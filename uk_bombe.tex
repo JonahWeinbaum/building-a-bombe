@@ -1,3 +1,60 @@
 \chapter{The UK Bombe}
 
-\section{test}
+\section{Motivating Example}
+
+\section{Changes to Enigma}
+
+Starting in 1940, the German's enhanced the security of their 
+key distribution. As discussed in CITE the \emph{Grundstellung} rotor 
+position was sent along with the daily key and an operator chose a \emph{Spruchschlusse} to 
+encode twice at the start of a message. Later iterations of this protocol removed the \emph{Grundstellung}
+from key sheets.
+\\\\These new key sheets contained the following columns
+columns \emph{Tag/Datum}, \emph{Walzenlage}, \emph{Ringstellung}, \emph{Steckerverbindungen}, and \emph{Kenngruppen} 
+\\\\Notice the removal of the \emph{Grundstellung} as well as the addition of the \emph{Kenngruppen}. The \emph{Kenngruppen} were a set of 
+four trigrams used to identify which setting was being used to encode a message, this is particularly useful if trying to decode a message using a prior day's key. 
+The operator would choose a trigram from the the \emph{Kenngruppen}, append two letters to the front of the trigram,
+and this five letter combination (known as the \emph{Buchstabenkenngruppe}) would preceed the message being sent. If a message
+was sent in multiple segments, multiple \emph{Buchstabenkenngruppe} were used to start each segment.
+\\\\When sending a message the operator was to use the following protocol
+\begin{enumerate}[I.]
+\item The time at which the message was sent is listed
+\item The number of parts which the message contained is listed
+\item Which message part is being sent is listed
+\item The length of the message part (not including \emph{Buchstabenkenngruppe}) is listed
+\item A \emph{Grundstellung} rotor position is chosen and listed 
+\item A \emph{Spruchschlüssel} rotor position is chosen and encoded using the \emph{Grundstellung}, this is listed
+\item The \emph{Buchstabenkenngruppe} is listed
+\item The message part encoded using the daily key and the \emph{Spruchschlüssel} position is listed
+\end{enumerate}
+It is clear that with this protocol, the Polish Bomba could no longer deduce the necessary 
+details to decrypt enigma messages. All of the permutation information contained in the original key distribution 
+protocol was removed and a new method needed to be derived for infering information about the daily key.
+\section{Loops}
+The removal of the double encoded \emph{Spruchschlüssel} does not mean that permutation information cannot be stored elsewhere in the message. 
+For the sake of argument, let us say we knew that our message had plaintext encoding
+
+\begin{center}
+\begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.3cm, minimum width=0.3cm}]
+
+    % Centering the diagram
+    \node (a1) [] {A};
+    \node (a2) [right=of a1] {Y};
+    \node (a3) [right=of a2] {X};
+    
+    % Nodes for ciphertext
+    \node (x1) [below=1cm of a1] {X};
+    \node (x2) [below=1cm of a2] {A};
+    \node (x3) [below=1cm of a3] {Y};
+    
+    % Arrows for mapping
+    \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
+    \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
+    \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
+    
+    
+    \end{tikzpicture}
+\end{center}
+
+Where the number in each mapping indicates how many steps away we are from the rotor 
+positions when we began encoding the message.

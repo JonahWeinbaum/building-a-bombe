@@ -17,6 +17,9 @@
 \usepackage{tikz-cd}
 \usepackage{bbm}
 \usepackage{hyperref}
+\usepackage{enumerate}% http://ctan.org/pkg/enumerate
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -113,7 +116,7 @@
 % Title Page Information
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Your personal info goes here!
-\title{Cracking Enigma}
+\title{Building a Bombe}
 \subtitle{The Mathematics and Circuitry that Bested German Cryptographers}
 \author{Jonah Weinbaum}
 
@@ -154,6 +157,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \include{the_enigma}
+
+\include{permutations}
 
 \include{polish_bomba}
 

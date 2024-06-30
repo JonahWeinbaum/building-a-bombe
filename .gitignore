@@ -4,3 +4,6 @@
 *.out
 *.toc
 %.pdf
+cracking_enigma.fdb_latexmk
+cracking_enigma.fls
+cracking_enigma.pdf

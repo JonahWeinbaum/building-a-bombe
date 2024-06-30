@@ -58,3 +58,50 @@ For the sake of argument, let us say we knew that our message had plaintext enco
 
 Where the number in each mapping indicates how many steps away we are from the rotor 
 positions when we began encoding the message.
+
+\section{Test Function}
+
+We begin by defining a new notion of permutation order that will ease notation going forward. 
+
+\begin{definition}
+    For $\sigma\in S_n$ and $k\in\mathbb{N}_n$, the \textbf{permuation order with respect to $k$}
+    is the smallest integer $i\in\mathbb{N}$ such that 
+    \[
+        \sigma^i(k) = k
+    \]
+    We denote that as $\operatorname{ord}_k(\sigma)$.
+\end{definition}
+
+This is distinct from $\operatorname{ord}(\sigma)$ since this does not require that $\sigma^{\operatorname{ord(\sigma)}}$ is the identity on all elements, 
+rather we just require this on a single element $k$.
+
+We define a test function which we will use to test our hypotheses of steckerings in the plugboard. 
+
+\begin{definition}
+    The \textbf{Enigma test function} on $n$ letters is 
+    \begin{align*}
+        \tau: S_n\times \mathbb{N}_n & \to \mathbb{N}_{2^n}
+        \\(\sigma, k) &\mapsto \sum_{i=1}^{n}b_i\cdot 2^{i-1}
+    \end{align*}
+    Where
+    \[
+      b_i \coloneq 
+      \begin{cases} 
+      1 & i\in\bigcup\limits_{i=1}^{\operatorname{ord}_k(\sigma)}\{\sigma^i(k)\}\\
+      0 & \text{else} \\
+      \end{cases}
+    \]
+\end{definition}
+\text{}\\Let us break down this function since there appears to be a lot of verbose notation. To step back for a moment, our goal
+with this test function is to examine how current will flow through a loop when applied to a possible steckering. 
+\\\\We first consider the case where both our rotor stack $\sigma$ and hypotheses $k$ are correct. Then the loop immediately closes and 
+we have that for our test
+    \[
+        \sigma(k) = k
+    \]
+In this case $\operatorname{ord}_k(\sigma) = 1$. We then have that $\bigcup\limits_{i=1}^{\operatorname{ord}_k(\sigma)}\{\sigma^i(k)\}$ reduces to $\{\sigma(k)\} = \{k\}$.
+Then it is clear that only $b_k$ will be non-zero and thus
+\[
+    \tau(\sigma, k) = 2^k
+\]
+This represents an $n$-bit number with also zeros aside from the $k$-th position. This is analogous to only the $k$-th wire being live in our Bombe. 

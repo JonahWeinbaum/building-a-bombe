@@ -32,48 +32,113 @@ details to decrypt enigma messages. All of the permutation information contained
 protocol was removed and a new method needed to be derived for infering information about the daily key.
 \section{Loops}
 The removal of the double encoded \emph{Spruchschlüssel} does not mean that permutation information cannot be stored elsewhere in the message. 
-For the sake of argument, let us say we knew that our message had plaintext encoding
+For the sake of argument, let us say we knew that our encrypted message had plaintext encoding
 
 \begin{center}
-\begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.3cm, minimum width=0.3cm}]
+\begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.1cm, minimum width=0.1cm}]
 
     % Centering the diagram
-    \node (a1) [] {A};
-    \node (a2) [right=of a1] {Y};
-    \node (a3) [right=of a2] {X};
+    \node (a1) [] {D};
+    \node (a2) [right=0.1cm of a1] {Y};
+    \node (a3) [right=0.1cm of a2] {Y};
+    \node (a4) [right=0.1cm of a3] {Y};
+    \node (a5) [right=0.1cm of a4] {Y};
+    \node (a6) [right=0.1cm of a5] {Y};
+    \node (a7) [right=0.1cm of a6] {X };
+    \node (a8) [right=0.1cm of a7] {Y};
+    \node (a9) [right=0.1cm of a8] {Y};
+    \node (a10) [right=0.1cm of a9] {Y};
+    \node (a11) [right=0.1cm of a10] {X};
     
     % Nodes for ciphertext
-    \node (x1) [below=1cm of a1] {X};
-    \node (x2) [below=1cm of a2] {A};
-    \node (x3) [below=1cm of a3] {Y};
+    \node (x1) [below=1cm of a1] {A};
+    \node (x2) [below=1cm of a2] {B};
+    \node (x3) [below=1cm of a3] {R};
+    \node (x4) [below=1cm of a4] {A};
+    \node (x5) [below=1cm of a5] {C};
+    \node (x6) [below=1cm of a6] {A};
+    \node (x7) [below=1cm of a7] {D};
+    \node (x8) [below=1cm of a8] {A};
+    \node (x9) [below=1cm of a9] {B};
+    \node (x10) [below=1cm of a10] {R};
+    \node (x11) [below=1cm of a11] {A};
     
     % Arrows for mapping
     \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
     \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
     \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
-    
+    \draw[->] (a4) -- (x4) node[midway, left, draw=none, fill=none] {4};
+    \draw[->] (a5) -- (x5) node[midway, left, draw=none, fill=none] {5};
+    \draw[->] (a6) -- (x6) node[midway, left, draw=none, fill=none] {6};
+    \draw[->] (a7) -- (x7) node[midway, left, draw=none, fill=none] {7};
+    \draw[->] (a8) -- (x8) node[midway, left, draw=none, fill=none] {8};
+    \draw[->] (a9) -- (x9) node[midway, left, draw=none, fill=none] {9};
+    \draw[->] (a10) -- (x10) node[midway, left, draw=none, fill=none] {10};
+    \draw[->] (a11) -- (x11) node[midway, left, draw=none, fill=none] {11};
     
     \end{tikzpicture}
 \end{center}
 
-Where the number in each mapping indicates how many steps away we are from the rotor 
+Where the top row is the ciphertext and the bottom is the plaintext, further, the number in each mapping indicates how many steps away we are from the rotor 
 positions when we began encoding the message.
+
+\begin{center}
+    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.1cm, minimum width=0.1cm}]
+        \node (A) at (90:1.5) {$A$};
+        \node (D) at (210:1.5) {$D$};
+        \node (X) at (330:1.5) {$X$};
+      
+        \draw[->, bend right=45] (A) to node[midway, draw=none, above] {1} (D);
+        \draw[->, bend right=45] (D) to node[midway, draw=none, above] {7} (X);
+        \draw[->, bend right=45] (X) to node[midway, draw=none, above] {11} (A);
+      \end{tikzpicture}
+\end{center}
+
+Recall
+\begin{align*}
+    E_1 &= P^{-1}\theta_1R_1^{-1}\theta_1^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_1^{-1}R_1\theta_1P
+    \\E_7 &= P^{-1}\theta_7R_1^{-1}\theta_7^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_7^{-1}R_1\theta_7P
+    \\E_{11} &= P^{-1}\theta_{11}R_1^{-1}\theta_{11}^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_{11}^{-1}R_1\theta_{11}P
+\end{align*}
+Then it follows that our loop can be represented by 
+\begin{align*}
+    \sigma &= E_{11}\circ E_7 \circ E_{1}
+\end{align*}
+and we see that all the intermediate plugboard settings cancel out. Lets isolate the plugboard settings by letting 
+$\overline{\sigma}$ represent $\sigma$ without the use of the plugboard for input and output, then 
+\[
+    \sigma = P^{-1}\overline{\sigma}P
+\]
+We have that
+\begin{align*}
+    \sigma(A) &= A
+    \\\iff (P^{-1}\overline{\sigma}P)(A) &= A
+    \\\iff \overline{\sigma}(P(A)) &= P(A)
+\end{align*}
+
+Suppose that our initial rotor position was correct, then certainly our $\overline{\sigma}$ is correct (assuming out crib was accurate). We can make a hypothesis 
+that $A$ is steckered to $K$ in the plugboard. Suppose we find that $\overline{\sigma}(K) \ne K$, then $\sigma(A)\ne A$ and our loop is broken, breaking our assumptions, thus $A$ must not be steckered to $K$.
+But this will actually elimiate more hypotheses than just $A$ being steckered to $K$. We know that $\overline{\sigma}(K) =$
 
 \section{Test Function}
 
-We begin by defining a new notion of permutation order that will ease notation going forward. 
+% \begin{definition}
+%     Given $\sigma\in S_n$, let 
+%     \begin{center}
+%         $\Sigma\coloneq\{\sigma^i\text{ }\vert\text{ }i\in\mathbb{N}_n\}$
+%     \end{center}
+%     that is $\Sigma = \langle\sigma\rangle \le S_n$ is the subgroup generated by $\sigma$.
+% \end{definition}
 
-\begin{definition}
-    For $\sigma\in S_n$ and $k\in\mathbb{N}_n$, the \textbf{permuation order with respect to $k$}
-    is the smallest integer $i\in\mathbb{N}$ such that 
-    \[
-        \sigma^i(k) = k
-    \]
-    We denote that as $\operatorname{ord}_k(\sigma)$.
-\end{definition}
+% This subgroup of the symmetric group admits a group action by simply acting the permutation on an element, that is
 
-This is distinct from $\operatorname{ord}(\sigma)$ since this does not require that $\sigma^{\operatorname{ord(\sigma)}}$ is the identity on all elements, 
-rather we just require this on a single element $k$.
+% \begin{definition}
+%     Given $\sigma\in S_n$ let 
+%     \begin{align*}
+%         \cdot : \Sigma\times\mathbb{N}_n&\to\mathbb{N}_n
+%         \\(\rho, a)&\mapsto \rho(a)
+%     \end{align*}
+% \end{definition}
 
 We define a test function which we will use to test our hypotheses of steckerings in the plugboard. 
 
@@ -87,7 +152,7 @@ We define a test function which we will use to test our hypotheses of steckering
     \[
       b_i \coloneq 
       \begin{cases} 
-      1 & i\in\bigcup\limits_{i=1}^{\operatorname{ord}_k(\sigma)}\{\sigma^i(k)\}\\
+      1 & i\in\langle\sigma\rangle\cdot{k}\\
       0 & \text{else} \\
       \end{cases}
     \]
@@ -99,9 +164,9 @@ we have that for our test
     \[
         \sigma(k) = k
     \]
-In this case $\operatorname{ord}_k(\sigma) = 1$. We then have that $\bigcup\limits_{i=1}^{\operatorname{ord}_k(\sigma)}\{\sigma^i(k)\}$ reduces to $\{\sigma(k)\} = \{k\}$.
+In this case $\vert\langle\sigma\rangle\cdot{k}\vert = 1$. We then have that $\langle\sigma\rangle\cdot{k}$ reduces to $\{\sigma(k)\} = \{k\}$.
 Then it is clear that only $b_k$ will be non-zero and thus
 \[
-    \tau(\sigma, k) = 2^k
+    \tau(\sigma, k) = 2^{k-1}
 \]
-This represents an $n$-bit number with also zeros aside from the $k$-th position. This is analogous to only the $k$-th wire being live in our Bombe. 
+This represents an $n$-bit number with also zeros aside from the $(k-1)$-th position. This is analogous to only the $k$-th wire being live in our Bombe. 

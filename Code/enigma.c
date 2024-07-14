@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-bool logging = false;
+bool logging = true;
 
 //Static Enigma Wirings 
 //Data from https://www.cryptomuseum.com/crypto/enigma/wiring.htm#14
@@ -35,10 +35,9 @@ typedef struct parameters
 
 t_parameters key_sheet = {
     {3, 2, 1}, 
-    {1, 1, 2},
-    "AAA",
+    {1, 1, 1},
+    "ZZZ",
     ""
-    //"POMLIUKJNHYTGBVFREDC"
 };
 
 typedef struct eng_state 
@@ -323,13 +322,14 @@ void displayRotor(char (*mappingFunction)(char, bool), bool is_logging) {
 }
 
 
+
 int main() {
     enigma_reset();
     // key_sheet.ringstellung[0] = 2;
     // displayRotor(N, logging);
-    
-    for (int i = 0; i < 30; i ++) {
-        printf("%c", enigma_encrypt('A'));
-    }
+    // char msg[] = "HELLOTABITHA";
+    // for (int i = 0; i < sizeof(msg) - 1; i ++) {
+    //     printf("Lamp: %c\n", enigma_encrypt(msg[i]));
+    // }
     return 0;
 }

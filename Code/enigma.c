@@ -54,8 +54,8 @@ typedef struct parameters
 
 t_parameters key_sheet = {
     {2, 5, 3}, 
-    {4, 14, 24},
-    "YZY",
+    {4, 13, 24},
+    "YYY",
     "UFETGQADVNHMZPLJIKXO"
     //"POMLIUKJNHYTGBVFREDC"
 };

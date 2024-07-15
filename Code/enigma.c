@@ -22,7 +22,7 @@ void displayRotor(char (*mappingFunction)(char, bool), bool is_logging) {
     }
     printf("\n");
 }
-bool logging = false;
+bool logging = true;
 
 //Static Enigma Wirings 
 //Data from https://www.cryptomuseum.com/crypto/enigma/wiring.htm#14
@@ -54,8 +54,8 @@ typedef struct parameters
 
 t_parameters key_sheet = {
     {2, 5, 3}, 
-    {4, 13, 24},
-    "YYY",
+    {4, 11, 24},
+    "YWY",
     "UFETGQADVNHMZPLJIKXO"
     //"POMLIUKJNHYTGBVFREDC"
 };
@@ -275,7 +275,8 @@ char enigma_encrypt(char in) {
 
 
     //Print Letters in Window
-    if (logging) {printf("%c-%c-%c\n", enigma_state.window[0]
+    printf("Shifts : \"%c-%c-%c\"\n", (enigma_state.shifts[0]%26) + 'A', (enigma_state.shifts[1]%26) + 'A', (enigma_state.shifts[2]%26) + 'A');
+    if (logging) {printf("Window: %c-%c-%c\n", enigma_state.window[0]
                      , enigma_state.window[1]
                      , enigma_state.window[2]); }
 
@@ -332,7 +333,7 @@ int main() {
     char cipher_text[] = "SNMKGGSTZZUGARLV";
     // key_sheet.ringstellung[0] = 2;
     for(int i = 0; i < strlen(cipher_text); i++) {
-    printf("%c", enigma_encrypt(cipher_text[i]));
+    printf("", enigma_encrypt(cipher_text[i]));
     // displayRotor(N, logging);
     }
     // for (int i = 0; i < strlen(cipher_text); i ++) {

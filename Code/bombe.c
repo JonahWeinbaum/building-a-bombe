@@ -80,14 +80,16 @@ Drum IV is two steps ahead, and rotor V is three steps ahead.
 
 /* Enigma I Wirings */
 char rotor[5][26]={
-    /*I*/   "JEKMFLGDQVZNTOWYHXUSPAIBRC",
-	/*II*/  "EAJDKSIRUXBLHWTMCQGZNPYFVO",
-	/*III*/ "OBDFHJLCPRTXVZNYEIWGAKMUSQ",
-	/*IV*/  "WBESOVPZJAYQUIRHXLNFTGKDCM",
-	/*V*/   "ECKVZBRGITYUPSDNHLXAWMJQOF" 
+    /*I*/   "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+	/*II*/  "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+	/*III*/ "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+	/*IV*/  "ESOVPZJAYQUIRHXLNFTGKDCMWB",
+	/*V*/   "VZBRGITYUPSDNHLXAWMJQOFECK" 
 };
 
 char turnover[5]="QEVJZ";
+
+int row_fails[5] = {1, 1, 1, 2, 3};
 
 char reflector[1][26]={
     /*B*/ "YRUHQSLDPXNGOKMIEBFZCWVJAT"
@@ -357,7 +359,14 @@ void row_reset(t_row *row) {
         row->states[i].shifts[2] += row->shifts[i];
        //scrambler_advance(&row->states[i], row->shifts[i]);
     }
-    
+
+    //Add in row failures
+    for (int i = 0; i < 12; i++) {
+            row->states[i].shifts[0] += 26 - row_fails[row->states[i].walzenlage[0]-1];
+            row->states[i].shifts[1] += 26 - row_fails[row->states[i].walzenlage[1]-1];
+            row->states[i].shifts[2] += 26 - row_fails[row->states[i].walzenlage[2]-1];
+    }
+     
     //Update Ringstellung
     char indicator2 = row->states[0].window[0] == 'Z' ? 'Z' : 'A' + 'Y' - row->states[0].window[0];
     char indicator1 = row->states[0].window[1] == 'Z' ? 'Z' : 'A' + 'Y' - row->states[0].window[1];
@@ -593,6 +602,9 @@ void cable_scrambler(bool pm[26][26], bool output_state[26], char cable, t_state
     for (char in = 'A'; in <= 'Z'; in++) {
         //If has current, run it through scrambler and update output
         if (cs[in-'A']) {
+            //printf("Ringstellung : {%d, %d, %d}\n", scram->ringstellung[0], scram->ringstellung[1], scram->ringstellung[2]);
+            //printf("Spruchschlusse : \"%c%c%c\"\n", (scram->shifts[0]%26) + 'A', (scram->shifts[1]%26) + 'A', (scram->shifts[2]%26) + 'A');
+            //printf("%c-%c-%c\n", (scram->shifts[0]%26) + 'A', (scram->shifts[1]%26) + 'A', (scram->shifts[2]%26) + 'A');
             char out = scrambler(scram, in, false);
             output_state[out-'A'] = true;
         }
@@ -635,7 +647,7 @@ bool plugboard_update(bool pm[26][26], t_row *row) {
 
                 //OR values to update
                 for (int k = 0; k < 26; k++) {
-                    if (cout[k] == 0 && update[k] == 1) { /*printf("LIT UP %c%c\n", conn.out, k+'a');*/ updated = true;}
+                    if (cout[k] == 0 && update[k] == 1) {/*printf("LIT UP %c%c\n", conn.out, k+'a');*/ updated = true;}
                     cable_set(pm, conn.out, k+'a', update[k] || cout[k]);
                 }
             }
@@ -653,7 +665,7 @@ bool plugboard_update(bool pm[26][26], t_row *row) {
 
                 //OR values to update
                 for (int k = 0; k < 26; k++) {
-                    if (cin[k] == 0 && update[k] == 1) { /*printf("LIT UP %c%c\n", conn.in, k+'a');*/ updated = true;}
+                    if (cin[k] == 0 && update[k] == 1) { /*printf("LIT UP %c%c\n", conn.in, k+'a'); */ updated = true;}
                     cable_set(pm, conn.in, k+'a', update[k] || cin[k]);
                 }
             }
@@ -736,7 +748,7 @@ int main() {
     connect.scram_id = 11;
     row.connects[11] = connect;
 
-    int shifts[12] = {0, 5, 6, 14, 13, 7, 16, 2, 10, 9, 12, 15};
+    int shifts[12] = {11, 5, 6, 14, 13, 7, 16, 2, 10, 9, 12, 15};
 
     for (int i = 0; i < 12; i++) {
         row.states[i].walzenlage[2] = 3;
@@ -746,63 +758,59 @@ int main() {
     }
 
     row_reset(&row);
-    // setNonCanonicalMode(1);
-    // for (int i = 0; i < 26*26*26; i++) {
-    //     // if (i % 1000 == 0) {printf("%d\n", i);}
-    //     plugboard_reset(plug_matrix);
-    //     cable_set(plug_matrix, 'G', 'q', true); 
-    //     clearScreen();
-    //     displayBombe(plug_matrix, row); usleep(1000000);
-    //     while(plugboard_update(plug_matrix, &row)) {        clearScreen();
-    //     displayBombe(plug_matrix, row); usleep(1000000);}
-    //     clearScreen();
-    //     displayBombe(plug_matrix, row);
+    setNonCanonicalMode(1);
+    for (int i = 0; i < 26*26*26; i++) {
+        // if (i % 1000 == 0) {printf("%d\n", i);}
+        plugboard_reset(plug_matrix);
+        cable_set(plug_matrix, 'G', 'a', true); 
+        while(plugboard_update(plug_matrix, &row)) {}
+        clearScreen();
+        displayBombe(plug_matrix, row);
 
 
-    //     row_advance(&row, 1);
-    //         char ch;
-    //         do {
-    //             ch = getchar();
-    //         } while (ch != 't');
+        row_advance(&row, 1);
+            char ch;
+            do {
+                ch = getchar();
+            } while (ch != 'n');
 
-    //     bool cs[26];
-    //     cable_state(plug_matrix, cs, 'G');
+        bool cs[26];
+        cable_state(plug_matrix, cs, 'G');
 
-    //     int sum = 0; 
-    //     for(int l = 0; l < 26; l++) {
-    //         sum += cs[l];
-    //     }
-    //     if (sum != 26) {      
-    //     }
-    // }
+        int sum = 0; 
+        for(int l = 0; l < 26; l++) {
+            sum += cs[l];
+        }
+        if (sum != 26) { 
+            char ch;
+            do {
+                ch = getchar();
+            } while (ch != 'c');   
+        }
+    }
 
-    while(true) {
+    // while(true) {
 
         
-        row_advance(&row, 1);
-        char indicator2 = row.states[0].window[0] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[0];
-        char indicator1 = row.states[0].window[1] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[1];
-        char indicator0 =  P_inv(row.states[0].window[2], row.shifts[0], false) == 'Z' ? 'Z' : 'A' + 'Y' - P_inv(row.states[0].window[2], row.shifts[0], false);
+    //     row_advance(&row, 1);
+    //     char indicator2 = row.states[0].window[0] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[0];
+    //     char indicator1 = row.states[0].window[1] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[1];
+    //     char indicator0 =  P_inv(row.states[0].window[2], row.shifts[0], false) == 'Z' ? 'Z' : 'A' + 'Y' - P_inv(row.states[0].window[2], row.shifts[0], false);
 
-        if (indicator0 == 'X' && indicator1 == 'K' && indicator2 == 'D') {break;}
-    }
+    //     if (indicator0 == 'X' && indicator1 == 'K' && indicator2 == 'D') {break;}
+    // }
 
-    displayBombe(plug_matrix, row);
+    // displayBombe(plug_matrix, row);
 
-    plugboard_reset(plug_matrix);
-    cable_set(plug_matrix, 'G', 'q', true); 
-    while(plugboard_update(plug_matrix, &row)) {
+    // plugboard_reset(plug_matrix);
+    // cable_set(plug_matrix, 'G', 'q', true); 
+    // while(plugboard_update(plug_matrix, &row)) {}
 
-    }
-
-    printf("\n\n\n");
+    // printf("\n\n\n");
 
 
-    displayBombe(plug_matrix, row);
+    // displayBombe(plug_matrix, row);
 
-    //Display Settings of Scrambler 1
-    printf("Ringstellung : {%d, %d, %d}\n", row.states[0].ringstellung[0], row.states[0].ringstellung[1], row.states[0].ringstellung[2]);
-    printf("Spruchschlusse : \"%c%c%c\"\n", (row.states[0].shifts[0]%26) + 'A', (row.states[0].shifts[1]%26) + 'A', (row.states[0].shifts[2]%26) + 'A');
 
     return 0;
 }

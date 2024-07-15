@@ -1,9 +1,28 @@
-
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
-bool logging = true;
+void displayRotor(char (*mappingFunction)(char, bool), bool is_logging) {
+    // Print the top row (A to Z)
+    for (char c = 'A'; c <= 'Z'; c++) {
+        printf("%c ", c);
+    }
+    printf("\n");
+
+    // Print the mapping arrows
+    for (char c = 'A'; c <= 'Z'; c++) {
+        printf("| ");
+    }
+    printf("\n");
+
+    // Print the bottom row (mapped characters)
+    for (char c = 'A'; c <= 'Z'; c++) {
+        printf("%c ", mappingFunction(c, is_logging));
+    }
+    printf("\n");
+}
+bool logging = false;
 
 //Static Enigma Wirings 
 //Data from https://www.cryptomuseum.com/crypto/enigma/wiring.htm#14
@@ -34,10 +53,11 @@ typedef struct parameters
 } t_parameters;
 
 t_parameters key_sheet = {
-    {3, 2, 1}, 
-    {1, 1, 1},
-    "ZZZ",
-    ""
+    {2, 5, 3}, 
+    {4, 11, 24},
+    "YWY",
+    "UFETGQADVNHMZPLJIKXO"
+    //"POMLIUKJNHYTGBVFREDC"
 };
 
 typedef struct eng_state 
@@ -99,14 +119,14 @@ char P_inv(char in, int deg, bool is_logging) {
 char N(char in, bool is_logging) {
 
     //Ceasar Shift For Rotation (Considering Ringstellung)
-    char in_shift = P(in, enigma_state.shifts[2]-(key_sheet.ringstellung[2]-1), false);
+    char in_shift = P(in, 26 + enigma_state.shifts[2]-(key_sheet.ringstellung[2]-1), false);
 
     //Map Letter
     char *rotor_mapping = rotor[(size_t)(key_sheet.walzenlage[2] - 1)];
     char out = rotor_mapping[(in_shift - 'A') % sizeof(alphabet)];
 
     //Reverse Ceasar Shift (Considering Ringstellung)
-    char out_shift = P_inv(out, enigma_state.shifts[2]-(key_sheet.ringstellung[2]-1), false);
+    char out_shift = P_inv(out, 26 + enigma_state.shifts[2]-(key_sheet.ringstellung[2]-1), false);
 
     //Log and Output
     if (is_logging) {printf("--W: %c->%c\n", in, out_shift);}
@@ -139,14 +159,14 @@ char N_inv(char in, bool is_logging) {
 char M(char in, bool is_logging) {
 
     //Ceasar Shift For Rotation (Considering Ringstellung)
-    char in_shift = P(in, enigma_state.shifts[1]-(key_sheet.ringstellung[1]-1), false);
+    char in_shift = P(in, 26 + enigma_state.shifts[1]-(key_sheet.ringstellung[1]-1), false);
 
     //Map Letter
     char *rotor_mapping = rotor[(size_t)(key_sheet.walzenlage[1] - 1)];
     char out = rotor_mapping[(in_shift - 'A') % sizeof(alphabet)];
 
     //Reverse Ceasar Shift (Considering Ringstellung)
-    char out_shift = P_inv(out, enigma_state.shifts[1]-(key_sheet.ringstellung[1]-1), false);
+    char out_shift = P_inv(out, 26 + enigma_state.shifts[1]-(key_sheet.ringstellung[1]-1), false);
 
     //Log and Output
     if (is_logging) {printf("-W-: %c->%c\n", in, out_shift);}
@@ -178,14 +198,14 @@ char M_inv(char in, bool is_logging) {
 /*Third Rotor*/
 char L(char in, bool is_logging) {
     //Ceasar Shift For Rotation (Considering Ringstellung)
-    char in_shift = P(in, enigma_state.shifts[0]-(key_sheet.ringstellung[0]-1), false);
+    char in_shift = P(in, 26 + enigma_state.shifts[0]-(key_sheet.ringstellung[0]-1), false);
 
     //Map Letter
     char *rotor_mapping = rotor[(size_t)(key_sheet.walzenlage[0] - 1)];
     char out = rotor_mapping[(in_shift - 'A') % sizeof(alphabet)];
 
     //Reverse Ceasar Shift (Considering Ringstellung)
-    char out_shift = P_inv(out, enigma_state.shifts[0]-(key_sheet.ringstellung[0]-1), false);
+    char out_shift = P_inv(out, 26 + enigma_state.shifts[0]-(key_sheet.ringstellung[0]-1), false);
 
     //Log and Output
     if (is_logging) {printf("W--: %c->%c\n", in, out_shift);}
@@ -205,7 +225,7 @@ char L_inv(char in, bool is_logging) {
         if (letter_map[i] == in) {
             
             //Log and Output
-            if (is_logging) {printf("W--: %c->%c\n", in, i + 'A');}
+            if (is_logging) {printf("-W-: %c->%c\n", in, i + 'A');}
             return i + 'A';
         }
     }
@@ -231,7 +251,7 @@ void enigma_reset() {
 
     //Initialize
     for (int i = 0; i < 3; i++) {
-        enigma_state.shifts[i] = 0;
+        enigma_state.shifts[i] = (key_sheet.spruchschlusse[i] - 'A');
         enigma_state.window[i] = key_sheet.spruchschlusse[i];
     }
 }
@@ -301,35 +321,20 @@ void displayCeasar(char (*mappingFunction)(char, int, bool), int deg, bool is_lo
     printf("\n");
 }
 
-void displayRotor(char (*mappingFunction)(char, bool), bool is_logging) {
-    // Print the top row (A to Z)
-    for (char c = 'A'; c <= 'Z'; c++) {
-        printf("%c ", c);
-    }
-    printf("\n");
-
-    // Print the mapping arrows
-    for (char c = 'A'; c <= 'Z'; c++) {
-        printf("| ");
-    }
-    printf("\n");
-
-    // Print the bottom row (mapped characters)
-    for (char c = 'A'; c <= 'Z'; c++) {
-        printf("%c ", mappingFunction(c, is_logging));
-    }
-    printf("\n");
-}
 
 
 
 int main() {
     enigma_reset();
+    char cipher_text[] = "SNMKGGSTZZUGARLV";
     // key_sheet.ringstellung[0] = 2;
+    for(int i = 0; i < strlen(cipher_text); i++) {
+    printf("%c", enigma_encrypt(cipher_text[i]));
     // displayRotor(N, logging);
-    // char msg[] = "HELLOTABITHA";
-    // for (int i = 0; i < sizeof(msg) - 1; i ++) {
-    //     printf("Lamp: %c\n", enigma_encrypt(msg[i]));
+    }
+    // for (int i = 0; i < strlen(cipher_text); i ++) {
+    //     char enc =  enigma_encrypt('A');
+    //     printf("%c-%c-%c : %c->%c\n",enigma_state.window[0], enigma_state.window[1], enigma_state.window[2], 'A', enc);
     // }
-    return 0;
+    // return 0;
 }

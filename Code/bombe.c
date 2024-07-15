@@ -15,6 +15,8 @@
 #define COLOR_WHITE   "\x1b[37m"
 
 
+int ring_setting[3];
+
 // Function to set the terminal to non-canonical mode
 void setNonCanonicalMode(int enable) {
     struct termios tty;
@@ -69,6 +71,12 @@ bool plug_matrix[26][26];
 //Static Enigma Wirings 
 //Data from https://www.cryptomuseum.com/crypto/enigma/wiring.htm#14
 char alphabet[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+/*
+The drums have similar wiring as their Enigma counterparts but there are differences. 
+Probably by mistake, drums I, II, III, VI, VII and VIII on the Bombe are one letter ahead of the corresponding Enigma rotors. 
+Drum IV is two steps ahead, and rotor V is three steps ahead. 
+*/
 
 /* Enigma I Wirings */
 char rotor[5][26]={
@@ -295,7 +303,7 @@ void scrambler_reset(t_state *state) {
     }
 
     //Check Notch Flags
-    state->notches_engaged[1] = ('Y'   == state->window[2]);
+    state->notches_engaged[1] = ('Y'   == state->window[0]);
     state->notches_engaged[0] = ('Y'   == state->window[1]);
 }
 
@@ -714,13 +722,20 @@ int main() {
     for (int i = 0; i < 26*26*26; i++) {
         // if (i % 1000 == 0) {printf("%d\n", i);}
         plugboard_reset(plug_matrix);
-        cable_set(plug_matrix, 'G', 'a', true); 
-        while(plugboard_update(plug_matrix, &row)) {}
+        cable_set(plug_matrix, 'G', 'q', true); 
+        clearScreen();
+        displayBombe(plug_matrix, row); usleep(1000000);
+        while(plugboard_update(plug_matrix, &row)) {        clearScreen();
+        displayBombe(plug_matrix, row); usleep(1000000);}
         clearScreen();
         displayBombe(plug_matrix, row);
 
 
         row_advance(&row, 1);
+            char ch;
+            do {
+                ch = getchar();
+            } while (ch != 't');
 
         bool cs[26];
         cable_state(plug_matrix, cs, 'G');
@@ -730,10 +745,6 @@ int main() {
             sum += cs[l];
         }
         if (sum != 26) {      
-            char ch;
-            do {
-                ch = getchar();
-            } while (ch != 't');
         }
     }
 
@@ -749,10 +760,12 @@ int main() {
     // }
 
     // plugboard_reset(plug_matrix);
-    //     cable_set(plug_matrix, 'G', 'a', true); 
+    // cable_set(plug_matrix, 'G', 'q', true); 
+    // displayBombe(plug_matrix, row);
     //     while(plugboard_update(plug_matrix, &row)) {
     //     displayBombe(plug_matrix, row);
     //     printf("\n\n");
+    //     return 0;
     //     usleep(1000000);
     // }
     // displayBombe(plug_matrix, row);

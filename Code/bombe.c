@@ -80,11 +80,11 @@ Drum IV is two steps ahead, and rotor V is three steps ahead.
 
 /* Enigma I Wirings */
 char rotor[5][26]={
-    /*I*/   "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-	/*II*/  "AJDKSIRUXBLHWTMCQGZNPYFVOE",
-	/*III*/ "BDFHJLCPRTXVZNYEIWGAKMUSQO",
-	/*IV*/  "ESOVPZJAYQUIRHXLNFTGKDCMWB",
-	/*V*/   "VZBRGITYUPSDNHLXAWMJQOFECK" 
+    /*I*/   "JEKMFLGDQVZNTOWYHXUSPAIBRC",
+	/*II*/  "EAJDKSIRUXBLHWTMCQGZNPYFVO",
+	/*III*/ "OBDFHJLCPRTXVZNYEIWGAKMUSQ",
+	/*IV*/  "WBESOVPZJAYQUIRHXLNFTGKDCM",
+	/*V*/   "ECKVZBRGITYUPSDNHLXAWMJQOF" 
 };
 
 char turnover[5]="QEVJZ";
@@ -99,6 +99,7 @@ typedef struct scram_state
     int walzenlage[3];
     int shifts[3];
     char window[3];
+    int ringstellung[3];
     bool notches_engaged[2];
 } t_state;
 
@@ -167,14 +168,14 @@ char P_inv(char in, int deg, bool is_logging) {
 char N(t_state* state, char in, bool is_logging) {
 
     //Ceasar Shift For Rotation
-    char in_shift = P(in, state->shifts[2], false);
+    char in_shift = P(in, 26 + state->shifts[2]-(state->ringstellung[2]-1), false);
 
     //Map Letter
     char *rotor_mapping = rotor[(size_t)(state->walzenlage[2] - 1)];
     char out = rotor_mapping[(in_shift - 'A') % sizeof(alphabet)];
 
     //Reverse Ceasar Shift 
-    char out_shift = P_inv(out, state->shifts[2], false);
+    char out_shift = P_inv(out, 26 + state->shifts[2]-(state->ringstellung[2]-1), false);
 
     //Log and Output
     if (is_logging) {printf("--W: %c->%c\n", in, out_shift);}
@@ -207,14 +208,14 @@ char N_inv(t_state* state, char in, bool is_logging) {
 char M(t_state* state, char in, bool is_logging) {
 
     //Ceasar Shift For Rotation
-    char in_shift = P(in, state->shifts[1], false);
+    char in_shift = P(in, 26 + state->shifts[1]-(state->ringstellung[1]-1), false);
 
     //Map Letter
     char *rotor_mapping = rotor[(size_t)(state->walzenlage[1] - 1)];
     char out = rotor_mapping[(in_shift - 'A') % sizeof(alphabet)];
 
     //Reverse Ceasar Shift 
-    char out_shift = P_inv(out, state->shifts[1], false);
+    char out_shift = P_inv(out, 26 + state->shifts[1]-(state->ringstellung[1]-1), false);
 
     //Log and Output
     if (is_logging) {printf("-W-: %c->%c\n", in, out_shift);}
@@ -248,14 +249,14 @@ char M_inv(t_state* state, char in, bool is_logging) {
 char L(t_state* state, char in, bool is_logging) {
 
     //Ceasar Shift For Rotation
-    char in_shift = P(in, state->shifts[0], false);
+    char in_shift = P(in, 26 + state->shifts[0]-(state->ringstellung[0]-1), false);
 
     //Map Letter
     char *rotor_mapping = rotor[(size_t)(state->walzenlage[0] - 1)];
     char out = rotor_mapping[(in_shift - 'A') % sizeof(alphabet)];
 
     //Reverse Ceasar Shift 
-    char out_shift = P_inv(out, state->shifts[0], false);
+    char out_shift = P_inv(out, 26 + state->shifts[0]-(state->ringstellung[0]-1), false);
 
     //Log and Output
     if (is_logging) {printf("W--: %c->%c\n", in, out_shift);}
@@ -298,7 +299,7 @@ char R(char in, bool is_logging) {
 void scrambler_reset(t_state *state) {
     //Initialize
     for (int i = 0; i < 3; i++) {
-        state->shifts[i] = 0;
+        state->shifts[i] = 'Z'-'A';
         state->window[i] = 'Z';
     }
 
@@ -310,18 +311,14 @@ void scrambler_reset(t_state *state) {
 void scrambler_advance(t_state *state, int steps) {
     for (int i = 0; i < steps; i++) {
         //Move Window and Reset Flags
-        state->shifts[0] += 1;
         state->window[0] = P(state->window[0], 1, false);
-        if (state->notches_engaged[1] && state->notches_engaged[0]) { 
-            state->shifts[2] += 1; 
+        if (state->notches_engaged[0]) { 
             state->window[2] = P(state->window[2], 1, false);
-            state->shifts[1] += 1; 
             state->window[1] = P(state->window[1], 1, false);
             state->notches_engaged[1] = false;
             state->notches_engaged[0] = false; 
         }
         if (state->notches_engaged[1]) { 
-            state->shifts[1] += 1; 
             state->window[1] = P(state->window[1], 1, false);
             state->notches_engaged[1] = false;
 
@@ -360,11 +357,42 @@ void row_reset(t_row *row) {
         row->states[i].shifts[2] += row->shifts[i];
        //scrambler_advance(&row->states[i], row->shifts[i]);
     }
+    
+    //Update Ringstellung
+    char indicator2 = row->states[0].window[0] == 'Z' ? 'Z' : 'A' + 'Y' - row->states[0].window[0];
+    char indicator1 = row->states[0].window[1] == 'Z' ? 'Z' : 'A' + 'Y' - row->states[0].window[1];
+    char indicator0 =  P_inv(row->states[0].window[2], row->shifts[0], false) == 'Z' ? 'Z' : 'A' + 'Y' - P_inv(row->states[0].window[2], row->shifts[0], false);
+
+    char ring0 = indicator2-'A'+1;
+    char ring1 = indicator1-'A'+1;
+    char ring2 = indicator0-'A'+1;
+
+    for (int i = 0; i < 12; i++) {
+        row->states[i].ringstellung[2] = ring2;
+        row->states[i].ringstellung[1] = ring1;
+        row->states[i].ringstellung[0] = ring0;
+    }
 }
 
 void row_advance(t_row *row, int steps) {
     for (int i = 0; i < 12; i++) {
         scrambler_advance(&row->states[i], steps);
+    }
+    
+    //Update Ringstellung
+    char indicator2 = row->states[0].window[0] == 'Z' ? 'Z' : 'A' + 'Y' - row->states[0].window[0];
+    char indicator1 = row->states[0].window[1] == 'Z' ? 'Z' : 'A' + 'Y' - row->states[0].window[1];
+    char indicator0 =  P_inv(row->states[0].window[2], row->shifts[0], false) == 'Z' ? 'Z' : 'A' + 'Y' - P_inv(row->states[0].window[2], row->shifts[0], false);
+
+    char ring2 = indicator0-'A'+1;
+    char ring1 = indicator1-'A'+1;
+    char ring0 = indicator2-'A'+1;
+
+
+    for (int i = 0; i < 12; i++) {
+        row->states[i].ringstellung[2] = ring2;
+        row->states[i].ringstellung[1] = ring1;
+        row->states[i].ringstellung[0] = ring0;
     }
 }
 
@@ -708,7 +736,7 @@ int main() {
     connect.scram_id = 11;
     row.connects[11] = connect;
 
-    int shifts[12] = {11, 5, 6, 14, 13, 7, 16, 2, 10, 9, 12, 15};
+    int shifts[12] = {0, 5, 6, 14, 13, 7, 16, 2, 10, 9, 12, 15};
 
     for (int i = 0; i < 12; i++) {
         row.states[i].walzenlage[2] = 3;
@@ -718,57 +746,63 @@ int main() {
     }
 
     row_reset(&row);
-    setNonCanonicalMode(1);
-    for (int i = 0; i < 26*26*26; i++) {
-        // if (i % 1000 == 0) {printf("%d\n", i);}
-        plugboard_reset(plug_matrix);
-        cable_set(plug_matrix, 'G', 'q', true); 
-        clearScreen();
-        displayBombe(plug_matrix, row); usleep(1000000);
-        while(plugboard_update(plug_matrix, &row)) {        clearScreen();
-        displayBombe(plug_matrix, row); usleep(1000000);}
-        clearScreen();
-        displayBombe(plug_matrix, row);
+    // setNonCanonicalMode(1);
+    // for (int i = 0; i < 26*26*26; i++) {
+    //     // if (i % 1000 == 0) {printf("%d\n", i);}
+    //     plugboard_reset(plug_matrix);
+    //     cable_set(plug_matrix, 'G', 'q', true); 
+    //     clearScreen();
+    //     displayBombe(plug_matrix, row); usleep(1000000);
+    //     while(plugboard_update(plug_matrix, &row)) {        clearScreen();
+    //     displayBombe(plug_matrix, row); usleep(1000000);}
+    //     clearScreen();
+    //     displayBombe(plug_matrix, row);
 
 
-        row_advance(&row, 1);
-            char ch;
-            do {
-                ch = getchar();
-            } while (ch != 't');
+    //     row_advance(&row, 1);
+    //         char ch;
+    //         do {
+    //             ch = getchar();
+    //         } while (ch != 't');
 
-        bool cs[26];
-        cable_state(plug_matrix, cs, 'G');
+    //     bool cs[26];
+    //     cable_state(plug_matrix, cs, 'G');
 
-        int sum = 0; 
-        for(int l = 0; l < 26; l++) {
-            sum += cs[l];
-        }
-        if (sum != 26) {      
-        }
-    }
+    //     int sum = 0; 
+    //     for(int l = 0; l < 26; l++) {
+    //         sum += cs[l];
+    //     }
+    //     if (sum != 26) {      
+    //     }
+    // }
 
-    // while(true) {
+    while(true) {
 
         
-    //     row_advance(&row, 1);
-    //     char indicator2 = row.states[0].window[0] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[0];
-    //     char indicator1 = row.states[0].window[1] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[1];
-    //     char indicator0 =  P_inv(row.states[0].window[2], row.shifts[0], false) == 'Z' ? 'Z' : 'A' + 'Y' - P_inv(row.states[0].window[2], row.shifts[0], false);
+        row_advance(&row, 1);
+        char indicator2 = row.states[0].window[0] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[0];
+        char indicator1 = row.states[0].window[1] == 'Z' ? 'Z' : 'A' + 'Y' - row.states[0].window[1];
+        char indicator0 =  P_inv(row.states[0].window[2], row.shifts[0], false) == 'Z' ? 'Z' : 'A' + 'Y' - P_inv(row.states[0].window[2], row.shifts[0], false);
 
-    //     if (indicator0 == 'X' && indicator1 == 'K' && indicator2 == 'D') {break;}
-    // }
+        if (indicator0 == 'X' && indicator1 == 'K' && indicator2 == 'D') {break;}
+    }
 
-    // plugboard_reset(plug_matrix);
-    // cable_set(plug_matrix, 'G', 'q', true); 
-    // displayBombe(plug_matrix, row);
-    //     while(plugboard_update(plug_matrix, &row)) {
-    //     displayBombe(plug_matrix, row);
-    //     printf("\n\n");
-    //     return 0;
-    //     usleep(1000000);
-    // }
-    // displayBombe(plug_matrix, row);
+    displayBombe(plug_matrix, row);
+
+    plugboard_reset(plug_matrix);
+    cable_set(plug_matrix, 'G', 'q', true); 
+    while(plugboard_update(plug_matrix, &row)) {
+
+    }
+
+    printf("\n\n\n");
+
+
+    displayBombe(plug_matrix, row);
+
+    //Display Settings of Scrambler 1
+    printf("Ringstellung : {%d, %d, %d}\n", row.states[0].ringstellung[0], row.states[0].ringstellung[1], row.states[0].ringstellung[2]);
+    printf("Spruchschlusse : \"%c%c%c\"\n", (row.states[0].shifts[0]%26) + 'A', (row.states[0].shifts[1]%26) + 'A', (row.states[0].shifts[2]%26) + 'A');
 
     return 0;
 }

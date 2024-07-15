@@ -54,8 +54,8 @@ typedef struct parameters
 
 t_parameters key_sheet = {
     {2, 5, 3}, 
-    {4, 11, 24},
-    "YWY",
+    {4, 14, 24},
+    "YZY",
     "UFETGQADVNHMZPLJIKXO"
     //"POMLIUKJNHYTGBVFREDC"
 };
@@ -245,31 +245,34 @@ char R(char in, bool is_logging) {
 
 /*Standard Enigma Encryption*/
 void enigma_reset() {
-    //Check Notch Flags
-    enigma_state.notches_engaged[1] = (turnover[key_sheet.walzenlage[2]-1]   == enigma_state.window[2]);
-    enigma_state.notches_engaged[0] = (turnover[key_sheet.walzenlage[1]-1]   == enigma_state.window[1]);
-
     //Initialize
     for (int i = 0; i < 3; i++) {
         enigma_state.shifts[i] = (key_sheet.spruchschlusse[i] - 'A');
         enigma_state.window[i] = key_sheet.spruchschlusse[i];
     }
+        //Check Notch Flags
+    enigma_state.notches_engaged[1] = (turnover[key_sheet.walzenlage[2]-1]   == enigma_state.window[2]);
+    enigma_state.notches_engaged[0] = (turnover[key_sheet.walzenlage[1]-1]   == enigma_state.window[1]);
 }
 
 char enigma_encrypt(char in) {
     //Move Window and Reset Flags
     enigma_state.shifts[2] += 1;
     enigma_state.window[2] = P(enigma_state.window[2], 1, false);
+    if (enigma_state.notches_engaged[0]) { 
+        enigma_state.shifts[1] += 1; 
+        enigma_state.window[1] = P(enigma_state.window[1], 1, false);
+        enigma_state.shifts[0] += 1; 
+        enigma_state.window[0] = P(enigma_state.window[0], 1, false);
+        enigma_state.notches_engaged[1] = false;
+        enigma_state.notches_engaged[0]= false; 
+    }
     if (enigma_state.notches_engaged[1]) { 
         enigma_state.shifts[1] += 1; 
         enigma_state.window[1] = P(enigma_state.window[1], 1, false);
         enigma_state.notches_engaged[1] = false; 
     }
-    if (enigma_state.notches_engaged[0]) { 
-        enigma_state.shifts[0] += 1; 
-        enigma_state.window[0] = P(enigma_state.window[0], 1, false);
-        enigma_state.notches_engaged[0] = false; 
-    }
+
 
     //Print Letters in Window
     if (logging) {printf("%c-%c-%c\n", enigma_state.window[0]

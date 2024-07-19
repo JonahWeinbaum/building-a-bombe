@@ -1,8 +1,16 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
+#include <stdbool.h>
 
-//Setup Parameter
+typedef struct enigma_parameters
+{
+  int walzenlage[3];
+  int ringstellung[3];
+  char spruchschlusse[3];
+  char steckerverbindungen[20];
+} t_parameters;
+
 typedef struct scram_state 
 {
     int walzenlage[3];

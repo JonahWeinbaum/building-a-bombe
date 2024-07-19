@@ -2,6 +2,7 @@
 #define DISPLAY_H
 
 #include <stdio.h>
+#include <stdbool.h>
 #include "terminal.h"
 #include "ceasar.h"
 #include "row.h"

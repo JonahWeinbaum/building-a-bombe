@@ -1,6 +1,9 @@
 #ifndef WIRINGS_H
 #define WIRINGS_H
 
+#include "structs.h"
+#include <stdbool.h>
+
 char alphabet[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 //Static Enigma Wirings 
@@ -30,5 +33,7 @@ char reflector[1][26]={
 };  
 
 bool plug_matrix[26][26];
+
+t_state enigma_state;
 
 #endif //WIRINGS_H

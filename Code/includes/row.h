@@ -4,8 +4,6 @@
 #include "structs.h"
 #include "rotors.h"
 
-bool plug_matrix[26][26];
-
 void scrambler_reset(t_state *state) {
     //Initialize
     for (int i = 0; i < 3; i++) {
@@ -164,7 +162,7 @@ bool plugboard_update(bool pm[26][26], t_row *row) {
     bool updated = false;
 
     //Update diagonal matrix
-    //diagonal_update(pm);
+    diagonal_update(pm);
 
     //Send current through each cable
     for (char cable = 'A'; cable <= 'Z'; cable++) {
@@ -214,7 +212,7 @@ bool plugboard_update(bool pm[26][26], t_row *row) {
     }
     
     //Update diagonal matrix
-    //diagonal_update(pm);
+   diagonal_update(pm);
 
     return updated;
 }

@@ -1,20 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
-
 #include "wirings.h"
 #include "terminal.h"
 #include "display.h"
 #include "ceasar.h"
-
-bool logging = true;
-
-bool plug_matrix[26][26];
-
-//Cipher Functions
-
-/*Standard Scrambler Encryption*/
-
 
 int main() {
     //Set Terminal to Non-Canonical Mode
@@ -98,19 +87,24 @@ int main() {
 
     row_reset(&row);
     for (int i = 0; i < 26*26*26; i++) {
-        // if (i % 1000 == 0) {printf("%d\n", i);}
         plugboard_reset(plug_matrix);
         cable_set(plug_matrix, 'G', 'a', true); 
-        while(plugboard_update(plug_matrix, &row)) {clearScreen();
-        displayBombe(plug_matrix, row); usleep(1000000);}
+        while(plugboard_update(plug_matrix, &row)) {}
         
+            // char ch;
+            // do {
+            //     ch = getchar();
+            // } while (ch != 'c');   
 
-
+        clearScreen();
+        displayBombe(plug_matrix, row); 
+        usleep(10000);
         row_advance(&row, 1);
-            char ch;
-            do {
-                ch = getchar();
-            } while (ch != 'n');
+
+            // char ch;
+            // do {
+            //     ch = getchar();
+            // } while (ch != 'n '); 
 
         bool cs[26];
         cable_state(plug_matrix, cs, 'G');

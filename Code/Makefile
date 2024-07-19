@@ -6,17 +6,33 @@ CFLAGS = -Iincludes -Wall -Wextra -Werror
 SOURCE_DIR = src
 OUTPUT_DIR = out
 
+
 # Source and executable files
-SOURCES = $(SOURCE_DIR)/bombe.c
-EXECUTABLE = $(OUTPUT_DIR)/bombe
+BOMBE_SOURCE = $(SOURCE_DIR)/bombe.c
+ENIGMA_SOURCE = $(SOURCE_DIR)/enigma.c
+CYCLE_SOURCE = $(SOURCE_DIR)/cycle_type.c
+BOMBE_EXECUTABLE = $(OUTPUT_DIR)/bombe
+ENIGMA_EXECUTABLE = $(OUTPUT_DIR)/enigma
+CYCLE_EXECUTABLE = $(OUTPUT_DIR)/cycle_type
+
 
 # Default target
-all: $(EXECUTABLE)
+all: $(BOMBE_EXECUTABLE) $(ENIGMA_EXECUTABLE) $(CYCLE_EXECUTABLE)
 
-# Link the executable
-$(EXECUTABLE): $(SOURCES)
+# Link the bombe executable
+$(BOMBE_EXECUTABLE): $(BOMBE_SOURCE)
 	@mkdir -p $(OUTPUT_DIR)
-	$(CC) $(CFLAGS) $(SOURCES) -o $(EXECUTABLE)
+	$(CC) $(CFLAGS) $(BOMBE_SOURCE) -o $(BOMBE_EXECUTABLE)
+
+# Link the enigma executable
+$(ENIGMA_EXECUTABLE): $(ENIGMA_SOURCE)
+	@mkdir -p $(OUTPUT_DIR)
+	$(CC) $(CFLAGS) $(ENIGMA_SOURCE) -o $(ENIGMA_EXECUTABLE)
+
+$(CYCLE_EXECUTABLE): $(CYCLE_SOURCE)
+	@mkdir -p $(OUTPUT_DIR)
+	$(CC) $(CFLAGS) $(CYCLE_SOURCE) -o $(CYCLE_EXECUTABLE)
+
 
 # Clean up build files
 clean:

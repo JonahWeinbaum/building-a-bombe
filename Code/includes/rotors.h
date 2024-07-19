@@ -3,9 +3,34 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+
 #include "wirings.h"
 #include "ceasar.h"
 #include "structs.h"
+
+/*Plugboard*/
+char S(t_parameters *params, char in, bool is_logging) {
+    //Setup letter map
+    char letter_map[26];
+    for (int i = 0; i < 26; i++) {
+        letter_map[i] = alphabet[i];
+    }
+
+
+    for (int i = 0; i < 20; i += 2) {
+        letter_map[params->steckerverbindungen[i] - 'A'] = params->steckerverbindungen[i+1];
+        letter_map[params->steckerverbindungen[i+1] - 'A'] = params->steckerverbindungen[i];
+    }
+    if (is_logging) {printf("Plug: %c->%c\n", in, letter_map[in - 'A']);}
+    return letter_map[in - 'A'];
+}
+
+char S_inv(t_parameters *params, char in, bool is_logging) {
+    char out = S(params, in, false);
+    if (is_logging) {printf("Plug: %c->%c\n", in, out);}
+    return out;
+}
+
 
 /*First Rotor*/
 char N(t_state* state, char in, bool is_logging) {

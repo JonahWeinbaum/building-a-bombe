@@ -158,11 +158,13 @@ void plugboard_reset(bool pm[26][26]) {
     }
 }
 
-bool plugboard_update(bool pm[26][26], t_row *row) {
+bool plugboard_update(bool pm[26][26], t_row *row, bool diagonal) {
     bool updated = false;
 
     //Update diagonal matrix
-    diagonal_update(pm);
+    if (diagonal) {
+        diagonal_update(pm);
+    }
 
     //Send current through each cable
     for (char cable = 'A'; cable <= 'Z'; cable++) {
@@ -212,7 +214,9 @@ bool plugboard_update(bool pm[26][26], t_row *row) {
     }
     
     //Update diagonal matrix
-   diagonal_update(pm);
+    if (diagonal) {
+        diagonal_update(pm);
+    }
 
     return updated;
 }

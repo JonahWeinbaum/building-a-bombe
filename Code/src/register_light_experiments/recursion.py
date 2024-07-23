@@ -1,3 +1,6 @@
+# Viewing our Enigma loops as arithmetic on binary strings and
+# developing a recursive equation for the loop
+
 import random
 
 n = 26

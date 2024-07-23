@@ -1,9 +1,11 @@
+# Generates and visualizes graphs of compositions of disjoint transpositions 
+# and the corresponding cycles in each wire. Can include diagonal wirings. This can be used
+# for emperical testing of cycle distributions on a number of enigmas connected in series. 
+
 import random
 import networkx as nx
 import matplotlib.pyplot as plt
 import string
-
-
 
 def generate_disjoint_transpositions(n):
     # Initialize the list with numbers from 0 to n-1
@@ -25,7 +27,7 @@ def generate_disjoint_transpositions(n):
     
     return transpositions
 
-def create_graph_with_transpositions(n, l):
+def create_graph_with_transpositions(n, l, diag = False):
     G = nx.Graph()
     
     # Create l columns of n nodes
@@ -35,6 +37,10 @@ def create_graph_with_transpositions(n, l):
     
     # Connect nodes within each column to the next via random transpositions
     for col in range(l - 1):
+        # if (col == 1):
+        #     transpositions = generate_disjoint_transpositions(n)
+        #     for i, j in transpositions:
+        #         G.add_edge((col, i), (col + 1, j))
         transpositions = generate_disjoint_transpositions(n)
         for i, j in transpositions:
             G.add_edge((col, i), (col + 1, j))
@@ -42,9 +48,10 @@ def create_graph_with_transpositions(n, l):
     for node in range(n):
         G.add_edge((0, node), (l - 1, node), color='invis')  # Invisible edges
     
-    for i in range(l):
-        for j in range(i+1, l):
-            G.add_edge((i, j), (j, i), color='diag', connectionstyle = "arc3,rad=100")
+    if diag:
+        for i in range(l):
+            for j in range(i+1, l):
+                G.add_edge((i, j), (j, i), color='diag', connectionstyle = "arc3,rad=100")
     
 
     return G
@@ -122,6 +129,30 @@ def visualize_graph(G, n, l, col_distance=2):
 def is_connected(G):
     return nx.is_connected(G)
 
+def get_cycle_type(G):
+    components = list(nx.connected_components(G))
+    type = []
+    for component in components:
+        s = 0
+        for node in component:
+                if node[0] == 0:
+                    s+=1 
+        type.append(s)
+    return type
+
+def is_stop(G):
+    components = list(nx.connected_components(G))
+    type = []
+    for component in components:
+        s = 0
+        for node in component:
+                if node[0] == 0:
+                    s+=1 
+        type.append(s)
+    if 25 in type:
+        return True
+    return False
+
 def monte_carlo_simulation(n, l, num_simulations):
     connected_count = 0
     for _ in range(num_simulations):
@@ -134,19 +165,7 @@ def monte_carlo_simulation(n, l, num_simulations):
 
 # Parameters
 n = 26
-l = 4
+l = 12
+k = l+1
 
-visualize_graph(create_graph_with_transpositions(n, l), n, l, 10)
-
-# for l in range(1, 13):
-#     # print(k)
-#     num_simulations = 10000
-
-
-#     s = 0
-#     monte_total = 10000
-#     for i in range(monte_total):
-#         s += int(is_connected(create_graph_with_transpositions(n, l)))
-
-#     score = (s / monte_total)
-#     print(f"l = {l} -> " + "{:.1%}".format(score))
+visualize_graph(create_graph_with_transpositions(n, k, diag = True), n, k)

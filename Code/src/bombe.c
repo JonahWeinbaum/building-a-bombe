@@ -9,6 +9,8 @@ int main() {
     //Set Terminal to Non-Canonical Mode
     setNonCanonicalMode(1);
 
+    bool include_diagonal = true;
+
     t_row row = {0};
 
     int shifts[12] = {11, 5, 6, 14, 13, 7, 16, 2, 10, 9, 12, 15};
@@ -22,7 +24,7 @@ int main() {
 
     row.test_cable = 'G';
 
-    row.num_conn = 12;
+    row.num_conn = 3;
 
     t_connect connect = {0};
     connect.in = 'U';
@@ -36,12 +38,12 @@ int main() {
     row.connects[1] = connect;
 
     connect.in = 'G';
-    connect.out = 'R';
+    connect.out = 'U';
     connect.scram_id = 2;
     row.connects[2] = connect;
 
     connect.in = 'R';
-    connect.out = 'A';
+    connect.out = 'U';
     connect.scram_id = 3;
     row.connects[3] = connect;
 
@@ -89,7 +91,7 @@ int main() {
     for (int i = 0; i < 26*26*26; i++) {
         plugboard_reset(plug_matrix);
         cable_set(plug_matrix, 'G', 'a', true); 
-        while(plugboard_update(plug_matrix, &row)) {}
+        while(plugboard_update(plug_matrix, &row, include_diagonal)) {}
         
             // char ch;
             // do {
@@ -113,7 +115,7 @@ int main() {
         for(int l = 0; l < 26; l++) {
             sum += cs[l];
         }
-        if (sum != 26) { 
+        if (sum == 26) { 
             char ch;
             do {
                 ch = getchar();

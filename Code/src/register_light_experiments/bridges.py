@@ -30,7 +30,6 @@ def cycle_type(cycles):
 
 
 def bridges_cycles(a, b):
-
     if(len(a) == 1):
         return True
 
@@ -60,7 +59,11 @@ cycle_type_map = dict()
 s = 0
 for (b1, b2) in list(itertools.combinations(bijections, 2)):
         if bridges_cycles(permutation_to_cycles(b1), permutation_to_cycles(b2)):
+            print(bridges_cycles(permutation_to_cycles(b2), permutation_to_cycles(b1)))
             if not ((tuple(b1)) in cycle_type_map):
+                # print(permutation_to_cycles(b1))
+                # print(permutation_to_cycles(b2))
+                # print()
                 cycle_type_map[tuple(b1)] = 1
             else:
                 cycle_type_map[tuple(b1)] += 1
@@ -68,4 +71,4 @@ for (b1, b2) in list(itertools.combinations(bijections, 2)):
             if not ((tuple(b1)) in cycle_type_map):
                 cycle_type_map[tuple(b1)] = 0
 
-print(cycle_type_map)
+# print(cycle_type_map)

@@ -4,9 +4,11 @@
 
 from itertools import combinations_with_replacement
 from collections import defaultdict, Counter
+import matplotlib.pyplot as plt
 import math
 import random
 import networkx as nx
+import string
 
 def integer_partitions(n):
     """
@@ -59,8 +61,8 @@ def probability_diag_connects_one(cycle_types, n, dist=None):
                 total += inner_sum*prob
     return total
 
-def probability_diag_connects_any(cycle_types, n, l):
-    p = probability_diag_connects_one(cycle_types, n)
+def probability_diag_connects_any(cycle_types, n, l, dist=None):
+    p = probability_diag_connects_one(cycle_types, n, dist)
     return 1 - math.pow(1-p, l*(l-1)/2)
 
 def generate_disjoint_transpositions(n):
@@ -82,6 +84,50 @@ def generate_disjoint_transpositions(n):
     transpositions.sort(key=lambda x: x[0])
     
     return transpositions
+
+def subscript_letter(index):
+    # Return the corresponding lowercase letter for the given index
+    return string.ascii_lowercase[index]
+
+def visualize_graph(G, n, l, col_distance=2):
+    pos = {}
+    labels = {}
+
+    # Assign positions to nodes with specified column distance
+    for col in range(l):
+        col_label = string.ascii_uppercase[col]
+        for node in range(n):
+            pos[(col, node)] = (col * col_distance, -node)
+            labels[(col, node)] = f"{col_label}{subscript_letter(node)}"
+    
+    components = list(nx.connected_components(G))
+    colors = plt.cm.get_cmap('tab20', len(components))  # Use a colormap with enough colors
+    
+    # Assign colors to nodes based on their component
+    # Assign colors to nodes and edges based on their component
+    node_color_map = {}
+    for i, component in enumerate(components):
+        color = colors(i)
+        for node in component:
+            node_color_map[node] = color
+    
+    # Assign edge colors based on the color of the first node it's connected to
+    edge_colors = []
+    for edge in G.edges():
+        if G.edges[edge].get('color') == 'invis':
+            edge_colors.append('none')  # Invisible edges
+        elif G.edges[edge].get('color') == 'diag':
+            edge_colors.append('tab:green')  # Invisible edges
+        else:
+            edge_colors.append(node_color_map.get(edge[0], 'black'))
+    # Draw the graph with colored components
+    plt.figure(figsize=(12, 8))
+    nx.draw(G, pos, labels=labels, with_labels=True, node_size=200, node_color=[node_color_map[node] for node in G.nodes()],
+            edge_color=edge_colors, width=2, font_weight="bold", font_size=10)
+    
+    # Set background color to black
+    plt.gca().set_facecolor('black')
+    plt.show()
 
 def create_graph_with_transpositions(n, l):
     G = nx.Graph()
@@ -122,7 +168,7 @@ def collect_cycle_types(n, l, num_simulations):
         cycle_type = tuple(sorted(cycle_type))
         cycle_type = partition_to_multiplicity(cycle_type)
         if not cycle_type in cycles_seen:
-            cycles_seen.update({cycle_type: 0})
+            cycles_seen.update({cycle_type: 1})
         else: 
             s = cycles_seen[cycle_type]
             cycles_seen.update({cycle_type: s + 1})
@@ -138,7 +184,24 @@ def monte_carlo_simulation(n, l, num_simulations):
         G = create_graph_with_transpositions(n, l+1)
         num_before = len(list(nx.connected_components(G)))
         # Add in Diagonal Edge
-        G.add_edge((0, 1), (1, 0))
+        # G.add_edge((0, 1), (1, 0))
+        # G.add_edge((2, 1), (1, 2))
+        # G.add_edge((3, 1), (1, 2))
+        # for i in range(l):
+        #     for j in range(i+1, l):
+        #         G.add_edge((i, j), (j, i), color='diag', connectionstyle = "arc3,rad=100")
+
+        # IF EDGES ARE SAMPLED RANDOMLY THEN THIS ALIGNS WITH THE COLLECTED DISTRIBUTION
+        # HOWEVER THE DIAGONAL NATURE SEEMS TO SKEW THESE PROBABILITIES QUITE A LOT
+        possible_edges = []
+        for col in range(l - 1):
+            for i in range(n):
+                for j in range(n):
+                    possible_edges.append(((col, i), (col + 1, j)))
+
+        # Sample k edges randomly from the possible edges
+        sampled_edges = random.sample(possible_edges, int(l*(l-1)/2))
+        G.add_edges_from(sampled_edges)
 
         num_after = len(list(nx.connected_components(G)))
         if (num_before != num_after):
@@ -148,9 +211,10 @@ def monte_carlo_simulation(n, l, num_simulations):
 
 
 n = 26
-l = 2
+l = 3
+print(f"Monte Carlo -> {monte_carlo_simulation(n, l, 10000)}")
+
 cycle_types = all_multiplicities(integer_partitions(n), n)
 
-print(f"Uniform Dist -> {probability_diag_connects_one(cycle_types, n)}")
-print(f"Collected Dist -> {probability_diag_connects_one(cycle_types, n, collect_cycle_types(n, l, 100000))}")
-print(f"Monte Carlo -> {monte_carlo_simulation(n, l, 100000)}")
+print(f"Uniform Dist -> {probability_diag_connects_any(cycle_types, n, l)}")
+print(f"Collected Dist -> {probability_diag_connects_any(cycle_types, n, l, collect_cycle_types(n, l, 10000))}")

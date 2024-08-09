@@ -24,7 +24,7 @@ int main() {
 
     row.test_cable = 'G';
 
-    row.num_conn = 3;
+    row.num_conn = 12;
 
     t_connect connect = {0};
     connect.in = 'U';
@@ -38,12 +38,12 @@ int main() {
     row.connects[1] = connect;
 
     connect.in = 'G';
-    connect.out = 'U';
+    connect.out = 'R';
     connect.scram_id = 2;
     row.connects[2] = connect;
 
     connect.in = 'R';
-    connect.out = 'U';
+    connect.out = 'A';
     connect.scram_id = 3;
     row.connects[3] = connect;
 
@@ -103,10 +103,10 @@ int main() {
         usleep(10000);
         row_advance(&row, 1);
 
-            // char ch;
-            // do {
-            //     ch = getchar();
-            // } while (ch != 'n '); 
+        char ch;
+        do {
+            ch = getchar();
+        } while (ch != 'n'); 
 
         bool cs[26];
         cable_state(plug_matrix, cs, 'G');
@@ -115,7 +115,7 @@ int main() {
         for(int l = 0; l < 26; l++) {
             sum += cs[l];
         }
-        if (sum == 26) { 
+        if (sum != 26) { 
             char ch;
             do {
                 ch = getchar();

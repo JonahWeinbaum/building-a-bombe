@@ -30,121 +30,121 @@ was sent in multiple segments, multiple \emph{Buchstabenkenngruppe} were used to
 It is clear that with this protocol, the Polish Bomba could no longer deduce the necessary 
 details to decrypt Enigma messages. All of the permutation information contained in the original key distribution 
 protocol was removed and a new method needed to be derived for infering information about the daily key.
-\section{Loops}
-The removal of the double encoded \emph{Spruchschlüssel} does not mean that permutation information cannot be stored elsewhere in the message. 
-For the sake of argument, let us say we knew that our encrypted message had plaintext encoding
+% \section{Loops}
+% The removal of the double encoded \emph{Spruchschlüssel} does not mean that permutation information cannot be stored elsewhere in the message. 
+% For the sake of argument, let us say we knew that our encrypted message had plaintext encoding
 
-\begin{center}
-\begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.1cm, minimum width=0.1cm}]
+% \begin{center}
+% \begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.1cm, minimum width=0.1cm}]
 
-    % Centering the diagram
-    \node (a1) [] {D};
-    \node (a2) [right=0.1cm of a1] {Y};
-    \node (a3) [right=0.1cm of a2] {Y};
-    \node (a4) [right=0.1cm of a3] {Y};
-    \node (a5) [right=0.1cm of a4] {Y};
-    \node (a6) [right=0.1cm of a5] {Y};
-    \node (a7) [right=0.1cm of a6] {X };
-    \node (a8) [right=0.1cm of a7] {Y};
-    \node (a9) [right=0.1cm of a8] {Y};
-    \node (a10) [right=0.1cm of a9] {Y};
-    \node (a11) [right=0.1cm of a10] {X};
+%     % Centering the diagram
+%     \node (a1) [] {D};
+%     \node (a2) [right=0.1cm of a1] {Y};
+%     \node (a3) [right=0.1cm of a2] {Y};
+%     \node (a4) [right=0.1cm of a3] {Y};
+%     \node (a5) [right=0.1cm of a4] {Y};
+%     \node (a6) [right=0.1cm of a5] {Y};
+%     \node (a7) [right=0.1cm of a6] {X };
+%     \node (a8) [right=0.1cm of a7] {Y};
+%     \node (a9) [right=0.1cm of a8] {Y};
+%     \node (a10) [right=0.1cm of a9] {Y};
+%     \node (a11) [right=0.1cm of a10] {X};
     
-    % Nodes for ciphertext
-    \node (x1) [below=1cm of a1] {A};
-    \node (x2) [below=1cm of a2] {B};
-    \node (x3) [below=1cm of a3] {R};
-    \node (x4) [below=1cm of a4] {A};
-    \node (x5) [below=1cm of a5] {C};
-    \node (x6) [below=1cm of a6] {A};
-    \node (x7) [below=1cm of a7] {D};
-    \node (x8) [below=1cm of a8] {A};
-    \node (x9) [below=1cm of a9] {B};
-    \node (x10) [below=1cm of a10] {R};
-    \node (x11) [below=1cm of a11] {A};
+%     % Nodes for ciphertext
+%     \node (x1) [below=1cm of a1] {A};
+%     \node (x2) [below=1cm of a2] {B};
+%     \node (x3) [below=1cm of a3] {R};
+%     \node (x4) [below=1cm of a4] {A};
+%     \node (x5) [below=1cm of a5] {C};
+%     \node (x6) [below=1cm of a6] {A};
+%     \node (x7) [below=1cm of a7] {D};
+%     \node (x8) [below=1cm of a8] {A};
+%     \node (x9) [below=1cm of a9] {B};
+%     \node (x10) [below=1cm of a10] {R};
+%     \node (x11) [below=1cm of a11] {A};
     
-    % Arrows for mapping
-    \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
-    \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
-    \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
-    \draw[->] (a4) -- (x4) node[midway, left, draw=none, fill=none] {4};
-    \draw[->] (a5) -- (x5) node[midway, left, draw=none, fill=none] {5};
-    \draw[->] (a6) -- (x6) node[midway, left, draw=none, fill=none] {6};
-    \draw[->] (a7) -- (x7) node[midway, left, draw=none, fill=none] {7};
-    \draw[->] (a8) -- (x8) node[midway, left, draw=none, fill=none] {8};
-    \draw[->] (a9) -- (x9) node[midway, left, draw=none, fill=none] {9};
-    \draw[->] (a10) -- (x10) node[midway, left, draw=none, fill=none] {10};
-    \draw[->] (a11) -- (x11) node[midway, left, draw=none, fill=none] {11};
+%     % Arrows for mapping
+%     \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
+%     \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
+%     \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
+%     \draw[->] (a4) -- (x4) node[midway, left, draw=none, fill=none] {4};
+%     \draw[->] (a5) -- (x5) node[midway, left, draw=none, fill=none] {5};
+%     \draw[->] (a6) -- (x6) node[midway, left, draw=none, fill=none] {6};
+%     \draw[->] (a7) -- (x7) node[midway, left, draw=none, fill=none] {7};
+%     \draw[->] (a8) -- (x8) node[midway, left, draw=none, fill=none] {8};
+%     \draw[->] (a9) -- (x9) node[midway, left, draw=none, fill=none] {9};
+%     \draw[->] (a10) -- (x10) node[midway, left, draw=none, fill=none] {10};
+%     \draw[->] (a11) -- (x11) node[midway, left, draw=none, fill=none] {11};
     
-    \end{tikzpicture}
-\end{center}
+%     \end{tikzpicture}
+% \end{center}
 
-Where the top row is the ciphertext and the bottom is the plaintext, further, the number in each mapping indicates how many steps away we are from the rotor 
-positions when we began encoding the message.
+% Where the top row is the ciphertext and the bottom is the plaintext, further, the number in each mapping indicates how many steps away we are from the rotor 
+% positions when we began encoding the message.
 
-\begin{center}
-    \begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.1cm, minimum width=0.1cm}]
-        \node (A) at (90:1.5) {$A$};
-        \node (D) at (210:1.5) {$D$};
-        \node (X) at (330:1.5) {$X$};
+% \begin{center}
+%     \begin{tikzpicture}[node distance=1cm, every node/.style={draw, circle, minimum height=0.1cm, minimum width=0.1cm}]
+%         \node (A) at (90:1.5) {$A$};
+%         \node (D) at (210:1.5) {$D$};
+%         \node (X) at (330:1.5) {$X$};
       
-        \draw[->, bend right=45] (A) to node[midway, draw=none, above] {1} (D);
-        \draw[->, bend right=45] (D) to node[midway, draw=none, above] {7} (X);
-        \draw[->, bend right=45] (X) to node[midway, draw=none, above] {11} (A);
-      \end{tikzpicture}
-\end{center}
+%         \draw[->, bend right=45] (A) to node[midway, draw=none, above] {1} (D);
+%         \draw[->, bend right=45] (D) to node[midway, draw=none, above] {7} (X);
+%         \draw[->, bend right=45] (X) to node[midway, draw=none, above] {11} (A);
+%       \end{tikzpicture}
+% \end{center}
 
-Recall
-\begin{align*}
-    E_1 &= P^{-1}\theta_1R_1^{-1}\theta_1^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_1^{-1}R_1\theta_1P
-    \\E_7 &= P^{-1}\theta_7R_1^{-1}\theta_7^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_7^{-1}R_1\theta_7P
-    \\E_{11} &= P^{-1}\theta_{11}R_1^{-1}\theta_{11}^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_{11}^{-1}R_1\theta_{11}P
-\end{align*}
-Then it follows that our loop can be represented by 
-\begin{align*}
-    \sigma &= E_{11}\circ E_7 \circ E_{1}
-\end{align*}
-and we see that all the intermediate plugboard settings cancel out. Lets isolate the plugboard settings by letting 
-$\overline{\sigma}$ represent $\sigma$ without the use of the plugboard for input and output, then 
-\[
-    \sigma = P^{-1}\overline{\sigma}P
-\]
-We have that
-\begin{align*}
-    \sigma(A) &= A
-    \\\iff (P^{-1}\overline{\sigma}P)(A) &= A
-    \\\iff \overline{\sigma}(P(A)) &= P(A)
-\end{align*}
+% Recall
+% \begin{align*}
+%     E_1 &= P^{-1}\theta_1R_1^{-1}\theta_1^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_1^{-1}R_1\theta_1P
+%     \\E_7 &= P^{-1}\theta_7R_1^{-1}\theta_7^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_7^{-1}R_1\theta_7P
+%     \\E_{11} &= P^{-1}\theta_{11}R_1^{-1}\theta_{11}^{-1}R_2^{-1}R_3^{-1}MR_3R_2\theta_{11}^{-1}R_1\theta_{11}P
+% \end{align*}
+% Then it follows that our loop can be represented by 
+% \begin{align*}
+%     \sigma &= E_{11}\circ E_7 \circ E_{1}
+% \end{align*}
+% and we see that all the intermediate plugboard settings cancel out. Lets isolate the plugboard settings by letting 
+% $\overline{\sigma}$ represent $\sigma$ without the use of the plugboard for input and output, then 
+% \[
+%     \sigma = P^{-1}\overline{\sigma}P
+% \]
+% We have that
+% \begin{align*}
+%     \sigma(A) &= A
+%     \\\iff (P^{-1}\overline{\sigma}P)(A) &= A
+%     \\\iff \overline{\sigma}(P(A)) &= P(A)
+% \end{align*}
 
-Suppose that our initial rotor position was correct, then certainly our $\overline{\sigma}$ is correct. We can make a hypothesis 
-that $A$ is steckered to $K$ in the plugboard. Suppose we find that $\overline{\sigma}(K) \ne K$, then $\sigma(A)\ne A$ and our loop is broken, breaking our assumptions, thus $A$ must not be steckered to $K$.
-But this will actually elimiate more hypotheses than just $A$ being steckered to $K$. We know that $\overline{\sigma}(K)$ is some letter which is not $K$. So we continue with a new hypothesis that $A$ is steckered to 
-$\overline{\sigma}(K)$ and if we find $\overline{\sigma}(\overline{\sigma}(K)) \ne \overline{\sigma}(K)$, then we have further eliminated this possibility. 
-Each new hypothesis suggests that $A$ is steckered to $\overline{\sigma}^{i}(K)$ which will be shown to be false if $\overline{\sigma}^{i+1}(K) \ne \overline{\sigma}^{i}(K)$. What if we find that 
-$\overline{\sigma}^{i+1}(K) = \overline{\sigma}^i(K)$ at some point? This cannot happen since 
-\begin{center}
-        \begin{align*}
-            &\overline{\sigma}^{i+1}(K) = \overline{\sigma}^i(K)
-            \\\Rightarrow \text{ }&\overline{\sigma}^{-i}\circ\overline{\sigma}^{i+1}(K) = \overline\sigma^{-i}\circ\overline{\sigma}^i(K)
-            \\\Rightarrow \text{ }&\overline{\sigma}(K) = K
-        \end{align*}
-\end{center}
-which by supposition is false. Then we can continue in our hypotheses until we eventually reach a cycle where $\overline\sigma^i(K) = K$.
-Then we gather a set of impossible steckerings, that is
-\begin{align*}
-    P(A) \notin \{\text{ }\overline{\sigma}^i(K)\text{ }\vert\text{ }i\in\mathbb{N}\}
-\end{align*}
-\\\\The notation we are using can be simplified significantly. The set $\{\text{ }\overline{\sigma}^i(K)\text{ }\vert\text{ }i\in\mathbb{N}\}$ is equivalent to the orbit of $K$ via the group action of the 
-cyclic subgroup $\langle\overline{\sigma}\rangle$ which can be denoted $\langle\overline{\sigma}\rangle\cdot K$. 
-\\\\We then have several cases 
-\begin{enumerate}
-    \item If $|\langle\overline{\sigma}\rangle\cdot K| = 26$, then $A$ cannot be steckered to anything which is clearly
-    impossible, thus our rotor position must be incorrect. 
-    \item If $|\langle\overline{\sigma}\rangle\cdot K| = 25$, then $A$ can only be steckered to the remaining letter \\$\{A,\dots,Z\} -
-    \langle \overline{\sigma} \rangle\cdot K$
-    \item If $|\langle\overline{\sigma}\rangle\cdot K| = 1$, in this case we must have intially had $\overline{\sigma}(K) = K$ so we have not
-    eliminated any possibilities. 
-\end{enumerate}
+% Suppose that our initial rotor position was correct, then certainly our $\overline{\sigma}$ is correct. We can make a hypothesis 
+% that $A$ is steckered to $K$ in the plugboard. Suppose we find that $\overline{\sigma}(K) \ne K$, then $\sigma(A)\ne A$ and our loop is broken, breaking our assumptions, thus $A$ must not be steckered to $K$.
+% But this will actually elimiate more hypotheses than just $A$ being steckered to $K$. We know that $\overline{\sigma}(K)$ is some letter which is not $K$. So we continue with a new hypothesis that $A$ is steckered to 
+% $\overline{\sigma}(K)$ and if we find $\overline{\sigma}(\overline{\sigma}(K)) \ne \overline{\sigma}(K)$, then we have further eliminated this possibility. 
+% Each new hypothesis suggests that $A$ is steckered to $\overline{\sigma}^{i}(K)$ which will be shown to be false if $\overline{\sigma}^{i+1}(K) \ne \overline{\sigma}^{i}(K)$. What if we find that 
+% $\overline{\sigma}^{i+1}(K) = \overline{\sigma}^i(K)$ at some point? This cannot happen since 
+% \begin{center}
+%         \begin{align*}
+%             &\overline{\sigma}^{i+1}(K) = \overline{\sigma}^i(K)
+%             \\\Rightarrow \text{ }&\overline{\sigma}^{-i}\circ\overline{\sigma}^{i+1}(K) = \overline\sigma^{-i}\circ\overline{\sigma}^i(K)
+%             \\\Rightarrow \text{ }&\overline{\sigma}(K) = K
+%         \end{align*}
+% \end{center}
+% which by supposition is false. Then we can continue in our hypotheses until we eventually reach a cycle where $\overline\sigma^i(K) = K$.
+% Then we gather a set of impossible steckerings, that is
+% \begin{align*}
+%     P(A) \notin \{\text{ }\overline{\sigma}^i(K)\text{ }\vert\text{ }i\in\mathbb{N}\}
+% \end{align*}
+% \\\\The notation we are using can be simplified significantly. The set $\{\text{ }\overline{\sigma}^i(K)\text{ }\vert\text{ }i\in\mathbb{N}\}$ is equivalent to the orbit of $K$ via the group action of the 
+% cyclic subgroup $\langle\overline{\sigma}\rangle$ which can be denoted $\langle\overline{\sigma}\rangle\cdot K$. 
+% \\\\We then have several cases 
+% \begin{enumerate}
+%     \item If $|\langle\overline{\sigma}\rangle\cdot K| = 26$, then $A$ cannot be steckered to anything which is clearly
+%     impossible, thus our rotor position must be incorrect. 
+%     \item If $|\langle\overline{\sigma}\rangle\cdot K| = 25$, then $A$ can only be steckered to the remaining letter \\$\{A,\dots,Z\} -
+%     \langle \overline{\sigma} \rangle\cdot K$
+%     \item If $|\langle\overline{\sigma}\rangle\cdot K| = 1$, in this case we must have intially had $\overline{\sigma}(K) = K$ so we have not
+%     eliminated any possibilities. 
+% \end{enumerate}
 
 \section*{Motivating Example}
 
@@ -269,16 +269,15 @@ Consider the following mapping,
         \item If we examine a particular hypothesis, say $A$ is steckered to $K$, we can rule out this steckering if we find that $K$ is not in a $1$-cycle, that is if $\overline\sigma(K) \ne K$. If we
         mechanize this process we can eliminate rotor positions which do not satisfy this singular hypothesis. Turing called this method \textbf{single line scanning}. Note, however, that this method may eliminate rotor
         positions which do have valid steckerings, just not the particular steckering that we hypothesized.
-        \item If we find $\overline\sigma$ does not contain a $1$-cycle must then have that no steckerings of $A$ 
-        are valid and thus the hypothesized rotor position must be incorrect. If we wanted to rule out certain rotor positions one method would be mechanising the above description. Examining
-        each possible steckering of a letter sequentially and ruling out any rotor positions which have no valid steckerings. Turing called this method \textbf{serial scanning}.
+        \item If we perform single line scanning in sequence, that is, for each steckering hypothesis, we can rule out rotor positions which have all steckering hypotheses invalid. Turing called this method \textbf{serial scanning}.
         \item Serial scanning requires a seperate examination of each steckering. Turing proposed a machine which could concurrently examine all steckering possibilities and eliminate rotor positions
         which had no valid steckerings. Turing called this method \textbf{simultaneous scanning}.
         \item If we find $\overline\sigma$ has a $26$-cycle, then we must have that there are no $1$-cycles and thus no valid steckerings. It then follows that the rotor position is incorrect.
         If we mechanism this process we can eliminate \emph{some} rotor positions which do not have valid steckerings. We will call this method \textbf{spider scanning}. Note, however, that this method 
         would not, for example, detect that a $13,13$-cycle contains no valid steckerings. As Turing explained, 
         \say{The ideal machine that Welchman was aiming at was to reject any position in which a certain fixed-for-the-time Stecker hypothesis led to any direct contradiction... The spider does more than this in one way and 
-        less in another. It is not restricted to dealing with one Stecker hypothesis at a time, and it does not find all direct contradictions.}
+        less in another. It is not restricted to dealing with one Stecker hypothesis at a time, and it does not find all direct contradictions.} Effectively, spider-scanning is like a form of simultaneous scanning which is restricted
+        to examining only one cycle at a time.
     \end{enumerate}
     Iterations of each scanning methods were proposed or designed, but in the end we find that the spider scanning method was used in the implementation of the Bombe.At a high level, we encode the structure of the ciphertext-plaintext pairings, we input a hypothesis that a particular 
     letter (e.g $A$) is steckered to another (e.g. $\alpha$), and we electrically produce the elements that must also be steckered to our test letter 
@@ -452,11 +451,11 @@ Consider the following mapping,
     \end{center}
     As before, let us make a hypothesis regarding steckering. Suppose $P(A) = D$. We know that $A$ must map to $A$ via 
     $P\overline\sigma_3\overline\sigma_2\overline\sigma_1 P$. In our diagram, however we do not see a plugboard so how can we represent the plugboard's involvement? In order 
-    to achieve this \emph{we} will function as the plugboard by applying voltage to the $d$ line on the $A$ thus implicitly performing the a plugboard mapping in which $P(A) = D$. 
-    Then this will go through the map electrical mapping $\overline\sigma_1$ arriving on the $B$ cable, followed by $\overline\sigma_2$ arriving on the $C$ cable, followed by $\overline\sigma_3$ arriving back on the $A$ cable, where \emph{we} as the implicit plugboard know that 
+    to achieve this \emph{we} will function as the plugboard by applying voltage to the $d$ line on the $A$ thus implicitly performing the plugboard mapping in which $P(A) = D$. 
+    Then this will go through the electrical mapping $\overline\sigma_1$ arriving on the $B$ cable, followed by $\overline\sigma_2$ arriving on the $C$ cable, followed by $\overline\sigma_3$ arriving back on the $A$ cable, where \emph{we} as the implicit plugboard know that 
     the output of this electrical mapping must go through the pluboard again to get a final output of $A$.
-    \\\\We will denote each wire by its a capital and lowercase letter which indicates both the cable and specific wire to which we refer. For instance, line $d$ on cable $A$ will be denoted $Ad$. Any time a wire 
-    $Xy$ is live, implicitly this means that there is an intermediary plugboard which mapped $P(X) = Y$. 
+    \\\\We will denote each wire by a capital and lowercase letter which indicates both the cable and specific wire to which we refer. For instance, line $d$ on cable $A$ will be denoted $Ad$. Any time a wire 
+    $Xy$ is live, implicitly this means that there is an intermediary plugboard which mapped $P(X) = Y$ or $P(Y) = X$. 
     To see this electrical mapping occur let us visualize a current being sent through $Ad$.
     \begin{center}
         \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
@@ -981,8 +980,103 @@ Consider the following mapping,
     \end{center}
 
     In this example, following our steckering hypothesis $P(A) = D$, results in $Aa$ becoming live after mapping through $\overline\sigma$ and 
-    thus we must have $P(A) = A$ as well in order for this to ultimately map back to $A$ and preserve our ciphertext-plaintext loop above.
+    thus we must have $P(A) = A$ as well in order for this to ultimately map back to $A$ and preserve our ciphertext-plaintext loop above. Thus we can eliminate the steckering possibilities that 
+    $P(A) \in \{A, D\}$. Effectively, this process is a mechanization of finding the cycle containing a particular letter. In the above diagram sending current from $Ad$ until we arrive back at $Ad$ is akin to repeatedly applying $\overline\sigma$ to $D$ 
+    until we return to $D$. This can be visualized in our diagram as 
 
+    \begin{center}
+        \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+            % Draw the box
+            \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+            
+            \node at (3, -2) {$\overline\sigma_3$};
+
+            % Draw the wires entering the box
+            \draw[-, red] (0, 2) -- (2, 2) node[midway, above] {a};
+            \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
+            \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
+            \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
+
+            % Draw the wires exiting the box with crossed mappings
+            \draw[-, red] (4, 2) -- (6,2) node[midway, above] {a};
+            \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
+            \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
+            \draw[-, red] (4,-1) -- (6, -1) node[midway, above] {d};
+
+            % Draw the lines inside the box to represent the mapping
+            \draw[-, red] (2, 2) -- (4,-1);
+            \draw[-] (2, 1) -- (4, 0);
+            \draw[-] (2, 0) -- (4, 1);
+            \draw[-, red] (2,-1) -- (4, 2);
+
+            \draw[-, red] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+            \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+            \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+            \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1) node[midway, above] {};
+
+            \draw[-, red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+            \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+            \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+            \draw[-, red] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+            \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+            \node at (3-3, -2-7) {$\overline\sigma_1$};
+
+            % Draw the wires entering the box
+            \draw[-, red] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
+            \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
+            \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
+            \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
+
+            % Draw the wires exiting the box
+            \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
+            \draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
+            \draw[-, red] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
+            \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
+
+            % Draw the lines inside the box to represent the mapping
+            \draw[-, red] (2-3, 2-7) -- (4-3, 0-7);
+            \draw[-] (2-3, 1-7) -- (4-3, -1-7);
+            \draw[-] (2-3, 0-7) -- (4-3, 2-7);
+            \draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
+
+            \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+            
+            \node at (3+3, -2-7) {$\overline\sigma_2$};
+
+
+            % Draw the wires entering the box
+            \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+            \draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+            \draw[-, red] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+            \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+            % Draw the wires exiting the box
+            \draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
+            \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
+            \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
+            \draw[-, red] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
+
+            \draw[-] (2+3, 2-7) -- (4+3, 0-7);
+            \draw[-, red] (2+3, 1-7) -- (4+3, -1-7);
+            \draw[-, red] (2+3, 0-7) -- (4+3, 2-7);
+            \draw[-] (2+3,-1-7) -- (4+3, 1-7);
+
+            \node[draw,circle] at (-4.5, -1) {$A$};
+            \node[draw,circle] at (3, -9) {$B$};
+            \node[draw,circle] at (10.5, -1) {$C$};
+
+        \end{tikzpicture}
+    \end{center}
+    Where we find that in $\overline\sigma$ we have the cycle $(AD)$ since $Ad$ and $Aa$ are the only two live 
+    wires in the $A$ cable after allowing currently to reach a steady-state. If we had instead applied current to $Ab$ we would find that $Ab$ and $Ac$ become live and give us the full 
+    permutation $\overline\sigma = (AD)(BC)$. The beauty of this design is that it is able to deduce the elements in a cycle of $\overline\sigma$ nearly instantaneously since it only requires the circuit to reach
+    a steady-state.
+    \\\\Equipped with this tool spider-scanning becomes quite trivial. The goal of spider-scanning is to eliminate a rotor position by checking if the permutation has a $26$-cycle. In our diagram, with four lines, 
+    this would be analogous to testing a steckering hypothesis (any hypothesis) and finding that the entire cable becomes live. Then all elements lie within the same cycle of $\overline\sigma$ and thus all steckering possibilities are immediately eliminated. 
+
+        
     % In this diagram, we use upper case $A$, $B$, $C$ to denote the \textbf{outside line} -- that is, the mapping we are given from the plaintext-ciphertext pairing.
     % We know that when $A$ maps through the plugboard, followed by $\overline\sigma_1$, and finally back through the plugboard we get $B$. The lowercase letters $a$, $b$, $c$, $d$ denote the \textbf{inside line} -- that is, the possible plugboard 
     % mappings of each outside line. To wit, applying a current to the line $Aa$ (i.e. cable $A$ wire $a$) is supposing that when $A$ maps through the plugboard we will get $A$ as an output. In this way, by choosing where to apply current, we are implicitly

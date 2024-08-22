@@ -31,27 +31,44 @@ def create_graph_with_transpositions(n, l, diag = False):
     G = nx.Graph()
     
     # Create l columns of n nodes
-    for col in range(l):
-        for node in range(n):
-            G.add_node((col, node))
+
+    for loop in range(len(l)):
+        for col in range(l[loop]):
+            for node in range(n):
+                if col == 0 and loop == 0:
+                    G.add_node((0, 0, node))
+                elif col == 0 and loop != 0:
+                    continue
+                else:
+                    G.add_node((loop, col, node))
     
     # Connect nodes within each column to the next via random transpositions
-    for col in range(l - 1):
-        # if (col == 1):
-        #     transpositions = generate_disjoint_transpositions(n)
-        #     for i, j in transpositions:
-        #         G.add_edge((col, i), (col + 1, j))
-        transpositions = generate_disjoint_transpositions(n)
-        for i, j in transpositions:
-            G.add_edge((col, i), (col + 1, j))
+    for loop in range(len(l)):
+        for col in range(l[loop] - 1):
+            # if (col == 1):
+            #     transpositions = generate_disjoint_transpositions(n)
+            #     for i, j in transpositions:
+            #         G.add_edge((col, i), (col + 1, j))
+            transpositions = generate_disjoint_transpositions(n)
+            for i, j in transpositions:
+                if col == 0:
+                    G.add_edge((0, 0, i), (loop, col + 1, j))
+                else:
+                    G.add_edge((loop, col, i), (loop, col + 1, j))
     
-    for node in range(n):
-        G.add_edge((0, node), (l - 1, node), color='invis')  # Invisible edges
+                
+    for loop in range(len(l)):
+        for node in range(n):
+            G.add_edge((0, 0, node), (loop, l[loop] - 1, node), color='invis')  # Invisible edges
     
     if diag:
-        for i in range(l):
-            for j in range(i+1, l):
-                G.add_edge((i, j), (j, i), color='diag', connectionstyle = "arc3,rad=100")
+        for loop in range(len(l)):
+            for i in range(l[loop]):
+                for j in range(i+1, l[loop] - 1):
+                    if i == 0:
+                        G.add_edge((0, i, j), (loop, j, i), color='diag', connectionstyle = "arc3,rad=100")
+                    else:
+                        G.add_edge((loop, i, j), (loop, j, i), color='diag', connectionstyle = "arc3,rad=100")
     
 
     return G
@@ -86,16 +103,38 @@ def subscript_letter(index):
     # Return the corresponding lowercase letter for the given index
     return string.ascii_lowercase[index]
 
-def visualize_graph(G, n, l, col_distance=2):
+def visualize_graph(G, n, l, col_distance=2, row_distance=40):
     pos = {}
     labels = {}
 
     # Assign positions to nodes with specified column distance
-    for col in range(l):
-        col_label = string.ascii_uppercase[col]
-        for node in range(n):
-            pos[(col, node)] = (col * col_distance, -node)
-            labels[(col, node)] = f"{col_label}{subscript_letter(node)}"
+    for loop in range(len(l)):
+        for col in range(l[loop]):
+            col_label = string.ascii_uppercase[col]
+            if col == l[loop]-1:
+                col_label = string.ascii_uppercase[0]
+            for node in range(n):
+                if loop != 0 and col == 0:
+                    continue
+                if loop == 0 and col == 0:
+                    pos[(loop, col, node)] = (col * col_distance, -node)
+                    labels[(loop, col, node)] = f"{col_label}{subscript_letter(node)}"
+                else: 
+                    if len(l) % 2 == 0:
+                        if loop % 2 == 0:
+                            pos[(loop, col, node)] = (col * col_distance, -node + (row_distance/2) + row_distance * (int(loop/2)))
+                            labels[(loop, col, node)] = f"{col_label}{subscript_letter(node)}"
+                        else: 
+                            pos[(loop, col, node)] = (col * col_distance, -node - (row_distance/2) - row_distance * (int(loop/2)))
+                            labels[(loop, col, node)] = f"{col_label}{subscript_letter(node)}"
+                    else:
+                        if loop % 2 == 0:
+                            pos[(loop, col, node)] = (col * col_distance, -node + row_distance * (int(loop/2)))
+                            labels[(loop, col, node)] = f"{col_label}{subscript_letter(node)}"
+                        else: 
+                            pos[(loop, col, node)] = (col * col_distance, -node - row_distance * (int(loop/2)+1))
+                            labels[(loop, col, node)] = f"{col_label}{subscript_letter(node)}"
+
     
     components = list(nx.connected_components(G))
     colors = plt.cm.get_cmap('tab20', len(components))  # Use a colormap with enough colors
@@ -156,16 +195,16 @@ def is_stop(G):
 def monte_carlo_simulation(n, l, num_simulations):
     connected_count = 0
     for _ in range(num_simulations):
-        permutation = generate_random_bijection(n)
-        G = create_graph_from_bijection(n, permutation)
-        add_random_edges(G, l)
+        G = create_graph_with_transpositions(n, l, diag = True)
         if is_connected(G):
             connected_count += 1
-    return connected_count / num_simulations
+    return (num_simulations - connected_count) 
 
 # Parameters
-n = 26
-l = 12
-k = l+1
+n = 10
+l = [8, 8]
+k = [l + 1 for l in l]
 
-visualize_graph(create_graph_with_transpositions(n, k, diag = True), n, k)
+two_and_six = monte_carlo_simulation(n, [2, 5], 26*26*26)
+print(two_and_six)
+# visualize_graph(create_graph_with_transpositions(n, k, diag = True), n, k)

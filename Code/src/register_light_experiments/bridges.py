@@ -99,8 +99,9 @@ def is_subset(tuple1, tuple2):
 def get_necc(necc_sets, to_test):
     necc = []
     for s in necc_sets:
-        if is_subset(s, to_test):
-            necc.append(s)
+        for t in to_test:
+            if is_subset(s, t):
+                necc.append(s)
     return necc
 
 def get_unique_cycles(tup):
@@ -133,53 +134,15 @@ def cycles_satisfy(necc_sets, b):
             satifies = True
     return satifies
     
-n = 26
-
-#Get all cycle types in
-ip = integer_partitions(n)
-total = 0
-#Initialize query dictionary
-query = dict()
-for part in (tqdm(ip, desc="Processing Partitions")):
-    query[part] = dict()
-    for part2 in ip:
-        #CHECK IF THIS IS REALLY SYMEMTRIC
-        if not (part2 in list(query.keys())):
-            longer = [p2 >= len(part) for p2 in part2]
-            # More cycle bridges (No longer mutually exclusive)
-            if (True in longer and dict(Counter(longer).items())[True] > 1):
-                query[part][part2] = 0
-                instance = partition_to_instance(part, n)
-                necc_sets = generate_sets(permutation_to_cycles(instance))
-
-                for s in necc_sets:
-                    #         remain_after_s = remaining_elements(tuple(range(1, n + 1)), s)
-#         power_remain = powerset(remain_after_s)
-#         for p in power_remain:
-
-            # One cycle bridges
-            elif True in longer:
-                length_k = part2[(longer.index(True))]
-                prob = 0
-                for c in (chain.from_iterable(combinations(list(part), r) for r in range(len(part)+1))):
-                    if c != ():
-                        prob += math.pow(-1, len(c)+1)*comb(n-sum(c), length_k)
-                total_outcomes = comb(n, length_k)
-                prob = (total_outcomes - prob) / total_outcomes
-                query[part][part2] = prob
-
-            # No Bridges
-            else:
-                query[part][part2] = 0
-
-def overcount_solver():
-    return
-
-def query_solver(query, p1, n):
-    mutually = 0
+#Brute Force Query Solver
+def bf_query_solver(query, p1, n):
     #Create an instance of cycle_type
     ip1 = partition_to_instance(p1, n)
-    all_bridges = []
+    print(ip1)
+    print("\n")
+    all_bridges = set()
+
+    overcounts = dict()
 
     #Generate all bridges of ip1
     necc_sets = generate_sets(permutation_to_cycles(ip1))
@@ -189,35 +152,120 @@ def query_solver(query, p1, n):
         for p in power_remain:
             necc_cycle = tuple(set(s).union(set(p)))
             remain = remaining_elements(tuple(range(1, n + 1)), necc_cycle)
-            if len(remain) < len(p1):
-                continue
             for q in get_unique_cycles(necc_cycle):
                 for r in itertools.permutations(remain):
                     cycles_r = list(permutation_to_cycles(r))
-                    longer_than_necc = [len(c)>=len(p1) for c in cycles_r]
-                    if (not (True in longer_than_necc)):
+                    len_cycles_r = [len(c) for c in cycles_r]
+                    longer_than_q =[len(q) <  length for length in len_cycles_r]
+                    if True in longer_than_q:
                         continue
                     remain_permutes = []
                     for cycle in cycles_r:
                         remain_permutes.append(cycle)
                     remain_permutes.append(tuple(q))
-                    all_bridges.append(tuple(sorted(remain_permutes)))
-
+                    all_bridges.add(tuple(sorted(remain_permutes)))
+    print(all_bridges)
     cycle_types = dict()
-    for bridge in list(set(all_bridges)):
+    for bridge in all_bridges:
         ct = cycle_type(bridge)
         if ct in list(cycle_types.keys()):
             cycle_types[ct] += 1
         else:
             cycle_types[ct] = 1
+    
     for ct in list(cycle_types.keys()):
-        mult = partition_to_multiplicity(ct)  
-        inner_product = math.factorial(n)
-        for (c_i, i) in mult:
-            inner_product /= math.factorial(i)*(c_i**i)
-        cycle_types[ct] /= inner_product
-        longer = list(c >= len(p1) for c in ct)
-        mutually += (int(dict(Counter(longer).items())[True] > 1))
+        # mult = partition_to_multiplicity(ct)  
+        # inner_product = math.factorial(n)
+        # for (c_i, i) in mult:
+        #     inner_product /= math.factorial(i)*(c_i**i)
+        # cycle_types[ct] /= inner_product
+        # longer = list(c >= len(p1) for c in ct)
+        # mutually += (int(dict(Counter(longer).items())[True] > 1))
         query[p1][ct] = cycle_types[ct]
-    return mutually
+    # return mutually
+
+#Brute Force Equalities Solver
+def bf_equalities_solver(query, p1, n):
+    #Create an instance of cycle_type
+    ip1 = partition_to_instance(p1, n)
+
+    all_bridges = set()
+    equalities = dict()
+
+    #Generate all bridges of ip1
+    necc_sets = generate_sets(permutation_to_cycles(ip1))
+    for s in necc_sets: 
+        remain_after_s = remaining_elements(tuple(range(1, n + 1)), s)
+        power_remain = powerset(remain_after_s)
+        for p in power_remain:
+            necc_cycle = tuple(set(s).union(set(p)))
+            remain = remaining_elements(tuple(range(1, n + 1)), necc_cycle)
+            for q in get_unique_cycles(necc_cycle):
+                for r in itertools.permutations(remain):
+                    cycles_r = list(permutation_to_cycles(r))
+                    len_cycles_r = [len(c) for c in cycles_r]
+                    longer_than_q =[len(q) <  length for length in len_cycles_r]
+                    if True in longer_than_q:
+                        continue
+                    remain_permutes = []
+                    for cycle in cycles_r:
+                        remain_permutes.append(cycle)
+                    remain_permutes.append(tuple(q))
+                    if tuple(sorted(remain_permutes)) in all_bridges:
+                        if cycle_type(remain_permutes) in list(equalities.keys()):
+                            equalities[cycle_type(remain_permutes)] += 1
+                        else:
+                            perms = 1
+                            for c in remain_permutes:
+                                perms *= math.factorial(len(c)-1)
+                            equalities[cycle_type(remain_permutes)] = 1
+                    all_bridges.add(tuple(sorted(remain_permutes)))
+    for ct in list(equalities.keys()):
+        perms = 1
+        for c in ct:
+            perms *= math.factorial(c-1)
+        equalities[ct] /= perms
+    print(equalities)
+n = 5
+
+#Get all cycle types in
+ip = integer_partitions(n)
+total = 0
+#Initialize query dictionary
+query = dict()
+equalities = dict()
+for part in ip:
+    query[part] = dict()
+    equalities[part] = dict()
+    for part2 in ip:
+        query[part][part2] = 0
+    if part == (2,3):
+        # bf_query_solver(query, part, n)
+        bf_equalities_solver(query, part, n)
+# for part in (tqdm(ip, desc="Processing Partitions")):
+#     query[part] = dict()
+#     for part2 in ip:
+#         #CHECK IF THIS IS REALLY SYMEMTRIC
+#         if not (part2 in list(query.keys())):
+#             longer = [p2 >= len(part) for p2 in part2]
+#             # More cycle bridges (No longer mutually exclusive)
+#             if (True in longer and dict(Counter(longer).items())[True] > 1):
+#                 query[part][part2] = 0
+#                 instance = partition_to_instance(part, n)
+#                 necc_sets = generate_sets(permutation_to_cycles(instance))
+
+#             # One cycle bridges
+#             elif True in longer:
+#                 length_k = part2[(longer.index(True))]
+#                 prob = 0
+#                 for c in (chain.from_iterable(combinations(list(part), r) for r in range(len(part)+1))):
+#                     if c != ():
+#                         prob += math.pow(-1, len(c)+1)*comb(n-sum(c), length_k)
+#                 total_outcomes = comb(n, length_k)
+#                 prob = (total_outcomes - prob) / total_outcomes
+#                 query[part][part2] = prob
+
+#             # No Bridges
+#             else:
+#                 query[part][part2] = 0
 

@@ -138,8 +138,6 @@ def cycles_satisfy(necc_sets, b):
 def bf_query_solver(query, p1, n):
     #Create an instance of cycle_type
     ip1 = partition_to_instance(p1, n)
-    print(ip1)
-    print("\n")
     all_bridges = set()
 
     overcounts = dict()
@@ -164,7 +162,6 @@ def bf_query_solver(query, p1, n):
                         remain_permutes.append(cycle)
                     remain_permutes.append(tuple(q))
                     all_bridges.add(tuple(sorted(remain_permutes)))
-    print(all_bridges)
     cycle_types = dict()
     for bridge in all_bridges:
         ct = cycle_type(bridge)
@@ -188,7 +185,6 @@ def bf_query_solver(query, p1, n):
 def bf_equalities_solver(query, p1, n):
     #Create an instance of cycle_type
     ip1 = partition_to_instance(p1, n)
-
     all_bridges = set()
     equalities = dict()
 
@@ -221,51 +217,47 @@ def bf_equalities_solver(query, p1, n):
                             equalities[cycle_type(remain_permutes)] = 1
                     all_bridges.add(tuple(sorted(remain_permutes)))
     for ct in list(equalities.keys()):
+        l = max(ct)
+        list_ct = list(ct)
+        list_ct.remove(l)
+        ct_remain = tuple(list_ct) 
+        mult_remain = partition_to_multiplicity(ct_remain)
+        N = len(necc_sets)
+        k = len(necc_sets[0])
         perms = 1
         for c in ct:
             perms *= math.factorial(c-1)
-        equalities[ct] /= perms
+        if l != 1:
+            t1 = N*comb(n-k, l-k)*math.factorial(l-1)*math.factorial(n-l)
+            divisor = 1
+            for (c_i, i) in mult_remain:
+                divisor *= math.factorial(i)*math.pow(c_i, i)
+            t1 /= divisor
+        else:
+            t1 = N*comb(n-k, l-k)*math.factorial(n-l)
+            divisor = 1
+            for (c_i, i) in mult_remain:
+                divisor *= math.factorial(i)*math.pow(c_i, i)
+            t1 /= divisor
+        equalities[ct] = (t1-query[part][ct]) / perms
     print(equalities)
-n = 5
+n = 7
 
 #Get all cycle types in
 ip = integer_partitions(n)
 total = 0
 #Initialize query dictionary
 query = dict()
+query2 = dict()
 equalities = dict()
 for part in ip:
     query[part] = dict()
-    equalities[part] = dict()
+    query2[part] = dict()
     for part2 in ip:
         query[part][part2] = 0
-    if part == (2,3):
-        # bf_query_solver(query, part, n)
+        query2[part][part2] = 0
+    if part == (2, 2, 3):
+        bf_query_solver(query, part, n)
         bf_equalities_solver(query, part, n)
-# for part in (tqdm(ip, desc="Processing Partitions")):
-#     query[part] = dict()
-#     for part2 in ip:
-#         #CHECK IF THIS IS REALLY SYMEMTRIC
-#         if not (part2 in list(query.keys())):
-#             longer = [p2 >= len(part) for p2 in part2]
-#             # More cycle bridges (No longer mutually exclusive)
-#             if (True in longer and dict(Counter(longer).items())[True] > 1):
-#                 query[part][part2] = 0
-#                 instance = partition_to_instance(part, n)
-#                 necc_sets = generate_sets(permutation_to_cycles(instance))
-
-#             # One cycle bridges
-#             elif True in longer:
-#                 length_k = part2[(longer.index(True))]
-#                 prob = 0
-#                 for c in (chain.from_iterable(combinations(list(part), r) for r in range(len(part)+1))):
-#                     if c != ():
-#                         prob += math.pow(-1, len(c)+1)*comb(n-sum(c), length_k)
-#                 total_outcomes = comb(n, length_k)
-#                 prob = (total_outcomes - prob) / total_outcomes
-#                 query[part][part2] = prob
-
-#             # No Bridges
-#             else:
-#                 query[part][part2] = 0
-
+# print(query[(2,2,3)])
+# print(query2[(2,2,3)])

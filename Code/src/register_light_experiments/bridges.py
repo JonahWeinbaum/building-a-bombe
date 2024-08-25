@@ -185,14 +185,17 @@ def bf_query_solver(query, p1, n):
 def bf_equalities_solver(query, p1, n):
     #Create an instance of cycle_type
     ip1 = partition_to_instance(p1, n)
-    all_bridges = set()
-    equalities = dict()
 
+    all_bridges = set()
+    all_powers = []
+    equalities = dict()
     #Generate all bridges of ip1
     necc_sets = generate_sets(permutation_to_cycles(ip1))
     for s in necc_sets: 
         remain_after_s = remaining_elements(tuple(range(1, n + 1)), s)
         power_remain = powerset(remain_after_s)
+        for sub in power_remain:
+            all_powers.append(sub)
         for p in power_remain:
             necc_cycle = tuple(set(s).union(set(p)))
             remain = remaining_elements(tuple(range(1, n + 1)), necc_cycle)
@@ -239,9 +242,15 @@ def bf_equalities_solver(query, p1, n):
             for (c_i, i) in mult_remain:
                 divisor *= math.factorial(i)*math.pow(c_i, i)
             t1 /= divisor
-        equalities[ct] = (t1-query[part][ct]) / perms
+        equalities[ct] = ((t1-query[part][ct]) /perms) 
+    all_powers_count = dict(Counter(all_powers).items())
+    for ac in list(all_powers_count.keys()):
+        all_powers_count[ac] -= 1
+        if all_powers_count[ac] == 0:
+            del all_powers_count[ac]
     print(equalities)
-n = 7
+
+n = 8
 
 #Get all cycle types in
 ip = integer_partitions(n)
@@ -256,7 +265,7 @@ for part in ip:
     for part2 in ip:
         query[part][part2] = 0
         query2[part][part2] = 0
-    if part == (2, 2, 3):
+    if part == (3,5):
         bf_query_solver(query, part, n)
         bf_equalities_solver(query, part, n)
 # print(query[(2,2,3)])

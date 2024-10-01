@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "stdlib.h": "c"
-    }
+        "stdlib.h": "c",
+        "structs.h": "c"
+    },
+    "sarif-viewer.connectToGithubCodeScanning": "off"
 }

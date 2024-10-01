@@ -496,10 +496,10 @@
             \draw[-] (4,-1) -- (6, -1) node[right, above] {d};
 
             % Draw the lines inside the box to represent the mapping
-            \draw[-] (2, 2) -- (4, 0);
-            \draw[-] (2, 1) -- (4, -1);
-            \draw[-] (2, 0) -- (4, 2);
-            \draw[-] (2,-1) -- (4, 1);
+            \draw[-] (2, 2) -- (4, -1);
+            \draw[-] (2, 1) -- (4, 0);
+            \draw[-] (2, 0) -- (4, 1);
+            \draw[-] (2,-1) -- (4, 2);
 
             \draw[fill=lightgray] (2+6,-1.5) rectangle (4+6,2.5) node[midway] {};
             
@@ -570,6 +570,8 @@
             \draw[-] (2-6, 0-14) -- (4-6, 2-14);
             \draw[-] (2-6,-1-14) -- (4-6, 1-14);
 
+            \node at (3-6, -2-14) {$\overline\delta_1$};
+
             \draw[fill=lightgray] (2,-1.5-14) rectangle (4,2.5-14) node[midway] {};
 
             \node at (3, -2-14) {$\overline\sigma_1 = \overline\delta_1$};
@@ -587,10 +589,34 @@
             \draw[-] (4,-1-14) -- (6, -1-14) node[right, above] {d};
 
             % Draw the lines inside the box to represent the mapping
-            \draw[-] (2, 2-14) -- (4, 0-14);
-            \draw[-] (2, 1-14) -- (4, -1-14);
-            \draw[-] (2, 0-14) -- (4, 2-14);
-            \draw[-] (2,-1-14) -- (4, 1-14);
+            \draw[-] (2, 2-14) -- (4, -1-14);
+            \draw[-] (2, 1-14) -- (4, 0-14);
+            \draw[-] (2, 0-14) -- (4, 1-14);
+            \draw[-] (2,-1-14) -- (4, 2-14);
+
+            \draw[fill=lightgray] (2+6,-1.5-14) rectangle (4+6,2.5-14) node[midway] {};
+
+            \node at (3, -2-14) {$\overline\sigma_1 = \overline\delta_1$};
+
+            % Draw the wires entering the box
+            \draw[-] (0+6, 2-14) -- (2+6, 2-14) node[midway, above] {};
+            \draw[-] (0+6, 1-14) -- (2+6, 1-14) node[midway, above] {};
+            \draw[-] (0+6, 0-14) -- (2+6, 0-14) node[midway, above] {};
+            \draw[-] (0+6,-1-14) -- (2+6,-1-14) node[midway, above] {};
+
+            % Draw the wires exiting the box
+            \draw[-] (4+6, 2-14) -- (6+6,2-14) node[right, above] {a};
+            \draw[-] (4+6, 1-14) -- (6+6, 1-14) node[right, above] {b};
+            \draw[-] (4+6, 0-14) -- (6+6, 0-14) node[right, above] {c};
+            \draw[-] (4+6,-1-14) -- (6+6, -1-14) node[right, above] {d};
+
+            % Draw the lines inside the box to represent the mapping
+            \draw[-] (2+6, 2-14) -- (4+6, -1-14);
+            \draw[-] (2+6, 1-14) -- (4+6, 0-14);
+            \draw[-] (2+6, 0-14) -- (4+6, 1-14);
+            \draw[-] (2+6,-1-14) -- (4+6, 2-14);
+
+            \node at (3+6, -2-14) {$\overline\delta_2$};
             % \node[draw,circle] at (-4.5, -1) {$A$};
             % \node[draw,circle] at (3, -9) {$B$};
             % \node[draw,circle] at (10.5, -1) {$C$};

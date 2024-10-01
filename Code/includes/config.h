@@ -7,10 +7,10 @@ bool logging = false;
 
 /* Enigma Parameters*/
 t_parameters key_sheet = {
-    {2, 5, 3}, 
-    {4, 11, 24},
-    "YWY",
-    "UFETGQADVNHMZPLJIKXO"
+    {4, 5, 1}, 
+    {21, 15, 16},
+    "XAZ",
+    "KLITFQHYXCNPVZJBSEOG"
 };
 
 #endif //PARAMS_H

@@ -3,7 +3,7 @@ import math
 from collections import defaultdict, Counter
 import math
 import itertools
-
+import sympy as sp
 from itertools import chain, combinations
 from tqdm import tqdm
 from math import comb
@@ -186,12 +186,14 @@ def bf_equalities_solver(query, p1, n):
     #Create an instance of cycle_type
     ip1 = partition_to_instance(p1, n)
 
+    s_to_bridge = dict()
     all_bridges = set()
     all_powers = []
     equalities = dict()
     #Generate all bridges of ip1
     necc_sets = generate_sets(permutation_to_cycles(ip1))
     for s in necc_sets: 
+        s_to_bridge[s] = []
         remain_after_s = remaining_elements(tuple(range(1, n + 1)), s)
         power_remain = powerset(remain_after_s)
         for sub in power_remain:
@@ -219,6 +221,8 @@ def bf_equalities_solver(query, p1, n):
                                 perms *= math.factorial(len(c)-1)
                             equalities[cycle_type(remain_permutes)] = 1
                     all_bridges.add(tuple(sorted(remain_permutes)))
+                    s_to_bridge[s].append(remain_permutes)
+                    
     for ct in list(equalities.keys()):
         l = max(ct)
         list_ct = list(ct)
@@ -243,12 +247,23 @@ def bf_equalities_solver(query, p1, n):
                 divisor *= math.factorial(i)*math.pow(c_i, i)
             t1 /= divisor
         equalities[ct] = ((t1-query[part][ct]) /perms) 
-    all_powers_count = dict(Counter(all_powers).items())
-    for ac in list(all_powers_count.keys()):
-        all_powers_count[ac] -= 1
-        if all_powers_count[ac] == 0:
-            del all_powers_count[ac]
-    print(equalities)
+    # all_powers_count = dict(Counter(all_powers).items())
+    # for ac in list(all_powers_count.keys()):
+    #     all_powers_count[ac] -= 1
+    #     if all_powers_count[ac] == 0:
+    #         del all_powers_count[ac]
+    
+    #Print necc_set equivalences
+    # found_already = set()
+    # for s1 in necc_sets:
+    #     for perm in s_to_bridge[s1]:
+    #         if cycle_type(perm) == (5,):
+    #             for s2 in necc_sets:
+    #                 if s1 != s2 and perm in s_to_bridge[s2]:
+    #                     found_already.add(tuple(sorted((s1,s2))))
+    # for (p1, p2) in sorted(found_already):
+    #     print(str(p1) + " ~ " + str(p2))
+
 
 n = 8
 
@@ -259,14 +274,13 @@ total = 0
 query = dict()
 query2 = dict()
 equalities = dict()
-for part in ip:
+for part in [(4,4)]:
     query[part] = dict()
     query2[part] = dict()
     for part2 in ip:
         query[part][part2] = 0
         query2[part][part2] = 0
-    if part == (3,5):
         bf_query_solver(query, part, n)
-        bf_equalities_solver(query, part, n)
-# print(query[(2,2,3)])
+        # bf_equalities_solver(query, part, n)
+print(query[(4,4)])
 # print(query2[(2,2,3)])

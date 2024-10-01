@@ -9,6 +9,7 @@ import math
 import random
 import networkx as nx
 import string
+import pandas as pd
 
 def integer_partitions(n):
     """
@@ -159,25 +160,6 @@ def get_cycle_type(G):
         type.append(s)
     return type
 
-# Calculate emperical distribution of cycle types and probabilities
-def collect_cycle_types(n, l, num_simulations):
-    cycles_seen = dict()
-    for i in range(num_simulations):
-        G = create_graph_with_transpositions(n, l+1)
-        cycle_type = get_cycle_type(G)
-        cycle_type = tuple(sorted(cycle_type))
-        cycle_type = partition_to_multiplicity(cycle_type)
-        if not cycle_type in cycles_seen:
-            cycles_seen.update({cycle_type: 1})
-        else: 
-            s = cycles_seen[cycle_type]
-            cycles_seen.update({cycle_type: s + 1})
-    for cycle in cycles_seen:
-        cycles_seen[cycle] /= num_simulations
-
-    return cycles_seen
-
-
 def monte_carlo_simulation(n, l, num_simulations):
     connected_count = 0
     for _ in range(num_simulations):
@@ -210,11 +192,81 @@ def monte_carlo_simulation(n, l, num_simulations):
     return connected_count / num_simulations
 
 
+def collect_cycle_types(n, l, num_simulations):
+    # Collect cycle types and their counts
+    cycles_seen = defaultdict(int)
+    
+    for i in range(num_simulations):
+        G = create_graph_with_transpositions(n, l + 1)
+        cycle_type = get_cycle_type(G)
+        cycle_type = tuple(sorted(cycle_type))
+        cycles_seen[cycle_type] += 1
+
+    # Normalize to get probabilities
+    for cycle in cycles_seen:
+        cycles_seen[cycle] /= num_simulations
+
+    return cycles_seen
+
+def generate_table(cycles_seen, n):
+    # Generate all integer partitions of n
+    partitions = sorted(integer_partitions(n), reverse=True)
+    
+    # Create a dataframe to store results
+    df = pd.DataFrame(index=partitions, columns=["Probability"])
+    
+    # Fill the dataframe with probabilities from cycles_seen
+    for cycle_type, prob in cycles_seen.items():
+        if cycle_type in df.index:
+            df.at[cycle_type, "Probability"] = prob
+        else:
+            df.loc[cycle_type] = [prob]
+
+    # Fill missing probabilities with 0
+    df = df.fillna(0)
+    
+    # Sort the dataframe for a clean output
+    df = df.sort_index(ascending=False)
+    
+    return df
+
 n = 26
 l = 3
-print(f"Monte Carlo -> {monte_carlo_simulation(n, l, 10000)}")
+num_simulations = 10000
+# Collect cycle types and probabilities
+cycle_type_probs = collect_cycle_types(n, l, num_simulations)
 
-cycle_types = all_multiplicities(integer_partitions(n), n)
+# Generate and print the table
+df = generate_table(cycle_type_probs, n)
+def df_to_latex_beamer(df):
+    """
+    Convert a pandas DataFrame with nonzero probabilities to a LaTeX table
+    formatted for a Beamer presentation.
+    """
+    # Filter for non-zero probabilities
+    df_nonzero = df[df['Probability'] > 0]
 
-print(f"Uniform Dist -> {probability_diag_connects_any(cycle_types, n, l)}")
-print(f"Collected Dist -> {probability_diag_connects_any(cycle_types, n, l, collect_cycle_types(n, l, 10000))}")
+    # Convert the DataFrame to LaTeX format with custom options for Beamer
+    latex_table = df_nonzero.to_latex(index=True, 
+                                      header=True, 
+                                      column_format='|c|c|',  # Adjust column format as needed
+                                      bold_rows=True,
+                                      escape=False)  # Allow LaTeX characters in index
+    
+    # Formatting for Beamer tables
+    latex_table = (
+        "\\begin{table}[ht]\n"
+        "\\centering\n"
+        "\\resizebox{\\textwidth}{!}{%\n"  # Adjust size for Beamer
+        + latex_table + 
+        "}\n\\caption{Cycle Types and Probabilities}\n"
+        "\\end{table}\n"
+    )
+    
+    return latex_table
+
+# Assuming df is the DataFrame that contains cycle types and probabilities
+latex_code = df_to_latex_beamer(df[df["Probability"] > 0])
+
+# Output the LaTeX code
+print(latex_code)

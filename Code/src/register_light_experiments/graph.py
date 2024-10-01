@@ -202,9 +202,9 @@ def monte_carlo_simulation(n, l, num_simulations):
 
 # Parameters
 n = 10
-l = [8, 8]
+l = [6]
 k = [l + 1 for l in l]
 
-two_and_six = monte_carlo_simulation(n, [2, 5], 26*26*26)
-print(two_and_six)
-# visualize_graph(create_graph_with_transpositions(n, k, diag = True), n, k)
+# two_and_six = monte_carlo_simulation(n, [2, 5], 26*26*26)
+# print(two_and_six)
+visualize_graph(create_graph_with_transpositions(n, k, diag = True), n, k)

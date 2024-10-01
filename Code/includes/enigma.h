@@ -4,6 +4,8 @@
 #include "config.h"
 #include "rotors.h"
 
+extern bool logging;
+
 /*Standard Enigma Encryption*/
 void enigma_reset() {
     //Initialize

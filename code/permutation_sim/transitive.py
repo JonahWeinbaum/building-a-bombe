@@ -1,5 +1,6 @@
+from pprint import pprint
 from itertools import combinations
-
+from collections import Counter
 def partition_of_partition(p1, p2):
         
     def backtrack(p1, p2, index, current_partition, result, seen):
@@ -19,8 +20,16 @@ def partition_of_partition(p1, p2):
         # Next target value in P2
         target = p2[index]
 
+        # TODO: Cache integer partitions
+        global ips
+
+        subsets = []
+        for part in ips[target]:
+            if not Counter(part) - Counter(p1):
+                subsets.append(part)
+                
         # Get unique subsets of p1 which add to target value
-        for subset in get_unique_subsets_with_sum(p1, target):
+        for subset in subsets:
            remaining = list(p1)
            for elem in subset:
                remaining.remove(elem)            
@@ -35,28 +44,32 @@ def partition_of_partition(p1, p2):
 def group_partitions(part1, part2):
     return [[list(a), list(b)] for a, b in zip(part1, part2)]
 
-def get_unique_subsets_with_sum(numbers, target):
-    unique_subsets = []
+def generate_integer_partitions(n):
+    result = list()
+    result.append([n,])
     
-    def find_subsets(index, current_subset, current_sum):
-        # Reached target
-        if current_sum == target:
-            if sorted(current_subset) not in [sorted(x) for x in unique_subsets]:
-                unique_subsets.append(current_subset.copy())
-            return
-
-        # Overshot
-        if current_sum > target or index >= len(numbers):
-            return
-        
-        # Include the current number
-        current_subset.append(numbers[index])
-        find_subsets(index + 1, current_subset, current_sum + numbers[index])
-        
-        # Exclude the current number
-        current_subset.pop()
-        find_subsets(index + 1, current_subset, current_sum)
+    for i in range(1, n):
+        for p in generate_integer_partitions(n - i):
+            result.append(list(sorted([i,] + p)))
     
-    find_subsets(0, [], 0)
-    return unique_subsets
+    return [list(i) for i in set(tuple(i) for i in result)]
 
+n = 26
+ips = {}
+print("Generating all integer partitions")
+for i in range(1, 27):
+    ips[i] = generate_integer_partitions(i)
+print("Generated...")
+c1 = [1 for i in range(26)]
+c2 = [2 for i in range(13)]
+
+for gen in ips[26]:
+    print(gen)
+    c1_gen = (partition_of_partition(c1, gen))
+    c2_gen = (partition_of_partition(c2, gen))
+    grouped = []
+    for p1 in c1_gen:
+        for p2 in c2_gen:
+            grouped.append(group_partitions(p1, p2))
+    print(*grouped, sep='\n')
+    print("...")

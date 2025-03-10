@@ -11,17 +11,20 @@ from typing import Dict
 import math
 import time
 
-def partition_of_partition(p: tuple[int,...], target_p: tuple[int,...], ips: Dict[int, list[tuple[int,...]]]) -> list[tuple[tuple[int,...],...]]:
-    def backtrack(p: tuple[int,...], target_p: tuple[int,...], index: int, current_partition: tuple[tuple[int, ...], ...], result: list[tuple[tuple[int,...],...]], seen: set[tuple[tuple[int,...],...]]) -> None:
+def partition_of_partition(p: tuple[int,...], target_p: tuple[int,...]) -> list[tuple[tuple[int,...],...]]:
+    global ips
+    @lru_cache(None)
+    def backtrack(p: tuple[int,...], target_p: tuple[int,...], index: int, current_partition: tuple[tuple[int, ...], ...], result: tuple[tuple[tuple[int,...],...],...]) -> None:
         # We have gone through all targets
         if index == len(target_p):
 
             # No elements remain in p thus our partition is valid
             if not p:
-                # Add partition to result only if not seen before                
-                if tuple(sorted(current_partition)) not in seen:
-                    seen.add(tuple(sorted(current_partition)))
-                    result.append(tuple(sorted(current_partition)))
+                # Add partition to result only if not seen before
+                current_partition = tuple(sorted(current_partition))
+                if current_partition not in seen:
+                    seen.add(current_partition)
+                    result = result + (current_partition,)
             return
 
         # Next target value in target_p
@@ -38,13 +41,13 @@ def partition_of_partition(p: tuple[int,...], target_p: tuple[int,...], ips: Dic
            for elem in subset:
                remaining.remove(elem)
            new_current: tuple[tuple[int, ...],...] = current_partition + (subset,)
-           backtrack(tuple(remaining), target_p, index + 1, new_current, result, seen)
+           backtrack(tuple(remaining), target_p, index + 1, new_current, result)
 
-    result: list[tuple[tuple[int,...],...]] = []
+    result: tuple[tuple[tuple[int,...],...]] = tuple()
     seen: set[tuple[tuple[int,...],...]] = set()
-    current_partition: tuple[tuple[int,...],...] = ()
+    current_partition: tuple[tuple[int,...],...] = tuple()
     index: int = 0
-    backtrack(p, target_p, index, current_partition, result, seen)
+    backtrack(p, target_p, index, current_partition, result)
     return [tuple(sorted(t, key=lambda x: sum(x))) for t in result]
  
 def group_partitions(p1: tuple[tuple[int,...],...], p2: tuple[tuple[int,...],...]) -> tuple[tuple[tuple[int,...],tuple[int,...]],...]:
@@ -84,7 +87,7 @@ def partitions_to_search_space(p1: tuple[int,...], p2: tuple[int,...], n: int) -
     return n1*n2
 
 @lru_cache(None)
-def get_transitive_prob(p1: tuple[int,...], p2: tuple[int,...], n: int,  depth: int = 0):
+def get_transitive_prob(p1: tuple[int,...], p2: tuple[int,...], n: int, depth: int = 0):
     global probs
     global ips
     #print(" "*depth + f"n: {n} -> ips[{n}]: {ips[n]}")
@@ -101,8 +104,8 @@ def get_transitive_prob(p1: tuple[int,...], p2: tuple[int,...], n: int,  depth: 
         #print(" "*depth + f"On partition {gen}")
         if gen != (n,):
 
-           c1_gen: list[tuple[tuple[int,...],...]] = partition_of_partition(p1, gen, ips)
-           c2_gen: list[tuple[tuple[int,...],...]] = partition_of_partition(p2, gen, ips)
+           c1_gen: list[tuple[tuple[int,...],...]] = partition_of_partition(p1, gen)
+           c2_gen: list[tuple[tuple[int,...],...]] = partition_of_partition(p2, gen)
            #print(" "*depth + f"p1: {p1} -> c1_gen: {c1_gen}")
            #print(" "*depth + f"p2: {p2} -> c2_gen: {c2_gen}")
            grouped: list[tuple[tuple[tuple[int,...],tuple[int,...]],...]] = []
@@ -184,16 +187,7 @@ probs: Dict[tuple[tuple[int,...],...], float] = {}
 #     sum(doc["p1"]) for doc in probabilities.find({}, {"p1": 1, "_id": 0})
 # )
 
-# p1 = (1,1,1,1,1,1)
-# p2 = (2,2,2)
-# for p in ips[6]:
-#     print(p)
-#     c1 = partition_of_partition(p1, p, ips)
-#     c2 = partition_of_partition(p2, p, ips)
 
-#     for a in c1:
-#         for b in c2: 
-#             print("\t" + str(group_partitions(a, b)))
 for k in range (1, 20):
     pairs: list[tuple[tuple[int,...], tuple[int,...]]] = [(i, j) for i in ips[k] for j in ips[k]]  # Generate all pairs
 

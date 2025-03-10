@@ -2,105 +2,110 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pprint import pprint
 from itertools import combinations
 from collections import Counter
-from pymongo import MongoClient
-from tqdm import tqdm
+#from pymongo import MongoClient
+#from pymongo.collection import Collection
+#from pymongo.database import Database
+from tqdm import tqdm # type: ignore
 from functools import lru_cache
+from typing import Dict
 import math
 import time
 
-def partition_of_partition(p, target_p):
-    def backtrack(p, target_p, index, current_partition, result, seen):
+def partition_of_partition(p: tuple[int,...], target_p: tuple[int,...], ips: Dict[int, list[tuple[int,...]]]) -> list[tuple[tuple[int,...],...]]:
+    def backtrack(p: tuple[int,...], target_p: tuple[int,...], index: int, current_partition: tuple[tuple[int, ...], ...], result: list[tuple[tuple[int,...],...]], seen: set[tuple[tuple[int,...],...]]) -> None:
         # We have gone through all targets
         if index == len(target_p):
 
             # No elements remain in p thus our partition is valid
             if not p:
-
-                # Add partition to result only if not seen before
-                partition_tuple = tuple(tuple(sorted(sub)) for sub in current_partition)
-                if partition_tuple not in seen:
-                    seen.add(partition_tuple)
-                    result.append(current_partition[:])
+                # Add partition to result only if not seen before                
+                if tuple(sorted(current_partition)) not in seen:
+                    seen.add(tuple(sorted(current_partition)))
+                    result.append(tuple(sorted(current_partition)))
             return
 
         # Next target value in target_p
-        target = target_p[index]
+        target: int = target_p[index]
 
-        # Cache integer partitions
-        global ips
-
-        subsets = []
+        subsets: list[tuple[int,...]] = []
         for part in ips[target]:
             if not Counter(part) - Counter(p):
                 subsets.append(part)
-                
+        #print(f"Subsets to sum: {subsets}")
         # Get unique subsets of p1 which add to target value
         for subset in subsets:
-           remaining = list(p)
+           remaining: list[int]= list(p)
            for elem in subset:
-               remaining.remove(elem)            
-           backtrack(remaining, target_p, index + 1, current_partition + [list(subset)], result, seen)
+               remaining.remove(elem)
+           new_current: tuple[tuple[int, ...],...] = current_partition + (subset,)
+           backtrack(tuple(remaining), target_p, index + 1, new_current, result, seen)
 
-    result = []
-    seen = set()
-    
-    backtrack(p, target_p, 0, [], result, seen)
-    return result
+    result: list[tuple[tuple[int,...],...]] = []
+    seen: set[tuple[tuple[int,...],...]] = set()
+    current_partition: tuple[tuple[int,...],...] = ()
+    index: int = 0
+    backtrack(p, target_p, index, current_partition, result, seen)
+    return [tuple(sorted(t, key=lambda x: sum(x))) for t in result]
  
-def group_partitions(part1, part2):
-    return [[list(a), list(b)] for a, b in zip(part1, part2)]
+def group_partitions(p1: tuple[tuple[int,...],...], p2: tuple[tuple[int,...],...]) -> tuple[tuple[tuple[int,...],tuple[int,...]],...]:
+    return tuple((a, b) for a, b in zip(p1, p2))
 
-def generate_integer_partitions(n):
-    result = list()
-    result.append([n,])
+def generate_integer_partitions(n: int) -> list[tuple]:
+    result: set[tuple] = set()
+    result.add((n,))
     
     for i in range(1, n):
         for p in generate_integer_partitions(n - i):
-            result.append(list(sorted([i,] + p)))
+            result.add(tuple((sorted((i,) + p))))
     
-    return [list(i) for i in set(tuple(i) for i in result)]
+    return list(result)
 
-def number_of_partition(p, n):
-    result = math.factorial(n)
-    p_m = partition_to_multiplicity(p);
+def number_of_partition(p: tuple, n: int) -> int:
+    result: float = math.factorial(n)
+    p_m: tuple = partition_to_multiplicity(p);
     for i, k_i in p_m:
         result /= math.pow(math.factorial(i), k_i)*math.factorial(k_i)
     return int(result)
         
-def num_of_cycle_type(p, n):
-    result = math.factorial(n)
-    p_m = partition_to_multiplicity(p);
+def num_of_cycle_type(p: tuple, n: int) -> int:
+    result: float = math.factorial(n)
+    p_m: tuple = partition_to_multiplicity(p);
     for i, k_i in p_m:
         result /= math.pow(i, k_i)*math.factorial(k_i)
     return int(result)
 
-def partition_to_multiplicity(partition):
-    return tuple(sorted(Counter(partition).items()))
+def partition_to_multiplicity(p: tuple) -> tuple:
+    return tuple(sorted(Counter(p).items()))
 
-def partitions_to_search_space(p1, p2, n):
-    n1 = num_of_cycle_type(p1, n)
-    n2 = num_of_cycle_type(p2, n)
+def partitions_to_search_space(p1: tuple[int,...], p2: tuple[int,...], n: int) -> int:
+    n1: int = num_of_cycle_type(p1, n)
+    n2: int = num_of_cycle_type(p2, n)
+
     return n1*n2
 
-def get_transitive_prob(p1, p2, n, depth = 0):
-    global local_probabilities
-
-    key = tuple(sorted(map(tuple, [p1, p2])))  
-    t = local_probabilities.get(key, None)
+@lru_cache(None)
+def get_transitive_prob(p1: tuple[int,...], p2: tuple[int,...], n: int,  depth: int = 0):
+    global probs
+    global ips
+    #print(" "*depth + f"n: {n} -> ips[{n}]: {ips[n]}")
+    key: tuple[tuple[int,...],...] = tuple(sorted((p1, p2)))
+    t: float | None = probs.get(key, None)
 
     if t is not None:
         return t
-    global ips
 
-    psearchsize = partitions_to_search_space(p1, p2, n)
-    total = psearchsize
+    psearchsize: float = float(partitions_to_search_space(p1, p2, n))
+    total: float = psearchsize
    
     for gen in ips[n]:
-        if gen != [n]:
-           c1_gen = (partition_of_partition(p1, gen))
-           c2_gen = (partition_of_partition(p2, gen))
+        #print(" "*depth + f"On partition {gen}")
+        if gen != (n,):
 
-           grouped = []
+           c1_gen: list[tuple[tuple[int,...],...]] = partition_of_partition(p1, gen, ips)
+           c2_gen: list[tuple[tuple[int,...],...]] = partition_of_partition(p2, gen, ips)
+           #print(" "*depth + f"p1: {p1} -> c1_gen: {c1_gen}")
+           #print(" "*depth + f"p2: {p2} -> c2_gen: {c2_gen}")
+           grouped: list[tuple[tuple[tuple[int,...],tuple[int,...]],...]] = []
 
            # Both have valid subpartitions
            if c1_gen and c2_gen:
@@ -110,23 +115,23 @@ def get_transitive_prob(p1, p2, n, depth = 0):
            else:
                continue
 
-           num_partition = number_of_partition(gen, n)
-           subtotal = 0
+           #print(" "*depth + f"Grouped: {grouped}")
+           num_partition: int = number_of_partition(gen, n)
+           subtotal: float = 0.0
            for group in grouped:
-               subsubtotal = 1
+               
+               subsubtotal: float = 1.0
                for i, [s1, s2] in enumerate(group):
-                  key = tuple(sorted(map(tuple, [s1, s2])))  
-                  t = local_probabilities.get(key, None)
+                  key = tuple(sorted((s1, s2)))
+                  t = probs.get(key, None)
 
                   if t:
-                      subsubtotal *= partitions_to_search_space(s1, s2, gen[i])*t
+                      subsubtotal *= float(partitions_to_search_space(s1, s2, gen[i])*t)
                   else:
-                      #Base case
+                      #Base casex
                       if len(s1) == 1 or len(s2) == 1:
-                          print(len(local_probabilities))
-                          key = tuple(sorted(map(tuple, [s1, s2]))) 
-                          local_probabilities[key] = 1.0
-                          print(len(local_probabilities))
+                          key = tuple(sorted((s1, s2)))
+                          probs[key] = 1.0
                           #print(" "*depth + "Length 1 case backtracking...")
                           subsubtotal *= partitions_to_search_space(s1, s2, gen[i])
                       else:
@@ -139,54 +144,71 @@ def get_transitive_prob(p1, p2, n, depth = 0):
 
     total /= psearchsize
 
-    key = tuple(sorted(map(tuple, [p1, p2]))) 
-    local_probabilities[key] = total
+    key = tuple(sorted((p1, p2))) 
+    probs[key] = total
 
     return total
 
-client = MongoClient("mongodb://localhost:27017/")
+#client: MongoClient  = MongoClient("mongodb://localhost:27017/")
 
-db = client["transitive"]
+#db: Database = client["transitive"]
 
-probabilities = db["probabilities"]
-partitions = db["partitions"]
+#probabilities: Collection = db["probabilities"]
+#partitions: Collection = db["partitions"]
 
-# Extract all probabilities into local storage
-print("Loading probabilities from db...")
-local_probabilities = {
-    tuple(sorted(map(tuple, [doc["p1"], doc["p2"]]))): doc["t"]
-    for doc in probabilities.find({}, {"p1": 1, "p2": 1, "t": 1, "_id": 0})
-}
-print("Loaded!")
+ips: Dict[int, list[tuple]] = {}
 
-last_query = max(
-    sum(doc["p1"]) for doc in probabilities.find({}, {"p1": 1, "_id": 0})
-)
-ips = {}
 print("Generating all integer partitions...")
-for i in range(1,27):
-    ips_i = partitions.find_one({"n": i})["partitions"]
-    if ips_i is None:
-        ips_i = generate_integer_partitions(i)
-        partitions.insert_one({"n": i, "partitions": ips_i})
+for i in range(1,20):
+    ips_i: list[tuple] | None = None
+    #cached_p: Dict[str, list[tuple]] | None = partitions.find_one({"n": i}) 
+    #if cached_p is None:
+    ips_i = generate_integer_partitions(i)
+        #partitions.insert_one({"n": i, "partitions": ips_i})
+    # Found partitions we must convert to tuples
+    #else:
+    #    ips_i = [tuple(ip) for ip in cached_p["partitions"]]
     ips[i] = ips_i        
 print("Generated!")
 
+# # Extract all probabilities into local storage
+# print("Loading probabilities from db...")
+probs: Dict[tuple[tuple[int,...],...], float] = {}
+# local_probabilities = {
+#     tuple(sorted(map(tuple, [doc["p1"], doc["p2"]]))): doc["t"]
+#     for doc in probabilities.find({}, {"p1": 1, "p2": 1, "t": 1, "_id": 0})
+# }
+# print("Loaded!")
 
-for k in range (last_query, 27):
-   pairs = [(i, j) for i in ips[k] for j in ips[k]]  # Generate all pairs
+# last_query = max(
+#     sum(doc["p1"]) for doc in probabilities.find({}, {"p1": 1, "_id": 0})
+# )
 
-   with tqdm(total=len(pairs), desc="Processing pairs") as pbar:
-       for (i,j) in pairs:
-           get_transitive_prob(i, j, k)
-           pbar.update(1)
+# p1 = (1,1,1,1,1,1)
+# p2 = (2,2,2)
+# for p in ips[6]:
+#     print(p)
+#     c1 = partition_of_partition(p1, p, ips)
+#     c2 = partition_of_partition(p2, p, ips)
+
+#     for a in c1:
+#         for b in c2: 
+#             print("\t" + str(group_partitions(a, b)))
+for k in range (1, 20):
+    pairs: list[tuple[tuple[int,...], tuple[int,...]]] = [(i, j) for i in ips[k] for j in ips[k]]  # Generate all pairs
+
+    with tqdm(total=len(pairs), desc="Processing pairs") as pbar:
+        for p1, p2 in pairs:
+            get_transitive_prob(p1, p2, k)
+            pbar.update(1)
+
 
    # After completing this round insert missing probabilities
-   total = 0
-   for (p1, p2), t in local_probabilities.items():
-     if sum(p1) == k:
-        key = {"p1": list(p1), "p2": list(p2)}  
+   # total = 0
+   # for (p1, p2), t in .items():
+   #   if sum(p1) == k:
+   #      key = {"p1": list(p1), "p2": list(p2)}  
 
-        if not probabilities.find_one(key):
-            probabilities.insert_one({"p1": list(p1), "p2": list(p2), "t": t})
-            total += 1
+   #      if not probabilities.find_one(key):
+   #          probabilities.insert_one({"p1": list(p1), "p2": list(p2), "t": t})
+   #          total += 1

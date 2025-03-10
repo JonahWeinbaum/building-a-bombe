@@ -80,34 +80,19 @@ def partitions_to_search_space(p1, p2, n):
     n2 = num_of_cycle_type(p2, n)
     return n1*n2
 
-
-client = MongoClient("mongodb://localhost:27017/")
-
-db = client["transitive"]
-
-probabilities = db["probabilities"]
-partitions = db["partitions"]
-n = 10
-ips = {}
-print("Generating all integer partitions")
-for i in range(1,27):
-    ips_i = partitions.find_one({"n": i})["partitions"]
-    if ips_i is None:
-        ips_i = generate_integer_partitions(i)
-        partitions.insert_one({"n": i, "partitions": ips_i})
-    ips[i] = ips_i        
-print("Generated...")
-
 def get_transitive_prob(p1, p2, n, depth = 0):
-    p1p2 = probabilities.find_one({"p1": p1, "p2": p2})
-    p2p1 = probabilities.find_one({"p1": p2, "p2": p1})
-    if p1p2:
-        return p1p2["t"]
-    if p2p1:
-        return p2p1["t"]
+    global local_probabilities
+
+    key = tuple(sorted(map(tuple, [p1, p2])))  
+    t = local_probabilities.get(key, None)
+
+    if t:
+        return t
+    
     global ips
 
-    total = partitions_to_search_space(p1, p2, n)
+    psearchsize = partitions_to_search_space(p1, p2, n)
+    total = psearchsize
    
     for gen in ips[n]:
         if gen != [n]:
@@ -129,18 +114,16 @@ def get_transitive_prob(p1, p2, n, depth = 0):
            for group in grouped:
                subsubtotal = 1
                for i, [s1, s2] in enumerate(group):
+                  key = tuple(sorted(map(tuple, [s1, s2])))  
+                  t = local_probabilities.get(key, None)
 
-                  s1s2 = probabilities.find_one({"p1": s1, "p2": s2})
-                  s2s1 = probabilities.find_one({"p1": s2, "p2": s1})
-
-                  t = 0
-                  if s1s2:
-                      subsubtotal *= partitions_to_search_space(s1, s2, gen[i])*s1s2["t"]
-                  elif s2s1:
-                      subsubtotal *= partitions_to_search_space(s1, s2, gen[i])*s2s1["t"]
+                  if t:
+                      subsubtotal *= partitions_to_search_space(s1, s2, gen[i])*t
                   else:
                       #Base case
                       if len(s1) == 1 or len(s2) == 1:
+                          key = tuple(sorted(map(tuple, [s1, s2]))) 
+                          local_probabilities[key] = 1.0
                           probabilities.insert_one({"p1": s1, "p2": s2, "t": 1.0})
                           #print(" "*depth + "Length 1 case backtracking...")
                           subsubtotal *= partitions_to_search_space(s1, s2, gen[i])
@@ -152,15 +135,56 @@ def get_transitive_prob(p1, p2, n, depth = 0):
            subtotal *= num_partition
            total -= subtotal
 
-    total /= partitions_to_search_space(p1, p2, n)
-    probabilities.insert_one({"p1": p1, "p2": p2, "t": total})
+    total /= psearchsize
+
+    key = tuple(sorted(map(tuple, [p1, p2]))) 
+    local_probabilities[key] = total
+
     return total
 
-for k in range (1, 27):
+client = MongoClient("mongodb://localhost:27017/")
+
+db = client["transitive"]
+
+probabilities = db["probabilities"]
+partitions = db["partitions"]
+
+# Extract all probabilities into local storage
+print("Loading probabilities from db...")
+local_probabilities = {
+    tuple(sorted(map(tuple, [doc["p1"], doc["p2"]]))): doc["t"]
+    for doc in probabilities.find({}, {"p1": 1, "p2": 1, "t": 1, "_id": 0})
+}
+print("Loaded!")
+
+last_query = max(
+    sum(doc["p1"]) for doc in probabilities.find({}, {"p1": 1, "_id": 0})
+)
+ips = {}
+print("Generating all integer partitions...")
+for i in range(1,27):
+    ips_i = partitions.find_one({"n": i})["partitions"]
+    if ips_i is None:
+        ips_i = generate_integer_partitions(i)
+        partitions.insert_one({"n": i, "partitions": ips_i})
+    ips[i] = ips_i        
+print("Generated!")
+
+for k in range (last_query, 27):
    pairs = [(i, j) for i in ips[k] for j in ips[k]]  # Generate all pairs
+
    with ThreadPoolExecutor() as executor:
-    futures = {executor.submit(get_transitive_prob, i, j, n): (i, j) for i, j in pairs}
+    futures = {executor.submit(get_transitive_prob, i, j, k): (i, j) for i, j in pairs}
 
     with tqdm(total=len(pairs), desc="Processing pairs") as pbar:
         for future in as_completed(futures):
             pbar.update(1)
+
+    # After completing this round insert missing probabilities
+    for (p1, p2), t in local_probabilities.items():
+     if sum(p1) == k:
+         key = {"p1": list(p1), "p2": list(p2)}  
+
+         if not probabilities.find_one(key):
+             probabilities.insert_one({"p1": list(p1), "p2": list(p2), "t": t})
+             print(f"Inserted into DB: {key} -> {t}")

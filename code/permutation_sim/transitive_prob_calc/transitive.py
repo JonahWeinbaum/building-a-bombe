@@ -3,6 +3,7 @@ from functools import cache, wraps
 from collections import Counter
 from typing_extensions import TypeVar, ParamSpec, Callable
 from io import BufferedReader
+from tqdm import TqdmExperimentalWarning
 from tqdm.rich import tqdm
 from rich.console import Console
 from rich.progress import track
@@ -13,8 +14,15 @@ import math
 import pickle
 import glob
 import logging
+import warnings
 
+N: int = 26
+EPS: float = 1e-9
+POP_CACHE_LOADED: bool = False
+LAST_LOADED: int = 1
 init(autoreset=True)
+
+warnings.filterwarnings("ignore", category=TqdmExperimentalWarning)
 
 LOG_FORMAT = "[%(levelname)s] %(message)s"
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
@@ -43,24 +51,29 @@ _P = ParamSpec("_P")
 
 
 def cached(func: Callable[_P, _T]):
-
     def load_pop_cache(func: Callable[_P, _T]):
         try:
+            global POP_CACHE_LOADED
             log_info("Attempting to load POP cache...")
             pop_cache: BufferedReader = open("popCache.dat", "rb")
             func.cache = pickle.load(pop_cache)  # type: ignore
             pop_cache.close()
+            POP_CACHE_LOADED = True
             log_success("POP Cache Loaded!")
         except:
             log_warning("Failed to load POP cache!")
 
     def load_prob_cache(func: Callable[_P, _T]):
         try:
+            global LAST_LOADED
             log_info("Attempting to load probability cache...")
             prob_cache_files: list[str] = glob.glob("probCache*.dat")
             latest_file: str = max(
                 prob_cache_files,
                 key=lambda f: int(f.replace("probCache", "").replace(".dat", "")),
+            )
+            LAST_LOADED = (
+                int(latest_file.replace("probCache", "").replace(".dat", "")) + 1
             )
             prob_cache: BufferedReader = open(latest_file, "rb")
             func.cache = pickle.load(prob_cache)  # type: ignore
@@ -82,11 +95,6 @@ def cached(func: Callable[_P, _T]):
         try:
             return func.cache[args]
         except KeyError:
-
-            # if func.__name__ == "partition_of_partition":
-            #     log_info(f"POP Cache Miss! Key -> {args}")
-            # if func.__name__ == "get_transitive_prob":
-            #     log_info(f"Prob Cache Miss! Key -> {args}")
             func.cache[args] = result = func(*args)
             return result
 
@@ -179,7 +187,6 @@ def get_transitive_prob(
     p2: tuple[int, ...],
     n: int,
 ) -> float:
-
     if len(p1) == 1 or len(p2) == 1:
         return 1.0
 
@@ -237,9 +244,6 @@ def get_simple_transitive_prob(n: int) -> float:
     return result
 
 
-N: int = 23
-EPS: float = 1e-9
-
 log_info("Generating all integer partitions...")
 IPS: list[list[tuple[int, ...]]] = [
     generate_integer_partitions(i) for i in range(N + 1)
@@ -248,25 +252,26 @@ log_success("Generated!")
 
 
 def main() -> None:
-    for i in range(1, N + 1):
-        pop_pairs: list[tuple[tuple[int, ...], tuple[int, ...]]] = [
-            (IPS[i][j1], IPS[i][j2])
-            for j1 in range(len(IPS[i]))
-            for j2 in range(j1, len(IPS[i]))
-        ]
+    if not POP_CACHE_LOADED:
+        for i in range(1, N + 1):
+            pop_pairs: list[tuple[tuple[int, ...], tuple[int, ...]]] = [
+                (IPS[i][j1], IPS[i][j2])
+                for j1 in range(len(IPS[i]))
+                for j2 in range(j1, len(IPS[i]))
+            ]
 
-        with tqdm(total=len(pop_pairs), desc=f"Processing POPs {i}") as pbar:
-            for p1, p2 in pop_pairs:
-                partition_of_partition(p1, p2)
-                pbar.update(1)
+            with tqdm(total=len(pop_pairs), desc=f"Processing POPs {i}") as pbar:
+                for p1, p2 in pop_pairs:
+                    partition_of_partition(p1, p2)
+                    pbar.update(1)
 
-    pop_cache = open("popCache.dat", "wb")
-    pickle.dump(partition_of_partition.cache, pop_cache)
-    pop_cache.close()
+        pop_cache = open("popCache.dat", "wb")
+        pickle.dump(partition_of_partition.cache, pop_cache)
+        pop_cache.close()
 
-    log_success("Saved POP cache!")
+        log_success("Saved POP cache!")
 
-    for i in range(1, N + 1):
+    for i in range(LAST_LOADED, N + 1):
         prob_pairs: list[tuple[tuple[int, ...], tuple[int, ...]]] = [
             (IPS[i][j1], IPS[i][j2])
             for j1 in range(len(IPS[i]))
@@ -276,7 +281,7 @@ def main() -> None:
             for p1, p2 in prob_pairs:
                 get_transitive_prob(p1, p2, i)
                 pbar.update(1)
-        prob_cache = open(f"probCache{i}.dat", "ab")
+        prob_cache = open(f"probCache{i}.dat", "wb")
         pickle.dump(get_transitive_prob.cache, prob_cache)
         prob_cache.close()
         log_success("Saved probability cache!")
@@ -293,7 +298,6 @@ def test() -> None:
         calculated_prob: float = 0.0
         for j1 in range(len(IPS[i])):
             for j2 in range(j1, len(IPS[i])):
-
                 if j1 != j2:
                     calculated_prob += 2 * (
                         cycle_type_prob(IPS[i][j1], i)

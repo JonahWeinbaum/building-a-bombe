@@ -3,10 +3,40 @@ from functools import cache, wraps
 from collections import Counter
 from typing_extensions import TypeVar, ParamSpec, Callable
 from io import BufferedReader
-from tqdm import tqdm
+from tqdm.rich import tqdm
+from rich.console import Console
+from rich.progress import track
+from rich.table import Table
+from colorama import Fore, Style, init
+import argparse
 import math
 import pickle
 import glob
+import logging
+
+init(autoreset=True)
+
+LOG_FORMAT = "[%(levelname)s] %(message)s"
+logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
+
+logger = logging.getLogger("PartitionLogger")
+
+
+def log_success(message: str):
+    logger.info(Fore.GREEN + message)
+
+
+def log_warning(message: str):
+    logger.warning(Fore.YELLOW + message)
+
+
+def log_error(message: str):
+    logger.error(Fore.RED + message)
+
+
+def log_info(message: str):
+    logger.info(Fore.CYAN + message)
+
 
 _T = TypeVar("_T")
 _P = ParamSpec("_P")
@@ -16,17 +46,17 @@ def cached(func: Callable[_P, _T]):
 
     def load_pop_cache(func: Callable[_P, _T]):
         try:
-            print("Attempting to load POP cache...")
+            log_info("Attempting to load POP cache...")
             pop_cache: BufferedReader = open("popCache.dat", "rb")
             func.cache = pickle.load(pop_cache)  # type: ignore
             pop_cache.close()
-            print("POP Cache Loaded!")
+            log_success("POP Cache Loaded!")
         except:
-            print("Failed to load POP cache!")
+            log_warning("Failed to load POP cache!")
 
     def load_prob_cache(func: Callable[_P, _T]):
         try:
-            print("Attempting to load probability cache...")
+            log_info("Attempting to load probability cache...")
             prob_cache_files: list[str] = glob.glob("probCache*.dat")
             latest_file: str = max(
                 prob_cache_files,
@@ -35,9 +65,9 @@ def cached(func: Callable[_P, _T]):
             prob_cache: BufferedReader = open(latest_file, "rb")
             func.cache = pickle.load(prob_cache)  # type: ignore
             prob_cache.close()
-            print("Probability Cache Loaded!")
+            log_success("Probability Cache Loaded!")
         except:
-            print("Failed to load probability cache!")
+            log_warning("Failed to load probability cache!")
 
     func.cache = {}  # type: ignore
 
@@ -54,9 +84,9 @@ def cached(func: Callable[_P, _T]):
         except KeyError:
 
             # if func.__name__ == "partition_of_partition":
-            #     print(f"POP Cache Miss! Key -> {args}")
+            #     log_info(f"POP Cache Miss! Key -> {args}")
             # if func.__name__ == "get_transitive_prob":
-            #     print(f"Prob Cache Miss! Key -> {args}")
+            #     log_info(f"Prob Cache Miss! Key -> {args}")
             func.cache[args] = result = func(*args)
             return result
 
@@ -207,13 +237,14 @@ def get_simple_transitive_prob(n: int) -> float:
     return result
 
 
-N: int = 26
+N: int = 23
+EPS: float = 1e-9
 
-print("Generating all integer partitions...")
+log_info("Generating all integer partitions...")
 IPS: list[list[tuple[int, ...]]] = [
     generate_integer_partitions(i) for i in range(N + 1)
 ]
-print("Generated!")
+log_success("Generated!")
 
 
 def main() -> None:
@@ -223,6 +254,7 @@ def main() -> None:
             for j1 in range(len(IPS[i]))
             for j2 in range(j1, len(IPS[i]))
         ]
+
         with tqdm(total=len(pop_pairs), desc=f"Processing POPs {i}") as pbar:
             for p1, p2 in pop_pairs:
                 partition_of_partition(p1, p2)
@@ -231,7 +263,8 @@ def main() -> None:
     pop_cache = open("popCache.dat", "wb")
     pickle.dump(partition_of_partition.cache, pop_cache)
     pop_cache.close()
-    print("Saved POP cache!")
+
+    log_success("Saved POP cache!")
 
     for i in range(1, N + 1):
         prob_pairs: list[tuple[tuple[int, ...], tuple[int, ...]]] = [
@@ -246,11 +279,15 @@ def main() -> None:
         prob_cache = open(f"probCache{i}.dat", "ab")
         pickle.dump(get_transitive_prob.cache, prob_cache)
         prob_cache.close()
-    print("Saved probability cache!")
+        log_success("Saved probability cache!")
 
 
 def test() -> None:
-    for i in range(1, N + 1):
+    console = Console()
+
+    results = []
+
+    for i in track(range(1, N + 1), description="Running tests..."):
         simple_prob: int = get_simple_transitive_prob(i)
 
         calculated_prob: float = 0.0
@@ -269,11 +306,47 @@ def test() -> None:
                         * cycle_type_prob(IPS[i][j2], i)
                         * get_transitive_prob(IPS[i][j1], IPS[i][j2], i)
                     )
+        passed = abs(calculated_prob - simple_prob) < EPS
+        results.append((i, simple_prob, calculated_prob, passed))
 
-        print(
-            f"Probability is {simple_prob}, calculated probability is {calculated_prob}"
+    table = Table(title="Test Results")
+    table.add_column("N", justify="right", style="cyan", no_wrap=True)
+    table.add_column("Simple Prob", justify="right", style="magenta")
+    table.add_column("Calculated Prob", justify="right", style="yellow")
+    table.add_column("Status", justify="center", style="green")
+
+    for i, simple_prob, calculated_prob, passed in results:
+        status = (
+            "[bold green]PASS[/bold green]" if passed else "[bold red]FAIL[/bold red]"
         )
+        table.add_row(str(i), f"{simple_prob:.6f}", f"{calculated_prob:.6f}", status)
+
+    num_failures = sum(1 for _, _, _, passed in results if not passed)
+    console.print(table)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "mode",
+        nargs="?",
+        choices=["main", "test"],
+        default="main",
+        help="Specify the mode to run: 'main' (default) to execute the main function, "
+        "or 'test' to run unit tests.",
+    )
+    parser.add_argument(
+        "--N",
+        type=int,
+        default=26,
+        help="Highest value of transitive probability to compute",
+    )
+
+    args = parser.parse_args()
+
+    N = args.N
+
+    if args.mode == "test":
+        test()
+    else:
+        main()

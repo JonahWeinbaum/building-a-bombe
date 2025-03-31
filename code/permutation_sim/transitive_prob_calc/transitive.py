@@ -78,7 +78,7 @@ def cached(func: Callable[_P, _T]):
             prob_cache: BufferedReader = open(latest_file, "rb")
             func.cache = pickle.load(prob_cache)  # type: ignore
             prob_cache.close()
-            log_success("Probability Cache Loaded!")
+            log_success(f"Probability Cache Loaded for i = {LAST_LOADED - 1}!")
         except:
             log_warning("Failed to load probability cache!")
 
@@ -284,7 +284,7 @@ def main() -> None:
         prob_cache = open(f"probCache{i}.dat", "wb")
         pickle.dump(get_transitive_prob.cache, prob_cache)
         prob_cache.close()
-        log_success("Saved probability cache!")
+        log_success(f"Saved probability cache for i = {i}!")
 
 
 def test() -> None:

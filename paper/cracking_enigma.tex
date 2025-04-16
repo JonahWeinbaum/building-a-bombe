@@ -25,30 +25,40 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{positioning, shapes.geometric}
 \hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-    pdftitle={Overleaf Example},
-    pdfpagemode=FullScreen,
-    }
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  urlcolor=cyan,
+  pdftitle={Overleaf Example},
+  pdfpagemode=FullScreen,
+}
 
+\makeatletter
+\renewcommand{\@chapapp}{}% Not necessary...
+\newenvironment{chapquote}[2][2em]
+{\setlength{\@tempdima}{#1}%
+  \def\chapquote@author{#2}%
+  \parshape 1 \@tempdima \dimexpr\textwidth-2\@tempdima\relax%
+\itshape}
+{\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
+\makeatother
 
 \DeclareCaptionFormat{algor}{%
   \hrulefill\par\offinterlineskip\vskip1pt%
-    \textbf{#1#2}#3\offinterlineskip\hrulefill}
+\textbf{#1#2}#3\offinterlineskip\hrulefill}
 \DeclareCaptionStyle{algori}{singlelinecheck=off,format=algor,labelsep=space}
 \captionsetup[algorithm]{style=algori}
 
-%This version of the thesis template has been updated for the February 2017 thesis guidelines provided by the School of Graduate and Advanced Studies by David Freund and Daryl DeFord.
+%This version of the thesis template has been updated for the
+% February 2017 thesis guidelines provided by the School of Graduate
+% and Advanced Studies by David Freund and Daryl DeFord.
 
 %  Some good options are draft and singlespacing, for drafts, and *final*,
-%for the final cut, and noheadings, for a printout without headings.  
+%for the final cut, and noheadings, for a printout without headings.
 %You can also use the copyright option to add a copyright.  Note:
 %final will enforce a bunch of different options, like oneside, 12pt
 %and doublespacing, as well as make the margins correct.   Draft, has
-%larger margins and is appropriate for twosided printing.   
-
+%larger margins and is appropriate for twosided printing.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%    IMPORTANT     %%%%%
@@ -61,38 +71,40 @@
 %
 %  If you are using a terminal this is straightforward, but if you are
 %  using a tex editing program it make take a little bit of searching
-%  before you figure out how to make this work. 
-%  
+%  before you figure out how to make this work.
+%
 %  Alternatively, you might consider compiling using pdflatex, which
-%  compiles straight to a PDF and doesn't have this problem.  
+%  compiles straight to a PDF and doesn't have this problem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Additional Packages (add as desired)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsmath,amssymb,amsthm}
 
-%\usepackage{mkindex} %Uncomment if you would like to have an index. Compiling with an index takes more work than compiling without one. You will have to look up how to use the index package.
+%\usepackage{mkindex} %Uncomment if you would like to have an index.
+% Compiling with an index takes more work than compiling without one.
+% You will have to look up how to use the index package.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Change or add to as desired. 
+%  Change or add to as desired.
 %  These two commands make the first enumerations look like (a)
-%  And the second level like (i).  
+%  And the second level like (i).
 \renewcommand{\labelenumi}{(\alph{enumi})}
 \renewcommand{\labelenumii}{(\roman{enumii})}
 %  These commands make the section headings Boldface and not all
-%  caps. It also removes the chapter numbers  
+%  caps. It also removes the chapter numbers
 \renewcommand{\chaptermark}[1]{\markboth{{\sc #1}}{{\sc #1}}}
 \renewcommand{\sectionmark}[1]{\markright{{\sc \thesection\ #1}}}
-%  These commands have lowercase headings with chapter numbers. 
+%  These commands have lowercase headings with chapter numbers.
 %\renewcommand{\chaptermark}[1]{markboth{#1}{}}
-%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}} 
-		
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Theorem Declarations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% A basic set of theorem declarations.  Add or remove as desired. 
+% A basic set of theorem declarations.  Add or remove as desired.
 \newtheorem{prop}{Proposition}[chapter]
 \newtheorem{theorem}[prop]{Theorem}
 \newtheorem{lemma}[prop]{Lemma}
@@ -103,7 +115,6 @@
 \newtheorem{remark}[prop]{Remark}
 \newtheorem{example}[prop]{Example}
 \newtheorem*{claim}{Claim}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Indicies
@@ -139,7 +150,6 @@
 %Abstract
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Table of Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,7 +170,7 @@
 %%  YOUR THESIS HERE!  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \include{the_enigma}
+\include{the_enigma}
 
 % \include{permutations}
 
@@ -182,7 +192,6 @@
 % \addcontentsline{toc}{chapter}{References}
 % \bibliography{citations}
 % \markboth{{\sffamily\sc Bibliography}}{}
-
 
 %Uncomment if you want an index
 %\printindex

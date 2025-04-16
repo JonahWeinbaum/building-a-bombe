@@ -1,73 +1,113 @@
 \chapter{Permutations}
 
 \begin{definition}
-    A \textbf{permutation} $\sigma$ is a bijective function from a set $S$ to 
-    the same set 
-    \begin{center}
-        $\sigma$: $S\to S$
-    \end{center}
+  A \textbf{permutation} $\sigma$ is a bijective function from a set $S$ to
+  the same set
+  \begin{center}
+    $\sigma$: $S\to S$
+  \end{center}
 \end{definition}
 
-A permutation can be thought of as ``swapping'' elements of our set while. Some simple examples 
+A permutation can be thought of as ``swapping'' elements of our set
+while. Some simple examples
 of permutations are
 \begin{example}
-    \text{}
-    \begin{enumerate}
-        \item$\sigma = \text{id}_S$ known as the \textbf{identity permuation}, which maps each element to itself
-        \item$S = \{a, b, c, d, \dots, z\}$ and $\sigma$ defined by $\sigma(a) = b, \dots, \sigma(z) = a$. This shifts 
-        each letter by one place in the alphabet, wrapping around at $z$. We will called this the \textbf{Caesar permutation} and it will be denoted by 
-        $\theta_1$
-    \end{enumerate}
+  \text{}
+  \begin{enumerate}
+    \item$\sigma = \text{id}_S$ known as the \textbf{identity
+      permuation}, which maps each element to itself
+    \item$S = \{a, b, c, d, \dots, z\}$ and $\sigma$ defined by
+      $\sigma(a) = b, \dots, \sigma(z) = a$. This shifts
+      each letter by one place in the alphabet, wrapping around at
+      $z$. We will called this the \textbf{Caesar permutation} and it
+      will be denoted by
+      $\theta_1$
+  \end{enumerate}
 \end{example}
 
-We will show that for a fixed rotor state the Enigma functions is a permutation on the set of the latin alphabet.
-It is clear that the enigma machine sends this set to itself but it is not immediately apparent that such a mapping is bijective. To see this
-we must shift our discription of the enigma to that of a composition of permutations. Let us first define some useful notation.
+We will show that for a fixed rotor state the Enigma functions is a
+permutation on the set of the latin alphabet.
+It is clear that the enigma machine sends this set to itself but it
+is not immediately apparent that such a mapping is bijective. To see this
+we must shift our discription of the enigma to that of a composition
+of permutations. Let us first define some useful notation.
 
 \begin{definition}
-    For a set $S$, the \textbf{symmetric group over $S$} is the group $(G,\circ)$ of all permutations on $S$, where
-    \begin{center}
-        $G\coloneq\{f: S\to S\text{ }\vert\text{ }f\text{ is a bijection}\}$
-    \end{center}
-    where the group operation is composition of functions. We denote this group $\operatorname{Sym}(S)$.
+  For a set $S$, the \textbf{symmetric group over $S$} is the group
+  $(G,\circ)$ of all permutations on $S$, where
+  \begin{center}
+    $G\coloneq\{f: S\to S\text{ }\vert\text{ }f\text{ is a bijection}\}$
+  \end{center}
+  where the group operation is composition of functions. We denote
+  this group $\operatorname{Sym}(S)$.
 \end{definition}
 
-It is clear that this group is closed with respect to composition, since the composition of bijections is itself a bijection. The identity element is simply the identity permutation described in CITE, and 
-the inverse of an element is simply its inverse as a function, since the inverse of a bijection is itself a bijection this is well-defined.
+It is clear that this group is closed with respect to composition,
+since the composition of bijections is itself a bijection. The
+identity element is simply the identity permutation described in CITE, and
+the inverse of an element is simply its inverse as a function, since
+the inverse of a bijection is itself a bijection this is well-defined.
 
 \begin{example}
-    The Caeser cipher is one of the simplest and earliest encryption schemes. It involves shifting
-    the set of letters by a fixed amount to encode a message. In Caesar's case he would shift each letter in a message by three places, 
-    sending $A\mapsto D,\dots, X\mapsto A, Y\mapsto B, Z\mapsto C$. In the context of permuations, this can be viewed as a repeated
-    application of the Caesar permuation $\theta_1$ described earlier CITE. For instance, to get Caesar's particular cipher 
-    we use $\theta_1\circ\theta_1\circ\theta_1$ (that is $\theta_1^3\in\operatorname{Sym}(\{A,\dots,Z\})$). For ease of notation we define
-    \begin{center}
-        $\theta_n\coloneq\theta_1^n$ for $n\in\mathbb{N}$
-    \end{center}
-    Though this continues indefinitely, due to the nature of the permuation it is clear that $\theta_n = \theta_{(n+26)}$ $\forall\text{ }n\in\mathbb{N}$ so, in particular, 
-    there are only $26$ distinct Caesar ciphers -- a small keyspace indeed.
+  The Caeser cipher is one of the simplest and earliest encryption
+  schemes. It involves shifting
+  the set of letters by a fixed amount to encode a message. In
+  Caesar's case he would shift each letter in a message by three places,
+  sending $A\mapsto D,\dots, X\mapsto A, Y\mapsto B, Z\mapsto C$. In
+  the context of permuations, this can be viewed as a repeated
+  application of the Caesar permuation $\theta_1$ described earlier
+  CITE. For instance, to get Caesar's particular cipher
+  we use $\theta_1\circ\theta_1\circ\theta_1$ (that is
+  $\theta_1^3\in\operatorname{Sym}(\{A,\dots,Z\})$). For ease of
+  notation we define
+  \begin{center}
+    $\theta_n\coloneq\theta_1^n$ for $n\in\mathbb{N}$
+  \end{center}
+  Though this continues indefinitely, due to the nature of the
+  permuation it is clear that $\theta_n = \theta_{(n+26)}$
+  $\forall\text{ }n\in\mathbb{N}$ so, in particular,
+  there are only $26$ distinct Caesar ciphers -- a small keyspace indeed.
 \end{example}
 
-\section{Enigma as a Permutation} 
+\section{Enigma as a Permutation}
 
-Suppose for now that we have fixed the rotors of the enigma machine in place. We want to examine how each letter is mapped through the machine. 
-Recall from CITE that the enigma machine maps each letter signal through the following transformations: the plugboard, three rotors, a reflector panel, back through the rotors, 
-and back through the plugboard. Each of these components can themselves be viewed as a bijective mapping by construction. We will label the permutation associated with each  as follows:
+Suppose for now that we have fixed the rotors of the enigma machine
+in place. We want to examine how each letter is mapped through the machine.
+Recall from CITE that the enigma machine maps each letter signal
+through the following transformations: the plugboard, three rotors, a
+reflector panel, back through the rotors,
+and back through the plugboard. Each of these components can
+themselves be viewed as a bijective mapping by construction. We will
+label the permutation associated with each  as follows:
 \begin{enumerate}
-    \item $R_{(1,r_1, \ell_1, g_1)}, R_{(2, r_2, \ell_2, g_2)}, R_{(3, r_3, \ell_3, g_3)}$ will be the rotors going from right to left where 
-    $r_i\in \{\text{I}, \text{II}, \dots, \text{VI}\}$ define which rotors we have selected, and $\ell_i, g_i\in\{a, \dots, z\}$ indicates the \emph{Ringstellung} and \emph{Grundstellung} respectively for that rotor.
-    \item $P$ will be our plugboard setting
-    \item $M_\alpha$ will be our reflector setting where $\alpha\in\{A, B, C\}$ describes our reflector type
+  \item $R_{(1,r_1, \ell_1, g_1)}, R_{(2, r_2, \ell_2, g_2)}, R_{(3,
+    r_3, \ell_3, g_3)}$ will be the rotors going from right to left where
+    $r_i\in \{\text{I}, \text{II}, \dots, \text{VI}\}$ define which
+    rotors we have selected, and $\ell_i, g_i\in\{a, \dots, z\}$
+    indicates the \emph{Ringstellung} and \emph{Grundstellung}
+    respectively for that rotor.
+  \item $P$ will be our plugboard setting
+  \item $M_\alpha$ will be our reflector setting where $\alpha\in\{A,
+    B, C\}$ describes our reflector type
 \end{enumerate}
 
-For the rotor and the reflector we include subscripts to describe their settings since their permutation is entirely determined by this short list of parameters.
-The plugboard, on the other hand, is itself (by the \emph{Steckerverbindungen}) a description of its permutation so subscripts are unnecessary.
-\\\\Supposing we are at ground position, the engima permutation $E$ is as follows:
+For the rotor and the reflector we include subscripts to describe
+their settings since their permutation is entirely determined by this
+short list of parameters.
+The plugboard, on the other hand, is itself (by the
+\emph{Steckerverbindungen}) a description of its permutation so
+subscripts are unnecessary.
+\\\\Supposing we are at ground position, the engima permutation $E$
+is as follows:
 \begin{center}
-    $E = PR_1R_2R_3M_\alpha R_3^{-1} R_2^{-1} R_1^{-1} P^{-1}$
+  $E = PR_1R_2R_3M_\alpha R_3^{-1} R_2^{-1} R_1^{-1} P^{-1}$
 \end{center}
 \noindent We note that
 \begin{align*}
-    E &= PR_{(1,r_1, \ell_1, g_1)}R_{(2, r_2, \ell_2, g_2)}R_{(3, r_3, \ell_3, g_3)}M_\alpha R_{(3, r_3, \ell_3, g_3)}^{-1} R_{(2, r_2, \ell_2, g_2)}^{-1} R_{(1,r_1, \ell_1, g_1)}^{-1} P^{-1}
-    \\&=(PR_{(1,r_1, \ell_1, g_1)}R_{(2, r_2, \ell_2, g_2)}R_{(3, r_3, \ell_3, g_3)})\circ M_\alpha \circ(PR_{(1,r_1, \ell_1, g_1)}R_{(2, r_2, \ell_2, g_2)}R_{(3, r_3, \ell_3, g_3)})^{-1}
+  E &= PR_{(1,r_1, \ell_1, g_1)}R_{(2, r_2, \ell_2, g_2)}R_{(3, r_3,
+  \ell_3, g_3)}M_\alpha R_{(3, r_3, \ell_3, g_3)}^{-1} R_{(2, r_2,
+  \ell_2, g_2)}^{-1} R_{(1,r_1, \ell_1, g_1)}^{-1} P^{-1}
+  \\&=(PR_{(1,r_1, \ell_1, g_1)}R_{(2, r_2, \ell_2, g_2)}R_{(3, r_3,
+  \ell_3, g_3)})\circ M_\alpha \circ(PR_{(1,r_1, \ell_1, g_1)}R_{(2,
+  r_2, \ell_2, g_2)}R_{(3, r_3, \ell_3, g_3)})^{-1}
 \end{align*}

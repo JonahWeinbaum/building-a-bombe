@@ -1,11 +1,11 @@
 \chapter{The Enigma}
 
 \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 52}}
-  The Engima, though simple in principle and primitive in many ways,
-  presented the cryptanalyst with a dazzling number of possibilities.
+	The Enigma, though simple in principle and primitive in many ways,
+	presented the cryptanalyst with a dazzling number of possibilities.
 \end{chapquote}
 
-The Engima machine was used extensivley by the Germans to encipher
+The Enigma machine was used extensivley by the Germans to encipher
 communications prior to and throughout World War II. German
 strategems like the \emph{blitzkrieg} required quick radio
 communcation, so to ensure that the allied powers did not intercept
@@ -32,10 +32,16 @@ corresponding keyboard layout. The operator presses keys of the
 desired plaintext and copies the output of the illuminated bulbs to
 get the enciphered text. The actual mechanism of this encipherment
 requires several mechanical components in a complex arrangement
-\subsubsection{The Plugboard}
-\text{}\\
-\begin{center}\includegraphics{plugboard.jpg}
-\end{center}
+
+\subsection{The Plugboard}
+
+\begin{figure}[htbp]
+	\begin{center}\includegraphics[scale=0.9]{images/plugboard.jpg}
+	\end{center}
+	\label{ref:plugboard}
+	\caption{Enigma \texttt{I} Plugboard}
+\end{figure}
+
 Upon a key press, the electrical current corresponding to this letter
 is sent to a mechanism known as the plugboard. From an operator's
 perspective, the plugboard was a series of ports, one for each
@@ -46,16 +52,275 @@ will send current corresponding to a letter to the opposite letter
 letter (e.g. D has no cable), then the plugboard simply will return a
 current corresponding to this same letter (e.g. D). Assuming all 10
 cables are used this means that the plugboard can be represented as a
-permutation on 26 letters with a cycle type of $2^{10}1^6$. One such
+permutation on 26 letters with $2^{10}1^6$ cycle type\footnote{We
+	will denote cycle types in this paper in the format
+	$\lambda_1^{m_1}\dots\lambda_n^{m_n}$ where $\lambda_i$ is the length
+	of a cycle and $m_i$ is the multiplicity of this cycle length.}. One such
 permutation could be
 \begin{center}
-  (\texttt{HR})(\texttt{AT})(\texttt{IW})(\texttt{SK})(\texttt{UY})(\texttt{DF})(\texttt{GV})(\texttt{LJ})(\texttt{BQ})(\texttt{MX})(\texttt{C})(\texttt{E})(\texttt{N})(\texttt{O})(\texttt{P})(\texttt{Z})
+	(\texttt{HR})(\texttt{AT})(\texttt{IW})(\texttt{SK})(\texttt{UY})(\texttt{DF})(\texttt{GV})(\texttt{LJ})(\texttt{BQ})(\texttt{MX})(\texttt{C})(\texttt{E})(\texttt{N})(\texttt{O})(\texttt{P})(\texttt{Z})
 \end{center}
-In general we will denote the permutation corresponding to a plugboard as $P$.
+In general we will denote the permutation corresponding to a plugboard as $S$.
 
-\subsubsection{The Rotors}
+\subsection{The Rotors}
+\begin{figure}[htpb]
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\includegraphics[width=\linewidth]{images/rotor_v_front.jpg}
+		\caption{Entry-side}
+		\label{fig:rotor_v_front}
+	\end{subfigure}
+	\hspace{0.02\textwidth}
+	\begin{subfigure}{0.3\textwidth}
+		\includegraphics[width=\linewidth]{images/rotor_v_back.jpg}
+		\caption{Exit-side}
+		\label{fig:rotor_v_back}
+	\end{subfigure}
+	\caption{Rotor \texttt{V}}
+	\label{fig:rotor_v}
+\end{figure}
 
-\subsubsection{The Reflector}
+The Enigma model \texttt{I} used three rotors, selected from a larger
+set of rotors, the number of which changed depending on the military
+branch we examine. At a minimum all three branches of the military
+had access to five rotors labeled by their roman numeral equivalents.
+Each rotor encoded a unique permutation from 26 input contacts to 26
+output contacts by simply connecting between each input/output pair
+in the permutation with a wire. The contacts represented the letters
+in alphabetical order moving in a clockwise manner relative to the
+entry-side of the rotor. The rotor input contacts were often marked
+with a white dot indicating which contact corresponded to \texttt{A},
+but in general is found by looking at the contact immediately above
+the numeral indicator.
+\\\\On their own these rotors would prove to be very poor
+cryptographic devices as they are just substitution ciphers which are
+vulnerable to frequency analysis and, if found by the enemy, would
+serve no purpose whatsoever. Therefore, these rotors were designed to
+rotate which served to change the subtitution at each stage of encryption.
+\\\\Because these rotors rotate it is best to differentiate between
+contact letters and contact positions. When we give the permutation
+corresponding to a rotor as in figure \ref{fig:rotor_v_wiring} we are
+referring to the \texttt{A} contact as the specific contact denoted
+by the marker dot and the \texttt{B} contact as its next contact
+turning clockwise. When referred to in this context we will use the
+word ``contact''. On the other hand, when we say that an electrical
+current corresponding to \texttt{A} enters a rotor, we mean to say
+that the current enters the contact at the topmost \emph{position} of
+the rotor, even if the rotor has rotated now such that that contact
+is not the contact with the marker dot. When referred to in this
+context we will use the word ``position'' so as to disambiguate from
+the prior context. That is to say, a contact and a position need not
+be the same. For example, contact \texttt{A} can be in position
+\texttt{B}. This occurs when the pin with the marker dot adjacent to
+it is one pin away from being at the top of the rotor.
+
+\subsubsection{Turnover}
+Each rotor had on its entry-side a notch next to each contact. A pawl
+attempted to engage
+the notch and move the rotor forward by one contact each key press.
+On the exit-side, each
+rotor was equipped with a smooth ring with only a single notch
+breaking it. This is known as the ``turnover notch''. Assuming the
+rotor functions in isolation the pawl will engage the entry notches
+during each key press thus moving the rotor forward by one until,
+after 26 presses, the rotor returns to its original position.
+However, if we have two rotors, say rotor M and N, such that rotor M
+has its entry contacts placed adjacent to the exit contacts of rotor
+N; then, the smooth ring of the rotor N will occlude the notches of
+rotor M thus preventing the pawl from engaging. That is, except at
+the location where the turnover notch is located. The pawl will then
+only be able to rotate rotor M if it aligns with the turnover notch of rotor N.
+\\\\Now consider three rotors, rotors L, M, and N, arranged left to
+right from an operator's perspective. Then electrical current first
+enters rotor N, followed by rotor M, and finally rotor L. Rotor N
+will have no rotor's smooth ring occluding its notches so the pawl is
+free to engage rotor N at every key press. Thus rotor N will always
+turn at each press of the key. Rotor M, however, will only turn at
+the position at which rotor N's turnover notch aligns with the pawl,
+meanining that for each full rotation of rotor N, rotor M will move
+by one contact. Finally, rotor L will only move when rotor M's
+turnover notch is aligned with the pawl meaning that rotor N must
+rotate 26 times before rotor L will move by one contact.
+
+%% https://www.cryptomuseum.com/crypto/enigma/m3/index.htm %%
+\begin{center}
+	\begin{figure}[h]
+		\[
+			\left(
+			\begin{array}{llllllllllllllllllllllllll}
+					\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+					\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+					\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+					\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+					\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+					\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+					\texttt{Y} & \texttt{Z}                             \\
+					\texttt{V} & \texttt{Z} & \texttt{B} & \texttt{R} &
+					\texttt{G} & \texttt{I} & \texttt{T} & \texttt{Y} &
+					\texttt{U} & \texttt{P} & \texttt{S} & \texttt{D} &
+					\texttt{N} & \texttt{H} & \texttt{L} & \texttt{X} &
+					\texttt{A} & \texttt{W} & \texttt{M} & \texttt{J} &
+					\texttt{Q} & \texttt{O} & \texttt{F} & \texttt{E} &
+					\texttt{C} & \texttt{K}
+				\end{array}
+			\right)
+		\]
+		\caption{Rotor \texttt{V} permutation}
+		\label{fig:rotor_v_wiring}
+	\end{figure}
+\end{center}
+
+\subsubsection{Rotation}
+
+Consider the effect of a rotor turn on rotor \texttt{V}, whose
+internal wiring is described in figure \ref{fig:rotor_v_wiring}.
+In a default position in which contact \texttt{A} is at position
+\texttt{A}. After pressing a key, the rotor
+will turn resulting in contact \texttt{B} now being in position
+\texttt{A}. This means that an input current
+entering at position \texttt{A} will go into contact \texttt{B}, be
+routed through the permutation and exit at contact
+\texttt{Z} which now is at position \texttt{Y} due to the rotation.
+This is to say that rotating the rotor has the effect
+of shifting an input letter forward by 1 (mod 26) and the output
+letter back by 1 (mod 26).
+\\\\To encode the effect of rotation as a permutation consider
+\begin{definition}
+	The \emph{Ceasar permutation} (denoted $P$) is the permutation
+	taking a letter to the next letter in alphabetical order (mod 26).
+	Its two-line permutation notation is
+	\[
+		\left(
+		\begin{array}{llllllllllllllllllllllllll}
+				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}                             \\
+				\texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z} & \texttt{A}
+			\end{array}
+		\right).
+	\]
+\end{definition}
+If we denote the permutation corresponding to rotor \texttt{V} in
+default position as $\sigma$. Then after $r$ rotations, to get
+our new permutation we must first shift each input letter forward by
+$r$ and each output letter backwards by $r$. This can be encoded via
+the Ceasar permutation as follows
+\[
+	{P^{-r}}\sigma{P^{r}}.
+\]
+
+\subsubsection{Outer Ring}
+
+The rotors were additionally equipped with an outer ring with
+letters in alphabetical order moving clockwise relative to the
+entry-side of the rotor. Alternately some rings had numerical values
+ranging from \texttt{01} to \texttt{26}.
+\\\\To consider the effect of this ring,
+consider if an operator were instructed to place the ring such that
+the letter ring's \texttt{B} was placed over contact \texttt{A}. Once
+the rotor is closed inside the machine
+the operator can now only see the letters indicated by the ring
+appearing in a small window. If he moves the ring's letter \texttt{A}
+to be in the window, then contact \texttt{Z} is now in position
+\texttt{A}. This means that an input current
+entering at position \texttt{A} will go into contact \texttt{Z}, be
+routed through the permutation and exit
+at contact \texttt{K} which now is at position \texttt{L} due to the
+ring setting. This is to say that the moving the ring
+setting has the effect of shifting an input letter back by 1 (mod 26)
+and the output letter forward by 1 (mod 26).
+As in the prior discussion on rotor rotation, if we denote the
+permutation corresponding to rotor \texttt{V} in default position as
+$\sigma$. Then shifting the ring by $r$ letters, we get a new
+permutation by first shifting each input letter backwards by $r$ and
+each output letter forwards by $r$. This can be encoded via the
+Ceasar permutation as follows
+\[
+	{P^{r}}\sigma{P^{-r}}.
+\]
+In this sense, we can think of rotor rotations and ring adjustments
+as having inverse effects. In fact, if we ignore turnover, setting
+the ring forward by $r$ letters and then rotating the rotor by $r$
+letters is equivalent to having left the ring setting and rotor in
+its default position. That is to say, for cases where turnover does not occur, the ring setting (\emph{Ringstellung}) and which letter
+we decide to show in our window (\emph{Grundstellung}) really represent one singular component of our keyspace since we can always consider our ring setting as being at \texttt{A} by just shifting which letter we display in our window.
+However, consider that changing the ring
+setting also changes where the turnover occurs relative to the
+internal wiring of a rotor. This means that for rotors $M$ and $L$ which are affected by turnover, the ring setting does in fact add to the key space since it has effects which are independent from the window setting. For rotor $N$ we can simply ignore the ring setting
+in our analysis of the key space.
+
+%% NOTE HAPPENES AFTER PAWL %%
+
+% In default position the effect of this ring is just that it conveys
+% which contact corresponds to which letter and, when the rotors are
+% locked inside the Enigma machine, displays to the operator which
+% letter is at the top of the rotor through a small window for each
+% rotor. However, the ring itself was disconnected from the rotor and
+% could be rotated freely. Further, the turnover notch moved along with
+% the ring and thus changing the ring setting would also change the
+% relative turnover point for each rotor.
+% This has two effects.
+% \begin{itemize}
+%   \item If the operator is instructed to use rotor \texttt{V} and to
+%         have \texttt{A} showing through the window on their machine then
+%         if the ring setting is such that \texttt{A} on the ring
+%         corresponds to contact letter \texttt{A} (the contact next to the
+%         marker dot), then a current entering at the position
+%         correpsonding to \texttt{A} will exit at the position
+%         corresponding to \texttt{E}; however, if the ring setting is such
+%         that \texttt{A} on the ring corresponds to contact letter
+%         \texttt{B}, then a current entering at the position corresponding
+%         to \texttt{A} will exit at the position corresponding to
+%         \texttt{K} . In this sense the, ring setting has an inverse
+%         relationship to how much the rotor has turned. If the rotor has
+%         turned by one contact, but the ring setting has been turned by
+%         one letter from the default position, then, as a permutation, it
+%         is as if the rotor has a default ring setting and has not moved.
+% \end{itemize}
+
+\subsection{The Reflector}
+
+\section{Key Size}
+
+\subsubsection{\emph{Plugboard Setting (}Steckerverbindungen\emph{)}}
+\subsubsection{\emph{Rotor Selection (}Walzenlage\emph{)}}
+From the 5 rotors in circulation, 3 rotors in some order were needed to operate the Enigma machine. There are thus ${5}\choose{3}$ total selections of 3 rotors each of which can be ordered in $3!$ ways, giving us ${5\choose3}\cdot{3!}$ possibilities.
+
+\subsubsection{\emph{Ring Setting (}Ringstellung\emph{)}}
+Recall that the only rotors for which the ring setting actually adds to the keyspace is the 2 rigthmost rotors. Since each ring can be setting corresponds a letter from the 26 letter alphabet, this gives us $26^2$ possibilities.
+
+\subsubsection{\emph{Window Setting (}Grundstellung\emph{)}}
+A window setting specified 3 letters from the 26 letter alphabet giving us $26^3$ possibilities.
+
+\subsubsection{Reflector Selection}
+While there are multiple reflectors each of which saw varying levels of usage during World War II, most machines generally stuck to a fixed relfector known as \texttt{UKW-B}. Therefore, this does not factor into our keysize but is worth noting if other reflectors are being considered.
+
+\section{Enigma as a Permutation}
+
+Recall that from the keyboard, current will enter the plugboard ($S$), followed by the rigtmost rotor ($N$), middle
+rotor ($M$), leftmost rotor ($L$), and the reflector ($R$), only to return through each of these components. Then at default position the Enigma machine can be represented as a permutation
+\[
+	\sigma_0 = S^{-1}N^{-1}M^{-1}L^{-1}RLMNS
+\]
+
+Additionally recall that if we ignore turnover the ring setting and window setting effectively represent one singular setting.
+Then, by proper adjustment of permutations ($L$, $M$, and $N$) we can consider any Enigma setting as beggining in such a state as described by $\sigma$. Further, each subsequent keypress will bring us to a new state with a new permutation given by
+\[
+	\sigma_i = S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S
+\]
+where $i$ describes the number of times we have depressed the keyboard. Of course, turnover does exist and does matter; however, if we are examining only the first few letters (say $l$) of a message being encrypted, we have a $\frac{25}{26}$ chance of no turnover occuring at each step and so we have a $(\frac{25}{26})^l$ chance of no turnover occuring during our initial stages on encryption. For small $l$ this is a reasonably high probability. We will see that the first Enigma codebreakers made use of this fact to simplify their model of the machine to the above permutation $\sigma_i$.
+
+\subsection{Cycle Type}
 
 \section{The Enigma Protocol}
 Before describing the internal mechanics of the Enigma, we will first
@@ -69,13 +334,13 @@ supplied an Enigma machine along with a machine key
 (\emph{maschinenschlussel}). THe machine key
 
 Further, each have a copy of the ``\emph{General Regulations for the
-Enigma}'' -- a book entailing all the protocols necessary for Alice
+	Enigma}'' -- a book entailing all the protocols necessary for Alice
 and Bob to communicate securely. According to this guide ``all secret
-communcations are to be enciphered on the Engima'', in order to do
+communcations are to be enciphered on the Enigma'', in order to do
 this, the following guides are necessary external to the machine itself
 \begin{itemize}
-  \item The general daily key (\emph{Tagesschluessel Allgemein})
-  \item The K-Book (\emph{K-Buch})
+	\item The general daily key (\emph{Tagesschluessel Allgemein})
+	\item The K-Book (\emph{K-Buch})
 \end{itemize}
 
 % \\\begin{figure}[h]
@@ -100,7 +365,7 @@ this, the following guides are necessary external to the machine itself
 % \hline
 % \end{tabular}}
 % \end{center}
-%   \caption{Example Engima Key Sheet (September 1938)}
+%   \caption{Example Enigma Key Sheet (September 1938)}
 %   \label{fig:enigma_key_sheet}
 % \end{figure}
 %% https://www.researchgate.net/figure/Enigma-key-book-Photo-from-authentic-German-codebook-From-before-September-1938-as-it_fig2_339932418

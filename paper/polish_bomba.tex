@@ -1,1 +1,94 @@
 \chapter{The Polish Bomba}
+%% https://www.cryptocellar.org/pubs/ukwa.pdf%%
+%% https://www.cryptocellar.org/enigma/files/rejewski-paper.pdf %% 
+
+Rejewski was saddled with arguably the most complex discoveries in Enigma code breaking. Not only did he need to determine a means to recover daily keys from limited intellegence supplied by ?? but he additionally needed to recover the wirings of the rotors themselves.
+\section{Characteristics}
+Rejewksi quickly determined the protocol by which messages were enciphered -- in fact, he stated the this protocol was ``obvious.'' We will see that purely with knowledge of this procudure and some military intellegence, Rejewski was able to determine the rotor wirings necessary to make further cryptanalysis possible.
+\\\\Consider the first six letters transmitted according to our encryption producedure. Operator Alice has some three letter private key (say \texttt{XYZ}) which she encodes twice with the machine settings specified by her key sheet. This will give us six encrypted letters $\sigma_1(\texttt{X})\sigma_2(\texttt{Y})\sigma_3(\texttt{Z})\sigma_4(\texttt{X})\sigma_5(\texttt{Y})\sigma_6(\texttt{Z})$. Suppose these six letters are given as
+\begin{center}
+	\texttt{ABC} \texttt{DEF}
+\end{center}
+That is
+\begin{align*}
+	\sigma_1(\texttt{X}) & = \texttt{A} \\
+	\sigma_2(\texttt{Y}) & = \texttt{B} \\
+	\sigma_3(\texttt{Z}) & = \texttt{C} \\
+	\sigma_4(\texttt{X}) & = \texttt{D} \\
+	\sigma_5(\texttt{Y}) & = \texttt{E} \\
+	\sigma_6(\texttt{Z}) & = \texttt{F} \\
+\end{align*}
+Since each $\sigma_i$ is represented by 13 disjoint transpositions we can deduce, for example, that
+\[
+	\sigma_1\sigma_4(D) = \sigma_1(X) = A.
+\]
+With a sufficient set of hexagrams from gathered messages, we could then fully deduce the permutation $\sigma_1\sigma_4$. Further, we could recover $\sigma_2\sigma_5$ and $\sigma_3\sigma_6$. Rejewski refered to these paired permutations as {\bf{characteristics}}. In practice, such recovered characteristics may look like
+\begin{align*}
+	\sigma_1\sigma_4 & = (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S}) \\
+	\sigma_2\sigma_5 & = (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K}) \\
+	\sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})
+\end{align*}
+Rejewski noted a key structural similarity between all such characteristics recovered in this fashion: in each characteristic, cycles of the same length appear in pairs.
+\\\\To see why this happens consider the following lemma,
+\begin{lemma}
+	Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$. Then $\alpha$ and $\beta$ will appear in disjoint cycles of $\sigma_i\sigma_{i+3}$ of equal length.
+\end{lemma}
+\begin{proof}
+	%% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf %%
+	We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$ then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our claim is true. Then without loss of generality we can arrange $\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
+	\[
+		\setlength{\arraycolsep}{15pt}
+		\begin{array}{cc}
+			\sigma_i      & \sigma_{i+3} \\
+			\hline
+			(\alpha\beta) & (\beta x_1)  \\
+			(x_1 x_2)     & (x_2 x_3)    \\
+			\vdots        & \vdots       \\
+			(x_{k-1} x_k) & (x_k \alpha)
+		\end{array}
+	\]
+	Then the product $\sigma_i\sigma_{i+3}$ will be
+	\[
+		\sigma_1\sigma_{i+3} = (\alpha x_1 x_3 \dots x_{k-1} )(x_k x_{k-2} \dots x_2 \beta)
+	\]
+	and thus $\alpha$ and $\beta$ end up in disjoint cycles of equal length.
+\end{proof}
+
+This lemma has several consequences.
+\begin{itemize}
+	\item A permutation like $\sigma_1\sigma_4$ which has two singletons $\texttt{A}$ and $\texttt{S}$ (in this context they are refered to as {\bf{females}}) then both $\sigma_1$ and $\sigma_4$ must have the transposition $(\texttt{AS})$.
+	\item A permutation like $\sigma_3\sigma_6$ (two disjoint 13 cycles) reduces the space of possible $\sigma_3$'s to just 13 permutations which will take the form
+	      \begin{center}
+		      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
+		      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
+		      $\vdots$                                       \\
+		      $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
+	      \end{center}
+	      and similarly for $\sigma_6$.
+\end{itemize}
+Thus with absolutely no knowledge of the rotor wirings or the daily key, we can already tractibly compute a searchable space of $\sigma_i$'s. To determine which $\sigma_i$ is the correct one, we make use of the most prevalent bug in cryptography -- operator error.
+
+\subsection{Cillies}
+Enigma operators were instructed to construct random trigrams for their message keys -- likely to prevent frequency analysis attacks on the hexagrams beginning messages; However, operators often chose the same trigrams for each message. Some examples might inclide
+\begin{itemize}
+\item Initials of the operator's spouse. For example, \texttt{CIL} or \texttt{LIE} for an ope
+\end{itemize}
+
+\section{Wiring Recovery}
+
+The full recovery of rotor wirings and turovers is out of scope of this paper; However, we will provide a brief description to illustrate that with minimal intellegence information, entire rotor wirings were able to be deduced.
+
+\section{The Grill and Clock Methods}
+
+The clock method was a precursor to Banburismus...
+
+\section{The Cyclometer}
+
+\section{The Bomba}
+
+
+
+%% WIRE RECOVERY https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3f948f763e4d77467a6bd6fc07e71787020495d0 %%
+%% http://tandfonline.com/doi/full/10.1080/01611194.2016.1257522 %%
+
+%% note: I am not a historian, I dont read German. There are many protocls by which Enigma was used over varying time frames. There were many techniques attempted in breaking Enigma and many iterations of these techniques. The techiques discussed in this paper are intended to present a narrative leading to ultimately new results, but do not capture the full breadth and historical context surrounding the Enigma machine. The more I have studied this subject the more I have found that a truly complete analysis of the subject capturing both histoical, engineering, and matehmatical accuracy would require the combined efforts of many parties and would...%%

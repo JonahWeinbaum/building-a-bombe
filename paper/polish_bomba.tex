@@ -31,6 +31,7 @@ With a sufficient set of hexagrams from gathered messages, we could then fully d
 Rejewski noted a key structural similarity between all such characteristics recovered in this fashion: in each characteristic, cycles of the same length appear in pairs.
 \\\\To see why this happens consider the following lemma,
 \begin{lemma}
+	\label{cillies}
 	Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$. Then $\alpha$ and $\beta$ will appear in disjoint cycles of $\sigma_i\sigma_{i+3}$ of equal length.
 \end{lemma}
 \begin{proof}
@@ -56,8 +57,8 @@ Rejewski noted a key structural similarity between all such characteristics reco
 
 This lemma has several consequences.
 \begin{itemize}
-	\item A permutation like $\sigma_1\sigma_4$ which has two singletons $\texttt{A}$ and $\texttt{S}$ (in this context they are refered to as {\bf{females}}) then both $\sigma_1$ and $\sigma_4$ must have the transposition $(\texttt{AS})$.
-	\item A permutation like $\sigma_3\sigma_6$ (two disjoint 13 cycles) reduces the space of possible $\sigma_3$'s to just 13 permutations which will take the form
+	\item A characteristic like $\sigma_1\sigma_4$ which has two singletons $\texttt{A}$ and $\texttt{S}$ (in this context they are refered to as {\bf{females}}) then both $\sigma_1$ and $\sigma_4$ must have the transposition $(\texttt{AS})$.
+	\item A characteristic like $\sigma_3\sigma_6$ (two disjoint 13 cycles) reduces the space of possible $\sigma_3$'s to just 13 permutations which will take the form
 	      \begin{center}
 		      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
 		      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
@@ -71,19 +72,155 @@ Thus with absolutely no knowledge of the rotor wirings or the daily key, we can 
 \subsection{Cillies}
 Enigma operators were instructed to construct random trigrams for their message keys -- likely to prevent frequency analysis attacks on the hexagrams beginning messages; However, operators often chose the same trigrams for each message. Some examples might inclide
 \begin{itemize}
-\item Initials of the operator's spouse. For example, \texttt{CIL} or \texttt{LIE} for an ope
-\end{itemize}
+	\item Initials or first letters of the operator's spouse. For example, \texttt{CIL} perhaps deriving from the name ``Cecelia'' being shortened to ``cillie''. Allegadely for this reason, poor selections of trigrams from operators became known as {\bf{cillies}}.
+	\item The same letter encoded three times such as \texttt{JJJ}
+	\item Locations such as \texttt{LON} representing London.
+	\item Later, Bletchley Park cryptanalyst John Herivel noticed that many operators selected message keys that were very close to the provided ring settings potentially allowing for a quick means of determining the ring settings.
 
+	      %% Battle of wits the complete story of codebreaking in World War II PAGE 143 %% 
+\end{itemize}
+By keeping track of various radio stations which used cillies. Rejewski had a reasonable guess as to what the message key used for a particular ciphertext were. Suppose we recieved three hexagrams originating from a radio station which often used \texttt{JJJ} as their message key:
+\begin{center}
+	\texttt{SUG SMF}\\
+	\texttt{SJM SPO}\\
+	\texttt{SYX SCW}.
+\end{center}
+
+We can then compare these message keys against our possibilites for $\sigma_i$s to determine if $\texttt{JJJ}$ could have in fact been used to encipher these hexagrams. For example, the first hexagram could not have been used since \texttt{J} and \texttt{G} lie in the same cycle of $\sigma_3\sigma_6$ which would contradict lemma \ref{cillies}. Contiuing in this fashion we may hypothesize that the third hexagram was likely an enciphering of the repeated letter $\texttt{J}$.
+\\\\To confirm this hypothesis we can use the supposition to further reduce the possible $\sigma_i$s. In fact, in our case, such a hypothesis would completely determine which $\sigma_3$ and $\sigma_6$ were being used and for the remaining $\sigma_i$s we are only left with a small set of options. We can then confirm our hypothesis by trying such $\sigma_i$s on hexagrams from other radio stations suspected of using cillies. If we find that $\texttt{PPP}$ is the message key corresponding to our deduced $\sigma_i$s we have reason to believe that our initial hypothesis was correct. If our hexagram corresponded to a key \texttt{PPA} we may only need to select a new choice of possible $\sigma_i$s to instead produce the expected cilly. In this way, we can recover each $\sigma_i$ and thus recover any transmission's message key -- all without any knowledge of internal wirings, plugboard settings, or daily keys.
 \section{Wiring Recovery}
 
-The full recovery of rotor wirings and turovers is out of scope of this paper; However, we will provide a brief description to illustrate that with minimal intellegence information, entire rotor wirings were able to be deduced.
+Equipped with a means to determine each $\sigma_i$, Rejewski set himself to finding the internal wirings of the rotors. The full recovery of rotor wirings and turovers is out of scope of this paper; However, we will provide a brief description to illustrate that with minimal intellegence information, entire rotor wirings were able to be deduced.
+\\\\We begin by expanding $\sigma_i$ to
+\[
+	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
+\]
+where $x$ accounts for the initial starting position of the rightmost rotor.
+Since $M^{-1}L^{-1}RLM$ does not change between $\sigma_i$s we will denote this permutation $Q$ thus simplifying our earlier expression to
+\[
+	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
+\]
+Rejewski knew the plugboard settings for two whole months, so he began shifting knowns and unknowns to opposite sides. Shifting things around gives us
+\begin{align*}
+	                    & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S     \\
+	\Rightarrow\text{ } & S\sigma_i S^{-1} = P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}    \\
+	\Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =  N^{-1}P^{x+i}QP^{-(x+i)}N
+\end{align*}
+To further simplify notation we will then define ${\rho_i} \coloneq P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
+\[
+	\rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
+\]
+where $\rho_i$s are known from the key sheets Rejewski had access to. We will now eliminate this equations dependence on $Q$ by considering pairs of $\rho_i$ and $\rho_{i+1}$
+\begin{align*}
+	\rho_i\rho_{i+1} & = N^{-1}P^{x+i}QP^{-(x+i)}NN^{-1}P^{x+i+1}QP^{-(x+i+1)}N \\
+	                 & = N^{-1}P^{x+i}QP^{-(x+i)}P^{x+i+1}QP^{-(x+i+1)}N        \\
+	                 & = N^{-1}P^{x+i}QPQP^{-(x+i+1)}N                          \\
+	                 & =N^{-1}P^{x+i}(QPQP^{-1})P^{-{x+i}}N
+\end{align*}
+Each $\rho_i\rho_{i+1}$ shares the common subexpression $QPQP^{-1}$. We can eliminate this subexpression by noting
+\begin{align*}
+	\rho_{i+1}\rho_{i+2} & = N^{-1}P^{x+i+1}(QPQP^{-1})P^{-{x+i+1}}N                                                     \\
+	                     & = N^{-1}P^{x+i+1}(P^{-(x+i)}NN^{-1}P^{x+i})(QPQP^{-1})(P^{-(x+i)}NN^{-1}P^{x+i})P^{-{x+i+1}}N \\
+	                     & = N^{-1}P^{x+i+1}P^{-(x+i)}N(N^{-1}P^{x+i}QPQP^{-1}P^{-(x+i)}N)N^{-1}P^{x+i}P^{-{x+i+1}}N     \\
+	                     & = N^{-1}P^{x+i+1}P^{-(x+i)}N(\rho_i\rho_{i+1})N^{-1}P^{x+i}P^{-{x+i+1}}N                      \\
+	                     & = N^{-1}P^{-1}N(\rho_i\rho_{i+1})N^{-1}PN                                                     \\
+\end{align*}
+We now have a relationship between each $\rho_i\rho_{i+1}$ and $\rho_{i+1}\rho_{i+2}$ by conjugating by $N^{-1}PN$. Now recall from theorem \ref{IDK} that if $\rho_i\rho_{i+1}$ has a reasonbaly large cycle structure, then there are only a limited number of possible permutations for $N^{-1}PN$. The relationship between $\rho_{i+1}\rho_{i+2}$ and $\rho_{i+2}\rho_{i+3}$ will further reduce these possibilities since of course $N^{-1}PN$ must be the same between these two relationships. Eventually, we can fully deduce $N^{-1}PN$. Finally, this will give us $26$ possibilites for $N$ representing its $26$ intial starting positions, and thus we can recover $N$ itself representing the internal wiring of the rigthmost rotor.
+\\\\In a similar fashion we can recover the remaining rotor wirings though often with the help of other mathematical tricks, not to mention military intellegence and luck. From this point forward, we will assume that the cryptanalyst now has access to the wirings of all the rotors as well as the reflector.
 
-\section{The Grill and Clock Methods}
+\section{The Grill Method}
 
-The clock method was a precursor to Banburismus...
+We now have deduced all of the rotors $N$, $M$, $L$, $R$ and each $\sigma_i$. We will use this information to recover the daily keys. For the moment, let us assume $S$ is the identity permutation. Then rearranging $\sigma_i$ we get
+\begin{align}
+	Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
+\end{align}
+Since $Q$ must be the same for each such equation involving $\sigma_i$ we will devise a manual way to deduce $Q$. We can precompute $N$, $P^{-1}NP$, $\dots$, $P^{4}NP^{-4}$ and arrange them in a large sheet called the {\bf{bottom sheet}}.
+Then for each $\sigma_i$ we can write out $\sigma_i$ with a slit beneath it to allow space for each possible $P^{-k}NP^k$. We will illustrate this for $\sigma_1$ and denote the spaces beneath with periods.
+\begin{align*}
+	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+	\texttt{|}          & \texttt{..........................} \texttt{|}
+\end{align*}
+We will call this the {\bf{top sheet}}. By sliding the bottom sheet beneath the top sheet we can test various values of $P^{-k}NP^{k}$ to see what values of $Q$ they give. For example, for $k = 0$ we have
+\begin{align*}
+	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+	N \texttt{ |}       & \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
+\end{align*}
+We know that $Q(\texttt{A}) = (P^{-k}NP)\sigma_i(P^{-k}NP)^{-1}(\texttt{A})$. Therefore to compute $Q(\texttt{A})$ we first begin at $\texttt{A}$ in our bottom row to find that $N^{-1}(\texttt{A})=\texttt{Z}$. We now map $\texttt{Z}$ through $\sigma_i$ by finding $\texttt{Z}$ on the top row and seeing where it lands in the middle row, thus giving $\sigma_iN^{-1}(\texttt{A}) = \texttt{U}$. Finally to see where $N$ maps $\texttt{U}$ by finding $\texttt{U}$ on the top row and seeing where it lands in the middle row, thus giving $Q(\texttt{A}) = N\sigma_iN^{-1}(\texttt{A}) = M$. Continuing in this fashion we can get a candidate $Q$ generated by the guess that $\sigma_i$ aligned with $N$ in the sheet. Recall that $Q$ must be consistent between each equation \ref{eq:q_eq}. To check this we can simply construct our top sheet so that each $\sigma_i$ is placed over one another each with a slot beneath it. We can now get candidate $Q$s for each $\sigma_i$. If we find that our offset of the bottom sheet creates inconsistencies we can move the bottom sheet up by one until we find candidates that are consistent between each $\sigma_i$.
+\\\\If $S$ were truly the identity then we would ultimately find an offset that generates identical $Q$s for each $\sigma_i$. Of course, $S$ will not be the identity. Thus, instead of looking for perfect consistency between each $Q$ we are only looking for relative consistency between each $Q$ where perhaps a majority send one letter to another. By comparing $Q$s generated by each $\sigma_i$ we can deduce with reasonable certainty the value of the true $Q$ by just considering where the majority of the $Q$s map \texttt{A}, \texttt{B}, and so on. Further, the offset in the bottom sheet which generated the most consistent permutations $Q$ will give us the offset of the rightmost rotor. Additionally, using this method, we can see where the $Q$s fail to line up to determine which letters are steckered and which are unsteckered, along with some of the steckerings themselves. Such a method was called the {\bf{grill method}} and required tedious work and had many possibilites for mistakes.
+\\\\To determine the offsets of the remaining two rotors we can simply enumerate all $26^2 = 676$ positions of the left two rotors (for both possible orderings of the rotors) until $Q$ is produced. In practice, a catalogue was eventually compiled which associated each $Q$ to a corresponding position and ordering of the left two rotors. Now equipped with each rotor position, we still must determine the ring settings.
+\\\\To determine the ring settings we make use of another operator error. Often messages began with the letters \texttt{ANX} which is the German word ``to'' along with \texttt{X} denoting a space. We could therefore set the ring setting to its default lcoation and then brute force all $26^3$ possible rotor positions until the first letters in the deciphered message were \texttt{ANX}. Once we knew the position at which this occured, along with the message key, we can immediately determine what the ring settings must have been to produce this message -- since the ring setting and rotor position have inverse effects on the rotor permutation.
+
+\section{The Clock Method}
+
+At this point Rejewski and his team were able to recover daily keys, but the above methods are extremely slow and inefficient. Many optimizations were made over the years. We will now examine one particular optimization.
+\\\\While we do know the wirings of the rotors, we do not know when we begin our cryptanalysis what the order of these rotors were. At the time there were only three rotors in use (\texttt{I}, \texttt{II}, \texttt{III}) so one could simply try all 3 rotors as the rightmost one and repeat the above analysis. Of course, this makes the above method 3 times slower. In practice, early Enigma daily keys kept rotor positions the same for an entire 3 month period meaning this analysis did not need to be done too frequently.
+\\\\However, Jerzy Różycki worked out an efficient method to determine the rightmost rotor which he called the {\bf{clock method}}. The clock method attempted to determine where the turnover notch was for the rightmost rotor. From this we could immediately determine which of the three rotors was used.
+
+\subsection{Index of Coincidence}
+In a string of random text from a 26 letter alphabet we get a uniform distribution of letters. However, text which encodes a language does not generate a uniform distribution. Distributions for various languages have been well studied and are the information needed for frequency analysis. Having a non-uniform distribution also implies that when we align two pieces  of text which encodes a language (call them $\texttt{T}_A$ and $\texttt{T}_B$), the chance that a letter from $\texttt{T}_A$ will align at the same position with a letter from $\texttt{T}_B$ is non-uniform. We can therefore detect if  $\texttt{T}_A$ and $\texttt{T}_B$ are encoded with the same polyalphabetic cipher by counting the number of aligned letters between them (called {\bf{coincidences}}) and seeing if they represent a non-uniform frequency.
+\\\\To make use of this property, we can select two messages with message keys whose first two letters coincided (e.g. \texttt{XYA} and \texttt{XYF}). This meant that both messages were encoded with the only difference being in their rightmost rotor. If at some point during encoding the first message, its rotors align with the rotors used to encode the second message, we would expect to see the number of coincidences between the messages to suddenly spike significantly, in this way, we can detect when the two messages had their rotors align. This does not work, however, if turnover occurs then the two messages will not align in their rotor positions and we will see a random distribution of coincidences. If we align the message generated by $\texttt{XYA}$ on top of the message generated by $\texttt{XYF}$ we can slide the bottom message until is 5 positions further than the top message,
+\begin{align*}
+	 & \texttt{XYA}: \texttt{PASLK XASSP AUSDK XPVNW UULVT LWKRE KGUQO DSUKV ZOLMZ ZHYBF}                                                                                                                                                      \\
+	 & \texttt{XYF}: \texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{BAWXV ETTOP JZHXL VWGGQ MWDII OEHQO YSLRB IYLGB CHBYT }                                                                                               \\
+	 & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \texttt{**}\ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \texttt{*}
+\end{align*}
+at this point we would expect the texts to both be encoded by $\texttt{XYF}$ and the number of coincidences (indicated by \texttt{*}) should spike as we see in the above diagram. If this does not occur, this means no turnover occured between $\texttt{A}$ and $\texttt{F}$. This, for example, eliminates rotor \texttt{II} as a candidate since its turnonver occurs when \texttt{E} is displayed in the window. We can gain further information by performing the above procecdure but now with the message encoded by $\texttt{XYF}$ on the top and the message encoded by $\texttt{XYA}$ on the bottom. In this way we can determine which rotor was being used. The clock method was a precursor to a method we will discuss later known as Banburismus. The important takeaway is that language frequency analysis may not be strong enough to decode Enigma messages, it may be strong enough to determine elements of the key like rotor choice or ordering.
 
 \section{The Cyclometer}
 
+These manual methods of decryption became increasingly difficult as German operators were instructed to use more plugboard jacks and increased the rate at which daily keys changed. Rejewski wanted to produce a mechanical means of performing a similar deduction. He returned to the characteristics associated with a particular day's key. He noticed that the cycle structure of a characteristic did not regularly repeat (if at all). Then we perhaps could create a ``fingerprint'' of a key by noting the cycle structure of all three characteristics associated to the key. Now that Rejewski had the internal rotor wirings, he could build a machine that could immediately produce the cycle structure of characteristics for a given setting.
+\\\\Let us first understand the manual implementation of such a deduction. Assuming an identity plugboard $S$ we can use our internal rotor wirings to know the exact permutaition $\sigma_1$ and $\sigma_3$ for any initial rotor position. In specific, suppose we have
+
+\begin{center}
+	\[
+		\left(
+		\begin{array}{llllllllllllllllllllllllll}
+				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}                             \\
+				\texttt{P} & \texttt{T} & \texttt{K} & \texttt{X} &
+				\texttt{R} & \texttt{Z} & \texttt{Q} & \texttt{S} &
+				\texttt{W} & \texttt{M} & \texttt{C} & \texttt{O} &
+				\texttt{J} & \texttt{Y} & \texttt{L} & \texttt{A} &
+				\texttt{G} & \texttt{E} & \texttt{H} & \texttt{B} &
+				\texttt{V} & \texttt{U} & \texttt{I} & \texttt{D} &
+				\texttt{N} & \texttt{F}
+			\end{array}
+		\right)
+	\]
+	$\sigma_1$
+\end{center}
+\begin{center}
+	\[
+		\left(
+		\begin{array}{llllllllllllllllllllllllll}
+				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}                             \\
+				\texttt{J} & \texttt{W} & \texttt{V} & \texttt{R} &
+				\texttt{O} & \texttt{S} & \texttt{U} & \texttt{Y} &
+				\texttt{Z} & \texttt{A} & \texttt{T} & \texttt{Q} &
+				\texttt{X} & \texttt{P} & \texttt{E} & \texttt{N} &
+				\texttt{L} & \texttt{D} & \texttt{F} & \texttt{K} &
+				\texttt{G} & \texttt{C} & \texttt{B} & \texttt{M} &
+				\texttt{H} & \texttt{I}
+			\end{array}
+		\right)
+	\]
+	$\sigma_3$
+\end{center}
+Then to find the permutation $\sigma_1\sigma_3$ we might do the following. We begin with \texttt{A}. We first run \texttt{A} through $\sigma_3$ to get \texttt{J}. We then run \texttt{J} through $\sigma_1$ to get \texttt{M}. Thus we see $\sigma_1\sigma_3(\texttt{A}) = \texttt{M}$. Now we would continue with \texttt{M} sending it back into $\sigma_3$. Eventually after jumping back and forth between $\sigma_1$ and $\sigma_3$ we we will have encountered all letters contained in the same cycle as \texttt{A}. We do, however, encounter some other letters as well. This method is effectively the same method used in lemma \ref{cillies} to find the two disjoint cycles of equal length produced in a characteristic. In fact, by switching back and forth between $\sigma_1$ and $\sigma_3$ we will find alternating elements of the pair of cycles of equal length which contain \texttt{A}. We can mechanize this process
+\\\\Note that the machine made finding cycles in permutations instantaneous by connecting each cycle in its own disjoint electrical circuit. This first attempt at mechanizing the process of decryption is a very early predacessor to the primary topic of this paper, the Bombe. This method of enumerating cycles, as we will see, is the core of the Bombe's primary function.
 \section{The Bomba}
 
 

@@ -5,9 +5,11 @@
 	presented the cryptanalyst with a dazzling number of possibilities.
 \end{chapquote}
 
+
 The Enigma machine was used extensivley by the Germans to encipher
 communications prior to and throughout World War II. German
 strategems like the \emph{blitzkrieg} required quick radio
+%% See the Code Book Singh page 196 %%
 communcation, so to ensure that the allied powers did not intercept
 signals, they encoded all radio signals using the Enigma machine.
 Breaking the Enigma would allow the allied powers to freely intercept
@@ -35,12 +37,12 @@ requires several mechanical components in a complex arrangement
 
 \subsection{The Plugboard}
 
-\begin{figure}[htbp]
-	\begin{center}\includegraphics[scale=0.9]{images/plugboard.jpg}
-	\end{center}
-	\label{ref:plugboard}
-	\caption{Enigma \texttt{I} Plugboard}
-\end{figure}
+% \begin{figure}[htbp]
+% 	\begin{center}\includegraphics[scale=0.9]{images/plugboard.jpg}
+% 	\end{center}
+% 	\label{ref:plugboard}
+% 	\caption{Enigma \texttt{I} Plugboard}
+% \end{figure}
 
 Upon a key press, the electrical current corresponding to this letter
 is sent to a mechanism known as the plugboard. From an operator's
@@ -63,22 +65,22 @@ permutation could be
 In general we will denote the permutation corresponding to a plugboard as $S$.
 
 \subsection{The Rotors}
-\begin{figure}[htpb]
-	\centering
-	\begin{subfigure}{0.3\textwidth}
-		\includegraphics[width=\linewidth]{images/rotor_v_front.jpg}
-		\caption{Entry-side}
-		\label{fig:rotor_v_front}
-	\end{subfigure}
-	\hspace{0.02\textwidth}
-	\begin{subfigure}{0.3\textwidth}
-		\includegraphics[width=\linewidth]{images/rotor_v_back.jpg}
-		\caption{Exit-side}
-		\label{fig:rotor_v_back}
-	\end{subfigure}
-	\caption{Rotor \texttt{V}}
-	\label{fig:rotor_v}
-\end{figure}
+% \begin{figure}[htpb]
+% 	\centering
+% 	\begin{subfigure}{0.3\textwidth}
+% 		\includegraphics[width=\linewidth]{images/rotor_v_front.jpg}
+% 		\caption{Entry-side}
+% 		\label{fig:rotor_v_front}
+% 	\end{subfigure}
+% 	\hspace{0.02\textwidth}
+% 	\begin{subfigure}{0.3\textwidth}
+% 		\includegraphics[width=\linewidth]{images/rotor_v_back.jpg}
+% 		\caption{Exit-side}
+% 		\label{fig:rotor_v_back}
+% 	\end{subfigure}
+% 	\caption{Rotor \texttt{V}}
+% 	\label{fig:rotor_v}
+% \end{figure}
 
 The Enigma model \texttt{I} used three rotors, selected from a larger
 set of rotors, the number of which changed depending on the military
@@ -329,20 +331,25 @@ resulting in a roughly $77$-bit key space.
 %% https://bletchleypark.org.uk/our-story/enigmas-of-bletchley-park/%%
 %% https://www.cryptomuseum.com/crypto/enigma/i/index.htm%%
 %% https://www.cryptomuseum.com/crypto/enigma/files/schluessel_m.pdf%^
-Suppose Alice and Bob are two radio operators (between September
-1938 and May 1940) who want to communicate securely. Each are
-supplied an Enigma machine along with a machine key
-(\emph{maschinenschlussel}). THe machine key
 
-Further, each have a copy of the ``\emph{General Regulations for the
-	Enigma}'' -- a book entailing all the protocols necessary for Alice
-and Bob to communicate securely. According to this guide ``all secret
-communcations are to be enciphered on the Enigma'', in order to do
-this, the following guides are necessary external to the machine itself
-\begin{itemize}
-	\item The general daily key (\emph{Tagesschluessel Allgemein})
-	\item The K-Book (\emph{K-Buch})
-\end{itemize}
+%% FOR THE DATE GET chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf $$
+Suppose Alice and Bob are two radio operators (prior to September 15 1938) who want to communicate securely. Each are
+supplied an Enigma machine along with a machine key
+(\emph{maschinenschlussel}).
+%% https://www.ilord.com/enigma-manuals %%
+%% REAL DECRYPT FOR EXAMPLE OH WAIT THESE MIGHT JUST BE TUNNY DECRYPTS https://web.archive.org/web/20160406042455/http://www.ilord.com/bp-decrypts.html %% 
+Further, each have a copy of the ``\emph{Gebrauchsanleitung für die Chiffriermaschine Enigma}'' -- a book entailing all the protocols necessary for Alice
+and Bob to communicate securely. The manual explains
+\\\\\texttt{III. Setting the Key. }
+\\\texttt{10. The codebook issued with the machine determines the following 4 settings of the device:}
+\\\texttt{1. Order of the encryption rotors (III/IV, 12) (\emph{Walzenlage}),}
+\\\texttt{2. Setting of the number or letter rings (III/IV, 13) on the 3 encryption rotors (\emph{Ringstellung}),}
+\\\texttt{3. Setting of the numbers or letters visible in the windows (I/II, 16) (\emph{Grundstellung}),}
+\\\texttt{4. Establishment of the connections using the patchcords (II, 30) on the plug board (II, 15) (\emph{Steckerverbindungen}).}
+
+
+
+%% FOR PROTOCOL NOTE FROM CODE BOOK TAHT CERTAIN SCRAMBLER POSITIONS WERE DISALLOWED YAY OR CERTAIN PLUGBOARD SETTINGS %%
 
 \section{Enigma as a Permutation}
 
@@ -438,6 +445,16 @@ This lemma leads us to the following theorem that will be of deep relevance for 
 			                            & = \alpha(a_{i,j})
 		\end{align*}
 		Then $\alpha = \tau\beta\tau^{-1}$ and $\alpha$ and $\beta$ are conjugates.
+\end{proof}
+\begin{corr}
+	Given $\alpha$ and $\beta$ of the same cycle type ($\lambda_1^{m_1}\dots\lambda_k^{m_k}$), there are
+	\[
+		\prod_{i=1}^{k}\lambda_i^{m_i}m_i!
+	\]
+	permutations which conjugate $\alpha$ to $\beta$.
+\end{corr}
+\begin{proof}
+	We have seen via the above proof that permutations with conjugate $\alpha$ to $\beta$ consist of mappins between the cycles of $\alpha$ and $\beta$ when cycles of the same length are written one over the other. Of course, we can reorder the cycles of length $\lambda_i$ in $m_i!$ ways. Further, for each $\lambda_i$ cycle (of which there are $m_i$) we can shift each element up to $\lambda_i$ times to get the same permutation. This gives $\lambda_i^{m_i}$ possible shifts of each $\lambda_i$ cycle.
 \end{proof}
 Recall that at any fixed position of the Enigma machine the permutation describing this position $\sigma_i$ is just a conjugate of the reflector permutation $R$. As the reflector has a cycle type of $2^{13}$ it must then be the case by theorem \ref{conjugate_cycle_type} that at any given position the Enigma machine is simply a $2^{13}$ cycle. This gives two key properties at any given fixed position
 \begin{itemize}

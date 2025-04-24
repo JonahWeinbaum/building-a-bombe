@@ -279,114 +279,90 @@ In this circuit $N_x$ represents the rightmost rotor at some position $x$ and $Q
 \section{The Bomba}
 
 As mentioned prior, the addition of plugboard jacks made the grill method infeasible.
-Further, beginning on September 15, 1938, the German military changed the protocol by which Enigma messages were encoded, making the grill method completely obsolete.
+Further, beginning on September 15, 1938, the German military changed the protocol by which Enigma messages were encoded, making the grill method completely obsolete. A new means of fingerprinting messages outside of characteristics needed to be developed. Further, compared to the grill method, such a new method would need to account for the fact that the plugboard swapped many more letters.
+
 
 \subsection{Changes to the Enigma Protocol}
 
 %% https://www.ciphermachinesandcryptology.com/en/enigmaproc.htm %%
 %% https://www.tandfonline.com/doi/full/10.1080/01611194.2010.486257?journalCode=ucry20 && 
-Starting in 1938, the German key sheets began removing an explicit window setting (\emph{Grundstellung}) and added an indicator group known as the \emph{Kenngruppen}. An example key sheet from this era might look like:
-\begin{figure}[h]
-	\begin{center}
-		\resizebox{0.98\textwidth}{!}{
-			\begin{tabular}{|c|c|c|c|c|}
-				\hline
-				\textbf{\emph{\texttt{Datum}}}               &
-				\textbf{\emph{\texttt{Walzenlage}}}          &
-				\textbf{\emph{\texttt{Ringstellung}}}        &
-				\textbf{\emph{\texttt{Steckerverbindungen}}} &
-				\textbf{\emph{\texttt{Kenngruppen}}}                                                                                                                      \\
-				\hline
-				\texttt{31.}                                 & \texttt{I II V}          & \texttt{10 14 02} & \texttt{BF SD AY HG OU QC WI RL} & \texttt{sfy azy zkq bqi} \\
-				\texttt{30.}                                 & \texttt{V IV I}          & \texttt{04 25 01} & \texttt{UE PL
-				AY TB ZH WM OJ DC}                           & \texttt{iuy swz omo myj}                                                                                   \\
-				\texttt{29.}                                 & \texttt{III V II}        & \texttt{13 11 06} & \texttt{WJ VD
-				PO MQ FX ZR NE LG}                           & \texttt{rui kao fqi rwu}                                                                                   \\
-				\texttt{28.}                                 & \texttt{I III II}        & \texttt{09 16 12} & \texttt{HR
-				TJ LD IO CN GX QK PZ}                        & \texttt{ioy kjv yko fpz}                                                                                   \\
-				$\vdots$                                     & $\vdots$                 & $\vdots$          & $\vdots$                         & $\vdots$                 \\
-				\hline
-			\end{tabular}}
-	\end{center}
-	\caption{Mock Enigma Key Sheet for 1938}
-	\label{fig:keysheet_bomba}
-\end{figure}
-%chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.tandfonline.com/doi/pdf/10.1080/01611190802562809%
-\\From the keysheet, the operator chose a trigram from the day's indicator groups. Then by adding two random letters to the trigram, they would generate a hexagram called a \emph{Buchstabenkenngruppe}. For example on the date of the 29th in figure \ref{keysheet_bomba}, the operator might choose the second indicator group to get a \emph{Buchstabenkenngruppe} of \texttt{LOKAO}. When sending a message the operator was to send a message with the following information \footnote{References for Enigma procedures between 1938-1940 are scarce so this procedure is based on observing an army Enigma message sent on 21 September 1938 referenced in ??}
-\begin{enumerate}[I.]
-	\item The time at which the message was sent
-	\item The number of parts which the message contained
-	\item A random \emph{Grundstellung} rotor position (listed twice in plaintext)
-	\item Which message part is being sent
-	\item The length of the message part, including \emph{Buchstabenkenngruppe} and the doubly encoded \emph{Spruchschlüssel}
-	\item A \emph{Spruchschlüssel} rotor position (encoded twice using the \emph{Grundstellung})
-	\item The first four letters of the message encoded using the daily key and
-	      \emph{Spruchschlüssel}
-	\item The \emph{Buchstabenkenngruppe}
-	\item The remainder of the encoded message
-\end{enumerate}
+Starting in 1938, the German key sheets began removing an explicit window setting (\emph{Grundstellung}) and added an indicator group known as the \emph{Kenngruppen}. The indicator group was an extra identification added to messages to note which key was being used. It serves no cryptographic purpose so we will just discuss the way in which the message key was obtained.
+\\\\Operators were now instructed to choose a random window setting (\emph{Grundstellung}) for each message. The operator then sent the window setting in plaintext and proceeded to encode their message key (\emph{Spruchschlüssel}) twice, enciphered with the chosen window setting. % \begin{figure}[h]
+% 	\begin{center}
+% 		\resizebox{0.98\textwidth}{!}{
+% 			\begin{tabular}{|c|c|c|c|c|}
+% 				\hline
+% 				\textbf{\emph{\texttt{Datum}}}               &
+% 				\textbf{\emph{\texttt{Walzenlage}}}          &
+% 				\textbf{\emph{\texttt{Ringstellung}}}        &
+% 				\textbf{\emph{\texttt{Steckerverbindungen}}} &
+% 				\textbf{\emph{\texttt{Kenngruppen}}}                                                                                                                      \\
+% 				\hline
+% 				\texttt{31.}                                 & \texttt{I II V}          & \texttt{10 14 02} & \texttt{BF SD AY HG OU QC WI RL} & \texttt{sfy azy zkq bqi} \\
+% 				\texttt{30.}                                 & \texttt{V IV I}          & \texttt{04 25 01} & \texttt{UE PL
+% 				AY TB ZH WM OJ DC}                           & \texttt{iuy swz omo myj}                                                                                   \\
+% 				\texttt{29.}                                 & \texttt{III V II}        & \texttt{13 11 06} & \texttt{WJ VD
+% 				PO MQ FX ZR NE LG}                           & \texttt{rui kao fqi rwu}                                                                                   \\
+% 				\texttt{28.}                                 & \texttt{I III II}        & \texttt{09 16 12} & \texttt{HR
+% 				TJ LD IO CN GX QK PZ}                        & \texttt{ioy kjv yko fpz}                                                                                   \\
+% 				$\vdots$                                     & $\vdots$                 & $\vdots$          & $\vdots$                         & $\vdots$                 \\
+% 				\hline
+% 			\end{tabular}}
+% 	\end{center}
+% 	\caption{Mock Enigma Key Sheet for 1938}
+% 	\label{fig:keysheet_bomba}
+% \end{figure}
+% %chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.tandfonline.com/doi/pdf/10.1080/01611190802562809%
+% \\From the keysheet, the operator chose a trigram from the day's indicator groups. Then by adding two random letters to the trigram, they would generate a hexagram called a \emph{Buchstabenkenngruppe}. For example on the date of the 29th in figure \ref{keysheet_bomba}, the operator might choose the second indicator group to get a \emph{Buchstabenkenngruppe} of \texttt{LOKAO}. When sending a message the operator was to send a message with the following information \footnote{References for Enigma procedures between 1938-1940 are scarce so this procedure is based on observing an army Enigma message sent on 21 September 1938 referenced in ??}
+% \begin{enumerate}[I.]
+% 	\item The time at which the message was sent
+% 	\item The number of parts which the message contained
+% 	\item A random \emph{Grundstellung} rotor position (listed twice in plaintext)
+% 	\item Which message part is being sent
+% 	\item The length of the message part, including \emph{Buchstabenkenngruppe} and the doubly encoded \emph{Spruchschlüssel}
+% 	\item A \emph{Spruchschlüssel} rotor position (encoded twice using the \emph{Grundstellung})
+% 	\item The first four letters of the message encoded using the daily key and
+% 	      \emph{Spruchschlüssel}
+% 	\item The \emph{Buchstabenkenngruppe}
+% 	\item The remainder of the encoded message
+% \end{enumerate}
 
-\noindent For the 31st we might get a message of the form
+% \noindent For the 31st we might get a message of the form
 
-\begin{center}
-	\texttt{1830 - 2 TLE - LOP LOP - 1 TL - = 35}\\
-	\texttt{ERTQK NMRJR NOBQI EIKAR QIIJE DMFAZ QTBCP}
-\end{center}
-Parsing this we have that
-\begin{itemize}
-	\item Our message was sent at $18:30$
-	\item Consisting of two parts
-	\item \texttt{LOP} is our \emph{Grundstellung}
-	\item We are sending the first message part consisting of $35$ characters
-	\item \texttt{ERT QKN} is our doubly encoded \emph{Spruchschlüssel}
-	\item \texttt{NOBQI} is our \emph{Buchstabenkenngruppe}
-	\item Our encoded message is \texttt{MRJR EIKAR...}
-\end{itemize}
+% \begin{center}
+% 	\texttt{1830 - 2 TLE - LOP LOP - 1 TL - = 35}\\
+% 	\texttt{ERTQK NMRJR NOBQI EIKAR QIIJE DMFAZ QTBCP}
+% \end{center}
+% Parsing this we have that
+% \begin{itemize}
+% 	\item Our message was sent at $18:30$
+% 	\item Consisting of two parts
+% 	\item \texttt{LOP} is our \emph{Grundstellung}
+% 	\item We are sending the first message part consisting of $35$ characters
+% 	\item \texttt{ERT QKN} is our doubly encoded \emph{Spruchschlüssel}
+% 	\item \texttt{NOBQI} is our \emph{Buchstabenkenngruppe}
+% 	\item Our encoded message is \texttt{MRJR EIKAR...}
+% \end{itemize}
 
-On first view this method seems to be more insecure than the previous method since we openly broadcast our \emph{Grundstellung}. However, because the \emph{Grundstellung} now changes between each message sequence, we will never find enough messages with the same \emph{Grundstellung}s to produce a set of characteristics needed for the cyclometer. Even with the \emph{Grundstellung} the cryptanalyst still knows nothing of the ring setting, plugboard setting, rotor position, or rotor order.
+\text{}\\On first view this method seems to be more insecure than the previous method since we openly broadcast our window setting. However, because the window setting now changes between each message sequence, we will never find enough messages with the same window settingss to produce a set of characteristics needed for the cyclometer. Even with the window setting the cryptanalyst still knows nothing of the ring setting, plugboard setting, rotor position, or rotor order.
 
 \subsection{Females}
-Suppose we had three messages with the following \emph{Grundstellung} and doubly encoded \emph{Spruchschlüssel}
+Rejewski noticed that, given enough cipher material, we could find three messages with the following form.
 \[
 	\setlength{\arraycolsep}{15pt}
 	\begin{array}{c | c}
-		\emph{Grundstellung} & \emph{Spruchschlüssel} \\
+		\emph{Grundstellung} & \emph{Spruchschlüssel}                                                   \\
 		\hline
-		\texttt{MBR}         & \texttt{AXY AKR}       \\
-		\texttt{AKJ}         & \texttt{PAL DAZ}       \\
-		\texttt{NQD}         & \texttt{LQA SOA}
+		\texttt{RTJ}         & {\uline{\texttt{W}}}\texttt{AH }{\uline{\texttt{W}}}\texttt{IK}          \\
+		\texttt{HPN}         & \texttt{RA}{\uline{\texttt{W}}}\texttt{ KT}{\uline{\texttt{W}}}          \\
+		\texttt{DQY}         & \texttt{D}{\uline{\texttt{W}}}\texttt{J M}{\uline{\texttt{W}}}\texttt{R}
 	\end{array}
 \]
-Notice that the first message has the letter \texttt{A} in both its first and fourth position. Cryptanalysts refered to such coincidences at a distance of three letters by the term {\bf{females}}. The second and third message also contain females at the second (and fifth) and third (and sixth) letter of their respective trigrams. It turns out that such a set of females is a sufficiently unique ``fingerprint'' to determine the recover the daily key.
-\subsection{Recovering the Ring Settings}
-We will begin by making two simplifying assumptions which we will later address. First, let us assume the plugboard permutation $S$ is the identity. Second, let us assume no turnover occurs during the enciphering of each message's message key. Third, we will assume that we know the order of the rotors.
-\\\\We know that for some ring setting, the relative distances between \texttt{MBR}, \texttt{AKJ}, and \texttt{NQD} will produce a set of females at the first and third, second and fifth, and third and sixth letters respectively.
-\\\\Suppose we had a device which contained 6 Enigma machines, each with ring setting \texttt{AAA}, set to the locations of the first female (\texttt{MBR} and \texttt{MBU}), second female (\texttt{AKK} and \texttt{AKN}), and the third female (\texttt{NQF} and \texttt{NQI}), and maintained these distances between each Enigma as we stepped through settings. Further, suppose such a machine would stop when it detected females produced between the pairs of Enigma machines. Of course, this machine is exactly what we will build up to in this section and it is known as the {\bf{Bomba}}.
-\\\\After stopping, we would know the absolute positions at which the females observed would occur. From this position, we will now attempt to recover the ring setting. Suppose the true ring setting was \texttt{AAA}. Then our machine would immediately stop since our initial machine position is exactly the settings used to encode the messages. Now suppose the true ring settting was \texttt{AAB}. Recall that, without turnover, the ring setting and the rotor position have inverse effects on each other -- moving the ring setting forward by one is equivalent to moving the rotor position back by one. For this reason, we would observe the machine stop when the Enigma machine initially positioned at \texttt{MBR} is now at \texttt{MBQ}. From following this observation, we can see that if the machine stops with the rotors $x$ steps ahead of where they started, then the ring setting must be $-x$ positions away from \texttt{AAA}.
-
-\subsection{Reducing Assumptions}
-We made some fairly generous assumptions to be able to recover our ring settings so we will work to remove some of these.
-
-\subsubsection{Rotor Order}
-We assumed that the rotor choice and order are known. Of course, we do not know these factors. However, we can run our machine for the $6$ possible rotor orderings, and for each such ordering we will get back a candidate ring setting. Now, we can test which rotor ordering is correct by using our ring setting to attempt to decipher the doubly encoded message keys. If we were correct then we should see the same trigram deciphered twice. Of course, because we made an erronious assumption regarding the plugboard we will not see the exact same trigram, but if we chose the correct rotor ordering we will still see many copies of letters at a distance of three from each other. With enough deciphered message keys we can guess which rotor ordering was used that day. Given both this and the clock method described earlier we can recover the true rotor ordering.
-
-\subsubsection{Turnover}
-Earlier discovery of rotor wirings and ring notch locations meant that cryptanalysts knew for a given rotor order, which window settings will produce turnovers in the first six key presses. We can test all the rotor orders for which this does not happen as described above. Further, if there are rotor orders for which turnover does occur we can simply account for this turnover when setting up our machine by adjusting the intial positions as necessary.
-
-\subsubsection{Plugboard}
-We began by assuming the plugboard $S$ was the identity, an explicitly false assumption. However, note that the only criterion for an Enigma setting $\sigma$ to have a female of the letter $\alpha$ at position $i$ for $i \in \{1,2,3\}$ is that $\sigma_{i}(\alpha) = \sigma_{i+3}(\alpha)$. If $S$ fixes $\alpha$ we can completely ignore $S$'s effect on the permutations $\sigma_i$ and $\sigma_{i+3}$ when determining if such a female is present. That is, if $S$ fixes $\alpha$, then our machine need not encode the plugboard permutation whatsoever to determine at which absolute positions females occur.
-\\\\In practice, German operators used $5$-$8$ plugboard jacks, meaning that on average half the letters were swapped and half the letters were fixed. This means that such an $\alpha$ we fixed half the time. This is the reason in our example we chose messages with females which all contained the letter \texttt{A}. If we only have females containing one letter, then we only need that specific letter to be fixed by the plugboard and no others.
-\\\\Thus, with an element of luck, and clever choice of messages for analysis, we can move forward with our simplifying assumptions, thus allowing us to recover both the ring setting and rotor ordering.
-
-\subsection{Recovering the Plugboard}
-% \\\\We will nowIf we assume the plugboard $S$ is the identity, then we can construct a machine which simple iterates th...
-% %% ASSUME NO TURNOVER SINCE WE CAN GUARANTEE BY LOOKING AT THE GRUNDSTELLUNG AND SEEING IF THERES TURNOVER FOR A PARTICULAR ROTOR ORDER  %%
-% \\\\In reality, $S$ will not be the identity, but we only require that $S$ fixes \texttt{A} in order to remove its relevance from the relationship between $\sigma_{i}$ and $\sigma_{i+3}$. At the time the Bomba was constructed, anywhere from $5$ to $8$ plugboard jacks were in use, meaning we have, on average, a $50\%$ chance that $S$ fixes \texttt{A}.
-% \\\\We begin by assuming the ring position is \texttt{AAA}, that is, our labels on the rotors we will use will just directly correspond with the contact beneath them. If the true ring setting were \texttt{AAA} the machine would stop immediately. If instead the true ring setting were were \texttt{AAB} to observe the same effect as this ring setting we would need to wait until the rotor had reach the position ???, at which point that machine would stop.
-% In this sense, we can determine the true ring setting by seeing how far from the initial position the Bomba had to move before we found a stop. %% WITH NO TURNOVER %% The ring setting moves in inverse fashion to the rotation of the rotors so we can simply subtract this number of rotations from our proposed ring setting \textt{AAA} to get the true ring setting. \\\\In this paper, diagrams for the Cyclometer and the Bombe (later discussed) are abstracted so as to remove reference to specific circuitry elements since the reader is not expected to have a deep understanding of electrical engineering. However, compared to the Cyclometer and the Bombe, the Bomba requires more logical operations since it necessitates the equivalent of an AND gate. To maintain clarity for readers we will construct the Bomba piece by piece with relatively simplified circuit diagrams intended to give the reader an understand of how such a machine could work in practice.
+Notice that the first message has the letter \texttt{W} in both its first and fourth position. Cryptanalysts refered to such coincidences at a distance of three letters by the term {\bf{females}} and to denote its location we could say this is a $1-4$ female. The second and third message also contain females, specifically $3-6$ and $2-5$ females respectively. In order for a daily key to be correct, it must produce females at the noted locations for the specific window setting. It turns out that such a set of females is a sufficiently unique ``fingerprint'' to determine the recover the daily key.
 
 \subsection{Bomba Kryptologiczna}
-Let us construct a device that can determine for a given input letter when two sets of rotors three steps apart produce a female. Consider the following circuit.
+We will first produce a mechanical means of detecting when three Enigma machines produce females at given locations. Let us begin construct a device that can detecta a single female, taht is, it can determine for a given input letter when two sets of rotors three steps apart produce a female.
+\\\\In this paper, diagrams for the Cyclometer and the Bombe (later discussed) are abstracted so as to remove reference to specific circuitry elements since the reader is not expected to have a deep understanding of electrical engineering. However, compared to the Cyclometer and the Bombe, the Bomba requires more logical operations since it necessitates the equivalent of an AND gate. To maintain clarity for readers we will construct the Bomba piece by piece with relatively simplified circuit diagrams intended to give the reader an understand of how such a machine could work in practice. Note that while we indicate transistors here for simplicity, the actual machine was an electromechanical computer which used relays and switches for these operations. Consider the following circuit.
 \begin{center}
 	\begin{circuitikz}
 		% Draw the box
@@ -535,9 +511,68 @@ Let us construct a device that can determine for a given input letter when two s
 
 	\end{circuitikz}
 \end{center}
-On the left we have our two sets of rotors represented by permutations $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$. The dotted line from $V^{-}$ to $V^{+}$  represents our battery line. When current enters through the battery line, it is only able to enter at contacts which have their switches flipped, this is how the operator can select the input letter. When the input letter then travels through the rotors, it will exit at some other location. If both $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ produce the same exit letter for the given input letter, then both exit letters wil reach transistor gates along the same line (depicted with letters \texttt{A}, \texttt{B}, \texttt{C}, \texttt{D}). When this happens, current is freely able to flow from $T^{-}$ to $T^{+}$.
+On the left we have our two sets of rotors represented by permutations $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ (three steps apart). The dotted line from $V^{-}$ to $V^{+}$  represents our battery line. When current enters through the battery line, it is only able to enter at contacts which have their switches flipped, this is how the operator can select the input letter. When the input letter then travels through the rotors, it will exit at some other location. If both $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ produce the same exit letter for the given input letter, then both exit letters wil reach transistor gates along the same line (depicted with letters \texttt{A}, \texttt{B}, \texttt{C}, \texttt{D}). When this happens, current is freely able to flow from $T^{-}$ to $T^{+}$.
 \\\\To see this, note that in our diagram we have \texttt{A} selected as the input letter. Following $N_x^{-1}Q_{y,z}N_x$ we can see that the rotor will now output \texttt{C}. Similarly, rotor $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ will output \texttt{C}. Each of these will then travel to transistor gates of the line labelled \texttt{C}, thus opening both transistors in this line and allowing current to flow from $T^{-}$ to $T^{+}$.
 Thus, if we connect our battery in parallel to the line from $T^{-}$ to $T^{+}$ and some current-triggered detector in series with the line from $T^{-}$ to $T^{+}$, the detector will only trigger when the input letter (in our case \texttt{A}) produces a female (in our case \texttt{C}) for the specifed rotor position. We can abstract this entire circuit by noting that the wires exiting the enclosing box of the diagram are all that are needed to detect the presence of a female for the given rotor position and input. The box itself has settings consisting of the choice of rotors, rotor positions, and which switch we select for our input letter.
+
+\begin{center}
+	\begin{circuitikz}[scale=0.9, octagon/.style=
+				{shape=regular polygon, regular polygon sides=8, draw, minimum width=.2in}]
+		\fill[pink] (3-5, 0) rectangle (0-5, 3);
+		\node at (1.5-5, 1.5) {\large$x,y,z$};
+		\fill[pink] (3-0, 0) rectangle (0-0, 3);
+		\node at (1.5-0, 1.5) {\large$x^\prime,y^\prime,z^\prime$};
+		\fill[pink] (3+5, 0) rectangle (0+5, 3);
+		\node at (1.5+5, 1.5) {\large$x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}$};
+		\draw[dashed] (3-5-3-1, 2) -- (0-5, 2);
+		\draw[dashed] (3-0-3-2, 2) -- (0, 2);
+		\draw[dashed] (3-0-3-2+5, 2) -- (0+5, 2);
+		\draw[dashed] (3-5-3-1+14, 2) -- (0-5+15.5, 2);
+		\draw[dashed] (3-5-3-1, 2) -- (3-5-3-1, 1);
+		\draw[dashed] (0-5+15.5, 2) -- (0-5+15.5, -5);
+		\draw[dashed] (0-5+15.5, -5) -- (0-5+15.5-1.5, -5);
+
+		\draw (3-5-3-1, 1) -- (0-5, 1);
+		\draw (3-0-3-2, 1) -- (0, 1);
+		\draw (3-0-3-2+5, 1) -- (0+5, 1);
+		\draw (3-5-3-1+14, 1) -- (0-5+14, 1);
+		\draw (3-5-3-1, 1) -- (3-5-3-1, -2.5);
+		\draw (3-5-3-1, -3) to[battery] (3-5-3-1, -2.5);
+		\draw (3-5-3-1, -3) -- (3-5-3-1, -5);
+		\draw (3-5-3-1, -5) -- (0-5+14, -5);
+		\draw (0-5+14, -5) -- (0-5+14, -3.6);
+		\draw (0-5+14, -1.4) -- (0-5+14, 1);
+		\node[octagon] at (0-5+14, -2.5) {STOP};
+	\end{circuitikz}
+\end{center}
+
+\subsection{Recovering the Ring Settings}
+We will begin by making two simplifying assumptions which we will later address. First, let us assume the plugboard permutation $S$ is the identity. Second, let us assume no turnover occurs during the enciphering of each message's message key. Third, we will assume that we know the order of the rotors.
+\\\\We know that for some ring setting, the relative distances between \texttt{MBR}, \texttt{AKJ}, and \texttt{NQD} will produce a set of females at the first and third, second and fifth, and third and sixth letters respectively.
+\\\\Suppose we had a device which contained 6 Enigma machines, each with ring setting \texttt{AAA}, set to the locations of the first female (\texttt{MBR} and \texttt{MBU}), second female (\texttt{AKK} and \texttt{AKN}), and the third female (\texttt{NQF} and \texttt{NQI}), and maintained these distances between each Enigma as we stepped through settings. Further, suppose such a machine would stop when it detected females produced between the pairs of Enigma machines. Of course, this machine is exactly what we will build up to in this section and it is known as the {\bf{Bomba}}.
+\\\\After stopping, we would know the absolute positions at which the females observed would occur. From this position, we will now attempt to recover the ring setting. Suppose the true ring setting was \texttt{AAA}. Then our machine would immediately stop since our initial machine position is exactly the settings used to encode the messages. Now suppose the true ring settting was \texttt{AAB}. Recall that, without turnover, the ring setting and the rotor position have inverse effects on each other -- moving the ring setting forward by one is equivalent to moving the rotor position back by one. For this reason, we would observe the machine stop when the Enigma machine initially positioned at \texttt{MBR} is now at \texttt{MBQ}. From following this observation, we can see that if the machine stops with the rotors $x$ steps ahead of where they started, then the ring setting must be $-x$ positions away from \texttt{AAA}.
+
+\subsection{Reducing Assumptions}
+We made some fairly generous assumptions to be able to recover our ring settings so we will work to remove some of these.
+
+\subsubsection{Rotor Order}
+We assumed that the rotor choice and order are known. Of course, we do not know these factors. However, we can run our machine for the $6$ possible rotor orderings, and for each such ordering we will get back a candidate ring setting. Now, we can test which rotor ordering is correct by using our ring setting to attempt to decipher the doubly encoded message keys. If we were correct then we should see the same trigram deciphered twice. Of course, because we made an erronious assumption regarding the plugboard we will not see the exact same trigram, but if we chose the correct rotor ordering we will still see many copies of letters at a distance of three from each other. With enough deciphered message keys we can guess which rotor ordering was used that day. Given both this and the clock method described earlier we can recover the true rotor ordering.
+
+\subsubsection{Turnover}
+Earlier discovery of rotor wirings and ring notch locations meant that cryptanalysts knew for a given rotor order, which window settings will produce turnovers in the first six key presses. We can test all the rotor orders for which this does not happen as described above. Further, if there are rotor orders for which turnover does occur we can simply account for this turnover when setting up our machine by adjusting the intial positions as necessary.
+
+\subsubsection{Plugboard}
+We began by assuming the plugboard $S$ was the identity, an explicitly false assumption. However, note that the only criterion for an Enigma setting $\sigma$ to have a female of the letter $\alpha$ at position $i$ for $i \in \{1,2,3\}$ is that $\sigma_{i}(\alpha) = \sigma_{i+3}(\alpha)$. If $S$ fixes $\alpha$ we can completely ignore $S$'s effect on the permutations $\sigma_i$ and $\sigma_{i+3}$ when determining if such a female is present. That is, if $S$ fixes $\alpha$, then our machine need not encode the plugboard permutation whatsoever to determine at which absolute positions females occur.
+\\\\In practice, German operators used $5$-$8$ plugboard jacks, meaning that on average half the letters were swapped and half the letters were fixed. This means that such an $\alpha$ we fixed half the time. This is the reason in our example we chose messages with females which all contained the letter \texttt{A}. If we only have females containing one letter, then we only need that specific letter to be fixed by the plugboard and no others.
+\\\\Thus, with an element of luck, and clever choice of messages for analysis, we can move forward with our simplifying assumptions, thus allowing us to recover both the ring setting and rotor ordering.
+
+\subsection{Recovering the Plugboard}
+% \\\\We will nowIf we assume the plugboard $S$ is the identity, then we can construct a machine which simple iterates th...
+% %% ASSUME NO TURNOVER SINCE WE CAN GUARANTEE BY LOOKING AT THE GRUNDSTELLUNG AND SEEING IF THERES TURNOVER FOR A PARTICULAR ROTOR ORDER  %%
+% \\\\In reality, $S$ will not be the identity, but we only require that $S$ fixes \texttt{A} in order to remove its relevance from the relationship between $\sigma_{i}$ and $\sigma_{i+3}$. At the time the Bomba was constructed, anywhere from $5$ to $8$ plugboard jacks were in use, meaning we have, on average, a $50\%$ chance that $S$ fixes \texttt{A}.
+% \\\\We begin by assuming the ring position is \texttt{AAA}, that is, our labels on the rotors we will use will just directly correspond with the contact beneath them. If the true ring setting were \texttt{AAA} the machine would stop immediately. If instead the true ring setting were were \texttt{AAB} to observe the same effect as this ring setting we would need to wait until the rotor had reach the position ???, at which point that machine would stop.
+% In this sense, we can determine the true ring setting by seeing how far from the initial position the Bomba had to move before we found a stop. %% WITH NO TURNOVER %% The ring setting moves in inverse fashion to the rotation of the rotors so we can simply subtract this number of rotations from our proposed ring setting \textt{AAA} to get the true ring setting. \\\\In this paper, diagrams for the Cyclometer and the Bombe (later discussed) are abstracted so as to remove reference to specific circuitry elements since the reader is not expected to have a deep understanding of electrical engineering. However, compared to the Cyclometer and the Bombe, the Bomba requires more logical operations since it necessitates the equivalent of an AND gate. To maintain clarity for readers we will construct the Bomba piece by piece with relatively simplified circuit diagrams intended to give the reader an understand of how such a machine could work in practice.
+
 %% WIRE RECOVERY https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3f948f763e4d77467a6bd6fc07e717870208.0d0 %%
 %% http://tandfonline.com/doi/full/10.1080/01611194.2016.1257522 %%
 

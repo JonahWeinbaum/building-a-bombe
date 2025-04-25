@@ -1,11 +1,8 @@
 
 
-\chapter{The UK Bombe}
+\chapter{Turing-Welchman Bombe}
 
-\section{Motivating Example}
-
-\section{Changes to Enigma}
-
+\subsection{Changes to the Enigma Protocol}
 Starting in 1940, the German's enhanced the security of their
 key distribution. As discussed in CITE the \emph{Grundstellung} rotor
 position was sent along with the daily key and an operator chose a
@@ -200,7 +197,7 @@ infering information about the daily key.
 %     eliminated any possibilities.
 % \end{enumerate}
 
-\section*{Motivating Example}
+\section{Plaintext Attack}
 
 Suppose we knew the plaintext which had been enciphered into a
 particular Enigma transmission.
@@ -290,7 +287,7 @@ $\sigma_{11}\circ\sigma_7\circ\sigma_1$ has a fixed point at $A$.
 We also note that the intermediate plugboard settings cancel out, that is
 \begin{center}
   \begin{align*}
-    \sigma_{1}\circ\sigma_7\circ\sigma_{11} &=
+    \sigma_{1}\circ\sigma_7\circ\sigma_{11} & =
     P\overline{\sigma_{1}}P\circ P\overline{\sigma_7}P\circ
     P\overline{\sigma_{11}}P
     \\&= P\circ
@@ -314,7 +311,7 @@ $\alpha$ -- that is, $P(A) = \alpha$ (conversely, $P(\alpha) = A$).
 It then follows that for a fixed $i\in\mathbb{N}$
 \begin{center}
   \begin{align*}
-    \overline{\sigma}^i(\alpha) &= P\circ\sigma^i\circ P(\alpha)
+    \overline{\sigma}^i(\alpha) & = P\circ\sigma^i\circ P(\alpha)
     \\&= P\circ\sigma^i(A)
     \\&= P(A)
   \end{align*}

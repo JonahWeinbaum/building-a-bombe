@@ -1,633 +1,1168 @@
-\chapter{The Polish Bomba}
+\chapter{Bomba Kryptologiczna}
 %% https://www.cryptocellar.org/pubs/ukwa.pdf%%
-%% https://www.cryptocellar.org/enigma/files/rejewski-paper.pdf %% 
+%% https://www.cryptocellar.org/enigma/files/rejewski-paper.pdf %%
 
-% FOR SUPPLIED INTELLEGENCE SEE https://archive.org/details/enigmahowgermanm0000koza/page/16/mode/2up - Page 16 %
-Rejewski was saddled with arguably the most complex discoveries in Enigma code breaking. Not only did he need to determine a means to recover daily keys from limited intellegence supplied by ?? but he additionally needed to recover the wirings of the rotors themselves.
+% FOR SUPPLIED INTELLEGENCE SEE
+% https://archive.org/details/enigmahowgermanm0000koza/page/16/mode/2up
+% - Page 16 %
+Rejewski was saddled with arguably the most complex discoveries in
+Enigma code breaking. Not only did he need to determine a means to
+recover daily keys from limited intellegence supplied by ?? but he
+additionally needed to recover the wirings of the rotors themselves.
 \section{Characteristics}
-Rejewksi quickly determined the protocol by which messages were enciphered -- in fact, he stated the this protocol was ``obvious.'' We will see that purely with knowledge of this procudure and some military intellegence, Rejewski was able to determine the rotor wirings necessary to make further cryptanalysis possible.
-\\\\Consider the first six letters transmitted according to our encryption producedure. Operator Alice has some three letter private key (say \texttt{XYZ}) which she encodes twice with the machine settings specified by her key sheet. This will give us six encrypted letters $\sigma_1(\texttt{X})\sigma_2(\texttt{Y})\sigma_3(\texttt{Z})\sigma_4(\texttt{X})\sigma_5(\texttt{Y})\sigma_6(\texttt{Z})$. Suppose these six letters are given as
+Rejewksi quickly determined the protocol by which messages were
+enciphered -- in fact, he stated the this protocol was ``obvious.''
+We will see that purely with knowledge of this procudure and some
+military intellegence, Rejewski was able to determine the rotor
+wirings necessary to make further cryptanalysis possible.
+\\\\Consider the first six letters transmitted according to our
+encryption producedure. Operator Alice has some three letter private
+key (say \texttt{XYZ}) which she encodes twice with the machine
+settings specified by her key sheet. This will give us six encrypted
+letters
+$\sigma_1(\texttt{X})\sigma_2(\texttt{Y})\sigma_3(\texttt{Z})\sigma_4(\texttt{X})\sigma_5(\texttt{Y})\sigma_6(\texttt{Z})$.
+Suppose these six letters are given as
 \begin{center}
-	\texttt{ABC} \texttt{DEF}
+  \texttt{ABC} \texttt{DEF}
 \end{center}
 That is
 \begin{align*}
-	\sigma_1(\texttt{X}) & = \texttt{A} \\
-	\sigma_2(\texttt{Y}) & = \texttt{B} \\
-	\sigma_3(\texttt{Z}) & = \texttt{C} \\
-	\sigma_4(\texttt{X}) & = \texttt{D} \\
-	\sigma_5(\texttt{Y}) & = \texttt{E} \\
-	\sigma_6(\texttt{Z}) & = \texttt{F} \\
+  \sigma_1(\texttt{X}) & = \texttt{A} \\
+  \sigma_2(\texttt{Y}) & = \texttt{B} \\
+  \sigma_3(\texttt{Z}) & = \texttt{C} \\
+  \sigma_4(\texttt{X}) & = \texttt{D} \\
+  \sigma_5(\texttt{Y}) & = \texttt{E} \\
+  \sigma_6(\texttt{Z}) & = \texttt{F} \\
 \end{align*}
-Since each $\sigma_i$ is represented by 13 disjoint transpositions we can deduce, for example, that
+Since each $\sigma_i$ is represented by 13 disjoint transpositions we
+can deduce, for example, that
 \[
-	\sigma_1\sigma_4(D) = \sigma_1(X) = A.
+  \sigma_1\sigma_4(D) = \sigma_1(X) = A.
 \]
-With a sufficient set of hexagrams from gathered messages, we could then fully deduce the permutation $\sigma_1\sigma_4$. Further, we could recover $\sigma_2\sigma_5$ and $\sigma_3\sigma_6$. Rejewski refered to these paired permutations as {\bf{characteristics}}. In practice, such recovered characteristics may look like
+With a sufficient set of hexagrams from gathered messages, we could
+then fully deduce the permutation $\sigma_1\sigma_4$. Further, we
+could recover $\sigma_2\sigma_5$ and $\sigma_3\sigma_6$. Rejewski
+refered to these paired permutations as {\bf{characteristics}}. In
+practice, such recovered characteristics may look like
 \begin{align*}
-	\sigma_1\sigma_4 & = (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S}) \\
-	\sigma_2\sigma_5 & = (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K}) \\
-	\sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})
+  \sigma_1\sigma_4 & =
+  (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})
+  \\
+  \sigma_2\sigma_5 & =
+  (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})
+  \\
+  \sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})
 \end{align*}
-Rejewski noted a key structural similarity between all such characteristics recovered in this fashion: in each characteristic, cycles of the same length appear in pairs.
+Rejewski noted a key structural similarity between all such
+characteristics recovered in this fashion: in each characteristic,
+cycles of the same length appear in pairs.
 \\\\To see why this happens consider the following lemma,
 \begin{lemma}
-	\label{cillies}
-	Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$. Then $\alpha$ and $\beta$ will appear in disjoint cycles of $\sigma_i\sigma_{i+3}$ of equal length.
+  \label{cillies}
+  Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$.
+  Then $\alpha$ and $\beta$ will appear in disjoint cycles of
+  $\sigma_i\sigma_{i+3}$ of equal length.
 \end{lemma}
 \begin{proof}
-	%% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf %%
-	We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$ then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our claim is true. Then without loss of generality we can arrange $\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
-	\[
-		\setlength{\arraycolsep}{15pt}
-		\begin{array}{cc}
-			\sigma_i      & \sigma_{i+3} \\
-			\hline
-			(\alpha\beta) & (\beta x_1)  \\
-			(x_1 x_2)     & (x_2 x_3)    \\
-			\vdots        & \vdots       \\
-			(x_{k-1} x_k) & (x_k \alpha)
-		\end{array}
-	\]
-	Then the product $\sigma_i\sigma_{i+3}$ will be
-	\[
-		\sigma_1\sigma_{i+3} = (\alpha x_1 x_3 \dots x_{k-1} )(x_k x_{k-2} \dots x_2 \beta)
-	\]
-	and thus $\alpha$ and $\beta$ end up in disjoint cycles of equal length.
+  %% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
+  % %%
+  We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$
+  then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our
+  claim is true. Then without loss of generality we can arrange
+  $\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
+  \[
+    \setlength{\arraycolsep}{15pt}
+    \begin{array}{cc}
+      \sigma_i      & \sigma_{i+3} \\
+      \hline
+      (\alpha\beta) & (\beta x_1)  \\
+      (x_1 x_2)     & (x_2 x_3)    \\
+      \vdots        & \vdots       \\
+      (x_{k-1} x_k) & (x_k \alpha)
+    \end{array}
+  \]
+  Then the product $\sigma_i\sigma_{i+3}$ will be
+  \[
+    \sigma_1\sigma_{i+3} = (\alpha x_1 x_3 \dots x_{k-1} )(x_k
+    x_{k-2} \dots x_2 \beta)
+  \]
+  and thus $\alpha$ and $\beta$ end up in disjoint cycles of equal length.
 \end{proof}
 
 This lemma has several consequences.
 \begin{itemize}
-	\item A characteristic like $\sigma_1\sigma_4$ which has two singletons $\texttt{A}$ and $\texttt{S}$ then both $\sigma_1$ and $\sigma_4$ must have the transposition $(\texttt{AS})$.
-	\item A characteristic like $\sigma_3\sigma_6$ (two disjoint 13 cycles) reduces the space of possible $\sigma_3$'s to just 13 permutations which will take the form
-	      \begin{center}
-		      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
-		      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
-		      $\vdots$                                       \\
-		      $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
-	      \end{center}
-	      and similarly for $\sigma_6$.
+  \item A characteristic like $\sigma_1\sigma_4$ which has two
+    singletons $\texttt{A}$ and $\texttt{S}$ then both $\sigma_1$ and
+    $\sigma_4$ must have the transposition $(\texttt{AS})$.
+  \item A characteristic like $\sigma_3\sigma_6$ (two disjoint 13
+    cycles) reduces the space of possible $\sigma_3$'s to just 13
+    permutations which will take the form
+    \begin{center}
+      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
+      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
+      $\vdots$                                       \\
+      $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
+    \end{center}
+    and similarly for $\sigma_6$.
 \end{itemize}
-Thus with absolutely no knowledge of the rotor wirings or the daily key, we can already tractibly compute a searchable space of $\sigma_i$'s. To determine which $\sigma_i$ is the correct one, we make use of the most prevalent bug in cryptography -- operator error.
+Thus with absolutely no knowledge of the rotor wirings or the daily
+key, we can already tractibly compute a searchable space of
+$\sigma_i$'s. To determine which $\sigma_i$ is the correct one, we
+make use of the most prevalent bug in cryptography -- operator error.
 
 \subsection{Cillies}
-Enigma operators were instructed to construct random trigrams for their message keys -- likely to prevent frequency analysis attacks on the hexagrams beginning messages; However, operators often chose the same trigrams for each message. Some examples might inclide
+Enigma operators were instructed to construct random trigrams for
+their message keys -- likely to prevent frequency analysis attacks on
+the hexagrams beginning messages; However, operators often chose the
+same trigrams for each message. Some examples might inclide
 \begin{itemize}
-	\item Initials or first letters of the operator's spouse. For example, \texttt{CIL} perhaps deriving from the name ``Cecelia'' being shortened to ``cillie''. Allegadely for this reason, poor selections of trigrams from operators became known as {\bf{cillies}}.
-	\item The same letter encoded three times such as \texttt{JJJ}
-	\item Locations such as \texttt{LON} representing London.
-	\item Later, Bletchley Park cryptanalyst John Herivel noticed that many operators selected message keys that were very close to the provided ring settings potentially allowing for a quick means of determining the ring settings.
+  \item Initials or first letters of the operator's spouse. For
+    example, \texttt{CIL} perhaps deriving from the name ``Cecelia''
+    being shortened to ``cillie''. Allegadely for this reason, poor
+    selections of trigrams from operators became known as {\bf{cillies}}.
+  \item The same letter encoded three times such as \texttt{JJJ}
+  \item Locations such as \texttt{LON} representing London.
+  \item Later, Bletchley Park cryptanalyst John Herivel noticed that
+    many operators selected message keys that were very close to the
+    provided ring settings potentially allowing for a quick means of
+    determining the ring settings.
 
-	      %% Battle of wits the complete story of codebreaking in World War II PAGE 143 %% 
+    %% Battle of wits the complete story of codebreaking in World War
+    % II PAGE 143 %%
 \end{itemize}
-By keeping track of various radio stations which used cillies. Rejewski had a reasonable guess as to what the message key used for a particular ciphertext were. Suppose we recieved three hexagrams originating from a radio station which often used \texttt{JJJ} as their message key:
+By keeping track of various radio stations which used cillies.
+Rejewski had a reasonable guess as to what the message key used for a
+particular ciphertext were. Suppose we recieved three hexagrams
+originating from a radio station which often used \texttt{JJJ} as
+their message key:
 \begin{center}
-	\texttt{SUG SMF}\\
-	\texttt{SJM SPO}\\
-	\texttt{SYX SCW}.
+  \texttt{SUG SMF}\\
+  \texttt{SJM SPO}\\
+  \texttt{SYX SCW}.
 \end{center}
 
-We can then compare these message keys against our possibilites for $\sigma_i$s to determine if $\texttt{JJJ}$ could have in fact been used to encipher these hexagrams. For example, the first hexagram could not have been used since \texttt{J} and \texttt{G} lie in the same cycle of $\sigma_3\sigma_6$ which would contradict lemma \ref{cillies}. Contiuing in this fashion we may hypothesize that the third hexagram was likely an enciphering of the repeated letter $\texttt{J}$.
-\\\\To confirm this hypothesis we can use the supposition to further reduce the possible $\sigma_i$s. In fact, in our case, such a hypothesis would completely determine which $\sigma_3$ and $\sigma_6$ were being used and for the remaining $\sigma_i$s we are only left with a small set of options. We can then confirm our hypothesis by trying such $\sigma_i$s on hexagrams from other radio stations suspected of using cillies. If we find that $\texttt{PPP}$ is the message key corresponding to our deduced $\sigma_i$s we have reason to believe that our initial hypothesis was correct. If our hexagram corresponded to a key \texttt{PPA} we may only need to select a new choice of possible $\sigma_i$s to instead produce the expected cilly. In this way, we can recover each $\sigma_i$ and thus recover any transmission's message key -- all without any knowledge of internal wirings, plugboard settings, or daily keys.
+We can then compare these message keys against our possibilites for
+$\sigma_i$s to determine if $\texttt{JJJ}$ could have in fact been
+used to encipher these hexagrams. For example, the first hexagram
+could not have been used since \texttt{J} and \texttt{G} lie in the
+same cycle of $\sigma_3\sigma_6$ which would contradict lemma
+\ref{cillies}. Contiuing in this fashion we may hypothesize that the
+third hexagram was likely an enciphering of the repeated letter $\texttt{J}$.
+\\\\To confirm this hypothesis we can use the supposition to further
+reduce the possible $\sigma_i$s. In fact, in our case, such a
+hypothesis would completely determine which $\sigma_3$ and $\sigma_6$
+were being used and for the remaining $\sigma_i$s we are only left
+with a small set of options. We can then confirm our hypothesis by
+trying such $\sigma_i$s on hexagrams from other radio stations
+suspected of using cillies. If we find that $\texttt{PPP}$ is the
+message key corresponding to our deduced $\sigma_i$s we have reason
+to believe that our initial hypothesis was correct. If our hexagram
+corresponded to a key \texttt{PPA} we may only need to select a new
+choice of possible $\sigma_i$s to instead produce the expected cilly.
+In this way, we can recover each $\sigma_i$ and thus recover any
+transmission's message key -- all without any knowledge of internal
+wirings, plugboard settings, or daily keys.
 \section{Wiring Recovery}
 
-Equipped with a means to determine each $\sigma_i$, Rejewski set himself to finding the internal wirings of the rotors. The full recovery of rotor wirings and turovers is out of scope of this paper; However, we will provide a brief description to illustrate that with minimal intellegence information, entire rotor wirings were able to be deduced.
+Equipped with a means to determine each $\sigma_i$, Rejewski set
+himself to finding the internal wirings of the rotors. The full
+recovery of rotor wirings and turovers is out of scope of this paper;
+However, we will provide a brief description to illustrate that with
+minimal intellegence information, entire rotor wirings were able to be deduced.
 \\\\We begin by expanding $\sigma_i$ to
 \[
-	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
+  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
 \]
 where $x$ accounts for the initial starting position of the rightmost rotor.
-Since $M^{-1}L^{-1}RLM$ does not change between $\sigma_i$s we will denote this permutation $Q$ thus simplifying our earlier expression to
+Since $M^{-1}L^{-1}RLM$ does not change between $\sigma_i$s we will
+denote this permutation $Q$ thus simplifying our earlier expression to
 \[
-	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
+  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
 \]
-Rejewski knew the plugboard settings for two whole months, so he began shifting knowns and unknowns to opposite sides. Shifting things around gives us
+Rejewski knew the plugboard settings for two whole months, so he
+began shifting knowns and unknowns to opposite sides. Shifting things
+around gives us
 \begin{align*}
-	                    & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S     \\
-	\Rightarrow\text{ } & S\sigma_i S^{-1} = P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}    \\
-	\Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =  N^{-1}P^{x+i}QP^{-(x+i)}N
+  & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S     \\
+  \Rightarrow\text{ } & S\sigma_i S^{-1} =
+  P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}    \\
+  \Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =
+  N^{-1}P^{x+i}QP^{-(x+i)}N
 \end{align*}
-To further simplify notation we will then define ${\rho_i} \coloneq P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
+To further simplify notation we will then define ${\rho_i} \coloneq
+P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
 \[
-	\rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
+  \rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
 \]
-where $\rho_i$s are known from the key sheets Rejewski had access to. We will now eliminate this equations dependence on $Q$ by considering pairs of $\rho_i$ and $\rho_{i+1}$
+where $\rho_i$s are known from the key sheets Rejewski had access to.
+We will now eliminate this equations dependence on $Q$ by considering
+pairs of $\rho_i$ and $\rho_{i+1}$
 \begin{align*}
-	\rho_i\rho_{i+1} & = N^{-1}P^{x+i}QP^{-(x+i)}NN^{-1}P^{x+i+1}QP^{-(x+i+1)}N \\
-	                 & = N^{-1}P^{x+i}QP^{-(x+i)}P^{x+i+1}QP^{-(x+i+1)}N        \\
-	                 & = N^{-1}P^{x+i}QPQP^{-(x+i+1)}N                          \\
-	                 & =N^{-1}P^{x+i}(QPQP^{-1})P^{-{x+i}}N
+  \rho_i\rho_{i+1} & = N^{-1}P^{x+i}QP^{-(x+i)}NN^{-1}P^{x+i+1}QP^{-(x+i+1)}N \\
+  & = N^{-1}P^{x+i}QP^{-(x+i)}P^{x+i+1}QP^{-(x+i+1)}N        \\
+  & = N^{-1}P^{x+i}QPQP^{-(x+i+1)}N                          \\
+  & =N^{-1}P^{x+i}(QPQP^{-1})P^{-{x+i}}N
 \end{align*}
-Each $\rho_i\rho_{i+1}$ shares the common subexpression $QPQP^{-1}$. We can eliminate this subexpression by noting
+Each $\rho_i\rho_{i+1}$ shares the common subexpression $QPQP^{-1}$.
+We can eliminate this subexpression by noting
 \begin{align*}
-	\rho_{i+1}\rho_{i+2} & = N^{-1}P^{x+i+1}(QPQP^{-1})P^{-{x+i+1}}N                                                     \\
-	                     & = N^{-1}P^{x+i+1}(P^{-(x+i)}NN^{-1}P^{x+i})(QPQP^{-1})(P^{-(x+i)}NN^{-1}P^{x+i})P^{-{x+i+1}}N \\
-	                     & = N^{-1}P^{x+i+1}P^{-(x+i)}N(N^{-1}P^{x+i}QPQP^{-1}P^{-(x+i)}N)N^{-1}P^{x+i}P^{-{x+i+1}}N     \\
-	                     & = N^{-1}P^{x+i+1}P^{-(x+i)}N(\rho_i\rho_{i+1})N^{-1}P^{x+i}P^{-{x+i+1}}N                      \\
-	                     & = N^{-1}P^{-1}N(\rho_i\rho_{i+1})N^{-1}PN                                                     \\
+  \rho_{i+1}\rho_{i+2} & = N^{-1}P^{x+i+1}(QPQP^{-1})P^{-{x+i+1}}N
+  \\
+  & =
+  N^{-1}P^{x+i+1}(P^{-(x+i)}NN^{-1}P^{x+i})(QPQP^{-1})(P^{-(x+i)}NN^{-1}P^{x+i})P^{-{x+i+1}}N
+  \\
+  & =
+  N^{-1}P^{x+i+1}P^{-(x+i)}N(N^{-1}P^{x+i}QPQP^{-1}P^{-(x+i)}N)N^{-1}P^{x+i}P^{-{x+i+1}}N
+  \\
+  & =
+  N^{-1}P^{x+i+1}P^{-(x+i)}N(\rho_i\rho_{i+1})N^{-1}P^{x+i}P^{-{x+i+1}}N
+  \\
+  & = N^{-1}P^{-1}N(\rho_i\rho_{i+1})N^{-1}PN
+  \\
 \end{align*}
-We now have a relationship between each $\rho_i\rho_{i+1}$ and $\rho_{i+1}\rho_{i+2}$ by conjugating by $N^{-1}PN$. Now recall from theorem %\ref{IDK}% that if $\rho_i\rho_{i+1}$ has a reasonbaly large cycle structure, then there are only a limited number of possible permutations for $N^{-1}PN$. The relationship between $\rho_{i+1}\rho_{i+2}$ and $\rho_{i+2}\rho_{i+3}$ will further reduce these possibilities since of course $N^{-1}PN$ must be the same between these two relationships. Eventually, we can fully deduce $N^{-1}PN$. Finally, this will give us $26$ possibilites for $N$ representing its $26$ intial starting positions, and thus we can recover $N$ itself representing the internal wiring of the rigthmost rotor.
-\\\\In a similar fashion we can recover the remaining rotor wirings though often with the help of other mathematical tricks, not to mention military intellegence and luck. From this point forward, we will assume that the cryptanalyst now has access to the wirings of all the rotors as well as the reflector.
+We now have a relationship between each $\rho_i\rho_{i+1}$ and
+$\rho_{i+1}\rho_{i+2}$ by conjugating by $N^{-1}PN$. Now recall from
+theorem %\ref{IDK}% that if $\rho_i\rho_{i+1}$ has a reasonbaly large
+% cycle structure, then there are only a limited number of possible
+% permutations for $N^{-1}PN$. The relationship between
+% $\rho_{i+1}\rho_{i+2}$ and $\rho_{i+2}\rho_{i+3}$ will further
+% reduce these possibilities since of course $N^{-1}PN$ must be the
+% same between these two relationships. Eventually, we can fully
+% deduce $N^{-1}PN$. Finally, this will give us $26$ possibilites for
+% $N$ representing its $26$ intial starting positions, and thus we
+% can recover $N$ itself representing the internal wiring of the
+% rigthmost rotor.
+\\\\In a similar fashion we can recover the remaining rotor wirings
+though often with the help of other mathematical tricks, not to
+mention military intellegence and luck. From this point forward, we
+will assume that the cryptanalyst now has access to the wirings of
+all the rotors as well as the reflector.
 
 \section{The Grill Method}
 
-We now have deduced all of the rotors $N$, $M$, $L$, $R$ and each $\sigma_i$. We will use this information to recover the daily keys. For the moment, let us assume $S$ is the identity permutation. Then rearranging $\sigma_i$ we get
+We now have deduced all of the rotors $N$, $M$, $L$, $R$ and each
+$\sigma_i$. We will use this information to recover the daily keys.
+For the moment, let us assume $S$ is the identity permutation. Then
+rearranging $\sigma_i$ we get
 \begin{align}
-	Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
+  Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
 \end{align}
-Since $Q$ must be the same for each such equation involving $\sigma_i$ we will devise a manual way to deduce $Q$. We can precompute $N$, $P^{-1}NP$, $\dots$, $P^{4}NP^{-4}$ and arrange them in a large sheet called the {\bf{bottom sheet}}.
-Then for each $\sigma_i$ we can write out $\sigma_i$ with a slit beneath it to allow space for each possible $P^{-k}NP^k$. We will illustrate this for $\sigma_1$ and denote the spaces beneath with periods.
+Since $Q$ must be the same for each such equation involving
+$\sigma_i$ we will devise a manual way to deduce $Q$. We can
+precompute $N$, $P^{-1}NP$, $\dots$, $P^{4}NP^{-4}$ and arrange them
+in a large sheet called the {\bf{bottom sheet}}.
+Then for each $\sigma_i$ we can write out $\sigma_i$ with a slit
+beneath it to allow space for each possible $P^{-k}NP^k$. We will
+illustrate this for $\sigma_1$ and denote the spaces beneath with periods.
 \begin{align*}
-	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
-	\texttt{|}          & \texttt{..........................} \texttt{|}
+  \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+  \texttt{|}          & \texttt{..........................} \texttt{|}
 \end{align*}
-We will call this the {\bf{top sheet}}. By sliding the bottom sheet beneath the top sheet we can test various values of $P^{-k}NP^{k}$ to see what values of $Q$ they give. For example, for $k = 0$ we have
+We will call this the {\bf{top sheet}}. By sliding the bottom sheet
+beneath the top sheet we can test various values of $P^{-k}NP^{k}$ to
+see what values of $Q$ they give. For example, for $k = 0$ we have
 \begin{align*}
-	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
-	N \texttt{ |}       & \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
+  \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+  N \texttt{ |}       & \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
 \end{align*}
-We know that $Q(\texttt{A}) = (P^{-k}NP)\sigma_i(P^{-k}NP)^{-1}(\texttt{A})$. Therefore to compute $Q(\texttt{A})$ we first begin at $\texttt{A}$ in our bottom row to find that $N^{-1}(\texttt{A})=\texttt{Z}$. We now map $\texttt{Z}$ through $\sigma_i$ by finding $\texttt{Z}$ on the top row and seeing where it lands in the middle row, thus giving $\sigma_iN^{-1}(\texttt{A}) = \texttt{U}$. Finally to see where $N$ maps $\texttt{U}$ by finding $\texttt{U}$ on the top row and seeing where it lands in the middle row, thus giving $Q(\texttt{A}) = N\sigma_iN^{-1}(\texttt{A}) = M$. Continuing in this fashion we can get a candidate $Q$ generated by the guess that $\sigma_i$ aligned with $N$ in the sheet. Recall that $Q$ must be consistent between each equation \ref{eq:q_eq}. To check this we can simply construct our top sheet so that each $\sigma_i$ is placed over one another each with a slot beneath it. We can now get candidate $Q$s for each $\sigma_i$. If we find that our offset of the bottom sheet creates inconsistencies we can move the bottom sheet up by one until we find candidates that are consistent between each $\sigma_i$.
-\\\\If $S$ were truly the identity then we would ultimately find an offset that generates identical $Q$s for each $\sigma_i$. Of course, $S$ will not be the identity. Thus, instead of looking for perfect consistency between each $Q$ we are only looking for relative consistency between each $Q$ where perhaps a majority send one letter to another. By comparing $Q$s generated by each $\sigma_i$ we can deduce with reasonable certainty the value of the true $Q$ by just considering where the majority of the $Q$s map \texttt{A}, \texttt{B}, and so on. Further, the offset in the bottom sheet which generated the most consistent permutations $Q$ will give us the absolute position of the rightmost rotor. Additionally, using this method, we can see where the $Q$s fail to line up to determine which letters are steckered and which are unsteckered, along with some of the steckerings themselves. Such a method was called the {\bf{grill method}} and required tedious work and had many possibilites for mistakes.
-\\\\To determine the absolute positions of the remaining two rotors we can simply enumerate all $26^2 = 676$ positions of the left two rotors (for both possible orderings of the rotors) until $Q$ is produced. In practice, a catalogue was eventually compiled which associated each $Q$ to a corresponding position and ordering of the left two rotors. Now equipped with each absolute rotor position, we still must determine the ring settings.
-\\\\To determine the ring settings we make use of another operator error. Often messages began with the letters \texttt{ANX} which is the German word ``to'' along with \texttt{X} denoting a space. We could therefore set the ring setting to its default lcoation and then brute force all $26^3$ possible rotor positions until the first letters in the deciphered message were \texttt{ANX}. Once we knew the absolute position at which this occured, along with the message key, we can immediately determine what the ring settings must have been to produce this message -- since the ring setting and rotor position have inverse effects on the rotor permutation.
-\\\\One key point regarding the grill method is that at the time when it was in use only $6$ jacks were used in the plugboard. This means that the $Q$s generated by each $\sigma_i$ were relatively similar since the permutation $S$ had less impact on average. However, the Germans eventually used up to $10$ jacks making the grill method infeasible since we can no longer determine confidently the true value of $Q$. This fact will later necessitate the development of an additional tool called the {\bf{Bomba}} later discussed in this chapter.
+We know that $Q(\texttt{A}) =
+(P^{-k}NP)\sigma_i(P^{-k}NP)^{-1}(\texttt{A})$. Therefore to compute
+$Q(\texttt{A})$ we first begin at $\texttt{A}$ in our bottom row to
+find that $N^{-1}(\texttt{A})=\texttt{Z}$. We now map $\texttt{Z}$
+through $\sigma_i$ by finding $\texttt{Z}$ on the top row and seeing
+where it lands in the middle row, thus giving
+$\sigma_iN^{-1}(\texttt{A}) = \texttt{U}$. Finally to see where $N$
+maps $\texttt{U}$ by finding $\texttt{U}$ on the top row and seeing
+where it lands in the middle row, thus giving $Q(\texttt{A}) =
+N\sigma_iN^{-1}(\texttt{A}) = M$. Continuing in this fashion we can
+get a candidate $Q$ generated by the guess that $\sigma_i$ aligned
+with $N$ in the sheet. Recall that $Q$ must be consistent between
+each equation \ref{eq:q_eq}. To check this we can simply construct
+our top sheet so that each $\sigma_i$ is placed over one another each
+with a slot beneath it. We can now get candidate $Q$s for each
+$\sigma_i$. If we find that our offset of the bottom sheet creates
+inconsistencies we can move the bottom sheet up by one until we find
+candidates that are consistent between each $\sigma_i$.
+\\\\If $S$ were truly the identity then we would ultimately find an
+offset that generates identical $Q$s for each $\sigma_i$. Of course,
+$S$ will not be the identity. Thus, instead of looking for perfect
+consistency between each $Q$ we are only looking for relative
+consistency between each $Q$ where perhaps a majority send one letter
+to another. By comparing $Q$s generated by each $\sigma_i$ we can
+deduce with reasonable certainty the value of the true $Q$ by just
+considering where the majority of the $Q$s map \texttt{A},
+\texttt{B}, and so on. Further, the offset in the bottom sheet which
+generated the most consistent permutations $Q$ will give us the
+absolute position of the rightmost rotor. Additionally, using this
+method, we can see where the $Q$s fail to line up to determine which
+letters are steckered and which are unsteckered, along with some of
+the steckerings themselves. Such a method was called the {\bf{grill
+method}} and required tedious work and had many possibilites for mistakes.
+\\\\To determine the absolute positions of the remaining two rotors
+we can simply enumerate all $26^2 = 676$ positions of the left two
+rotors (for both possible orderings of the rotors) until $Q$ is
+produced. In practice, a catalogue was eventually compiled which
+associated each $Q$ to a corresponding position and ordering of the
+left two rotors. Now equipped with each absolute rotor position, we
+still must determine the ring settings.
+\\\\To determine the ring settings we make use of another operator
+error. Often messages began with the letters \texttt{ANX} which is
+the German word ``to'' along with \texttt{X} denoting a space. We
+could therefore set the ring setting to its default lcoation and then
+brute force all $26^3$ possible rotor positions until the first
+letters in the deciphered message were \texttt{ANX}. Once we knew the
+absolute position at which this occured, along with the message key,
+we can immediately determine what the ring settings must have been to
+produce this message -- since the ring setting and rotor position
+have inverse effects on the rotor permutation.
+\\\\One key point regarding the grill method is that at the time when
+it was in use only $6$ jacks were used in the plugboard. This means
+that the $Q$s generated by each $\sigma_i$ were relatively similar
+since the permutation $S$ had less impact on average. However, the
+Germans eventually used up to $10$ jacks making the grill method
+infeasible since we can no longer determine confidently the true
+value of $Q$. This fact will later necessitate the development of an
+additional tool called the {\bf{Bomba}} later discussed in this chapter.
 
 \section{The Clock Method}
 
-At this point Rejewski and his team were able to recover daily keys, but the above methods are extremely slow and inefficient. Many optimizations were made over the years. We will now examine one particular optimization.
-\\\\While we do know the wirings of the rotors, we do not know when we begin our cryptanalysis what the order of these rotors were. At the time there were only three rotors in use (\texttt{I}, \texttt{II}, \texttt{III}) so one could simply try all 3 rotors as the rightmost one and repeat the above analysis. Of course, this makes the above method 3 times slower. In practice, early Enigma daily keys kept rotor positions the same for an entire 3 month period meaning this analysis did not need to be done too frequently.
-\\\\However, Jerzy Różycki worked out an efficient method to determine the rightmost rotor which he called the {\bf{clock method}}. The clock method attempted to determine where the turnover notch was for the rightmost rotor. From this we could immediately determine which of the three rotors was used.
+At this point Rejewski and his team were able to recover daily keys,
+but the above methods are extremely slow and inefficient. Many
+optimizations were made over the years. We will now examine one
+particular optimization.
+\\\\While we do know the wirings of the rotors, we do not know when
+we begin our cryptanalysis what the order of these rotors were. At
+the time there were only three rotors in use (\texttt{I},
+\texttt{II}, \texttt{III}) so one could simply try all 3 rotors as
+the rightmost one and repeat the above analysis. Of course, this
+makes the above method 3 times slower. In practice, early Enigma
+daily keys kept rotor positions the same for an entire 3 month period
+meaning this analysis did not need to be done too frequently.
+\\\\However, Jerzy Różycki worked out an efficient method to
+determine the rightmost rotor which he called the {\bf{clock
+method}}. The clock method attempted to determine where the turnover
+notch was for the rightmost rotor. From this we could immediately
+determine which of the three rotors was used.
 
 \subsection{Index of Coincidence}
-In a string of random text from a 26 letter alphabet we get a uniform distribution of letters. However, text which encodes a language does not generate a uniform distribution. Distributions for various languages have been well studied and are the information needed for frequency analysis. Having a non-uniform distribution also implies that when we align two pieces  of text which encodes a language (call them $\texttt{T}_A$ and $\texttt{T}_B$), the chance that a letter from $\texttt{T}_A$ will align at the same position with a letter from $\texttt{T}_B$ is non-uniform. We can therefore detect if  $\texttt{T}_A$ and $\texttt{T}_B$ are encoded with the same polyalphabetic cipher by counting the number of aligned letters between them (called {\bf{coincidences}}) and seeing if they represent a non-uniform frequency.
-\\\\To make use of this property, we can select two messages with message keys whose first two letters coincided (e.g. \texttt{XYA} and \texttt{XYF}). This meant that both messages were encoded with the only difference being in their rightmost rotor. If at some point during encoding the first message, its rotors align with the rotors used to encode the second message, we would expect to see the number of coincidences between the messages to suddenly spike significantly, in this way, we can detect when the two messages had their rotors align. This does not work, however, if turnover occurs then the two messages will not align in their rotor positions and we will see a random distribution of coincidences. If we align the message generated by $\texttt{XYA}$ on top of the message generated by $\texttt{XYF}$ we can slide the bottom message until is 5 positions further than the top message,
+In a string of random text from a 26 letter alphabet we get a uniform
+distribution of letters. However, text which encodes a language does
+not generate a uniform distribution. Distributions for various
+languages have been well studied and are the information needed for
+frequency analysis. Having a non-uniform distribution also implies
+that when we align two pieces  of text which encodes a language (call
+them $\texttt{T}_A$ and $\texttt{T}_B$), the chance that a letter
+from $\texttt{T}_A$ will align at the same position with a letter
+from $\texttt{T}_B$ is non-uniform. We can therefore detect if
+$\texttt{T}_A$ and $\texttt{T}_B$ are encoded with the same
+polyalphabetic cipher by counting the number of aligned letters
+between them (called {\bf{coincidences}}) and seeing if they
+represent a non-uniform frequency.
+\\\\To make use of this property, we can select two messages with
+message keys whose first two letters coincided (e.g. \texttt{XYA} and
+\texttt{XYF}). This meant that both messages were encoded with the
+only difference being in their rightmost rotor. If at some point
+during encoding the first message, its rotors align with the rotors
+used to encode the second message, we would expect to see the number
+of coincidences between the messages to suddenly spike significantly,
+in this way, we can detect when the two messages had their rotors
+align. This does not work, however, if turnover occurs then the two
+messages will not align in their rotor positions and we will see a
+random distribution of coincidences. If we align the message
+generated by $\texttt{XYA}$ on top of the message generated by
+$\texttt{XYF}$ we can slide the bottom message until is 5 positions
+further than the top message,
 \begin{align*}
-	 & \texttt{XYA}: \texttt{PASLK XASSP AUSDK XPVNW UULVT LWKRE KGUQO DSUKV ZOLMZ ZHYBF}                                                                                                                                                      \\
-	 & \texttt{XYF}: \texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{BAWXV ETTOP JZHXL VWGGQ MWDII OEHQO YSLRB IYLGB CHBYT }                                                                                               \\
-	 & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \texttt{**}\ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \texttt{*}
+  & \texttt{XYA}: \texttt{PASLK XASSP AUSDK XPVNW UULVT LWKRE KGUQO
+  DSUKV ZOLMZ ZHYBF}
+  \\
+  & \texttt{XYF}: \texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{
+  }\texttt{ }\texttt{BAWXV ETTOP JZHXL VWGGQ MWDII OEHQO YSLRB IYLGB
+  CHBYT }
+  \\
+  &
+  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \texttt{**}\ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \texttt{*}
 \end{align*}
-at this point we would expect the texts to both be encoded by $\texttt{XYF}$ and the number of coincidences (indicated by \texttt{*}) should spike as we see in the above diagram. If this does not occur, this means no turnover occured between $\texttt{A}$ and $\texttt{F}$. This, for example, eliminates rotor \texttt{II} as a candidate since its turnonver occurs when \texttt{E} is displayed in the window. We can gain further information by performing the above procecdure but now with the message encoded by $\texttt{XYF}$ on the top and the message encoded by $\texttt{XYA}$ on the bottom. In this way we can determine which rotor was being used. The clock method was a precursor to a method we will discuss later known as Banburismus. The important takeaway is that language frequency analysis may not be strong enough to decode Enigma messages, it may be strong enough to determine elements of the key like rotor choice or ordering.
+at this point we would expect the texts to both be encoded by
+$\texttt{XYF}$ and the number of coincidences (indicated by
+\texttt{*}) should spike as we see in the above diagram. If this does
+not occur, this means no turnover occured between $\texttt{A}$ and
+$\texttt{F}$. This, for example, eliminates rotor \texttt{II} as a
+candidate since its turnonver occurs when \texttt{E} is displayed in
+the window. We can gain further information by performing the above
+procecdure but now with the message encoded by $\texttt{XYF}$ on the
+top and the message encoded by $\texttt{XYA}$ on the bottom. In this
+way we can determine which rotor was being used. The clock method was
+a precursor to a method we will discuss later known as Banburismus.
+The important takeaway is that language frequency analysis may not be
+strong enough to decode Enigma messages, it may be strong enough to
+determine elements of the key like rotor choice or ordering.
 
 \section{The Cyclometer}
 
-These manual methods of decryption became increasingly difficult as German operators were instructed to use more plugboard jacks and increased the rate at which daily keys changed. Rejewski wanted to produce a mechanical means of performing a similar deduction. He returned to the characteristics associated with a particular day's key. He noticed that the cycle structure of a characteristic did not regularly repeat (if at all). Then we perhaps could create a ``fingerprint'' of a key by noting the cycle structure of all three characteristics associated to the key. Now that Rejewski had the internal rotor wirings, he could build a machine that could immediately produce the cycle structure of characteristics for a given setting.
-\\\\Let us first understand the manual implementation of such a deduction. Assuming an identity plugboard $S$ we can use our internal rotor wirings to know the exact permutaition $\sigma_1$ and $\sigma_4$ for any initial rotor position. In specific, suppose we have
+These manual methods of decryption became increasingly difficult as
+German operators were instructed to use more plugboard jacks and
+increased the rate at which daily keys changed. Rejewski wanted to
+produce a mechanical means of performing a similar deduction. He
+returned to the characteristics associated with a particular day's
+key. He noticed that the cycle structure of a characteristic did not
+regularly repeat (if at all). Then we perhaps could create a
+``fingerprint'' of a key by noting the cycle structure of all three
+characteristics associated to the key. Now that Rejewski had the
+internal rotor wirings, he could build a machine that could
+immediately produce the cycle structure of characteristics for a given setting.
+\\\\Let us first understand the manual implementation of such a
+deduction. Assuming an identity plugboard $S$ we can use our internal
+rotor wirings to know the exact permutaition $\sigma_1$ and
+$\sigma_4$ for any initial rotor position. In specific, suppose we have
 
 \begin{center}
-	\[
-		\left(
-		\begin{array}{llllllllllllllllllllllllll}
-				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-				\texttt{Y} & \texttt{Z}                             \\
-				\texttt{P} & \texttt{T} & \texttt{K} & \texttt{X} &
-				\texttt{R} & \texttt{Z} & \texttt{Q} & \texttt{S} &
-				\texttt{W} & \texttt{M} & \texttt{C} & \texttt{O} &
-				\texttt{J} & \texttt{Y} & \texttt{L} & \texttt{A} &
-				\texttt{G} & \texttt{E} & \texttt{H} & \texttt{B} &
-				\texttt{V} & \texttt{U} & \texttt{I} & \texttt{D} &
-				\texttt{N} & \texttt{F}
-			\end{array}
-		\right)
-	\]
-	$\sigma_1$
+  \[
+    \left(
+      \begin{array}{llllllllllllllllllllllllll}
+        \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+        \texttt{Y} & \texttt{Z}                             \\
+        \texttt{P} & \texttt{T} & \texttt{K} & \texttt{X} &
+        \texttt{R} & \texttt{Z} & \texttt{Q} & \texttt{S} &
+        \texttt{W} & \texttt{M} & \texttt{C} & \texttt{O} &
+        \texttt{J} & \texttt{Y} & \texttt{L} & \texttt{A} &
+        \texttt{G} & \texttt{E} & \texttt{H} & \texttt{B} &
+        \texttt{V} & \texttt{U} & \texttt{I} & \texttt{D} &
+        \texttt{N} & \texttt{F}
+      \end{array}
+    \right)
+  \]
+  $\sigma_1$
 \end{center}
 \begin{center}
-	\[
-		\left(
-		\begin{array}{llllllllllllllllllllllllll}
-				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-				\texttt{Y} & \texttt{Z}                             \\
-				\texttt{J} & \texttt{W} & \texttt{V} & \texttt{R} &
-				\texttt{O} & \texttt{S} & \texttt{U} & \texttt{Y} &
-				\texttt{Z} & \texttt{A} & \texttt{T} & \texttt{Q} &
-				\texttt{X} & \texttt{P} & \texttt{E} & \texttt{N} &
-				\texttt{L} & \texttt{D} & \texttt{F} & \texttt{K} &
-				\texttt{G} & \texttt{C} & \texttt{B} & \texttt{M} &
-				\texttt{H} & \texttt{I}
-			\end{array}
-		\right)
-	\]
-	$\sigma_4$
+  \[
+    \left(
+      \begin{array}{llllllllllllllllllllllllll}
+        \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+        \texttt{Y} & \texttt{Z}                             \\
+        \texttt{J} & \texttt{W} & \texttt{V} & \texttt{R} &
+        \texttt{O} & \texttt{S} & \texttt{U} & \texttt{Y} &
+        \texttt{Z} & \texttt{A} & \texttt{T} & \texttt{Q} &
+        \texttt{X} & \texttt{P} & \texttt{E} & \texttt{N} &
+        \texttt{L} & \texttt{D} & \texttt{F} & \texttt{K} &
+        \texttt{G} & \texttt{C} & \texttt{B} & \texttt{M} &
+        \texttt{H} & \texttt{I}
+      \end{array}
+    \right)
+  \]
+  $\sigma_4$
 \end{center}
-Then to find the permutation $\sigma_1\sigma_4$ we might do the following. We begin with \texttt{A}. We first run \texttt{A} through $\sigma_4$ to get \texttt{J}. We then run \texttt{J} through $\sigma_1$ to get \texttt{M}. Thus we see $\sigma_1\sigma_4(\texttt{A}) = \texttt{M}$. Now we would continue with \texttt{M} sending it back into $\sigma_4$. Eventually after jumping back and forth between $\sigma_1$ and $\sigma_4$ we we will have encountered all letters contained in the same cycle as \texttt{A}. We do, however, encounter some other letters as well. This method is effectively the same method used in lemma \ref{cillies} to find the two disjoint cycles of equal length produced in a characteristic. In fact, by switching back and forth between $\sigma_1$ and $\sigma_4$ we will find alternating elements of the pair of cycles of equal length which contain \texttt{A}. We can mechanize this process via the following circuit:
+Then to find the permutation $\sigma_1\sigma_4$ we might do the
+following. We begin with \texttt{A}. We first run \texttt{A} through
+$\sigma_4$ to get \texttt{J}. We then run \texttt{J} through
+$\sigma_1$ to get \texttt{M}. Thus we see
+$\sigma_1\sigma_4(\texttt{A}) = \texttt{M}$. Now we would continue
+with \texttt{M} sending it back into $\sigma_4$. Eventually after
+jumping back and forth between $\sigma_1$ and $\sigma_4$ we we will
+have encountered all letters contained in the same cycle as
+\texttt{A}. We do, however, encounter some other letters as well.
+This method is effectively the same method used in lemma
+\ref{cillies} to find the two disjoint cycles of equal length
+produced in a characteristic. In fact, by switching back and forth
+between $\sigma_1$ and $\sigma_4$ we will find alternating elements
+of the pair of cycles of equal length which contain \texttt{A}. We
+can mechanize this process via the following circuit:
 \begin{center}
-	\begin{tikzpicture}[thick, scale=0.9, every node/.style={scale=0.7}]
-		% Draw the box
-		\draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
+  \begin{tikzpicture}[thick, scale=0.9, every node/.style={scale=0.7}]
+    % Draw the box
+    \draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
 
-		\node at (3-5, -2-1) {$Q_{y,z}$};
+    \node at (3-5, -2-1) {$Q_{y,z}$};
 
-		\draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
-		\draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
+    \draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
+    \draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
 
-		\draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
+    \draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
 
-		\node at (3-3, -2-1) {$N_x$};
+    \node at (3-3, -2-1) {$N_x$};
 
-		% Draw the lines inside the box to represent the mapping
-		\draw[-] (2-3, 2-1) -- (4-3, 0-1);
-		\draw[-] (2-3, 1-1) -- (4-3, -1-1);
-		\draw[-] (2-3, 0-1) -- (4-3, 2-1);
-		\draw[-] (2-3,-1-1) -- (4-3, 1-1);
+    % Draw the lines inside the box to represent the mapping
+    \draw[-] (2-3, 2-1) -- (4-3, 0-1);
+    \draw[-] (2-3, 1-1) -- (4-3, -1-1);
+    \draw[-] (2-3, 0-1) -- (4-3, 2-1);
+    \draw[-] (2-3,-1-1) -- (4-3, 1-1);
 
-		% Draw the lines inside the box to represent the mapping
-		\draw[-] (2-1, -1-1) -- (4+3, -1-1);
-		\draw[-] (2-1, 0-1) -- (4+3, 0-1);
-		\draw[-] (2-1, 1-1) -- (4+3, 1-1);
-		\draw[-] (2-1,2-1) -- (4+3, 2-1);
+    % Draw the lines inside the box to represent the mapping
+    \draw[-] (2-1, -1-1) -- (4+3, -1-1);
+    \draw[-] (2-1, 0-1) -- (4+3, 0-1);
+    \draw[-] (2-1, 1-1) -- (4+3, 1-1);
+    \draw[-] (2-1,2-1) -- (4+3, 2-1);
 
-		\draw[fill=lightgray] (2+3,-1.5-1) rectangle (4+3,2.5-1) node[midway] {};
+    \draw[fill=lightgray] (2+3,-1.5-1) rectangle (4+3,2.5-1) node[midway] {};
 
-		\node at (3+3, -2-1) {$N_{x+3}$};
+    \node at (3+3, -2-1) {$N_{x+3}$};
 
-		% Draw the lines inside the box to represent the mapping
-		\draw[-] (2+3, 1-1) -- (4+3, 2-1);
-		\draw[-] (2+3, 2-1) -- (4+3, 1-1);
-		\draw[-] (2+3, 0-1) -- (4+3, -1-1);
-		\draw[-] (2+3,-1-1) -- (4+3, 0-1);
+    % Draw the lines inside the box to represent the mapping
+    \draw[-] (2+3, 1-1) -- (4+3, 2-1);
+    \draw[-] (2+3, 2-1) -- (4+3, 1-1);
+    \draw[-] (2+3, 0-1) -- (4+3, -1-1);
+    \draw[-] (2+3,-1-1) -- (4+3, 0-1);
 
-		\draw[fill=lightgray] (2+5,-1.5-1) rectangle (4+5,2.5-1) node[midway] {};
+    \draw[fill=lightgray] (2+5,-1.5-1) rectangle (4+5,2.5-1) node[midway] {};
 
-		\node at (3+5, -2-1) {$Q_{y,z}$};
+    \node at (3+5, -2-1) {$Q_{y,z}$};
 
-		\draw[-] (2+5, 2-1) |- ++(0.75, 0) |- (2+5, 0-1);
-		\draw[-] (2+5, 1-1) |- ++(1, 0) |- (2+5, -1-1);
+    \draw[-] (2+5, 2-1) |- ++(0.75, 0) |- (2+5, 0-1);
+    \draw[-] (2+5, 1-1) |- ++(1, 0) |- (2+5, -1-1);
 
-		\node at (2+1, 2.3-1) {$\texttt{A}$};
-		\node at (2+1, 1.3-1) {$\texttt{B}$};
-		\node at (2+1, 0.3-1) {$\texttt{C}$};
-		\node at (2+1, -0.6-1) {$\texttt{D}$};
+    \node at (2+1, 2.3-1) {$\texttt{A}$};
+    \node at (2+1, 1.3-1) {$\texttt{B}$};
+    \node at (2+1, 0.3-1) {$\texttt{C}$};
+    \node at (2+1, -0.6-1) {$\texttt{D}$};
 
-	\end{tikzpicture}
+  \end{tikzpicture}
 \end{center}
 
-In this circuit $N_x$ represents the rightmost rotor at some position $x$ and $Q_{y,z}$ represents our fictious rotor (consisting of $M$, $L$, and $R$) at a fixed position $y$ and $z$. Note that right hand rotor in the permutation depicted on the right is 3 steps further than the right hand rotor depicted on the left. When we now apply a current at \texttt{A} the current will travel back and forth through $N_xQ_{y,z}$ and $N_{x+3}Q_{y,z}$ and reach all the letters contained in the pair of cycles of equal length which contain \texttt{A}, that is, the number of wires electrified is double the length of the cycle containing \texttt{A}. Thus, we can quickly determine the length of the cycles in a permutation $\sigma_1\sigma_{4}$ at any given position of rotors ${x}$, $y$, and $z$. We can now rotate through all $26^3$ positions of the rotors and create a catalogue of all characteristics $\sigma_1\sigma_3$ (note that $\sigma_2\sigma_5$ and $\sigma_3\sigma_6$ can be retrieved by just looking at the next two catalogue entries). We must also consider all 6 orderings of rotors \texttt{I}, \texttt{II}, and \texttt{III}. Thus we can laboriously generate a catalogue of all rotor orders and settings consisting of $105456$ entries.
-\\\\Now equipped with this catalogue, the cryptanalyst could use the traffic from a given day to determine the characteristics, look up the cycle types in the catalogue, and determine the rotor order and absolute rotor positions. The plugboard settings could then be determined by comparing the characteristics recovered from the traffic against the characteristics generated by the discovered rotor positions with no plugboard jacks inserted. Finally the ring position could be recovered as discussed before by using known plaintext from the message. This ultimately reduced the time to find a day's settings to roughly $15$ minutes.
-\\\\Note that the machine made finding cycles in permutations instantaneous by connecting each cycle in its own disjoint electrical circuit. This first attempt at mechanizing the process of decryption is a very early predacessor to the primary topic of this paper, the Bombe. This method of enumerating cycles, as we will see, is the core of the Bombe's primary function.
+In this circuit $N_x$ represents the rightmost rotor at some position
+$x$ and $Q_{y,z}$ represents our fictious rotor (consisting of $M$,
+$L$, and $R$) at a fixed position $y$ and $z$. Note that right hand
+rotor in the permutation depicted on the right is 3 steps further
+than the right hand rotor depicted on the left. When we now apply a
+current at \texttt{A} the current will travel back and forth through
+$N_xQ_{y,z}$ and $N_{x+3}Q_{y,z}$ and reach all the letters contained
+in the pair of cycles of equal length which contain \texttt{A}, that
+is, the number of wires electrified is double the length of the cycle
+containing \texttt{A}. Thus, we can quickly determine the length of
+the cycles in a permutation $\sigma_1\sigma_{4}$ at any given
+position of rotors ${x}$, $y$, and $z$. We can now rotate through all
+$26^3$ positions of the rotors and create a catalogue of all
+characteristics $\sigma_1\sigma_3$ (note that $\sigma_2\sigma_5$ and
+  $\sigma_3\sigma_6$ can be retrieved by just looking at the next two
+catalogue entries). We must also consider all 6 orderings of rotors
+\texttt{I}, \texttt{II}, and \texttt{III}. Thus we can laboriously
+generate a catalogue of all rotor orders and settings consisting of
+$105456$ entries.
+\\\\Now equipped with this catalogue, the cryptanalyst could use the
+traffic from a given day to determine the characteristics, look up
+the cycle types in the catalogue, and determine the rotor order and
+absolute rotor positions. The plugboard settings could then be
+determined by comparing the characteristics recovered from the
+traffic against the characteristics generated by the discovered rotor
+positions with no plugboard jacks inserted. Finally the ring position
+could be recovered as discussed before by using known plaintext from
+the message. This ultimately reduced the time to find a day's
+settings to roughly $15$ minutes.
+\\\\Note that the machine made finding cycles in permutations
+instantaneous by connecting each cycle in its own disjoint electrical
+circuit. This first attempt at mechanizing the process of decryption
+is a very early predacessor to the primary topic of this paper, the
+Bombe. This method of enumerating cycles, as we will see, is the core
+of the Bombe's primary function.
 \section{The Bomba}
 
-As mentioned prior, the addition of plugboard jacks made the grill method infeasible.
-Further, beginning on September 15, 1938, the German military changed the protocol by which Enigma messages were encoded, making the grill method completely obsolete. A new means of fingerprinting messages outside of characteristics needed to be developed. Further, compared to the grill method, such a new method would need to account for the fact that the plugboard swapped many more letters.
-
+As mentioned prior, the addition of plugboard jacks made the grill
+method infeasible.
+Further, beginning on September 15, 1938, the German military changed
+the protocol by which Enigma messages were encoded, making the grill
+method completely obsolete. A new means of fingerprinting messages
+outside of characteristics needed to be developed. Further, compared
+to the grill method, such a new method would need to account for the
+fact that the plugboard swapped many more letters.
 
 \subsection{Changes to the Enigma Protocol}
 
 %% https://www.ciphermachinesandcryptology.com/en/enigmaproc.htm %%
-%% https://www.tandfonline.com/doi/full/10.1080/01611194.2010.486257?journalCode=ucry20 && 
-Starting in 1938, the German key sheets began removing an explicit window setting (\emph{Grundstellung}) and added an indicator group known as the \emph{Kenngruppen}. The indicator group was an extra identification added to messages to note which key was being used. It serves no cryptographic purpose so we will just discuss the way in which the message key was obtained.
-\\\\Operators were now instructed to choose a random window setting (\emph{Grundstellung}) for each message. The operator then sent the window setting in plaintext and proceeded to encode their message key (\emph{Spruchschlüssel}) twice, enciphered with the chosen window setting. % \begin{figure}[h]
-% 	\begin{center}
-% 		\resizebox{0.98\textwidth}{!}{
-% 			\begin{tabular}{|c|c|c|c|c|}
-% 				\hline
-% 				\textbf{\emph{\texttt{Datum}}}               &
-% 				\textbf{\emph{\texttt{Walzenlage}}}          &
-% 				\textbf{\emph{\texttt{Ringstellung}}}        &
-% 				\textbf{\emph{\texttt{Steckerverbindungen}}} &
-% 				\textbf{\emph{\texttt{Kenngruppen}}}                                                                                                                      \\
-% 				\hline
-% 				\texttt{31.}                                 & \texttt{I II V}          & \texttt{10 14 02} & \texttt{BF SD AY HG OU QC WI RL} & \texttt{sfy azy zkq bqi} \\
-% 				\texttt{30.}                                 & \texttt{V IV I}          & \texttt{04 25 01} & \texttt{UE PL
-% 				AY TB ZH WM OJ DC}                           & \texttt{iuy swz omo myj}                                                                                   \\
-% 				\texttt{29.}                                 & \texttt{III V II}        & \texttt{13 11 06} & \texttt{WJ VD
-% 				PO MQ FX ZR NE LG}                           & \texttt{rui kao fqi rwu}                                                                                   \\
-% 				\texttt{28.}                                 & \texttt{I III II}        & \texttt{09 16 12} & \texttt{HR
-% 				TJ LD IO CN GX QK PZ}                        & \texttt{ioy kjv yko fpz}                                                                                   \\
-% 				$\vdots$                                     & $\vdots$                 & $\vdots$          & $\vdots$                         & $\vdots$                 \\
-% 				\hline
-% 			\end{tabular}}
-% 	\end{center}
-% 	\caption{Mock Enigma Key Sheet for 1938}
-% 	\label{fig:keysheet_bomba}
+%% https://www.tandfonline.com/doi/full/10.1080/01611194.2010.486257?journalCode=ucry20
+% &&
+Starting in 1938, the German key sheets began removing an explicit
+window setting (\emph{Grundstellung}) and added an indicator group
+known as the \emph{Kenngruppen}. The indicator group was an extra
+identification added to messages to note which key was being used. It
+serves no cryptographic purpose so we will just discuss the way in
+which the message key was obtained.
+\\\\Operators were now instructed to choose a random window setting
+(\emph{Grundstellung}) for each message. The operator then sent the
+window setting in plaintext and proceeded to encode their message key
+(\emph{Spruchschlüssel}) twice, enciphered with the chosen window
+setting. % \begin{figure}[h]
+%   \begin{center}
+%     \resizebox{0.98\textwidth}{!}{
+%       \begin{tabular}{|c|c|c|c|c|}
+%         \hline
+%         \textbf{\emph{\texttt{Datum}}}               &
+%         \textbf{\emph{\texttt{Walzenlage}}}          &
+%         \textbf{\emph{\texttt{Ringstellung}}}        &
+%         \textbf{\emph{\texttt{Steckerverbindungen}}} &
+%         \textbf{\emph{\texttt{Kenngruppen}}}
+%                                                                                               \\
+%         \hline
+%         \texttt{31.}                                 & \texttt{I II
+% V}          & \texttt{10 14 02} & \texttt{BF SD AY HG OU QC WI RL}
+% & \texttt{sfy azy zkq bqi} \\
+%         \texttt{30.}                                 & \texttt{V IV
+% I}          & \texttt{04 25 01} & \texttt{UE PL
+%         AY TB ZH WM OJ DC}                           & \texttt{iuy
+% swz omo myj}
+%                            \\
+%         \texttt{29.}                                 & \texttt{III
+% V II}        & \texttt{13 11 06} & \texttt{WJ VD
+%         PO MQ FX ZR NE LG}                           & \texttt{rui
+% kao fqi rwu}
+%                            \\
+%         \texttt{28.}                                 & \texttt{I
+% III II}        & \texttt{09 16 12} & \texttt{HR
+%         TJ LD IO CN GX QK PZ}                        & \texttt{ioy
+% kjv yko fpz}
+%                            \\
+%         $\vdots$                                     & $\vdots$
+%             & $\vdots$          & $\vdots$
+% & $\vdots$                 \\
+%         \hline
+%       \end{tabular}}
+%   \end{center}
+%   \caption{Mock Enigma Key Sheet for 1938}
+%   \label{fig:keysheet_bomba}
 % \end{figure}
 % %chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.tandfonline.com/doi/pdf/10.1080/01611190802562809%
-% \\From the keysheet, the operator chose a trigram from the day's indicator groups. Then by adding two random letters to the trigram, they would generate a hexagram called a \emph{Buchstabenkenngruppe}. For example on the date of the 29th in figure \ref{keysheet_bomba}, the operator might choose the second indicator group to get a \emph{Buchstabenkenngruppe} of \texttt{LOKAO}. When sending a message the operator was to send a message with the following information \footnote{References for Enigma procedures between 1938-1940 are scarce so this procedure is based on observing an army Enigma message sent on 21 September 1938 referenced in ??}
+% \\From the keysheet, the operator chose a trigram from the day's
+% indicator groups. Then by adding two random letters to the trigram,
+% they would generate a hexagram called a
+% \emph{Buchstabenkenngruppe}. For example on the date of the 29th in
+% figure \ref{keysheet_bomba}, the operator might choose the second
+% indicator group to get a \emph{Buchstabenkenngruppe} of
+% \texttt{LOKAO}. When sending a message the operator was to send a
+% message with the following information \footnote{References for
+% Enigma procedures between 1938-1940 are scarce so this procedure is
+% based on observing an army Enigma message sent on 21 September 1938
+% referenced in ??}
 % \begin{enumerate}[I.]
-% 	\item The time at which the message was sent
-% 	\item The number of parts which the message contained
-% 	\item A random \emph{Grundstellung} rotor position (listed twice in plaintext)
-% 	\item Which message part is being sent
-% 	\item The length of the message part, including \emph{Buchstabenkenngruppe} and the doubly encoded \emph{Spruchschlüssel}
-% 	\item A \emph{Spruchschlüssel} rotor position (encoded twice using the \emph{Grundstellung})
-% 	\item The first four letters of the message encoded using the daily key and
-% 	      \emph{Spruchschlüssel}
-% 	\item The \emph{Buchstabenkenngruppe}
-% 	\item The remainder of the encoded message
+%   \item The time at which the message was sent
+%   \item The number of parts which the message contained
+%   \item A random \emph{Grundstellung} rotor position (listed twice
+% in plaintext)
+%   \item Which message part is being sent
+%   \item The length of the message part, including
+% \emph{Buchstabenkenngruppe} and the doubly encoded \emph{Spruchschlüssel}
+%   \item A \emph{Spruchschlüssel} rotor position (encoded twice
+% using the \emph{Grundstellung})
+%   \item The first four letters of the message encoded using the daily key and
+%         \emph{Spruchschlüssel}
+%   \item The \emph{Buchstabenkenngruppe}
+%   \item The remainder of the encoded message
 % \end{enumerate}
 
 % \noindent For the 31st we might get a message of the form
 
 % \begin{center}
-% 	\texttt{1830 - 2 TLE - LOP LOP - 1 TL - = 35}\\
-% 	\texttt{ERTQK NMRJR NOBQI EIKAR QIIJE DMFAZ QTBCP}
+%   \texttt{1830 - 2 TLE - LOP LOP - 1 TL - = 35}\\
+%   \texttt{ERTQK NMRJR NOBQI EIKAR QIIJE DMFAZ QTBCP}
 % \end{center}
 % Parsing this we have that
 % \begin{itemize}
-% 	\item Our message was sent at $18:30$
-% 	\item Consisting of two parts
-% 	\item \texttt{LOP} is our \emph{Grundstellung}
-% 	\item We are sending the first message part consisting of $35$ characters
-% 	\item \texttt{ERT QKN} is our doubly encoded \emph{Spruchschlüssel}
-% 	\item \texttt{NOBQI} is our \emph{Buchstabenkenngruppe}
-% 	\item Our encoded message is \texttt{MRJR EIKAR...}
+%   \item Our message was sent at $18:30$
+%   \item Consisting of two parts
+%   \item \texttt{LOP} is our \emph{Grundstellung}
+%   \item We are sending the first message part consisting of $35$ characters
+%   \item \texttt{ERT QKN} is our doubly encoded \emph{Spruchschlüssel}
+%   \item \texttt{NOBQI} is our \emph{Buchstabenkenngruppe}
+%   \item Our encoded message is \texttt{MRJR EIKAR...}
 % \end{itemize}
 
-\text{}\\On first view this method seems to be more insecure than the previous method since we openly broadcast our window setting. However, because the window setting now changes between each message sequence, we will never find enough messages with the same window settingss to produce a set of characteristics needed for the cyclometer. Even with the window setting the cryptanalyst still knows nothing of the ring setting, plugboard setting, rotor position, or rotor order.
+\text{}\\On first view this method seems to be more insecure than the
+previous method since we openly broadcast our window setting.
+However, because the window setting now changes between each message
+sequence, we will never find enough messages with the same window
+settingss to produce a set of characteristics needed for the
+cyclometer. Even with the window setting the cryptanalyst still knows
+nothing of the ring setting, plugboard setting, rotor position, or rotor order.
 
 \subsection{Females}
-Rejewski noticed that, given enough cipher material, we could find three messages with the following form.
+Rejewski noticed that, given enough cipher material, we could find
+three messages with the following form.
 \[
-	\setlength{\arraycolsep}{15pt}
-	\begin{array}{c | c}
-		\emph{Grundstellung} & \emph{Spruchschlüssel}                                                   \\
-		\hline
-		\texttt{RTJ}         & {\uline{\texttt{W}}}\texttt{AH }{\uline{\texttt{W}}}\texttt{IK}          \\
-		\texttt{HPN}         & \texttt{RA}{\uline{\texttt{W}}}\texttt{ KT}{\uline{\texttt{W}}}          \\
-		\texttt{DQY}         & \texttt{D}{\uline{\texttt{W}}}\texttt{J M}{\uline{\texttt{W}}}\texttt{R}
-	\end{array}
+  \setlength{\arraycolsep}{15pt}
+  \begin{array}{c | c}
+    \emph{Grundstellung} & \emph{Spruchschlüssel}
+    \\
+    \hline
+    \texttt{RTJ}         & {\uline{\texttt{W}}}\texttt{AH
+    }{\uline{\texttt{W}}}\texttt{IK}          \\
+    \texttt{HPN}         & \texttt{RA}{\uline{\texttt{W}}}\texttt{
+    KT}{\uline{\texttt{W}}}          \\
+    \texttt{DQY}         & \texttt{D}{\uline{\texttt{W}}}\texttt{J
+    M}{\uline{\texttt{W}}}\texttt{R}
+  \end{array}
 \]
-Notice that the first message has the letter \texttt{W} in both its first and fourth position. Cryptanalysts refered to such coincidences at a distance of three letters by the term {\bf{females}} and to denote its location we could say this is a $1-4$ female. The second and third message also contain females, specifically $3-6$ and $2-5$ females respectively. In order for a daily key to be correct, it must produce females at the noted locations for the specific window setting. It turns out that such a set of females is a sufficiently unique ``fingerprint'' to determine the recover the daily key.
+Notice that the first message has the letter \texttt{W} in both its
+first and fourth position. Cryptanalysts refered to such coincidences
+at a distance of three letters by the term {\bf{females}} and to
+denote its location we could say this is a $1-4$ female. The second
+and third message also contain females, specifically $3-6$ and $2-5$
+females respectively. In order for a daily key to be correct, it must
+produce females at the noted locations for the specific window
+setting. It turns out that such a set of females is a sufficiently
+unique ``fingerprint'' to determine the recover the daily key.
 
 \subsection{Bomba Kryptologiczna}
-We will first produce a mechanical means of detecting when three Enigma machines produce females at given locations -- such a machine became known as the {\bf{Bomba Kryptologiczna}} (Bomba for short). Let us begin by constructing a device that can detecta a single female, taht is, it can determine for a given input letter when two sets of rotors three steps apart produce a female.
-\\\\In this paper, diagrams for the Cyclometer and the Bombe (later discussed) are abstracted so as to remove reference to specific circuitry elements since the reader is not expected to have a deep understanding of electrical engineering. However, compared to the Cyclometer and the Bombe, the Bomba requires more logical operations since it necessitates the equivalent of an AND gate. To maintain clarity for readers we will construct the Bomba piece by piece with relatively simplified circuit diagrams intended to give the reader an understand of how such a machine could work in practice. Note that while we indicate transistors here for simplicity, the actual machine was an electromechanical computer which used relays and switches for these operations. Consider the following circuit.
+We will first produce a mechanical means of detecting when three
+Enigma machines produce females at given locations -- such a machine
+became known as the {\bf{Bomba Kryptologiczna}} (Bomba for short).
+Let us begin by constructing a device that can detecta a single
+female, taht is, it can determine for a given input letter when two
+sets of rotors three steps apart produce a female.
+\\\\In this paper, diagrams for the Cyclometer and the Bombe (later
+discussed) are abstracted so as to remove reference to specific
+circuitry elements since the reader is not expected to have a deep
+understanding of electrical engineering. However, compared to the
+Cyclometer and the Bombe, the Bomba requires more logical operations
+since it necessitates the equivalent of an AND gate. To maintain
+clarity for readers we will construct the Bomba piece by piece with
+relatively simplified circuit diagrams intended to give the reader an
+understand of how such a machine could work in practice. Note that
+while we indicate transistors here for simplicity, the actual machine
+was an electromechanical computer which used relays and switches for
+these operations. Consider the following circuit.
 
 \begin{center}
-	\scalebox{0.9} {
-		\begin{circuitikz}
-			% Draw the box
-			\draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
+  \scalebox{0.9} {
+    \begin{circuitikz}
+      % Draw the box
+      \draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
 
-			\node at (3-5, -2-1) {$Q_{y,z}$};
+      \node at (3-5, -2-1) {$Q_{y,z}$};
 
-			\draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
-			\draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
+      \draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
+      \draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
 
-			\draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
+      \draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
 
-			\node at (3-3, -2-1) {$N_x$};
+      \node at (3-3, -2-1) {$N_x$};
 
-			% Draw the lines inside the box to represent the mapping
-			\draw[-] (2-3, 2-1) -- (4-3, 0-1);
-			\draw[-] (2-3, 1-1) -- (4-3, -1-1);
-			\draw[-] (2-3, 0-1) -- (4-3, 2-1);
-			\draw[-] (2-3,-1-1) -- (4-3, 1-1);
+      % Draw the lines inside the box to represent the mapping
+      \draw[-] (2-3, 2-1) -- (4-3, 0-1);
+      \draw[-] (2-3, 1-1) -- (4-3, -1-1);
+      \draw[-] (2-3, 0-1) -- (4-3, 2-1);
+      \draw[-] (2-3,-1-1) -- (4-3, 1-1);
 
+      % Wiring exiting
+      \draw (1,2-1) to (1.75,2-1);
+      \draw[line width=1.25pt] (1.75, 2-1) to ++(60:0.5);
+      \fill (1.75, 2-1) circle (2pt); % dot
+      \fill (1.75,2-1) ++(60:0.5) circle (2pt); % dot
+      \draw (2.25,2-1) circle (2pt); % dot
+      \draw (2.3,2-1) to (3,2-1);
+      \draw (1,1-1) to (1.75,1-1);
+      \draw[line width=1.25pt] (1.75,1-1) to (2.25,1-1);
+      \fill (1.75, 1-1) circle (2pt); % dot
+      \fill (2.25, 1-1) circle (2pt); % dot
+      \draw (2.25,1-1) to (4.5,1-1);
+      \draw (1,0-1) to (1.75,0-1);
+      \draw[line width=1.25pt] (1.75,0-1) to (2.25,0-1);
+      \fill (1.75, 0-1) circle (2pt); % dot
+      \fill (2.25, 0-1) circle (2pt); % dot
+      \draw (2.25,0-1) to (6,0-1);
+      \draw (1,-1-1) to (1.75,-1-1);
+      \draw[line width=1.25pt] (1.75,-1-1) to (2.25,-1-1);
+      \fill (1.75, -1-1) circle (2pt); % dot
+      \fill (2.25, -1-1) circle (2pt); % dot
+      \draw (2.25,-1-1) to (7.5,-1-1);
 
-			% Wiring exiting 
-			\draw (1,2-1) to (1.75,2-1);
-			\draw[line width=1.25pt] (1.75, 2-1) to ++(60:0.5);
-			\fill (1.75, 2-1) circle (2pt); % dot
-			\fill (1.75,2-1) ++(60:0.5) circle (2pt); % dot
-			\draw (2.25,2-1) circle (2pt); % dot
-			\draw (2.3,2-1) to (3,2-1);
-			\draw (1,1-1) to (1.75,1-1);
-			\draw[line width=1.25pt] (1.75,1-1) to (2.25,1-1);
-			\fill (1.75, 1-1) circle (2pt); % dot
-			\fill (2.25, 1-1) circle (2pt); % dot
-			\draw (2.25,1-1) to (4.5,1-1);
-			\draw (1,0-1) to (1.75,0-1);
-			\draw[line width=1.25pt] (1.75,0-1) to (2.25,0-1);
-			\fill (1.75, 0-1) circle (2pt); % dot
-			\fill (2.25, 0-1) circle (2pt); % dot
-			\draw (2.25,0-1) to (6,0-1);
-			\draw (1,-1-1) to (1.75,-1-1);
-			\draw[line width=1.25pt] (1.75,-1-1) to (2.25,-1-1);
-			\fill (1.75, -1-1) circle (2pt); % dot
-			\fill (2.25, -1-1) circle (2pt); % dot
-			\draw (2.25,-1-1) to (7.5,-1-1);
+      % Draw the box
+      \draw[fill=lightgray] (2-5,-1.5-7) rectangle (4-5,2.5-7) node[midway] {};
 
-			% Draw the box
-			\draw[fill=lightgray] (2-5,-1.5-7) rectangle (4-5,2.5-7) node[midway] {};
+      \node at (3-5, -2-7) {$Q_{y,z}$};
 
-			\node at (3-5, -2-7) {$Q_{y,z}$};
+      \draw[-] (2-3, 2-7) |- ++(-0.75, 0) |- (2-3, 0-7);
+      \draw[-] (2-3, 1-7) |- ++(-1, 0) |- (2-3, -1-7);
 
-			\draw[-] (2-3, 2-7) |- ++(-0.75, 0) |- (2-3, 0-7);
-			\draw[-] (2-3, 1-7) |- ++(-1, 0) |- (2-3, -1-7);
+      \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+      \node at (3-3, -2-7) {$N_{x+3}$};
 
-			\node at (3-3, -2-7) {$N_{x+3}$};
+      % Draw the lines inside the box to represent the mapping
+      \draw[-] (2-3, 2-7) -- (4-3, 1-7);
+      \draw[-] (2-3, 1-7) -- (4-3, 2-7);
+      \draw[-] (2-3, 0-7) -- (4-3, -1-7);
+      \draw[-] (2-3,-1-7) -- (4-3, 0-7);
 
-			% Draw the lines inside the box to represent the mapping
-			\draw[-] (2-3, 2-7) -- (4-3, 1-7);
-			\draw[-] (2-3, 1-7) -- (4-3, 2-7);
-			\draw[-] (2-3, 0-7) -- (4-3, -1-7);
-			\draw[-] (2-3,-1-7) -- (4-3, 0-7);
+      % Wiring exiting
+      \draw (1,2-7) to (1.75,2-7);
+      \draw[line width=1.25pt] (1.75, 2-7) to ++(60:0.5);
+      \fill (1.75, 2-7) circle (2pt); % dot
+      \fill (1.75,2-7) ++(60:0.5) circle (2pt); % dot
+      \draw (2.25,2-7) circle (2pt); % dot
+      \draw (2.3,2-7) to (3,2-7);
+      \draw (1,1-7) to (1.75,1-7);
+      \draw[line width=1.25pt] (1.75,1-7) to (2.25,1-7);
+      \fill (1.75, 1-7) circle (2pt); % dot
+      \fill (2.25, 1-7) circle (2pt); % dot
+      \draw (2.25,1-7) to (4.5,1-7);
+      \draw (1,0-7) to (1.75,0-7);
+      \draw[line width=1.25pt] (1.75,0-7) to (2.25,0-7);
+      \fill (1.75, 0-7) circle (2pt); % dot
+      \fill (2.25, 0-7) circle (2pt); % dot
+      \draw (2.25,0-7) to (6,0-7);
+      \draw (1,-1-7) to (1.75,-1-7);
+      \draw[line width=1.25pt] (1.75,-1-7) to (2.25,-1-7);
+      \fill (1.75, -1-7) circle (2pt); % dot
+      \fill (2.25, -1-7) circle (2pt); % dot
+      \draw (2.25,-1-7) to (7.5,-1-7);
 
-			% Wiring exiting 
-			\draw (1,2-7) to (1.75,2-7);
-			\draw[line width=1.25pt] (1.75, 2-7) to ++(60:0.5);
-			\fill (1.75, 2-7) circle (2pt); % dot
-			\fill (1.75,2-7) ++(60:0.5) circle (2pt); % dot
-			\draw (2.25,2-7) circle (2pt); % dot
-			\draw (2.3,2-7) to (3,2-7);
-			\draw (1,1-7) to (1.75,1-7);
-			\draw[line width=1.25pt] (1.75,1-7) to (2.25,1-7);
-			\fill (1.75, 1-7) circle (2pt); % dot
-			\fill (2.25, 1-7) circle (2pt); % dot
-			\draw (2.25,1-7) to (4.5,1-7);
-			\draw (1,0-7) to (1.75,0-7);
-			\draw[line width=1.25pt] (1.75,0-7) to (2.25,0-7);
-			\fill (1.75, 0-7) circle (2pt); % dot
-			\fill (2.25, 0-7) circle (2pt); % dot
-			\draw (2.25,0-7) to (6,0-7);
-			\draw (1,-1-7) to (1.75,-1-7);
-			\draw[line width=1.25pt] (1.75,-1-7) to (2.25,-1-7);
-			\fill (1.75, -1-7) circle (2pt); % dot
-			\fill (2.25, -1-7) circle (2pt); % dot
-			\draw (2.25,-1-7) to (7.5,-1-7);
+      % Circuit wires for A
+      \draw (3.5, -11) to (3.5,-1.5-7);
+      \draw (3.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-7);
+      \draw (3.5,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-7);
+      \draw (3.5, 0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-7);
+      \draw (3.5, 1.5-7) to (3.5,1.5-7);
+      \draw (3.5,2.0-1.77-6) node[npn, anchor=S] {};
+      \draw (3.5, 2.5-7) to (3.5,-1.5-1);
+      \draw (3.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-1);
+      \draw (3.5,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-1);
+      \draw (3.5, 0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-1);
+      \draw (3.5, 1.5-1) to (3.5,2.0-1.5);
+      \draw (3.5,2.0-1.77) node[npn, anchor=S] {};
+      \draw (3.5, 2.0-0.5) to (3.5,4);
 
+      % Circuit wires for B
+      \draw (5.0, -10) to (5.0,-1.5-7);
+      \draw (5.0,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-7);
+      \draw (5.0,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-7);
+      \draw (5.0,2.0-1.77-7) node[npn, anchor=S] {};
+      \draw (5.0, 2.5-7-1) to (5.0,-1.5-1);
+      \draw (5.0, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-1);
+      \draw (5.0,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-1);
+      \draw (5.0,2.0-1.77-1) node[npn, anchor=S] {};
+      \draw (5.0, 2.0-0.5-1) to (5.0,3);
 
-			% Circuit wires for A
-			\draw (3.5, -11) to (3.5,-1.5-7);
-			\draw (3.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-7);
-			\draw (3.5,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-7);
-			\draw (3.5, 0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-7);
-			\draw (3.5, 1.5-7) to (3.5,1.5-7);
-			\draw (3.5,2.0-1.77-6) node[npn, anchor=S] {};
-			\draw (3.5, 2.5-7) to (3.5,-1.5-1);
-			\draw (3.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-1);
-			\draw (3.5,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-1);
-			\draw (3.5, 0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-1);
-			\draw (3.5, 1.5-1) to (3.5,2.0-1.5);
-			\draw (3.5,2.0-1.77) node[npn, anchor=S] {};
-			\draw (3.5, 2.0-0.5) to (3.5,4);
+      % Circuit wires for C
+      \draw (6.5, -10) to (6.5,-1.5-7);
+      \draw (6.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-7);
+      \draw (6.5,2.0-1.77-7-1) node[npn, anchor=S] {};
+      \draw (6.5, 2.5-7-1-1) to (6.5,-1.5-1);
+      \draw (6.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-1);
+      \draw (6.5,2.0-1.77-1-1) node[npn, anchor=S] {};
+      \draw (6.5, 2.0-0.5-1-1) to (6.5,3);
 
-			% Circuit wires for B
-			\draw (5.0, -10) to (5.0,-1.5-7);
-			\draw (5.0,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-7);
-			\draw (5.0,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-7);
-			\draw (5.0,2.0-1.77-7) node[npn, anchor=S] {};
-			\draw (5.0, 2.5-7-1) to (5.0,-1.5-1);
-			\draw (5.0, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-1);
-			\draw (5.0,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-1);
-			\draw (5.0,2.0-1.77-1) node[npn, anchor=S] {};
-			\draw (5.0, 2.0-0.5-1) to (5.0,3);
+      % Circuit wires for D
+      \draw (8.0, -10) to (8.0,-1.5-7);
+      \draw (8.0,2.0-1.77-7-1-1) node[npn, anchor=S] {};
+      \draw (8.0, 2.5-7-1-1-1) to (8.0,-1.5-1);
+      \draw (8.0,2.0-1.77-1-1-1) node[npn, anchor=S] {};
+      \draw (8.0, 2.0-0.5-1-1-1) to (8.0,3);
 
-			% Circuit wires for C
-			\draw (6.5, -10) to (6.5,-1.5-7);
-			\draw (6.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-7);
-			\draw (6.5,2.0-1.77-7-1) node[npn, anchor=S] {};
-			\draw (6.5, 2.5-7-1-1) to (6.5,-1.5-1);
-			\draw (6.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-1);
-			\draw (6.5,2.0-1.77-1-1) node[npn, anchor=S] {};
-			\draw (6.5, 2.0-0.5-1-1) to (6.5,3);
+      % Circuit Completion
+      \draw (3.5,3) to (8,3);
+      \draw (8, -10) to (3.5, -10);
+      \draw[purple] (-3.3, 3.3) rectangle (10.3, -10.3);
 
-			% Circuit wires for D
-			\draw (8.0, -10) to (8.0,-1.5-7);
-			\draw (8.0,2.0-1.77-7-1-1) node[npn, anchor=S] {};
-			\draw (8.0, 2.5-7-1-1-1) to (8.0,-1.5-1);
-			\draw (8.0,2.0-1.77-1-1-1) node[npn, anchor=S] {};
-			\draw (8.0, 2.0-0.5-1-1-1) to (8.0,3);
+      % Labels
+      \node at (3.5, 4+0.3) {$T^{+}$};
+      \node at (3.5, -11-0.3) {$T^{-}$};
+      \node at (3.7, 2-5.5) {\texttt{A}};
+      \node at (5.2, 2-5.5) {\texttt{B}};
+      \node at (6.7, 2-5.5) {\texttt{C}};
+      \node at (8.2, 2-5.5) {\texttt{D}};
 
-			% Circuit Completion
-			\draw (3.5,3) to (8,3);
-			\draw (8, -10) to (3.5, -10);
-			\draw[purple] (-3.3, 3.3) rectangle (10.3, -10.3);
+      % Power line
+      \node at (2, 4+0.3) {$V^{+}$};
+      \node at (2, -11-0.3) {$V^{-}$};
+      \draw[dashed] (2, 4) -- (2, -11);
 
-			% Labels
-			\node at (3.5, 4+0.3) {$T^{+}$};
-			\node at (3.5, -11-0.3) {$T^{-}$};
-			\node at (3.7, 2-5.5) {\texttt{A}};
-			\node at (5.2, 2-5.5) {\texttt{B}};
-			\node at (6.7, 2-5.5) {\texttt{C}};
-			\node at (8.2, 2-5.5) {\texttt{D}};
-
-			% Power line
-			\node at (2, 4+0.3) {$V^{+}$};
-			\node at (2, -11-0.3) {$V^{-}$};
-			\draw[dashed] (2, 4) -- (2, -11);
-
-		\end{circuitikz}
-	}
+    \end{circuitikz}
+  }
 \end{center}
-On the left we have our two sets of rotors represented by permutations $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ (three steps apart). Note that these permutaions ignore the plugboard setting $S$, a caveat we will discuss later. Further, we will implicitly set the rotors' ring settings to \texttt{AAA} by just placing each letter abve its corresponding contact on the rotor.
-\\\\The dotted line from $V^{-}$ to $V^{+}$  represents our battery line. When current enters through the battery line, it is only able to enter at contacts which have their switches flipped, this is how the operator can select the input letter. When the input letter then travels through the rotors, it will exit at some other location. If both $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ produce the same exit letter for the given input letter, then both exit letters wil reach transistor gates along the same line (depicted with letters \texttt{A}, \texttt{B}, \texttt{C}, \texttt{D}). When this happens, current is freely able to flow from $T^{-}$ to $T^{+}$.
-\\\\To see this, note that in our diagram we have \texttt{A} selected as the input letter. Following $N_x^{-1}Q_{y,z}N_x$ we can see that the rotor will now output \texttt{C}. Similarly, rotor $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ will output \texttt{C}. Each of these will then travel to transistor gates of the line labelled \texttt{C}, thus opening both transistors in this line and allowing current to flow from $T^{-}$ to $T^{+}$.
-Thus, if we connect our battery in parallel to the line from $T^{-}$ to $T^{+}$ and some current-triggered detector in series with the line from $T^{-}$ to $T^{+}$, the detector will only trigger when the input letter (in our case \texttt{A}) produces a female (in our case \texttt{C}) for the specifed rotor position. We can abstract this entire circuit by noting that the wires exiting the enclosing box of the diagram are all that are needed to detect the presence of a female for the given rotor position and input. The box itself has settings consisting of the choice of rotors, rotor positions, and which switch we select for our input letter.
-\\\\To allow this machine to detect three different pairs of females, we can simply align three female detectors in series, with three different rotor settings $(x,y,z)$, $(x^\prime, y^\prime, z^\prime)$, and $(x^{\prime\prime}, y^{\prime\prime}, z^{\prime\prime})$ which indicate the start of that detectors particular female. We then wire the three detectors to a stopping mechanism (in the case of the Bomba this was an electromagnet), and the machine will stop whenever all three females are detected.
+On the left we have our two sets of rotors represented by
+permutations $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$
+(three steps apart). Note that these permutaions ignore the plugboard
+setting $S$, a caveat we will discuss later. Further, we will
+implicitly set the rotors' ring settings to \texttt{AAA} by just
+placing each letter abve its corresponding contact on the rotor.
+\\\\The dotted line from $V^{-}$ to $V^{+}$  represents our battery
+line. When current enters through the battery line, it is only able
+to enter at contacts which have their switches flipped, this is how
+the operator can select the input letter. When the input letter then
+travels through the rotors, it will exit at some other location. If
+both $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$ produce
+the same exit letter for the given input letter, then both exit
+letters wil reach transistor gates along the same line (depicted with
+letters \texttt{A}, \texttt{B}, \texttt{C}, \texttt{D}). When this
+happens, current is freely able to flow from $T^{-}$ to $T^{+}$.
+\\\\To see this, note that in our diagram we have \texttt{A} selected
+as the input letter. Following $N_x^{-1}Q_{y,z}N_x$ we can see that
+the rotor will now output \texttt{C}. Similarly, rotor
+$N_{x+3}^{-1}Q_{y,z}N_{x+3}$ will output \texttt{C}. Each of these
+will then travel to transistor gates of the line labelled \texttt{C},
+thus opening both transistors in this line and allowing current to
+flow from $T^{-}$ to $T^{+}$.
+Thus, if we connect our battery in parallel to the line from $T^{-}$
+to $T^{+}$ and some current-triggered detector in series with the
+line from $T^{-}$ to $T^{+}$, the detector will only trigger when the
+input letter (in our case \texttt{A}) produces a female (in our case
+\texttt{C}) for the specifed rotor position. We can abstract this
+entire circuit by noting that the wires exiting the enclosing box of
+the diagram are all that are needed to detect the presence of a
+female for the given rotor position and input. The box itself has
+settings consisting of the choice of rotors, rotor positions, and
+which switch we select for our input letter.
+\\\\To allow this machine to detect three different pairs of females,
+we can simply align three female detectors in series, with three
+different rotor settings $(x,y,z)$, $(x^\prime, y^\prime, z^\prime)$,
+and $(x^{\prime\prime}, y^{\prime\prime}, z^{\prime\prime})$ which
+indicate the start of that detectors particular female. We then wire
+the three detectors to a stopping mechanism (in the case of the Bomba
+this was an electromagnet), and the machine will stop whenever all
+three females are detected.
 
 \begin{center}
-	\scalebox{0.9} {
-		\begin{circuitikz}[scale=0.9, octagon/.style=
-					{shape=regular polygon, regular polygon sides=8, draw, minimum width=.2in}]
-			\fill[pink] (3-5, 0) rectangle (0-5, 3);
-			\node at (1.5-5, 1.5) {\large$x,y,z$};
-			\fill[pink] (3-0, 0) rectangle (0-0, 3);
-			\node at (1.5-0, 1.5) {\large$x^\prime,y^\prime,z^\prime$};
-			\fill[pink] (3+5, 0) rectangle (0+5, 3);
-			\node at (1.5+5, 1.5) {\large$x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}$};
-			\draw[dashed] (3-5-3-1, 2) -- (0-5, 2);
-			\draw[dashed] (3-0-3-2, 2) -- (0, 2);
-			\draw[dashed] (3-0-3-2+5, 2) -- (0+5, 2);
-			\draw[dashed] (3-5-3-1+14, 2) -- (0-5+15.5, 2);
-			\draw[dashed] (3-5-3-1, 2) -- (3-5-3-1, 1);
-			\draw[dashed] (0-5+15.5, 2) -- (0-5+15.5, -5);
-			\draw[dashed] (0-5+15.5, -5) -- (0-5+15.5-1.5, -5);
+  \scalebox{0.9} {
+    \begin{circuitikz}[scale=0.9, octagon/.style=
+        {shape=regular polygon, regular polygon sides=8, draw, minimum
+      width=.2in}]
+      \fill[pink] (3-5, 0) rectangle (0-5, 3);
+      \node at (1.5-5, 1.5) {\large$x,y,z$};
+      \fill[pink] (3-0, 0) rectangle (0-0, 3);
+      \node at (1.5-0, 1.5) {\large$x^\prime,y^\prime,z^\prime$};
+      \fill[pink] (3+5, 0) rectangle (0+5, 3);
+      \node at (1.5+5, 1.5)
+      {\large$x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}$};
+      \draw[dashed] (3-5-3-1, 2) -- (0-5, 2);
+      \draw[dashed] (3-0-3-2, 2) -- (0, 2);
+      \draw[dashed] (3-0-3-2+5, 2) -- (0+5, 2);
+      \draw[dashed] (3-5-3-1+14, 2) -- (0-5+15.5, 2);
+      \draw[dashed] (3-5-3-1, 2) -- (3-5-3-1, 1);
+      \draw[dashed] (0-5+15.5, 2) -- (0-5+15.5, -5);
+      \draw[dashed] (0-5+15.5, -5) -- (0-5+15.5-1.5, -5);
 
-			\draw (3-5-3-1, 1) -- (0-5, 1);
-			\draw (3-0-3-2, 1) -- (0, 1);
-			\draw (3-0-3-2+5, 1) -- (0+5, 1);
-			\draw (3-5-3-1+14, 1) -- (0-5+14, 1);
-			\draw (3-5-3-1, 1) -- (3-5-3-1, -2.5);
-			\draw (3-5-3-1, -3) to[battery] (3-5-3-1, -2.5);
-			\draw (3-5-3-1, -3) -- (3-5-3-1, -5);
-			\draw (3-5-3-1, -5) -- (0-5+14, -5);
-			\draw (0-5+14, -5) -- (0-5+14, -3.6);
-			\draw (0-5+14, -1.4) -- (0-5+14, 1);
-			\node[octagon] at (0-5+14, -2.5) {STOP};
-		\end{circuitikz}
-	}
+      \draw (3-5-3-1, 1) -- (0-5, 1);
+      \draw (3-0-3-2, 1) -- (0, 1);
+      \draw (3-0-3-2+5, 1) -- (0+5, 1);
+      \draw (3-5-3-1+14, 1) -- (0-5+14, 1);
+      \draw (3-5-3-1, 1) -- (3-5-3-1, -2.5);
+      \draw (3-5-3-1, -3) to[battery] (3-5-3-1, -2.5);
+      \draw (3-5-3-1, -3) -- (3-5-3-1, -5);
+      \draw (3-5-3-1, -5) -- (0-5+14, -5);
+      \draw (0-5+14, -5) -- (0-5+14, -3.6);
+      \draw (0-5+14, -1.4) -- (0-5+14, 1);
+      \node[octagon] at (0-5+14, -2.5) {STOP};
+    \end{circuitikz}
+  }
 \end{center}
 
-\noindent This is more or less the structure of the Bomba. Using our above construction we can select rotor positions corresponding to 3 females (thus representing 6 total sets of rotors) and we can select an input letter which we expect to produce these 3 females. The machine rotates all the rotors simultaneously so they maintain their relative distance from one another and as it churns through all $26^3$ rotor positions, the machine will halt when it finds an absolute position corresponding to females in each set of rotors. From this machine we will now show that the daily key can be derived. We must first account for some caveats in our construction of the machine.
+\noindent This is more or less the structure of the Bomba. Using our
+above construction we can select rotor positions corresponding to 3
+females (thus representing 6 total sets of rotors) and we can select
+an input letter which we expect to produce these 3 females. The
+machine rotates all the rotors simultaneously so they maintain their
+relative distance from one another and as it churns through all
+$26^3$ rotor positions, the machine will halt when it finds an
+absolute position corresponding to females in each set of rotors.
+From this machine we will now show that the daily key can be derived.
+We must first account for some caveats in our construction of the machine.
 
 \subsubsection{Turnover}
-In our construction we made the simplifying assumption that the rotor 3 steps apart from $N_{x}^{-1}Q_{y,z}N_{x}$ is $N_{x+3}^{-1}Q_{y,z}N_{x+3}$. Of course, if rotor tunover occurs between these two points, the middle rotor will have stepped making this assumption no longer true. However, earlier discovery of rotor wirings and ring notch locations meant that cryptanalysts knew for a given rotor order, which window settings will produce turnovers in the first six key presses. Therefore, we definitively know whether or not a turnover occured for a given message so in reality we can update the middle rotor as necessary to ensure the two rotors maintain a relative distance of 3 steps. This amounts to changing $y$ to $y+1$ for some rotor orders and messages.
+In our construction we made the simplifying assumption that the rotor
+3 steps apart from $N_{x}^{-1}Q_{y,z}N_{x}$ is
+$N_{x+3}^{-1}Q_{y,z}N_{x+3}$. Of course, if rotor tunover occurs
+between these two points, the middle rotor will have stepped making
+this assumption no longer true. However, earlier discovery of rotor
+wirings and ring notch locations meant that cryptanalysts knew for a
+given rotor order, which window settings will produce turnovers in
+the first six key presses. Therefore, we definitively know whether or
+not a turnover occured for a given message so in reality we can
+update the middle rotor as necessary to ensure the two rotors
+maintain a relative distance of 3 steps. This amounts to changing $y$
+to $y+1$ for some rotor orders and messages.
 \subsubsection{The Plugboard}
-Recall that our rotors are represented by permutations of the form $N_{x}^{-1}Q_{y,z}N_{x}$. Such permutations completely ignore the effect of the plugboard permutation $S$. However, consider a message with the keys
+Recall that our rotors are represented by permutations of the form
+$N_{x}^{-1}Q_{y,z}N_{x}$. Such permutations completely ignore the
+effect of the plugboard permutation $S$. However, consider a message
+with the keys
 \[
-	\setlength{\arraycolsep}{15pt}
-	\begin{array}{c | c}
-		\texttt{RTJ} & {\uline{\texttt{W}}}\texttt{AH }{\uline{\texttt{W}}}\texttt{IK} \\
-	\end{array}
+  \setlength{\arraycolsep}{15pt}
+  \begin{array}{c | c}
+    \texttt{RTJ} & {\uline{\texttt{W}}}\texttt{AH
+    }{\uline{\texttt{W}}}\texttt{IK} \\
+  \end{array}
 \]
-Denote the Enigma permutation at the positions $1$ and $4$ respectively as $\sigma_1$ and $\sigma_4$. Recal that the \texttt{W} at both these positions represent the same enciphered letter, which means we necessarily have
+Denote the Enigma permutation at the positions $1$ and $4$
+respectively as $\sigma_1$ and $\sigma_4$. Recal that the \texttt{W}
+at both these positions represent the same enciphered letter, which
+means we necessarily have
 \[
-	\sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
+  \sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
 \]
-This is precisely the criteria we are using to check if $\sigma_i$ has a $1-4$ female, we mechanicaly run \texttt{W} through these machines at 3 steps apart, and see if they are equal.
+This is precisely the criteria we are using to check if $\sigma_i$
+has a $1-4$ female, we mechanicaly run \texttt{W} through these
+machines at 3 steps apart, and see if they are equal.
 \\\\If \texttt{W} is fixed by the plugboard permutation $S$ then we have
 \begin{align*}
-	     & \sigma_1(\texttt{W}) = \sigma_4(\texttt{W})                                              \\
-	\iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) = S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}S(\texttt{W})   \\
-	\iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) = S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W})    \\
-	\iff & S^{-1}(N_x^{-1}Q_{y,z}N_x(\texttt{W})) = S^{-1}(N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W})) \\
+  & \sigma_1(\texttt{W}) = \sigma_4(\texttt{W})
+  \\
+  \iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) =
+  S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}S(\texttt{W})   \\
+  \iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) =
+  S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W})    \\
+  \iff & S^{-1}(N_x^{-1}Q_{y,z}N_x(\texttt{W})) =
+  S^{-1}(N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W})) \\
 \end{align*}
 Since $S^{-1}$ is an injection this occurs if and only if
 \[
-	N_x^{-1}Q_{y,z}N_x(\texttt{W}) = N_{x+3}^{-1}Q_{y,z}N_{x+3}(\texttt{W})
+  N_x^{-1}Q_{y,z}N_x(\texttt{W}) = N_{x+3}^{-1}Q_{y,z}N_{x+3}(\texttt{W})
 \]
-This means that for the purposes of testing for females on input \texttt{W}, our simplified rotor model works correctly so long as $S$ fixes \texttt{W}. At the time when this machine was developed anywhere from $5-8$ plugboard jacks were being used meaning that, on average, half of the letters were fixed. Therefore we have a reasonably high probability of our analysis being correct at least every other attempt. This is why our messages were chosen so that they all had the same letter \texttt{W} being repeated, since we only needed \emph{one} letter fixed by $S$. Compared to the grill method this is a significant improvement.
+This means that for the purposes of testing for females on input
+\texttt{W}, our simplified rotor model works correctly so long as $S$
+fixes \texttt{W}. At the time when this machine was developed
+anywhere from $5-8$ plugboard jacks were being used meaning that, on
+average, half of the letters were fixed. Therefore we have a
+reasonably high probability of our analysis being correct at least
+every other attempt. This is why our messages were chosen so that
+they all had the same letter \texttt{W} being repeated, since we only
+needed \emph{one} letter fixed by $S$. Compared to the grill method
+this is a significant improvement.
 
 \subsection{Recovering the Ring Settings}
-In our Bomba we have 6 rotors, with 3 of them being paired such that they are 3 steps apart. Let us refer to these 6 rotors as,
+In our Bomba we have 6 rotors, with 3 of them being paired such that
+they are 3 steps apart. Let us refer to these 6 rotors as,
 \begin{align*}
-	 & R_{x,y,z} \texttt{ - } R_{x+3,y,z}                                                                                           \\
-	 & R_{x^\prime,y^\prime,z^\prime} \texttt{ - } R_{x^\prime+3,y^\prime,z^\prime}                                                 \\
-	 & R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}} \texttt{ - } R_{x^{\prime\prime}+3,y^{\prime\prime},z^{\prime\prime}}
+  & R_{x,y,z} \texttt{ - } R_{x+3,y,z}
+  \\
+  & R_{x^\prime,y^\prime,z^\prime} \texttt{ - }
+  R_{x^\prime+3,y^\prime,z^\prime}
+  \\
+  & R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}} \texttt{ -
+  } R_{x^{\prime\prime}+3,y^{\prime\prime},z^{\prime\prime}}
 \end{align*}
-When our Bomba stops, we know the positions at which the females observed would occur with a supposed ring setting of \texttt{AAA}. From this position, we will now attempt to recover the true ring setting. Suppose the true ring setting was \texttt{AAA}. Then our machine would immediately stop since our initial machine position is exactly the settings used to encode the messages. Now suppose the true ring settting was \texttt{AAB}. Recall that, without turnover, the ring setting and the rotor position have inverse effects on each other -- moving the ring setting forward by one is equivalent to moving the rotor position back by one. For this reason, we would observe the machine stop when the Enigma machine initially positioned at $(x,y,z)$ is now at $(x-1,y,z)$. From following this observation, we can see that if the machine stops with the rotors $k$ steps ahead of where they started, then the ring setting must be $-k$ positions away from \texttt{AAA}. Thus if the machine starts at position $(x,y,z)$ and stops at position $(a,b,c)$ we can get the numerical values of the ring position by computing
+When our Bomba stops, we know the positions at which the females
+observed would occur with a supposed ring setting of \texttt{AAA}.
+From this position, we will now attempt to recover the true ring
+setting. Suppose the true ring setting was \texttt{AAA}. Then our
+machine would immediately stop since our initial machine position is
+exactly the settings used to encode the messages. Now suppose the
+true ring settting was \texttt{AAB}. Recall that, without turnover,
+the ring setting and the rotor position have inverse effects on each
+other -- moving the ring setting forward by one is equivalent to
+moving the rotor position back by one. For this reason, we would
+observe the machine stop when the Enigma machine initially positioned
+at $(x,y,z)$ is now at $(x-1,y,z)$. From following this observation,
+we can see that if the machine stops with the rotors $k$ steps ahead
+of where they started, then the ring setting must be $-k$ positions
+away from \texttt{AAA}. Thus if the machine starts at position
+$(x,y,z)$ and stops at position $(a,b,c)$ we can get the numerical
+values of the ring position by computing
 \[
-	(1 - (c- z)\text{ mod }26, 1 - (b- y)\text{ mod }26, 1 - (a- x)\text{ mod }26).
+  (1 - (c- z)\text{ mod }26, 1 - (b- y)\text{ mod }26, 1 - (a-
+  x)\text{ mod }26).
 \]
 
 \subsection{Recovering the Rotor Order}
-If we run our machine for all $6$ possible rotor orderings, we now have candidate ring settings for each rotor ordering. We can now test which rotor ordering is correct by using our ring setting to attempt to decipher the doubly encoded message keys. If we were correct then we should see the same trigram deciphered twice. Of course, because we have not yet set the plugboard we will not see the exact same trigram, but if we chose the correct rotor ordering we will still see many copies of letters at a distance of three from each other for any letter which was fixed by the plugboard. With enough deciphered message keys we can guess which rotor ordering was used that day. Given both this and the clock method described earlier we can recover the true rotor ordering.
+If we run our machine for all $6$ possible rotor orderings, we now
+have candidate ring settings for each rotor ordering. We can now test
+which rotor ordering is correct by using our ring setting to attempt
+to decipher the doubly encoded message keys. If we were correct then
+we should see the same trigram deciphered twice. Of course, because
+we have not yet set the plugboard we will not see the exact same
+trigram, but if we chose the correct rotor ordering we will still see
+many copies of letters at a distance of three from each other for any
+letter which was fixed by the plugboard. With enough deciphered
+message keys we can guess which rotor ordering was used that day.
+Given both this and the clock method described earlier we can recover
+the true rotor ordering.
 
 \subsection{Recovering the Plugboard}
-We now have the rotor order, the ring setting, and the window setting. We can then attempt to decrypt a message key. For example, we may decode the message key from
+We now have the rotor order, the ring setting, and the window
+setting. We can then attempt to decrypt a message key. For example,
+we may decode the message key from
 \[
-	\setlength{\arraycolsep}{15pt}
-	\begin{array}{c | c}
-		\texttt{LRJ} & \texttt{PAH }\texttt{IKO} \\
-	\end{array}
+  \setlength{\arraycolsep}{15pt}
+  \begin{array}{c | c}
+    \texttt{LRJ} & \texttt{PAH }\texttt{IKO} \\
+  \end{array}
 \]
 and get
 \begin{center}
-	\texttt{AN}{\uline{\texttt{K}}}\texttt{ LR}{\uline{\texttt{K}}}
+  \texttt{AN}{\uline{\texttt{K}}}\texttt{ LR}{\uline{\texttt{K}}}
 \end{center}
-We can assume \texttt{K} is correct since we expect it to be repeated at a distance of 3 letters apart, but the first two letters in each trigram are not identical indicating that they are being affected by the plugboard. We might guess therefore the the message should look like either something of the form
+We can assume \texttt{K} is correct since we expect it to be repeated
+at a distance of 3 letters apart, but the first two letters in each
+trigram are not identical indicating that they are being affected by
+the plugboard. We might guess therefore the the message should look
+like either something of the form
 \begin{center}
-	{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}\texttt{ }{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}
+  {\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
+  }{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}
 \end{center}
 or
 \begin{center}
-	{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}\texttt{ }{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}
+  {\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
+  }{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}
 \end{center}
 
-\noindent However, we have now deduced the entire permutation $\sigma_i$, save for $S$. We can therefore derive which plugboard settting produces $\sigma_1(\texttt{P}) = \texttt{L}$ or the alternate $\sigma_4(\texttt{I}) = \texttt{A}$. This gives two pluboard possibilities. As we attempt to decrypt more message keys, we can find plugboard settings which agree and thus work out the entirety of the plugboard. With this, the cryptanalyst has recovered the entire daily key.
-\\\\The Bomba represented a move towards electromechanical computation for cryptography. This invention (along with the Cyclometer) had a direct influence on the choice to construct the Bombe at Bletchley Park. Cryptanalysts at Bletchley had known about the work of Polish cryptographers and attempted to expand their methods in the face of complex changes to the Engima protocol.
-% \\\\We will nowIf we assume the plugboard $S$ is the identity, then we can construct a machine which simple iterates th...
-% %% ASSUME NO TURNOVER SINCE WE CAN GUARANTEE BY LOOKING AT THE GRUNDSTELLUNG AND SEEING IF THERES TURNOVER FOR A PARTICULAR ROTOR ORDER  %%
-% \\\\In reality, $S$ will not be the identity, but we only require that $S$ fixes \texttt{A} in order to remove its relevance from the relationship between $\sigma_{i}$ and $\sigma_{i+3}$. At the time the Bomba was constructed, anywhere from $5$ to $8$ plugboard jacks were in use, meaning we have, on average, a $50\%$ chance that $S$ fixes \texttt{A}.
-% \\\\We begin by assuming the ring position is \texttt{AAA}, that is, our labels on the rotors we will use will just directly correspond with the contact beneath them. If the true ring setting were \texttt{AAA} the machine would stop immediately. If instead the true ring setting were were \texttt{AAB} to observe the same effect as this ring setting we would need to wait until the rotor had reach the position ???, at which point that machine would stop.
-% In this sense, we can determine the true ring setting by seeing how far from the initial position the Bomba had to move before we found a stop. %% WITH NO TURNOVER %% The ring setting moves in inverse fashion to the rotation of the rotors so we can simply subtract this number of rotations from our proposed ring setting \textt{AAA} to get the true ring setting. \\\\In this paper, diagrams for the Cyclometer and the Bombe (later discussed) are abstracted so as to remove reference to specific circuitry elements since the reader is not expected to have a deep understanding of electrical engineering. However, compared to the Cyclometer and the Bombe, the Bomba requires more logical operations since it necessitates the equivalent of an AND gate. To maintain clarity for readers we will construct the Bomba piece by piece with relatively simplified circuit diagrams intended to give the reader an understand of how such a machine could work in practice.
+\noindent However, we have now deduced the entire permutation
+$\sigma_i$, save for $S$. We can therefore derive which plugboard
+settting produces $\sigma_1(\texttt{P}) = \texttt{L}$ or the
+alternate $\sigma_4(\texttt{I}) = \texttt{A}$. This gives two
+pluboard possibilities. As we attempt to decrypt more message keys,
+we can find plugboard settings which agree and thus work out the
+entirety of the plugboard. With this, the cryptanalyst has recovered
+the entire daily key.
+\\\\The Bomba represented a move towards electromechanical
+computation for cryptography. This invention (along with the
+Cyclometer) had a direct influence on the choice to construct the
+Bombe at Bletchley Park. Cryptanalysts at Bletchley had known about
+the work of Polish cryptographers and attempted to expand their
+methods in the face of complex changes to the Engima protocol.
+% \\\\We will nowIf we assume the plugboard $S$ is the identity, then
+% we can construct a machine which simple iterates th...
+% %% ASSUME NO TURNOVER SINCE WE CAN GUARANTEE BY LOOKING AT THE
+% GRUNDSTELLUNG AND SEEING IF THERES TURNOVER FOR A PARTICULAR ROTOR ORDER  %%
+% \\\\In reality, $S$ will not be the identity, but we only require
+% that $S$ fixes \texttt{A} in order to remove its relevance from the
+% relationship between $\sigma_{i}$ and $\sigma_{i+3}$. At the time
+% the Bomba was constructed, anywhere from $5$ to $8$ plugboard jacks
+% were in use, meaning we have, on average, a $50\%$ chance that $S$
+% fixes \texttt{A}.
+% \\\\We begin by assuming the ring position is \texttt{AAA}, that
+% is, our labels on the rotors we will use will just directly
+% correspond with the contact beneath them. If the true ring setting
+% were \texttt{AAA} the machine would stop immediately. If instead
+% the true ring setting were were \texttt{AAB} to observe the same
+% effect as this ring setting we would need to wait until the rotor
+% had reach the position ???, at which point that machine would stop.
+% In this sense, we can determine the true ring setting by seeing how
+% far from the initial position the Bomba had to move before we found
+% a stop. %% WITH NO TURNOVER %% The ring setting moves in inverse
+% fashion to the rotation of the rotors so we can simply subtract
+% this number of rotations from our proposed ring setting \textt{AAA}
+% to get the true ring setting. \\\\In this paper, diagrams for the
+% Cyclometer and the Bombe (later discussed) are abstracted so as to
+% remove reference to specific circuitry elements since the reader is
+% not expected to have a deep understanding of electrical
+% engineering. However, compared to the Cyclometer and the Bombe, the
+% Bomba requires more logical operations since it necessitates the
+% equivalent of an AND gate. To maintain clarity for readers we will
+% construct the Bomba piece by piece with relatively simplified
+% circuit diagrams intended to give the reader an understand of how
+% such a machine could work in practice.
 
-%% WIRE RECOVERY https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3f948f763e4d77467a6bd6fc07e717870208.0d0 %%
+%% WIRE RECOVERY
+% https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3f948f763e4d77467a6bd6fc07e717870208.0d0
+% %%
 %% http://tandfonline.com/doi/full/10.1080/01611194.2016.1257522 %%
 
-%% note: I am not a historian, I dont read German. There are many protocls by which Enigma was used over varying time frames. There were many techniques attempted in breaking Enigma and many iterations of these techniques. The techiques discussed in this paper are intended to present a narrative leading to ultimately new results, but do not capture the full breadth and historical context surrounding the Enigma machine. The more I have studied this subject the more I have found that a truly complete analysis of the subject capturing both histoical, engineering, and matehmatical accuracy would require the combined efforts of many parties and would...%%
+%% note: I am not a historian, I dont read German. There are many
+% protocls by which Enigma was used over varying time frames. There
+% were many techniques attempted in breaking Enigma and many
+% iterations of these techniques. The techiques discussed in this
+% paper are intended to present a narrative leading to ultimately new
+% results, but do not capture the full breadth and historical context
+% surrounding the Enigma machine. The more I have studied this
+% subject the more I have found that a truly complete analysis of the
+% subject capturing both histoical, engineering, and matehmatical
+% accuracy would require the combined efforts of many parties and would...%%

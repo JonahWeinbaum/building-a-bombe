@@ -1,10 +1,9 @@
 \chapter{The Enigma}
 
 \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 52}}
-	The Enigma, though simple in principle and primitive in many ways,
-	presented the cryptanalyst with a dazzling number of possibilities.
+  The Enigma, though simple in principle and primitive in many ways,
+  presented the cryptanalyst with a dazzling number of possibilities.
 \end{chapquote}
-
 
 The Enigma machine was used extensivley by the Germans to encipher
 communications prior to and throughout World War II. German
@@ -38,10 +37,10 @@ requires several mechanical components in a complex arrangement
 \subsection{The Plugboard}
 
 % \begin{figure}[htbp]
-% 	\begin{center}\includegraphics[scale=0.9]{images/plugboard.jpg}
-% 	\end{center}
-% 	\label{ref:plugboard}
-% 	\caption{Enigma \texttt{I} Plugboard}
+%   \begin{center}\includegraphics[scale=0.9]{images/plugboard.jpg}
+%   \end{center}
+%   \label{ref:plugboard}
+%   \caption{Enigma \texttt{I} Plugboard}
 % \end{figure}
 
 Upon a key press, the electrical current corresponding to this letter
@@ -55,31 +54,31 @@ letter (e.g. D has no cable), then the plugboard simply will return a
 current corresponding to this same letter (e.g. D). Assuming all 10
 cables are used this means that the plugboard can be represented as a
 permutation on 26 letters with $2^{10}1^6$ cycle type\footnote{We
-	will denote cycle types in this paper in the format
-	$\lambda_1^{m_1}\dots\lambda_n^{m_n}$ where $\lambda_i$ is the length
-	of a cycle and $m_i$ is the multiplicity of this cycle length.}. One such
+  will denote cycle types in this paper in the format
+  $\lambda_1^{m_1}\dots\lambda_n^{m_n}$ where $\lambda_i$ is the length
+of a cycle and $m_i$ is the multiplicity of this cycle length.}. One such
 permutation could be
 \begin{center}
-	(\texttt{HR})(\texttt{AT})(\texttt{IW})(\texttt{SK})(\texttt{UY})(\texttt{DF})(\texttt{GV})(\texttt{LJ})(\texttt{BQ})(\texttt{MX})(\texttt{C})(\texttt{E})(\texttt{N})(\texttt{O})(\texttt{P})(\texttt{Z})
+  (\texttt{HR})(\texttt{AT})(\texttt{IW})(\texttt{SK})(\texttt{UY})(\texttt{DF})(\texttt{GV})(\texttt{LJ})(\texttt{BQ})(\texttt{MX})(\texttt{C})(\texttt{E})(\texttt{N})(\texttt{O})(\texttt{P})(\texttt{Z})
 \end{center}
 In general we will denote the permutation corresponding to a plugboard as $S$.
 
 \subsection{The Rotors}
 % \begin{figure}[htpb]
-% 	\centering
-% 	\begin{subfigure}{0.3\textwidth}
-% 		\includegraphics[width=\linewidth]{images/rotor_v_front.jpg}
-% 		\caption{Entry-side}
-% 		\label{fig:rotor_v_front}
-% 	\end{subfigure}
-% 	\hspace{0.02\textwidth}
-% 	\begin{subfigure}{0.3\textwidth}
-% 		\includegraphics[width=\linewidth]{images/rotor_v_back.jpg}
-% 		\caption{Exit-side}
-% 		\label{fig:rotor_v_back}
-% 	\end{subfigure}
-% 	\caption{Rotor \texttt{V}}
-% 	\label{fig:rotor_v}
+%   \centering
+%   \begin{subfigure}{0.3\textwidth}
+%     \includegraphics[width=\linewidth]{images/rotor_v_front.jpg}
+%     \caption{Entry-side}
+%     \label{fig:rotor_v_front}
+%   \end{subfigure}
+%   \hspace{0.02\textwidth}
+%   \begin{subfigure}{0.3\textwidth}
+%     \includegraphics[width=\linewidth]{images/rotor_v_back.jpg}
+%     \caption{Exit-side}
+%     \label{fig:rotor_v_back}
+%   \end{subfigure}
+%   \caption{Rotor \texttt{V}}
+%   \label{fig:rotor_v}
 % \end{figure}
 
 The Enigma model \texttt{I} used three rotors, selected from a larger
@@ -146,30 +145,30 @@ rotate 26 times before rotor L will move by one contact.
 
 %% https://www.cryptomuseum.com/crypto/enigma/m3/index.htm %%
 \begin{center}
-	\begin{figure}[h]
-		\[
-			\left(
-			\begin{array}{llllllllllllllllllllllllll}
-					\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-					\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-					\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-					\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-					\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-					\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-					\texttt{Y} & \texttt{Z}                             \\
-					\texttt{V} & \texttt{Z} & \texttt{B} & \texttt{R} &
-					\texttt{G} & \texttt{I} & \texttt{T} & \texttt{Y} &
-					\texttt{U} & \texttt{P} & \texttt{S} & \texttt{D} &
-					\texttt{N} & \texttt{H} & \texttt{L} & \texttt{X} &
-					\texttt{A} & \texttt{W} & \texttt{M} & \texttt{J} &
-					\texttt{Q} & \texttt{O} & \texttt{F} & \texttt{E} &
-					\texttt{C} & \texttt{K}
-				\end{array}
-			\right)
-		\]
-		\caption{Rotor \texttt{V} permutation}
-		\label{fig:rotor_v_wiring}
-	\end{figure}
+  \begin{figure}[h]
+    \[
+      \left(
+        \begin{array}{llllllllllllllllllllllllll}
+          \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+          \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+          \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+          \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+          \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+          \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+          \texttt{Y} & \texttt{Z}                             \\
+          \texttt{V} & \texttt{Z} & \texttt{B} & \texttt{R} &
+          \texttt{G} & \texttt{I} & \texttt{T} & \texttt{Y} &
+          \texttt{U} & \texttt{P} & \texttt{S} & \texttt{D} &
+          \texttt{N} & \texttt{H} & \texttt{L} & \texttt{X} &
+          \texttt{A} & \texttt{W} & \texttt{M} & \texttt{J} &
+          \texttt{Q} & \texttt{O} & \texttt{F} & \texttt{E} &
+          \texttt{C} & \texttt{K}
+        \end{array}
+      \right)
+    \]
+    \caption{Rotor \texttt{V} permutation}
+    \label{fig:rotor_v_wiring}
+  \end{figure}
 \end{center}
 
 \subsubsection{Rotation}
@@ -188,29 +187,29 @@ of shifting an input letter forward by 1 (mod 26) and the output
 letter back by 1 (mod 26).
 \\\\To encode the effect of rotation as a permutation consider
 \begin{definition}
-	The \emph{Ceasar permutation} (denoted $P$) is the permutation
-	taking a letter to the next letter in alphabetical order (mod 26).
-	Its two-line permutation notation is
-	\[
-		\left(
-		\begin{array}{llllllllllllllllllllllllll}
-				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-				\texttt{Y} & \texttt{Z}                             \\
-				\texttt{B} & \texttt{C} & \texttt{D} &
-				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-				\texttt{Y} & \texttt{Z} & \texttt{A}
-			\end{array}
-		\right).
-	\]
+  The \emph{Ceasar permutation} (denoted $P$) is the permutation
+  taking a letter to the next letter in alphabetical order (mod 26).
+  Its two-line permutation notation is
+  \[
+    \left(
+      \begin{array}{llllllllllllllllllllllllll}
+        \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+        \texttt{Y} & \texttt{Z}                             \\
+        \texttt{B} & \texttt{C} & \texttt{D} &
+        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+        \texttt{Y} & \texttt{Z} & \texttt{A}
+      \end{array}
+    \right).
+  \]
 \end{definition}
 If we denote the permutation corresponding to rotor \texttt{V} in
 default position as $\sigma$. Then after $r$ rotations, to get
@@ -218,9 +217,13 @@ our new permutation we must first shift each input letter forward by
 $r$ and each output letter backwards by $r$. This can be encoded via
 the Ceasar permutation as follows
 \[
-	{P^{-r}}\sigma{P^{r}}.
+  {P^{-r}}\sigma{P^{r}}.
 \]
-
+\noindent It should be noted that current will only flow through the
+machine \emph{after} the rotation has taken place. Thus encrypting a
+letter with the window indicating \texttt{AAA} is really going to
+send current through the rotors with the window indicaiton
+\texttt{AAB} since the rightmost rotor will turn before the encryption happens.
 \subsubsection{Outer Ring}
 
 The rotors were additionally equipped with an outer ring with
@@ -248,17 +251,24 @@ permutation by first shifting each input letter backwards by $r$ and
 each output letter forwards by $r$. This can be encoded via the
 Ceasar permutation as follows
 \[
-	{P^{r}}\sigma{P^{-r}}.
+  {P^{r}}\sigma{P^{-r}}.
 \]
 In this sense, we can think of rotor rotations and ring adjustments
 as having inverse effects. In fact, if we ignore turnover, setting
 the ring forward by $r$ letters and then rotating the rotor by $r$
 letters is equivalent to having left the ring setting and rotor in
-its default position. That is to say, for cases where turnover does not occur, the ring setting (\emph{Ringstellung}) and which letter
-we decide to show in our window (\emph{Grundstellung}) really represent one singular component of our keyspace since we can always consider our ring setting as being at \texttt{A} by just shifting which letter we display in our window.
+its default position. That is to say, for cases where turnover does
+not occur, the ring setting (\emph{Ringstellung}) and which letter
+we decide to show in our window (\emph{Grundstellung}) really
+represent one singular component of our keyspace since we can always
+consider our ring setting as being at \texttt{A} by just shifting
+which letter we display in our window.
 However, consider that changing the ring
 setting also changes where the turnover occurs relative to the
-internal wiring of a rotor. This means that for rotors $M$ and $L$ which are affected by turnover, the ring setting does in fact add to the key space since it has effects which are independent from the window setting.
+internal wiring of a rotor. This means that for rotors $M$ and $L$
+which are affected by turnover, the ring setting does in fact add to
+the key space since it has effects which are independent from the
+window setting.
 
 %% NOTE HAPPENES AFTER PAWL %%
 
@@ -290,176 +300,417 @@ internal wiring of a rotor. This means that for rotors $M$ and $L$ which are aff
 % \end{itemize}
 
 \subsection{The Reflector}
+After the current travels through all three rotors, it ends up at the
+reflector which we will denote $R$. The reflector is specially
+designed so that its permutation consists only of disjoint
+transpostions, that is it has a $2^13$ cycle type. This means that
+reflector simply swaps letters in a set of $13$ pairs.
+\\\\Rather than having an entry and an exit side each with their own
+contacts, the reflector has one side of contacts. Current enters at a
+particular contact and is routed through the permutaiton back out
+this same side at a different contact. The reason for this is that
+the reflector's job is to send current through the exact inverse of
+the process we have described up to this point. That is, after
+exiting the reflector, current travels back through the rotors (now
+entering at the exit contacts of the leftmost rotor), travels back
+through the plugboard, and now ends up at a lamp light indicating the
+enciphered letter.
 
 \section{Key Size}
 
 \subsubsection{\emph{Plugboard Setting (}Steckerverbindungen\emph{)}}
-10 plugboard wires are selected in total. The first wire must connect 2 out of 26 letters giving us ${26\choose2}$ locations this wire can be placed. We now select a wire for the next two letters giving us ${24\choose2}$ remaining locations. We continue in this fashion until having placed 9 wires leaving us ${8\choose2}$ remaining choices. In total, we have found
+10 plugboard wires are selected in total. The first wire must connect
+2 out of 26 letters giving us ${26\choose2}$ locations this wire can
+be placed. We now select a wire for the next two letters giving us
+${24\choose2}$ remaining locations. We continue in this fashion until
+having placed 9 wires leaving us ${8\choose2}$ remaining choices. In
+total, we have found
 \begin{align*}
-	 & {26\choose2}{24\choose2}\dots{8\choose2}                                  \\
-	 & =\frac{26!}{2!\cdot 24!}\frac{24!}{2!\cdot 22!}\dots\frac{8!}{2!\cdot 6!} \\
-	 & =\frac{26!}{2^10\cdot6!}
+  & {26\choose2}{24\choose2}\dots{8\choose2}                                  \\
+  & =\frac{26!}{2!\cdot 24!}\frac{24!}{2!\cdot 22!}\dots\frac{8!}{2!\cdot 6!} \\
+  & =\frac{26!}{2^{10}\cdot6!}
 \end{align*}
-possible wire arrangements. Of course, the order in which we select the 10 wires does not matter so we have overcounted and must therefore divide this value by $10!$ wire orderings. Therefore, we have
+possible wire arrangements. Of course, the order in which we select
+the 10 wires does not matter so we have overcounted and must
+therefore divide this value by $10!$ wire orderings. Therefore, we have
 \[
-	\frac{26!}{2^10\cdot 10! \cdot 6!}
+  \frac{26!}{2^{10}\cdot 10! \cdot 6!}
 \]
 plugboard settings.
 
 \subsubsection{\emph{Rotor Selection (}Walzenlage\emph{)}}
-From the 5 rotors in circulation, 3 rotors in some order were needed to operate the Enigma machine. There are thus ${5}\choose{3}$ total selections of 3 rotors each of which can be ordered in $3!$ ways, giving us ${5\choose3}\cdot{3!}$ possibilities.
+From the 5 rotors in circulation, 3 rotors in some order were needed
+to operate the Enigma machine. There are thus ${5}\choose{3}$ total
+selections of 3 rotors each of which can be ordered in $3!$ ways,
+giving us ${5\choose3}\cdot{3!}$ possibilities.
 
 \subsubsection{\emph{Ring Setting (}Ringstellung\emph{)}}
-Recall that the only rotors for which the ring setting actually adds to the keyspace is the 2 rigthmost rotors since this setting changes where turnover occurs and only the 2 leftmost rotors are affected by turnover. Since each ring can be setting corresponds a letter from the 26 letter alphabet, this gives us $26^2$ possibilities.
+Recall that the only rotors for which the ring setting actually adds
+to the keyspace is the 2 rigthmost rotors since this setting changes
+where turnover occurs and only the 2 leftmost rotors are affected by
+turnover. Since each ring can be setting corresponds a letter from
+the 26 letter alphabet, this gives us $26^2$ possibilities.
 
 \subsubsection{\emph{Window Setting (}Grundstellung\emph{)}}
-A window setting specified 3 letters from the 26 letter alphabet giving us $26^3$ possibilities.
+A window setting specified 3 letters from the 26 letter alphabet
+giving us $26^3$ possibilities.
 
 \subsubsection{\emph{Reflector Selection}}
-While there are multiple reflectors each of which saw varying levels of usage during World War II, most machines generally stuck to a fixed relfector known as \texttt{UKW-B}. Therefore, this does not factor into our keyspace but is worth noting if other reflectors are being considered.
+While there are multiple reflectors each of which saw varying levels
+of usage during World War II, most machines generally stuck to a
+fixed relfector known as \texttt{UKW-B}. Therefore, this does not
+factor into our keyspace but is worth noting if other reflectors are
+being considered.
 
 \subsubsection{Total Key Size}
-Putting together all these components of an Enigma's key settings we derivce the following expression for the total number of keys
+Putting together all these components of an Enigma's key settings we
+derivce the following expression for the total number of keys
 \[
-	\frac{26!}{2^10\cdot 10! \cdot 6!}\cdot{5\choose 3}\cdot3!\cdot 26^2\cdot 26^3 \approx 1.07 \cdot 10^{23} \approx 2^{77}
+  \frac{26!}{2^{10}\cdot 10! \cdot 6!}\cdot{5\choose 3}\cdot3!\cdot
+  26^2\cdot 26^3 \approx 1.07 \cdot 10^{23} \approx 2^{77}
 \]
 resulting in a roughly $77$-bit key space.
-\\\\With such a large key space, it seemed to the Germans that Enigma was unbreakable. This was an era before computers could churn through massive keyspaces in a matter of hours. Any attempt to break Enigma was going to require an attack more intellegent than brute-forcing.
-\\\\In chapter 2, we will see how Polish cryptanalysts made use of a flaw in the Enigma protocol, along with some clever mathematics, to construct one of the earliest attempts at breaking the cipher. To provide the requisite background we will examine the protocol by which German Enigma operators sent messages, as well as provide a mathematical formalism for the machine.
+\\\\With such a large key space, it seemed to the Germans that Enigma
+was unbreakable. This was an era before computers could churn through
+massive keyspaces in a matter of hours. Any attempt to break Enigma
+was going to require an attack more intellegent than brute-forcing.
+\\\\In chapter 2, we will see how Polish cryptanalysts made use of a
+flaw in the Enigma protocol, along with some clever mathematics, to
+construct one of the earliest attempts at breaking the cipher. To
+provide the requisite background we will examine the protocol by
+which German Enigma operators sent messages, as well as provide a
+mathematical formalism for the machine.
 
 \section{The Enigma Protocol}
 %% https://bletchleypark.org.uk/our-story/enigmas-of-bletchley-park/%%
 %% https://www.cryptomuseum.com/crypto/enigma/i/index.htm%%
 %% https://www.cryptomuseum.com/crypto/enigma/files/schluessel_m.pdf%^
 
-%% FOR THE DATE GET chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf $$
-Suppose Alice and Bob are two radio operators (prior to September 15 1938) who want to communicate securely. Each are
-supplied an Enigma machine along with a machine key
-(\emph{maschinenschlussel}).
+%% FOR THE DATE GET
+% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
+% $$
+Suppose Alice and Bob are two radio operators (prior to September 15
+1938) who want to communicate securely. Each are supplied an Enigma
+machine along with a key sheet indicating the keys for a given day.
+The key sheet contains the following informations
+\begin{itemize}
+  \item The choice and order of rotors (at this point only three
+      rotors \texttt{I}, \texttt{II}, and \texttt{III} were in
+    production) known as the \emph{Walzenlage}
+  \item the ring setting known as the \emph{Ringstellung}
+    %% See rejwinski for this %%
+  \item the plugboard settings (at this point only 3 jacks were used)
+    known as the \emph{Steckerverbindungen}
+  \item the window setting known as the \emph{Grundstellung}
+\end{itemize}
+A key sheet at this time may have looked along these lines.
+
+\begin{figure}[h]
+  \begin{center}
+    \resizebox{0.98\textwidth}{!}{
+      \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{\emph{\texttt{Datum}}}               &
+        \textbf{\emph{\texttt{Walzenlage}}}          &
+        \textbf{\emph{\texttt{Ringstellung}}}        &
+        \textbf{\emph{\texttt{Steckerverbindungen}}} &
+        \textbf{\emph{\texttt{Grundstellung}}}
+        \\
+        \hline
+        \texttt{31.}                                 & \texttt{I II
+        III} & \texttt{10 14 02} & \texttt{BF SD AY} & \texttt{VAR} \\
+        \texttt{30.}                                 & \texttt{II I
+        III} & \texttt{04 25 01} & \texttt{UE PL
+        AY}                                          & \texttt{PAQ}
+        \\
+        \texttt{29.}                                 & \texttt{I III
+        II} & \texttt{13 11 06} & \texttt{WJ VD
+        PO}                                          & \texttt{ZJB}
+        \\
+        $\vdots$                                     & $\vdots$
+        & $\vdots$          & $\vdots$          & $\vdots$     \\
+        \hline
+    \end{tabular}}
+  \end{center}
+  \caption{Mock Enigma Key Sheet pre-1938}
+  \label{fig:keysheet_early}
+\end{figure}
+
+\noindent Alice wants to encrypt the message \texttt{HELLO WORLD} on
+the 31st of the month using the key sheet in figure
+\ref{keysheet_early}. She opens the machine and places the rotors in
+the machine from left to right as \texttt{I}, \texttt{II},
+\texttt{III}. She then aligns the \texttt{10} indicator on the
+leftmost drum to be inline with the \texttt{A} contact, and similarly
+for the remaining ring settings. Alice now closes the machine and
+rotates the rotors so that they display \texttt{VAR} in the window of
+each rotor. Finally, Alice connects \texttt{B} and \texttt{F} in the
+plugboard and similarly for the remaining plugboard settings. Alice
+now choose a random message key, this is a three letter trigram
+called the \emph{Spruchschlüssel}. Alice chooses her message key as
+\texttt{LSG} and is now ready to encrypt her message.
+\\\\First, Alice will encrypt her message key \texttt{LSG} twice,
+producing the hexagram
+\begin{center}
+  \texttt{KUW ACQ}
+\end{center}
+\noindent Alice now sets her window setting to her message key
+\texttt{LSG} and begins enciphering her message \texttt{HELLO WORLD} to produce
+\begin{center}
+  \texttt{WQMYV HWGAB}
+\end{center}
+Alice now sends the following message to Bob
+\begin{center}
+  \texttt{KUW ACQ WQMYV HWGAB}
+\end{center}
+\noindent Bob recieves this message. He gets his key sheet and sets
+up his machine as the key sheet describes for that day. He now types
+in the first six letters of the messsage to get back Alice's message
+key, which will look like
+\begin{center}
+  \texttt{LSG LSG}
+\end{center}
+We can now see why we doubly encoded the message key, if Bob did not
+see the same trigram repeated twice he would know that either he or
+Alice set up their machines incorrectly or Alice incorrectly typed in
+her message key. Bob could then tell Alice to correct the message.
+Now equipped with Alice's message key, Bob sets his machine window to
+\texttt{LSG} and begins typing in the remainder of the message to
+recover the plaintext
+\begin{center}
+  \texttt{HELLO WORLD}
+\end{center}
+\noindent It should be noted the procedure described here is a
+facimile of the actual procedure meant to only convey the components
+that are cryptographically significant. In practice, additional
+information was sent alongside the message such as time of
+transmission and radio station of origin. Further the message itself
+was to be encoded with particular rules, for example, spaces would be
+denoted with \texttt{X}. As we discuss changes to Enigma protocol
+throughout this paper we will leave such details out.
 %% https://www.ilord.com/enigma-manuals %%
-%% REAL DECRYPT FOR EXAMPLE OH WAIT THESE MIGHT JUST BE TUNNY DECRYPTS https://web.archive.org/web/20160406042455/http://www.ilord.com/bp-decrypts.html %% 
-Further, each have a copy of the ``\emph{Gebrauchsanleitung für die Chiffriermaschine Enigma}'' -- a book entailing all the protocols necessary for Alice
-and Bob to communicate securely. The manual explains
-\\\\\texttt{III. Setting the Key. }
-\\\texttt{10. The codebook issued with the machine determines the following 4 settings of the device:}
-\\\texttt{1. Order of the encryption rotors (III/IV, 12) (\emph{Walzenlage}),}
-\\\texttt{2. Setting of the number or letter rings (III/IV, 13) on the 3 encryption rotors (\emph{Ringstellung}),}
-\\\texttt{3. Setting of the numbers or letters visible in the windows (I/II, 16) (\emph{Grundstellung}),}
-\\\texttt{4. Establishment of the connections using the patchcords (II, 30) on the plug board (II, 15) (\emph{Steckerverbindungen}).}
+%% REAL DECRYPT FOR EXAMPLE OH WAIT THESE MIGHT JUST BE TUNNY
+% DECRYPTS
+% https://web.archive.org/web/20160406042455/http://www.ilord.com/bp-decrypts.html
+% %%
+% Further, each have a copy of the ``\emph{Gebrauchsanleitung für die
+% Chiffriermaschine Enigma}'' -- a book entailing all the protocols
+% necessary for Alice
+% and Bob to communicate securely. The manual explains
+% \\\\\texttt{III. Setting the Key. }
+% \\\texttt{10. The codebook issued with the machine determines the
+% following 4 settings of the device:}
+% \\\texttt{1. Order of the encryption rotors (III/IV, 12) (\emph{Walzenlage}),}
+% \\\texttt{2. Setting of the number or letter rings( III/IV, 13) on
+% the 3 encryption rotors (\emph{Ringstellung}),}
+% \\\texttt{3. Setting of the numbers or letters visible in the
+% windows (I/II, 16) (\emph{Grundstellung}),}
+% \\\texttt{4. Establishment of the connections using the patchcords
+% (II, 30) on the plug board (II, 15) (\emph{Steckerverbindungen}).}
 
-
-
-%% FOR PROTOCOL NOTE FROM CODE BOOK TAHT CERTAIN SCRAMBLER POSITIONS WERE DISALLOWED YAY OR CERTAIN PLUGBOARD SETTINGS %%
+%% FOR PROTOCOL NOTE FROM CODE BOOK TAHT CERTAIN SCRAMBLER POSITIONS
+% WERE DISALLOWED YAY OR CERTAIN PLUGBOARD SETTINGS %%
 
 \section{Enigma as a Permutation}
 
-Recall that from the keyboard, current will enter the plugboard ($S$), followed by the rigtmost rotor ($N$), middle
-rotor ($M$), leftmost rotor ($L$), and the reflector ($R$), only to return through each of these components. Then at default position the Enigma machine can be represented as a permutation
+Recall that from the keyboard, current will enter the plugboard
+($S$), followed by the rigtmost rotor ($N$), middle
+rotor ($M$), leftmost rotor ($L$), and the reflector ($R$), only to
+return through each of these components. Then at default position the
+Enigma machine can be represented as a permutation
 \[
-	\sigma_0 \coloneq S^{-1}N^{-1}M^{-1}L^{-1}RLMNS
+  \sigma_0 \coloneq S^{-1}N^{-1}M^{-1}L^{-1}RLMNS
 \]
 
-Additionally recall that if we ignore turnover the ring setting and window setting effectively represent one singular setting.
-Then, by proper adjustment of permutations ($L$, $M$, and $N$) we can consider any Enigma setting as beggining in such a state as described by $\sigma$. Further, each subsequent keypress will bring us to a new state with a new permutation given by
+Additionally recall that if we ignore turnover the ring setting and
+window setting effectively represent one singular setting.
+Then, by proper adjustment of permutations ($L$, $M$, and $N$) we can
+consider any Enigma setting as beggining in such a state as described
+by $\sigma$. Further, each subsequent keypress will bring us to a new
+state with a new permutation given by
 \[
-	\sigma_i \coloneq S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S
+  \sigma_i \coloneq S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S
 \]
-where $i$ describes the number of times we have depressed the keyboard. Of course, turnover does exist and does matter; however, if we are examining only the first few letters (say $l$) of a message being encrypted, we have a $\frac{25}{26}$ chance of no turnover occuring at each step and so we have a $(\frac{25}{26})^l$ chance of no turnover occuring during our initial stages on encryption. For small $l$ this is a reasonably high probability. We will see that the first Enigma codebreakers made use of this
+where $i$ describes the number of times we have depressed the
+keyboard. Of course, turnover does exist and does matter; however, if
+we are examining only the first few letters (say $l$) of a message
+being encrypted, we have a $\frac{25}{26}$ chance of no turnover
+occuring at each step and so we have a $(\frac{25}{26})^l$ chance of
+no turnover occuring during our initial stages on encryption. For
+small $l$ this is a reasonably high probability. We will see that the
+first Enigma codebreakers made use of this
 fact to simplify their model of the machine to the above permutation $\sigma_i$.
-
 
 \subsection{Cycle Type}
 Consider the structure of the permuation $\sigma_i$. We have
 \begin{align*}
-	\sigma_i & = S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S \\
-	         & = (LMP^{-i}NP^{i}S)^{-1}R(LMP^{-i}NP^{i}S).
+  \sigma_i & = S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S \\
+  & = (LMP^{-i}NP^{i}S)^{-1}R(LMP^{-i}NP^{i}S).
 \end{align*}
-That is, $\sigma_i$ is simply the reflector permuation $R$ precomposed and postcomposed with a permutation and its inverse respectively. This leads us to the following definition,
+That is, $\sigma_i$ is simply the reflector permuation $R$
+precomposed and postcomposed with a permutation and its inverse
+respectively. This leads us to the following definition,
 
 \begin{definition}
-	Let $G$ be a group. We say two elements $a,b\in{G}$ are {\bf{conjugate}} if $\exists\text{ }g\in{G}$ s.t. $a=gbg^{-1}$.
+  Let $G$ be a group. We say two elements $a,b\in{G}$ are
+  {\bf{conjugate}} if $\exists\text{ }g\in{G}$ s.t. $a=gbg^{-1}$.
 \end{definition}
-In this way, we can shorten our above observation to say that $\forall\text{ }i\in\mathbb{N}$ we have that $\sigma_i$ and $R$ are conjugate permutations. Now consider the following lemma,
+In this way, we can shorten our above observation to say that
+$\forall\text{ }i\in\mathbb{N}$ we have that $\sigma_i$ and $R$ are
+conjugate permutations. Now consider the following lemma,
 
 \begin{lemma}
-	Suppose $\rho=(a_0\dots a_{k-1})\in S_n$ is a $k$-cycle. Then $\forall\text{ }\tau\in S_n$ we have
-	$\tau\rho\tau^{-1}$ is a $k$-cycle.
-	\label{conjugate_cycle}
+  Suppose $\rho=(a_0\dots a_{k-1})\in S_n$ is a $k$-cycle. Then
+  $\forall\text{ }\tau\in S_n$ we have
+  $\tau\rho\tau^{-1}$ is a $k$-cycle.
+  \label{conjugate_cycle}
 \end{lemma}
 \begin{proof}
-	Since $\tau\in S_n$ is a bijection, to show how $\tau\rho\tau^{-1}$ acts on $\{1,\dots, n\}$ it suffices to show how it acts on $\{\tau(1), \dots, \tau(n)\}$.
-	We consider how $\tau\rho\tau^{-1}$ acts on elements of the form $\tau(a_i)$ for a fixed $i\in\{0,\dots,k-1\}$.
-	\begin{align*}
-		\tau(a_0\dots a_{k-1})\tau^{-1}(\tau(a_i)) & = \tau(a_0\dots a_{k-1})(a_i)  \\
-		                                           & = \tau(a_{(i+1)\text{ mod }k}) \\
-	\end{align*}
-	Then we know $\tau\rho\tau^{-1}$ contains the cycle $(\tau(a_0)\dots \tau(a_{k-1}))$.
-	Further, if $\tau\rho\tau^{-1}$ acts on the remaining elements $\tau(x)$ where $x\in\mathbb{N}_N - \{a_0,\dots,a_{k-1}\}$.
-	Then we have
-	\begin{align*}
-		\tau(a_0\dots a_{k-1})\tau^{-1}(\tau(x)) & = \tau(a_0\dots a_{k-1})(x) \\
-		                                         & = \tau(x)                   \\
-	\end{align*}
-	Meaning $\tau\rho\tau^{-1}$ acts as the identity on $\tau(x)$. From this we can deduce that
-	$\tau\rho\tau^{-1}$'s cycle decomposition consists of a single cycle of length $k$.
+  Since $\tau\in S_n$ is a bijection, to show how $\tau\rho\tau^{-1}$
+  acts on $\{1,\dots, n\}$ it suffices to show how it acts on
+  $\{\tau(1), \dots, \tau(n)\}$.
+  We consider how $\tau\rho\tau^{-1}$ acts on elements of the form
+  $\tau(a_i)$ for a fixed $i\in\{0,\dots,k-1\}$.
+  \begin{align*}
+    \tau(a_0\dots a_{k-1})\tau^{-1}(\tau(a_i)) & = \tau(a_0\dots
+    a_{k-1})(a_i)  \\
+    & = \tau(a_{(i+1)\text{ mod }k}) \\
+  \end{align*}
+  Then we know $\tau\rho\tau^{-1}$ contains the cycle
+  $(\tau(a_0)\dots \tau(a_{k-1}))$.
+  Further, if $\tau\rho\tau^{-1}$ acts on the remaining elements
+  $\tau(x)$ where $x\in\mathbb{N}_N - \{a_0,\dots,a_{k-1}\}$.
+  Then we have
+  \begin{align*}
+    \tau(a_0\dots a_{k-1})\tau^{-1}(\tau(x)) & = \tau(a_0\dots a_{k-1})(x) \\
+    & = \tau(x)                   \\
+  \end{align*}
+  Meaning $\tau\rho\tau^{-1}$ acts as the identity on $\tau(x)$. From
+  this we can deduce that
+  $\tau\rho\tau^{-1}$'s cycle decomposition consists of a single
+  cycle of length $k$.
 \end{proof}
 
-This lemma leads us to the following theorem that will be of deep relevance for the remainder of the paper.
+This lemma leads us to the following theorem that will be of deep
+relevance for the remainder of the paper.
 
 \begin{theorem}
-	\label{conjugate_cycle_type}
-	$\forall\text{ }\alpha, \beta \in S_n$ we have
-	\begin{center}
-		$\alpha$ and $\beta$ are conjugates $\iff$ $\alpha$ and $\beta$ have the same cycle type.
-	\end{center}
+  \label{conjugate_cycle_type}
+  $\forall\text{ }\alpha, \beta \in S_n$ we have
+  \begin{center}
+    $\alpha$ and $\beta$ are conjugates $\iff$ $\alpha$ and $\beta$
+    have the same cycle type.
+  \end{center}
 \end{theorem}
 \begin{proof}
-	\text{}\\$\Rightarrow$) Suppose $\exists\text{ }\tau\in S_n$ s.t. $\alpha = \tau\beta\tau^{-1}$. $\beta$ has some cycle type $\lambda_1^{m_1}\dots\lambda_k^{m_k}$. We can decompose
-	$\beta$ into disjoint cycles $\beta_{\lambda_1, 1}\dots\beta_{\lambda_1, m_1}\dots\beta_{\lambda_k, 1}\dots\beta_{\lambda_k, m_k}$. That is, $m_i$ cycles of length $\lambda_i$ for each $i \in \mathbb{N}_k$. .
-		\begin{align*}
-			\alpha & = \tau\beta_{\lambda_1, 1}\dots\beta_{\lambda_1, m_1}\dots\beta_{\lambda_k, 1}\dots\beta_{\lambda_k, m_k}\tau^{-1}                                                                                           \\
-			       & = \tau\beta_{\lambda_1, 1}(\tau^{-1}\tau)\dots(\tau^{-1}\tau)\beta_{\lambda_1, m_1}(\tau^{-1}\tau)\dots(\tau^{-1}\tau)\beta_{\lambda_k, 1}(\tau^{-1}\tau)\dots(\tau^{-1}\tau)\beta_{\lambda_k, m_k}\tau^{-1} \\
-			       & = (\tau\beta_{\lambda_1, 1}\tau^{-1})\dots(\tau\beta_{\lambda_1, m_1}\tau^{-1})\dots(\tau\beta_{\lambda_k, 1}\tau^{-1})\dots(\tau\beta_{\lambda_k, m_k}\tau^{-1})
-		\end{align*}
-		Each $\forall i \in \mathbb{N}_k$ and $j \in \mathbb{N}_{m_i}$ we have that $\beta_{\lambda_i, j}$ is a cycle of length $\lambda_i$ so by lemma \ref{conjugate_cycle} we have that $\tau\beta_{\lambda_i, j}\tau^{-1}$ is a $\lambda_i$ cycle.
-		\\\\Then to show $\alpha$ has cycle type $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ we need only show that each $\tau\beta_{\lambda_i, j}\tau^{-1}$ and $\tau\beta_{\lambda_s, r}\tau^{-1}$ are disjoint $\forall\text{ }i, s\in\mathbb{N}_k$ and $j\in\mathbb{N}_{m_i}$, $r\in\mathbb{N}_{m_s}$. Suppose not, that is $\tau\beta_{\lambda_i, j}\tau^{-1}$ and $\tau\beta_{\lambda_s, r}\tau^{-1}$ act non-fixedly on the same element. We write $\beta_{\lambda_i, j}$ as $(a_0\dots a_{\lambda_i-1})$ and $\beta_{\lambda_s, r}$ as $(b_0\dots b_{\lambda_s-1})$. These two cycles are disjoint as they are independent cycles in the disjoint cycle decomposition. Then $\forall\text{ }\ell\in\{0,\dots,\lambda_i-1\}$ and $m\in\{0,\dots,\lambda_s-1\}$ we have that $a_\ell \ne b_m$.
-		We have from lemma \ref{conjugate_cycle} that
-		\begin{align*}
-			\tau\beta_{\lambda_i, j}\tau^{-1} & = (\tau(a_0)\dots\tau(a_{\lambda_i-1})) \\
-			\tau\beta_{\lambda_s, r}\tau^{-1} & = (\tau(b_0)\dots\tau(b_{\lambda_s-1}))
-		\end{align*}
-		By supposition there must $\exists\text{ }\tau(a_\ell) = \tau(b_m)$; However, $a_\ell \ne b_m$ and $\tau$ is an injection resulting in a contradiction. Then $\alpha$ has cycle type $\lambda_1^{m_1}\dots\lambda_k^{m_k}$.
+\text{}\\$\Rightarrow$) Suppose $\exists\text{ }\tau\in S_n$ s.t.
+$\alpha = \tau\beta\tau^{-1}$. $\beta$ has some cycle type
+$\lambda_1^{m_1}\dots\lambda_k^{m_k}$. We can decompose
+$\beta$ into disjoint cycles $\beta_{\lambda_1,
+1}\dots\beta_{\lambda_1, m_1}\dots\beta_{\lambda_k,
+1}\dots\beta_{\lambda_k, m_k}$. That is, $m_i$ cycles of length
+$\lambda_i$ for each $i \in \mathbb{N}_k$. .
+\begin{align*}
+  \alpha & = \tau\beta_{\lambda_1, 1}\dots\beta_{\lambda_1,
+  m_1}\dots\beta_{\lambda_k, 1}\dots\beta_{\lambda_k, m_k}\tau^{-1}
+  \\
+  & = \tau\beta_{\lambda_1,
+  1}(\tau^{-1}\tau)\dots(\tau^{-1}\tau)\beta_{\lambda_1,
+  m_1}(\tau^{-1}\tau)\dots(\tau^{-1}\tau)\beta_{\lambda_k,
+  1}(\tau^{-1}\tau)\dots(\tau^{-1}\tau)\beta_{\lambda_k, m_k}\tau^{-1} \\
+  & = (\tau\beta_{\lambda_1, 1}\tau^{-1})\dots(\tau\beta_{\lambda_1,
+  m_1}\tau^{-1})\dots(\tau\beta_{\lambda_k,
+  1}\tau^{-1})\dots(\tau\beta_{\lambda_k, m_k}\tau^{-1})
+\end{align*}
+Each $\forall i \in \mathbb{N}_k$ and $j \in \mathbb{N}_{m_i}$ we
+have that $\beta_{\lambda_i, j}$ is a cycle of length $\lambda_i$ so
+by lemma \ref{conjugate_cycle} we have that $\tau\beta_{\lambda_i,
+j}\tau^{-1}$ is a $\lambda_i$ cycle.
+\\\\Then to show $\alpha$ has cycle type
+$\lambda_1^{m_1}\dots\lambda_k^{m_k}$ we need only show that each
+$\tau\beta_{\lambda_i, j}\tau^{-1}$ and $\tau\beta_{\lambda_s,
+r}\tau^{-1}$ are disjoint $\forall\text{ }i, s\in\mathbb{N}_k$ and
+$j\in\mathbb{N}_{m_i}$, $r\in\mathbb{N}_{m_s}$. Suppose not, that is
+$\tau\beta_{\lambda_i, j}\tau^{-1}$ and $\tau\beta_{\lambda_s,
+r}\tau^{-1}$ act non-fixedly on the same element. We write
+$\beta_{\lambda_i, j}$ as $(a_0\dots a_{\lambda_i-1})$ and
+$\beta_{\lambda_s, r}$ as $(b_0\dots b_{\lambda_s-1})$. These two
+cycles are disjoint as they are independent cycles in the disjoint
+cycle decomposition. Then $\forall\text{
+}\ell\in\{0,\dots,\lambda_i-1\}$ and $m\in\{0,\dots,\lambda_s-1\}$ we
+have that $a_\ell \ne b_m$.
+We have from lemma \ref{conjugate_cycle} that
+\begin{align*}
+  \tau\beta_{\lambda_i, j}\tau^{-1} & = (\tau(a_0)\dots\tau(a_{\lambda_i-1})) \\
+  \tau\beta_{\lambda_s, r}\tau^{-1} & = (\tau(b_0)\dots\tau(b_{\lambda_s-1}))
+\end{align*}
+By supposition there must $\exists\text{ }\tau(a_\ell) = \tau(b_m)$;
+However, $a_\ell \ne b_m$ and $\tau$ is an injection resulting in a
+contradiction. Then $\alpha$ has cycle type
+$\lambda_1^{m_1}\dots\lambda_k^{m_k}$.
 
-	\text{}\\$\Leftarrow$) Suppose $\alpha$ and $\beta$ both have cycle type $\lambda_1^{m_1}\dots\lambda_k^{m_k}$. Then we can write
-		\begin{align*}
-			\alpha & = (a_{0,1}\dots a_{\lambda_1-1, 1})\dots(a_{0,m_1}\dots a_{\lambda_1-1,m_1})\dots(a_{0,\lambda_k}\dots a_{\lambda_k-1,1})\dots(a_{1,m_k}\dots a_{\lambda_k-1,m_k}) \\
-			\beta  & = (b_{0,1}\dots b_{\lambda_1-1,1})\dots(b_{0,m_1}\dots b_{\lambda_1-1,m_1})\dots(b_{0,\lambda_k}\dots b_{\lambda_k-1,1})\dots(b_{0,m_k}\dots b_{\lambda_k-1,m_k})
-		\end{align*}
-		Then we define $\tau:\mathbb{N}_n\to\mathbb{N}_n$ by $\tau(b_{i, j}) = a_{i,j}$ for any valid indices $i,j\in\mathbb{N}$.
-		We claim that $\alpha = \tau\beta\tau^{-1}$. We consider $\tau\beta\tau^{-1}$'s action on some $a_{i,j}\in\mathbb{N}_n$. $a_{i,j}$ lies in some cycle of length $\lambda_\ell$ and by construction $b_{i,j}$ lies in a cycle of length $\lambda_\ell$.
-		\begin{align*}
-			\tau\beta\tau^{-1}(a_{i,j}) & = \tau\beta\tau^{-1}(\tau(b_{i,j}))        \\
-			                            & = \tau\beta(b_{i,j})                       \\
-			                            & = \tau(b_{i+1\text{ mod }\lambda_\ell, j}) \\
-			                            & = a_{i+1\text{ mod }\lambda_\ell, j}       \\
-			                            & = \alpha(a_{i,j})
-		\end{align*}
-		Then $\alpha = \tau\beta\tau^{-1}$ and $\alpha$ and $\beta$ are conjugates.
+\text{}\\$\Leftarrow$) Suppose $\alpha$ and $\beta$ both have cycle
+type $\lambda_1^{m_1}\dots\lambda_k^{m_k}$. Then we can write
+\begin{align*}
+\alpha & = (a_{0,1}\dots a_{\lambda_1-1, 1})\dots(a_{0,m_1}\dots
+a_{\lambda_1-1,m_1})\dots(a_{0,\lambda_k}\dots
+a_{\lambda_k-1,1})\dots(a_{1,m_k}\dots a_{\lambda_k-1,m_k}) \\
+\beta  & = (b_{0,1}\dots b_{\lambda_1-1,1})\dots(b_{0,m_1}\dots
+b_{\lambda_1-1,m_1})\dots(b_{0,\lambda_k}\dots
+b_{\lambda_k-1,1})\dots(b_{0,m_k}\dots b_{\lambda_k-1,m_k})
+\end{align*}
+Then we define $\tau:\mathbb{N}_n\to\mathbb{N}_n$ by $\tau(b_{i, j})
+= a_{i,j}$ for any valid indices $i,j\in\mathbb{N}$.
+We claim that $\alpha = \tau\beta\tau^{-1}$. We consider
+$\tau\beta\tau^{-1}$'s action on some $a_{i,j}\in\mathbb{N}_n$.
+$a_{i,j}$ lies in some cycle of length $\lambda_\ell$ and by
+construction $b_{i,j}$ lies in a cycle of length $\lambda_\ell$.
+\begin{align*}
+\tau\beta\tau^{-1}(a_{i,j}) & = \tau\beta\tau^{-1}(\tau(b_{i,j}))        \\
+& = \tau\beta(b_{i,j})                       \\
+& = \tau(b_{i+1\text{ mod }\lambda_\ell, j}) \\
+& = a_{i+1\text{ mod }\lambda_\ell, j}       \\
+& = \alpha(a_{i,j})
+\end{align*}
+Then $\alpha = \tau\beta\tau^{-1}$ and $\alpha$ and $\beta$ are conjugates.
 \end{proof}
 \begin{corr}
-	Given $\alpha$ and $\beta$ of the same cycle type ($\lambda_1^{m_1}\dots\lambda_k^{m_k}$), there are
-	\[
-		\prod_{i=1}^{k}\lambda_i^{m_i}m_i!
-	\]
-	permutations which conjugate $\alpha$ to $\beta$.
+Given $\alpha$ and $\beta$ of the same cycle type
+($\lambda_1^{m_1}\dots\lambda_k^{m_k}$), there are
+\[
+\prod_{i=1}^{k}\lambda_i^{m_i}m_i!
+\]
+permutations which conjugate $\alpha$ to $\beta$.
 \end{corr}
 \begin{proof}
-	We have seen via the above proof that permutations with conjugate $\alpha$ to $\beta$ consist of mappins between the cycles of $\alpha$ and $\beta$ when cycles of the same length are written one over the other. Of course, we can reorder the cycles of length $\lambda_i$ in $m_i!$ ways. Further, for each $\lambda_i$ cycle (of which there are $m_i$) we can shift each element up to $\lambda_i$ times to get the same permutation. This gives $\lambda_i^{m_i}$ possible shifts of each $\lambda_i$ cycle.
+We have seen via the above proof that permutations with conjugate
+$\alpha$ to $\beta$ consist of mappins between the cycles of $\alpha$
+and $\beta$ when cycles of the same length are written one over the
+other. Of course, we can reorder the cycles of length $\lambda_i$ in
+$m_i!$ ways. Further, for each $\lambda_i$ cycle (of which there are
+$m_i$) we can shift each element up to $\lambda_i$ times to get the
+same permutation. This gives $\lambda_i^{m_i}$ possible shifts of
+each $\lambda_i$ cycle.
 \end{proof}
-Recall that at any fixed position of the Enigma machine the permutation describing this position $\sigma_i$ is just a conjugate of the reflector permutation $R$. As the reflector has a cycle type of $2^{13}$ it must then be the case by theorem \ref{conjugate_cycle_type} that at any given position the Enigma machine is simply a $2^{13}$ cycle. This gives two key properties at any given fixed position
+Recall that at any fixed position of the Enigma machine the
+permutation describing this position $\sigma_i$ is just a conjugate
+of the reflector permutation $R$. As the reflector has a cycle type
+of $2^{13}$ it must then be the case by theorem
+\ref{conjugate_cycle_type} that at any given position the Enigma
+machine is simply a $2^{13}$ cycle. This gives two key properties at
+any given fixed position
 \begin{itemize}
-	\item The Enigma is an involution meaning that $\sigma_i(\sigma_i(x)) = x$. This is actually a desired and arguably necessary property for the Enigma to function since we need to ensure that, when two machines are at the same position, a cipher letter $\sigma_i(x)$ will decrypt to its plaintext counterpart $x$.
-	\item The Enigma has no fixed points. Since $\sigma_i$ is composed of 13 disjoint transpositions we can never have a letter $x$ for which $\sigma_i(x) = x$. Therefore, we will never see a letter encrypted to itself. This means that for \emph{any} setting, an Enigma machine repeatedly pressing $\texttt{A}$ will \emph{never} produce $\texttt{A}$ on the output bulbs.
+\item The Enigma is an involution meaning that $\sigma_i(\sigma_i(x))
+= x$. This is actually a desired and arguably necessary property for
+the Enigma to function since we need to ensure that, when two
+machines are at the same position, a cipher letter $\sigma_i(x)$ will
+decrypt to its plaintext counterpart $x$.
+\item The Enigma has no fixed points. Since $\sigma_i$ is composed of
+13 disjoint transpositions we can never have a letter $x$ for which
+$\sigma_i(x) = x$. Therefore, we will never see a letter encrypted to
+itself. This means that for \emph{any} setting, an Enigma machine
+repeatedly pressing $\texttt{A}$ will \emph{never} produce
+$\texttt{A}$ on the output bulbs.
 \end{itemize}
 % \\\begin{figure}[h]
 %   \begin{center}

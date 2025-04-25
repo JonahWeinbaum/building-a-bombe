@@ -23,21 +23,21 @@ letters
 $\sigma_1(\texttt{X})\sigma_2(\texttt{Y})\sigma_3(\texttt{Z})\sigma_4(\texttt{X})\sigma_5(\texttt{Y})\sigma_6(\texttt{Z})$.
 Suppose these six letters are given as
 \begin{center}
-  \texttt{ABC} \texttt{DEF}
+	\texttt{ABC} \texttt{DEF}
 \end{center}
 That is
 \begin{align*}
-  \sigma_1(\texttt{X}) & = \texttt{A} \\
-  \sigma_2(\texttt{Y}) & = \texttt{B} \\
-  \sigma_3(\texttt{Z}) & = \texttt{C} \\
-  \sigma_4(\texttt{X}) & = \texttt{D} \\
-  \sigma_5(\texttt{Y}) & = \texttt{E} \\
-  \sigma_6(\texttt{Z}) & = \texttt{F} \\
+	\sigma_1(\texttt{X}) & = \texttt{A} \\
+	\sigma_2(\texttt{Y}) & = \texttt{B} \\
+	\sigma_3(\texttt{Z}) & = \texttt{C} \\
+	\sigma_4(\texttt{X}) & = \texttt{D} \\
+	\sigma_5(\texttt{Y}) & = \texttt{E} \\
+	\sigma_6(\texttt{Z}) & = \texttt{F} \\
 \end{align*}
 Since each $\sigma_i$ is represented by 13 disjoint transpositions we
 can deduce, for example, that
 \[
-  \sigma_1\sigma_4(D) = \sigma_1(X) = A.
+	\sigma_1\sigma_4(D) = \sigma_1(X) = A.
 \]
 With a sufficient set of hexagrams from gathered messages, we could
 then fully deduce the permutation $\sigma_1\sigma_4$. Further, we
@@ -45,65 +45,65 @@ could recover $\sigma_2\sigma_5$ and $\sigma_3\sigma_6$. Rejewski
 refered to these paired permutations as {\bf{characteristics}}. In
 practice, such recovered characteristics may look like
 \begin{align*}
-  \sigma_1\sigma_4 & =
-  (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})
-  \\
-  \sigma_2\sigma_5 & =
-  (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})
-  \\
-  \sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})
+	\sigma_1\sigma_4 & =
+	(\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})
+	\\
+	\sigma_2\sigma_5 & =
+	(\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})
+	\\
+	\sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})
 \end{align*}
 Rejewski noted a key structural similarity between all such
 characteristics recovered in this fashion: in each characteristic,
 cycles of the same length appear in pairs.
 \\\\To see why this happens consider the following lemma,
 \begin{lemma}
-  \label{cillies}
-  Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$.
-  Then $\alpha$ and $\beta$ will appear in disjoint cycles of
-  $\sigma_i\sigma_{i+3}$ of equal length.
+	\label{cillies}
+	Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$.
+	Then $\alpha$ and $\beta$ will appear in disjoint cycles of
+	$\sigma_i\sigma_{i+3}$ of equal length.
 \end{lemma}
 \begin{proof}
-  %% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
-  % %%
-  We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$
-  then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our
-  claim is true. Then without loss of generality we can arrange
-  $\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
-  \[
-    \setlength{\arraycolsep}{15pt}
-    \begin{array}{cc}
-      \sigma_i      & \sigma_{i+3} \\
-      \hline
-      (\alpha\beta) & (\beta x_1)  \\
-      (x_1 x_2)     & (x_2 x_3)    \\
-      \vdots        & \vdots       \\
-      (x_{k-1} x_k) & (x_k \alpha)
-    \end{array}
-  \]
-  Then the product $\sigma_i\sigma_{i+3}$ will be
-  \[
-    \sigma_1\sigma_{i+3} = (\alpha x_1 x_3 \dots x_{k-1} )(x_k
-    x_{k-2} \dots x_2 \beta)
-  \]
-  and thus $\alpha$ and $\beta$ end up in disjoint cycles of equal length.
+	%% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
+	% %%
+	We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$
+	then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our
+	claim is true. Then without loss of generality we can arrange
+	$\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
+	\[
+		\setlength{\arraycolsep}{15pt}
+		\begin{array}{cc}
+			\sigma_i      & \sigma_{i+3} \\
+			\hline
+			(\alpha\beta) & (\beta x_1)  \\
+			(x_1 x_2)     & (x_2 x_3)    \\
+			\vdots        & \vdots       \\
+			(x_{k-1} x_k) & (x_k \alpha)
+		\end{array}
+	\]
+	Then the product $\sigma_i\sigma_{i+3}$ will be
+	\[
+		\sigma_1\sigma_{i+3} = (\alpha x_1 x_3 \dots x_{k-1} )(x_k
+		x_{k-2} \dots x_2 \beta)
+	\]
+	and thus $\alpha$ and $\beta$ end up in disjoint cycles of equal length.
 \end{proof}
 
 This lemma has several consequences.
 \begin{itemize}
-  \item A characteristic like $\sigma_1\sigma_4$ which has two
-    singletons $\texttt{A}$ and $\texttt{S}$ then both $\sigma_1$ and
-    $\sigma_4$ must have the transposition $(\texttt{AS})$.
-  \item A characteristic like $\sigma_3\sigma_6$ (two disjoint 13
-    cycles) reduces the space of possible $\sigma_3$'s to just 13
-    permutations which will take the form
-    \begin{center}
-      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
-      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
-      $\vdots$                                       \\
-      $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
-    \end{center}
-    and similarly for $\sigma_6$.
+	\item A characteristic like $\sigma_1\sigma_4$ which has two
+	      singletons $\texttt{A}$ and $\texttt{S}$ then both $\sigma_1$ and
+	      $\sigma_4$ must have the transposition $(\texttt{AS})$.
+	\item A characteristic like $\sigma_3\sigma_6$ (two disjoint 13
+	      cycles) reduces the space of possible $\sigma_3$'s to just 13
+	      permutations which will take the form
+	      \begin{center}
+		      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
+		      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
+		      $\vdots$                                       \\
+		      $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
+	      \end{center}
+	      and similarly for $\sigma_6$.
 \end{itemize}
 Thus with absolutely no knowledge of the rotor wirings or the daily
 key, we can already tractibly compute a searchable space of
@@ -116,19 +116,19 @@ their message keys -- likely to prevent frequency analysis attacks on
 the hexagrams beginning messages; However, operators often chose the
 same trigrams for each message. Some examples might inclide
 \begin{itemize}
-  \item Initials or first letters of the operator's spouse. For
-    example, \texttt{CIL} perhaps deriving from the name ``Cecelia''
-    being shortened to ``cillie''. Allegadely for this reason, poor
-    selections of trigrams from operators became known as {\bf{cillies}}.
-  \item The same letter encoded three times such as \texttt{JJJ}
-  \item Locations such as \texttt{LON} representing London.
-  \item Later, Bletchley Park cryptanalyst John Herivel noticed that
-    many operators selected message keys that were very close to the
-    provided ring settings potentially allowing for a quick means of
-    determining the ring settings.
+	\item Initials or first letters of the operator's spouse. For
+	      example, \texttt{CIL} perhaps deriving from the name ``Cecelia''
+	      being shortened to ``cillie''. Allegadely for this reason, poor
+	      selections of trigrams from operators became known as {\bf{cillies}}.
+	\item The same letter encoded three times such as \texttt{JJJ}
+	\item Locations such as \texttt{LON} representing London.
+	\item Later, Bletchley Park cryptanalyst John Herivel noticed that
+	      many operators selected message keys that were very close to the
+	      provided ring settings potentially allowing for a quick means of
+	      determining the ring settings.
 
-    %% Battle of wits the complete story of codebreaking in World War
-    % II PAGE 143 %%
+	      %% Battle of wits the complete story of codebreaking in World War
+	      % II PAGE 143 %%
 \end{itemize}
 By keeping track of various radio stations which used cillies.
 Rejewski had a reasonable guess as to what the message key used for a
@@ -136,9 +136,9 @@ particular ciphertext were. Suppose we recieved three hexagrams
 originating from a radio station which often used \texttt{JJJ} as
 their message key:
 \begin{center}
-  \texttt{SUG SMF}\\
-  \texttt{SJM SPO}\\
-  \texttt{SYX SCW}.
+	\texttt{SUG SMF}\\
+	\texttt{SJM SPO}\\
+	\texttt{SYX SCW}.
 \end{center}
 
 We can then compare these message keys against our possibilites for
@@ -171,54 +171,54 @@ However, we will provide a brief description to illustrate that with
 minimal intellegence information, entire rotor wirings were able to be deduced.
 \\\\We begin by expanding $\sigma_i$ to
 \[
-  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
+	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
 \]
 where $x$ accounts for the initial starting position of the rightmost rotor.
 Since $M^{-1}L^{-1}RLM$ does not change between $\sigma_i$s we will
 denote this permutation $Q$ thus simplifying our earlier expression to
 \[
-  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
+	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
 \]
 Rejewski knew the plugboard settings for two whole months, so he
 began shifting knowns and unknowns to opposite sides. Shifting things
 around gives us
 \begin{align*}
-  & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S     \\
-  \Rightarrow\text{ } & S\sigma_i S^{-1} =
-  P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}    \\
-  \Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =
-  N^{-1}P^{x+i}QP^{-(x+i)}N
+	                    & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S \\
+	\Rightarrow\text{ } & S\sigma_i S^{-1} =
+	P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}                                         \\
+	\Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =
+	N^{-1}P^{x+i}QP^{-(x+i)}N
 \end{align*}
 To further simplify notation we will then define ${\rho_i} \coloneq
-P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
+	P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
 \[
-  \rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
+	\rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
 \]
 where $\rho_i$s are known from the key sheets Rejewski had access to.
 We will now eliminate this equations dependence on $Q$ by considering
 pairs of $\rho_i$ and $\rho_{i+1}$
 \begin{align*}
-  \rho_i\rho_{i+1} & = N^{-1}P^{x+i}QP^{-(x+i)}NN^{-1}P^{x+i+1}QP^{-(x+i+1)}N \\
-  & = N^{-1}P^{x+i}QP^{-(x+i)}P^{x+i+1}QP^{-(x+i+1)}N        \\
-  & = N^{-1}P^{x+i}QPQP^{-(x+i+1)}N                          \\
-  & =N^{-1}P^{x+i}(QPQP^{-1})P^{-{x+i}}N
+	\rho_i\rho_{i+1} & = N^{-1}P^{x+i}QP^{-(x+i)}NN^{-1}P^{x+i+1}QP^{-(x+i+1)}N \\
+	                 & = N^{-1}P^{x+i}QP^{-(x+i)}P^{x+i+1}QP^{-(x+i+1)}N        \\
+	                 & = N^{-1}P^{x+i}QPQP^{-(x+i+1)}N                          \\
+	                 & =N^{-1}P^{x+i}(QPQP^{-1})P^{-{x+i}}N
 \end{align*}
 Each $\rho_i\rho_{i+1}$ shares the common subexpression $QPQP^{-1}$.
 We can eliminate this subexpression by noting
 \begin{align*}
-  \rho_{i+1}\rho_{i+2} & = N^{-1}P^{x+i+1}(QPQP^{-1})P^{-{x+i+1}}N
-  \\
-  & =
-  N^{-1}P^{x+i+1}(P^{-(x+i)}NN^{-1}P^{x+i})(QPQP^{-1})(P^{-(x+i)}NN^{-1}P^{x+i})P^{-{x+i+1}}N
-  \\
-  & =
-  N^{-1}P^{x+i+1}P^{-(x+i)}N(N^{-1}P^{x+i}QPQP^{-1}P^{-(x+i)}N)N^{-1}P^{x+i}P^{-{x+i+1}}N
-  \\
-  & =
-  N^{-1}P^{x+i+1}P^{-(x+i)}N(\rho_i\rho_{i+1})N^{-1}P^{x+i}P^{-{x+i+1}}N
-  \\
-  & = N^{-1}P^{-1}N(\rho_i\rho_{i+1})N^{-1}PN
-  \\
+	\rho_{i+1}\rho_{i+2} & = N^{-1}P^{x+i+1}(QPQP^{-1})P^{-{x+i+1}}N
+	\\
+	                     & =
+	N^{-1}P^{x+i+1}(P^{-(x+i)}NN^{-1}P^{x+i})(QPQP^{-1})(P^{-(x+i)}NN^{-1}P^{x+i})P^{-{x+i+1}}N
+	\\
+	                     & =
+	N^{-1}P^{x+i+1}P^{-(x+i)}N(N^{-1}P^{x+i}QPQP^{-1}P^{-(x+i)}N)N^{-1}P^{x+i}P^{-{x+i+1}}N
+	\\
+	                     & =
+	N^{-1}P^{x+i+1}P^{-(x+i)}N(\rho_i\rho_{i+1})N^{-1}P^{x+i}P^{-{x+i+1}}N
+	\\
+	                     & = N^{-1}P^{-1}N(\rho_i\rho_{i+1})N^{-1}PN
+	\\
 \end{align*}
 We now have a relationship between each $\rho_i\rho_{i+1}$ and
 $\rho_{i+1}\rho_{i+2}$ by conjugating by $N^{-1}PN$. Now recall from
@@ -245,7 +245,7 @@ $\sigma_i$. We will use this information to recover the daily keys.
 For the moment, let us assume $S$ is the identity permutation. Then
 rearranging $\sigma_i$ we get
 \begin{align}
-  Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
+	Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
 \end{align}
 Since $Q$ must be the same for each such equation involving
 $\sigma_i$ we will devise a manual way to deduce $Q$. We can
@@ -255,20 +255,20 @@ Then for each $\sigma_i$ we can write out $\sigma_i$ with a slit
 beneath it to allow space for each possible $P^{-k}NP^k$. We will
 illustrate this for $\sigma_1$ and denote the spaces beneath with periods.
 \begin{align*}
-  \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
-  \texttt{|}          & \texttt{..........................} \texttt{|}
+	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+	\texttt{|}          & \texttt{..........................} \texttt{|}
 \end{align*}
 We will call this the {\bf{top sheet}}. By sliding the bottom sheet
 beneath the top sheet we can test various values of $P^{-k}NP^{k}$ to
 see what values of $Q$ they give. For example, for $k = 0$ we have
 \begin{align*}
-  \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
-  N \texttt{ |}       & \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
+	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+	N \texttt{ |}       & \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
 \end{align*}
 We know that $Q(\texttt{A}) =
-(P^{-k}NP)\sigma_i(P^{-k}NP)^{-1}(\texttt{A})$. Therefore to compute
+	(P^{-k}NP)\sigma_i(P^{-k}NP)^{-1}(\texttt{A})$. Therefore to compute
 $Q(\texttt{A})$ we first begin at $\texttt{A}$ in our bottom row to
 find that $N^{-1}(\texttt{A})=\texttt{Z}$. We now map $\texttt{Z}$
 through $\sigma_i$ by finding $\texttt{Z}$ on the top row and seeing
@@ -276,7 +276,7 @@ where it lands in the middle row, thus giving
 $\sigma_iN^{-1}(\texttt{A}) = \texttt{U}$. Finally to see where $N$
 maps $\texttt{U}$ by finding $\texttt{U}$ on the top row and seeing
 where it lands in the middle row, thus giving $Q(\texttt{A}) =
-N\sigma_iN^{-1}(\texttt{A}) = M$. Continuing in this fashion we can
+	N\sigma_iN^{-1}(\texttt{A}) = M$. Continuing in this fashion we can
 get a candidate $Q$ generated by the guess that $\sigma_i$ aligned
 with $N$ in the sheet. Recall that $Q$ must be consistent between
 each equation \ref{eq:q_eq}. To check this we can simply construct
@@ -299,7 +299,7 @@ absolute position of the rightmost rotor. Additionally, using this
 method, we can see where the $Q$s fail to line up to determine which
 letters are steckered and which are unsteckered, along with some of
 the steckerings themselves. Such a method was called the {\bf{grill
-method}} and required tedious work and had many possibilites for mistakes.
+			method}} and required tedious work and had many possibilites for mistakes.
 \\\\To determine the absolute positions of the remaining two rotors
 we can simply enumerate all $26^2 = 676$ positions of the left two
 rotors (for both possible orderings of the rotors) until $Q$ is
@@ -342,7 +342,7 @@ daily keys kept rotor positions the same for an entire 3 month period
 meaning this analysis did not need to be done too frequently.
 \\\\However, Jerzy Różycki worked out an efficient method to
 determine the rightmost rotor which he called the {\bf{clock
-method}}. The clock method attempted to determine where the turnover
+			method}}. The clock method attempted to determine where the turnover
 notch was for the rightmost rotor. From this we could immediately
 determine which of the three rotors was used.
 
@@ -375,15 +375,15 @@ generated by $\texttt{XYA}$ on top of the message generated by
 $\texttt{XYF}$ we can slide the bottom message until is 5 positions
 further than the top message,
 \begin{align*}
-  & \texttt{XYA}: \texttt{PASLK XASSP AUSDK XPVNW UULVT LWKRE KGUQO
-  DSUKV ZOLMZ ZHYBF}
-  \\
-  & \texttt{XYF}: \texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{
-  }\texttt{ }\texttt{BAWXV ETTOP JZHXL VWGGQ MWDII OEHQO YSLRB IYLGB
-  CHBYT }
-  \\
-  &
-  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \texttt{**}\ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \texttt{*}
+	 & \texttt{XYA}: \texttt{PASLK XASSP AUSDK XPVNW UULVT LWKRE KGUQO
+		DSUKV ZOLMZ ZHYBF}
+	\\
+	 & \texttt{XYF}: \texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{
+	}\texttt{ }\texttt{BAWXV ETTOP JZHXL VWGGQ MWDII OEHQO YSLRB IYLGB
+		CHBYT }
+	\\
+	 &
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \texttt{**}\ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \texttt{*}
 \end{align*}
 at this point we would expect the texts to both be encoded by
 $\texttt{XYF}$ and the number of coincidences (indicated by
@@ -419,50 +419,50 @@ rotor wirings to know the exact permutaition $\sigma_1$ and
 $\sigma_4$ for any initial rotor position. In specific, suppose we have
 
 \begin{center}
-  \[
-    \left(
-      \begin{array}{llllllllllllllllllllllllll}
-        \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-        \texttt{Y} & \texttt{Z}                             \\
-        \texttt{P} & \texttt{T} & \texttt{K} & \texttt{X} &
-        \texttt{R} & \texttt{Z} & \texttt{Q} & \texttt{S} &
-        \texttt{W} & \texttt{M} & \texttt{C} & \texttt{O} &
-        \texttt{J} & \texttt{Y} & \texttt{L} & \texttt{A} &
-        \texttt{G} & \texttt{E} & \texttt{H} & \texttt{B} &
-        \texttt{V} & \texttt{U} & \texttt{I} & \texttt{D} &
-        \texttt{N} & \texttt{F}
-      \end{array}
-    \right)
-  \]
-  $\sigma_1$
+	\[
+		\left(
+		\begin{array}{llllllllllllllllllllllllll}
+				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}                             \\
+				\texttt{P} & \texttt{T} & \texttt{K} & \texttt{X} &
+				\texttt{R} & \texttt{Z} & \texttt{Q} & \texttt{S} &
+				\texttt{W} & \texttt{M} & \texttt{C} & \texttt{O} &
+				\texttt{J} & \texttt{Y} & \texttt{L} & \texttt{A} &
+				\texttt{G} & \texttt{E} & \texttt{H} & \texttt{B} &
+				\texttt{V} & \texttt{U} & \texttt{I} & \texttt{D} &
+				\texttt{N} & \texttt{F}
+			\end{array}
+		\right)
+	\]
+	$\sigma_1$
 \end{center}
 \begin{center}
-  \[
-    \left(
-      \begin{array}{llllllllllllllllllllllllll}
-        \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-        \texttt{Y} & \texttt{Z}                             \\
-        \texttt{J} & \texttt{W} & \texttt{V} & \texttt{R} &
-        \texttt{O} & \texttt{S} & \texttt{U} & \texttt{Y} &
-        \texttt{Z} & \texttt{A} & \texttt{T} & \texttt{Q} &
-        \texttt{X} & \texttt{P} & \texttt{E} & \texttt{N} &
-        \texttt{L} & \texttt{D} & \texttt{F} & \texttt{K} &
-        \texttt{G} & \texttt{C} & \texttt{B} & \texttt{M} &
-        \texttt{H} & \texttt{I}
-      \end{array}
-    \right)
-  \]
-  $\sigma_4$
+	\[
+		\left(
+		\begin{array}{llllllllllllllllllllllllll}
+				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}                             \\
+				\texttt{J} & \texttt{W} & \texttt{V} & \texttt{R} &
+				\texttt{O} & \texttt{S} & \texttt{U} & \texttt{Y} &
+				\texttt{Z} & \texttt{A} & \texttt{T} & \texttt{Q} &
+				\texttt{X} & \texttt{P} & \texttt{E} & \texttt{N} &
+				\texttt{L} & \texttt{D} & \texttt{F} & \texttt{K} &
+				\texttt{G} & \texttt{C} & \texttt{B} & \texttt{M} &
+				\texttt{H} & \texttt{I}
+			\end{array}
+		\right)
+	\]
+	$\sigma_4$
 \end{center}
 Then to find the permutation $\sigma_1\sigma_4$ we might do the
 following. We begin with \texttt{A}. We first run \texttt{A} through
@@ -478,56 +478,56 @@ This method is effectively the same method used in lemma
 produced in a characteristic. In fact, by switching back and forth
 between $\sigma_1$ and $\sigma_4$ we will find alternating elements
 of the pair of cycles of equal length which contain \texttt{A}. We
-can mechanize this process via the following circuit:
+can mechanize this process via the following circuit\footnote{Throughout this paper, diagrams will represent a simplified Enigma machine consisting of only four letters (\texttt{A},\texttt{B}, \texttt{C}, and \texttt{D}):}
 \begin{center}
-  \begin{tikzpicture}[thick, scale=0.9, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
+	\begin{tikzpicture}[thick, scale=0.9, every node/.style={scale=0.7}]
+		% Draw the box
+		\draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
 
-    \node at (3-5, -2-1) {$Q_{y,z}$};
+		\node at (3-5, -2-1) {$Q_{y,z}$};
 
-    \draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
-    \draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
+		\draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
+		\draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
 
-    \draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
+		\draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
 
-    \node at (3-3, -2-1) {$N_x$};
+		\node at (3-3, -2-1) {$N_x$};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-1) -- (4-3, 0-1);
-    \draw[-] (2-3, 1-1) -- (4-3, -1-1);
-    \draw[-] (2-3, 0-1) -- (4-3, 2-1);
-    \draw[-] (2-3,-1-1) -- (4-3, 1-1);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2-3, 2-1) -- (4-3, 0-1);
+		\draw[-] (2-3, 1-1) -- (4-3, -1-1);
+		\draw[-] (2-3, 0-1) -- (4-3, 2-1);
+		\draw[-] (2-3,-1-1) -- (4-3, 1-1);
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-1, -1-1) -- (4+3, -1-1);
-    \draw[-] (2-1, 0-1) -- (4+3, 0-1);
-    \draw[-] (2-1, 1-1) -- (4+3, 1-1);
-    \draw[-] (2-1,2-1) -- (4+3, 2-1);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2-1, -1-1) -- (4+3, -1-1);
+		\draw[-] (2-1, 0-1) -- (4+3, 0-1);
+		\draw[-] (2-1, 1-1) -- (4+3, 1-1);
+		\draw[-] (2-1,2-1) -- (4+3, 2-1);
 
-    \draw[fill=lightgray] (2+3,-1.5-1) rectangle (4+3,2.5-1) node[midway] {};
+		\draw[fill=lightgray] (2+3,-1.5-1) rectangle (4+3,2.5-1) node[midway] {};
 
-    \node at (3+3, -2-1) {$N_{x+3}$};
+		\node at (3+3, -2-1) {$N_{x+3}$};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2+3, 1-1) -- (4+3, 2-1);
-    \draw[-] (2+3, 2-1) -- (4+3, 1-1);
-    \draw[-] (2+3, 0-1) -- (4+3, -1-1);
-    \draw[-] (2+3,-1-1) -- (4+3, 0-1);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2+3, 1-1) -- (4+3, 2-1);
+		\draw[-] (2+3, 2-1) -- (4+3, 1-1);
+		\draw[-] (2+3, 0-1) -- (4+3, -1-1);
+		\draw[-] (2+3,-1-1) -- (4+3, 0-1);
 
-    \draw[fill=lightgray] (2+5,-1.5-1) rectangle (4+5,2.5-1) node[midway] {};
+		\draw[fill=lightgray] (2+5,-1.5-1) rectangle (4+5,2.5-1) node[midway] {};
 
-    \node at (3+5, -2-1) {$Q_{y,z}$};
+		\node at (3+5, -2-1) {$Q_{y,z}$};
 
-    \draw[-] (2+5, 2-1) |- ++(0.75, 0) |- (2+5, 0-1);
-    \draw[-] (2+5, 1-1) |- ++(1, 0) |- (2+5, -1-1);
+		\draw[-] (2+5, 2-1) |- ++(0.75, 0) |- (2+5, 0-1);
+		\draw[-] (2+5, 1-1) |- ++(1, 0) |- (2+5, -1-1);
 
-    \node at (2+1, 2.3-1) {$\texttt{A}$};
-    \node at (2+1, 1.3-1) {$\texttt{B}$};
-    \node at (2+1, 0.3-1) {$\texttt{C}$};
-    \node at (2+1, -0.6-1) {$\texttt{D}$};
+		\node at (2+1, 2.3-1) {$\texttt{A}$};
+		\node at (2+1, 1.3-1) {$\texttt{B}$};
+		\node at (2+1, 0.3-1) {$\texttt{C}$};
+		\node at (2+1, -0.6-1) {$\texttt{D}$};
 
-  \end{tikzpicture}
+	\end{tikzpicture}
 \end{center}
 
 In this circuit $N_x$ represents the rightmost rotor at some position
@@ -539,16 +539,16 @@ current at \texttt{A} the current will travel back and forth through
 $N_xQ_{y,z}$ and $N_{x+3}Q_{y,z}$ and reach all the letters contained
 in the pair of cycles of equal length which contain \texttt{A}, that
 is, the number of wires electrified is double the length of the cycle
-containing \texttt{A}. Thus, we can quickly determine the length of
+containing \texttt{A}. If we connect each wire to a bulb, we can count the number of illuminated bulbs and can quickly determine the length of
 the cycles in a permutation $\sigma_1\sigma_{4}$ at any given
 position of rotors ${x}$, $y$, and $z$. We can now rotate through all
 $26^3$ positions of the rotors and create a catalogue of all
 characteristics $\sigma_1\sigma_3$ (note that $\sigma_2\sigma_5$ and
-  $\sigma_3\sigma_6$ can be retrieved by just looking at the next two
+$\sigma_3\sigma_6$ can be retrieved by just looking at the next two
 catalogue entries). We must also consider all 6 orderings of rotors
 \texttt{I}, \texttt{II}, and \texttt{III}. Thus we can laboriously
 generate a catalogue of all rotor orders and settings consisting of
-$105456$ entries.
+$6\cdot 26^3 = 105456$ entries.
 \\\\Now equipped with this catalogue, the cryptanalyst could use the
 traffic from a given day to determine the characteristics, look up
 the cycle types in the catalogue, and determine the rotor order and
@@ -687,18 +687,18 @@ nothing of the ring setting, plugboard setting, rotor position, or rotor order.
 Rejewski noticed that, given enough cipher material, we could find
 three messages with the following form.
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \emph{Grundstellung} & \emph{Spruchschlüssel}
-    \\
-    \hline
-    \texttt{RTJ}         & {\uline{\texttt{W}}}\texttt{AH
-    }{\uline{\texttt{W}}}\texttt{IK}          \\
-    \texttt{HPN}         & \texttt{RA}{\uline{\texttt{W}}}\texttt{
-    KT}{\uline{\texttt{W}}}          \\
-    \texttt{DQY}         & \texttt{D}{\uline{\texttt{W}}}\texttt{J
-    M}{\uline{\texttt{W}}}\texttt{R}
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\emph{Grundstellung} & \emph{Spruchschlüssel}
+		\\
+		\hline
+		\texttt{RTJ}         & {\uline{\texttt{W}}}\texttt{AH
+		}{\uline{\texttt{W}}}\texttt{IK}                               \\
+		\texttt{HPN}         & \texttt{RA}{\uline{\texttt{W}}}\texttt{
+		KT}{\uline{\texttt{W}}}                                        \\
+		\texttt{DQY}         & \texttt{D}{\uline{\texttt{W}}}\texttt{J
+			M}{\uline{\texttt{W}}}\texttt{R}
+	\end{array}
 \]
 Notice that the first message has the letter \texttt{W} in both its
 first and fourth position. Cryptanalysts refered to such coincidences
@@ -731,152 +731,152 @@ was an electromechanical computer which used relays and switches for
 these operations. Consider the following circuit.
 
 \begin{center}
-  \scalebox{0.9} {
-    \begin{circuitikz}
-      % Draw the box
-      \draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
+	\scalebox{0.9} {
+		\begin{circuitikz}
+			% Draw the box
+			\draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
 
-      \node at (3-5, -2-1) {$Q_{y,z}$};
+			\node at (3-5, -2-1) {$Q_{y,z}$};
 
-      \draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
-      \draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
+			\draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
+			\draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
 
-      \draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
+			\draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
 
-      \node at (3-3, -2-1) {$N_x$};
+			\node at (3-3, -2-1) {$N_x$};
 
-      % Draw the lines inside the box to represent the mapping
-      \draw[-] (2-3, 2-1) -- (4-3, 0-1);
-      \draw[-] (2-3, 1-1) -- (4-3, -1-1);
-      \draw[-] (2-3, 0-1) -- (4-3, 2-1);
-      \draw[-] (2-3,-1-1) -- (4-3, 1-1);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-1) -- (4-3, 0-1);
+			\draw[-] (2-3, 1-1) -- (4-3, -1-1);
+			\draw[-] (2-3, 0-1) -- (4-3, 2-1);
+			\draw[-] (2-3,-1-1) -- (4-3, 1-1);
 
-      % Wiring exiting
-      \draw (1,2-1) to (1.75,2-1);
-      \draw[line width=1.25pt] (1.75, 2-1) to ++(60:0.5);
-      \fill (1.75, 2-1) circle (2pt); % dot
-      \fill (1.75,2-1) ++(60:0.5) circle (2pt); % dot
-      \draw (2.25,2-1) circle (2pt); % dot
-      \draw (2.3,2-1) to (3,2-1);
-      \draw (1,1-1) to (1.75,1-1);
-      \draw[line width=1.25pt] (1.75,1-1) to (2.25,1-1);
-      \fill (1.75, 1-1) circle (2pt); % dot
-      \fill (2.25, 1-1) circle (2pt); % dot
-      \draw (2.25,1-1) to (4.5,1-1);
-      \draw (1,0-1) to (1.75,0-1);
-      \draw[line width=1.25pt] (1.75,0-1) to (2.25,0-1);
-      \fill (1.75, 0-1) circle (2pt); % dot
-      \fill (2.25, 0-1) circle (2pt); % dot
-      \draw (2.25,0-1) to (6,0-1);
-      \draw (1,-1-1) to (1.75,-1-1);
-      \draw[line width=1.25pt] (1.75,-1-1) to (2.25,-1-1);
-      \fill (1.75, -1-1) circle (2pt); % dot
-      \fill (2.25, -1-1) circle (2pt); % dot
-      \draw (2.25,-1-1) to (7.5,-1-1);
+			% Wiring exiting
+			\draw (1,2-1) to (1.75,2-1);
+			\draw[line width=1.25pt] (1.75, 2-1) to ++(60:0.5);
+			\fill (1.75, 2-1) circle (2pt); % dot
+			\fill (1.75,2-1) ++(60:0.5) circle (2pt); % dot
+			\draw (2.25,2-1) circle (2pt); % dot
+			\draw (2.3,2-1) to (3,2-1);
+			\draw (1,1-1) to (1.75,1-1);
+			\draw[line width=1.25pt] (1.75,1-1) to (2.25,1-1);
+			\fill (1.75, 1-1) circle (2pt); % dot
+			\fill (2.25, 1-1) circle (2pt); % dot
+			\draw (2.25,1-1) to (4.5,1-1);
+			\draw (1,0-1) to (1.75,0-1);
+			\draw[line width=1.25pt] (1.75,0-1) to (2.25,0-1);
+			\fill (1.75, 0-1) circle (2pt); % dot
+			\fill (2.25, 0-1) circle (2pt); % dot
+			\draw (2.25,0-1) to (6,0-1);
+			\draw (1,-1-1) to (1.75,-1-1);
+			\draw[line width=1.25pt] (1.75,-1-1) to (2.25,-1-1);
+			\fill (1.75, -1-1) circle (2pt); % dot
+			\fill (2.25, -1-1) circle (2pt); % dot
+			\draw (2.25,-1-1) to (7.5,-1-1);
 
-      % Draw the box
-      \draw[fill=lightgray] (2-5,-1.5-7) rectangle (4-5,2.5-7) node[midway] {};
+			% Draw the box
+			\draw[fill=lightgray] (2-5,-1.5-7) rectangle (4-5,2.5-7) node[midway] {};
 
-      \node at (3-5, -2-7) {$Q_{y,z}$};
+			\node at (3-5, -2-7) {$Q_{y,z}$};
 
-      \draw[-] (2-3, 2-7) |- ++(-0.75, 0) |- (2-3, 0-7);
-      \draw[-] (2-3, 1-7) |- ++(-1, 0) |- (2-3, -1-7);
+			\draw[-] (2-3, 2-7) |- ++(-0.75, 0) |- (2-3, 0-7);
+			\draw[-] (2-3, 1-7) |- ++(-1, 0) |- (2-3, -1-7);
 
-      \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-      \node at (3-3, -2-7) {$N_{x+3}$};
+			\node at (3-3, -2-7) {$N_{x+3}$};
 
-      % Draw the lines inside the box to represent the mapping
-      \draw[-] (2-3, 2-7) -- (4-3, 1-7);
-      \draw[-] (2-3, 1-7) -- (4-3, 2-7);
-      \draw[-] (2-3, 0-7) -- (4-3, -1-7);
-      \draw[-] (2-3,-1-7) -- (4-3, 0-7);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 1-7);
+			\draw[-] (2-3, 1-7) -- (4-3, 2-7);
+			\draw[-] (2-3, 0-7) -- (4-3, -1-7);
+			\draw[-] (2-3,-1-7) -- (4-3, 0-7);
 
-      % Wiring exiting
-      \draw (1,2-7) to (1.75,2-7);
-      \draw[line width=1.25pt] (1.75, 2-7) to ++(60:0.5);
-      \fill (1.75, 2-7) circle (2pt); % dot
-      \fill (1.75,2-7) ++(60:0.5) circle (2pt); % dot
-      \draw (2.25,2-7) circle (2pt); % dot
-      \draw (2.3,2-7) to (3,2-7);
-      \draw (1,1-7) to (1.75,1-7);
-      \draw[line width=1.25pt] (1.75,1-7) to (2.25,1-7);
-      \fill (1.75, 1-7) circle (2pt); % dot
-      \fill (2.25, 1-7) circle (2pt); % dot
-      \draw (2.25,1-7) to (4.5,1-7);
-      \draw (1,0-7) to (1.75,0-7);
-      \draw[line width=1.25pt] (1.75,0-7) to (2.25,0-7);
-      \fill (1.75, 0-7) circle (2pt); % dot
-      \fill (2.25, 0-7) circle (2pt); % dot
-      \draw (2.25,0-7) to (6,0-7);
-      \draw (1,-1-7) to (1.75,-1-7);
-      \draw[line width=1.25pt] (1.75,-1-7) to (2.25,-1-7);
-      \fill (1.75, -1-7) circle (2pt); % dot
-      \fill (2.25, -1-7) circle (2pt); % dot
-      \draw (2.25,-1-7) to (7.5,-1-7);
+			% Wiring exiting
+			\draw (1,2-7) to (1.75,2-7);
+			\draw[line width=1.25pt] (1.75, 2-7) to ++(60:0.5);
+			\fill (1.75, 2-7) circle (2pt); % dot
+			\fill (1.75,2-7) ++(60:0.5) circle (2pt); % dot
+			\draw (2.25,2-7) circle (2pt); % dot
+			\draw (2.3,2-7) to (3,2-7);
+			\draw (1,1-7) to (1.75,1-7);
+			\draw[line width=1.25pt] (1.75,1-7) to (2.25,1-7);
+			\fill (1.75, 1-7) circle (2pt); % dot
+			\fill (2.25, 1-7) circle (2pt); % dot
+			\draw (2.25,1-7) to (4.5,1-7);
+			\draw (1,0-7) to (1.75,0-7);
+			\draw[line width=1.25pt] (1.75,0-7) to (2.25,0-7);
+			\fill (1.75, 0-7) circle (2pt); % dot
+			\fill (2.25, 0-7) circle (2pt); % dot
+			\draw (2.25,0-7) to (6,0-7);
+			\draw (1,-1-7) to (1.75,-1-7);
+			\draw[line width=1.25pt] (1.75,-1-7) to (2.25,-1-7);
+			\fill (1.75, -1-7) circle (2pt); % dot
+			\fill (2.25, -1-7) circle (2pt); % dot
+			\draw (2.25,-1-7) to (7.5,-1-7);
 
-      % Circuit wires for A
-      \draw (3.5, -11) to (3.5,-1.5-7);
-      \draw (3.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-7);
-      \draw (3.5,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-7);
-      \draw (3.5, 0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-7);
-      \draw (3.5, 1.5-7) to (3.5,1.5-7);
-      \draw (3.5,2.0-1.77-6) node[npn, anchor=S] {};
-      \draw (3.5, 2.5-7) to (3.5,-1.5-1);
-      \draw (3.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-1);
-      \draw (3.5,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-1);
-      \draw (3.5, 0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-1);
-      \draw (3.5, 1.5-1) to (3.5,2.0-1.5);
-      \draw (3.5,2.0-1.77) node[npn, anchor=S] {};
-      \draw (3.5, 2.0-0.5) to (3.5,4);
+			% Circuit wires for A
+			\draw (3.5, -11) to (3.5,-1.5-7);
+			\draw (3.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-7);
+			\draw (3.5,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-7);
+			\draw (3.5, 0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-7);
+			\draw (3.5, 1.5-7) to (3.5,1.5-7);
+			\draw (3.5,2.0-1.77-6) node[npn, anchor=S] {};
+			\draw (3.5, 2.5-7) to (3.5,-1.5-1);
+			\draw (3.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-1);
+			\draw (3.5,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-1);
+			\draw (3.5, 0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-1);
+			\draw (3.5, 1.5-1) to (3.5,2.0-1.5);
+			\draw (3.5,2.0-1.77) node[npn, anchor=S] {};
+			\draw (3.5, 2.0-0.5) to (3.5,4);
 
-      % Circuit wires for B
-      \draw (5.0, -10) to (5.0,-1.5-7);
-      \draw (5.0,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-7);
-      \draw (5.0,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-7);
-      \draw (5.0,2.0-1.77-7) node[npn, anchor=S] {};
-      \draw (5.0, 2.5-7-1) to (5.0,-1.5-1);
-      \draw (5.0, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-1);
-      \draw (5.0,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-1);
-      \draw (5.0,2.0-1.77-1) node[npn, anchor=S] {};
-      \draw (5.0, 2.0-0.5-1) to (5.0,3);
+			% Circuit wires for B
+			\draw (5.0, -10) to (5.0,-1.5-7);
+			\draw (5.0,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-7);
+			\draw (5.0,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-7);
+			\draw (5.0,2.0-1.77-7) node[npn, anchor=S] {};
+			\draw (5.0, 2.5-7-1) to (5.0,-1.5-1);
+			\draw (5.0, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-1);
+			\draw (5.0,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-1);
+			\draw (5.0,2.0-1.77-1) node[npn, anchor=S] {};
+			\draw (5.0, 2.0-0.5-1) to (5.0,3);
 
-      % Circuit wires for C
-      \draw (6.5, -10) to (6.5,-1.5-7);
-      \draw (6.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-7);
-      \draw (6.5,2.0-1.77-7-1) node[npn, anchor=S] {};
-      \draw (6.5, 2.5-7-1-1) to (6.5,-1.5-1);
-      \draw (6.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-1);
-      \draw (6.5,2.0-1.77-1-1) node[npn, anchor=S] {};
-      \draw (6.5, 2.0-0.5-1-1) to (6.5,3);
+			% Circuit wires for C
+			\draw (6.5, -10) to (6.5,-1.5-7);
+			\draw (6.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-7);
+			\draw (6.5,2.0-1.77-7-1) node[npn, anchor=S] {};
+			\draw (6.5, 2.5-7-1-1) to (6.5,-1.5-1);
+			\draw (6.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-1);
+			\draw (6.5,2.0-1.77-1-1) node[npn, anchor=S] {};
+			\draw (6.5, 2.0-0.5-1-1) to (6.5,3);
 
-      % Circuit wires for D
-      \draw (8.0, -10) to (8.0,-1.5-7);
-      \draw (8.0,2.0-1.77-7-1-1) node[npn, anchor=S] {};
-      \draw (8.0, 2.5-7-1-1-1) to (8.0,-1.5-1);
-      \draw (8.0,2.0-1.77-1-1-1) node[npn, anchor=S] {};
-      \draw (8.0, 2.0-0.5-1-1-1) to (8.0,3);
+			% Circuit wires for D
+			\draw (8.0, -10) to (8.0,-1.5-7);
+			\draw (8.0,2.0-1.77-7-1-1) node[npn, anchor=S] {};
+			\draw (8.0, 2.5-7-1-1-1) to (8.0,-1.5-1);
+			\draw (8.0,2.0-1.77-1-1-1) node[npn, anchor=S] {};
+			\draw (8.0, 2.0-0.5-1-1-1) to (8.0,3);
 
-      % Circuit Completion
-      \draw (3.5,3) to (8,3);
-      \draw (8, -10) to (3.5, -10);
-      \draw[purple] (-3.3, 3.3) rectangle (10.3, -10.3);
+			% Circuit Completion
+			\draw (3.5,3) to (8,3);
+			\draw (8, -10) to (3.5, -10);
+			\draw[purple] (-3.3, 3.3) rectangle (10.3, -10.3);
 
-      % Labels
-      \node at (3.5, 4+0.3) {$T^{+}$};
-      \node at (3.5, -11-0.3) {$T^{-}$};
-      \node at (3.7, 2-5.5) {\texttt{A}};
-      \node at (5.2, 2-5.5) {\texttt{B}};
-      \node at (6.7, 2-5.5) {\texttt{C}};
-      \node at (8.2, 2-5.5) {\texttt{D}};
+			% Labels
+			\node at (3.5, 4+0.3) {$T^{+}$};
+			\node at (3.5, -11-0.3) {$T^{-}$};
+			\node at (3.7, 2-5.5) {\texttt{A}};
+			\node at (5.2, 2-5.5) {\texttt{B}};
+			\node at (6.7, 2-5.5) {\texttt{C}};
+			\node at (8.2, 2-5.5) {\texttt{D}};
 
-      % Power line
-      \node at (2, 4+0.3) {$V^{+}$};
-      \node at (2, -11-0.3) {$V^{-}$};
-      \draw[dashed] (2, 4) -- (2, -11);
+			% Power line
+			\node at (2, 4+0.3) {$V^{+}$};
+			\node at (2, -11-0.3) {$V^{-}$};
+			\draw[dashed] (2, 4) -- (2, -11);
 
-    \end{circuitikz}
-  }
+		\end{circuitikz}
+	}
 \end{center}
 On the left we have our two sets of rotors represented by
 permutations $N_x^{-1}Q_{y,z}N_x$ and $N_{x+3}^{-1}Q_{y,z}N_{x+3}$
@@ -921,38 +921,38 @@ this was an electromagnet), and the machine will stop whenever all
 three females are detected.
 
 \begin{center}
-  \scalebox{0.9} {
-    \begin{circuitikz}[scale=0.9, octagon/.style=
-        {shape=regular polygon, regular polygon sides=8, draw, minimum
-      width=.2in}]
-      \fill[pink] (3-5, 0) rectangle (0-5, 3);
-      \node at (1.5-5, 1.5) {\large$x,y,z$};
-      \fill[pink] (3-0, 0) rectangle (0-0, 3);
-      \node at (1.5-0, 1.5) {\large$x^\prime,y^\prime,z^\prime$};
-      \fill[pink] (3+5, 0) rectangle (0+5, 3);
-      \node at (1.5+5, 1.5)
-      {\large$x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}$};
-      \draw[dashed] (3-5-3-1, 2) -- (0-5, 2);
-      \draw[dashed] (3-0-3-2, 2) -- (0, 2);
-      \draw[dashed] (3-0-3-2+5, 2) -- (0+5, 2);
-      \draw[dashed] (3-5-3-1+14, 2) -- (0-5+15.5, 2);
-      \draw[dashed] (3-5-3-1, 2) -- (3-5-3-1, 1);
-      \draw[dashed] (0-5+15.5, 2) -- (0-5+15.5, -5);
-      \draw[dashed] (0-5+15.5, -5) -- (0-5+15.5-1.5, -5);
+	\scalebox{0.9} {
+		\begin{circuitikz}[scale=0.9, octagon/.style=
+					{shape=regular polygon, regular polygon sides=8, draw, minimum
+						width=.2in}]
+			\fill[pink] (3-5, 0) rectangle (0-5, 3);
+			\node at (1.5-5, 1.5) {\large$x,y,z$};
+			\fill[pink] (3-0, 0) rectangle (0-0, 3);
+			\node at (1.5-0, 1.5) {\large$x^\prime,y^\prime,z^\prime$};
+			\fill[pink] (3+5, 0) rectangle (0+5, 3);
+			\node at (1.5+5, 1.5)
+			{\large$x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}$};
+			\draw[dashed] (3-5-3-1, 2) -- (0-5, 2);
+			\draw[dashed] (3-0-3-2, 2) -- (0, 2);
+			\draw[dashed] (3-0-3-2+5, 2) -- (0+5, 2);
+			\draw[dashed] (3-5-3-1+14, 2) -- (0-5+15.5, 2);
+			\draw[dashed] (3-5-3-1, 2) -- (3-5-3-1, 1);
+			\draw[dashed] (0-5+15.5, 2) -- (0-5+15.5, -5);
+			\draw[dashed] (0-5+15.5, -5) -- (0-5+15.5-1.5, -5);
 
-      \draw (3-5-3-1, 1) -- (0-5, 1);
-      \draw (3-0-3-2, 1) -- (0, 1);
-      \draw (3-0-3-2+5, 1) -- (0+5, 1);
-      \draw (3-5-3-1+14, 1) -- (0-5+14, 1);
-      \draw (3-5-3-1, 1) -- (3-5-3-1, -2.5);
-      \draw (3-5-3-1, -3) to[battery] (3-5-3-1, -2.5);
-      \draw (3-5-3-1, -3) -- (3-5-3-1, -5);
-      \draw (3-5-3-1, -5) -- (0-5+14, -5);
-      \draw (0-5+14, -5) -- (0-5+14, -3.6);
-      \draw (0-5+14, -1.4) -- (0-5+14, 1);
-      \node[octagon] at (0-5+14, -2.5) {STOP};
-    \end{circuitikz}
-  }
+			\draw (3-5-3-1, 1) -- (0-5, 1);
+			\draw (3-0-3-2, 1) -- (0, 1);
+			\draw (3-0-3-2+5, 1) -- (0+5, 1);
+			\draw (3-5-3-1+14, 1) -- (0-5+14, 1);
+			\draw (3-5-3-1, 1) -- (3-5-3-1, -2.5);
+			\draw (3-5-3-1, -3) to[battery] (3-5-3-1, -2.5);
+			\draw (3-5-3-1, -3) -- (3-5-3-1, -5);
+			\draw (3-5-3-1, -5) -- (0-5+14, -5);
+			\draw (0-5+14, -5) -- (0-5+14, -3.6);
+			\draw (0-5+14, -1.4) -- (0-5+14, 1);
+			\node[octagon] at (0-5+14, -2.5) {STOP};
+		\end{circuitikz}
+	}
 \end{center}
 
 \noindent This is more or less the structure of the Bomba. Using our
@@ -985,36 +985,36 @@ $N_{x}^{-1}Q_{y,z}N_{x}$. Such permutations completely ignore the
 effect of the plugboard permutation $S$. However, consider a message
 with the keys
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \texttt{RTJ} & {\uline{\texttt{W}}}\texttt{AH
-    }{\uline{\texttt{W}}}\texttt{IK} \\
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{RTJ} & {\uline{\texttt{W}}}\texttt{AH
+		}{\uline{\texttt{W}}}\texttt{IK}              \\
+	\end{array}
 \]
 Denote the Enigma permutation at the positions $1$ and $4$
 respectively as $\sigma_1$ and $\sigma_4$. Recal that the \texttt{W}
 at both these positions represent the same enciphered letter, which
 means we necessarily have
 \[
-  \sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
+	\sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
 \]
 This is precisely the criteria we are using to check if $\sigma_i$
 has a $1-4$ female, we mechanicaly run \texttt{W} through these
 machines at 3 steps apart, and see if they are equal.
 \\\\If \texttt{W} is fixed by the plugboard permutation $S$ then we have
 \begin{align*}
-  & \sigma_1(\texttt{W}) = \sigma_4(\texttt{W})
-  \\
-  \iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) =
-  S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}S(\texttt{W})   \\
-  \iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) =
-  S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W})    \\
-  \iff & S^{-1}(N_x^{-1}Q_{y,z}N_x(\texttt{W})) =
-  S^{-1}(N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W})) \\
+	     & \sigma_1(\texttt{W}) = \sigma_4(\texttt{W})
+	\\
+	\iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) =
+	S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}S(\texttt{W})     \\
+	\iff & S^{-1}N_x^{-1}Q_{y,z}N_xS(\texttt{W}) =
+	S^{-1}N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W})      \\
+	\iff & S^{-1}(N_x^{-1}Q_{y,z}N_x(\texttt{W})) =
+	S^{-1}(N_{x+3}x^{-1}Q_{y,z}N_{x+3}(\texttt{W}))    \\
 \end{align*}
 Since $S^{-1}$ is an injection this occurs if and only if
 \[
-  N_x^{-1}Q_{y,z}N_x(\texttt{W}) = N_{x+3}^{-1}Q_{y,z}N_{x+3}(\texttt{W})
+	N_x^{-1}Q_{y,z}N_x(\texttt{W}) = N_{x+3}^{-1}Q_{y,z}N_{x+3}(\texttt{W})
 \]
 This means that for the purposes of testing for females on input
 \texttt{W}, our simplified rotor model works correctly so long as $S$
@@ -1031,13 +1031,13 @@ this is a significant improvement.
 In our Bomba we have 6 rotors, with 3 of them being paired such that
 they are 3 steps apart. Let us refer to these 6 rotors as,
 \begin{align*}
-  & R_{x,y,z} \texttt{ - } R_{x+3,y,z}
-  \\
-  & R_{x^\prime,y^\prime,z^\prime} \texttt{ - }
-  R_{x^\prime+3,y^\prime,z^\prime}
-  \\
-  & R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}} \texttt{ -
-  } R_{x^{\prime\prime}+3,y^{\prime\prime},z^{\prime\prime}}
+	 & R_{x,y,z} \texttt{ - } R_{x+3,y,z}
+	\\
+	 & R_{x^\prime,y^\prime,z^\prime} \texttt{ - }
+	R_{x^\prime+3,y^\prime,z^\prime}
+	\\
+	 & R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}} \texttt{ -
+	} R_{x^{\prime\prime}+3,y^{\prime\prime},z^{\prime\prime}}
 \end{align*}
 When our Bomba stops, we know the positions at which the females
 observed would occur with a supposed ring setting of \texttt{AAA}.
@@ -1057,8 +1057,8 @@ away from \texttt{AAA}. Thus if the machine starts at position
 $(x,y,z)$ and stops at position $(a,b,c)$ we can get the numerical
 values of the ring position by computing
 \[
-  (1 - (c- z)\text{ mod }26, 1 - (b- y)\text{ mod }26, 1 - (a-
-  x)\text{ mod }26).
+	(1 - (c- z)\text{ mod }26, 1 - (b- y)\text{ mod }26, 1 - (a-
+	x)\text{ mod }26).
 \]
 
 \subsection{Recovering the Rotor Order}
@@ -1080,14 +1080,14 @@ We now have the rotor order, the ring setting, and the window
 setting. We can then attempt to decrypt a message key. For example,
 we may decode the message key from
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \texttt{LRJ} & \texttt{PAH }\texttt{IKO} \\
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{LRJ} & \texttt{PAH }\texttt{IKO} \\
+	\end{array}
 \]
 and get
 \begin{center}
-  \texttt{AN}{\uline{\texttt{K}}}\texttt{ LR}{\uline{\texttt{K}}}
+	\texttt{AN}{\uline{\texttt{K}}}\texttt{ LR}{\uline{\texttt{K}}}
 \end{center}
 We can assume \texttt{K} is correct since we expect it to be repeated
 at a distance of 3 letters apart, but the first two letters in each
@@ -1095,13 +1095,13 @@ trigram are not identical indicating that they are being affected by
 the plugboard. We might guess therefore the the message should look
 like either something of the form
 \begin{center}
-  {\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
-  }{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}
+	{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
+	}{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}
 \end{center}
 or
 \begin{center}
-  {\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
-  }{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}
+	{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
+	}{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}
 \end{center}
 
 \noindent However, we have now deduced the entire permutation

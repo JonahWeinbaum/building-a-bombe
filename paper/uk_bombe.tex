@@ -2,48 +2,53 @@
 
 \chapter{Turing-Welchman Bombe}
 
+In the previous chapters, we have seen complicated manual cryptographic techniques give rise to a set of electromechanical tools meant to make such work tractible over short time periods. Changes to the Enigma protocol would soon necessitate the construction of one of the largest such electromechanical devices to date, known as the {\bf{Bombe}}.
+
 \subsection{Changes to the Enigma Protocol}
-Starting in 1940, the German's enhanced the security of their
-key distribution. As discussed in CITE the \emph{Grundstellung} rotor
-position was sent along with the daily key and an operator chose a
-\emph{Spruchschlusse} to
-encode twice at the start of a message. Later iterations of this
-protocol removed the \emph{Grundstellung}
-from key sheets.
-\\\\These new key sheets contained the following columns
-columns \emph{Tag/Datum}, \emph{Walzenlage}, \emph{Ringstellung},
-\emph{Steckerverbindungen}, and \emph{Kenngruppen}
-\\\\Notice the removal of the \emph{Grundstellung} as well as the
-addition of the \emph{Kenngruppen}. The \emph{Kenngruppen} were a set of
-four trigrams used to identify which setting was being used to encode
-a message, this is particularly useful if trying to decode a message
-using a prior day's key.
-The operator would choose a trigram from the the \emph{Kenngruppen},
-append two letters to the front of the trigram,
-and this five letter combination (known as the
-\emph{Buchstabenkenngruppe}) would preceed the message being sent. If a message
-was sent in multiple segments, multiple \emph{Buchstabenkenngruppe}
-were used to start each segment.
-\\\\When sending a message the operator was to use the following protocol
-\begin{enumerate}[I.]
-  \item The time at which the message was sent is listed
-  \item The number of parts which the message contained is listed
-  \item Which message part is being sent is listed
-  \item The length of the message part (not including
-    \emph{Buchstabenkenngruppe}) is listed
-  \item A \emph{Grundstellung} rotor position is chosen and listed
-  \item A \emph{Spruchschlüssel} rotor position is chosen and encoded
-    using the \emph{Grundstellung}, this is listed
-  \item The \emph{Buchstabenkenngruppe} is listed
-  \item The message part encoded using the daily key and the
-    \emph{Spruchschlüssel} position is listed
-\end{enumerate}
-It is clear that with this protocol, the Polish Bomba could no longer
-deduce the necessary
-details to decrypt Enigma messages. All of the permutation
-information contained in the original key distribution
-protocol was removed and a new method needed to be derived for
-infering information about the daily key.
+Recall that during the use of the Polish Bomba, operators were instructed to send their window setting (\emph{Grundstellung}) in plaintext, and then use this to doubly encode their message key (\emph{Spruchschlüssel}). Starting in 1940, a small but impactful change was made to the Enigma encryption protocol -- operators were instructed to send their encoded message key only once.
+\\\\The Polish Bomba relied on relationships between the doubly encoded message key to function, without such relationships all the previously mentioned tools became useless. World War II had begun and the need for intellegence material was greater than ever. Thus, British intellegence brought a group of cryptanalysts, mathematicians, historians, linguists, and more, to Bletchley Park to engage in a large-scale attempt to break the Enigma machine with this new protocol.
+\\\\No name is more well known from this operation than that of Alan Turing, whose work went on to become the foundations of modern computer science. Turing needed to find a new means of attacking the Enigma encryption that could no longer rely on the doubly enciphered message key. Consider that the reliance on the doubly enciphered message key was really just a reliance on the knowledge that two letters encoded the same plaintext at specific intervals of distance. Thus, Turing began engineering a method of deducing daily keys via a known plaintext attack.
+
+% As discussed in CITE the \emph{Grundstellung} rotor
+% position was sent along with the daily key and an operator chose a
+% \emph{Spruchschlusse} to
+% encode twice at the start of a message. Later iterations of this
+% protocol removed the \emph{Grundstellung}
+% from key sheets.
+% \\\\These new key sheets contained the following columns
+% columns \emph{Tag/Datum}, \emph{Walzenlage}, \emph{Ringstellung},
+% \emph{Steckerverbindungen}, and \emph{Kenngruppen}
+% \\\\Notice the removal of the \emph{Grundstellung} as well as the
+% addition of the \emph{Kenngruppen}. The \emph{Kenngruppen} were a set of
+% four trigrams used to identify which setting was being used to encode
+% a message, this is particularly useful if trying to decode a message
+% using a prior day's key.
+% The operator would choose a trigram from the the \emph{Kenngruppen},
+% append two letters to the front of the trigram,
+% and this five letter combination (known as the
+% \emph{Buchstabenkenngruppe}) would preceed the message being sent. If a message
+% was sent in multiple segments, multiple \emph{Buchstabenkenngruppe}
+% were used to start each segment.
+% \\\\When sending a message the operator was to use the following protocol
+% \begin{enumerate}[I.]
+% 	\item The time at which the message was sent is listed
+% 	\item The number of parts which the message contained is listed
+% 	\item Which message part is being sent is listed
+% 	\item The length of the message part (not including
+% 	      \emph{Buchstabenkenngruppe}) is listed
+% 	\item A \emph{Grundstellung} rotor position is chosen and listed
+% 	\item A \emph{Spruchschlüssel} rotor position is chosen and encoded
+% 	      using the \emph{Grundstellung}, this is listed
+% 	\item The \emph{Buchstabenkenngruppe} is listed
+% 	\item The message part encoded using the daily key and the
+% 	      \emph{Spruchschlüssel} position is listed
+% \end{enumerate}
+% It is clear that with this protocol, the Polish Bomba could no longer
+% deduce the necessary
+% details to decrypt Enigma messages. All of the permutation
+% information contained in the original key distribution
+% protocol was removed and a new method needed to be derived for
+% infering information about the daily key.
 % \section{Loops}
 % The removal of the double encoded \emph{Spruchschlüssel} does not
 % mean that permutation information cannot be stored elsewhere in the message.
@@ -203,201 +208,210 @@ Suppose we knew the plaintext which had been enciphered into a
 particular Enigma transmission.
 Consider the following mapping,
 \begin{center}
-  \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
-    circle, minimum height=0.1cm, minimum width=0.1cm}]
+	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
+					circle, minimum height=0.1cm, minimum width=0.1cm}]
 
-    % Centering the diagram
-    \node (a1) [] {D};
-    \node (a2) [right=0.1cm of a1] {Y};
-    \node (a3) [right=0.1cm of a2] {Y};
-    \node (a4) [right=0.1cm of a3] {Y};
-    \node (a5) [right=0.1cm of a4] {Y};
-    \node (a6) [right=0.1cm of a5] {Y};
-    \node (a7) [right=0.1cm of a6] {X };
-    \node (a8) [right=0.1cm of a7] {Y};
-    \node (a9) [right=0.1cm of a8] {Y};
-    \node (a10) [right=0.1cm of a9] {Y};
-    \node (a11) [right=0.1cm of a10] {X};
+		% Centering the diagram
+		\node (a1) [] {\texttt{D}};
+		\node (a2) [right=0.1cm of a1] {\texttt{Y}};
+		\node (a3) [right=0.1cm of a2] {\texttt{Y}};
+		\node (a4) [right=0.1cm of a3] {\texttt{Y}};
+		\node (a5) [right=0.1cm of a4] {\texttt{Y}};
+		\node (a6) [right=0.1cm of a5] {\texttt{Y}};
+		\node (a7) [right=0.1cm of a6] {\texttt{X }};
+		\node (a8) [right=0.1cm of a7] {\texttt{Y}};
+		\node (a9) [right=0.1cm of a8] {\texttt{Y}};
+		\node (a10) [right=0.1cm of a9] {\texttt{Y}};
+		\node (a11) [right=0.1cm of a10] {\texttt{X}};
 
-    % Nodes for ciphertext
-    \node (x1) [below=1cm of a1] {A};
-    \node (x2) [below=1cm of a2] {B};
-    \node (x3) [below=1cm of a3] {R};
-    \node (x4) [below=1cm of a4] {A};
-    \node (x5) [below=1cm of a5] {C};
-    \node (x6) [below=1cm of a6] {A};
-    \node (x7) [below=1cm of a7] {D};
-    \node (x8) [below=1cm of a8] {A};
-    \node (x9) [below=1cm of a9] {B};
-    \node (x10) [below=1cm of a10] {R};
-    \node (x11) [below=1cm of a11] {A};
+		% Nodes for ciphertext
+		\node (x1) [below=1cm of a1] {\texttt{A}};
+		\node (x2) [below=1cm of a2] {\texttt{B}};
+		\node (x3) [below=1cm of a3] {\texttt{R}};
+		\node (x4) [below=1cm of a4] {\texttt{A}};
+		\node (x5) [below=1cm of a5] {\texttt{C}};
+		\node (x6) [below=1cm of a6] {\texttt{A}};
+		\node (x7) [below=1cm of a7] {\texttt{D}};
+		\node (x8) [below=1cm of a8] {\texttt{A}};
+		\node (x9) [below=1cm of a9] {\texttt{B}};
+		\node (x10) [below=1cm of a10] {\texttt{R}};
+		\node (x11) [below=1cm of a11] {\texttt{A}};
 
-    % Arrows for mapping
-    \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
-    \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
-    \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
-    \draw[->] (a4) -- (x4) node[midway, left, draw=none, fill=none] {4};
-    \draw[->] (a5) -- (x5) node[midway, left, draw=none, fill=none] {5};
-    \draw[->] (a6) -- (x6) node[midway, left, draw=none, fill=none] {6};
-    \draw[->] (a7) -- (x7) node[midway, left, draw=none, fill=none] {7};
-    \draw[->] (a8) -- (x8) node[midway, left, draw=none, fill=none] {8};
-    \draw[->] (a9) -- (x9) node[midway, left, draw=none, fill=none] {9};
-    \draw[->] (a10) -- (x10) node[midway, left, draw=none, fill=none] {10};
-    \draw[->] (a11) -- (x11) node[midway, left, draw=none, fill=none] {11};
+		% Arrows for mapping
+		\draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
+		\draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
+		\draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
+		\draw[->] (a4) -- (x4) node[midway, left, draw=none, fill=none] {4};
+		\draw[->] (a5) -- (x5) node[midway, left, draw=none, fill=none] {5};
+		\draw[->] (a6) -- (x6) node[midway, left, draw=none, fill=none] {6};
+		\draw[->] (a7) -- (x7) node[midway, left, draw=none, fill=none] {7};
+		\draw[->] (a8) -- (x8) node[midway, left, draw=none, fill=none] {8};
+		\draw[->] (a9) -- (x9) node[midway, left, draw=none, fill=none] {9};
+		\draw[->] (a10) -- (x10) node[midway, left, draw=none, fill=none] {10};
+		\draw[->] (a11) -- (x11) node[midway, left, draw=none, fill=none] {11};
 
-  \end{tikzpicture}
+	\end{tikzpicture}
 \end{center}
 where the top row indicates our enciphered message, the bottom row
 indicates the plaintext,
-and then indices on the arrows indicate how many steps forward our
+and the indices on the arrows indicate how many steps forward our
 Enigma machine has moved while enciphering this message.
-Our goal is to determine which Enigma settings were used to encipher
-the message.  In order to achieve this,
-we will examine which settings maintain the relationships between the
-enciphered and plaintext letters.
-\\\\For example, any setting which maintains the above pairing must
-encipher $A$ to $D$ from the first position of the machine, then at
-the seventh position, it must encipher $D$ to $X$, and at the
-eleventh position $X$ must be enciphered back to $A$. It follows that if we had
-three Enigma machines connected in series, with an offset of 1, 7,
-and 11, from our initial position, then inputting $A$ on the first
-machine would result in an ouput of $A$ on the
-third machine. We visualize this loop as follows
+\\\\From this pairing we have that
 \begin{center}
-  \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
-    circle, minimum height=0.1cm, minimum width=0.1cm}]
-    \node (A) at (90:1.5) {$A$};
-    \node (D) at (210:1.5) {$D$};
-    \node (X) at (330:1.5) {$X$};
-
-    \draw[<->, bend right=45] (A) to node[midway, draw=none, above] {1} (D);
-    \draw[<->, bend right=45] (D) to node[midway, draw=none, above] {7} (X);
-    \draw[<->, bend right=45] (X) to node[midway, draw=none, above] {11} (A);
-  \end{tikzpicture}
+	$\sigma_1(\texttt{A}) = {\texttt{D}}$\\
+	$\sigma_7(\texttt{D}) = {\texttt{X}}$\\
+	$\sigma_{11}(\texttt{X}) = {\texttt{A}}$\\
 \end{center}
-To express this mathematically we denote the permutation represented
-by the Enigma at
-position $i$ as $\sigma_i$. Since these each use the same plugboard
-we will also note the
-Enigma at position $i$ not using the plugboard as
-$\overline{\sigma_i}$, that is $\sigma_i = P\overline{\sigma_i}P$
-(conversely, $\overline\sigma_i = P\sigma_iP$).
+% Our goal is to determine which Enigma settings were used to encipher
+% the message.  In order to achieve this,
+% we will examine which settings maintain the relationships between the
+% enciphered and plaintext letters.
+% \\\\For example, any setting which maintains the above pairing must
+% encipher $\texttt{A}$ to $\texttt{D}$ from the first position of the machine, then at
+% the seventh position, it must encipher $\texttt{D}$ to $\texttt{X}$, and at the
+% eleventh position $\texttt{X}$ must be enciphered back to $\texttt{A}$. It follows that if we had
+% three Enigma machines connected in series, with an offset of 1, 7,
+% and 11, from our initial position, then inputting $\texttt{A}$ on the first
+% machine would result in an ouput of $\texttt{A}$ on the
+% third machine.
+Thus, $\sigma_1$, $\sigma_7$, and $\sigma_11$ form a loop starting at \texttt{A}. We visualize this loop as follows
+\begin{center}
+	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
+					circle, minimum height=0.1cm, minimum width=0.1cm}]
+		\node (A) at (90:1.5) {$\texttt{A}$};
+		\node (D) at (210:1.5) {$\texttt{D}$};
+		\node (X) at (330:1.5) {$\texttt{X}$};
+
+		\draw[<->, bend right=45] (A) to node[midway, draw=none, above] {1} (D);
+		\draw[<->, bend right=45] (D) to node[midway, draw=none, above] {7} (X);
+		\draw[<->, bend right=45] (X) to node[midway, draw=none, above] {11} (A);
+	\end{tikzpicture}
+\end{center}
+Recall that, ignoring turnover, each $\sigma_i$ is of the form
+\begin{center}
+	$\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S$
+\end{center}
+We will denote $\sigma_i$ seperated from its plugboard as
+\begin{center}
+	$\overline{\sigma_i} = P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}$
+\end{center}
+\noindent that is $\sigma_i = S^{-1}\overline{\sigma_i}S$
+(conversely, $\overline\sigma_i = S^{-1}\sigma_iS$)\footnote{It should be noted that $S$ = $S^{-1}$ since the plugboard is always an involution}.
 Then our loop is expressed by the fact that
-$\sigma_{11}\circ\sigma_7\circ\sigma_1$ has a fixed point at $A$.
+$\sigma_{11}\sigma_7\sigma_1$ has a fixed point at $\texttt{A}$.
 We also note that the intermediate plugboard settings cancel out, that is
 \begin{center}
-  \begin{align*}
-    \sigma_{1}\circ\sigma_7\circ\sigma_{11} & =
-    P\overline{\sigma_{1}}P\circ P\overline{\sigma_7}P\circ
-    P\overline{\sigma_{11}}P
-    \\&= P\circ
-    \overline{\sigma_{1}}\circ\overline{\sigma_7}\circ\overline{\sigma_{11}}\circ
-    P
-  \end{align*}
+	\begin{align*}
+		\sigma_{1}\sigma_7\sigma_{11} & =
+		S^{-1}\overline{\sigma_{1}}SS^{-1}\overline{\sigma_7}SS^{-1}\overline{\sigma_{11}}S
+		\\&= S^{-1}
+		\overline{\sigma_{1}}\overline{\sigma_7}\overline{\sigma_{11}}
+		S
+	\end{align*}
 \end{center}
 We will condense this notation by defining
 \begin{center}
-  $\sigma \coloneq \sigma_{1}\circ\sigma_7\circ\sigma_{11}$
+	$\pi \coloneq \sigma_{1}\sigma_7\sigma_{11}$
 \end{center}
 and
 \begin{center}
-  $\overline{\sigma} \coloneq
-  \overline{\sigma_{1}}\circ\overline{\sigma_7}\circ\overline{\sigma_{11}}$
+	$\overline{\pi} \coloneq
+		\overline{\sigma_{1}}\overline{\sigma_7}\overline{\sigma_{11}}$
 \end{center}
-And thus we have shown $\sigma = P\overline{\sigma}P$ (conversely,
-$\overline\sigma = P\sigma P$).
-\\\\Let us hypothesize that $A$ is steckered in the plugboard to
-$\alpha$ -- that is, $P(A) = \alpha$ (conversely, $P(\alpha) = A$).
+And thus we have shown $\pi = S^{-1}\overline{\pi}S$ (conversely,
+$\overline\pi = S^{-1}\pi S$).
+\\\\Let us hypothesize that $\texttt{A}$ is steckered in the plugboard to
+$\alpha$ -- that is, $S(\texttt{A}) = \alpha$ (conversely, $S(\alpha) = \texttt{A}$).
 It then follows that for a fixed $i\in\mathbb{N}$
 \begin{center}
-  \begin{align*}
-    \overline{\sigma}^i(\alpha) & = P\circ\sigma^i\circ P(\alpha)
-    \\&= P\circ\sigma^i(A)
-    \\&= P(A)
-  \end{align*}
+	\begin{align*}
+		\overline{\pi}^i(\alpha) & = S\pi^i S(\alpha)
+		\\&= S \pi^i(\texttt{A})
+		\\&= S(\texttt{A})
+	\end{align*}
 \end{center}
 and so we derive
 \begin{center}
-  $P(A) = \alpha \Rightarrow P(A) = \overline{\sigma}^i(\alpha)\text{
-  }\forall\text{ }i\in\mathbb{N}$
+	$S(\texttt{A}) = \alpha \Rightarrow S(\texttt{A}) = \overline{\pi}^i(\alpha)\text{
+		}\forall\text{ }i\in\mathbb{N}$
 \end{center}
-Then we have that $A$ must be steckered to all values in the set
-$\{\overline{\sigma}^i(\alpha)\text{ }\vert\text{ }i\in\mathbb{N}\}$.
+Then we have that $\texttt{A}$ must be steckered to all values in the set
+$\{\overline{\pi}^i(\alpha)\text{ }\vert\text{ }i\in\mathbb{N}\}$.
 We note that this set is that orbit of the element $\alpha$ under the
-group action of the subgroup $\langle\overline{\sigma}\rangle$ -- that is,
-$\langle\overline{\sigma}\rangle\cdot\alpha$.
-\\\\By construction of the Enigma machine, $A$ cannot be steckered to
+group action of the subgroup $\langle\overline{\pi}\rangle$ -- that is,
+$\langle\overline{\pi}\rangle\cdot\alpha$.
+\\\\By construction of the Enigma machine, $\texttt{A}$ cannot be steckered to
 more than one value at a time, so if
-$|\langle\overline{\sigma}\rangle\cdot\alpha| > 1$ our initial
-hypotheses that $P(A) = \alpha$ must have been incorrect. Further,
-the above argument also illustrates that $A$ cannot be steckered to
+$|\langle\overline{\pi}\rangle\cdot\alpha| > 1$ our initial
+hypotheses that $S(\texttt{A}) = \alpha$ must have been incorrect. Further,
+the above argument also illustrates that $\texttt{A}$ cannot be steckered to
 any element in the orbit of $\alpha$ since
-we would similarly find that the orbit of that element was not a
+we would similarly find that the orbit of \emph{that} element was not a
 singleton. Then we now have
 \begin{center}
-  $|\langle\overline{\sigma}\rangle\cdot\alpha| > 1 \Rightarrow P(A)
-  \notin \langle\overline{\sigma}\rangle\cdot\alpha$
+	$|\langle\overline{\pi}\rangle\cdot\alpha| > 1 \Rightarrow \texttt{A} \text{ cannot be steckered to any element in }\langle\overline{\pi}\rangle\cdot\alpha$
 \end{center}
-thus eliminating several elements that $A$ could be steckered to.
-\\\\By representing $\overline\sigma$ in its cycle notation we can
+thus eliminating several elements that $\texttt{A}$ could be steckered to.
+\\\\By representing $\overline\pi$ in its cycle notation we can
 quickly see whether certian hypotheses are possible. For example,
 suppose we found that
 \begin{center}
-  $\overline\sigma = (ABCDEF)(GHIJK)(L)(MNOPQRSTUVWXYZ)$
+	$\overline\pi = (\texttt{ABCDEF})(\texttt{GHIJK})(\texttt{L})(\texttt{MNOPQRSTUVWXYZ})$
 \end{center}
-If we suppose that $A$ is steckered to any element in the cycle
+If we suppose that $\texttt{A}$ is steckered to any element in the cycle
 $(ABCDEF)$ we find that this
-element has an orbit of length $6$ in $\langle\overline\sigma\rangle$
-and thus $A$ cannot be steckered
-to any element in this cycle. Then it is clear that $A$ can only be
-steckered to $L$ in this case.
+element has an orbit of length $6$ in $\langle\overline\pi\rangle$
+and thus $\texttt{A}$ cannot be steckered
+to any element in this cycle. Then it is clear that $\texttt{A}$ can only be
+steckered to $\texttt{L}$ in this case.
+
 \subsection{Scanning Methods}
 Turing describes various methods of mechanising the above analysis of
 cycle-type to determine when we can eliminate rotor positions.
 \begin{enumerate}
-  \item If we examine a particular hypothesis, say $A$ is steckered
-    to $K$, we can rule out this steckering if we find that $K$ is
-    not in a $1$-cycle, that is if $\overline\sigma(K) \ne K$. If we
-    mechanize this process we can eliminate rotor positions which do
-    not satisfy this singular hypothesis. Turing called this method
-    \textbf{single line scanning}. Note, however, that this method
-    may eliminate rotor
-    positions which do have valid steckerings, just not the
-    particular steckering that we hypothesized.
-  \item If we perform single line scanning in sequence, that is, for
-    each steckering hypothesis, we can rule out rotor positions which
-    have all steckering hypotheses invalid. Turing called this method
-    \textbf{serial scanning}.
-  \item Serial scanning requires a seperate examination of each
-    steckering. Turing proposed a machine which could concurrently
-    examine all steckering possibilities and eliminate rotor positions
-    which had no valid steckerings. Turing called this method
-    \textbf{simultaneous scanning}.
-  \item If we find $\overline\sigma$ has a $26$-cycle, then we must
-    have that there are no $1$-cycles and thus no valid steckerings.
-    It then follows that the rotor position is incorrect.
-    If we mechanism this process we can eliminate \emph{some} rotor
-    positions which do not have valid steckerings. We will call this
-    method \textbf{spider scanning}. Note, however, that this method
-    would not, for example, detect that a $13,13$-cycle contains no
-    valid steckerings. As Turing explained,
-    \say{The ideal machine that Welchman was aiming at was to reject
-      any position in which a certain fixed-for-the-time Stecker
-      hypothesis led to any direct contradiction... The spider does
-      more than this in one way and
-      less in another. It is not restricted to dealing with one Stecker
-      hypothesis at a time, and it does not find all direct
-    contradictions.} Effectively, spider-scanning is like a form of
-    simultaneous scanning which is restricted
-    to examining only one cycle at a time.
+	\item If we examine a particular hypothesis, say $\texttt{A}$ is steckered
+	      to $\texttt{A}$, we can rule out this steckering if we find that $\texttt{A}$ is
+	      not in a $1$-cycle, that is if $\overline\pi(\texttt{K}) \ne \texttt{K}$. If we
+	      mechanize this process we can eliminate rotor positions which do
+	      not satisfy this singular hypothesis. Turing called this method
+	      \textbf{single line scanning}. Note, however, that this method
+	      may eliminate rotor
+	      positions which do have valid steckerings, just not the
+	      particular steckering that we hypothesized.
+	\item If we perform single line scanning in sequence, that is, for
+	      each steckering hypothesis, we can rule out rotor positions which
+	      have all steckering hypotheses invalid. Turing called this method
+	      \textbf{serial scanning}.
+	\item Serial scanning requires a seperate examination of each
+	      steckering. Turing proposed a machine which could concurrently
+	      examine all steckering possibilities and eliminate rotor positions
+	      which had no valid steckerings. Turing called this method
+	      \textbf{simultaneous scanning}.
+	\item If we find $\overline\pi$ has a $26$-cycle, then we must
+	      have that there are no $1$-cycles and thus no valid steckerings.
+	      It then follows that the rotor position is incorrect.
+	      If we mechanism this process we can eliminate \emph{some} rotor
+	      positions which do not have valid steckerings. We will call this
+	      method \textbf{spider scanning}. Note, however, that this method
+	      would not, for example, detect that $\overline\pi$ with cycle type $2^{13}$ contains no
+	      valid steckerings. As Turing explained,
+	      \say{The ideal machine that Welchman was aiming at was to reject
+		      any position in which a certain fixed-for-the-time Stecker
+		      hypothesis led to any direct contradiction... The spider does
+		      more than this in one way and
+		      less in another. It is not restricted to dealing with one Stecker
+		      hypothesis at a time, and it does not find all direct
+		      contradictions.} Effectively, spider-scanning is like a form of
+	      simultaneous scanning which is restricted
+	      to examining only one cycle at a time.
 \end{enumerate}
 Iterations of each scanning methods were proposed or designed, but in
 the end we find that the spider scanning method was used in the
-implementation of the Bombe.At a high level, we encode the structure
+implementation of the Bombe. At a high level, we encode the structure
 of the ciphertext-plaintext pairings, we input a hypothesis that a particular
-letter (e.g $A$) is steckered to another (e.g. $\alpha$), and we
+letter (e.g $\texttt{A}$) is steckered to another (e.g. $\alpha$), and we
 electrically produce the elements that must also be steckered to our test letter
-(e.g. $\langle\overline{\sigma}\rangle\cdot\alpha$) if our hypothesis
+(e.g. $\langle\overline{\pi}\rangle\cdot\alpha$) if our hypothesis
 were to be true. If we find that this production generates a set of
 all letters and thus disqualifies this rotor position from producing
 the plaintext we observed, then we can continue on to the next rotor
@@ -407,55 +421,48 @@ position until we have no contradictory results from our hypothesis.
 
 In the section, we outline the construction of a rudementary Bombe.
 Our goal is to construct a machine using the above insight to quickly
-elimate a rotor position based on contradictory hypotheses. For
-clarity sake, we will
-imagine that our Engima machine operates on an alphabet of only four
-letters $\{A, B, C, D\}$.
-We must shift from the above mathematical construction to an
-electrical one. We first abstract the idea of the Engima machine and
-do away with the input output system of keys and lamp lights.
-Rather, we imagine the Enigma machine as black-box that takes in 4
-cables encoding, via current, each of the 4 letters, and outputs
-currents on the corresponding letter after applying the Enigma permutation.
+elimate a rotor position based on contradictory hypotheses. We must shift from the above mathematical construction to an
+% electromechanical one. We imagine the Enigma machine as black-box that takes in cables encoding, via current, each of the 4 letters, and outputs
+% currents on the corresponding letter after applying the Enigma permutation.
 Imagine the following set of wires encoding a possible Enigma
-permutation we will denoted $\overline\sigma_\alpha$ (the bar
+permutation we will denoted $\overline\pi_i$ (the bar
 indicates we are not yet considering the plugboard).
 
 \tikzset{big box/.style={draw, minimum width=5cm, minimum height=4cm},
-small box/.style={draw, minimum width=1cm, minimum height=1cm}}
+	small box/.style={draw, minimum width=1cm, minimum height=1cm}}
 
 \begin{center}
-  \begin{tikzpicture}[thick]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+	\begin{tikzpicture}[thick]
+		% Draw the box
+		\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
 
-    \node at (3, -2) {$\overline\sigma_\alpha$};
+		\node at (3, -2) {$\overline\pi_i$};
 
-    % Draw the wires entering the box
-    \draw[-] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-] (0,-1) -- (2,-1) node[midway, above] {d};
+		% Draw the wires entering the box
+		\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{\texttt{a}}};
+		\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-] (4,-1) -- (6, -1) node[midway, above] {d};
+		% Draw the wires exiting the box with crossed mappings
+		\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+		\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-] (2,-1) -- (4, 2);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2, 2) -- (4,-1);
+		\draw[-] (2, 1) -- (4, 0);
+		\draw[-] (2, 0) -- (4, 1);
+		\draw[-] (2,-1) -- (4, 2);
 
-  \end{tikzpicture}
+	\end{tikzpicture}
 \end{center}
 A couple quick notes about this abstraction. First as these lines are
 simply wires, current can flow in either direction, left-to-right, or
 right-to-left.
 Second, we can apply current to multiple wires concurrently, for
-example, applying current at $a$ and $c$ will cause $d$ and $b$ to be
+example, applying current at $\texttt{a}$ and $\texttt{c}$ will cause $\texttt{d}$ and $\texttt{b}$ to be
 live on the other side of the machine.
 Finally, the choice to use lower case letters will become clear
 further in this section as we want to seperate the plugboard letters
@@ -465,772 +472,779 @@ Engima permutations in series to capture an underlying relationship
 between a ciphertext-plaintext pairing.
 Suppose we had plaintext ciphertext pairing
 \begin{center}
-  \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
-    circle, minimum height=0.1cm, minimum width=0.1cm}]
+	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
+					circle, minimum height=0.1cm, minimum width=0.1cm}]
 
-    % Centering the diagram
-    \node (a1) [] {B};
-    \node (a2) [right=0.1cm of a1] {C};
-    \node (a3) [right=0.1cm of a2] {A};
+		% Centering the diagram
+		\node (a1) [] {\texttt{B}};
+		\node (a2) [right=0.1cm of a1] {\texttt{C}};
+		\node (a3) [right=0.1cm of a2] {\texttt{A}};
 
-    % Nodes for ciphertext
-    \node (x1) [below=1cm of a1] {A};
-    \node (x2) [below=1cm of a2] {B};
-    \node (x3) [below=1cm of a3] {C};
+		% Nodes for ciphertext
+		\node (x1) [below=1cm of a1] {\texttt{A}};
+		\node (x2) [below=1cm of a2] {\texttt{B}};
+		\node (x3) [below=1cm of a3] {\texttt{C}};
 
-    % Arrows for mapping
-    \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
-    \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
-    \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
+		% Arrows for mapping
+		\draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
+		\draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
+		\draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
 
-  \end{tikzpicture}
+	\end{tikzpicture}
 \end{center}
 
 Then we find that there exists a loop in the pairing as follows
 
 \begin{center}
-  \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
-    circle, minimum height=0.1cm, minimum width=0.1cm}]
-    \node (A) at (90:1.5) {$A$};
-    \node (B) at (210:1.5) {$B$};
-    \node (C) at (330:1.5) {$C$};
+	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
+					circle, minimum height=0.1cm, minimum width=0.1cm}]
+		\node (A) at (90:1.5) {\texttt{A}};
+		\node (B) at (210:1.5) {\texttt{B}};
+		\node (C) at (330:1.5) {\texttt{C}};
 
-    \draw[<->, bend right=45] (A) to node[midway, draw=none, above] {1} (B);
-    \draw[<->, bend right=45] (B) to node[midway, draw=none, above] {2} (C);
-    \draw[<->, bend right=45] (C) to node[midway, draw=none, above] {3} (A);
-  \end{tikzpicture}
+		\draw[<->, bend right=45] (A) to node[midway, draw=none, above] {1} (B);
+		\draw[<->, bend right=45] (B) to node[midway, draw=none, above] {2} (C);
+		\draw[<->, bend right=45] (C) to node[midway, draw=none, above] {3} (A);
+	\end{tikzpicture}
 \end{center}
 We can then think of this loop as a series of Enigma permutations
 \begin{center}
-  \begin{tikzpicture}[thick, scale=0.6, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+	\begin{tikzpicture}[thick, scale=0.6, every node/.style={scale=0.7}]
+		% Draw the box
+		\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
 
-    \node at (3, -2) {$\overline\sigma_3$};
+		\node at (3, -2) {$\overline\pi_3$};
 
-    % Draw the wires entering the box
-    \draw[-] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-] (0,-1) -- (2,-1) node[midway, above] {d};
+		% Draw the wires entering the box
+		\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+		\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-] (4,-1) -- (6, -1) node[midway, above] {d};
+		% Draw the wires exiting the box with crossed mappings
+		\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+		\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-] (2,-1) -- (4, 2);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2, 2) -- (4,-1);
+		\draw[-] (2, 1) -- (4, 0);
+		\draw[-] (2, 0) -- (4, 1);
+		\draw[-] (2,-1) -- (4, 2);
 
-    \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-] (0-3, -1-7) to[out=180, in=180] (0, -1) node[midway, above] {};
+		\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+		\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+		\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+		\draw[-] (0-3, -1-7) to[out=180, in=180] (0, -1) node[midway, above] {};
 
-    \draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+		\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+		\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+		\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+		\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
 
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+		\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
+		\node at (3-3, -2-7) {$\overline\pi_1$};
 
-    % Draw the wires entering the box
-    \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
+		% Draw the wires entering the box
+		\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
+		% Draw the wires exiting the box
+		\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+		\draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+		\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+		\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-] (2-3,-1-7) -- (4-3, 1-7);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+		\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+		\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+		\draw[-] (2-3,-1-7) -- (4-3, 1-7);
 
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+		\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
 
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
+		\node at (3+3, -2-7) {$\overline\pi_2$};
 
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+		% Draw the wires entering the box
+		\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+		\draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+		\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+		\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
 
-    % Draw the wires exiting the box
-    \draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
+		% Draw the wires exiting the box
+		\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
 
-    \draw[-] (2+3, 2-7) -- (4+3, 1-7);
-    \draw[-] (2+3, 1-7) -- (4+3, 2-7);
-    \draw[-] (2+3, 0-7) -- (4+3, -1-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 0-7);
+		\draw[-] (2+3, 2-7) -- (4+3, 1-7);
+		\draw[-] (2+3, 1-7) -- (4+3, 2-7);
+		\draw[-] (2+3, 0-7) -- (4+3, -1-7);
+		\draw[-] (2+3,-1-7) -- (4+3, 0-7);
 
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
+		\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+		\node[draw,circle] at (3, -9) {\texttt{B}};
+		\node[draw,circle] at (10.5, -1) {\texttt{C}};
 
-  \end{tikzpicture}
+	\end{tikzpicture}
 \end{center}
 As before, let us make a hypothesis regarding steckering. Suppose
-$P(A) = D$. We know that $A$ must map to $A$ via
-$P\overline\sigma_3\overline\sigma_2\overline\sigma_1 P$. In our
+$S(\texttt{A}) = \texttt{D}$. We know that $\texttt{A}$ must map to $\texttt{A}$ via
+$S^{-1}\overline\pi_3\overline\pi_2\overline\pi_1 S$. In our
 diagram, however we do not see a plugboard so how can we represent
 the plugboard's involvement? In order
 to achieve this \emph{we} will function as the plugboard by applying
-voltage to the $d$ line on the $A$ thus implicitly performing the
-plugboard mapping in which $P(A) = D$.
-Then this will go through the electrical mapping $\overline\sigma_1$
-arriving on the $B$ cable, followed by $\overline\sigma_2$ arriving
-on the $C$ cable, followed by $\overline\sigma_3$ arriving back on
-the $A$ cable, where \emph{we} as the implicit plugboard know that
+voltage to the $\texttt{d}$ line on the $\texttt{A}$ cable thus implicitly performing the
+plugboard mapping in which $S(\texttt{A}) = \texttt{D}$.
+Then this will go through the electrical mapping $\overline\pi_1$
+arriving on the \texttt{B} cable, followed by $\overline\pi_2$ arriving
+on the \texttt{C} cable, followed by $\overline\pi_3$ arriving back on
+the \texttt{A} cable, where \emph{we} as the implicit plugboard know that
 the output of this electrical mapping must go through the pluboard
-again to get a final output of $A$.
+again to get a final output of \texttt{A}.
 \\\\We will denote each wire by a capital and lowercase letter which
 indicates both the cable and specific wire to which we refer. For
-instance, line $d$ on cable $A$ will be denoted $Ad$. Any time a wire
-$Xy$ is live, implicitly this means that there is an intermediary
-plugboard which mapped $P(X) = Y$ or $P(Y) = X$.
+instance, line \texttt{d} on cable \texttt{A} will be denoted $\texttt{Ad}$. Any time a wire
+$\texttt{Xy}$ is live, implicitly this means that there is an intermediary
+plugboard which mapped $S(\texttt{X}) = \texttt{Y}$ or $S(\texttt{Y}) = \texttt{X}$.
 To see this electrical mapping occur let us visualize a current being
-sent through $Ad$.
-\begin{center}
-  \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
-
-    \node at (3, -2) {$\overline\sigma_3$};
-
-    % Draw the wires entering the box
-    \draw[-] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
-
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-] (4,-1) -- (6, -1) node[midway, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-] (2,-1) -- (4, 2);
-
-    \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
-    node[midway, above] {};
-
-    \draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
-
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
-
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
-
-    % Draw the wires entering the box
-    \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
-
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-] (2-3,-1-7) -- (4-3, 1-7);
-
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
-
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
-
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
-
-    % Draw the wires exiting the box
-    \draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
-
-    \draw[-] (2+3, 2-7) -- (4+3, 1-7);
-    \draw[-] (2+3, 1-7) -- (4+3, 2-7);
-    \draw[-] (2+3, 0-7) -- (4+3, -1-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 0-7);
-
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
-
-  \end{tikzpicture}
-\end{center}
-\begin{center}
-  \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
-
-    \node at (3, -2) {$\overline\sigma_3$};
-
-    % Draw the wires entering the box
-    \draw[-] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
-
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-] (4,-1) -- (6, -1) node[midway, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-] (2,-1) -- (4, 2);
-
-    \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
-    node[midway, above] {};
-
-    \draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
-
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
-
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
-
-    % Draw the wires entering the box
-    \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
-
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
-
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
-
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
-
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
-
-    % Draw the wires exiting the box
-    \draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
-
-    \draw[-] (2+3, 2-7) -- (4+3, 1-7);
-    \draw[-] (2+3, 1-7) -- (4+3, 2-7);
-    \draw[-] (2+3, 0-7) -- (4+3, -1-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 0-7);
-
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
-
-  \end{tikzpicture}
-\end{center}
-\begin{center}
-  \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
-
-    \node at (3, -2) {$\overline\sigma_3$};
-
-    % Draw the wires entering the box
-    \draw[-] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
-
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-, red] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-] (4,-1) -- (6, -1) node[midway, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-] (2,-1) -- (4, 2);
-
-    \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
-    node[midway, above] {};
-
-    \draw[- ,red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
-
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
-
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
-
-    % Draw the wires entering the box
-    \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
-
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
-
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
-
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
-
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
-
-    % Draw the wires exiting the box
-    \draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
-
-    \draw[-] (2+3, 2-7) -- (4+3, 1-7);
-    \draw[-, red] (2+3, 1-7) -- (4+3, 2-7);
-    \draw[-] (2+3, 0-7) -- (4+3, -1-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 0-7);
-
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
-
-  \end{tikzpicture}
-\end{center}
-
-\begin{center}
-  \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
-
-    \node at (3, -2) {$\overline\sigma_3$};
-
-    % Draw the wires entering the box
-    \draw[-] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
-
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-, red] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-] (4,-1) -- (6, -1) node[midway, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-, red] (2,-1) -- (4, 2);
-
-    \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
-    node[midway, above] {};
-
-    \draw[- ,red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
-
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
-
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
-
-    % Draw the wires entering the box
-    \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
-
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
-
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
-
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
-
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
-
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
-
-    % Draw the wires exiting the box
-    \draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
-
-    \draw[-] (2+3, 2-7) -- (4+3, 1-7);
-    \draw[-, red] (2+3, 1-7) -- (4+3, 2-7);
-    \draw[-] (2+3, 0-7) -- (4+3, -1-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 0-7);
-
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
-
-  \end{tikzpicture}
-\end{center}
-Following our hypothesis that $P(A) = D$ we find that after sending
-current through $Ad$ we arrive after mapping through
-$\overline\sigma$ back at $Ad$ and this makes sense since we know that
-$D$ will map back to $A$ thus preserving the loop in our
-ciphertext-plaintext pairing. On the other hand, if we change
-$\overline\sigma$ and repreat this process which may end up in the
+sent through $\texttt{Ad}$.
+\begin{figure}[H]\begin{minipage}{0.45\textwidth}
+		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+			\node at (3, -2) {$\overline\pi_3$};
+
+			% Draw the wires entering the box
+			\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2, 2) -- (4,-1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-] (2,-1) -- (4, 2);
+
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
+
+			\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+			\node at (3-3, -2-7) {$\overline\pi_1$};
+
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-] (2-3,-1-7) -- (4-3, 1-7);
+
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+			\node at (3+3, -2-7) {$\overline\pi_2$};
+
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+			% Draw the wires exiting the box
+			\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+			\draw[-] (2+3, 2-7) -- (4+3, 1-7);
+			\draw[-] (2+3, 1-7) -- (4+3, 2-7);
+			\draw[-] (2+3, 0-7) -- (4+3, -1-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 0-7);
+
+			\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+			\node[draw,circle] at (3, -9) {\texttt{B}};
+			\node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+		\end{tikzpicture}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+			\node at (3, -2) {$\overline\pi_3$};
+
+			% Draw the wires entering the box
+			\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2, 2) -- (4,-1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-] (2,-1) -- (4, 2);
+
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
+
+			\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+			\node at (3-3, -2-7) {$\overline\pi_1$};
+
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
+
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+			\node at (3+3, -2-7) {$\overline\pi_2$};
+
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+			% Draw the wires exiting the box
+			\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+			\draw[-] (2+3, 2-7) -- (4+3, 1-7);
+			\draw[-] (2+3, 1-7) -- (4+3, 2-7);
+			\draw[-] (2+3, 0-7) -- (4+3, -1-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 0-7);
+
+			\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+			\node[draw,circle] at (3, -9) {\texttt{B}};
+			\node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+		\end{tikzpicture}
+	\end{minipage}
+	\\\\\\\\
+	\noindent \begin{minipage}{0.45\textwidth}
+		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+			\node at (3, -2) {$\overline\pi_3$};
+
+			% Draw the wires entering the box
+			\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-, red] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2, 2) -- (4,-1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-] (2,-1) -- (4, 2);
+
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
+
+			\draw[- ,red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+			\node at (3-3, -2-7) {$\overline\pi_1$};
+
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
+
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+			\node at (3+3, -2-7) {$\overline\pi_2$};
+
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+			% Draw the wires exiting the box
+			\draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+			\draw[-] (2+3, 2-7) -- (4+3, 1-7);
+			\draw[-, red] (2+3, 1-7) -- (4+3, 2-7);
+			\draw[-] (2+3, 0-7) -- (4+3, -1-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 0-7);
+
+			\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+			\node[draw,circle] at (3, -9) {\texttt{B}};
+			\node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+		\end{tikzpicture}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+			\node at (3, -2) {$\overline\pi_3$};
+
+			% Draw the wires entering the box
+			\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-, red] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2, 2) -- (4,-1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-, red] (2,-1) -- (4, 2);
+
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
+
+			\draw[- ,red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+			\node at (3-3, -2-7) {$\overline\pi_1$};
+
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
+
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+			\node at (3+3, -2-7) {$\overline\pi_2$};
+
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+			% Draw the wires exiting the box
+			\draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+			\draw[-] (2+3, 2-7) -- (4+3, 1-7);
+			\draw[-, red] (2+3, 1-7) -- (4+3, 2-7);
+			\draw[-] (2+3, 0-7) -- (4+3, -1-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 0-7);
+
+			\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+			\node[draw,circle] at (3, -9) {\texttt{B}};
+			\node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+		\end{tikzpicture}
+	\end{minipage}
+	\caption{Current passing from wire \texttt{Ad} back to wire \texttt{Ad}}
+	\label{fig:correct_stecker}
+\end{figure}
+\noindent Following our hypothesis that $S(\texttt{A}) = \texttt{D}$ we find that after sending
+current through $\texttt{Ad}$ we arrive after mapping through
+$\overline\pi$ back at $\texttt{Ad}$. Since we got an output of $\texttt{D}$ before the plugboard mapping, and we know that at the end this will ultimately map back through the plugboard to $\texttt{A}$ in order preserve our fixed point at $\texttt{A}$, we get the statement that $S(\texttt{D}) = \texttt{A}$ which is perfectly consistent with our original hypothesis.
+\\\\On the other hand, if we change
+$\overline\pi$ and repeat this process which may end up in the
 following sitatuation
-\begin{center}
-  \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+\begin{figure}[H]
+	\begin{minipage}{0.45\textwidth}
+		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
 
-    \node at (3, -2) {$\overline\sigma_3$};
+			\node at (3, -2) {$\overline\pi_3$};
 
-    % Draw the wires entering the box
-    \draw[-] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
+			% Draw the wires entering the box
+			\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-] (4,-1) -- (6, -1) node[midway, above] {d};
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-] (2,-1) -- (4, 2);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2, 2) -- (4,-1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-] (2,-1) -- (4, 2);
 
-    \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
-    node[midway, above] {};
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
 
-    \draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+			\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
 
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
+			\node at (3-3, -2-7) {$\overline\pi_1$};
 
-    % Draw the wires entering the box
-    \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-] (2-3,-1-7) -- (4-3, 1-7);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-] (2-3,-1-7) -- (4-3, 1-7);
 
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
 
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
+			\node at (3+3, -2-7) {$\overline\pi_2$};
 
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
 
-    % Draw the wires exiting the box
-    \draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
+			% Draw the wires exiting the box
+			\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
 
-    \draw[-] (2+3, 2-7) -- (4+3, 0-7);
-    \draw[-] (2+3, 1-7) -- (4+3, -1-7);
-    \draw[-] (2+3, 0-7) -- (4+3, 2-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 1-7);
+			\draw[-] (2+3, 2-7) -- (4+3, 0-7);
+			\draw[-] (2+3, 1-7) -- (4+3, -1-7);
+			\draw[-] (2+3, 0-7) -- (4+3, 2-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 1-7);
 
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
+			\node[draw,circle] at (-4.5, -1) {\texttt{\texttt{A}}};
+			\node[draw,circle] at (3, -9) {\texttt{\texttt{B}}};
+			\node[draw,circle] at (10.5, -1) {\texttt{\texttt{C}}};
 
-  \end{tikzpicture}
-\end{center}
-\begin{center}
-  \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+		\end{tikzpicture}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
 
-    \node at (3, -2) {$\overline\sigma_3$};
+			\node at (3, -2) {$\overline\pi_3$};
 
-    % Draw the wires entering the box
-    \draw[-, red] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
+			% Draw the wires entering the box
+			\draw[-, red] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-, red] (4,-1) -- (6, -1) node[midway, above] {d};
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-, red] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-] (2,-1) -- (4, 2);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-, red] (2, 2) -- (4,-1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-] (2,-1) -- (4, 2);
 
-    \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
-    node[midway, above] {};
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
 
-    \draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-, red] (6+3, -1-7) to[out=360, in=360] (6, -1)
-    node[midway, above] {};
+			\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-, red] (6+3, -1-7) to[out=360, in=360] (6, -1)
+			node[midway, above] {};
 
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
+			\node at (3-3, -2-7) {$\overline\pi_1$};
 
-    % Draw the wires entering the box
-    \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
 
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
 
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
+			\node at (3+3, -2-7) {$\overline\pi_2$};
 
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
 
-    % Draw the wires exiting the box
-    \draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-, red] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
+			% Draw the wires exiting the box
+			\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
 
-    \draw[-] (2+3, 2-7) -- (4+3, 0-7);
-    \draw[-, red] (2+3, 1-7) -- (4+3, -1-7);
-    \draw[-] (2+3, 0-7) -- (4+3, 2-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 1-7);
+			\draw[-] (2+3, 2-7) -- (4+3, 0-7);
+			\draw[-, red] (2+3, 1-7) -- (4+3, -1-7);
+			\draw[-] (2+3, 0-7) -- (4+3, 2-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 1-7);
 
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
+			\node[draw,circle] at (-4.5, -1) {\texttt{\texttt{A}}};
+			\node[draw,circle] at (3, -9) {\texttt{\texttt{B}}};
+			\node[draw,circle] at (10.5, -1) {\texttt{\texttt{C}}};
 
-  \end{tikzpicture}
-\end{center}
-
-In this example, following our steckering hypothesis $P(A) = D$,
-results in $Aa$ becoming live after mapping through $\overline\sigma$ and
-thus we must have $P(A) = A$ as well in order for this to ultimately
-map back to $A$ and preserve our ciphertext-plaintext loop above.
-Thus we can eliminate the steckering possibilities that
-$P(A) \in \{A, D\}$. Effectively, this process is a mechanization of
+		\end{tikzpicture}
+	\end{minipage}
+	\caption{Current passing from wire \texttt{Ad} ending up at wire \texttt{Aa}}
+	\label{fig:incorrect_stecker}
+\end{figure}
+\noindent In this example, following our steckering hypothesis $S(\texttt{A}) = \texttt{D}$,
+results in \texttt{Aa} becoming live after mapping through $\overline\pi$ and
+thus we must have $S(\texttt{A}) = \texttt{A}$ as well in order for this to ultimately
+map back to \texttt{A} and preverse our fixed point at \texttt{A}. This creates an incosistency between our hypothesis and deduction meaning that we can eliminate the steckering possibilities both steckering possibilities so that $S(\texttt{A}) \notin \{\texttt{A}, \texttt{D}\}$
+\\\\Effectively, this process is a mechanization of
 finding the cycle containing a particular letter. In the above
-diagram sending current from $Ad$ until we arrive back at $Ad$ is
-akin to repeatedly applying $\overline\sigma$ to $D$
-until we return to $D$. This can be visualized in our diagram as
+figure~\ref{fig:incorrect_stecker} sending current from \texttt{Ad} until we arrive back at \texttt{Ad} is
+akin to repeatedly applying $\overline\pi$ to \texttt{D}
+until we return to \texttt{D}. This can be visualized in our diagram as
 
 \begin{center}
-  \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+	\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+		% Draw the box
+		\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
 
-    \node at (3, -2) {$\overline\sigma_3$};
+		\node at (3, -2) {$\overline\pi_3$};
 
-    % Draw the wires entering the box
-    \draw[-, red] (0, 2) -- (2, 2) node[midway, above] {a};
-    \draw[-] (0, 1) -- (2, 1) node[midway, above] {b};
-    \draw[-] (0, 0) -- (2, 0) node[midway, above] {c};
-    \draw[-, red] (0,-1) -- (2,-1) node[midway, above] {d};
+		% Draw the wires entering the box
+		\draw[-, red] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+		\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+		\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box with crossed mappings
-    \draw[-, red] (4, 2) -- (6,2) node[midway, above] {a};
-    \draw[-] (4, 1) -- (6, 1) node[midway, above] {b};
-    \draw[-] (4, 0) -- (6, 0) node[midway, above] {c};
-    \draw[-, red] (4,-1) -- (6, -1) node[midway, above] {d};
+		% Draw the wires exiting the box with crossed mappings
+		\draw[-, red] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+		\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+		\draw[-, red] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-, red] (2, 2) -- (4,-1);
-    \draw[-] (2, 1) -- (4, 0);
-    \draw[-] (2, 0) -- (4, 1);
-    \draw[-, red] (2,-1) -- (4, 2);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-, red] (2, 2) -- (4,-1);
+		\draw[-] (2, 1) -- (4, 0);
+		\draw[-] (2, 0) -- (4, 1);
+		\draw[-, red] (2,-1) -- (4, 2);
 
-    \draw[-, red] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-    \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-    \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-    \draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
-    node[midway, above] {};
+		\draw[-, red] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+		\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+		\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+		\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+		node[midway, above] {};
 
-    \draw[-, red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-    \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-    \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-    \draw[-, red] (6+3, -1-7) to[out=360, in=360] (6, -1)
-    node[midway, above] {};
+		\draw[-, red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+		\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+		\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+		\draw[-, red] (6+3, -1-7) to[out=360, in=360] (6, -1)
+		node[midway, above] {};
 
-    \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+		\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-    \node at (3-3, -2-7) {$\overline\sigma_1$};
+		\node at (3-3, -2-7) {$\overline\pi_1$};
 
-    % Draw the wires entering the box
-    \draw[-, red] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {a};
-    \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {b};
-    \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {c};
-    \draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {d};
+		% Draw the wires entering the box
+		\draw[-, red] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
 
-    % Draw the wires exiting the box
-    \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {a};
-    \draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {b};
-    \draw[-, red] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {c};
-    \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {d};
+		% Draw the wires exiting the box
+		\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+		\draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+		\draw[-, red] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+		\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-, red] (2-3, 2-7) -- (4-3, 0-7);
-    \draw[-] (2-3, 1-7) -- (4-3, -1-7);
-    \draw[-] (2-3, 0-7) -- (4-3, 2-7);
-    \draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-, red] (2-3, 2-7) -- (4-3, 0-7);
+		\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+		\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+		\draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
 
-    \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+		\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
 
-    \node at (3+3, -2-7) {$\overline\sigma_2$};
+		\node at (3+3, -2-7) {$\overline\pi_2$};
 
-    % Draw the wires entering the box
-    \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-    \draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-    \draw[-, red] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-    \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+		% Draw the wires entering the box
+		\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+		\draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+		\draw[-, red] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+		\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
 
-    % Draw the wires exiting the box
-    \draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {a};
-    \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {b};
-    \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {c};
-    \draw[-, red] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {d};
+		% Draw the wires exiting the box
+		\draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-, red] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
 
-    \draw[-] (2+3, 2-7) -- (4+3, 0-7);
-    \draw[-, red] (2+3, 1-7) -- (4+3, -1-7);
-    \draw[-, red] (2+3, 0-7) -- (4+3, 2-7);
-    \draw[-] (2+3,-1-7) -- (4+3, 1-7);
+		\draw[-] (2+3, 2-7) -- (4+3, 0-7);
+		\draw[-, red] (2+3, 1-7) -- (4+3, -1-7);
+		\draw[-, red] (2+3, 0-7) -- (4+3, 2-7);
+		\draw[-] (2+3,-1-7) -- (4+3, 1-7);
 
-    \node[draw,circle] at (-4.5, -1) {$A$};
-    \node[draw,circle] at (3, -9) {$B$};
-    \node[draw,circle] at (10.5, -1) {$C$};
+		\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+		\node[draw,circle] at (3, -9) {\texttt{B}};
+		\node[draw,circle] at (10.5, -1) {\texttt{C}};
 
-  \end{tikzpicture}
+	\end{tikzpicture}
 \end{center}
-Where we find that in $\overline\sigma$ we have the cycle $(AD)$
-since $Ad$ and $Aa$ are the only two live
-wires in the $A$ cable after allowing currently to reach a
-steady-state. If we had instead applied current to $Ab$ we would find
-that $Ab$ and $Ac$ become live and give us the full
-permutation $\overline\sigma = (AD)(BC)$. The beauty of this design
+Where we find that in $\overline\pi$ we have the cycle $(\texttt{AD})$
+since \texttt{Ad} and \texttt{Aa} are the only two live
+wires in the \texttt{A} cable after allowing currently to reach a
+steady-state. If we had instead applied current to \texttt{Ab} we would find
+that \texttt{Ab} and \texttt{Ac} become live and give us the full
+permutation $\overline\pi = (\texttt{AD})(\texttt{BC})$. The beauty of this design
 is that it is able to deduce the elements in a cycle of
-$\overline\sigma$ nearly instantaneously since it only requires the
+$\overline\pi$ nearly instantaneously since it only requires the
 circuit to reach
 a steady-state.
 \\\\Equipped with this tool spider-scanning becomes quite trivial.
@@ -1238,22 +1252,23 @@ The goal of spider-scanning is to eliminate a rotor position by
 checking if the permutation has a $26$-cycle. In our diagram, with four lines,
 this would be analogous to testing a steckering hypothesis (any
 hypothesis) and finding that the entire cable becomes live. Then all
-elements lie within the same cycle of $\overline\sigma$ and thus all
+elements lie within the same cycle of $\overline\pi$ and thus all
 steckering possibilities are immediately eliminated.
 \\\\We can also near instantaneously determine which arrangements to
 eliminate with spider-scanning. When an arrangement is such that it
 cannot be eliminated and further examination is needed, we will cause
 the machine to stop.
-\\\\To see how this is done, we will illustrate how we can detect
-when a line say $Ab$ is no longer live. We can form a differential
+\subsection{Stopping Mechanism}
+To see how this is done, we will illustrate how we can detect
+when a line say \texttt{Ab} is no longer live. We can place a differential
 relay such that it only engages when a current difference is present
-between $Ab$ and some constant power supply line. Then, when current stops
-flowing through $Ab$, the relay will trigger. We can then wire the
+between \texttt{Ab} and some constant power supply line. Then, when current stops
+flowing through \texttt{Ab}, the relay will trigger. We can then wire the
 stopping mechanism to the contact terminal of the relay such that the
-stopping mechanism will only trigger when line $Ab$ is not live (i.e.
+stopping mechanism will only trigger when line \texttt{Ab} is not live (i.e.
 the relay is closed).
-\\\\We can further extend this to detect when any line on the $A$
-cable is not live by having each line $Aa$, $Ab$, $Ac$, $Ad$ wired in
+\\\\We can further extend this to detect when any line on the \texttt{A}
+cable is not live by having each line \texttt{Aa}, \texttt{Ab}, \texttt{Ac}, \texttt{Ad} wired in
 parallel, each to a seperate relay, all comparing against the same
 constant supply voltage. If we wire our stopping mechanism to engage
 if any relay closes
@@ -1262,39 +1277,34 @@ then our stopping mechanism will engage if any wire ceases to be live.
 If we are in the situation described above, a loop of Enigma
 permutations, then this choice does not matter. This is because if a
 $26$-cycle is present in
-$\overline\sigma_3\overline\sigma_2\overline\sigma_1$, it must also
+$\overline\pi_3\overline\pi_2\overline\pi_1$, it must also
 be present in
-$\overline\sigma_2\overline\sigma1\overline\sigma_3$ and
-$\overline\sigma_1\overline\sigma_2\overline\sigma_1$. This is
+$\overline\pi_2\overline\pi_1\overline\pi_3$ and
+$\overline\pi_1\overline\pi_2\overline\pi_1$. This is
 because all of these permutations are conjugates of one another, for
 example we have
 \begin{center}
-  $\overline\sigma_2\overline\sigma_1\overline\sigma_3 =
-  \overline\sigma_3^{-1}(\overline\sigma_3\overline\sigma_2\overline\sigma_1)\overline\sigma_3$
+	$\overline\pi_2\overline\pi_1\overline\pi_3 =
+		\overline\pi_3^{-1}(\overline\pi_3\overline\pi_2\overline\pi_1)\overline\pi_3$
 \end{center}
 Since permutations in the same conjugacy class must have the same
 cycle type, it follows that no matter where in the loop we place our
-detector, if all wires become live they will become live anywhere
-else we could place the detector.
-While this may seem a trivial observation we have actually stated
-something much stronger here which is that the cycle types of the
-permutation will not change no matter where we begin our observation from.
+detector, if all wires become live on one cable they will become live on all cables. Thus, we can place our detector anywhere.
 
 \subsection{Cribs and Menus}
 
-\begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 120}}
-  The bombes were useless without a crib. If a crib could be found by
-  the Hut 6 watch, the task of the bombe was simply to reduce the
-  assumptions of wheel order and scrambler positions that required
-  ``further analysis'' to a managable number.
-\end{chapquote}
-
-In our motivating example, we began with the supposition that the
+% \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 120}}
+% 	The bombes were useless without a crib. If a crib could be found by
+% 	the Hut 6 watch, the task of the bombe was simply to reduce the
+% 	assumptions of wheel order and scrambler positions that required
+% 	``further analysis'' to a managable number.
+% \end{chapquote}
+We began with the supposition that the
 cryptographer is given a known plaintext-ciphertext pairing. Unless
 the cryptographer was able to intercept
 a set of communications before and after encryption this supposition
 seems unrealistic. However, cryptoanalyists at Bletchley park
-employed two clever tricks the allowed for such pairings to be
+employed two clever tricks that allowed for such pairings to be
 deduced with reasonable effectiveness. First, analysts were able to
 cross-reference known information to theorize likely phrases in a
 message. For instance, if the weather on a particular day was windy
@@ -1303,18 +1313,20 @@ intellegence knew arrived from specific channels at specific times)
 would likely contain phrases like ``weather'', ``wind'', or ``rain''.
 The second trick used by analysts was the use of permuation theory to
 eliminate locations in the ciphertext where the plaintext could not
-feasibly have been enciphered. By construction, the Enigma machine is
-a series of 13 disjoint transpositions. Mathematically, this is
-because at each stage the permutation formed by the machine is just a
-conjugate of the reflector which has a $2^{13}$ cycle-type.
-\\\\ location of \emph{cribs} -- locations in the enciphered text
-that could plausibly have been generated from the suspsected plaintext phrases.
+feasibly have been enciphered.
+\\\\Recall that one consequence of the Enigma machine being a conjugate of the reflector is that no letter can be enciphered to itself.
+% the Enigma machine is
+% a series of 13 disjoint transpositions. Mathematically, this is
+% because at each stage the permutation formed by the machine is just a
+% conjugate of the reflector which has a $2^{13}$ cycle-type.
+% \\\\ location of \emph{cribs} -- locations in the enciphered text
+% that could plausibly have been generated from the suspsected plaintext phrases.
 
 \subsection{Diagonal Board}
 
-\begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 80}}
-  The idea that flashed into my mind in the School was that, by
-  interconnecting the scramblers in a completely new way, one could
-  increase the effectiveness of the automatic test by a very large
-  factor. I saw that we need not depend on obtaining three closed loops.
-\end{chapquote}
+% \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 80}}
+% 	The idea that flashed into my mind in the School was that, by
+% 	interconnecting the scramblers in a completely new way, one could
+% 	increase the effectiveness of the automatic test by a very large
+% 	factor. I saw that we need not depend on obtaining three closed loops.
+% \end{chapquote}

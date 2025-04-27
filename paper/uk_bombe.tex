@@ -2,11 +2,11 @@
 
 \chapter{Turing-Welchman Bombe}
 
-In the previous chapters, we have seen complicated manual cryptographic techniques give rise to a set of electromechanical tools meant to make such work tractible over short time periods. Changes to the Enigma protocol would soon necessitate the construction of one of the largest such electromechanical devices to date, known as the {\bf{Bombe}}.
+In the previous chapters, we have seen complicated manual cryptographic techniques give rise to a set of electromechanical tools meant to make such work tractable over short time periods. Changes to the Enigma protocol would soon necessitate the construction of one of the largest such electromechanical devices to date, known as the {\bf{Bombe}}.
 
 \subsection{Changes to the Enigma Protocol}
 Recall that during the use of the Polish Bomba, operators were instructed to send their window setting (\emph{Grundstellung}) in plaintext, and then use this to doubly encode their message key (\emph{Spruchschlüssel}). Starting in 1940, a small but impactful change was made to the Enigma encryption protocol -- operators were instructed to send their encoded message key only once.
-\\\\The Polish Bomba relied on relationships between the doubly encoded message key to function, without such relationships all the previously mentioned tools became useless. World War II had begun and the need for intellegence material was greater than ever. Thus, British intellegence brought a group of cryptanalysts, mathematicians, historians, linguists, and more, to Bletchley Park to engage in a large-scale attempt to break the Enigma machine with this new protocol.
+\\\\The Polish Bomba relied on relationships between the doubly encoded message key to function, without such relationships all the previously mentioned tools became useless. World War II had begun and the need for intelligence material was greater than ever. Thus, British intelligence brought a group of crypt-analysts, mathematicians, historians, linguists, and more, to Bletchley Park to engage in a large-scale attempt to break the Enigma machine with this new protocol.
 \\\\No name is more well known from this operation than that of Alan Turing, whose work went on to become the foundations of modern computer science. Turing needed to find a new means of attacking the Enigma encryption that could no longer rely on the doubly enciphered message key. Consider that the reliance on the doubly enciphered message key was really just a reliance on the knowledge that two letters encoded the same plaintext at specific intervals of distance. Thus, Turing began engineering a method of deducing daily keys via a known plaintext attack.
 
 % As discussed in CITE the \emph{Grundstellung} rotor
@@ -204,7 +204,7 @@ Recall that during the use of the Polish Bomba, operators were instructed to sen
 
 \section{Plaintext Attack}
 
-Suppose we knew the plaintext which had been enciphered into a
+Suppose we knew the plain-text which had been enciphered into a
 particular Enigma transmission.
 Consider the following mapping,
 \begin{center}
@@ -253,7 +253,7 @@ Consider the following mapping,
 	\end{tikzpicture}
 \end{center}
 where the top row indicates our enciphered message, the bottom row
-indicates the plaintext,
+indicates the plain-text,
 and the indices on the arrows indicate how many steps forward our
 Enigma machine has moved while enciphering this message.
 \\\\From this pairing we have that
@@ -291,7 +291,7 @@ Recall that, ignoring turnover, each $\sigma_i$ is of the form
 \begin{center}
 	$\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S$
 \end{center}
-We will denote $\sigma_i$ seperated from its plugboard as
+We will denote $\sigma_i$ separated from its plugboard as
 \begin{center}
 	$\overline{\sigma_i} = P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}$
 \end{center}
@@ -353,7 +353,7 @@ singleton. Then we now have
 \end{center}
 thus eliminating several elements that $\texttt{A}$ could be steckered to.
 \\\\By representing $\overline\pi$ in its cycle notation we can
-quickly see whether certian hypotheses are possible. For example,
+quickly see whether certain hypotheses are possible. For example,
 suppose we found that
 \begin{center}
 	$\overline\pi = (\texttt{ABCDEF})(\texttt{GHIJK})(\texttt{L})(\texttt{MNOPQRSTUVWXYZ})$
@@ -366,7 +366,7 @@ to any element in this cycle. Then it is clear that $\texttt{A}$ can only be
 steckered to $\texttt{L}$ in this case.
 
 \subsection{Scanning Methods}
-Turing describes various methods of mechanising the above analysis of
+Turing describes various methods of mechanizing the above analysis of
 cycle-type to determine when we can eliminate rotor positions.
 \begin{enumerate}
 	\item If we examine a particular hypothesis, say $\texttt{A}$ is steckered
@@ -382,7 +382,7 @@ cycle-type to determine when we can eliminate rotor positions.
 	      each steckering hypothesis, we can rule out rotor positions which
 	      have all steckering hypotheses invalid. Turing called this method
 	      \textbf{serial scanning}.
-	\item Serial scanning requires a seperate examination of each
+	\item Serial scanning requires a separate examination of each
 	      steckering. Turing proposed a machine which could concurrently
 	      examine all steckering possibilities and eliminate rotor positions
 	      which had no valid steckerings. Turing called this method
@@ -408,7 +408,7 @@ cycle-type to determine when we can eliminate rotor positions.
 Iterations of each scanning methods were proposed or designed, but in
 the end we find that the spider scanning method was used in the
 implementation of the Bombe. At a high level, we encode the structure
-of the ciphertext-plaintext pairings, we input a hypothesis that a particular
+of the plaintext-ciphertext pairings, we input a hypothesis that a particular
 letter (e.g $\texttt{A}$) is steckered to another (e.g. $\alpha$), and we
 electrically produce the elements that must also be steckered to our test letter
 (e.g. $\langle\overline{\pi}\rangle\cdot\alpha$) if our hypothesis
@@ -426,7 +426,7 @@ elimate a rotor position based on contradictory hypotheses. We must shift from t
 % currents on the corresponding letter after applying the Enigma permutation.
 Imagine the following set of wires encoding a possible Enigma
 permutation we will denoted $\overline\pi_i$ (the bar
-indicates we are not yet considering the plugboard).
+indicates we are not yet considering the plugboard). Further we will consider such Enigma permutations as being derived from rotors with an assumed ring setting of \texttt{ZZZ} and that the window setting at the beginning of our plaintext-ciphertext pairing is also \texttt{ZZZ}.
 
 \tikzset{big box/.style={draw, minimum width=5cm, minimum height=4cm},
 	small box/.style={draw, minimum width=1cm, minimum height=1cm}}
@@ -465,12 +465,12 @@ Second, we can apply current to multiple wires concurrently, for
 example, applying current at $\texttt{a}$ and $\texttt{c}$ will cause $\texttt{d}$ and $\texttt{b}$ to be
 live on the other side of the machine.
 Finally, the choice to use lower case letters will become clear
-further in this section as we want to seperate the plugboard letters
+further in this section as we want to separate the plugboard letters
 from the actual plaintext-ciphertext letters.
 \\\\As described in our motivating example, we may want to connect
 Engima permutations in series to capture an underlying relationship
-between a ciphertext-plaintext pairing.
-Suppose we had plaintext ciphertext pairing
+between a plaintext-ciphertext pairing.
+Suppose we had plaintext-ciphertext pairing
 \begin{center}
 	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
 					circle, minimum height=0.1cm, minimum width=0.1cm}]
@@ -493,7 +493,7 @@ Suppose we had plaintext ciphertext pairing
 	\end{tikzpicture}
 \end{center}
 
-Then we find that there exists a loop in the pairing as follows
+\noindent Then we find that there exists a loop in the pairing as follows
 
 \begin{center}
 	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
@@ -604,7 +604,7 @@ Then this will go through the electrical mapping $\overline\pi_1$
 arriving on the \texttt{B} cable, followed by $\overline\pi_2$ arriving
 on the \texttt{C} cable, followed by $\overline\pi_3$ arriving back on
 the \texttt{A} cable, where \emph{we} as the implicit plugboard know that
-the output of this electrical mapping must go through the pluboard
+the output of this electrical mapping must go through the plugboard
 again to get a final output of \texttt{A}.
 \\\\We will denote each wire by a capital and lowercase letter which
 indicates both the cable and specific wire to which we refer. For
@@ -964,7 +964,7 @@ current through $\texttt{Ad}$ we arrive after mapping through
 $\overline\pi$ back at $\texttt{Ad}$. Since we got an output of $\texttt{D}$ before the plugboard mapping, and we know that at the end this will ultimately map back through the plugboard to $\texttt{A}$ in order preserve our fixed point at $\texttt{A}$, we get the statement that $S(\texttt{D}) = \texttt{A}$ which is perfectly consistent with our original hypothesis.
 \\\\On the other hand, if we change
 $\overline\pi$ and repeat this process which may end up in the
-following sitatuation
+following situation
 \begin{figure}[H]
 	\begin{minipage}{0.45\textwidth}
 		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
@@ -1144,7 +1144,7 @@ following sitatuation
 \noindent In this example, following our steckering hypothesis $S(\texttt{A}) = \texttt{D}$,
 results in \texttt{Aa} becoming live after mapping through $\overline\pi$ and
 thus we must have $S(\texttt{A}) = \texttt{A}$ as well in order for this to ultimately
-map back to \texttt{A} and preverse our fixed point at \texttt{A}. This creates an incosistency between our hypothesis and deduction meaning that we can eliminate the steckering possibilities both steckering possibilities so that $S(\texttt{A}) \notin \{\texttt{A}, \texttt{D}\}$
+map back to \texttt{A} and preserve our fixed point at \texttt{A}. This creates an inconsistency between our hypothesis and deduction meaning that we can eliminate the steckering possibilities both steckering possibilities so that $S(\texttt{A}) \notin \{\texttt{A}, \texttt{D}\}$
 \\\\Effectively, this process is a mechanization of
 finding the cycle containing a particular letter. In the above
 figure~\ref{fig:incorrect_stecker} sending current from \texttt{Ad} until we arrive back at \texttt{Ad} is
@@ -1269,7 +1269,7 @@ stopping mechanism will only trigger when line \texttt{Ab} is not live (i.e.
 the relay is closed).
 \\\\We can further extend this to detect when any line on the \texttt{A}
 cable is not live by having each line \texttt{Aa}, \texttt{Ab}, \texttt{Ac}, \texttt{Ad} wired in
-parallel, each to a seperate relay, all comparing against the same
+parallel, each to a separate relay, all comparing against the same
 constant supply voltage. If we wire our stopping mechanism to engage
 if any relay closes
 then our stopping mechanism will engage if any wire ceases to be live.
@@ -1291,6 +1291,144 @@ Since permutations in the same conjugacy class must have the same
 cycle type, it follows that no matter where in the loop we place our
 detector, if all wires become live on one cable they will become live on all cables. Thus, we can place our detector anywhere.
 
+\subsection{Indicator Drums and Ring Setting}
+The Bombe is set up with a series of drums
+\begin{center}
+	$R_{x_1, y_1, z_1},\dots, R_{x_k, y_k, z_k}$
+\end{center}
+intended to encode the various positions of our Enigma machine while enciphering our plaintext-ciphertext pairing. We will assume that the initial setting while encoding the message was \texttt{ZZZ}. It will run through all $26^3$ positions of the Enigma machine until it finds a stop. Suppose that at a stop the drums have positions
+\begin{center}
+	$R_{a_1, b_1, c_1},\dots, R_{a_k, b_k, c_k}$.
+\end{center}
+Given that our supposed ring setting was \texttt{ZZZ} (we will denote (\texttt{26},
+\texttt{26}, \texttt{26})), we now know that a candidate with a ring setting of (\texttt{26},
+\texttt{26}, \texttt{26}) and window setting of $(a_1, b_1, c_1)$ which should produce our expected plaintext at the location of the first letter included in our loop. Of course, we want the plaintext from the beginning of our plaintext-ciphertext pairing, so this should actually occur at a window setting of
+\begin{align}
+	\label{eq:bombe_stop}
+	(\texttt{Z} + (a_1-x_1)\text{ mod }26, \texttt{Z} + (b_1-y_1)\text{ mod }26, \texttt{Z} + (c_1-z_1)\text{ mod }26)
+\end{align}
+with a ring setting of (\texttt{26},
+\texttt{26}, \texttt{26}). Recall, that our assumed window setting at the beginning of our plaintext-ciphertext pairing is \texttt{ZZZ}. We want to move our window setting \ref{eq:bombe_stop} to correspond with this but, in order to maintain permutation which produced the stop, we must move the ring setting backwards by the same amount we must move from \ref{eq:bombe_stop} to \texttt{ZZZ}. This displacement is given by
+\begin{align*}
+	((a_1-x_1)\text{ mod }26, (b_1-y_1)\text{ mod }26, (c_1-z_1)\text{ mod }26)
+\end{align*}
+since the \texttt{Z}s cancel out. Then we must move our assumed ring setting of (\texttt{26},
+\texttt{26}, \texttt{26}) backwards by this same amount giving a ring setting of
+\begin{align*}
+	(\texttt{26} - (a_1-x_1)\text{ mod }26, \texttt{26} - (b_1-y_1)\text{ mod }26, \texttt{26} - (c_1-z_1)\text{ mod }26).
+\end{align*}
+Notice that $(a_1-x_1, b_1-y_1, c_1-z_1)$ is just the number of steps our machine has made since it started. So, to get the ring position corresponding to the start of our plaintext-ciphertext pairing we just subtract the number of steps each rotor has made from our assumed ring position (\texttt{26},\texttt{26}, \texttt{26}). Rather than doing all this math, the Bombe was equipped with an additional {\bf{indicator drum}} which began with labels \texttt{ZZZ} and for each step the machine moved \emph{forward}, it moved the indicator drum \emph{backward}. This means that when the machine stopped, the indicator drum would immediately tell us the ring setting which corresponded to our plaintext-ciphertext pairing. Then, with this ring setting, setting our machine to the window setting \texttt{ZZZ} would produce our expected plaintext-ciphertext pairing.\footnote{The actual rotors used in the Bombe scramblers were incorrect and did not match the true Enigma rotors by varying degrees of rotation depending on the rotor in question. This meant operators did not set their window settings to \texttt{ZZZ} but rather some small offset depending on which rotors were included. This meant if we used rotors (\texttt{II}, \texttt{V}, \texttt{III}) our window setting would be \texttt{YWY}}.
+
+\subsection{Recovering the Plugboard}
+We now have a ring setting and window setting pair that should produce our plaintext-ciphertext pair, though, we have yet to deduce the plugboard setting. However, the genius of the Bombe is that much of the deduction required to workout the plugboard setting has been done for us. Consider a possible stop of the Bombe
+\begin{center}
+	\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+		% Draw the box
+		\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+		\node at (3, -2) {$\overline\pi_3$};
+
+		% Draw the wires entering the box
+		\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+		\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+		\draw[-, red] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+		% Draw the wires exiting the box with crossed mappings
+		\draw[-, red] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+		\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2, 2) -- (4,0);
+		\draw[-] (2, 1) -- (4, -1);
+		\draw[-, red] (2, 0) -- (4, 2);
+		\draw[-] (2,-1) -- (4, 1);
+
+		\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+		\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+		\draw[-, red] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+		\draw[-] (0-3, -1-7) to[out=180, in=180] (0, -1)
+		node[midway, above] {};
+
+		\draw[- ,red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+		\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+		\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+		\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+		\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+		\node at (3-3, -2-7) {$\overline\pi_1$};
+
+		% Draw the wires entering the box
+		\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-, red] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+		% Draw the wires exiting the box
+		\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+		\draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+		\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+		\draw[-, red] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2-3, 2-7) -- (4-3, 1-7);
+		\draw[-] (2-3, 1-7) -- (4-3, 2-7);
+		\draw[-, red] (2-3, 0-7) -- (4-3, -1-7);
+		\draw[-] (2-3,-1-7) -- (4-3, 0-7);
+
+		\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+		\node at (3+3, -2-7) {$\overline\pi_2$};
+
+		% Draw the wires entering the box
+		\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+		\draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+		\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+		\draw[-, red] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+		% Draw the wires exiting the box
+		\draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+		\draw[-] (2+3, 2-7) -- (4+3, -1-7);
+		\draw[-] (2+3, 1-7) -- (4+3, 0-7);
+		\draw[-] (2+3, 0-7) -- (4+3, 1-7);
+		\draw[-, red] (2+3,-1-7) -- (4+3, 2-7);
+
+		\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+		\node[draw,circle] at (3, -9) {\texttt{B}};
+		\node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+	\end{tikzpicture}
+\end{center}
+Our hypothesized plugboard setting was that \texttt{A} was steckered to \texttt{C} and we found no logical contradictions thus producing a stop. This means that at a minimum we recover that $S(\texttt{A}) = \texttt{C}$. However, we may as well have hypothesis that \texttt{B} was steckered to \texttt{D} and thus we would have applied current to wire \texttt{Bd}. Note that this wire is included in our connected component so we would have recovered the exact same stop. That is, the statement $S(\texttt{B}) = \texttt{D}$ also produced no logical contradictions. Similarly, reading off cable \texttt{C} we would recover $S(\texttt{C}) = \texttt{A}$ though we already knew this from our first hypothesis. Thus, for each cable in our loop we recover a plugboard setting consistent with our initial hypothesis (though some of these may be redundant). For a sufficiently long loop we can recover several plugboard setting just by seeing which wires are electrified on which cables.
+\subsubsection{Checking Machines}
+While looking at the internal wiring will, in fact, derive such plugboard settings, from an operator's perspective the Bombe only displayed which steckering our cable involved in our initial hypothesis produced. For this reason, a special device was produced called a {\bf{checking machine}} whose sole purpose was to derive these plugboard settings from a stop of the Bombe. We will consider one such derivation.
+% Wren reference https://wrens.org.uk/second-world-war-codebreaker/ %
+\\\\The checking machine was effectively an Enigma machine with no plugboard attachment and no rotor advancement mechanism -- effectively, the checking machine represents a fixed $\overline\sigma_i$. Suppose the operator (known as a {\bf{wren}})\footnote{Wren comes from the abbreviation WRN of the Women's Royal Navy Service. Such members became the primary operators of Bombes at Bletchley Park.} knew from the Bombe stop that our hypothesis letter \texttt{A} was steckered to \texttt{C} (i.e. $S(\texttt{A} = \texttt{C}$)). Further, from our loop the wren might know that
+\[
+	\sigma_1(\texttt{A}) = \texttt{B}
+\]
+We then have that
+\begin{align*}
+	S(\texttt{B}) & = S(\sigma_1(\texttt{A}))                \\
+	              & = SS^{-1}\overline\sigma_1 S(\texttt{A}) \\
+	              & = \overline\sigma_1(\texttt{D})
+\end{align*}
+Then to determine what letter is steckered to \texttt{B}, the wren only needs to set their ring settings to that given by the indicator, the window settings to that corresponding to $\sigma_1$, and input \texttt{D}. Now using this newly deduced steckering the wren can produce the steckering of the next letter in the loop until we have deduced the steckerings corresponding to each letter in our loop.
+
+\subsubsection{Invalid Stops}
+If at this stage we find that a deduced plugboard setting contradicts an earlier plugboard setting we discovered, this means that the point at which the Bombe stopped is incorrect! Recall that the Bombe stops when there are no logical contradictions gleamed from its setup and the information in the loop -- this does not mean no logical contradictions exist. Further, even if no logical contradictions existed that does not mean this is the only such setting which would be logically consistent with our plaintext (though this is certainly less likely). The use of the Bombe is thus a trial-and-error procedure. We run the machine until we find a candidate stop, then we check for possible further logical contradictions, and if such contradictions are found we continue from where we left off.
+\\\\If we find our stop has valid plugboard settings, we can recover any remaining settings is quite easily. We can attempt to decrypt our ciphertext with our window setting of \texttt{ZZZ}, our ring setting given by the indicator drum, and our plguboard settings we discovered from the stop. If we find that there are letters which do not match our expected plaintext we can deduce what plugboard settings need to be added to switch out incorrect letters with their correct plaintext letters. In this way we can recover the entirety of the plugboard settings.
+\subsection{Recovering the Ring Settings}
+By this point we know that for a window setting of \texttt{ZZZ}, a ring setting given by the indicator drum, and a plugboard setting deduced from the state of a stop as well as additional logical induction, we can produce the desired ciphertext-plaintext pairing. However, this does not mean the ring setting that we have is the true ring setting. We assumed that turnover did not occur during our crib so in this case we can adjust our window setting and ring setting arbitrarily (so long as we keep their relative distances the same). Of course, eventually turnover will occur, at which point the discrepancy between our ring setting and the true ring setting will become apparent.
+\\\\We will first illustrate how to recover the true ring setting of the rightmost rotor. We begin by setting our Enigma as previously described and inputting the ciphertext. This should produce our expected plaintext. As we keep inputting ciphertext beyond our known plaintext we will recover additional plaintext in the message. Eventually, turnover will occur and we will begin deciphering gibberish since our ring setting is not the true ring setting. To account for this, we can move our ring setting forward by one step (which means we must also move our window setting forward by one to maintain our permutation) and we can perform the same procedure, investigating if we get gibberish. Eventually, we will have arrived at the true ring setting and our deciphering will begin producing additional plaintext.
+\\\\To recover the ring setting of the other two rotors we employ the same procedure though it requires a great deal of ciphertext as turnover becomes less and less frequent as we consider the middle and leftmost rotor respectively. In doing this, we have now managed to recover all of the relevant settings of the daily key.
 \subsection{Cribs and Menus}
 
 % \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 120}}
@@ -1303,7 +1441,7 @@ We began with the supposition that the
 cryptographer is given a known plaintext-ciphertext pairing. Unless
 the cryptographer was able to intercept
 a set of communications before and after encryption this supposition
-seems unrealistic. However, cryptoanalyists at Bletchley park
+seems unrealistic. However, cryptanalysts at Bletchley park
 employed two clever tricks that allowed for such pairings to be
 deduced with reasonable effectiveness. First, analysts were able to
 cross-reference known information to theorize likely phrases in a
@@ -1311,11 +1449,35 @@ message. For instance, if the weather on a particular day was windy
 with a chance of rain, we would expect that the weather report (which
 intellegence knew arrived from specific channels at specific times)
 would likely contain phrases like ``weather'', ``wind'', or ``rain''.
-The second trick used by analysts was the use of permuation theory to
+The second trick used by analysts was the use of permutation theory to
 eliminate locations in the ciphertext where the plaintext could not
 feasibly have been enciphered.
-\\\\Recall that one consequence of the Enigma machine being a conjugate of the reflector is that no letter can be enciphered to itself.
-% the Enigma machine is
+% http://www.ellsbury.com/bombe1.htm %
+\\\\Recall that one consequence of the Enigma machine being a conjugate of the reflector is that no letter can be enciphered to itself. On D-Day the weather report had the following ciphertext
+\begin{center}
+	\texttt{QFZWRWIVTYRESXBFOGKUHQBAISEZ}
+\end{center}
+Given that this was a report the weather in the Bay of Biscay, we suspect it to contain the following plaintext
+\begin{center}
+	\texttt{WETTERVORHERSAGEBISKAYA}
+\end{center}
+If we overlay our ciphertext on top of our plaintext as follows
+\begin{align*}
+	 & \texttt{QFZWRWIVTYRE}{\uline{\texttt{S}}}\texttt{XBFOGKUHQBAISEZ} \\
+	 & \texttt{WETTERVORHER}{\uline{\texttt{S}}}\texttt{AGEBISKAYA.....}
+\end{align*}
+we notice that at the 13th position, the letter \texttt{S} appears in both the plaintext and the ciphertext. We know that such an encipherment is impossible and therefore the suspected plaintext cannot begin at this location. If we slide the plaintext along our ciphertext we get the following
+\begin{align*}
+	 & \texttt{QFZWRWIVTYRESXBFOGKUHQBAISEZ}                                                                                      \\
+	 & \texttt{WETTERVORHER}{\uline{\texttt{S}}}\texttt{AGEBISKAYA.....}                                                          \\
+	 & \texttt{.WETTER}{\uline{\texttt{V}}}\texttt{ORH}{\uline{\texttt{E}}}\texttt{RSAGEBISKAY}{\uline{\texttt{A}}}\texttt{....}  \\
+	 & \texttt{..WETTE}{\uline{\texttt{R}}}\texttt{VORHERSAGEBISKAYA...}                                                          \\
+	 & \texttt{...}{\uline{\texttt{W}}}\texttt{ETTERVORHERSA}{\uline{\texttt{G}}}\texttt{EBISK}{\uline{\texttt{A}}}\texttt{YA...} \\
+	 & \texttt{....WETTERVORHERSAGEBISKAYA..}                                                                                     \\
+\end{align*}
+We can see that at offsets $0-3$ we have coincidences between the plaintext and the ciphertext that would make enciphering at this position impossible. Only at an offset of $4$ do we observe no coincidences. Such a potentially valid location for enciphering is known as a {\bf{crib}}. We may find many such cribs for a given transmission and suspected plaintext, but if our suspected plaintext is long the likelihood of this occurring goes down significantly so we expect to find only a few cribs.
+
+% the Eniga machine is
 % a series of 13 disjoint transpositions. Mathematically, this is
 % because at each stage the permutation formed by the machine is just a
 % conjugate of the reflector which has a $2^{13}$ cycle-type.
@@ -1324,6 +1486,7 @@ feasibly have been enciphered.
 
 \subsection{Diagonal Board}
 
+\subsection{The Machine Gun}
 % \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 80}}
 % 	The idea that flashed into my mind in the School was that, by
 % 	interconnecting the scramblers in a completely new way, one could

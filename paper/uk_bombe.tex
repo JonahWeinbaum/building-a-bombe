@@ -1291,6 +1291,230 @@ Since permutations in the same conjugacy class must have the same
 cycle type, it follows that no matter where in the loop we place our
 detector, if all wires become live on one cable they will become live on all cables. Thus, we can place our detector anywhere.
 
+\subsection{Multiple Plaintext-Ciphertext Pairings}
+In its full form the Bombe was constructed with three rows each equipped with 12 Enigma rotors\footnote{Special rotors were designed for the Bombe called {\bf{Letchworth scramblers}} that allowed for rotors to send input and outputs on the same side. }. Each row could encode a seperate plaintext-pairing simultaneously thus increasing the number of electrical connections resulting in a higher likelihood that all wires become live and thus fewer detected stops.
+
+\subsection{Multiple Loops}
+In our example we provided only a single loop encoded in the plaintext-ciphertext pairing. In practice, multiple loops could exist within such a pairing and we can electrically connect all loops together within a row on the Bombe to produce a single circuit. For instance we might have a plaintext-ciphertext pairing as follows
+\begin{center}
+	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
+					circle, minimum height=0.1cm, minimum width=0.1cm}]
+
+		% Centering the diagram
+		\node (a1) [] {\texttt{B}};
+		\node (a2) [right=0.1cm of a1] {\texttt{C}};
+		\node (a3) [right=0.1cm of a2] {\texttt{A}};
+		\node (a4) [right=0.1cm of a3] {\texttt{A}};
+		\node (a5) [right=0.1cm of a4] {\texttt{C}};
+		\node (a6) [right=0.1cm of a5] {\texttt{C}};
+
+		% Nodes for ciphertext
+		\node (x1) [below=1cm of a1] {\texttt{A}};
+		\node (x2) [below=1cm of a2] {\texttt{B}};
+		\node (x3) [below=1cm of a3] {\texttt{C}};
+		\node (x4) [below=1cm of a4] {\texttt{B}};
+		\node (x5) [below=1cm of a5] {\texttt{B}};
+		\node (x6) [below=1cm of a6] {\texttt{A}};
+
+		% Arrows for mapping
+		\draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
+		\draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
+		\draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
+		\draw[->] (a4) -- (x4) node[midway, left, draw=none, fill=none] {4};
+		\draw[->] (a5) -- (x5) node[midway, left, draw=none, fill=none] {5};
+		\draw[->] (a6) -- (x6) node[midway, left, draw=none, fill=none] {6};
+
+	\end{tikzpicture}
+\end{center}
+Thus encoding the following loops
+\begin{center}
+	\scalebox{0.8}{
+		\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
+						circle, minimum height=0.1cm, minimum width=0.1cm}]
+			\node (B) at (135:4) {\texttt{B}};
+			\node (C) at (45:4) {\texttt{C}};
+
+			\node (A) at (0,0) {\texttt{A}};
+			\node (B2) at (225:4) {\texttt{B}};
+			\node (C2) at (315:4) {\texttt{C}};
+
+			\draw[<->, bend right=45] (A) to node[midway, draw=none, above] {4} (B2);
+			\draw[<->, bend right=70] (B2) to node[midway, draw=none, above] {5} (C2);
+			\draw[<->, bend right=45] (C2) to node[midway, draw=none, above] {6} (A);
+			\draw[<->, bend left=45] (A) to node[midway, draw=none, above] {1} (B);
+			\draw[<->, bend left=70] (B) to node[midway, draw=none, above] {2} (C);
+			\draw[<->, bend left=45] (C) to node[midway, draw=none, above] {3} (A);
+		\end{tikzpicture}
+	}
+\end{center}
+With our diagram format this could look as follows
+\begin{figure}[H]
+	\begin{center}
+		\scalebox{0.8}{
+			\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+				% Draw the box
+				\draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
+				\node at (0+5+1, 0+2-0.5) {$\overline\pi_3$};
+
+				% Draw the wires exiting the box 
+				\draw[-] (7, 5.5) -- (8,5.5) node[midway, above] {\texttt{a}};
+				\draw[-] (7, 4.5) -- (8,4.5) node[midway, above] {\texttt{b}};
+				\draw[-] (7, 3.5) -- (8, 3.5) node[midway, above] {\texttt{c}};
+				\draw[-] (7,2.5) -- (8, 2.5) node[midway, above] {\texttt{d}};
+
+				% Draw the wires entering the box 
+				\draw[-] (4, 5.5) -- (5,5.5) node[midway, above] {};
+				\draw[-] (4, 4.5) -- (5,4.5) node[midway, above] {};
+				\draw[-] (4, 3.5) -- (5, 3.5) node[midway, above] {};
+				\draw[-] (4,2.5) -- (5, 2.5) node[midway, above] {};
+
+				\draw[fill=lightgray] (0-5,0+2) rectangle (2-5,4+2) node[midway] {};
+				\node at (0-5+1, 0+2-0.5) {$\overline\pi_1$};
+
+				% Draw the wires entering the box 
+				\draw[-] (-13+7, 5.5) -- (-13+8,5.5) node[midway, above] {\texttt{a}};
+				\draw[-] (-13+7, 4.5) -- (-13+8,4.5) node[midway, above] {\texttt{b}};
+				\draw[-] (-13+7, 3.5) -- (-13+8, 3.5) node[midway, above] {\texttt{c}};
+				\draw[-] (-13+7,2.5) -- (-13+8, 2.5) node[midway, above] {\texttt{d}};
+
+				% Draw the wires exiting the box 
+				\draw[-] (-13+7+3, 5.5) -- (-13+8+3,5.5) node[midway, above] {};
+				\draw[-] (-13+7+3, 4.5) -- (-13+8+3,4.5) node[midway, above] {};
+				\draw[-] (-13+7+3, 3.5) -- (-13+8+3, 3.5) node[midway, above] {};
+				\draw[-] (-13+7+3,2.5) -- (-13+8+3, 2.5) node[midway, above] {};
+
+				\draw[fill=lightgray] (0,0+10) rectangle (2,4+10) node[midway] {};
+				\node at (0+1, 0+10-0.5) {$\overline\pi_2$};
+
+				% Draw the wires entering the box
+				\draw[-] (-1, 3+10.5) -- (0, 3+10.5) node[midway, above] {\texttt{a}};
+				\draw[-] (-1, 2+10.5) -- (0, 2+10.5) node[midway, above] {\texttt{b}};
+				\draw[-] (-1, 1+10.5) -- (0, 1+10.5) node[midway, above] {\texttt{c}};
+				\draw[-] (-1,0+10.5) -- (0,0+10.5) node[midway, above] {\texttt{d}};
+
+				% Draw the wires exiting the box
+				\draw[-] (3+-1, 3+10.5) -- (3+0, 3+10.5) node[midway, above] {\texttt{a}};
+				\draw[-] (3+-1, 2+10.5) -- (3+0, 2+10.5) node[midway, above] {\texttt{b}};
+				\draw[-] (3+-1, 1+10.5) -- (3+0, 1+10.5) node[midway, above] {\texttt{c}};
+				\draw[-] (3+-1,0+10.5) -- (3+0,0+10.5) node[midway, above] {\texttt{d}};
+
+				% Draw wires from 2 to 1
+				\draw[-] (-6, 5.5) to[out=180, in=180] (-1, 13.5) node[midway, above] {};
+				\draw[-] (-6, 4.5) to[out=180, in=180] (-1, 12.5) node[midway, above] {};
+				\draw[-] (-6, 3.5) to[out=180, in=180] (-1, 11.5) node[midway, above] {};
+				\draw[-] (-6, 2.5) to[out=180, in=180] (-1, 10.5)
+				node[midway, above] {};
+
+				% Draw wires from 3 to 2
+				\draw[-] (8, 5.5) to[out=360, in=360] (3, 13.5) node[midway, above] {};
+				\draw[-] (8, 4.5) to[out=360, in=360] (3, 12.5) node[midway, above] {};
+				\draw[-] (8, 3.5) to[out=360, in=360] (3, 11.5) node[midway, above] {};
+				\draw[-] (8, 2.5) to[out=360, in=360] (3, 10.5)
+				node[midway, above] {};
+
+				% Midway wires
+				\draw[-] (0.5, 1) -- (1.5, 1) node[midway, above] {\texttt{a}};
+				\draw[-] (0.5, 0) -- (1.5, 0) node[midway, above] {\texttt{b}};
+				\draw[-] (0.5, -1) -- (1.5, -1) node[midway, above] {\texttt{c}};
+				\draw[-] (0.5,-2) -- (1.5,-2) node[midway, above] {\texttt{d}};
+
+				% Draw wires from 1 to midway
+				\draw[-] (-2, 5.5) to[out=360, in=180] (0.5, 1) node[midway, above] {};
+				\draw[-] (-2, 4.5) to[out=360, in=180] (0.5, 0) node[midway, above] {};
+				\draw[-] (-2, 3.5) to[out=360, in=180] (0.5, -1) node[midway, above] {};
+				\draw[-] (-2, 2.5) to[out=360, in=180] (0.5, -2) node[midway, above] {};
+
+				% Draw wires from 2 to midway
+				\draw[-] (4, 5.5) to[out=180, in=360] (1.5, 1) node[midway, above] {};
+				\draw[-] (4, 4.5) to[out=180, in=360] (1.5, 0) node[midway, above] {};
+				\draw[-] (4, 3.5) to[out=180, in=360] (1.5, -1) node[midway, above] {};
+				\draw[-] (4, 2.5) to[out=180, in=360] (1.5, -2) node[midway, above] {};
+
+				\draw[fill=lightgray] (0,0-15) rectangle (2,4-15) node[midway] {};
+				\node at (0+1, 0+10-0.5-25) {$\overline\pi_5$};
+
+				% Draw the wires entering the box
+				\draw[-] (-1, 3+10.5-25) -- (0, 3+10.5-25) node[midway, above] {\texttt{a}};
+				\draw[-] (-1, 2+10.5-25) -- (0, 2+10.5-25) node[midway, above] {\texttt{b}};
+				\draw[-] (-1, 1+10.5-25) -- (0, 1+10.5-25) node[midway, above] {\texttt{c}};
+				\draw[-] (-1,0+10.5-25) -- (0,0+10.5-25) node[midway, above] {\texttt{d}};
+
+				% Draw the wires exiting the box
+				\draw[-] (3+-1, 3+10.5-25) -- (3+0, 3+10.5-25) node[midway, above] {\texttt{a}};
+				\draw[-] (3+-1, 2+10.5-25) -- (3+0, 2+10.5-25) node[midway, above] {\texttt{b}};
+				\draw[-] (3+-1, 1+10.5-25) -- (3+0, 1+10.5-25) node[midway, above] {\texttt{c}};
+				\draw[-] (3+-1,0+10.5-25) -- (3+0,0+10.5-25) node[midway, above] {\texttt{d}};
+
+				\draw[fill=lightgray] (0-5,0+2-9) rectangle (2-5,4+2-9) node[midway] {};
+				\node at (0-5+1, 0+2-0.5-9) {$\overline\pi_4$};
+
+				% Draw the wires entering the box 
+				\draw[-] (-13+7, 5.5-9) -- (-13+8,5.5-9) node[midway, above] {\texttt{a}};
+				\draw[-] (-13+7, 4.5-9) -- (-13+8,4.5-9) node[midway, above] {\texttt{b}};
+				\draw[-] (-13+7, 3.5-9) -- (-13+8, 3.5-9) node[midway, above] {\texttt{c}};
+				\draw[-] (-13+7,2.5-9) -- (-13+8, 2.5-9) node[midway, above] {\texttt{d}};
+
+				% Draw the wires exiting the box 
+				\draw[-] (-13+7+3, 5.5-9) -- (-13+8+3,5.5-9) node[midway, above] {};
+				\draw[-] (-13+7+3, 4.5-9) -- (-13+8+3,4.5-9) node[midway, above] {};
+				\draw[-] (-13+7+3, 3.5-9) -- (-13+8+3, 3.5-9) node[midway, above] {};
+				\draw[-] (-13+7+3,2.5-9) -- (-13+8+3, 2.5-9) node[midway, above] {};
+
+				% Draw the box
+				\draw[fill=lightgray] (0+5, 0+2-9) rectangle (2+5,4+2-9) node[midway] {};
+				\node at (0+5+1, 0+2-0.5-9) {$\overline\pi_6$};
+
+				% Draw the wires exiting the box 
+				\draw[-] (7, 5.5-9) -- (8,5.5-9) node[midway, above] {\texttt{a}};
+				\draw[-] (7, 4.5-9) -- (8,4.5-9) node[midway, above] {\texttt{b}};
+				\draw[-] (7, 3.5-9) -- (8, 3.5-9) node[midway, above] {\texttt{c}};
+				\draw[-] (7,2.5-9) -- (8, 2.5-9) node[midway, above] {\texttt{d}};
+
+				% Draw the wires entering the box 
+				\draw[-] (4, 5.5-9) -- (5,5.5-9) node[midway, above] {};
+				\draw[-] (4, 4.5-9) -- (5,4.5-9) node[midway, above] {};
+				\draw[-] (4, 3.5-9) -- (5, 3.5-9) node[midway, above] {};
+				\draw[-] (4,2.5-9) -- (5, 2.5-9) node[midway, above] {};
+
+				% Draw wires from 4 to 5
+				\draw[-] (-6, 5.5-9) to[out=180, in=180] (-1, 13.5-25) node[midway, above] {};
+				\draw[-] (-6, 4.5-9) to[out=180, in=180] (-1, 12.5-25) node[midway, above] {};
+				\draw[-] (-6, 3.5-9) to[out=180, in=180] (-1, 11.5-25) node[midway, above] {};
+				\draw[-] (-6, 2.5-9) to[out=180, in=180] (-1, 10.5-25)
+				node[midway, above] {};
+
+				% Draw wires from 5 to 6
+				\draw[-] (8, 5.5-9) to[out=360, in=360] (3, 13.5-25) node[midway, above] {};
+				\draw[-] (8, 4.5-9) to[out=360, in=360] (3, 12.5-25) node[midway, above] {};
+				\draw[-] (8, 3.5-9) to[out=360, in=360] (3, 11.5-25) node[midway, above] {};
+				\draw[-] (8, 2.5-9) to[out=360, in=360] (3, 10.5-25)
+				node[midway, above] {};
+
+				% Draw wires from 4 to midway
+				\draw[-] (-2, 5.5-9) to[out=360, in=180] (0.5, 1) node[midway, above] {};
+				\draw[-] (-2, 4.5-9) to[out=360, in=180] (0.5, 0) node[midway, above] {};
+				\draw[-] (-2, 3.5-9) to[out=360, in=180] (0.5, -1) node[midway, above] {};
+				\draw[-] (-2, 2.5-9) to[out=360, in=180] (0.5, -2) node[midway, above] {};
+
+				% Draw wires from 2 to midway
+				\draw[-] (4, 5.5-9) to[out=180, in=360] (1.5, 1) node[midway, above] {};
+				\draw[-] (4, 4.5-9) to[out=180, in=360] (1.5, 0) node[midway, above] {};
+				\draw[-] (4, 3.5-9) to[out=180, in=360] (1.5, -1) node[midway, above] {};
+				\draw[-] (4, 2.5-9) to[out=180, in=360] (1.5, -2) node[midway, above] {};
+
+				\node[draw,circle] at (-2, -0.5) {\texttt{A}};
+				\node[draw,circle] at (-7, -11) {\texttt{B}};
+				\node[draw,circle] at (-7, -11+21) {\texttt{B}};
+				\node[draw,circle] at (-7+16, -11) {\texttt{C}};
+				\node[draw,circle] at (-7+16, -11+21) {\texttt{C}};
+			\end{tikzpicture}
+		}
+	\end{center}
+	\caption{Multiple loops in the Bombe}
+	\label{fig:multiloops}
+\end{figure}
+\noindent Again, this increased electrical connections resulting in fewer stops. We will return in the next chapter to the effect that multiple loops has on the number of stops.
+
 \subsection{Indicator Drums and Ring Setting}
 The Bombe is set up with a series of drums
 \begin{center}
@@ -1423,7 +1647,7 @@ We then have that
 Then to determine what letter is steckered to \texttt{B}, the wren only needs to set their ring settings to that given by the indicator, the window settings to that corresponding to $\sigma_1$, and input \texttt{D}. Now using this newly deduced steckering the wren can produce the steckering of the next letter in the loop until we have deduced the steckerings corresponding to each letter in our loop.
 
 \subsubsection{Invalid Stops}
-If at this stage we find that a deduced plugboard setting contradicts an earlier plugboard setting we discovered, this means that the point at which the Bombe stopped is incorrect! Recall that the Bombe stops when there are no logical contradictions gleamed from its setup and the information in the loop -- this does not mean no logical contradictions exist. Further, even if no logical contradictions existed that does not mean this is the only such setting which would be logically consistent with our plaintext (though this is certainly less likely). The use of the Bombe is thus a trial-and-error procedure. We run the machine until we find a candidate stop, then we check for possible further logical contradictions, and if such contradictions are found we continue from where we left off.
+If at this stage we find that a deduced plugboard setting contradicts an earlier plugboard setting we discovered, this means that the point at which the Bombe stopped is incorrect! Recall that the Bombe stops when there are no logical contradictions gleamed from its setup and the information in the loop -- this does not mean no logical contradictions exist. Further, even if no logical contradictions existed that does not mean this is the only such setting which would be logically consistent with our plaintext (though this is certainly less likely). The use of the Bombe is thus a trial-and-error procedure. We run the machine until we find a candidate stop, then we check for possible further logical contradictions, and if such contradictions are found we continue from where we left off. Many additions we discuss later in this chapter are designed with the sole purpose of reducing the number of stops we need to check down to a tractable number.
 \\\\If we find our stop has valid plugboard settings, we can recover any remaining settings is quite easily. We can attempt to decrypt our ciphertext with our window setting of \texttt{ZZZ}, our ring setting given by the indicator drum, and our plguboard settings we discovered from the stop. If we find that there are letters which do not match our expected plaintext we can deduce what plugboard settings need to be added to switch out incorrect letters with their correct plaintext letters. In this way we can recover the entirety of the plugboard settings.
 \subsection{Recovering the Ring Settings}
 By this point we know that for a window setting of \texttt{ZZZ}, a ring setting given by the indicator drum, and a plugboard setting deduced from the state of a stop as well as additional logical induction, we can produce the desired ciphertext-plaintext pairing. However, this does not mean the ring setting that we have is the true ring setting. We assumed that turnover did not occur during our crib so in this case we can adjust our window setting and ring setting arbitrarily (so long as we keep their relative distances the same). Of course, eventually turnover will occur, at which point the discrepancy between our ring setting and the true ring setting will become apparent.
@@ -1476,7 +1700,71 @@ we notice that at the 13th position, the letter \texttt{S} appears in both the p
 	 & \texttt{....WETTERVORHERSAGEBISKAYA..}                                                                                     \\
 \end{align*}
 We can see that at offsets $0-3$ we have coincidences between the plaintext and the ciphertext that would make enciphering at this position impossible. Only at an offset of $4$ do we observe no coincidences. Such a potentially valid location for enciphering is known as a {\bf{crib}}. We may find many such cribs for a given transmission and suspected plaintext, but if our suspected plaintext is long the likelihood of this occurring goes down significantly so we expect to find only a few cribs.
+\\\\Now equipped with our crib
+\begin{figure}[H]
+	\begin{center}
+		\texttt{RWIVTYRESXBFOGKUHQBAISE}  \\
+		\texttt{WETTERVORHERSAGEBISKAYA} \\
+	\end{center}
+	\caption{Example crib}
+	\label{fig:crib}
+\end{figure}
+\noindent We can generate a diagramatic representation of our plaintext-ciphertext pairing called a {\bf{menu}} which will be used to wire up our Bombe. We assume the enciphering starts with window setting \texttt{ZZZ} so we will denote which window setting takes each letter to the next.
+\begin{figure}[H]
+	\begin{center}
+		\scalebox{0.8}{
+			\begin{tikzpicture}[>=stealth, every node/.style={}]
+				% Manual node positions
+				\node (E) at (0,0) {\texttt{E}};
+				\node (O) at (3,1.5) {\texttt{0}};
+				\node (B) at (0,3) {\texttt{B}};
+				\node (U) at (-3,3) {\texttt{U}};
+				\node (S) at (6,3) {\texttt{S}};
+				\node (Y) at (9,3) {\texttt{Y}};
+				\node (G) at (-6,3) {\texttt{G}};
+				\node (H) at (0,6) {\texttt{H}};
+				\node (X) at (-3,6) {\texttt{X}};
+				\node (W) at (3,0) {\texttt{W}};
+				\node (R) at (6,0) {\texttt{R}};
+				\node (F) at (9,0) {\texttt{F}};
+				\node (A) at (-3,0) {\texttt{A}};
+				\node (I) at (-3,-3) {\texttt{I}};
+				\node (Q) at (-6,-3) {\texttt{Q}};
+				\node (T) at (0,-3) {\texttt{T}};
+				\node (K) at (-6,0) {\texttt{K}};
+				\node (V) at (6,-3) {\texttt{V}};
 
+				% Connections
+				\draw[-] (E) -- (W) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (W) -- (R) node[midway, above, sloped] {\texttt{ZZA}};
+				\draw[-] (R) -- (F) node[midway, above, sloped] {\texttt{ZZL}};
+				\draw[-] (R) -- (Y) node[midway, above, sloped] {\texttt{ZZF}};
+				\draw[-] (E) -- (O) node[midway, above, sloped] {\texttt{ZZH}};
+				\draw[-] (O) -- (S) node[midway, above, sloped] {\texttt{ZZM}};
+				\draw[-] (S) -- (Y) node[midway, above, sloped] {\texttt{ZZV}};
+				\draw[-] (R) -- (S) node[midway, above, sloped] {\texttt{ZZI}};
+				\draw[-] (B) -- (S) node[midway, above, sloped] {\texttt{ZZS}};
+				\draw[-] (E) -- (B) node[midway, above, sloped] {\texttt{ZZK}};
+				\draw[-] (B) -- (H) node[midway, above, sloped] {\texttt{ZZQ}};
+				\draw[-] (X) -- (H) node[midway, above, sloped] {\texttt{ZZJ}};
+				\draw[-] (U) -- (E) node[midway, above, sloped] {\texttt{ZZP}};
+				\draw[-] (G) -- (A) node[midway, above, sloped] {\texttt{ZZN}};
+				\draw[-] (A) -- (E) node[midway, above, sloped] {\texttt{ZZW}};
+				\draw[-] (K) -- (G) node[midway, above, sloped] {\texttt{ZZO}};
+				\draw[-] (K) -- (A) node[midway, above, sloped] {\texttt{ZZT}};
+				\draw[-] (T) -- (E) node[midway, above, sloped] {\texttt{ZZE}};
+				\draw[-] (I) -- (A) node[midway, above, sloped] {\texttt{ZZU}};
+				\draw[-] (Q) -- (I) node[midway, above, sloped] {\texttt{ZZR}};
+				\draw[-] (I) -- (T) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (T) -- (V) node[midway, above, sloped] {\texttt{ZZD}};
+				\draw[-] (V) -- (R) node[midway, above, sloped] {\texttt{ZZG}};
+
+			\end{tikzpicture}}
+	\end{center}
+	\caption{Example menu}
+	\label{fig:menu}
+\end{figure}
+\noindent Upon looking at this menu one might ask the question of why we include conntextions like the one between \texttt{X} and \texttt{H} if they are not included in any loop? From our earlier machine description its clear that such connection will never electrify additional wires. That is, they will only permute the incoming electrified wires but never increasing the quantity of electrified wires since there is no feedback. Thus they add no additional value save for perhaps slightly more plugboard information. However, an addition to the machine made by Gordon Welchman made use of such connections and produced more electrified wires even within the loops themselves, thus reducing the total number of stops needing to be checked.
 % the Eniga machine is
 % a series of 13 disjoint transpositions. Mathematically, this is
 % because at each stage the permutation formed by the machine is just a
@@ -1484,7 +1772,107 @@ We can see that at offsets $0-3$ we have coincidences between the plaintext and 
 % \\\\ location of \emph{cribs} -- locations in the enciphered text
 % that could plausibly have been generated from the suspsected plaintext phrases.
 
-\subsection{Diagonal Board}
+\subsection{Diagonal Matrix}
+Recall that a wire \texttt{Xy} becoming electrified is consistent with the deduction that $S(\texttt{X}) = \texttt{Y}$. But this deduction is equivalent to the statement $S(\texttt{Y}) = \texttt{X}$. It follows then that if we apply current to \texttt{Yx} this will be entirely consistent with our current deductions and thus there will be no new logical contradictions introduced by this additional current. That is, for any wire \texttt{Xy} we can connect it directly to \texttt{Yx} through what was called a {\bf{diagonal matrix}}. In our diagram this can be viewed as follows
+\begin{center}
+	\begin{tikzpicture}[thick, scale=0.7, every node/.style={scale=0.7}]
+		% Draw the box
+		\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+		\node at (3, -2) {$\overline\pi_3$};
+
+		% Draw the wires entering the box
+		\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+		\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+		% Draw the wires exiting the box with crossed mappings
+		\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+		\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+		\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+		\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2, 2) -- (4,0);
+		\draw[-] (2, 1) -- (4, -1);
+		\draw[-] (2, 0) -- (4, 2);
+		\draw[-] (2,-1) -- (4, 1);
+
+		\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+		\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+		\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+		\draw[-] (0-3, -1-7) to[out=180, in=180] (0, -1)
+		node[midway, above] {};
+
+		\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+		\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+		\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+		\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+		\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+		\node at (3-3, -2-7) {$\overline\pi_1$};
+
+		% Draw the wires entering the box
+		\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+		% Draw the wires exiting the box
+		\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+		\draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+		\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+		\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2-3, 2-7) -- (4-3, 1-7);
+		\draw[-] (2-3, 1-7) -- (4-3, 2-7);
+		\draw[-] (2-3, 0-7) -- (4-3, -1-7);
+		\draw[-] (2-3,-1-7) -- (4-3, 0-7);
+
+		\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+		\node at (3+3, -2-7) {$\overline\pi_2$};
+
+		% Draw the wires entering the box
+		\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+		\draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+		\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+		\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+		% Draw the wires exiting the box
+		\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+		\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+		\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+		\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+		\draw[-] (2+3, 2-7) -- (4+3, -1-7);
+		\draw[-] (2+3, 1-7) -- (4+3, 0-7);
+		\draw[-] (2+3, 0-7) -- (4+3, 1-7);
+		\draw[-] (2+3,-1-7) -- (4+3, 2-7);
+
+		\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+		\node[draw,circle] at (3, -9) {\texttt{B}};
+		\node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+		% Diagonal wires
+		\draw[-, blue, very thick] (3,2-7) to[bend left=20] (-3+0.1, 2-3);
+		\draw[fill=white] (-3+0.1, 2-3) circle (0.1);
+		\draw[fill=white] (3, 2-7) circle (0.1);
+
+		\draw[-, orange,  very thick] (9-0.1,2-2) to[bend left=20] (-3+0.1, 2-4);
+		\draw[fill=white] (9-0.1, 2-2) circle (0.1);
+		\draw[fill=white] (-3+0.1, 2-4) circle (0.1);
+
+		\draw[-, purple, very thick] (3,0-7) to[bend right=20] (9-0.1, 2-3);
+		\draw[fill=white] (3, 0-7) circle (0.1);
+		\draw[fill=white] (9-0.1, 2-3) circle (0.1);
+
+	\end{tikzpicture}
+\end{center}
+
 
 \subsection{The Machine Gun}
 % \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 80}}

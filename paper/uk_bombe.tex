@@ -1772,112 +1772,201 @@ We can see that at offsets $0-3$ we have coincidences between the plaintext and 
 % \\\\ location of \emph{cribs} -- locations in the enciphered text
 % that could plausibly have been generated from the suspsected plaintext phrases.
 
-\subsection{Diagonal Matrix}
-Recall that a wire \texttt{Xy} becoming electrified is consistent with the deduction that $S(\texttt{X}) = \texttt{Y}$. But this deduction is equivalent to the statement $S(\texttt{Y}) = \texttt{X}$. It follows then that if we apply current to \texttt{Yx} this will be entirely consistent with our current deductions and thus there will be no new logical contradictions introduced by this additional current. That is, for any wire \texttt{Xy} we can connect it directly to \texttt{Yx} through what was called a {\bf{diagonal matrix}}. In our diagram this can be viewed as follows
-\begin{center}
-	\begin{tikzpicture}[thick, scale=0.7, every node/.style={scale=0.7}]
-		% Draw the box
-		\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+\subsection{Diagonal Board}
+Recall that a wire \texttt{Xy} becoming electrified is consistent with the deduction that $S(\texttt{X}) = \texttt{Y}$. But this deduction is equivalent to the statement $S(\texttt{Y}) = \texttt{X}$. It follows then that if we apply current to \texttt{Yx} this will be entirely consistent with our current deductions and thus there will be no new logical contradictions introduced by this additional current. That is, for any wire \texttt{Xy} we can connect it directly to \texttt{Yx} through what was called a {\bf{diagonal board}}. In our diagram this can be viewed as follows
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[thick, scale=0.7, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
 
-		\node at (3, -2) {$\overline\pi_3$};
+			\node at (3, -2) {$\overline\pi_3$};
 
-		% Draw the wires entering the box
-		\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
-		\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
-		\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
-		\draw[-] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+			% Draw the wires entering the box
+			\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
 
-		% Draw the wires exiting the box with crossed mappings
-		\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
-		\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
-		\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
-		\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
 
-		% Draw the lines inside the box to represent the mapping
-		\draw[-] (2, 2) -- (4,0);
-		\draw[-] (2, 1) -- (4, -1);
-		\draw[-] (2, 0) -- (4, 2);
-		\draw[-] (2,-1) -- (4, 1);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2, 2) -- (4, -1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-] (2,-1) -- (4, 2);
 
-		\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
-		\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
-		\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
-		\draw[-] (0-3, -1-7) to[out=180, in=180] (0, -1)
-		node[midway, above] {};
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
 
-		\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
-		\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
-		\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
-		\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+			\draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
 
-		\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-		\node at (3-3, -2-7) {$\overline\pi_1$};
+			\node at (3-3, -2-7) {$\overline\pi_1$};
 
-		% Draw the wires entering the box
-		\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
-		\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
-		\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
-		\draw[-] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
 
-		% Draw the wires exiting the box
-		\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
-		\draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
-		\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
-		\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
 
-		% Draw the lines inside the box to represent the mapping
-		\draw[-] (2-3, 2-7) -- (4-3, 1-7);
-		\draw[-] (2-3, 1-7) -- (4-3, 2-7);
-		\draw[-] (2-3, 0-7) -- (4-3, -1-7);
-		\draw[-] (2-3,-1-7) -- (4-3, 0-7);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-] (2-3,-1-7) -- (4-3, 1-7);
 
-		\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
 
-		\node at (3+3, -2-7) {$\overline\pi_2$};
+			\node at (3+3, -2-7) {$\overline\pi_2$};
 
-		% Draw the wires entering the box
-		\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
-		\draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
-		\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
-		\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
 
-		% Draw the wires exiting the box
-		\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
-		\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
-		\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
-		\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+			% Draw the wires exiting the box
+			\draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
 
-		\draw[-] (2+3, 2-7) -- (4+3, -1-7);
-		\draw[-] (2+3, 1-7) -- (4+3, 0-7);
-		\draw[-] (2+3, 0-7) -- (4+3, 1-7);
-		\draw[-] (2+3,-1-7) -- (4+3, 2-7);
+			\draw[-] (2+3, 2-7) -- (4+3, -1-7);
+			\draw[-] (2+3, 1-7) -- (4+3, 0-7);
+			\draw[-] (2+3, 0-7) -- (4+3, 1-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 2-7);
 
-		\node[draw,circle] at (-4.5, -1) {\texttt{A}};
-		\node[draw,circle] at (3, -9) {\texttt{B}};
-		\node[draw,circle] at (10.5, -1) {\texttt{C}};
+			\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+			\node[draw,circle] at (3, -9) {\texttt{B}};
+			\node[draw,circle] at (10.5, -1) {\texttt{C}};
 
-		% Diagonal wires
-		\draw[-, blue, very thick] (3,2-7) to[bend left=20] (-3+0.1, 2-3);
-		\draw[fill=white] (-3+0.1, 2-3) circle (0.1);
-		\draw[fill=white] (3, 2-7) circle (0.1);
+			% Diagonal wires
+			\draw[-, blue, very thick] (3,2-7) to[bend left=20] (-3+0.1, 2-3);
+			\draw[fill=white] (-3+0.1, 2-3) circle (0.1);
+			\draw[fill=white] (3, 2-7) circle (0.1);
 
-		\draw[-, orange,  very thick] (9-0.1,2-2) to[bend left=20] (-3+0.1, 2-4);
-		\draw[fill=white] (9-0.1, 2-2) circle (0.1);
-		\draw[fill=white] (-3+0.1, 2-4) circle (0.1);
+			\draw[-, orange,  very thick] (9-0.1,2-2) to[bend left=20] (-3+0.1, 2-4);
+			\draw[fill=white] (9-0.1, 2-2) circle (0.1);
+			\draw[fill=white] (-3+0.1, 2-4) circle (0.1);
 
-		\draw[-, purple, very thick] (3,0-7) to[bend right=20] (9-0.1, 2-3);
-		\draw[fill=white] (3, 0-7) circle (0.1);
-		\draw[fill=white] (9-0.1, 2-3) circle (0.1);
+			\draw[-, purple, very thick] (3,0-7) to[bend right=20] (9-0.1, 2-3);
+			\draw[fill=white] (3, 0-7) circle (0.1);
+			\draw[fill=white] (9-0.1, 2-3) circle (0.1);
 
-	\end{tikzpicture}
-\end{center}
-
-
+		\end{tikzpicture}
+	\end{center}
+	\caption{Diagonal wires}
+	\label{fig:diagonal}
+\end{figure}
+\noindent This significantly increases the number of connections, adding $\frac{k(k-1)}{2}$ new wires where $k$ is the number of Enigma machines in the loop. Adding more connections increases electrical connectivity thus reducing the number of stops. In fact, prior to the use of the diagonal board, often $3$ loops needed to be present in the crib to have a tractable number of stops. With the addition of the diagonal board this could be significantly reduced and made the use of the Bombe practical.
+\\\\For instance, in our example from figure~\ref{fig:diagonal}, without the diagonal such a state would produce a stop with hypothesis $S(\texttt{A}) = \texttt{D}$. However, adding the diagonal wires would cause all wires to have current flowing through them -- meaning that our original stop must have been a false one, only reveal by the addition of new, consistent deductions which ruled out all possible plugboard settings.
 \subsection{The Machine Gun}
-% \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 80}}
-% 	The idea that flashed into my mind in the School was that, by
-% 	interconnecting the scramblers in a completely new way, one could
-% 	increase the effectiveness of the automatic test by a very large
-% 	factor. I saw that we need not depend on obtaining three closed loops.
-% \end{chapquote}
+Even with the Bombe and the diagonal board we still have more deductions that can be made to rule out certain settings. Consider our first stop we examined from figure~\ref{fig:correct_stecker}.
+\begin{center}
+	\begin{minipage}{0.45\textwidth}
+		\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+			% Draw the box
+			\draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+			\node at (3, -2) {$\overline\pi_3$};
+
+			% Draw the wires entering the box
+			\draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+			\draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box with crossed mappings
+			\draw[-, red] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+			\draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+			\draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+			\draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2, 2) -- (4,-1);
+			\draw[-] (2, 1) -- (4, 0);
+			\draw[-] (2, 0) -- (4, 1);
+			\draw[-, red] (2,-1) -- (4, 2);
+
+			\draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+			\draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+			\draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+			\draw[-, red] (0-3, -1-7) to[out=180, in=180] (0, -1)
+			node[midway, above] {};
+
+			\draw[- ,red] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+			\draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+			\draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+			\draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+			\node at (3-3, -2-7) {$\overline\pi_1$};
+
+			% Draw the wires entering the box
+			\draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-, red] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+			% Draw the wires exiting the box
+			\draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+			\draw[-, red] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+			\draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+			\draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 0-7);
+			\draw[-] (2-3, 1-7) -- (4-3, -1-7);
+			\draw[-] (2-3, 0-7) -- (4-3, 2-7);
+			\draw[-, red] (2-3,-1-7) -- (4-3, 1-7);
+
+			\draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+			\node at (3+3, -2-7) {$\overline\pi_2$};
+
+			% Draw the wires entering the box
+			\draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+			\draw[-, red] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+			\draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+			\draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+			% Draw the wires exiting the box
+			\draw[-, red] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+			\draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+			\draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+			\draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+			\draw[-] (2+3, 2-7) -- (4+3, 1-7);
+			\draw[-, red] (2+3, 1-7) -- (4+3, 2-7);
+			\draw[-] (2+3, 0-7) -- (4+3, -1-7);
+			\draw[-] (2+3,-1-7) -- (4+3, 0-7);
+
+			\node[draw,circle] at (-4.5, -1) {\texttt{A}};
+			\node[draw,circle] at (3, -9) {\texttt{B}};
+			\node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+		\end{tikzpicture}
+	\end{minipage}
+\end{center}
+This stop may seem to imply we found no logical inconsitencies in our deductions stemming from the hypothesis that $S(\texttt{A}) = \texttt{D}$. However, when a wren goes to check the settings found, they will discover that this setting produces a contradictory plugboard setting of $S(\texttt{A}) = \texttt{C}$ -- thus ruling out this stop. Is there a means by which we could have detected this without having to manually work it out on a checking machine?
+\\\\Recall that before we introduced the checking machine, we noted that the plugboard settings we would deduce from the checking machine were implictly encoded in the internal state of the wires of the machine. In particular since wire $\texttt{Ca}$ was active, we could have immediately deduced that $S(\texttt{A})= \texttt{C}$ without having to employ a checking machine. However, these wires states are not easy for a human to read and would require complex manual analysis of the underlying cables. Instead, a device called the {\bf{machine gun}} was developed which examined the state of the diagonal board at a given stop to determine if logical contradictions were present among the deduced plugboard settings. When a stop occured, the machine gun would be brought in. The device then used a series of uniselectors to quickly switch through the diagonal board contacts to search for a pair of deduced steckerings that had a common letter (thus producing a logical contradiction). The machine got its name from the sudden loud burst of sound produced when the uniselectors ran through the diagonal board.
+\\\\Even with such a device many stops still needed to be checked by the wrens since the machine gun only detected logical inconsistencies in regards to plugboard setting overlap and thus still produced false stops.

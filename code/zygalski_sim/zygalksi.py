@@ -47,6 +47,46 @@ def shift_sheet(sheet, shift=(0, 0)):
 
     return result
 
+def escape_latex(s):
+    # Escape special LaTeX characters
+    return str(s).replace('&', r'\&').replace('%', r'\%').replace('$', r'\$') \
+                 .replace('#', r'\#').replace('_', r'\_').replace('{', r'\{') \
+                 .replace('}', r'\}').replace('~', r'\textasciitilde{}') \
+                 .replace('^', r'\^{}').replace('\\', r'\textbackslash{}')
+def format_cell(value):
+    if value == 0:
+        return r'\texttt{.}'
+    elif value == 1:
+        return r'\texttt{0}'
+    else:
+        return r'\texttt{' + escape_latex(str(value)) + '}'
+
+def print_sheet_latex(sheet):
+    if isinstance(sheet, list):
+        sheet = np.array(sheet)
+
+    rows, cols = sheet.shape
+    rows = int(rows / 2)
+    cols = int(cols / 2)
+    col_labels = (ALPHABET)[:cols]
+    row_labels = (ALPHABET)[:rows]
+
+    output = []
+
+    # Begin LaTeX tabular
+    col_format = 'c|' + 'c' * cols
+    output.append(r'\begin{tabular}{' + col_format + '}')
+    
+    header = ' & ' + ' & '.join(r'\texttt{' + c + '}' for c in col_labels) + r' \\ \hline'
+    output.append(header)
+
+    for i in reversed(range(rows)):
+        row = [r'\texttt{' + row_labels[i] + '}'] + [format_cell(sheet[i, j]) for j in range(cols)]
+        output.append(' & '.join(row) + r' \\')
+
+    output.append(r'\end{tabular}')
+    
+    print('\n'.join(output))
 def print_sheet(sheet):
     if isinstance(sheet, list):
         sheet = np.array(sheet)
@@ -79,8 +119,8 @@ def generate_sheet(rotors="I III II", left_window="A"):
             # Fill all four quadrants
 
             #HANDLE TURNOVER
-            if ALPHABET[y] in ['B', 'C', 'D', 'E']:
-                value = 1
+            # if ALPHABET[y] in ['B', 'C', 'D', 'E']:
+            #     value = 1
             sheet[y,x] = value
             sheet[y+size, x] = value
             sheet[y, x+size] = value
@@ -146,13 +186,14 @@ class ZyglaskiSheets:
         old_sheet = self.sheet.copy()
         self.sheet = and_sheets(old_sheet, new_sheet_shifted)
 
-for i in range(26):
-    print(chr(-i%26 + ord('A')))
-    zs = ZyglaskiSheets()
-    #trigrams = ["BWY", "AFQ", "LZX", "MHX", "RHT", "NSY", "QBW", "SBW", "VFS"]#, "WFW", "YKW"]
-    trigrams  = ["PTJ", "BSU", "EON", "XLV", "CEH", "BWY", "AGY", "KGS", "XET", "CWI", "CEH", "BUG"]
-    for tg in trigrams:
-        tg = chr(ord('A') + (ord(tg[0])-ord('A')+i) % 26) + tg[1:]
+print_sheet_latex(SHEETS['B'])
+# for i in range(26):
+#     if (chr(-i%26 + ord('A'))) == 'D':
+#         zs = ZyglaskiSheets()
+#         trigrams = ["BWY", "AFQ", "LZX", "MHX", "RHT", "NSY", "QBW", "SBW", "VFS", "WFW", "YKW"]
+# #        trigrams  = ["PTJ", "BSU", "EON", "XLV", "CEH", "BWY", "AGY", "KGS", "XET", "CWI", "CEH", "BUG"]
+#         for tg in trigrams:
+#             tg = chr(ord('A') + (ord(tg[0])-ord('A')+i) % 26) + tg[1:]
 
-        zs.next(tg)
-    print_sheet(zs.sheet)
+#             zs.next(tg)
+#         print_sheet(zs.sheet)

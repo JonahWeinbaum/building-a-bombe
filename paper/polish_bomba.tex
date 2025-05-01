@@ -960,7 +960,15 @@ an input letter which we expect to produce these 3 females. The
 machine rotates all the rotors simultaneously so they maintain their
 relative distance from one another and as it churns through all
 $26^3$ rotor positions, the machine will halt when it finds an
-absolute position corresponding to females in each set of rotors.
+absolute position corresponding to females in each set of rotors. The origin of the name Bomba is disputed amongst records with the following claims to its namesake
+\begin{itemize}
+	\item A United States army report explained that the original machines, which were turned by hand, would drop components on the floor when a solution was found producing a loud noise.
+	      % https://web.archive.org/web/20110807181348/http://www.codesandciphers.org.uk/documents/bmbrpt/bmbpg010.HTM %
+	\item Colonel Lisicki of the Polish Cipher Bureau explained that the name came from a popular ice-cream dessert of the same name which was consumed while the machine was first conceptualized.
+	      % Enigma : how the German machine cipher was broken, and how it was read by the Allies in World War Two page 63 note 1 %
+	\item Rejewski claims that the name was effectively random.
+	      % Enigma : how the German machine cipher was broken, and how it was read by the Allies in World War Two page 266 %
+\end{itemize}
 From this machine we will now show that the daily key can be derived.
 We must first account for some caveats in our construction of the machine.
 
@@ -1440,6 +1448,84 @@ Much of this procedure was predicated on the fact that moving our window setting
 \\\\Programatically this can be dealt with by ensuring that all $4$ such rows have holes in every cell thus ensuring that they do not accidentally rule out a possibly valid setting. How cryptographers actually dealt with this when using the physical sheets is unknown to me as no source referenced such an issue save for Tony Sale in his digitized implementation of the sheets, where he solved the problem as I did. This is a question that warrants further historical research.
 
 \subsubsection{Expected Number of Sheets}
+We will now compute the expected number of sheets required to carry out the above operation. We first need to determine the probability that a particular Enigma setting can generate a female. Consider an Enigma permutation $\sigma$, our goal is to determine the probability that $\sigma_1\sigma_4$ has a singleton cycle. We will make the simplifying assumption that $\sigma_1$ and $\sigma_4$ are pulled independently from a uniform distribution over all $2^{13}$ cycles.
+\\\\We will fix $\sigma_1$ as containing $13$ disjoint transpositions labelled $\tau_i$, that is
+\[
+	\sigma_1 = \tau_1\dots\tau_{13}
+\]
+$\sigma_1\sigma_4$ will contain a singleton cycle if and only if $\sigma_1$ and $\sigma_4$ contain at least one transposition in common. Then it suffices to determine the probability that $\sigma_4$ contains at least one transposition from the $\tau_i$s.
+\\\\We denote the event that $\tau_i$ is contained in $\sigma_4$ as $E_i$. Then the probability that at least one $\tau_i$ is common between $\sigma_1$ and $\sigma_4$ is
+\[
+	\mathbb{P}\biggl(\bigcup_{i=1}^{13}E_i\biggr)
+\]
+By inclusion-exclusion this gives us
+\[
+	\sum_{1 \le i \le 13}\mathbb{P}(E_i) - \sum_{1\le i < j \le 13}\mathbb{P}(E_i\cap E_j) + \dots + \sum_{1\le i_1 < \dots < i_{13} \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_{13}})
+\]
+We will begin by considering $\mathbb{P}(E_i)$, that is, the probability that $\sigma_4$ contains the transposition $\tau_i$. Then to calculate this probability, we can imagine fixing $\tau_i$ and then we have free choice over the remaining $12$ transpositions. This is the same as the number of $2^{12}$ cycles. We can then divide by the total number of $\sigma_4$s which is just the number of $2^{13}$ cycles. This gives us
+\[
+	\mathbb{P}(E_i) = \frac{\text{\# of }2^{12}\text{ cycles}}{\text{\# of }2^{13}\text{ cycles}}
+\]
+In order to compute the number of such choices we need the following lemma
+\begin{lemma}
+	\label{lem:num_cycle_type}
+	The number of permutations in $S_n$ with cycle type $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ is
+	\[
+		\frac{n!}{\lambda_1^{m_1}\dots\lambda_k^{m_k}m_1!\dots m_k!}
+	\]
+\end{lemma}
+\begin{proof}
+	Given any list of $n$ numbers (of which there are $n!$)
+	\[
+		c_1\dots c_n
+	\]
+	We can produce a $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ cycle type permutation by simply placing parentheses on our list. First we place, $m_1$ sets of parentheses capturing $\lambda_1$ elements each, and then we continue on in this fashion until placing $m_k$ sets of parentheses around $\lambda_k$ elements each. Doing this construction will return a set of all permutations with $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ cycle type, but we have overcounted. First, any cycle $\lambda_i$ can be shifted by up to $\lambda_i$ places and still represent the same cycle (e.g., $(1\ 2\ 3)$, $(2\ 3\ 1)$, and $(3\ 1\ 2)$ are the same cycle). Given that these cycles are disjoint this represents $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ total shifts that we were initially counting as distinct but actually represent the same permutation. Second, the order in which the $m_i$ cycles of the same length appear does not matter. For each $i$, we have overcounted by a factor of $m_i!$ due to permuting these identical-length cycles. Considering both types of overcounting, we must divide our original set of $n!$ elements by our overcounts giving
+	\[
+		\frac{n!}{\lambda_1^{m_1}\dots\lambda_k^{m_k}m_1!\dots m_k!}
+	\]
+	total permutations as desired.
+\end{proof}
+\noindent Using this lemma, can now compute
+\begin{align*}
+	\mathbb{P}(E_i) & = \frac{\frac{24!}{2^{12}12!}}{\frac{26!}{2^{13}13!}} \\
+	                & =  \frac{2\cdot(13)!\cdot(24)!}{(12)!\cdot(26!)}
+\end{align*}
+We can write this as
+\[
+	\frac{2^1\cdot(13)!\cdot(26-2(1))!}{(13-1)!\cdot(26!)}
+\]
+which will be useful later when trying to determine a generatic formula.
+\\\\We now consider $\mathbb{P}(E_i\cap E_j)$, that is, the probability that $\sigma_4$ contains both transpositions $\tau_i$ and $\tau_j$. Similarly, we can imagine fixing $\tau_i$ and $\tau_j$ and then we have free choice over the remaining 11 transpositions. Following a similar argument as above we derive
+\begin{align*}
+	\mathbb{P}(E_i\cap E_j) & = \frac{\frac{22!}{2^{11}11!}}{\frac{26!}{2^{13}13!}} \\
+	                        & =  \frac{2^2\cdot(13)!\cdot(22)!}{(11)!\cdot(26!)}    \\
+	                        & = \frac{2^2\cdot(13)!\cdot(26-2(2))!}{(13-2)!(26!)}
+\end{align*}
+\noindent In general, we arrive at the formula for an arbitrary number of fixed transpositions $(\tau_{i_1}, \dots, \tau_{i_k})$ with $k \le 13$ as
+\begin{align*}
+	\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_k}) = \frac{2^k\cdot (13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}
+\end{align*}
+Then computing our original probability we have
+\begin{align*}
+	 & \sum_{1 \le i \le 13}\mathbb{P}(E_i) - \sum_{1\le i < j \le 13}\mathbb{P}(E_i\cap E_j) + \dots + \sum_{1\le i_1 < \dots <i_{13} \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_{13}}) \\
+	 & = \sum_{i=k}^{13}(-1)^{k+1}\biggl(\sum_{1\le i_1 < \dots < i_k \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_k})\biggr)                                                              \\
+	 & = \sum_{i=k}^{13}(-1)^{k+1}\biggl(\sum_{1\le i_1 < \dots < i_k \le 13}\frac{2^k\cdot (13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}\biggr)                                                 \\
+	 & = \sum_{i=k}^{13}(-1)^{k+1}{13\choose k}\frac{2^k\cdot (13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}                                                                                      \\
+	 & \approx 0.405
+\end{align*}
+\noindent Thus any given setting has a roughly $40.5\%$ chance of being able to have a female. Then the likelihood that $n$ Enigma machines with randomized settings all produce a female is
+\[
+	(0.405)^n
+\]
+Then this is also the probability that at a given location, there is a hole present in all $n$ sheets. Given that there are $26^2$ holes being examined, the expected number of holes peering through all $n$ sheets is
+\[
+	(0.405)^n\cdot(26^2)
+\]
+Ideally, we would like to reduce the possible settings down to just a single hole being examined, and thus we would need to find the number of sheets $n$ such that
+\[
+	(0.405)^n\cdot(26^2) = 1
+\]
+Solving this gives us that we need roughly $12-13$ sheets to produce a single surviving hole in our overlapped sheets. This means we need to find $12-13$ messages with indicators containing females.
 % chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://00-98032271.nhdwebcentral.org/26533132/uploaded/111befaaf868b478f1024c2cd45d003cdf7a.pdf %
 % \\\\The Bomba represented a move towards electromechanical
 % computation for cryptography. This invention (along with the

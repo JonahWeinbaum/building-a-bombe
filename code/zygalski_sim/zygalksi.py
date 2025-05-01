@@ -3,6 +3,7 @@ from enigma.machine import EnigmaMachine
 import itertools
 import numpy as np
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 DEBUG = False
 init()
 
@@ -68,8 +69,8 @@ def print_sheet_latex(sheet):
     rows, cols = sheet.shape
     rows = int(rows / 2)
     cols = int(cols / 2)
-    col_labels = (ALPHABET)[:cols]
-    row_labels = (ALPHABET)[:rows]
+    col_labels = ALPHABET[:cols]
+    row_labels = ALPHABET[:rows]
 
     output = []
 
@@ -87,6 +88,57 @@ def print_sheet_latex(sheet):
     output.append(r'\end{tabular}')
     
     print('\n'.join(output))
+
+def print_window_latex(sheet):
+    if isinstance(sheet, list):
+        sheet = np.array(sheet)
+
+    rows, cols = sheet.shape
+    rows = int(rows / 2)
+    cols = int(cols / 2)
+    col_labels = ALPHABET[::-1]
+    row_labels = ALPHABET[::-1]
+
+    output = []
+
+    # Begin LaTeX tabular
+    col_format = 'c|' + 'c' * cols
+    output.append(r'\begin{tabular}{' + col_format + '}')
+    
+    header = ' & ' + ' & '.join(r'\texttt{' + c + '}' for c in col_labels) + r' \\ \hline'
+    output.append(header)
+
+    for i in reversed(range(rows)):
+        row = [r'\texttt{' + row_labels[i] + '}'] + [format_cell(sheet[i, j]) for j in range(cols)]
+        output.append(' & '.join(row) + r' \\')
+
+    output.append(r'\end{tabular}')
+    
+    print('\n'.join(output))
+    
+def print_window(sheet):
+    if isinstance(sheet, list):
+        sheet = np.array(sheet)
+
+    rows, cols = sheet.shape
+    col_labels = ALPHABET[::-1]
+    row_labels = ALPHABET[::-1]
+
+    # Determine the top-right quadrant bounds
+    top_half = range(rows//2)
+    right_half = range(cols//2)
+
+    # Print column headers for the right half
+    header = "  " + " ".join(Fore.CYAN + col_labels[j] + Style.RESET_ALL for j in right_half)
+    
+    print(header)
+
+    for i in reversed(top_half):
+        label = Fore.MAGENTA + row_labels[i] + Style.RESET_ALL
+        row = " ".join(colorize_cell(sheet[i, j]) for j in right_half)
+        print(f"{label:>3} {row}")
+
+
 def print_sheet(sheet):
     if isinstance(sheet, list):
         sheet = np.array(sheet)
@@ -176,24 +228,24 @@ class ZyglaskiSheets:
     def __init__(self):
         size = len(ALPHABET)
         self.sheet = np.ones((size*2, size*2), dtype=int)
-        self.zzz_pos = (0,0)
+        self.aaa_pos = (25, 25)
 
     def next(self, indicator):
         new_sheet = SHEETS[indicator[0]].copy()
-        new_zzz = (ord(indicator[1]) - ord('A'), ord(indicator[2]) - ord('A'))
-        zzz_shift = (self.zzz_pos[0] - new_zzz[0], self.zzz_pos[1] - new_zzz[1])
-        new_sheet_shifted = shift_sheet(new_sheet, zzz_shift)
+        new_aaa = (ord(indicator[1]) - ord('A'), ord(indicator[2]) - ord('A'))
+        aaa_shift = (self.aaa_pos[0] - new_aaa[0]-26, self.aaa_pos[1] - new_aaa[1]-26)
+        new_sheet_shifted = shift_sheet(new_sheet, aaa_shift)
         old_sheet = self.sheet.copy()
         self.sheet = and_sheets(old_sheet, new_sheet_shifted)
 
-print_sheet_latex(SHEETS['B'])
-# for i in range(26):
-#     if (chr(-i%26 + ord('A'))) == 'D':
-#         zs = ZyglaskiSheets()
-#         trigrams = ["BWY", "AFQ", "LZX", "MHX", "RHT", "NSY", "QBW", "SBW", "VFS", "WFW", "YKW"]
-# #        trigrams  = ["PTJ", "BSU", "EON", "XLV", "CEH", "BWY", "AGY", "KGS", "XET", "CWI", "CEH", "BUG"]
-#         for tg in trigrams:
-#             tg = chr(ord('A') + (ord(tg[0])-ord('A')+i) % 26) + tg[1:]
-
-#             zs.next(tg)
-#         print_sheet(zs.sheet)
+#print_sheet_latex(SHEETS['B'])
+for i in range(26):
+    if (chr(-i%26 + ord('A'))) == 'D':
+        zs = ZyglaskiSheets()
+        trigrams = ["BWY", "AFQ", "LZX", "MHX", "RHT", "NSY", "QBW", "SBW", "VFS", "WFW", "YKW"]
+#        trigrams  = ["PTJ", "BSU", "EON", "XLV", "CEH", "BWY", "AGY", "KGS", "XET", "CWI", "CEH", "BUG"]
+        for tg in trigrams:
+           
+            tg = chr(ord('A') + (ord(tg[0])-ord('A')+i) % 26) + tg[1:]
+            zs.next(tg)
+        print_window_latex(zs.sheet)

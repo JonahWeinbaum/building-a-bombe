@@ -274,7 +274,7 @@ Enigma machine has moved while enciphering this message.
 % and 11, from our initial position, then inputting $\texttt{A}$ on the first
 % machine would result in an ouput of $\texttt{A}$ on the
 % third machine.
-Thus, $\sigma_1$, $\sigma_7$, and $\sigma_11$ form a loop starting at \texttt{A}. We visualize this loop as follows
+Thus, $\sigma_1$, $\sigma_7$, and $\sigma_{11}$ form a loop starting at \texttt{A}. We visualize this loop as follows
 \begin{center}
 	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
 					circle, minimum height=0.1cm, minimum width=0.1cm}]
@@ -421,12 +421,11 @@ position until we have no contradictory results from our hypothesis.
 
 In the section, we outline the construction of a rudementary Bombe.
 Our goal is to construct a machine using the above insight to quickly
-elimate a rotor position based on contradictory hypotheses. We must shift from the above mathematical construction to an
-% electromechanical one. We imagine the Enigma machine as black-box that takes in cables encoding, via current, each of the 4 letters, and outputs
+elimate a rotor position based on contradictory hypotheses. We must shift from the above mathematical construction to an electromechanical one. %We imagine the Enigma machine as black-box that takes in cables encoding, via current, each of the 4 letters, and outputs
 % currents on the corresponding letter after applying the Enigma permutation.
 Imagine the following set of wires encoding a possible Enigma
 permutation we will denoted $\overline\pi_i$ (the bar
-indicates we are not yet considering the plugboard). Further we will consider such Enigma permutations as being derived from rotors with an assumed ring setting of \texttt{ZZZ} and that the window setting at the beginning of our plaintext-ciphertext pairing is also \texttt{ZZZ}.
+indicates we are not yet considering the plugboard).
 
 \tikzset{big box/.style={draw, minimum width=5cm, minimum height=4cm},
 	small box/.style={draw, minimum width=1cm, minimum height=1cm}}
@@ -507,7 +506,7 @@ Suppose we had plaintext-ciphertext pairing
 		\draw[<->, bend right=45] (C) to node[midway, draw=none, above] {3} (A);
 	\end{tikzpicture}
 \end{center}
-We can then think of this loop as a series of Enigma permutations
+We can then think of this loop as a series of three Enigma permutations. We assume the message began with window setting \texttt{ZZZ}. We will hypothesize some rotor ordering and we will further assume a ring setting of \texttt{ZZZ}. Thus the first machine will be set to a window setting \texttt{ZZZ}, the second set to \texttt{ZZA}, and the third set to \texttt{ZZB}. Note that this is assuming no turnover occured during our enciphering of the plaintext -- a caveat we will later address. We can connect these Enigma machines as follows
 \begin{center}
 	\begin{tikzpicture}[thick, scale=0.6, every node/.style={scale=0.7}]
 		% Draw the box
@@ -1254,13 +1253,17 @@ this would be analogous to testing a steckering hypothesis (any
 hypothesis) and finding that the entire cable becomes live. Then all
 elements lie within the same cycle of $\overline\pi$ and thus all
 steckering possibilities are immediately eliminated.
-\\\\We can also near instantaneously determine which arrangements to
-eliminate with spider-scanning. When an arrangement is such that it
+\\\\The Bombe is designed to quickly move through all $26^3$ possible window settings while maintaining the same relative distances between each Enigma permutation in our loop. At each configuration
+it applies current to test our steckering hypothesis and, only when an arrangement is such that it
 cannot be eliminated and further examination is needed, we will cause
 the machine to stop.
+
+\subsubsection{Scramblers}
+Thus far we have described the Bombe as connecting Enigma machines. In reality, the Bombe used a set of rotors known as {\bf{drums}} mimicking the effect of each Enigma rotor. Thus three drums together produced the effect of an entire Enigma permutation. Such a set of drums was called a {\bf{Letchworth scrambler}} which effectively mimicked the function of the Enigma machine but was double-ended meaning current could be applied in either direction to achieve our Enigma permutation.
+
 \subsection{Stopping Mechanism}
-To see how this is done, we will illustrate how we can detect
-when a line say \texttt{Ab} is no longer live. We can place a differential
+The Bombe would stop when it detected
+any line (say \texttt{Ab}) is no longer live. To do this, we can place a differential
 relay such that it only engages when a current difference is present
 between \texttt{Ab} and some constant power supply line. Then, when current stops
 flowing through \texttt{Ab}, the relay will trigger. We can then wire the
@@ -1291,8 +1294,6 @@ Since permutations in the same conjugacy class must have the same
 cycle type, it follows that no matter where in the loop we place our
 detector, if all wires become live on one cable they will become live on all cables. Thus, we can place our detector anywhere.
 
-\subsection{Multiple Plaintext-Ciphertext Pairings}
-In its full form the Bombe was constructed with three rows each equipped with 12 Enigma rotors\footnote{Special rotors were designed for the Bombe called {\bf{Letchworth scramblers}} that allowed for rotors to send input and outputs on the same side. }. Each row could encode a seperate plaintext-pairing simultaneously thus increasing the number of electrical connections resulting in a higher likelihood that all wires become live and thus fewer detected stops.
 
 \subsection{Multiple Loops}
 In our example we provided only a single loop encoded in the plaintext-ciphertext pairing. In practice, multiple loops could exist within such a pairing and we can electrically connect all loops together within a row on the Bombe to produce a single circuit. For instance we might have a plaintext-ciphertext pairing as follows
@@ -1513,14 +1514,14 @@ With our diagram format this could look as follows
 	\caption{Multiple loops in the Bombe}
 	\label{fig:multiloops}
 \end{figure}
-\noindent Again, this increased electrical connections resulting in fewer stops. We will return in the next chapter to the effect that multiple loops has on the number of stops.
+\noindent This increased electrical connections resulting in fewer stops. We will return in the next chapter to the effect that multiple loops has on the number of stops.
 
 \subsection{Indicator Drums and Ring Setting}
-The Bombe is set up with a series of drums
+The Bombe is set up with up to $12$ scramblers
 \begin{center}
 	$R_{x_1, y_1, z_1},\dots, R_{x_k, y_k, z_k}$
 \end{center}
-intended to encode the various positions of our Enigma machine while enciphering our plaintext-ciphertext pairing. We will assume that the initial setting while encoding the message was \texttt{ZZZ}. It will run through all $26^3$ positions of the Enigma machine until it finds a stop. Suppose that at a stop the drums have positions
+intended to encode the various positions of our Enigma machine while enciphering our plaintext-ciphertext pairing. We assume that the initial setting while encoding the message was \texttt{ZZZ}. It will run through all $26^3$ positions of the Enigma machine until it finds a stop. Suppose that at a stop the drums have positions
 \begin{center}
 	$R_{a_1, b_1, c_1},\dots, R_{a_k, b_k, c_k}$.
 \end{center}
@@ -1541,10 +1542,11 @@ since the \texttt{Z}s cancel out. Then we must move our assumed ring setting of 
 \begin{align*}
 	(\texttt{26} - (a_1-x_1)\text{ mod }26, \texttt{26} - (b_1-y_1)\text{ mod }26, \texttt{26} - (c_1-z_1)\text{ mod }26).
 \end{align*}
-Notice that $(a_1-x_1, b_1-y_1, c_1-z_1)$ is just the number of steps our machine has made since it started. So, to get the ring position corresponding to the start of our plaintext-ciphertext pairing we just subtract the number of steps each rotor has made from our assumed ring position (\texttt{26},\texttt{26}, \texttt{26}). Rather than doing all this math, the Bombe was equipped with an additional {\bf{indicator drum}} which began with labels \texttt{ZZZ} and for each step the machine moved \emph{forward}, it moved the indicator drum \emph{backward}. This means that when the machine stopped, the indicator drum would immediately tell us the ring setting which corresponded to our plaintext-ciphertext pairing. Then, with this ring setting, setting our machine to the window setting \texttt{ZZZ} would produce our expected plaintext-ciphertext pairing.\footnote{The actual rotors used in the Bombe scramblers were incorrect and did not match the true Enigma rotors by varying degrees of rotation depending on the rotor in question. This meant operators did not set their window settings to \texttt{ZZZ} but rather some small offset depending on which rotors were included. This meant if we used rotors (\texttt{II}, \texttt{V}, \texttt{III}) our window setting would be \texttt{YWY}}.
+Notice that $(a_1-x_1, b_1-y_1, c_1-z_1)$ is just the number of steps our machine has made since it started. So, to get the ring position corresponding to the start of our plaintext-ciphertext pairing we just subtract the number of steps each rotor has made from our assumed ring position (\texttt{26},\texttt{26}, \texttt{26}). Rather than doing all this math, the Bombe was equipped with an additional set of {\bf{indicator drums}} which began with labels \texttt{ZZZ} and for each step the machine moved \emph{forward}, it moved the indicator drum \emph{backward}. This means that when the machine stopped, the indicator drums would immediately tell us the ring setting which corresponded to our plaintext-ciphertext pairing. Then, with this ring setting, setting our machine to the window setting \texttt{ZZZ} would produce our expected plaintext-ciphertext pairing\footnote{The actual rotors used in the Bombe scramblers were incorrect and did not match the true Enigma rotors by varying degrees of rotation depending on the rotor in question. This meant operators did not set their window settings to \texttt{ZZZ} but rather some small offset depending on which rotors were included. This meant if we used rotors (\texttt{II}, \texttt{V}, \texttt{III}) our window setting would be \texttt{YWY}}.
+
 
 \subsection{Recovering the Plugboard}
-We now have a ring setting and window setting pair that should produce our plaintext-ciphertext pair, though, we have yet to deduce the plugboard setting. However, the genius of the Bombe is that much of the deduction required to workout the plugboard setting has been done for us. Consider a possible stop of the Bombe
+Given a stop, we now know that for our hypothesized rotor order, a window setting of \texttt{ZZZ}, and ring setting given by the indicator drums we should be able to produce our plaintext-ciphertext pair. However, we have yet to deduce the plugboard setting. The genius of the Bombe is that much of the deduction required to workout the plugboard setting has been done for us. Consider a possible stop of the Bombe
 \begin{center}
 	\begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
 		% Draw the box
@@ -1648,11 +1650,18 @@ Then to determine what letter is steckered to \texttt{B}, the wren only needs to
 
 \subsubsection{Invalid Stops}
 If at this stage we find that a deduced plugboard setting contradicts an earlier plugboard setting we discovered, this means that the point at which the Bombe stopped is incorrect! Recall that the Bombe stops when there are no logical contradictions gleamed from its setup and the information in the loop -- this does not mean no logical contradictions exist. Further, even if no logical contradictions existed that does not mean this is the only such setting which would be logically consistent with our plaintext (though this is certainly less likely). The use of the Bombe is thus a trial-and-error procedure. We run the machine until we find a candidate stop, then we check for possible further logical contradictions, and if such contradictions are found we continue from where we left off. Many additions we discuss later in this chapter are designed with the sole purpose of reducing the number of stops we need to check down to a tractable number.
-\\\\If we find our stop has valid plugboard settings, we can recover any remaining settings is quite easily. We can attempt to decrypt our ciphertext with our window setting of \texttt{ZZZ}, our ring setting given by the indicator drum, and our plguboard settings we discovered from the stop. If we find that there are letters which do not match our expected plaintext we can deduce what plugboard settings need to be added to switch out incorrect letters with their correct plaintext letters. In this way we can recover the entirety of the plugboard settings.
+\\\\If we find our stop has valid plugboard settings, we can recover any remaining settings is quite easily. We can attempt to decrypt our ciphertext with our window setting of \texttt{ZZZ}, our ring setting given by the indicator drums, and our plguboard settings we discovered from the stop. If we find that there are letters which do not match our expected plaintext we can deduce what plugboard settings need to be added to switch out incorrect letters with their correct plaintext letters. In this way we can recover the entirety of the plugboard settings.
 \subsection{Recovering the Ring Settings}
-By this point we know that for a window setting of \texttt{ZZZ}, a ring setting given by the indicator drum, and a plugboard setting deduced from the state of a stop as well as additional logical induction, we can produce the desired ciphertext-plaintext pairing. However, this does not mean the ring setting that we have is the true ring setting. We assumed that turnover did not occur during our crib so in this case we can adjust our window setting and ring setting arbitrarily (so long as we keep their relative distances the same). Of course, eventually turnover will occur, at which point the discrepancy between our ring setting and the true ring setting will become apparent.
+By this point we know that for our hypothesized rotor ordering, a window setting of \texttt{ZZZ}, a ring setting given by the indicator drums, and a plugboard setting deduced from the state of the stop as well as additional logical induction, we can produce the desired ciphertext-plaintext pairing. However, this does not mean the ring setting that we have is the true ring setting. We assumed that turnover did not occur during our crib so in this case we can adjust our window setting and ring setting arbitrarily (so long as we keep their relative distances the same). Of course, eventually turnover will occur, at which point the discrepancy between our ring setting and the true ring setting will become apparent.
 \\\\We will first illustrate how to recover the true ring setting of the rightmost rotor. We begin by setting our Enigma as previously described and inputting the ciphertext. This should produce our expected plaintext. As we keep inputting ciphertext beyond our known plaintext we will recover additional plaintext in the message. Eventually, turnover will occur and we will begin deciphering gibberish since our ring setting is not the true ring setting. To account for this, we can move our ring setting forward by one step (which means we must also move our window setting forward by one to maintain our permutation) and we can perform the same procedure, investigating if we get gibberish. Eventually, we will have arrived at the true ring setting and our deciphering will begin producing additional plaintext.
-\\\\To recover the ring setting of the other two rotors we employ the same procedure though it requires a great deal of ciphertext as turnover becomes less and less frequent as we consider the middle and leftmost rotor respectively. In doing this, we have now managed to recover all of the relevant settings of the daily key.
+\\\\To recover the ring setting of the other two rotors we employ the same procedure though it requires a great deal of ciphertext as turnover becomes less and less frequent as we consider the middle and leftmost rotor respectively.
+
+\subsection{Recovering the Rotor Order}
+In its full form the Bombe was constructed with $3$ rows each equipped with 12 scramblers. For a single plaintext-ciphertext pairing we could test multiple rotor orders simultaneously. If our plaintext-ciphertext pairing is shorter than $12$ characters we could test $3$ rotor orders concurrently. If it is longer then we may need to split it into two separate pairings spread across multiple rows meaning that we may only test $1$ or $2$ rotor orders. Further, over the course of the war many Bombes were produced. This meant that it was feasible to test all $60$ rotor orderings against our plaintext-ciphertext pairing to see which orderings generated valid stops, thus allowing us to deduce the correct rotor order. In doing this, we have now managed to recover all of the relevant settings of the daily key.
+
+\subsection{Turnover}
+Recall that when we initially set up our Bombe, we set each scrambler to correspond to a location in our plaintext -- the first location being $\texttt{ZZZ}$, the second being \texttt{ZZA}, and so on. As mentioned previously, the assumption that only the righthand rotor advanced in our window setting while enciphering the plaintext is only true if no turnover occurs. If turnover occured during the message encipherment, our machine will not produce correct stops.
+\\\\To account for this we will split up our message into multiple parts. Consider a plaintext-ciphertext pairing that is $26$ characters long. We are guaranteed to have a turnover of the middle rotor during the encipherment of this message. However, we know that the turnover must have occured in either the first half or the second half of the message. Thus, one half of the message assuredly had no turnover during its encipherment. This means that if we split our message into two $13$ character plaintext-ciphertext pairings, at least one of these will produce valid stops which will ultimately guide us to our daily key. In general, as long as our message is shorter than $26$ characters we can split the message into components such that one component is guaranteed to not have turnover. If the message is longer than $26$ characters there could be $2$ or more turnovers during encipherment meaning that splitting the text in this way would no longer guarantee valid stops but, as we will see in our analysis in the next chapter, a plaintext-ciphertext pairing of length $26$ is more than sufficient to produce a small number of stops so this does not present an issue.
 \subsection{Cribs and Menus}
 
 % \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 120}}
@@ -1764,7 +1773,7 @@ We can see that at offsets $0-3$ we have coincidences between the plaintext and 
 	\caption{Example menu}
 	\label{fig:menu}
 \end{figure}
-\noindent Upon looking at this menu one might ask the question of why we include conntextions like the one between \texttt{X} and \texttt{H} if they are not included in any loop? From our earlier machine description its clear that such connection will never electrify additional wires. That is, they will only permute the incoming electrified wires but never increasing the quantity of electrified wires since there is no feedback. Thus they add no additional value save for perhaps slightly more plugboard information. However, an addition to the machine made by Gordon Welchman made use of such connections and produced more electrified wires even within the loops themselves, thus reducing the total number of stops needing to be checked.
+\noindent Upon looking at this menu one might ask the question of why we include connections like the one between \texttt{X} and \texttt{H} if they are not included in any loop? From our earlier machine description its clear that such connection will never electrify additional wires. That is, they will only permute the incoming electrified wires but never increasing the quantity of electrified wires since there is no feedback. Thus they add no additional value save for perhaps slightly more plugboard information. However, an addition to the machine made by Gordon Welchman made use of such connections and produced more electrified wires even within the loops themselves, thus reducing the total number of stops needing to be checked.
 % the Eniga machine is
 % a series of 13 disjoint transpositions. Mathematically, this is
 % because at each stage the permutation formed by the machine is just a
@@ -1876,8 +1885,9 @@ Recall that a wire \texttt{Xy} becoming electrified is consistent with the deduc
 	\caption{Diagonal wires}
 	\label{fig:diagonal}
 \end{figure}
-\noindent This significantly increases the number of connections, adding $\frac{k(k-1)}{2}$ new wires where $k$ is the number of Enigma machines in the loop. Adding more connections increases electrical connectivity thus reducing the number of stops. In fact, prior to the use of the diagonal board, often $3$ loops needed to be present in the crib to have a tractable number of stops. With the addition of the diagonal board this could be significantly reduced and made the use of the Bombe practical.
-\\\\For instance, in our example from figure~\ref{fig:diagonal}, without the diagonal such a state would produce a stop with hypothesis $S(\texttt{A}) = \texttt{D}$. However, adding the diagonal wires would cause all wires to have current flowing through them -- meaning that our original stop must have been a false one, only reveal by the addition of new, consistent deductions which ruled out all possible plugboard settings.
+\noindent This significantly increases the number of connections, adding $\frac{k(k-1)}{2}$ new wires where $k$ is the number of scramblers in the loop. Adding more connections increases electrical connectivity thus reducing the number of stops. In fact, prior to the use of the diagonal board, often $3$ loops needed to be present in the crib to have a tractable number of stops. With the addition of the diagonal board this could be significantly reduced and made the use of the Bombe practical.
+\\\\For instance, in our example from figure~\ref{fig:diagonal}, without the diagonal such a state would produce a stop with hypothesis $S(\texttt{A}) = \texttt{D}$. However, adding the diagonal wires would cause all wires to have current flowing through them -- meaning that our original stop must have been a false one, only revealed by the addition of new, consistent deductions which ruled out all possible plugboard settings.
+\\\\This also meant that connections in our menu not included in a loop, such as the connection in \ref{fig:menu} between \texttt{X} and \texttt{H}, could now produce feedback within our loops through the diagonal board connections. This made such connections valuable additions to a menu.
 \subsection{The Machine Gun}
 Even with the Bombe and the diagonal board we still have more deductions that can be made to rule out certain settings. Consider our first stop we examined from figure~\ref{fig:correct_stecker}.
 \begin{center}

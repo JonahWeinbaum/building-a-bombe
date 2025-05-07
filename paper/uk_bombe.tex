@@ -5,7 +5,7 @@
 In the previous chapters, we have seen complicated manual cryptographic techniques give rise to a set of electromechanical tools meant to make such work tractable over short time periods. Changes to the Enigma protocol would soon necessitate the construction of one of the largest such electromechanical devices to date, known as the {\bf{Bombe}}.
 
 \subsection{Changes to the Enigma Protocol}
-Recall that during the use of the Polish Bomba, operators were instructed to send their window setting (\emph{Grundstellung}) in plaintext, and then use this to doubly encode their message key (\emph{Spruchschlüssel}). Starting in 1940, a small but impactful change was made to the Enigma encryption protocol -- operators were instructed to send their encoded message key only once.
+Recall that during the use of the Polish Bomba, operators were instructed to send their window setting (\emph{Grundstellung}) in plaintext, and then use this to doubly encode their message key (\emph{Spruchschlüssel}). Starting in 1940, a small but impactful change was made to the Enigma encryption protocol for the Army and Air Force -- operators were instructed to send their encoded message key only once.
 \\\\The Polish Bomba relied on relationships between the doubly encoded message key to function, without such relationships all the previously mentioned tools became useless. World War II had begun and the need for intelligence material was greater than ever. Thus, British intelligence brought a group of crypt-analysts, mathematicians, historians, linguists, and more, to Bletchley Park to engage in a large-scale attempt to break the Enigma machine with this new protocol.
 \\\\No name is more well known from this operation than that of Alan Turing, whose work went on to become the foundations of modern computer science. Turing needed to find a new means of attacking the Enigma encryption that could no longer rely on the doubly enciphered message key. Consider that the reliance on the doubly enciphered message key was really just a reliance on the knowledge that two letters encoded the same plaintext at specific intervals of distance. Thus, Turing began engineering a method of deducing daily keys via a known plaintext attack.
 
@@ -202,9 +202,14 @@ Recall that during the use of the Polish Bomba, operators were instructed to sen
 %     eliminated any possibilities.
 % \end{enumerate}
 
+% https://archive.org/details/enigmabattleforc0000seba/page/82/mode/2up?q=herivel %
+\subsection{Herivel Tip}
+While Turing was developing his plaintext attack that ultimately culminated in the creation of the Bombe, there was a period of time that some have called a "blackout" in which little to no Enigma messages could be deciphered. During this time, Bletchley Park cryptanalyst John Herivel had a simple idea. When operators set their ring settings as described by the key sheet they would place their wheels in the machine in the order described, and they would then turn the outer ring on each wheel so that the corresponding ring setting letter was at the top of the wheel. If the operator was particularly lazy, this was \emph{all} they did, or if they were only slightly lazy, they may turn the wheels a couple turns forward or back. Regardless, this meant that many operators began enciphering their messages with a window setting that was nearly identical to the ring setting. Thus, by looking at several operators first messages of the day, we would see several cluster around a particular setting that is likely to be the ring setting. Such an insight became known as the {\bf{Herevil tip}}.
+\\\\With the Herevil tip, we could determine a likely ring setting. Then by either brute force or use of the clock method, we could determine the rotor order. Then finally, as we did to recover the plugboard from the Bomba in section~\ref{bomba_plugboard}, we could even recover the plugboard settings. Thus, purely by virtue of operator error, we could recover the entire daily key.
+\\\\Ultimatley this only helped them to decipher messages within a particular network of operators known as the "Red network". However, as we will later see, access to a set of plaintext from messages will become a vital component of our plaintext attack.
 \section{Plaintext Attack}
 
-Suppose we knew the plain-text which had been enciphered into a
+Suppose we knew the plaintext which had been enciphered into a
 particular Enigma transmission.
 Consider the following mapping,
 \begin{center}
@@ -1980,3 +1985,198 @@ Even with the Bombe and the diagonal board we still have more deductions that ca
 This stop may seem to imply we found no logical inconsitencies in our deductions stemming from the hypothesis that $S(\texttt{A}) = \texttt{D}$. However, when a wren goes to check the settings found, they will discover that this setting produces a contradictory plugboard setting of $S(\texttt{A}) = \texttt{C}$ -- thus ruling out this stop. Is there a means by which we could have detected this without having to manually work it out on a checking machine?
 \\\\Recall that before we introduced the checking machine, we noted that the plugboard settings we would deduce from the checking machine were implictly encoded in the internal state of the wires of the machine. In particular since wire $\texttt{Ca}$ was active, we could have immediately deduced that $S(\texttt{A})= \texttt{C}$ without having to employ a checking machine. However, these wires states are not easy for a human to read and would require complex manual analysis of the underlying cables. Instead, a device called the {\bf{machine gun}} was developed which examined the state of the diagonal board at a given stop to determine if logical contradictions were present among the deduced plugboard settings. When a stop occured, the machine gun would be brought in. The device then used a series of uniselectors to quickly switch through the diagonal board contacts to search for a pair of deduced steckerings that had a common letter (thus producing a logical contradiction). The machine got its name from the sudden loud burst of sound produced when the uniselectors ran through the diagonal board.
 \\\\Even with such a device many stops still needed to be checked by the wrens since the machine gun only detected logical inconsistencies in regards to plugboard setting overlap and thus still produced false stops.
+
+\section{Banburismus}
+Early in this chapter we discussed the changes made to the Enigma protocol that necessitated the use of the Bombe. The changes discussed applied only to the Army and Air Force. The Navy, on the other hand, had a completely different set of changes that required additional insight to allow us to make use of our Bombe on such naval messages.
+
+\subsection{The Naval Enigma}
+The German Navy used completely different Enigma models including \texttt{M1}, \texttt{M2}, \texttt{M3}, and ultimately \texttt{M4}, the last of which actually allowed for the use of four rotors. The first three models are compatible with the Enigma model \texttt{I} that we have been discussing so we will not be examining the differences between these machines in this paper. Further, the \texttt{M4}'s additional rotor presented additional cryptographic challenges to cryptanalysts but the underlying theory described above is the same.
+%https://cryptomuseum.com/crypto/enigma/m3/index.htm%
+\\\\The most important difference of the Naval Enigma was the addition of three rotors (rotors \texttt{VI}, \texttt{VII}, and \texttt{VIII}). These rotors were exclusively used by the German Navy and they functioned differently than the afformentioned rotors \texttt{I}-\texttt{V}. In particular, these new rotors had $2$ turnover notches, increasing the rate of middle wheel and left wheel turnover. In theory, these new rotors increased the total rotor ordering possibilities to $336$, but the naval operating procedure specified that one of the three rotors in a key sheet \emph{must} be a naval rotor reducing our rotor ordering space to only $90$.
+\\\\The theory underlying the Bombe still allows for the naval Enigma to be broken, but the additional rotors meant that the workload required to break such machines was vastly increased. Further, the additional turnover meant that cribs from naval transmissions no longer eliminated turnover by splitting the crib into two pieces. If instead we knew the rotor ordering, we could quickly determine cribs that ignored turnover and the amount of time we needed to use the Bombe would be vastly decreased. The method by which cryptographers were able to reduce the possible rotor orderings to a set of only a few possibilities became known as {\bf{Banburismus}} and took inspiration from clock method described in section~\ref{clock_method}. To understand Banburismus we must first understand the procedure by which naval Enigmas sent messages.
+\subsection{The Naval Enigma Protocol}
+Unlike Army and Air Force key sheets, which by this point had stopped including the window setting (\emph{Grundstellung}) in their daily key, the Navy maintained this parameter of their daily key.
+\\\\The naval operators were provided a large book of trigrams via a {\bf{{K-Book}}} (\emph{K-Buch}) as well as a large mapping from bigrams to other bigrams known as a {\bf{bigram table}}. We will not discuss the exact details of choosing trigrams since they are not of cryptogrpahic importance, but suffice it to say that the operator chose two trigrams from the K-Book (e.g. \texttt{CAC} and \texttt{ABB}) and arranged them in two rows as follows
+\begin{align*}
+	 & \texttt{.CAC} \\
+	 & \texttt{ABB.}
+\end{align*}
+The operator then chose two random letters (e.g. \texttt{B} and \texttt{B}) and filled in the remaining slots
+\begin{align*}
+	 & \texttt{BCAC} \\
+	 & \texttt{ABBB}
+\end{align*}
+Each vertical bigram would then be converted via the bigram table to a new bigram. That is
+\begin{align*}
+	 & \texttt{BA} \mapsto \texttt{CC} \\
+	 & \texttt{CB} \mapsto \texttt{AA} \\
+	 & \texttt{AB} \mapsto \texttt{BC} \\
+	 & \texttt{CB} \mapsto \texttt{AA}
+\end{align*}
+And these new bigrams were then arranged into tetragrams which in our example produces \texttt{CCAA BCAA}. These two teragrams were then sent in plaintext at the start of our message. To actually encipher their message, the operator set their machine to the window setting specified by the key sheet and enciphered their second chosen trigram (i.e. \texttt{ABB} to get their message key. We will call the message key prior to being enciphered the {\bf{pre-message key}} (in our case \texttt{ABB}). They then set their window setting to the message key and began enciphering their message.
+\\\\The long short of this procedure is that if we have a copy of the bigram tables, we can work backwards to figure out the pre-message key for any naval message. This puts us in a very similar position to the one Rejewski was in when he was able to deduce message keys but knew nothing else about the machine settings.
+\\\\TALK ABOUT GETTING THE BIGRAM TABLES
+\\\\With the bigram tables in hand, we can assume that for any naval message we are able to deduce its pre-message key. With this assumption we will now employ statistical analysis to determine which rotors were more likely used in the daily key for a particular day.
+
+\subsection{Repeats}
+Suppose we find the following two naval Enigma messages
+\[
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{Pre-Message Key} & \texttt{Message}                \\
+		\hline
+		\texttt{VFG}             & \texttt{GXCYBGDSLVWBDJLKWIP...} \\
+		\texttt{VFX}             & \texttt{YNSCFCCPVIPEMSGIZWF...} \\
+	\end{array}
+\]
+We know that after enciphering our pre-message key we will get our actual message key. Both \texttt{VFG} and \texttt{VFX} will be enciphered with the same settings (say $\sigma_i$) so we know that they will be converted to
+\begin{align*}
+	\texttt{VFG} & \mapsto \sigma_1(V)\sigma_2(F)\sigma_3(G) \\
+	\texttt{VFX} & \mapsto \sigma_1(V)\sigma_2(F)\sigma_3(X) \\
+\end{align*}
+Given that both message keys begin with the letters $\sigma_1(V)\sigma_2(F)$, we know that they only differ by some unknown amount in their rightmost letter. Our first goal will be to determine the distance between $\sigma_3(G)$ and $\sigma_3(X)$. Note that we know such a distance ranges between $-25$ and $25$ and we need not consider a distance of $0$ as this would imply the pre-message keys are the same.
+\\\\Recall our discussion from section~\ref{ioc} regarding the index of coincidence. We know that when two texts represent the same polyalphabet cipher the observed distribution of coincidences (Bletchley Park called these {\bf{repeats}}) should be much higher than two texts representing random text. Consider aligning our two texts with an offset of $+11$ letters, that is, the hypothesis that $\sigma_3(\texttt{G}) = \sigma_3(\texttt{X}) + 11$
+\begin{center}
+	\scalebox{0.8}{
+		\begin{minipage}{\linewidth}
+			\begin{align*}
+				\texttt{...........GXCYBGDS}{\dunderline{2pt}{\texttt{L}}}\texttt{VWBDJLKWIPEHVYGQZWDTHR}{\dunderline{2pt}{\texttt{Q}}}\texttt{XIKEESQSSPZXARIXEAB}{\dunderline{2pt}{\texttt{Q}}}\texttt{IRUCKHGWUEBPF} & \\
+				\texttt{YNSCFCCPVIPEMSGIZWF}{\dunderline{2pt}{\texttt{L}}}\texttt{HESCIYSPVRXMCFQAXVXDVU}{\dunderline{2pt}{\texttt{Q}}}\texttt{ILBJUABNLKMKDJMENUN}{\dunderline{2pt}{\texttt{Q}}}\texttt{.............} &
+			\end{align*}
+		\end{minipage}}
+\end{center}
+In this case we find $3$ repeats when considering an overlap of length $54$, this repeat structure was denoted as $3/54$.
+\\\\For an offset of $-9$ we have
+\begin{center}
+	\scalebox{0.8}{
+		\begin{minipage}{\linewidth}
+			\begin{align*}
+				\texttt{GXCYBGDSLVWBDJLKWIPEHVY}{\dunderline{2pt}{\texttt{G}}}\texttt{Q}{\dunderline{2pt}{\texttt{Z}}}\texttt{}{\dunderline{2pt}{\texttt{W}}}\texttt{DT}{\dunderline{2pt}{\texttt{H}}}\texttt{RQX}{\dunderline{2pt}{\texttt{I}}}\texttt{KEESQSSPZX}{\dunderline{2pt}{\texttt{A}}}\texttt{RI}{\dunderline{2pt}{\texttt{X}}}\texttt{EAB}{\dunderline{2pt}{\texttt{Q}}}\texttt{}{\dunderline{2pt}{\texttt{I}}}\texttt{RUCKHGWUEBPF.......} & \\
+				\texttt{.........YNSCFCCPVIPEMS}{\dunderline{2pt}{\texttt{G}}}\texttt{I}{\dunderline{2pt}{\texttt{Z}}}\texttt{}{\dunderline{2pt}{\texttt{W}}}\texttt{FL}{\dunderline{2pt}{\texttt{H}}}\texttt{ESC}{\dunderline{2pt}{\texttt{I}}}\texttt{YSPVRXMCFQ}{\dunderline{2pt}{\texttt{A}}}\texttt{XV}{\dunderline{2pt}{\texttt{X}}}\texttt{DVU}{\dunderline{2pt}{\texttt{Q}}}\texttt{}{\dunderline{2pt}{\texttt{I}}}\texttt{LBJUABNLKMKDJMENUNQ} &
+			\end{align*}
+		\end{minipage}}
+\end{center}
+In this case we find $9$ repeats when considering an overlap of $56$ characters, but we additionally found two bigrams (\texttt{ZW} and \texttt{QI}) which were repeated. As bigrams are much more common in languages than random text, a point we will later discuss, we must factor this into our analysis. Thus we denote the repeat structure at this offset as $9^{\texttt{xx}}/56$, where each $\texttt{x}$ denotes a bigram.\\\\For any other $n$-gram repeat, we will use the $n$ in the exponent. For example, when considering $3$ repeats in $57$ letters, where we note that there is a trigram repeated we would denote this repeat structure as $3^{3}/57$. This is actually the case when examining our messages at an offset of $-8$.
+\\\\Examining offsets from $-9$ to $+9$\footnote{In practice all offsets from $-25$ to $+25$ would be computed but the table has been shorted for brevity} we get the following chart of repeat structures
+\begin{center}\scalebox{0.8}{
+		\begin{minipage}{\linewidth}
+			\begin{table}[H]
+				\centering
+				\small
+				\begin{tabular}{|l|l|}
+					\hline
+					\textbf{Offset}               & \textbf{Repeat Structure} \\
+					\hline
+					\texttt{VFG} = \texttt{VFX}-9 & $9^\texttt{xx}/56$        \\
+					\texttt{VFG} = \texttt{VFX}-8 & $3^3$/57                  \\
+					\texttt{VFG} = \texttt{VFX}-7 & 2/58                      \\
+					\texttt{VFG} = \texttt{VFX}-6 & 0/69                      \\
+					\texttt{VFG} = \texttt{VFX}-5 & 3/60                      \\
+					\texttt{VFG} = \texttt{VFX}-4 & 2/61                      \\
+					\texttt{VFG} = \texttt{VFX}-3 & 3/62                      \\
+					\texttt{VFG} = \texttt{VFX}-2 & 3/63                      \\
+					\texttt{VFG} = \texttt{VFX}-1 & $4^\texttt{x}$/63         \\
+					\texttt{VFG} = \texttt{VFX}+1 & 2/63                      \\
+					\texttt{VFG} = \texttt{VFX}+2 & 1/63                      \\
+					\texttt{VFG} = \texttt{VFX}+3 & 3/62                      \\
+					\texttt{VFG} = \texttt{VFX}+4 & 4/61                      \\
+					\texttt{VFG} = \texttt{VFX}+5 & 1/60                      \\
+					\texttt{VFG} = \texttt{VFX}+6 & 3/59                      \\
+					\texttt{VFG} = \texttt{VFX}+7 & 3/58                      \\
+					\texttt{VFG} = \texttt{VFX}+8 & 0/57                      \\
+					\texttt{VFG} = \texttt{VFX}+9 & 2/56                      \\
+					\hline
+				\end{tabular}
+				\caption{Repeat structure at various offsets}
+			\end{table}
+		\end{minipage}
+	}
+\end{center}
+The question now arises, which of these offsets is most likely. Of course an offset of $-9$ has the most repeats, but perhaps the trigram at an offset of $-8$ makes this case more likely. In order to answer this question we will need a means to score these repeat structures. To do this, we must take a brief moment to dicuss Bayesian statistics.
+\subsection{Bayesian Statistics}
+Turing thought of the relationships between texts at various offsets in terms of Bayesian statistics. Recall {\bf{Bayes theorem}}
+\begin{theorem}
+	Given events $A$ and $B$, where $\mathbb{P}(B) \ne 0$ we have that
+	\[
+		\mathbb{P}(A|B) = \frac{\mathbb{P}(B|A)\mathbb{P}(A)}{\mathbb{P}(B)}
+	\]
+\end{theorem}
+\noindent This is given in terms of probability. We will see that the math becomes siginificantly easier to do in one's head if we think of these probabilities instead in terms of {\bf{odds}}. That is
+\begin{definition}
+	For an event $A$ with probability $\mathbb{P}(A)$ we say that the odds of $A$ occuring are
+	\[
+		\mathbb{O}(A) = \frac{\mathbb{P}(A)}{\mathbb{P}(\overline{A})}
+	\]
+	where $\overline{A}$ denotes the probability of $A$ not occuring, that is, $\mathbb{P}(\overline{A}) = 1-\mathbb{P}(A)$.
+\end{definition}
+\noindent Then we have
+\begin{align*}
+	\mathbb{O}(A|B) & = \frac{\mathbb{P}(A|B)}{\mathbb{P}(\overline{A}|B)}                                                                              \\
+	                & = \frac{\mathbb{P}(A)}{\mathbb{P}(\overline{A})}\cdot\frac{\mathbb{P}(B|A)\mathbb{P}(B)}{\mathbb{P}(B|\overline{A})\mathbb{P}(B)} \\
+	                & = \frac{\mathbb{P}(A)}{\mathbb{P}(\overline{A})}\cdot\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}                           \\
+	                & = \mathbb{O}(A)\cdot\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}                                                            \\
+\end{align*}
+\noindent We will denote $\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}$ as $\mathbb{F}(A,B)$, this is called the {\bf{Bayes factor}}. The Bayes factor can be thought of as a measurement of how much the odds of an event increase when we add in a particular hypothesis. For a subsequent and independent event $C$ we have
+\begin{align*}
+	\mathbb{O}(A|B\wedge C) & = \mathbb{O}(A)\cdot\frac{\mathbb{P}(B\wedge C| A)}{\mathbb{P}(B\wedge C| \overline{A})}                                        \\
+	                        & = \mathbb{O}(A)\cdot\frac{\mathbb{P}(B| A)}{\mathbb{P}(B| \overline{A})}\cdot\frac{\mathbb{P}(C|A)}{\mathbb{P}(C|\overline{A})} \\
+	                        & = \mathbb{O}(A)\cdot \mathbb{F}(A,B) \cdot \mathbb{F}(A,C)
+\end{align*}
+\noindent Inductively we have that for a series of independent events $B_1, \dots, B_k$ we get
+\[
+	\mathbb{O}(A|\wedge_{i=1}^k B_i) = \mathbb{O}(A)\cdot\prod_{i=1}^k{\mathbb{F}(A,B_i)}
+\]
+If we are considering many events $B_i$, then we have to do a lot of multiplications by hand which are prone to error. For this reason, we consider the {\bf{log-odds}} of these events occuring, turning these products into summations. In particular, for log-base $b$
+\[
+	\log_b\mathbb{O}(A|\wedge_{i=1}^k B_i) = \log_b\mathbb{O}(A)+\sum_{i=1}^k{\log_b\mathbb{F}(A,B_i)}
+\]
+This leads us to the following definition
+\begin{definition}
+	A {\bf{ban}} is a logarithmic unit of information gained from a Bayes factor $\mathbb{F}(A,B)$ such that $1$ ban is equivalent to a Bayes factor which illustrates that the odds of event $A$ occuring are increased ten-fold when $B$ is observed. That is
+	\begin{align*}
+		            & 10^1 = \mathbb{F}(A,B)                    \\
+		\Rightarrow & \log_{10}(\mathbb{F}(A,B)) = 1\text{ ban}
+	\end{align*}
+	\noindent Subsquently, a {\bf{deciban}} is $\frac{1}{10}$ of a ban, representing an event's odds being increased by a factor of $10^\frac{1}{10}$, given $B$ occured. The unit we will be using is half of a deciban, known as a {\bf{hubdub (hdB)}}, representing an event's odds being increased by a factor of $10^\frac{1}{20}$, given $B$ occured. That is
+	\[
+		20\log_{10}(\mathbb{F}(A,B)) = 1\text{ hdB}
+	\]
+\end{definition}
+\noindent In our case, if we use hubdubs, we arrive at the following relationship between our odds
+\[
+	20\log_{10}\mathbb{O}(A|\wedge_{i=1}^k B_i) = 20\log_{10}\mathbb{O}(A)+\sum_{i=1}^k{20\log_{10}\mathbb{F}(A,B_i)}
+\]
+Then a series of independent events $B_1, \dots, B_k$ increase the odds of $A$ by  $\sum_{i=1}^k{20\log_{10}\mathbb{F}(A,B_i)}$ hdB. Note that if this value is positive this implies that the event $A$ is more likely to have occured after observing each $B_i$. If this value is negative, then the event $A$ is less likely to have occured after observing each $B_i$. If it is $0$ we have gained no information.
+
+\subsection{Scoring Charts}
+Bletchely Park cryptanalysts precompiled a large chart of how many hubdubs a particular observation of repeats was worth. Consider that we observe that at an offset of $-13$ our messages with pre-message keys \texttt{VFG} and \texttt{VFX} have a $6/52$ repeat structure. That is, there are $6$ monogram repeats occuring in $52$ characters of observed text. We will call this observed event $B$. We will call the event that the our overlap is in-depth as $A$.
+\\\\To calculate how many hubdubs of information we gain we can compute.
+\[
+	20\log_{10}\mathbb{F}(A,B) = 20\log_{10}\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}
+\]
+The denominator $\mathbb{P}(B|\overline{A})$ represents the probability that we observed $6$ repeated monograms in $52$ characters of text, given that our messages were not in-depth, that is, they both represent random streams of text. This is given by
+\[
+	\mathbb{P}(B|\overline{A}) = (\frac{1}{26})^6(1-\frac{1}{26})^{(52-6)}
+\]
+\\\\The numerator $\mathbb{P}(B|\overline{A})$ represents the probability that we observed $6$ repeated monograms in $52$ characters of text, given that our messages are in-depth, that is, they both represent streams of German text. Based on observation of the corpus of naval Enigma messages, analysts determined that a monogram repeat occurs with a probability of $\frac{1}{17}$. Then our numerator is given by
+\[
+	\mathbb{P}(B|A) = (\frac{1}{17})^6(1-\frac{1}{17})^{(52-6)}
+\]
+It then follows that the observation $B$, that is, that our texts are shifted at a distance of $-13$ is worth $13.59$ (which Bletchley Park rounded to $13$) hubdubs of information. That is, this new observation increases our odds of the messages being in-depth by a factor of $10^\frac{14}{20}$ -- giving a rougly $5$ to $1$ odds in favor of the text being in-depth. A scoring chart could be computed for all repeat structures of interest. Thus, we may get a scoring chart of
+\begin{center}
+	\scalebox{0.7}{
+		\begin{tabular}{r|rrrrrrrrrrrrrrrrrrrrrrrr}
+			   & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 & 50 & 51 & 52  & 53  & 54  & 55  & 56  & 57  & 58  & 59  & 60  & 61  & 62  & 63  \\ \hline
+			0  & -7 & -8 & -8 & -8 & -8 & -8 & -9 & -9 & -9 & -9 & -9 & -9 & -10 & -10 & -10 & -10 & -10 & -11 & -11 & -11 & -11 & -11 & -12 & -12 \\
+			1  & -4 & -4 & -4 & -4 & -4 & -4 & -5 & -5 & -5 & -5 & -5 & -6 & -6  & -6  & -6  & -6  & -7  & -7  & -7  & -7  & -7  & -7  & -8  & -8  \\
+			2  & 0  & 0  & 0  & 0  & 0  & -1 & -1 & -1 & -1 & -1 & -2 & -2 & -2  & -2  & -2  & -2  & -3  & -3  & -3  & -3  & -3  & -4  & -4  & -4  \\
+			3  & 4  & 4  & 3  & 3  & 3  & 3  & 3  & 2  & 2  & 2  & 2  & 2  & 1   & 1   & 1   & 1   & 1   & 1   & 0   & 0   & 0   & 0   & 0   & 0   \\
+			4  & 8  & 7  & 7  & 7  & 7  & 7  & 6  & 6  & 6  & 6  & 6  & 6  & 5   & 5   & 5   & 5   & 5   & 4   & 4   & 4   & 4   & 4   & 3   & 3   \\
+			5  & 11 & 11 & 11 & 11 & 11 & 11 & 10 & 10 & 10 & 10 & 10 & 9  & 9   & 9   & 9   & 9   & 8   & 8   & 8   & 8   & 8   & 8   & 7   & 7   \\
+			6  & 15 & 15 & 15 & 15 & 15 & 14 & 14 & 14 & 14 & 14 & 13 & 13 & 13  & 13  & 13  & 13  & 12  & 12  & 12  & 12  & 12  & 11  & 11  & 11  \\
+			7  & 19 & 19 & 19 & 19 & 18 & 18 & 18 & 18 & 18 & 18 & 17 & 17 & 17  & 17  & 17  & 16  & 16  & 16  & 16  & 16  & 15  & 15  & 15  & 15  \\
+			8  & 23 & 23 & 23 & 23 & 22 & 22 & 22 & 22 & 22 & 21 & 21 & 21 & 21  & 21  & 20  & 20  & 20  & 20  & 20  & 20  & 19  & 19  & 19  & 19  \\
+			9  & 27 & 27 & 27 & 26 & 26 & 26 & 26 & 26 & 25 & 25 & 25 & 25 & 25  & 25  & 24  & 24  & 24  & 24  & 24  & 23  & 23  & 23  & 23  & 23  \\
+			10 & 31 & 31 & 30 & 30 & 30 & 30 & 30 & 30 & 29 & 29 & 29 & 29 & 29  & 28  & 28  & 28  & 28  & 28  & 27  & 27  & 27  & 27  & 27  & 27  \\
+		\end{tabular}}
+\end{center}

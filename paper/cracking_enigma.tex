@@ -1,5 +1,6 @@
 \documentclass{dcthesis}
 
+\usepackage[export]{adjustbox} % in preambl
 \usepackage[normalem]{ulem}
 \usepackage{circuitikz}
 \usepackage{subcaption}
@@ -117,7 +118,9 @@
 \theoremstyle{remark}
 \newtheorem{remark}[prop]{Remark}
 \newtheorem{example}[prop]{Example}
-\newtheorem*{claim}{Claim}
+\newcommand\dunderline[3][-1pt]{{%
+  \sbox0{#3}%
+  \ooalign{\copy0\cr\rule[\dimexpr#1-#2\relax]{\wd0}{#2}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Indicies

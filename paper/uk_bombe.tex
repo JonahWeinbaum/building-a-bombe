@@ -2822,7 +2822,7 @@ scoring table.
 can approximate that a message with $m$ monograms including $b$
 bigrams over $n$ letters has a Bayes factor of
 \[
-	\frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\cdot\frac{(\frac{1}{17})^{(m-2b)}(1-\frac{1}{17})^{n-m-2b}}{(\frac{1}{26})^{(m-2b)}(1-\frac{1}{26})^{n-m-2b}}
+	\frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\cdot\frac{(\frac{1}{17})^{(m-2b)}(1-\frac{1}{17})^{(n-m)}}{(\frac{1}{26})^{(m-2b)}(1-\frac{1}{26})^{(n-m)}}
 \]
 This makes several assumptions and overestimations. First, this
 assumes that having bigrams and monograms are independent events.
@@ -2834,21 +2834,21 @@ that of the Bayes factor of a message with $m+b$ monograms in $n$
 letters, we get
 \begin{align*}
 	            &
-	\frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\cdot\frac{(\frac{1}{17})^{(m-2b)}(1-\frac{1}{17})^{n-m-2b}}{(\frac{1}{26})^{(m-2b)}(1-\frac{1}{26})^{n-m-2b}}
+	\frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\cdot\frac{(\frac{1}{17})^{(m-2b)}(1-\frac{1}{17})^{(n-m)}}{(\frac{1}{26})^{(m-2b)}(1-\frac{1}{26})^{(n-m)}}
 	\approx
 	\frac{(\frac{1}{17})^{m+b}(1-\frac{1}{17})^{n-m-b}}{(\frac{1}{26})^{m+b}(1-\frac{1}{26})^{n-m-b}}
 	\\\\
 	\Rightarrow &
 	\frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\approx
-	\frac{(\frac{1}{17})^{3b}(1-\frac{1}{17})^{b}}{(\frac{1}{26})^{3b}(1-\frac{1}{26})^{b}}
+	\frac{(\frac{1}{17})^{3b}(1-\frac{1}{17})^{-b}}{(\frac{1}{26})^{3b}(1-\frac{1}{26})^{-b}}
 	\\\\
 	\Rightarrow &
 	\frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\approx
-	(\frac{26}{17})^{3b}(\frac{16\cdot26}{17\cdot25})^b
+	(\frac{26}{17})^{3b}(\frac{17\cdot25}{16\cdot26})^b
 	\\\\
 	\Rightarrow &
 	\frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\approx
-	(\frac{26^4\cdot16}{17^4\cdot25})^b
+	(\frac{26^2\cdot25}{17^2\cdot16})^b
 \end{align*}
 % NSA BIGRAMS -
 % chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/friedman-documents/correspondence/FOLDER_152/41746979078617.pdf
@@ -2876,10 +2876,10 @@ This leaves us with only a dependence on $b$, allowing us to
 approximately guess $\beta$. We have
 \[
 	\beta^b \approx
-	(\frac{26^2\cdot16}{17^4\cdot25})^b
+	(\frac{25}{17^2\cdot16})^b
 \]
-Giving us $\beta \approx 0.00518$, or as Hugh Alexander might
-write, $\beta \approx 3.5\cdot\frac{1}{26^2}$. Given all the
+Giving us $\beta \approx 0.00540$, or as Hugh Alexander might
+write, $\beta \approx 3.65\cdot\frac{1}{26^2}$. Given all the
 simplifying assumptions made, this is still in the same magnitude
 of probability given by the NSA. Further, this estimate falls in
 line with the bonus system since it indicates that the index of
@@ -2905,7 +2905,7 @@ data of bigram frequency. The same type of calculation can be done
 for trigrams but the goal of this section was to give justification
 to the reader that the bonus system is more than just a heuristic.
 
-\subsection{Distance Charts}
+\subsection{Distance Charts}\label{distance_chart}
 Another factor we must account for is rotor turnover. We began with
 pre-message keys \texttt{VFG} and \texttt{VFX}, so all of this work
 has been assuming that only the last letter of the message key
@@ -2937,9 +2937,9 @@ denote $\tau_n$, is
 	\tau_n =
 	\begin{cases}
 		S \cdot \dfrac{26 - n}{26} + (1 - S) \cdot \dfrac{13 - n}{13},
-		 & \text{for } n \le 13      \\
-		S \cdot \dfrac{26 - n}{26},
-		 & \text{for } 13 < n \le 26
+		 & \text{for } n < 13        \\
+		S \cdot \dfrac{26 - n}{26}
+		 & \text{for } 13 \le n < 26
 	\end{cases}
 \]
 Given that, by protocol, at least one rotor must be a naval rotor
@@ -2948,7 +2948,7 @@ we will now calculate $S$.
 possible naval rotors, but $5\cdot4\cdot3$ of these will contain no
 naval rotors. Additionally, only $7\cdot6\cdot3$ of these will have
 a naval rotor as their rightmost rotor, meaning that the
-probability of having a naval rotor as your rightmost rotor (i.e. $1-S$) is
+probability of having a non-naval rotor as your rightmost rotor (i.e. $1-S$) is
 \[
 	1-S = \frac{7\cdot6\cdot3}{8\cdot7\cdot6 - 5\cdot4\cdot3}
 \]
@@ -3143,10 +3143,10 @@ score sheet for tetragrams with missing values
 	\end{center}
 	\caption{Scoring sheet for tetragrams with the only known values filled in}
 \end{figure}
-\noindent In practice, to score a message with repeat structure
+\noindent In practice, to score a pair of messages with repeat structure
 $11^{4\texttt{x}}/60$, we would first consult our tetragram scoring
-sheet for our message category and tetragram location to get our
-log-odds score, and then consult the relevant score chart to score
+sheet for both our message categories and tetragram locations to get our
+log-odds score by summing the two entries\footnote{Technically we would need to add in the loss corresponding to our offset when computing our tetra scoring sheet. Alexander does not appear to do this but instead just subtracted the loss at the end. This approximation works sufficiently well in many cases but it is worth noting this discrepancy. }. We would then consult the relevant score chart to score
 the remaining $7^\texttt{x}/56$ repeat structure, adding these two
 scores together to get our total score for this repeat structure.
 With this we can now score any repeat structure, save for one
@@ -3395,3 +3395,115 @@ letters in common. In theory, there is no reason the same process
 cannot be applied to pre-message keys with their first letter in
 common, although this requires significantly more offsets being
 considered and significantly reduced odds.
+\\\\We might think we need to handle all offsets from $-650$ to $+650$ but in practice, naval Enigma operating procedure restircted message lengths to $250$ characters. Thus, we can only examine offsets of $-250$ to $+250$. This is still an incredible number of offsets to check by hand. To handle this, a section at Bletchley Park known as the {\bf{Freebornery}} used tabulating machines to find repeats of length $4$ or greater, since shorter $n$-grams were not worth the considerable odds against such a large array of candidates. Messages with $4$ or more repeats were compiled into a {\bf{tetra catalogue}} as follows
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|l|}
+		\hline
+		\textbf{Pre-Message Key} & \textbf{Position} & \textbf{Letters}                                                                                                                                                                                                                                        \\
+		\hline
+		\texttt{AJU}             & 4.8               & \texttt{LK TNSV RAJTLK}                                                                                                                                                                                                                                 \\
+		\texttt{BYX}             & 6.5               & \texttt{CS TNSV AVYTXK}                                                                                                                                                                                                                                 \\
+		\texttt{ARX}             & 5.6               & \texttt{A}{\uline{\texttt{U}}}\texttt{ }{\uline{\texttt{T}}}\texttt{}{\uline{\texttt{N}}}\texttt{}{\uline{\texttt{T}}}\texttt{}{\uline{\texttt{B}}}\texttt{ }{\uline{\texttt{L}}}\texttt{}{\uline{\texttt{Y}}}\texttt{}{\uline{\texttt{D}}}\texttt{RMJ} \\
+		\texttt{AYR}             & 11.11             & \texttt{X}{\uline{\texttt{U}}}\texttt{ }{\uline{\texttt{T}}}\texttt{}{\uline{\texttt{N}}}\texttt{}{\uline{\texttt{T}}}\texttt{}{\uline{\texttt{B}}}\texttt{ }{\uline{\texttt{L}}}\texttt{}{\uline{\texttt{Y}}}\texttt{}{\uline{\texttt{D}}}\texttt{ACV} \\
+		\texttt{CRS}             & 6.1               & \texttt{NC TNXJ AVUSYM}                                                                                                                                                                                                                                 \\
+		\texttt{CQT}             & 8.4               & \texttt{}{\texttt{N}}\texttt{L TNXJ BRXSTO}                                                                                                                                                                                                             \\
+		\hline
+	\end{tabular}
+	\caption{Example tetragram catalogue}
+\end{table}
+\noindent Here we only underline repeats which are longer than $4$ letters as these have the best chance at being legitimate. We think of each rightmost rotor position as having an alphabet of ``26'' letters before it turns over to a new alphabet of 26 letters. The left number in the position column denotes which alphabet we in and the right number indicates which letter we are in in that alphabet when the $n$-gram occured. In this sense our first tetragram entry with a position of $4.8$ means that the tetragram occured in the $8$th letter of the $4$th alphabet, thus this occured at the $26\cdot3 + 8$ or $86$th letter of the message. It is worth noting that in this notation, for pre-message keys which differ by only their rightmost letter (as in the last section) an offset of $+n$ can be written as $+0.n$. In the end this will allow us to have one sheet with consistent notation representing all our analyzed messages.
+
+\subsubsection{Left Rotor Distance Charts}
+To score these messages the first thing we must do is generate a new distance chart for all possible rotor turnovers between all $-250$ to $+250$ offsets. As before we would like to get a probability $\tau_n$ that our offset represents a legitimate comparison between message keys with their leftmost letter in common. This is the same as asking the probability that turnover of the leftmost rotor dd \emph{not} occur. Now we need to consider more scenarios than in our one rotor analysis. Recall that there are $8\cdot7\cdot6$ total arrangements of rotors but $5\cdot4\cdot3$ of these are not allowed since they do not include any naval rotors. Then there are $276$ total rotor combinations we are eaxmining. The two rightmost rotors can be in one of the following cases
+\begin{itemize}
+	\item Two non-naval rotors -- For each of the $3$ naval rotors as the lefthand rotor we have $5\cdot4$ possible non-naval rotor combinations for the right two rotors, giving $60$ such combinations.
+	\item Two naval rotors --  We have $3\cdot2$ possible naval rotor combinations for the right two rotors, leaving $6$ remaining rotor possibilites for the leftmost rotor, thus giving $36$ such combinations.
+	\item Middle naval rotor and rightmost non-naval rotor --  We have $3\cdot5$ possible naval rotor combinations for the right two rotors, leaving $6$ remaining rotor possibilites for the leftmost rotor, thus giving $90$ such combinations.
+	\item Middle non-naval rotor and rightmostnaval rotor --  As above this has $90$ combinations.
+\end{itemize}
+
+For each of this cases we have varying likelihood of rotor turnover. Recall that when dealing with the leftmost rotors period of turnover we must consider double stepping as described in section~\ref{double_step}. Thus we have
+
+\begin{itemize}
+	\item Two non-naval rotors -- Leftmost rotor turns with a $26\cdot25 = 650$ period.
+	\item Two naval rotors --  Leftmost rotor turns with a $13\cdot12 = 156$ period.
+	\item Middle naval rotor and rightmost non-naval rotor --  Leftmost rotor turns with a $26\cdot12 = 312$ period.
+	\item Middle non-naval rotor and rightmostnaval rotor --  Leftmost rotor turns with a $13\cdot25 = 325$ period.
+\end{itemize}
+
+Using the same arguments to compute $\tau_n$ as in section~\ref{distance_chart} we get
+\[
+	\tau_n =
+	\begin{cases}
+		\frac{60}{276} \cdot \frac{650 - n}{650} + \frac{90}{276} \cdot \frac{325 - n}{325} + \frac{90}{276} \cdot \frac{312 - n}{312} + \frac{36}{276} \cdot \frac{156 - n}{156},
+		 & \text{for } n < 156          \\
+		\frac{60}{276} \cdot \frac{650 - n}{650} + \frac{90}{276} \cdot \frac{325 - n}{325} + \frac{90}{276} \cdot \frac{312 - n}{312},
+		 & \text{for } 156 \le  n < 312 \\
+		\frac{60}{276} \cdot \frac{650 - n}{650} + \frac{90}{276} \cdot \frac{325 - n}{325},
+		 & \text{for } 312 \le  n < 325 \\
+		\frac{60}{276} \cdot \frac{650 - n}{650}
+		 & \text{for } 325 \le  n < 650
+	\end{cases}
+\]
+This lets us compute $\tau_n$ from up to an offset of $\pm650$ but as mentioned we will only need this for $\pm250$. We can now generate a distance chart as before but now we consider each value from in the range $-250$ to $+250$.
+\begin{figure}[H]
+	\begin{center}
+		\scalebox{0.6}{
+			\begin{tabular}{c|*{26}{c}}
+
+				  & 0   & 1   & 2   & 3   & 4   & 5   & 6   & 7   & 8   & 9   & 10  & 11  & 12  & 13  & 14  & 15  & 16  & 17  & 18  & 19  & 20  & 21  & 22  & 23  & 24  & 25  \\
+				\hline
+				0 & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & 0   & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  \\
+
+				1 & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -1  & -2  & -2  \\
+
+				2 & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  & -2  \\
+
+				3 & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  & -3  \\
+
+				4 & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -4  & -5  & -5  & -5  & -5  \\
+
+				5 & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -5  & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -6  \\
+
+				6 & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -6  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  & -7  \\
+
+				7 & -7  & -7  & -7  & -7  & -7  & -7  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  & -8  \\
+
+				8 & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -9  & -10 & -10 & -10 & -10 & -10 & -10 & -10 & -10 & -10 \\
+
+				9 & -10 & -10 & -10 & -10 & -10 & -10 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -11 & -12 & -12 & -12 & -12 & -12 & -12 \\
+			\end{tabular}}
+	\end{center}
+	\caption{Distance chart for left rotor turnover}
+\end{figure}
+\noindent With this chart we now know what the loss for our scoring sheet needs to be for a particular message pair. From here we can use our exact same scoring method to compute the log-odds of score for entries in the tetragram catalogue. To the the true odds of our candidate offset we must consider the Bayesian prior representing the initial odds that any given offset is correct. We have that there are $1300$ possible offsets, all of which are equally likey, giving us an extra factor of $-62$ hdB to get the true odds of our candidate.
+\subsubsection{Score Conversion} A candidate offset on the tetragram catalogue does not just store information about the middle wheel but also additional information about the end wheel which we can use to further increase accuracy of our end wheel comparison. In order to do this, we need to determine our score with respect to the Bayesian prior for representing the initial odds of an offset in $\pm25$ being correct. Given that we have used the same scoring system regardless of analyzing middle-wheel and end-wheel comparisons, we have that the Bayesian factors we have computed would be the same whether we were analyzing middle-wheel or end-wheel comparions. Thus, we need only account for the difference in the prior odds between middle-wheel and end-wheel comparisons. We have $-62$ hdB prior log-odds for middle-wheel comparison and $-34$ hdB log-odds for end-wheel comparison. Thus to convert our score to that of an end wheel comparsion we must incur a loss of $-34-62 = -28$ hdB. If $p$ is the probability that our messages are in-depth, then we have that the odds with a loss of $-28$ hdB incurred is
+\begin{align*}
+	 & \frac{p\cdot10^{\frac{-28}{20}} + (1-p)(1-10^{\frac{-28}{20}})}{(1-p)} \\
+	 & = 10^{\frac{-28}{20}}\frac{p}{1-p}-10^{\frac{-28}{20}} + 1
+\end{align*}
+Note that $\frac{p}{1-p}$ is just our current odds and the above equation is our new odds. Then for a score of $s$, we have $10^\frac{s}{20} = \frac{p}{1-p}$. Thus, to convert from a middle-wheel to an end-wheel comparison, we compute
+\[
+	20\log_{10}(10^\frac{s}{20}\cdot10^{\frac{-28}{20}} -10^{\frac{-28}{20}} + 1)
+\]
+
+
+\noindent We can compute a conversion chart from middle-wheel scores to end-wheel scores as follows
+\begin{figure}[H]
+	\begin{center}
+		\scalebox{0.6}{
+			\begin{tabular}{|c|*{40}{c|}}
+				\hline
+				{\bf{Middle-wheel Score}} & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 & 33 & 34 & 35 & 36 & 37 & 38 & 39 \\
+				\hline
+				{\bf{End-wheel Score}}    & 1  & 1  & 1  & 2  & 2  & 2  & 2  & 3  & 3  & 4  & 4  & 4  & 5  & 5  & 6  & 6  & 7  & 8  & 8  & 9  & 10 & 10 & 11 & 12 & 13 \\
+				\hline
+			\end{tabular}}
+	\end{center}
+	\caption{Conversion chart for scores from $15$ hdB to $39$ hdB}
+\end{figure}
+\noindent Now we can include pre-message keys with only their left letter in common in our end-wheel analysis.
+\subsection{Scritchmus}
+At this point, we can now fully score messages with pre-message keys whose leftmost or left two letters are in common. We can search for messages and offsets which provide better than even odds and compile a list of such comparisons as follows

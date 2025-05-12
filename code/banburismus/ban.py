@@ -10,7 +10,7 @@ def score(r, l, loss =0):
     else:
         return math.floor(20*math.log(bayes_factor, 10))
 
-def print_latex_table(loss=0):
+def print_latex_table(loss=-7):
     import math
 
     def score(r, l, loss=0):
@@ -20,8 +20,8 @@ def print_latex_table(loss=0):
         pre_round = 20 * math.log(bayes_factor, 10)
         return round(pre_round) if pre_round < 0 else math.floor(pre_round)
 
-    l_values = list(range(40, 64))
-    r_values = range(11)
+    l_values = list(range(167, 179))
+    r_values = range(10, 25)
 
     print(r"\\begin{tabular}{r|" + "r" * len(l_values) + r"}")
     print("& " + " & ".join(str(l) for l in l_values) + r" \\ \hline")

@@ -3250,7 +3250,7 @@ of $-3$ hdB. We then get our score sheet calculated for a loss of
 $-3$ hdB from figure~\ref{fig:loss_sheet} and consult row $7$
 column $32$. Then, according to our bonus system, we move down one
 row for each bigram to row $9$ -- giving us a score of $21$ hdB. We
-now enter this score in a  {\bf{comparison sheet}}. The sheet will
+now enter this score in a  {\bf{deciban sheet}}. The sheet will
 show each offset and the associated score. Further, it will
 indicate which two letters are being compared, in our case
 \texttt{Q} and \texttt{B}. In our case we would fill in
@@ -3339,8 +3339,8 @@ $16$. Adding these two scores together we get a total score for
 this offset of $12$ which we would similarly record in the
 end-wheel comparison sheet for \texttt{L} and \texttt{J}.
 \\\\Eventually, we will have computed scores across many messages
-and many offsets, and our comparison sheet will slowly be filled
-out. An example comparison sheet is given for comparing \texttt{V}
+and many offsets, and our deciban sheet will slowly be filled
+out. An example deciban sheet is given for comparing \texttt{V}
 and \texttt{W} derived from pre-message keys
 \texttt{ZOV}/\texttt{ZOW} and \texttt{GMV}/\texttt{GMW} respectively.
 \begin{figure}[H]
@@ -3348,31 +3348,31 @@ and \texttt{W} derived from pre-message keys
 		\scalebox{0.6}{
 			\begin{tabular}{c|*{27}{c|}c}
 				\cline{2-28}
-				              & -13 & -12 & -11 & -10       & -9  & -8         & -7  & -6  & -5 & -4 &
-				-3            & -2  & -1  &     & 1         & 2   & 3          & 4   & 5
-				              & 6   & 7   & 8   & 9         & 10  & 11         & 12  & 13  &                \\
+				              & -13 & -12 & -11 & -10       & -9  & -8            & -7  & -6  & -5 & -4 &
+				-3            & -2  & -1  &     & 1         & 2   & 3             & 4   & 5
+				              & 6   & 7   & 8   & 9         & 10  & 11            & 12  & 13  &                \\
 				\cline{2-28}
-				\texttt{V   } & -3  & -3  & -3  & 0         & -8  & 6          & -6  & 6
-				              & -12 & -8  & -8  & 23        & 0   & \texttt{W} & 3   & -12
-				              & -8  & 7   & -3  & -6        & -6  & -2         & 1   & -7  & 6  & 3  & -2 &
-				\texttt{   V}                                                                               \\
+				\texttt{V   } & -3  & -3  & -3  & 0         & -8  & 6             & -6  & 6
+				              & -12 & -8  & -8  & 23        & 0   & \texttt{   W} & 3   & -12
+				              & -8  & 7   & -3  & -6        & -6  & -2            & 1   & -7  & 6  & 3  & -2 &
+				\texttt{   V}                                                                                  \\
 
 				\cline{2-28}
-				\texttt{W   } & -1  & 2   & -2  & 9         & -2  & -1         & -7  & 17
-				              & 2   & 2   & -5  & 4         & -24 & \texttt{W} & -6  & -6
-				              & 4   & -3  & -4  & 2         & 4   & 5          & -1  & -9  & -7 & -2 & 0  &
-				\texttt{   V}                                                                               \\
+				\texttt{W   } & -1  & 2   & -2  & 9         & -2  & -1            & -7  & 17
+				              & 2   & 2   & -5  & 4         & -24 & \texttt{   W} & -6  & -6
+				              & 4   & -3  & -4  & 2         & 4   & 5             & -1  & -9  & -7 & -2 & 0  &
+				\texttt{   V}                                                                                  \\
 				\cline{2-28}
 				\cline{2-28}
-				\texttt{Sum } & -4  & -3  & 1   & 9         & -10 & 5          & -13 & 23
-				              & -1  & -6  & -13 & {\bf{27}} & -24 & \texttt{}  & -3  & -18
-				              & -4  & 4   & -7  & -4        & -2  & 3          & 0   & -16 & -1 & 1  & -2 &
-				\texttt{ Sum}                                                                               \\
+				\texttt{Sum } & -4  & -3  & 1   & 9         & -10 & 5             & -13 & 23
+				              & -1  & -6  & -13 & {\bf{27}} & -24 & \texttt{}     & -3  & -18
+				              & -4  & 4   & -7  & -4        & -2  & 3             & 0   & -16 & -1 & 1  & -2 &
+				\texttt{ Sum}                                                                                  \\
 				\cline{2-28}
 			\end{tabular}}
 	\end{center}
 
-	\caption{End-wheel comparison for \texttt{V} and \texttt{W} with
+	\caption{End-wheel deciban sheet for \texttt{V} and \texttt{W} with
 		summation on the bottom }
 \end{figure}
 \noindent After all this work we can now determine that the most
@@ -3385,9 +3385,7 @@ prior representing the initial odds that any given offset is
 correct, which we denoted $\mathbb{O}(A)$. We have that there are
 $50$ possible offsets, all of which are equally likely, giving us
 an extra factor of $-34$ hdB to get the true odds of our candidate
-as $-7$ hdB or roughly $2$ to $1$ odds against our candidate. In
-practice, we will only consider odds which are in favor of a
-candidate as we will shortly see.
+as $-7$ hdB or roughly $2$ to $1$ odds against our candidate. These sheets will ultimately be used to disambiguate our deduced rotor possibilities. Later when we show deciban sheets, we will show scores already being adjusted by the prior odds to make our work easier.
 
 \subsection{Middle-Wheel Comparison}
 So far we have only examined pre-message keys with their first two
@@ -3504,6 +3502,175 @@ Note that $\frac{p}{1-p}$ is just our current odds and the above equation is our
 	\end{center}
 	\caption{Conversion chart for scores from $15$ hdB to $39$ hdB}
 \end{figure}
-\noindent Now we can include pre-message keys with only their left letter in common in our end-wheel analysis.
+\noindent Now we can include pre-message keys with only their left letter in common in our deciban sheets for end-wheel analysis.
 \subsection{Scritchmus}
-At this point, we can now fully score messages with pre-message keys whose leftmost or left two letters are in common. We can search for messages and offsets which provide better than even odds and compile a list of such comparisons as follows
+We have developed a lot of theory to score repeat structures and various letter offsets so it is best to recap what we get at the end of this analysis. We have
+\begin{itemize}
+	\item A list of repeat structures and their scores which we will call a {\bf{catalouge}}. This is just a scored tetra catalogue combined with a scored end-wheel catalogue. An example is as follows\footnote{For sufficiently high odds we just write ``certain'' as it may as well be}
+	      \begin{figure}[H]
+
+		      \begin{center}
+			      \scalebox{0.8}{
+				      \begin{tabular}{llll}
+					          & \textbf{Catalogue}                 &                 &            \\
+					      \hline
+					      (1) & \texttt{ARX} = \texttt{AYR} + 6.5  & Octagram        & Certain    \\
+					      (2) & \texttt{NTP} = \texttt{NXU} + 2.15 & Enneagram       & Certain    \\
+					      (3) & \texttt{LLK} = \texttt{LAP} + 9.24 & Enneagram       & Certain    \\
+					      (4) & \texttt{VRN} = \texttt{VXR} + 0.21 & $16^6/ 95$      & 100 : 1 on \\
+					      (5) & \texttt{STK} = \texttt{STN} + 0.7  & $23^{33} / 256$ & 15 : 1 on  \\
+					      (6) & \texttt{RWL} = \texttt{RWC} + 0.13 & $14^4 / 100$    & 6 : 1 on   \\
+					      (7) & \texttt{BVY} = \texttt{BLT} + 1.6  & $19^5 / 140$    & 5 : 1 on   \\
+					      (8) & \texttt{UJA} = \texttt{UMY} + 5.3  & $18^5 / 210$    & 3 : 2 on   \\
+					      (9) & \texttt{BAQ} = \texttt{BWS} + 0.17 & $20^7 / 274$    & 50 : 1 on  \\
+				      \end{tabular}}
+		      \end{center}
+		      \caption{Catalogue of repeat structures}
+		      \label{fig:catalogue}
+	      \end{figure}
+	\item A list of deciban sheets for a variety of letters combinations compiled from summed likelihoods of letter offsets gleamed from both end-wheel and middle-wheel comparisons. One such deciban sheet is as follows
+	      \begin{figure}[H]
+		      \begin{center}
+			      \scalebox{0.6}{
+				      \begin{tabular}{c|*{13}{c|}c}
+					      \cline{2-14}
+					                    & -6 & -5            & -4           &
+					      -3            & -2 & -1            &              & 1 & 2 & 3 & 4 & 5
+					                    & 6  &                                                  \\
+					      \cline{2-14}
+					      \texttt{T   } & 1  & 2             & 7            &
+					      7             & 4  & 3             & \texttt{ H } & 5 & 3 & 1 & 7 & 4
+					                    & 7  & \texttt{   T}                                    \\
+					      \cline{2-14}
+				      \end{tabular}}
+		      \end{center}
+
+		      \caption{End-wheel deciban sheet for \texttt{H} and \texttt{T}}
+		      \label{fig:deciban_sheet}
+	      \end{figure}
+\end{itemize}
+The process of combining these two pieces of information to recover the middle and end rotors became known as {\bf{scritchmus}}.
+
+\subsubsection{Determining $\sigma_3$}
+We are now going to determine the mapping of the third letter in the pre-message key $\sigma_3$. We begin by making a chain of letters whose distances are deduced from the likely candidates from our catalogue~\ref{fig:catalogue}. Repeat (1) indicates that $\sigma_3(\texttt{X}) = \sigma_3(\texttt{R}) + 5$. Let us make an initial assumption that $\sigma_3(\texttt{R}) = \texttt{M}$ then we deduce that $\sigma_3(\texttt{X}) = \texttt{M} + 5 = \texttt{R}$. We can place these in an alphabet as follows
+\begin{align*}
+	 & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
+	 & \texttt{............R....X........}
+\end{align*}
+In this way, adding in repeats (2)-(5) we get from our initial hypothesis $\sigma_3(\texttt{R}) = \texttt{M}$
+\begin{align*}
+	 & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
+	 & \texttt{P......N...UR.K..X........}
+\end{align*}
+Recall that $\sigma_3$ must be an involution so if $\sigma_3(\texttt{R}) = \texttt{M}$ we must also have $\sigma_3(\texttt{M}) = \texttt{R}$, but of course this contradicts our derivation that $\sigma_3(\texttt{M}) = \texttt{X}$. Then our initial hypothesis $\sigma_3(\texttt{R}) = \texttt{M}$ is likely wrong. We must therefore continue through all hypotheses for the value of $\sigma_3(\texttt{R})$. We can eliminate possibilities as follows
+% \begin{align*}
+% 	 & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} &                                                                 \\
+% 	 & \texttt{P......N...UR.K..X........} & \text{--- Contradicts reciprocal $\texttt{R}$ and $\texttt{M}$} \\
+% 	 & \texttt{.P......N...UR.K..X.......} & \text{--- Contradicts reciprocal $\texttt{P}$ and $\texttt{B}$} \\
+% 	 & \texttt{..P......N...UR.K..X......} & \text{--- Contradicts reciprocal $\texttt{N}$ and $\texttt{J}$} \\
+% 	 & \texttt{...P......N...UR.K..X.....} & \text{--- Contradicts reciprocal $\texttt{R}$ and $\texttt{M}$} \\
+% 	 & \texttt{....P......N...UR.K..X....} & \text{--- Contradicts reciprocal $\texttt{P}$ and $\texttt{E}$} \\
+% 	 & \texttt{.....P......N...UR.K..X...} & \text{--- Contradicts $\texttt{R}$ cannot be self-reciprocal}   \\
+% 	 & \texttt{......P......N...UR.K..X..} & \text{--- Contradicts $\texttt{N}$ cannot be self-reciprocal}   \\
+% 	 & \texttt{.......P......N...UR.K..X.} & \text{--- Possible}                                             \\
+% 	 & \texttt{........P......N...UR.K..X} & \text{--- Contradicts reciprocal $\texttt{P}$ and $\texttt{I}$} \\
+% 	 & \texttt{X........P......N...UR.K..} & \text{--- Contradicts $\texttt{U}$ cannot be self-reciprocal}   \\
+% 	 & \texttt{.X........P......N...UR.K.} & \text{--- Contradicts reciprocal $\texttt{R}$ and $\texttt{M}$} \\
+% 	 & \texttt{..X........P......N...UR.K} & \text{--- Contradicts reciprocal $\texttt{X}$ and $\texttt{A}$} \\
+% 	 & \texttt{K..X........P......N...UR.} & \text{--- Contradicts reciprocal $\texttt{X}$ and $\texttt{D}$} \\
+% 	 & \texttt{.K..X........P......N...UR} & \text{--- Contradicts reciprocal $\texttt{P}$ and $\texttt{N}$} \\
+% 	 & \texttt{R.K..X........P......N...U} & \text{--- Possible}                                             \\
+% 	 & \texttt{UR.K..X........P......N...} & \text{--- Contradicts $\texttt{P}$ cannot be self-reciprocal}   \\
+% 	 & \texttt{.UR.K..X........P......N..} & \text{--- Contradicts reciprocal $\texttt{X}$ and $\texttt{H}$} \\
+% 	 & \texttt{..UR.K..X........P......N.} & \text{--- Contradicts reciprocal $\texttt{R}$ and $\texttt{D}$} \\
+% 	 & \texttt{...UR.K..X........P......N} & \text{--- Possible}                                             \\
+% 	 & \texttt{N...UR.K..X........P......} & \text{--- Contradicts reciprocal $\texttt{K}$ and $\texttt{H}$} \\
+% 	 & \texttt{.N...UR.K..X........P.....} & \text{--- Contradicts reciprocal $\texttt{U}$ and $\texttt{F}$} \\
+% 	 & \texttt{..N...UR.K..X........P....} & \text{--- Possible}                                             \\
+% 	 & \texttt{...N...UR.K..X........P...} & \text{--- Contradicts reciprocal $\texttt{N}$ and $\texttt{D}$} \\
+% 	 & \texttt{....N...UR.K..X........P..} & \text{--- Contradicts reciprocal $\texttt{X}$ and $\texttt{O}$} \\
+% 	 & \texttt{.....N...UR.K..X........P.} & \text{--- Contradicts reciprocal $\texttt{R}$ and $\texttt{K}$} \\
+% 	 & \texttt{......N...UR.K..X........P} & \text{--- Contradicts reciprocal $\texttt{U}$ and $\texttt{K}$} \\
+% \end{align*}
+
+
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+
+\begin{center}
+	\scalebox{0.76}{
+		\begin{tabular}{|*{26}{c|}l|}
+			\hline
+			\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} & \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} & \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} & \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} & \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} & \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} & \texttt{Y} & \texttt{Z} & {\bf{Notes}}                                         \\
+			\hline
+			\texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{R} and \texttt{M} \\
+			\texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{P} and \texttt{B} \\
+			\texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{N} and \texttt{J} \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{R} and \texttt{M} \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{P} and \texttt{E} \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts \texttt{R} cannot be self-reciprocal \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \;\;Contradicts \texttt{N} cannot be self-reciprocal \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \;\;{\bf{Possible}}                                  \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \;\;Contradicts reciprocal \texttt{P} and \texttt{I} \\
+			\texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \;\;Contradicts \texttt{U} cannot be self-reciprocal \\
+			\texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \;\;Contradicts reciprocal \texttt{R} and \texttt{M} \\
+			\texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \;\;Contradicts reciprocal \texttt{X} and \texttt{A} \\
+			\texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \;\;Contradicts reciprocal \texttt{X} and \texttt{D} \\
+			\texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \;\;Contradicts reciprocal \texttt{P} and \texttt{N} \\
+			\texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \;\;{\bf{Possible}}                                  \\
+			\texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts \texttt{P} cannot be self-reciprocal \\
+			\texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{X} and \texttt{H} \\
+			\texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \;\;Contradicts reciprocal \texttt{R} and \texttt{D} \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \;\;{\bf{Possible}}                                  \\
+			\texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{K} and \texttt{H} \\
+			\texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{U} and \texttt{F} \\
+			\texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;{\bf{Possible}}                                  \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{N} and \texttt{D} \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal \texttt{X} and \texttt{O} \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \;\;Contradicts reciprocal \texttt{R} and \texttt{K} \\
+			\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \;\;Contradicts reciprocal \texttt{U} and \texttt{K} \\
+			\hline
+		\end{tabular}}
+\end{center}
+\noindent In the end we arrive at only $4$ possible alphabets. By filling in values given by the reciprocal nature of $\sigma_3$ we arrive at these four alphabets.
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+
+\begin{center}
+	\scalebox{0.76}{
+		\begin{tabular}{|l|*{26}{c|}l|}
+			\hline
+			    & \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} & \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} & \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} & \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} & \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} & \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} & \texttt{Y} & \texttt{Z} & {\bf{Notes}}                 \\
+			\hline
+
+			(a) & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} & \texttt{.} & \texttt{.} & \texttt{V} & \texttt{.} & \texttt{.} & \texttt{O} & \texttt{N} & \texttt{H} & \texttt{.} & \texttt{T} & \texttt{U} & \texttt{R} & \texttt{S} & \texttt{K} & \texttt{.} & \texttt{Y} & \texttt{X} & \texttt{.} & \;\;Picks up (7), denies (8) \\
+			(b) & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{C} & \texttt{.} & \texttt{.} & \texttt{V} & \texttt{P} & \texttt{O} & \texttt{.} & \texttt{A} & \texttt{.} & \texttt{.} & \texttt{Z} & \texttt{N} & \texttt{.} & \texttt{F} & \texttt{.} & \texttt{U} & \;\;Denies (6)/(8)           \\
+			(c) & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} & \texttt{G} & \texttt{.} & \texttt{.} & \texttt{Z} & \texttt{.} & \texttt{S} & \texttt{.} & \texttt{E} & \texttt{P} & \texttt{.} & \texttt{D} & \texttt{.} & \texttt{.} & \texttt{J} & \texttt{.} & \texttt{N} & \;\;Denies (9)               \\
+			(d) & \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} & \texttt{K} & \texttt{J} & \texttt{.} & \texttt{X} & \texttt{C} & \texttt{.} & \texttt{V} & \texttt{.} & \texttt{H} & \texttt{.} & \texttt{.} & \texttt{G} & \texttt{P} & \texttt{.} & \texttt{M} & \texttt{.} & \texttt{.} &                              \\
+			\hline
+		\end{tabular}}
+\end{center}
+
+\noindent  After filling in the alphabets further, we notice that some alphabets either contradict (deny) or support (pick up) the remaining hypotheses we have not included, that is, hypotheses (6)-(9). As (6) and (9) are both strong hypotheses, this will discount the validity of alphabets (b) and (c). Leaving us with remaining alphabets (a) and (d). Note that the denial of (8) for alphabet (a) is not that strong of an indicator against this alphabet since (8) has roughly even odds of being correct and picking up (7) is such that it outweighs the denial of (8) anyways.
+\\\\We now need to determine which of (a) or (d) is correct. To do this we can turn to our deciban sheets~\ref{fig:deciban_sheet}. For example, we note that alphabet (a) is such that $\texttt{T} = \texttt{H} + 2$ which is evidence $3$ hdB in favor of this alphabet. Alexander's example found that after adding up all the offsets in alphabet (a) against deciban sheets, we find that the alphabet has a total score of $54$ hdB, almost certainly indicating that alphabet (a) is our correct choice for $\sigma_3$.
+\\\\We can now further fill in the alphabet from hypotheses that got picked up. We begin by including hypothesis (9) and using $\sigma_3$'s reciprocal property to get the alphabet
+\begin{align*}
+	 & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
+	 & \texttt{.......P..VQ.ONHLTURSK.YX.}
+\end{align*}
+Now we that we have add \texttt{L} to our alphabet we can make use of hypothesis (6) to get
+\begin{align*}
+	 & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
+	 & \texttt{..DC...P..VQ.ONHLTURSK.YX.}
+\end{align*}
+With a large catalogue, we will often be able to fill out the entire alphabet in this way.
+
+\subsubsection{Recovering the End Rotor}
+We will now examine what possible end rotors could be used that corroborate our alphabet for $\sigma_3$. Consider that for our end-wheel comparisons like hypothesis (5) and (6), we have strong indication that no turnover occurred during these repeat structures. Therefore we may assume that no turnover occurred between the encipherment of \texttt{C} and \texttt{L}, and no turnover occurred between \texttt{N} and \texttt{K}. Thus we can assume no turnover occurred between \texttt{C} and \texttt{K}. Given that this is a stretch of $18$ letters, we can immediately eliminate the possibility that the rightmost rotor is a naval rotor as it would have turnover at least every $13$ letters. That leaves us with rotors \texttt{I}-\texttt{V}. Rotors \texttt{I}, \texttt{II}, and \texttt{IV}, all have turnover between \texttt{C} and \texttt{K}. Thus we are left with only the possibilities that the rightmost rotor is \texttt{III} or \texttt{V} -- narrowing our possibilities from $8$ to $2$.
+
+\subsubsection{Recovering the Middle Rotor}
+Determining the middle rotor is much the same as the above procedure. Our goal is to get a likely alphabet for $\sigma_2$ and determine where turnover of the leftmost wheel occurred so as to eliminate possible middle rotors. The only difference is that we now strongly suspect that turnover of the rightmost rotor occurred between \texttt{K} and \texttt{C}. Thus a hypothesis like (2) which asserts that, in the middle wheel alphabet $\texttt{T} = \texttt{X} + 2$, must be adjusted to state that $\texttt{T} = \texttt{X} + 3$ since we know turnover of the rightmost rotor occurred in passing from \texttt{P} to \texttt{U}. Adjusting our offsets as necessary we can perform the exact same analysis as above to determine a small set of possibilities for the middle rotor.
+\\\\All in all, this process can reduce the $276$ rotor orderings of the naval Enigma to only a handful of possibilities, thus making searching for naval settings on the Bombe tractable. However, in order to actually make use of the Bombe we still need a crib to determine invalid settings.
+
+\subsubsection{Constructing a Menu}
+By this point we have determined a handful of possible rotor orderings, and we have, with luck, determine the entirety of permutations $\sigma_2$ and $\sigma_3$. Note though, that the permutations $\sigma_2$ and $\sigma_3$ are themselves plaintext-ciphertext pairings! For example, if we determine $\sigma_2$ and $\sigma_3$ to be

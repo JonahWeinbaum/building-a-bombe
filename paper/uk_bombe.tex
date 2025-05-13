@@ -3672,5 +3672,104 @@ We will now examine what possible end rotors could be used that corroborate our 
 Determining the middle rotor is much the same as the above procedure. Our goal is to get a likely alphabet for $\sigma_2$ and determine where turnover of the leftmost wheel occurred so as to eliminate possible middle rotors. The only difference is that we now strongly suspect that turnover of the rightmost rotor occurred between \texttt{K} and \texttt{C}. Thus a hypothesis like (2) which asserts that, in the middle wheel alphabet $\texttt{T} = \texttt{X} + 2$, must be adjusted to state that $\texttt{T} = \texttt{X} + 3$ since we know turnover of the rightmost rotor occurred in passing from \texttt{P} to \texttt{U}. Adjusting our offsets as necessary we can perform the exact same analysis as above to determine a small set of possibilities for the middle rotor.
 \\\\All in all, this process can reduce the $276$ rotor orderings of the naval Enigma to only a handful of possibilities, thus making searching for naval settings on the Bombe tractable. However, in order to actually make use of the Bombe we still need a crib to determine invalid settings.
 
-\subsubsection{Constructing a Menu}
+\subsection{Running the Bombe}
 By this point we have determined a handful of possible rotor orderings, and we have, with luck, determine the entirety of permutations $\sigma_2$ and $\sigma_3$. Note though, that the permutations $\sigma_2$ and $\sigma_3$ are themselves plaintext-ciphertext pairings! For example, if we determine $\sigma_2$ and $\sigma_3$ to be
+\begin{align*}
+	             & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
+	\sigma_2\;\; & \texttt{KJNRPQUOLBAISCHEFDMYGZXWTV} \\
+	\sigma_3\;\; & \texttt{OVJWLSKMUCGEHTAXRQFNIBDPZY} \\
+\end{align*}
+Then we get a series of $2$ letter plaintext-ciphertext pairings, such as
+
+\begin{center}
+	\begin{tikzpicture}[node distance=1cm, every node/.style={draw,
+					circle, minimum height=0.1cm, minimum width=0.1cm}]
+
+		% Centering the diagram
+		\node (a1) [] {\texttt{?}};
+		\node (a2) [right=0.1cm of a1] {\texttt{A}};
+		\node (a3) [right=0.1cm of a2] {\texttt{B}};
+		% Nodes for ciphertext
+		\node (x1) [below=1cm of a1] {\texttt{?}};
+		\node (x2) [below=1cm of a2] {\texttt{K}};
+		\node (x3) [below=1cm of a3] {\texttt{O}};
+
+		% Arrows for mapping
+		\draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
+		\draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
+		\draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
+
+	\end{tikzpicture}
+\end{center}
+Using these plaintext-ciphertext mappings we can construct a menu as follows
+\begin{figure}[H]
+	\begin{center}
+		\scalebox{0.8}{
+			\begin{tikzpicture}[>=stealth, every node/.style={}]
+				% Manual node positions
+
+				\node (H) at (0,0) {\texttt{H}};
+				\node (O) at (1.5,0) {\texttt{O}};
+				\node (A) at (3,0) {\texttt{A}};
+				\node (K) at (4.5,0) {\texttt{K}};
+				\node (G) at (6,0) {\texttt{G}};
+				\node (U) at (7.5,0) {\texttt{U}};
+				\node (I) at (9,0) {\texttt{I}};
+				\node (L) at (10.5,0) {\texttt{L}};
+				\node (E) at (12,0) {\texttt{E}};
+				\node (M) at (0,-2) {\texttt{M}};
+				\node (S) at (1.5,-2) {\texttt{S}};
+				\node (F) at (3,-2) {\texttt{F}};
+				\node (Q) at (4.5,-2) {\texttt{Q}};
+				\node (R) at (6,-2) {\texttt{R}};
+				\node (D) at (7.5,-2) {\texttt{D}};
+				\node (W) at (9,-2) {\texttt{W}};
+				\node (X) at (10.5,-2) {\texttt{X}};
+				\node (P) at (12,-2) {\texttt{P}};
+				\node (C) at (3.75,-3.5) {\texttt{C}};
+				\node (N) at (5.25,-3.5) {\texttt{N}};
+				\node (T) at (6.75,-3.5) {\texttt{T}};
+				\node (Y) at (8.25,-3.5) {\texttt{Y}};
+				\node (J) at (3.75,-5.5) {\texttt{J}};
+				\node (B) at (5.25,-5.5) {\texttt{B}};
+				\node (V) at (6.75,-5.5) {\texttt{V}};
+				\node (Z) at (8.25,-5.5) {\texttt{Z}};
+
+
+
+				% Connections
+				\draw[-] (K) -- (A) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (O) -- (H) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (M) -- (S) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (Q) -- (F) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (R) -- (D) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (W) -- (X) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (P) -- (E) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (L) -- (I) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (U) -- (G) node[midway, above, sloped] {\texttt{ZZB}};
+				\draw[-] (C) -- (N) node[midway, above, sloped] {\texttt{ZZB}};
+
+				\draw[-] (T) -- (Y) node[midway, above, sloped] {\texttt{ZZB}};
+
+				\draw[-] (Z) -- (V) node[midway, above, sloped] {\texttt{ZZB}};
+
+				\draw[-] (B) -- (J) node[midway, above, sloped] {\texttt{ZZB}};
+
+
+				\draw[-] (O) -- (A) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (K) -- (G) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (U) -- (I) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (L) -- (E) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (X) -- (P) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (D) -- (W) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (Q) -- (R) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (S) -- (F) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (M) -- (H) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (N) -- (T) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (Z) -- (Y) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (B) -- (V) node[midway, above, sloped] {\texttt{ZZC}};
+				\draw[-] (J) -- (C) node[midway, above, sloped] {\texttt{ZZC}};
+			\end{tikzpicture}}
+	\end{center}
+	\caption{Menu constructed from Banburismus}
+\end{figure}

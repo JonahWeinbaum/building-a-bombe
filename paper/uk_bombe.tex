@@ -1905,7 +1905,7 @@ not match our expected plaintext we can deduce what plugboard
 settings need to be added to switch out incorrect letters with their
 correct plaintext letters. In this way we can recover the entirety of
 the plugboard settings.
-\subsection{Recovering the Ring Settings}
+\subsection{Recovering the Ring Settings}\label{bombe_ring_setting}
 By this point we know that for our hypothesized rotor ordering, a
 window setting of \texttt{ZZZ}, a ring setting given by the indicator
 drums, and a plugboard setting deduced from the state of the stop as
@@ -2385,6 +2385,9 @@ the wrens since the machine gun only detected logical inconsistencies
 in regards to plugboard setting overlap and thus still produced false stops.
 
 \section{Banburismus}
+% http://www.ellsbury.com/profsbk/profsbk-138.htm%
+% http://www.ellsbury.com/gne/gne-102.htm%
+% https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html %
 Early in this chapter we discussed the changes made to the Enigma
 protocol that necessitated the use of the Bombe. The changes
 discussed applied only to the Army and Air Force. The Navy, on the
@@ -3773,3 +3776,25 @@ Using these plaintext-ciphertext mappings we can construct a menu as follows
 	\end{center}
 	\caption{Menu constructed from Banburismus}
 \end{figure}
+\noindent Equipped with this menu, the Bombe can now be run for our limited set of rotor orderings and can deduce the steckerings and positions of rotors necessary to produce our menu -- that is, the settings which convert pre-message keys into message keys.
+\subsubsection{The \texttt{EINS} Catalogue}
+Recall from section~\ref{bombe_ring_setting} that the settings given by a stop of the Bombe do not necessarily correspond to the true ring settings. In order to determine the true ring settings we would normally use our plaintext-ciphertext pairing to determine at which point turnover occurred and adjust our ring setting as necessary. However, our cribs consist exclusively of two letter plaintext-ciphertext pairings, after which the message is enciphered with the message key and is thus meaningless. Therefore we can no longer deduce at what point during our message turnover occurs and thus can no longer use this method to determine the true ring setting.
+\\\\In analyzing naval Enigma traffic, cryptanalysts found that nearly all messages (around $90\%$) contained the word \texttt{EINS} (German for ``one'') at some point in the message. This makes sense for a number of reasons
+\begin{enumerate}
+	\item Naval messages regularly dealt with numbers, all of which needed to be typed out in full. This statistical observation is what made the use of the tetra catalogue so valuable.
+	\item An odd quirk known as {\bf{Benford's law}} tells us that $1$ appears more commonly than any digit in numerical data.
+	\item \texttt{EINS} shows up naturally in many German words either as a subcomponent of a word or when spanning across two words.
+	      % https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html %
+\end{enumerate}
+
+% \end{enumerate}
+\noindent Given that we have a known rotor ordering, steckering, and ring/window setting whose relative distance is correct but may need to be adjusted to get the true ring setting, we can compiled a list of all $26^3$ encipherments of \texttt{EINS} which preserve the relative distance between our ring and window setting. Originally this process had to be done by hand with catalogues known as {\bf{corsets}} but a machine called the {\bf{test-plate}} or {\bf{baby}} was created which autmatically enciphered \texttt{EINS} at all such positions into an {\bf{\texttt{EINS} catalogue}}.
+\\\\The catalogue could be used to determine locations within our message corpus, along with settings, that would produce \texttt{EINS}. If we then continue deciphering our message from the start of the \texttt{EINS} location,using these settings, we either find likely plaintext or gibberish. This gives a candidate for the rightmost ring setting. Then as in section~\ref{bombe_ring_setting} we continue attempting to decipher plaintext until we encounter gibberish and adjust the middle and subsequently left ring setting until we have deduced the entire ring setting. With this final component we are now able to completely decipher naval Enigma messages.
+% THE BABY THE RACK
+% http://www.ellsbury.com/profsbk/profsbk-140.htm% 
+% FORTYWEEPYYWEEPY http://www.ellsbury.com/hut8/hut8-013.htm%
+%https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma% 
+
+
+%Gardening, Parkerismus, Consecutive Stecker knockour %
+%chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.singingbanana.com/enigmaproject/maths.pdf%

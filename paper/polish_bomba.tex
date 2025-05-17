@@ -23,21 +23,21 @@ letters
 $\sigma_1(\texttt{X})\sigma_2(\texttt{Y})\sigma_3(\texttt{Z})\sigma_4(\texttt{X})\sigma_5(\texttt{Y})\sigma_6(\texttt{Z})$.
 Suppose these six letters are given as
 \begin{center}
-  \texttt{ABC} \texttt{DEF}
+	\texttt{ABC} \texttt{DEF}
 \end{center}
 That is
 \begin{align*}
-  \sigma_1(\texttt{X}) & = \texttt{A} \\
-  \sigma_2(\texttt{Y}) & = \texttt{B} \\
-  \sigma_3(\texttt{Z}) & = \texttt{C} \\
-  \sigma_4(\texttt{X}) & = \texttt{D} \\
-  \sigma_5(\texttt{Y}) & = \texttt{E} \\
-  \sigma_6(\texttt{Z}) & = \texttt{F} \\
+	\sigma_1(\texttt{X}) & = \texttt{A} \\
+	\sigma_2(\texttt{Y}) & = \texttt{B} \\
+	\sigma_3(\texttt{Z}) & = \texttt{C} \\
+	\sigma_4(\texttt{X}) & = \texttt{D} \\
+	\sigma_5(\texttt{Y}) & = \texttt{E} \\
+	\sigma_6(\texttt{Z}) & = \texttt{F} \\
 \end{align*}
 Since each $\sigma_i$ is represented by 13 disjoint transpositions we
 can deduce, for example, that
 \[
-  \sigma_1\sigma_4(D) = \sigma_1(X) = A.
+	\sigma_1\sigma_4(D) = \sigma_1(X) = A.
 \]
 With a sufficient set of hexagrams from gathered messages, we could
 then fully deduce the permutation $\sigma_1\sigma_4$. Further, we
@@ -45,65 +45,65 @@ could recover $\sigma_2\sigma_5$ and $\sigma_3\sigma_6$. Rejewski
 refered to these paired permutations as {\bf{characteristics}}. In
 practice, such recovered characteristics may look like
 \begin{align*}
-  \sigma_1\sigma_4 & =
-  (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})
-  \\
-  \sigma_2\sigma_5 & =
-  (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})
-  \\
-  \sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})
+	\sigma_1\sigma_4 & =
+	(\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})
+	\\
+	\sigma_2\sigma_5 & =
+	(\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})
+	\\
+	\sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})
 \end{align*}
 Rejewski noted a key structural similarity between all such
 characteristics recovered in this fashion: in each characteristic,
 cycles of the same length appear in pairs.
 \\\\To see why this happens consider the following lemma,
 \begin{lemma}
-  \label{cillies}
-  Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$.
-  Then $\alpha$ and $\beta$ will appear in disjoint cycles of
-  $\sigma_i\sigma_{i+3}$ of equal length.
+	\label{cillies}
+	Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$.
+	Then $\alpha$ and $\beta$ will appear in disjoint cycles of
+	$\sigma_i\sigma_{i+3}$ of equal length.
 \end{lemma}
 \begin{proof}
-  %% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
-  % %%
-  We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$
-  then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our
-  claim is true. Then without loss of generality we can arrange
-  $\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
-  \[
-    \setlength{\arraycolsep}{15pt}
-    \begin{array}{cc}
-      \sigma_i      & \sigma_{i+3} \\
-      \hline
-      (\alpha\beta) & (\beta x_1)  \\
-      (x_1 x_2)     & (x_2 x_3)    \\
-      \vdots        & \vdots       \\
-      (x_{k-1} x_k) & (x_k \alpha)
-    \end{array}
-  \]
-  Then the product $\sigma_i\sigma_{i+3}$ will be
-  \[
-    \sigma_1\sigma_{i+3} = (\alpha x_1 x_3 \dots x_{k-1} )(x_k
-    x_{k-2} \dots x_2 \beta)
-  \]
-  and thus $\alpha$ and $\beta$ end up in disjoint cycles of equal length.
+	%% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
+	% %%
+	We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$
+	then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our
+	claim is true. Then without loss of generality we can arrange
+	$\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
+	\[
+		\setlength{\arraycolsep}{15pt}
+		\begin{array}{cc}
+			\sigma_i      & \sigma_{i+3} \\
+			\hline
+			(\alpha\beta) & (\beta x_1)  \\
+			(x_1 x_2)     & (x_2 x_3)    \\
+			\vdots        & \vdots       \\
+			(x_{k-1} x_k) & (x_k \alpha)
+		\end{array}
+	\]
+	Then the product $\sigma_i\sigma_{i+3}$ will be
+	\[
+		\sigma_1\sigma_{i+3} = (\alpha x_1 x_3 \dots x_{k-1} )(x_k
+		x_{k-2} \dots x_2 \beta)
+	\]
+	and thus $\alpha$ and $\beta$ end up in disjoint cycles of equal length.
 \end{proof}
 
 This lemma has several consequences.
 \begin{itemize}
-  \item A characteristic like $\sigma_1\sigma_4$ which has two
-    singletons $\texttt{A}$ and $\texttt{S}$ then both $\sigma_1$ and
-    $\sigma_4$ must have the transposition $(\texttt{AS})$.
-  \item A characteristic like $\sigma_3\sigma_6$ (two disjoint 13
-    cycles) reduces the space of possible $\sigma_3$'s to just 13
-    permutations which will take the form
-    \begin{center}
-      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
-      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
-      $\vdots$                                       \\
-      $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
-    \end{center}
-    and similarly for $\sigma_6$.
+	\item A characteristic like $\sigma_1\sigma_4$ which has two
+	      singletons $\texttt{A}$ and $\texttt{S}$ then both $\sigma_1$ and
+	      $\sigma_4$ must have the transposition $(\texttt{AS})$.
+	\item A characteristic like $\sigma_3\sigma_6$ (two disjoint 13
+	      cycles) reduces the space of possible $\sigma_3$'s to just 13
+	      permutations which will take the form
+	      \begin{center}
+		      $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
+		      $(\texttt{AU})(\texttt{BD})(\texttt{VO})\dots(\texttt{YZ})$ \\
+		      $\vdots$                                       \\
+		      $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
+	      \end{center}
+	      and similarly for $\sigma_6$.
 \end{itemize}
 Thus with absolutely no knowledge of the rotor wirings or the daily
 key, we can already tractibly compute a searchable space of
@@ -116,15 +116,17 @@ their message keys -- likely to prevent frequency analysis attacks on
 the hexagrams beginning messages; However, operators often chose the
 same trigrams for each message. Some examples might inclide
 \begin{itemize}
-  \item Initials or first letters of the operator's spouse. For
-    example, \texttt{CIL} perhaps deriving from the name ``Cecelia''
-    being shortened to ``cillie''. Allegadely for this reason, poor
-    selections of trigrams from operators became known as {\bf{cillies}}.
-  \item The same letter encoded three times such as \texttt{JJJ}
-  \item Locations such as \texttt{LON} representing London.
+	\item Initials or first letters of the operator's spouse. For
+	      example, \texttt{CIL} perhaps deriving from the name ``Cecelia''
+	      being shortened to ``cillie''. Allegadely for this reason, poor
+	      selections of trigrams from operators became known as {\bf{cillies}}.
+	\item The same letter encoded three times such as \texttt{JJJ}. These were ultimately prohibited in 1933
+	\item Letters forming trigrams on the Enigma keyboard such as \texttt{ASD} and \texttt{PYX}. These were also later prohibited.
+	      % https://archive.org/details/enigmahowgermanm0000koza/page/240/mode/2up PG 241 %
+	\item Locations such as \texttt{LON} representing London.
 
-    %% Battle of wits the complete story of codebreaking in World War
-    % II PAGE 143 %%
+	      %% Battle of wits the complete story of codebreaking in World War
+	      % II PAGE 143 %%
 \end{itemize}
 By keeping track of various radio stations which used cillies.
 Rejewski had a reasonable guess as to what the message key used for a
@@ -132,9 +134,9 @@ particular ciphertext were. Suppose we recieved three hexagrams
 originating from a radio station which often used \texttt{JJJ} as
 their message key:
 \begin{center}
-  \texttt{SUG SMF}\\
-  \texttt{SJM SPO}\\
-  \texttt{SYX SCW}.
+	\texttt{SUG SMF}\\
+	\texttt{SJM SPO}\\
+	\texttt{SYX SCW}.
 \end{center}
 
 We can then compare these message keys against our possibilites for
@@ -167,55 +169,55 @@ However, we will provide a brief description to illustrate that with
 minimal intellegence information, entire rotor wirings were able to be deduced.
 \\\\We begin by expanding $\sigma_i$ to
 \[
-  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
+	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
 \]
 where $x$ accounts for the initial starting position of the rightmost rotor.
 Since $M^{-1}L^{-1}RLM$ does not change between $\sigma_i$s we will
 denote this permutation $Q$ thus simplifying our earlier expression to
 \[
-  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
+	\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
 \]
 Rejewski knew the plugboard settings for two whole months, so he
 began shifting knowns and unknowns to opposite sides. Shifting things
 around gives us
 \begin{align*}
-  & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S \\
-  \Rightarrow\text{ } & S\sigma_i S^{-1} =
-  P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}
-  \\
-  \Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =
-  N^{-1}P^{x+i}QP^{-(x+i)}N
+	                    & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S \\
+	\Rightarrow\text{ } & S\sigma_i S^{-1} =
+	P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}
+	\\
+	\Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =
+	N^{-1}P^{x+i}QP^{-(x+i)}N
 \end{align*}
 To further simplify notation we will then define ${\rho_i} \coloneq
-P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
+	P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
 \[
-  \rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
+	\rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
 \]
 where $\rho_i$s are known from the key sheets Rejewski had access to.
 We will now eliminate this equations dependence on $Q$ by considering
 pairs of $\rho_i$ and $\rho_{i+1}$
 \begin{align*}
-  \rho_i\rho_{i+1} & = N^{-1}P^{x+i}QP^{-(x+i)}NN^{-1}P^{x+i+1}QP^{-(x+i+1)}N \\
-  & = N^{-1}P^{x+i}QP^{-(x+i)}P^{x+i+1}QP^{-(x+i+1)}N        \\
-  & = N^{-1}P^{x+i}QPQP^{-(x+i+1)}N                          \\
-  & =N^{-1}P^{x+i}(QPQP^{-1})P^{-{x+i}}N
+	\rho_i\rho_{i+1} & = N^{-1}P^{x+i}QP^{-(x+i)}NN^{-1}P^{x+i+1}QP^{-(x+i+1)}N \\
+	                 & = N^{-1}P^{x+i}QP^{-(x+i)}P^{x+i+1}QP^{-(x+i+1)}N        \\
+	                 & = N^{-1}P^{x+i}QPQP^{-(x+i+1)}N                          \\
+	                 & =N^{-1}P^{x+i}(QPQP^{-1})P^{-{x+i}}N
 \end{align*}
 Each $\rho_i\rho_{i+1}$ shares the common subexpression $QPQP^{-1}$.
 We can eliminate this subexpression by noting
 \begin{align*}
-  \rho_{i+1}\rho_{i+2} & = N^{-1}P^{x+i+1}(QPQP^{-1})P^{-{x+i+1}}N
-  \\
-  & =
-  N^{-1}P^{x+i+1}(P^{-(x+i)}NN^{-1}P^{x+i})(QPQP^{-1})(P^{-(x+i)}NN^{-1}P^{x+i})P^{-{x+i+1}}N
-  \\
-  & =
-  N^{-1}P^{x+i+1}P^{-(x+i)}N(N^{-1}P^{x+i}QPQP^{-1}P^{-(x+i)}N)N^{-1}P^{x+i}P^{-{x+i+1}}N
-  \\
-  & =
-  N^{-1}P^{x+i+1}P^{-(x+i)}N(\rho_i\rho_{i+1})N^{-1}P^{x+i}P^{-{x+i+1}}N
-  \\
-  & = N^{-1}P^{-1}N(\rho_i\rho_{i+1})N^{-1}PN
-  \\
+	\rho_{i+1}\rho_{i+2} & = N^{-1}P^{x+i+1}(QPQP^{-1})P^{-{x+i+1}}N
+	\\
+	                     & =
+	N^{-1}P^{x+i+1}(P^{-(x+i)}NN^{-1}P^{x+i})(QPQP^{-1})(P^{-(x+i)}NN^{-1}P^{x+i})P^{-{x+i+1}}N
+	\\
+	                     & =
+	N^{-1}P^{x+i+1}P^{-(x+i)}N(N^{-1}P^{x+i}QPQP^{-1}P^{-(x+i)}N)N^{-1}P^{x+i}P^{-{x+i+1}}N
+	\\
+	                     & =
+	N^{-1}P^{x+i+1}P^{-(x+i)}N(\rho_i\rho_{i+1})N^{-1}P^{x+i}P^{-{x+i+1}}N
+	\\
+	                     & = N^{-1}P^{-1}N(\rho_i\rho_{i+1})N^{-1}PN
+	\\
 \end{align*}
 We now have a relationship between each $\rho_i\rho_{i+1}$ and
 $\rho_{i+1}\rho_{i+2}$ by conjugating by $N^{-1}PN$. Now recall from
@@ -242,7 +244,7 @@ $\sigma_i$. We will use this information to recover the daily keys.
 For the moment, let us assume $S$ is the identity permutation. Then
 rearranging $\sigma_i$ we get
 \begin{align}
-  Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
+	Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
 \end{align}
 Since $Q$ must be the same for each such equation involving
 $\sigma_i$ we will devise a manual way to deduce $Q$. We can
@@ -252,20 +254,20 @@ Then for each $\sigma_i$ we can write out $\sigma_i$ with a slit
 beneath it to allow space for each possible $P^{-k}NP^k$. We will
 illustrate this for $\sigma_1$ and denote the spaces beneath with periods.
 \begin{align*}
-  \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
-  \texttt{|}          & \texttt{..........................} \texttt{|}
+	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+	\texttt{|}          & \texttt{..........................} \texttt{|}
 \end{align*}
 We will call this the {\bf{top sheet}}. By sliding the bottom sheet
 beneath the top sheet we can test various values of $P^{-k}NP^{k}$ to
 see what values of $Q$ they give. For example, for $k = 0$ we have
 \begin{align*}
-  \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
-  N \texttt{ |}       & \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
+	\texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
+	\sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+	N \texttt{ |}       & \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
 \end{align*}
 We know that $Q(\texttt{A}) =
-(P^{-k}NP^k)\sigma_i(P^{-k}NP^k)^{-1}(\texttt{A})$. Therefore to compute
+	(P^{-k}NP^k)\sigma_i(P^{-k}NP^k)^{-1}(\texttt{A})$. Therefore to compute
 $Q(\texttt{A})$ we first begin at $\texttt{A}$ in our bottom row to
 find that $N^{-1}(\texttt{A})=\texttt{Z}$. We now map $\texttt{Z}$
 through $\sigma_i$ by finding $\texttt{Z}$ on the top row and seeing
@@ -273,7 +275,7 @@ where it lands in the middle row, thus giving
 $\sigma_iN^{-1}(\texttt{A}) = \texttt{U}$. Finally to see where $N$
 maps $\texttt{U}$ by finding $\texttt{U}$ on the top row and seeing
 where it lands in the middle row, thus giving $Q(\texttt{A}) =
-N\sigma_iN^{-1}(\texttt{A}) = M$. Continuing in this fashion we can
+	N\sigma_iN^{-1}(\texttt{A}) = M$. Continuing in this fashion we can
 get a candidate $Q$ generated by the guess that $\sigma_i$ aligned
 with $N$ in the sheet. Recall that $Q$ must be consistent between
 each equation \ref{eq:q_eq}. To check this we can simply construct
@@ -296,7 +298,7 @@ absolute position of the rightmost rotor. Additionally, using this
 method, we can see where the $Q$s fail to line up to determine which
 letters are steckered and which are unsteckered, along with some of
 the steckerings themselves. Such a method was called the {\bf{grill
-method}} and required tedious work and had many possibilites for mistakes.
+			method}} and required tedious work and had many possibilites for mistakes.
 \\\\To determine the absolute positions of the remaining two rotors
 we can simply enumerate all $26^2 = 676$ positions of the left two
 rotors (for both possible orderings of the rotors) until $Q$ is
@@ -305,7 +307,8 @@ associated each $Q$ to a corresponding position and ordering of the
 left two rotors. Now equipped with each absolute rotor position, we
 still must determine the ring settings.
 \\\\To determine the ring settings we make use of another operator
-error. Often messages began with the letters \texttt{ANX} which is
+error. Often messages began with the letters \texttt{ANX}\footnote{This practice was prohibited past 1940 by forcing messages to begin with a random word} which is
+% ENIGMA HOW pg 241 %
 the German word ``to'' along with \texttt{X} denoting a space. We
 could therefore set the ring setting to its default location and then
 brute force all $26^3$ possible rotor positions until the first
@@ -322,7 +325,6 @@ Germans eventually used up to $10$ jacks making the grill method
 infeasible since we can no longer determine confidently the true
 value of $Q$. This fact will later necessitate the development of an
 additional tool called the {\bf{Bomba}} later discussed in this chapter.
-
 \section{The Clock Method}\label{clock_method}
 
 At this point Rejewski and his team were able to recover daily keys,
@@ -339,7 +341,7 @@ daily keys kept rotor positions the same for an entire 3 month period
 meaning this analysis did not need to be done too frequently.
 \\\\However, Jerzy Różycki worked out an efficient method to
 determine the rightmost rotor which he called the {\bf{clock
-method}}. The clock method attempted to determine where the turnover
+			method}}. The clock method attempted to determine where the turnover
 notch was for the rightmost rotor. From this we could immediately
 determine which of the three rotors was used.
 
@@ -358,7 +360,7 @@ same position with a letter
 from the second piece of text is non-uniform, this distribution is
 called the {\bf{index of coincidence}}. In particular, for German, we
 find that the expected number of alignments (called
-{\bf{coincidences}}) between two pieces of text $26$ letters long is
+	{\bf{coincidences}}) between two pieces of text $26$ letters long is
 $2.05$. If these texts
 %https://en.wikipedia.org/wiki/Index_of_coincidence% It then follows
 % that if two pieces of text
@@ -382,15 +384,15 @@ generated by $\texttt{XYA}$ on top of the message generated by
 $\texttt{XYF}$ we can slide the bottom message until is 5 positions
 further than the top message,
 \begin{align*}
-  & \texttt{XYA}: \texttt{PASLK XASSP AUSDK XPVNW UULVT LWKRE KGUQO
-  DSUKV ZOLMZ ZHYBF}
-  \\
-  & \texttt{XYF}: \texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{
-  }\texttt{ }\texttt{BAWXV ETTOP JZHXL VWGGQ MWDII OEHQO YSLRB IYLGB
-  CHBYT }
-  \\
-  &
-  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \texttt{**}\ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \texttt{*}
+	 & \texttt{XYA}: \texttt{PASLK XASSP AUSDK XPVNW UULVT LWKRE KGUQO
+		DSUKV ZOLMZ ZHYBF}
+	\\
+	 & \texttt{XYF}: \texttt{ }\texttt{ }\texttt{ }\texttt{ }\texttt{
+	}\texttt{ }\texttt{BAWXV ETTOP JZHXL VWGGQ MWDII OEHQO YSLRB IYLGB
+		CHBYT }
+	\\
+	 &
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \ \ \texttt{**}\ \ \ \texttt{*}\ \ \ \ \ \ \ \ \ \texttt{*}\ \ \ \ \ \ \ \texttt{*}
 \end{align*}
 at this point we would expect the texts to both be encoded by
 $\texttt{XYF}$ and the number of coincidences (indicated by
@@ -426,50 +428,50 @@ rotor wirings to know the exact permutaition $\sigma_1$ and
 $\sigma_4$ for any initial rotor position. In specific, suppose we have
 
 \begin{center}
-  \[
-    \left(
-      \begin{array}{llllllllllllllllllllllllll}
-        \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-        \texttt{Y} & \texttt{Z}                             \\
-        \texttt{P} & \texttt{T} & \texttt{K} & \texttt{X} &
-        \texttt{R} & \texttt{Z} & \texttt{Q} & \texttt{S} &
-        \texttt{W} & \texttt{M} & \texttt{C} & \texttt{O} &
-        \texttt{J} & \texttt{Y} & \texttt{L} & \texttt{A} &
-        \texttt{G} & \texttt{E} & \texttt{H} & \texttt{B} &
-        \texttt{V} & \texttt{U} & \texttt{I} & \texttt{D} &
-        \texttt{N} & \texttt{F}
-      \end{array}
-    \right)
-  \]
-  $\sigma_1$
+	\[
+		\left(
+		\begin{array}{llllllllllllllllllllllllll}
+				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}                             \\
+				\texttt{P} & \texttt{T} & \texttt{K} & \texttt{X} &
+				\texttt{R} & \texttt{Z} & \texttt{Q} & \texttt{S} &
+				\texttt{W} & \texttt{M} & \texttt{C} & \texttt{O} &
+				\texttt{J} & \texttt{Y} & \texttt{L} & \texttt{A} &
+				\texttt{G} & \texttt{E} & \texttt{H} & \texttt{B} &
+				\texttt{V} & \texttt{U} & \texttt{I} & \texttt{D} &
+				\texttt{N} & \texttt{F}
+			\end{array}
+		\right)
+	\]
+	$\sigma_1$
 \end{center}
 \begin{center}
-  \[
-    \left(
-      \begin{array}{llllllllllllllllllllllllll}
-        \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-        \texttt{Y} & \texttt{Z}                             \\
-        \texttt{J} & \texttt{W} & \texttt{V} & \texttt{R} &
-        \texttt{O} & \texttt{S} & \texttt{U} & \texttt{Y} &
-        \texttt{Z} & \texttt{A} & \texttt{T} & \texttt{Q} &
-        \texttt{X} & \texttt{P} & \texttt{E} & \texttt{N} &
-        \texttt{L} & \texttt{D} & \texttt{F} & \texttt{K} &
-        \texttt{G} & \texttt{C} & \texttt{B} & \texttt{M} &
-        \texttt{H} & \texttt{I}
-      \end{array}
-    \right)
-  \]
-  $\sigma_4$
+	\[
+		\left(
+		\begin{array}{llllllllllllllllllllllllll}
+				\texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}                             \\
+				\texttt{J} & \texttt{W} & \texttt{V} & \texttt{R} &
+				\texttt{O} & \texttt{S} & \texttt{U} & \texttt{Y} &
+				\texttt{Z} & \texttt{A} & \texttt{T} & \texttt{Q} &
+				\texttt{X} & \texttt{P} & \texttt{E} & \texttt{N} &
+				\texttt{L} & \texttt{D} & \texttt{F} & \texttt{K} &
+				\texttt{G} & \texttt{C} & \texttt{B} & \texttt{M} &
+				\texttt{H} & \texttt{I}
+			\end{array}
+		\right)
+	\]
+	$\sigma_4$
 \end{center}
 Then to find the permutation $\sigma_1\sigma_4$ we might do the
 following. We begin with \texttt{A}. We first run \texttt{A} through
@@ -487,57 +489,57 @@ between $\sigma_1$ and $\sigma_4$ we will find alternating elements
 of the pair of cycles of equal length which contain \texttt{A}. We
 can mechanize this process via the following
 circuit\footnote{Throughout this paper, diagrams will represent a
-  simplified Enigma machine consisting of only four letters
-(\texttt{A},\texttt{B}, \texttt{C}, and \texttt{D}):}
+	simplified Enigma machine consisting of only four letters
+	(\texttt{A},\texttt{B}, \texttt{C}, and \texttt{D}):}
 \begin{center}
-  \begin{tikzpicture}[thick, scale=0.9, every node/.style={scale=0.7}]
-    % Draw the box
-    \draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
+	\begin{tikzpicture}[thick, scale=0.9, every node/.style={scale=0.7}]
+		% Draw the box
+		\draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
 
-    \node at (3-5, -2-1) {$Q_{y,x}$};
+		\node at (3-5, -2-1) {$Q_{y,x}$};
 
-    \draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
-    \draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
+		\draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
+		\draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
 
-    \draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
+		\draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
 
-    \node at (3-3, -2-1) {$N_z$};
+		\node at (3-3, -2-1) {$N_z$};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-3, 2-1) -- (4-3, 0-1);
-    \draw[-] (2-3, 1-1) -- (4-3, -1-1);
-    \draw[-] (2-3, 0-1) -- (4-3, 2-1);
-    \draw[-] (2-3,-1-1) -- (4-3, 1-1);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2-3, 2-1) -- (4-3, 0-1);
+		\draw[-] (2-3, 1-1) -- (4-3, -1-1);
+		\draw[-] (2-3, 0-1) -- (4-3, 2-1);
+		\draw[-] (2-3,-1-1) -- (4-3, 1-1);
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2-1, -1-1) -- (4+3, -1-1);
-    \draw[-] (2-1, 0-1) -- (4+3, 0-1);
-    \draw[-] (2-1, 1-1) -- (4+3, 1-1);
-    \draw[-] (2-1,2-1) -- (4+3, 2-1);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2-1, -1-1) -- (4+3, -1-1);
+		\draw[-] (2-1, 0-1) -- (4+3, 0-1);
+		\draw[-] (2-1, 1-1) -- (4+3, 1-1);
+		\draw[-] (2-1,2-1) -- (4+3, 2-1);
 
-    \draw[fill=lightgray] (2+3,-1.5-1) rectangle (4+3,2.5-1) node[midway] {};
+		\draw[fill=lightgray] (2+3,-1.5-1) rectangle (4+3,2.5-1) node[midway] {};
 
-    \node at (3+3, -2-1) {$N_{z+3}$};
+		\node at (3+3, -2-1) {$N_{z+3}$};
 
-    % Draw the lines inside the box to represent the mapping
-    \draw[-] (2+3, 1-1) -- (4+3, 2-1);
-    \draw[-] (2+3, 2-1) -- (4+3, 1-1);
-    \draw[-] (2+3, 0-1) -- (4+3, -1-1);
-    \draw[-] (2+3,-1-1) -- (4+3, 0-1);
+		% Draw the lines inside the box to represent the mapping
+		\draw[-] (2+3, 1-1) -- (4+3, 2-1);
+		\draw[-] (2+3, 2-1) -- (4+3, 1-1);
+		\draw[-] (2+3, 0-1) -- (4+3, -1-1);
+		\draw[-] (2+3,-1-1) -- (4+3, 0-1);
 
-    \draw[fill=lightgray] (2+5,-1.5-1) rectangle (4+5,2.5-1) node[midway] {};
+		\draw[fill=lightgray] (2+5,-1.5-1) rectangle (4+5,2.5-1) node[midway] {};
 
-    \node at (3+5, -2-1) {$Q_{y, x}$};
+		\node at (3+5, -2-1) {$Q_{y, x}$};
 
-    \draw[-] (2+5, 2-1) |- ++(0.75, 0) |- (2+5, 0-1);
-    \draw[-] (2+5, 1-1) |- ++(1, 0) |- (2+5, -1-1);
+		\draw[-] (2+5, 2-1) |- ++(0.75, 0) |- (2+5, 0-1);
+		\draw[-] (2+5, 1-1) |- ++(1, 0) |- (2+5, -1-1);
 
-    \node at (2+1, 2.3-1) {$\texttt{A}$};
-    \node at (2+1, 1.3-1) {$\texttt{B}$};
-    \node at (2+1, 0.3-1) {$\texttt{C}$};
-    \node at (2+1, -0.6-1) {$\texttt{D}$};
+		\node at (2+1, 2.3-1) {$\texttt{A}$};
+		\node at (2+1, 1.3-1) {$\texttt{B}$};
+		\node at (2+1, 0.3-1) {$\texttt{C}$};
+		\node at (2+1, -0.6-1) {$\texttt{D}$};
 
-  \end{tikzpicture}
+	\end{tikzpicture}
 \end{center}
 
 In this circuit $N_z$ represents the rightmost rotor at some position
@@ -557,7 +559,7 @@ the cycles in a permutation $\sigma_1\sigma_{4}$ at any given
 position of rotors $(x,y,z)$. We can now rotate through all
 $26^3$ positions of the rotors and create a catalogue of all
 characteristics $\sigma_1\sigma_3$ (note that $\sigma_2\sigma_5$ and
-  $\sigma_3\sigma_6$ can be retrieved by just looking at the next two
+$\sigma_3\sigma_6$ can be retrieved by just looking at the next two
 catalogue entries). We must also consider all 6 orderings of rotors
 \texttt{I}, \texttt{II}, and \texttt{III}. Thus we can laboriously
 generate a catalogue of all rotor orders and settings consisting of
@@ -604,7 +606,7 @@ which the message key was obtained.
 (\emph{Grundstellung}) for each message. The operator then sent the
 window setting in plaintext and proceeded to encode their message key
 (\emph{Spruchschlüssel}) twice, enciphered with the chosen window
-setting. % \begin{figure}[h]
+setting\footnote{Much like earlier cillies, some operators lazily chose trigrams for their ground setting and message key which formed words like \texttt{BERLIN} or \texttt{LONDON}}. % \begin{figure}[h]
 %   \begin{center}
 %     \resizebox{0.98\textwidth}{!}{
 %       \begin{tabular}{|c|c|c|c|c|}
@@ -700,18 +702,18 @@ nothing of the ring setting, plugboard setting, rotor position, or rotor order.
 Rejewski noticed that, given enough cipher material, we could find
 three messages with the following form.
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \emph{Grundstellung} & \emph{Spruchschlüssel}
-    \\
-    \hline
-    \texttt{RTJ}         & {\uline{\texttt{W}}}\texttt{AH
-    }{\uline{\texttt{W}}}\texttt{IK}                               \\
-    \texttt{HPN}         & \texttt{RA}{\uline{\texttt{W}}}\texttt{
-    KT}{\uline{\texttt{W}}}                                        \\
-    \texttt{DQY}         & \texttt{D}{\uline{\texttt{W}}}\texttt{J
-    M}{\uline{\texttt{W}}}\texttt{R}
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\emph{Grundstellung} & \emph{Spruchschlüssel}
+		\\
+		\hline
+		\texttt{RTJ}         & {\uline{\texttt{W}}}\texttt{AH
+		}{\uline{\texttt{W}}}\texttt{IK}                               \\
+		\texttt{HPN}         & \texttt{RA}{\uline{\texttt{W}}}\texttt{
+		KT}{\uline{\texttt{W}}}                                        \\
+		\texttt{DQY}         & \texttt{D}{\uline{\texttt{W}}}\texttt{J
+			M}{\uline{\texttt{W}}}\texttt{R}
+	\end{array}
 \]
 Notice that the first message has the letter \texttt{W} in both its
 first and fourth position. Cryptanalysts refered to such coincidences
@@ -745,152 +747,152 @@ was an electromechanical computer which used relays and switches for
 these operations. Consider the following circuit.
 
 \begin{center}
-  \scalebox{0.9} {
-    \begin{circuitikz}
-      % Draw the box
-      \draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
+	\scalebox{0.9} {
+		\begin{circuitikz}
+			% Draw the box
+			\draw[fill=lightgray] (2-5,-1.5-1) rectangle (4-5,2.5-1) node[midway] {};
 
-      \node at (3-5, -2-1) {$Q_{y,x}$};
+			\node at (3-5, -2-1) {$Q_{y,x}$};
 
-      \draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
-      \draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
+			\draw[-] (2-3, 2-1) |- ++(-0.75, 0) |- (2-3, 0-1);
+			\draw[-] (2-3, 1-1) |- ++(-1, 0) |- (2-3, -1-1);
 
-      \draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
+			\draw[fill=lightgray] (2-3,-1.5-1) rectangle (4-3,2.5-1) node[midway] {};
 
-      \node at (3-3, -2-1) {$N_z$};
+			\node at (3-3, -2-1) {$N_z$};
 
-      % Draw the lines inside the box to represent the mapping
-      \draw[-] (2-3, 2-1) -- (4-3, 0-1);
-      \draw[-] (2-3, 1-1) -- (4-3, -1-1);
-      \draw[-] (2-3, 0-1) -- (4-3, 2-1);
-      \draw[-] (2-3,-1-1) -- (4-3, 1-1);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-1) -- (4-3, 0-1);
+			\draw[-] (2-3, 1-1) -- (4-3, -1-1);
+			\draw[-] (2-3, 0-1) -- (4-3, 2-1);
+			\draw[-] (2-3,-1-1) -- (4-3, 1-1);
 
-      % Wiring exiting
-      \draw (1,2-1) to (1.75,2-1);
-      \draw[line width=1.25pt] (1.75, 2-1) to ++(60:0.5);
-      \fill (1.75, 2-1) circle (2pt); % dot
-      \fill (1.75,2-1) ++(60:0.5) circle (2pt); % dot
-      \draw (2.25,2-1) circle (2pt); % dot
-      \draw (2.3,2-1) to (3,2-1);
-      \draw (1,1-1) to (1.75,1-1);
-      \draw[line width=1.25pt] (1.75,1-1) to (2.25,1-1);
-      \fill (1.75, 1-1) circle (2pt); % dot
-      \fill (2.25, 1-1) circle (2pt); % dot
-      \draw (2.25,1-1) to (4.5,1-1);
-      \draw (1,0-1) to (1.75,0-1);
-      \draw[line width=1.25pt] (1.75,0-1) to (2.25,0-1);
-      \fill (1.75, 0-1) circle (2pt); % dot
-      \fill (2.25, 0-1) circle (2pt); % dot
-      \draw (2.25,0-1) to (6,0-1);
-      \draw (1,-1-1) to (1.75,-1-1);
-      \draw[line width=1.25pt] (1.75,-1-1) to (2.25,-1-1);
-      \fill (1.75, -1-1) circle (2pt); % dot
-      \fill (2.25, -1-1) circle (2pt); % dot
-      \draw (2.25,-1-1) to (7.5,-1-1);
+			% Wiring exiting
+			\draw (1,2-1) to (1.75,2-1);
+			\draw[line width=1.25pt] (1.75, 2-1) to ++(60:0.5);
+			\fill (1.75, 2-1) circle (2pt); % dot
+			\fill (1.75,2-1) ++(60:0.5) circle (2pt); % dot
+			\draw (2.25,2-1) circle (2pt); % dot
+			\draw (2.3,2-1) to (3,2-1);
+			\draw (1,1-1) to (1.75,1-1);
+			\draw[line width=1.25pt] (1.75,1-1) to (2.25,1-1);
+			\fill (1.75, 1-1) circle (2pt); % dot
+			\fill (2.25, 1-1) circle (2pt); % dot
+			\draw (2.25,1-1) to (4.5,1-1);
+			\draw (1,0-1) to (1.75,0-1);
+			\draw[line width=1.25pt] (1.75,0-1) to (2.25,0-1);
+			\fill (1.75, 0-1) circle (2pt); % dot
+			\fill (2.25, 0-1) circle (2pt); % dot
+			\draw (2.25,0-1) to (6,0-1);
+			\draw (1,-1-1) to (1.75,-1-1);
+			\draw[line width=1.25pt] (1.75,-1-1) to (2.25,-1-1);
+			\fill (1.75, -1-1) circle (2pt); % dot
+			\fill (2.25, -1-1) circle (2pt); % dot
+			\draw (2.25,-1-1) to (7.5,-1-1);
 
-      % Draw the box
-      \draw[fill=lightgray] (2-5,-1.5-7) rectangle (4-5,2.5-7) node[midway] {};
+			% Draw the box
+			\draw[fill=lightgray] (2-5,-1.5-7) rectangle (4-5,2.5-7) node[midway] {};
 
-      \node at (3-5, -2-7) {$Q_{y,x}$};
+			\node at (3-5, -2-7) {$Q_{y,x}$};
 
-      \draw[-] (2-3, 2-7) |- ++(-0.75, 0) |- (2-3, 0-7);
-      \draw[-] (2-3, 1-7) |- ++(-1, 0) |- (2-3, -1-7);
+			\draw[-] (2-3, 2-7) |- ++(-0.75, 0) |- (2-3, 0-7);
+			\draw[-] (2-3, 1-7) |- ++(-1, 0) |- (2-3, -1-7);
 
-      \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+			\draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
 
-      \node at (3-3, -2-7) {$N_{z+3}$};
+			\node at (3-3, -2-7) {$N_{z+3}$};
 
-      % Draw the lines inside the box to represent the mapping
-      \draw[-] (2-3, 2-7) -- (4-3, 1-7);
-      \draw[-] (2-3, 1-7) -- (4-3, 2-7);
-      \draw[-] (2-3, 0-7) -- (4-3, -1-7);
-      \draw[-] (2-3,-1-7) -- (4-3, 0-7);
+			% Draw the lines inside the box to represent the mapping
+			\draw[-] (2-3, 2-7) -- (4-3, 1-7);
+			\draw[-] (2-3, 1-7) -- (4-3, 2-7);
+			\draw[-] (2-3, 0-7) -- (4-3, -1-7);
+			\draw[-] (2-3,-1-7) -- (4-3, 0-7);
 
-      % Wiring exiting
-      \draw (1,2-7) to (1.75,2-7);
-      \draw[line width=1.25pt] (1.75, 2-7) to ++(60:0.5);
-      \fill (1.75, 2-7) circle (2pt); % dot
-      \fill (1.75,2-7) ++(60:0.5) circle (2pt); % dot
-      \draw (2.25,2-7) circle (2pt); % dot
-      \draw (2.3,2-7) to (3,2-7);
-      \draw (1,1-7) to (1.75,1-7);
-      \draw[line width=1.25pt] (1.75,1-7) to (2.25,1-7);
-      \fill (1.75, 1-7) circle (2pt); % dot
-      \fill (2.25, 1-7) circle (2pt); % dot
-      \draw (2.25,1-7) to (4.5,1-7);
-      \draw (1,0-7) to (1.75,0-7);
-      \draw[line width=1.25pt] (1.75,0-7) to (2.25,0-7);
-      \fill (1.75, 0-7) circle (2pt); % dot
-      \fill (2.25, 0-7) circle (2pt); % dot
-      \draw (2.25,0-7) to (6,0-7);
-      \draw (1,-1-7) to (1.75,-1-7);
-      \draw[line width=1.25pt] (1.75,-1-7) to (2.25,-1-7);
-      \fill (1.75, -1-7) circle (2pt); % dot
-      \fill (2.25, -1-7) circle (2pt); % dot
-      \draw (2.25,-1-7) to (7.5,-1-7);
+			% Wiring exiting
+			\draw (1,2-7) to (1.75,2-7);
+			\draw[line width=1.25pt] (1.75, 2-7) to ++(60:0.5);
+			\fill (1.75, 2-7) circle (2pt); % dot
+			\fill (1.75,2-7) ++(60:0.5) circle (2pt); % dot
+			\draw (2.25,2-7) circle (2pt); % dot
+			\draw (2.3,2-7) to (3,2-7);
+			\draw (1,1-7) to (1.75,1-7);
+			\draw[line width=1.25pt] (1.75,1-7) to (2.25,1-7);
+			\fill (1.75, 1-7) circle (2pt); % dot
+			\fill (2.25, 1-7) circle (2pt); % dot
+			\draw (2.25,1-7) to (4.5,1-7);
+			\draw (1,0-7) to (1.75,0-7);
+			\draw[line width=1.25pt] (1.75,0-7) to (2.25,0-7);
+			\fill (1.75, 0-7) circle (2pt); % dot
+			\fill (2.25, 0-7) circle (2pt); % dot
+			\draw (2.25,0-7) to (6,0-7);
+			\draw (1,-1-7) to (1.75,-1-7);
+			\draw[line width=1.25pt] (1.75,-1-7) to (2.25,-1-7);
+			\fill (1.75, -1-7) circle (2pt); % dot
+			\fill (2.25, -1-7) circle (2pt); % dot
+			\draw (2.25,-1-7) to (7.5,-1-7);
 
-      % Circuit wires for A
-      \draw (3.5, -11) to (3.5,-1.5-7);
-      \draw (3.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-7);
-      \draw (3.5,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-7);
-      \draw (3.5, 0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-7);
-      \draw (3.5, 1.5-7) to (3.5,1.5-7);
-      \draw (3.5,2.0-1.77-6) node[npn, anchor=S] {};
-      \draw (3.5, 2.5-7) to (3.5,-1.5-1);
-      \draw (3.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-1);
-      \draw (3.5,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-1);
-      \draw (3.5, 0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-1);
-      \draw (3.5, 1.5-1) to (3.5,2.0-1.5);
-      \draw (3.5,2.0-1.77) node[npn, anchor=S] {};
-      \draw (3.5, 2.0-0.5) to (3.5,4);
+			% Circuit wires for A
+			\draw (3.5, -11) to (3.5,-1.5-7);
+			\draw (3.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-7);
+			\draw (3.5,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-7);
+			\draw (3.5, 0.5-7) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-7);
+			\draw (3.5, 1.5-7) to (3.5,1.5-7);
+			\draw (3.5,2.0-1.77-6) node[npn, anchor=S] {};
+			\draw (3.5, 2.5-7) to (3.5,-1.5-1);
+			\draw (3.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,-0.5-1);
+			\draw (3.5,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,0.5-1);
+			\draw (3.5, 0.5-1) to[crossing, bipoles/crossing/size=0.5] (3.5,1.5-1);
+			\draw (3.5, 1.5-1) to (3.5,2.0-1.5);
+			\draw (3.5,2.0-1.77) node[npn, anchor=S] {};
+			\draw (3.5, 2.0-0.5) to (3.5,4);
 
-      % Circuit wires for B
-      \draw (5.0, -10) to (5.0,-1.5-7);
-      \draw (5.0,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-7);
-      \draw (5.0,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-7);
-      \draw (5.0,2.0-1.77-7) node[npn, anchor=S] {};
-      \draw (5.0, 2.5-7-1) to (5.0,-1.5-1);
-      \draw (5.0, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-1);
-      \draw (5.0,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-1);
-      \draw (5.0,2.0-1.77-1) node[npn, anchor=S] {};
-      \draw (5.0, 2.0-0.5-1) to (5.0,3);
+			% Circuit wires for B
+			\draw (5.0, -10) to (5.0,-1.5-7);
+			\draw (5.0,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-7);
+			\draw (5.0,-0.5-7) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-7);
+			\draw (5.0,2.0-1.77-7) node[npn, anchor=S] {};
+			\draw (5.0, 2.5-7-1) to (5.0,-1.5-1);
+			\draw (5.0, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,-0.5-1);
+			\draw (5.0,-0.5-1) to[crossing, bipoles/crossing/size=0.5] (5.0,0.5-1);
+			\draw (5.0,2.0-1.77-1) node[npn, anchor=S] {};
+			\draw (5.0, 2.0-0.5-1) to (5.0,3);
 
-      % Circuit wires for C
-      \draw (6.5, -10) to (6.5,-1.5-7);
-      \draw (6.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-7);
-      \draw (6.5,2.0-1.77-7-1) node[npn, anchor=S] {};
-      \draw (6.5, 2.5-7-1-1) to (6.5,-1.5-1);
-      \draw (6.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-1);
-      \draw (6.5,2.0-1.77-1-1) node[npn, anchor=S] {};
-      \draw (6.5, 2.0-0.5-1-1) to (6.5,3);
+			% Circuit wires for C
+			\draw (6.5, -10) to (6.5,-1.5-7);
+			\draw (6.5,-1.5-7) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-7);
+			\draw (6.5,2.0-1.77-7-1) node[npn, anchor=S] {};
+			\draw (6.5, 2.5-7-1-1) to (6.5,-1.5-1);
+			\draw (6.5, -1.5-1) to[crossing, bipoles/crossing/size=0.5] (6.5,-0.5-1);
+			\draw (6.5,2.0-1.77-1-1) node[npn, anchor=S] {};
+			\draw (6.5, 2.0-0.5-1-1) to (6.5,3);
 
-      % Circuit wires for D
-      \draw (8.0, -10) to (8.0,-1.5-7);
-      \draw (8.0,2.0-1.77-7-1-1) node[npn, anchor=S] {};
-      \draw (8.0, 2.5-7-1-1-1) to (8.0,-1.5-1);
-      \draw (8.0,2.0-1.77-1-1-1) node[npn, anchor=S] {};
-      \draw (8.0, 2.0-0.5-1-1-1) to (8.0,3);
+			% Circuit wires for D
+			\draw (8.0, -10) to (8.0,-1.5-7);
+			\draw (8.0,2.0-1.77-7-1-1) node[npn, anchor=S] {};
+			\draw (8.0, 2.5-7-1-1-1) to (8.0,-1.5-1);
+			\draw (8.0,2.0-1.77-1-1-1) node[npn, anchor=S] {};
+			\draw (8.0, 2.0-0.5-1-1-1) to (8.0,3);
 
-      % Circuit Completion
-      \draw (3.5,3) to (8,3);
-      \draw (8, -10) to (3.5, -10);
-      \draw[purple] (-3.3, 3.3) rectangle (10.3, -10.3);
+			% Circuit Completion
+			\draw (3.5,3) to (8,3);
+			\draw (8, -10) to (3.5, -10);
+			\draw[purple] (-3.3, 3.3) rectangle (10.3, -10.3);
 
-      % Labels
-      \node at (3.5, 4+0.3) {$T^{+}$};
-      \node at (3.5, -11-0.3) {$T^{-}$};
-      \node at (3.7, 2-5.5) {\texttt{A}};
-      \node at (5.2, 2-5.5) {\texttt{B}};
-      \node at (6.7, 2-5.5) {\texttt{C}};
-      \node at (8.2, 2-5.5) {\texttt{D}};
+			% Labels
+			\node at (3.5, 4+0.3) {$T^{+}$};
+			\node at (3.5, -11-0.3) {$T^{-}$};
+			\node at (3.7, 2-5.5) {\texttt{A}};
+			\node at (5.2, 2-5.5) {\texttt{B}};
+			\node at (6.7, 2-5.5) {\texttt{C}};
+			\node at (8.2, 2-5.5) {\texttt{D}};
 
-      % Power line
-      \node at (2, 4+0.3) {$V^{+}$};
-      \node at (2, -11-0.3) {$V^{-}$};
-      \draw[dashed] (2, 4) -- (2, -11);
+			% Power line
+			\node at (2, 4+0.3) {$V^{+}$};
+			\node at (2, -11-0.3) {$V^{-}$};
+			\draw[dashed] (2, 4) -- (2, -11);
 
-    \end{circuitikz}
-  }
+		\end{circuitikz}
+	}
 \end{center}
 On the left we have our two sets of rotors represented by
 permutations $N_z^{-1}Q_{y,x}N_z$ and $N_{z+3}^{-1}Q_{y,x}N_{z+3}$
@@ -935,38 +937,38 @@ this was an electromagnet), and the machine will stop whenever all
 three females are detected.
 
 \begin{center}
-  \scalebox{0.9} {
-    \begin{circuitikz}[scale=0.9, octagon/.style=
-        {shape=regular polygon, regular polygon sides=8, draw, minimum
-      width=.2in}]
-      \fill[pink] (3-5, 0) rectangle (0-5, 3);
-      \node at (1.5-5, 1.5) {\large$x,y,z$};
-      \fill[pink] (3-0, 0) rectangle (0-0, 3);
-      \node at (1.5-0, 1.5) {\large$x^\prime,y^\prime,z^\prime$};
-      \fill[pink] (3+5, 0) rectangle (0+5, 3);
-      \node at (1.5+5, 1.5)
-      {\large$x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}$};
-      \draw[dashed] (3-5-3-1, 2) -- (0-5, 2);
-      \draw[dashed] (3-0-3-2, 2) -- (0, 2);
-      \draw[dashed] (3-0-3-2+5, 2) -- (0+5, 2);
-      \draw[dashed] (3-5-3-1+14, 2) -- (0-5+15.5, 2);
-      \draw[dashed] (3-5-3-1, 2) -- (3-5-3-1, 1);
-      \draw[dashed] (0-5+15.5, 2) -- (0-5+15.5, -5);
-      \draw[dashed] (0-5+15.5, -5) -- (0-5+15.5-1.5, -5);
+	\scalebox{0.9} {
+		\begin{circuitikz}[scale=0.9, octagon/.style=
+					{shape=regular polygon, regular polygon sides=8, draw, minimum
+						width=.2in}]
+			\fill[pink] (3-5, 0) rectangle (0-5, 3);
+			\node at (1.5-5, 1.5) {\large$x,y,z$};
+			\fill[pink] (3-0, 0) rectangle (0-0, 3);
+			\node at (1.5-0, 1.5) {\large$x^\prime,y^\prime,z^\prime$};
+			\fill[pink] (3+5, 0) rectangle (0+5, 3);
+			\node at (1.5+5, 1.5)
+			{\large$x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}$};
+			\draw[dashed] (3-5-3-1, 2) -- (0-5, 2);
+			\draw[dashed] (3-0-3-2, 2) -- (0, 2);
+			\draw[dashed] (3-0-3-2+5, 2) -- (0+5, 2);
+			\draw[dashed] (3-5-3-1+14, 2) -- (0-5+15.5, 2);
+			\draw[dashed] (3-5-3-1, 2) -- (3-5-3-1, 1);
+			\draw[dashed] (0-5+15.5, 2) -- (0-5+15.5, -5);
+			\draw[dashed] (0-5+15.5, -5) -- (0-5+15.5-1.5, -5);
 
-      \draw (3-5-3-1, 1) -- (0-5, 1);
-      \draw (3-0-3-2, 1) -- (0, 1);
-      \draw (3-0-3-2+5, 1) -- (0+5, 1);
-      \draw (3-5-3-1+14, 1) -- (0-5+14, 1);
-      \draw (3-5-3-1, 1) -- (3-5-3-1, -2.5);
-      \draw (3-5-3-1, -3) to[battery] (3-5-3-1, -2.5);
-      \draw (3-5-3-1, -3) -- (3-5-3-1, -5);
-      \draw (3-5-3-1, -5) -- (0-5+14, -5);
-      \draw (0-5+14, -5) -- (0-5+14, -3.6);
-      \draw (0-5+14, -1.4) -- (0-5+14, 1);
-      \node[octagon] at (0-5+14, -2.5) {STOP};
-    \end{circuitikz}
-  }
+			\draw (3-5-3-1, 1) -- (0-5, 1);
+			\draw (3-0-3-2, 1) -- (0, 1);
+			\draw (3-0-3-2+5, 1) -- (0+5, 1);
+			\draw (3-5-3-1+14, 1) -- (0-5+14, 1);
+			\draw (3-5-3-1, 1) -- (3-5-3-1, -2.5);
+			\draw (3-5-3-1, -3) to[battery] (3-5-3-1, -2.5);
+			\draw (3-5-3-1, -3) -- (3-5-3-1, -5);
+			\draw (3-5-3-1, -5) -- (0-5+14, -5);
+			\draw (0-5+14, -5) -- (0-5+14, -3.6);
+			\draw (0-5+14, -1.4) -- (0-5+14, 1);
+			\node[octagon] at (0-5+14, -2.5) {STOP};
+		\end{circuitikz}
+	}
 \end{center}
 
 \noindent This is more or less the structure of the Bomba. Using our
@@ -980,19 +982,19 @@ absolute position corresponding to females in each set of rotors. The
 origin of the name Bomba is disputed amongst records with the
 following claims to its namesake
 \begin{itemize}
-  \item A United States army report explained that the original
-    machines, which were turned by hand, would drop components on the
-    floor when a solution was found producing a loud noise.
-    % https://web.archive.org/web/20110807181348/http://www.codesandciphers.org.uk/documents/bmbrpt/bmbpg010.HTM
-    % %
-  \item Colonel Lisicki of the Polish Cipher Bureau explained that
-    the name came from a popular ice-cream dessert of the same name
-    which was consumed while the machine was first conceptualized.
-    % Enigma : how the German machine cipher was broken, and how it
-    % was read by the Allies in World War Two page 63 note 1 %
-  \item Rejewski claims that the name was effectively random.
-    % Enigma : how the German machine cipher was broken, and how it
-    % was read by the Allies in World War Two page 266 %
+	\item A United States army report explained that the original
+	      machines, which were turned by hand, would drop components on the
+	      floor when a solution was found producing a loud noise.
+	      % https://web.archive.org/web/20110807181348/http://www.codesandciphers.org.uk/documents/bmbrpt/bmbpg010.HTM
+	      % %
+	\item Colonel Lisicki of the Polish Cipher Bureau explained that
+	      the name came from a popular ice-cream dessert of the same name
+	      which was consumed while the machine was first conceptualized.
+	      % Enigma : how the German machine cipher was broken, and how it
+	      % was read by the Allies in World War Two page 63 note 1 %
+	\item Rejewski claims that the name was effectively random.
+	      % Enigma : how the German machine cipher was broken, and how it
+	      % was read by the Allies in World War Two page 266 %
 \end{itemize}
 From this machine we will now show that the daily key can be derived.
 We must first account for some caveats in our construction of the machine.
@@ -1017,36 +1019,36 @@ $N_{z}^{-1}Q_{y,x}N_{z}$. Such permutations completely ignore the
 effect of the plugboard permutation $S$. However, consider a message
 with the keys
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \texttt{RTJ} & {\uline{\texttt{W}}}\texttt{AH
-    }{\uline{\texttt{W}}}\texttt{IK}              \\
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{RTJ} & {\uline{\texttt{W}}}\texttt{AH
+		}{\uline{\texttt{W}}}\texttt{IK}              \\
+	\end{array}
 \]
 Denote the Enigma permutation at the positions $1$ and $4$
 respectively as $\sigma_1$ and $\sigma_4$. Recall that the \texttt{W}
 at both these positions represent the same enciphered letter, which
 means we necessarily have
 \[
-  \sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
+	\sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
 \]
 This is precisely the criteria we are using to check if $\sigma_i$
 has a $1-4$ female, we mechanicaly run \texttt{W} through these
 machines at 3 steps apart, and see if they are equal.
 \\\\If \texttt{W} is fixed by the plugboard permutation $S$ then we have
 \begin{align*}
-  & \sigma_1(\texttt{W}) = \sigma_4(\texttt{W})
-  \\
-  \iff & S^{-1}N_z^{-1}Q_{y,x}N_zS(\texttt{W}) =
-  S^{-1}N_{z+3}x^{-1}Q_{y,x}N_{z+3}S(\texttt{W})     \\
-  \iff & S^{-1}N_z^{-1}Q_{y,x}N_zS(\texttt{W}) =
-  S^{-1}N_{z+3}x^{-1}Q_{y,x}N_{z+3}(\texttt{W})      \\
-  \iff & S^{-1}(N_z^{-1}Q_{y,x}N_z(\texttt{W})) =
-  S^{-1}(N_{z+3}x^{-1}Q_{y,x}N_{z+3}(\texttt{W}))    \\
+	     & \sigma_1(\texttt{W}) = \sigma_4(\texttt{W})
+	\\
+	\iff & S^{-1}N_z^{-1}Q_{y,x}N_zS(\texttt{W}) =
+	S^{-1}N_{z+3}x^{-1}Q_{y,x}N_{z+3}S(\texttt{W})     \\
+	\iff & S^{-1}N_z^{-1}Q_{y,x}N_zS(\texttt{W}) =
+	S^{-1}N_{z+3}x^{-1}Q_{y,x}N_{z+3}(\texttt{W})      \\
+	\iff & S^{-1}(N_z^{-1}Q_{y,x}N_z(\texttt{W})) =
+	S^{-1}(N_{z+3}x^{-1}Q_{y,x}N_{z+3}(\texttt{W}))    \\
 \end{align*}
 Since $S^{-1}$ is an injection this occurs if and only if
 \[
-  N_z^{-1}Q_{y,x}N_z(\texttt{W}) = N_{z+3}^{-1}Q_{y,x}N_{z+3}(\texttt{W})
+	N_z^{-1}Q_{y,x}N_z(\texttt{W}) = N_{z+3}^{-1}Q_{y,x}N_{z+3}(\texttt{W})
 \]
 This means that for the purposes of testing for females on input
 \texttt{W}, our simplified rotor model works correctly so long as $S$
@@ -1063,13 +1065,13 @@ this is a significant improvement.
 In our Bomba we have 6 rotors, with 3 of them being paired such that
 they are 3 steps apart. Let us refer to these 6 rotors as,
 \begin{align*}
-  & R_{x,y,z} \texttt{ - } R_{x,y,z+3}
-  \\
-  & R_{x^\prime,y^\prime,z^\prime} \texttt{ - }
-  R_{x^\prime,y^\prime,z^\prime+3}
-  \\
-  & R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}} \texttt{ -
-  } R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}+3}
+	 & R_{x,y,z} \texttt{ - } R_{x,y,z+3}
+	\\
+	 & R_{x^\prime,y^\prime,z^\prime} \texttt{ - }
+	R_{x^\prime,y^\prime,z^\prime+3}
+	\\
+	 & R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}} \texttt{ -
+	} R_{x^{\prime\prime},y^{\prime\prime},z^{\prime\prime}+3}
 \end{align*}
 When our Bomba stops, we know the positions at which the females
 observed would occur with a supposed ring setting of \texttt{AAA} (we
@@ -1091,13 +1093,13 @@ steps will not change our permutation. Since our goal is to change
 our window setting from $(a,b,c)$ back to the actual window setting
 $(x,y,z)$, we must change our window setting back by a displacement of
 \[
-  ((a-x)\text{ mod } 26, (b-y)\text{ mod }26, (c-z)\text{ mod }26)
+	((a-x)\text{ mod } 26, (b-y)\text{ mod }26, (c-z)\text{ mod }26)
 \]
 Thus to get the value of the true ring setting, we compute
 \[
-  (\texttt{01} - (a- x)\text{ mod }26, \texttt{01} - (b- y)\text{ mod
-    }26, \texttt{01} - (c-
-  z)\text{ mod }26).
+	(\texttt{01} - (a- x)\text{ mod }26, \texttt{01} - (b- y)\text{ mod
+	}26, \texttt{01} - (c-
+	z)\text{ mod }26).
 \]
 
 \subsection{Recovering the Rotor Order}
@@ -1120,14 +1122,14 @@ We now have the rotor order, the ring setting, and the window
 setting. We can then attempt to decrypt a message key. For example,
 we may decode the message key from
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \texttt{LRJ} & \texttt{PAH }\texttt{IKO} \\
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{LRJ} & \texttt{PAH }\texttt{IKO} \\
+	\end{array}
 \]
 and get
 \begin{center}
-  \texttt{AN}{\uline{\texttt{K}}}\texttt{ LR}{\uline{\texttt{K}}}
+	\texttt{AN}{\uline{\texttt{K}}}\texttt{ LR}{\uline{\texttt{K}}}
 \end{center}
 We can assume \texttt{K} is correct since we expect it to be repeated
 at a distance of 3 letters apart, but the first two letters in each
@@ -1135,13 +1137,13 @@ trigram are not identical indicating that they are being affected by
 the plugboard. We might guess therefore the the message should look
 like either something of the form
 \begin{center}
-  {\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
-  }{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}
+	{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
+	}{\uline{\texttt{A}}}\texttt{.}{\uline{\texttt{K}}}
 \end{center}
 or
 \begin{center}
-  {\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
-  }{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}
+	{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}\texttt{
+	}{\uline{\texttt{L}}}\texttt{.}{\uline{\texttt{K}}}
 \end{center}
 
 \noindent However, we have now deduced the entire permutation
@@ -1186,18 +1188,18 @@ this setting. Zygalski intended to create a similar catalogue of
 positions and orderings but now each entry related to the presence of
 a female for that setting. Consider a message with a $1-4$ female
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \texttt{BWY} & {\uline{\texttt{F}}}\texttt{VJ
-    }{\uline{\texttt{F}}}\texttt{UE}              \\
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{BWY} & {\uline{\texttt{F}}}\texttt{VJ
+		}{\uline{\texttt{F}}}\texttt{UE}              \\
+	\end{array}
 \]
 Denote the Enigma permutation at the positions $1$ and $4$
 respectively as $\sigma_1$ and $\sigma_4$. We know that \texttt{F} in
 the ciphertext at both position $1$ and $4$ represent the same letter
 (we will denote $\alpha$). Then we have
 \[
-  \sigma_1\sigma_4(\texttt{F}) = \sigma_1(\alpha) = \texttt{F}
+	\sigma_1\sigma_4(\texttt{F}) = \sigma_1(\alpha) = \texttt{F}
 \]
 That is $\sigma_1\sigma_4$ contains the singleton cycle
 $(\texttt{F})$. The converse is also true, that containing a
@@ -1206,12 +1208,12 @@ in that singleton will produce a $1-4$ female.
 \\\\We will denote $\sigma_i$ without the use of the plugboard as
 $\overline\sigma_i$, that is
 \[
-  \sigma_i = S^{-1}\sigma_i S
+	\sigma_i = S^{-1}\sigma_i S
 \]
 Then we note that
 \begin{align*}
-  \sigma_1\sigma_4 & = S^{-1}\overline\sigma_1 SS^{-1} \overline\sigma_4 S \\
-  & = S^{-1} \overline\sigma_1\overline\sigma_4 S
+	\sigma_1\sigma_4 & = S^{-1}\overline\sigma_1 SS^{-1} \overline\sigma_4 S \\
+	                 & = S^{-1} \overline\sigma_1\overline\sigma_4 S
 \end{align*}
 Then we have that $\sigma_1\sigma_4$ and
 $\overline\sigma_1\overline\sigma_4$ are conjugate permutations. Then
@@ -1244,203 +1246,203 @@ cell covered. We can denote such a sheet (\texttt{B} - \texttt{I}
 \texttt{III} \texttt{II}).
 
 \begin{figure}[H]
-  \begin{center}
-    \scalebox{0.8}{
-      \begin{tabular}{c|cccccccccccccccccccccccccc}
-        & \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
-        \texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
-        \texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
-        \texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
-        \texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
-        \texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
-        \texttt{Y} & \texttt{Z}
-        \\ \hline
-        \texttt{Z} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.}                             \\
-        \texttt{Y} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0}                             \\
-        \texttt{X} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.}                             \\
-        \texttt{W} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.}                             \\
-        \texttt{V} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{U} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{T} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{S} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{R} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.}                             \\
-        \texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{P} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.}                             \\
-        \texttt{O} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{N} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{M} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0}                             \\
-        \texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0}                             \\
-        \texttt{K} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{J} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.}                             \\
-        \texttt{I} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{H} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-        \texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{F} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-        \texttt{E} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{D} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{C} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{B} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-        \texttt{A} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-    \end{tabular}}
-  \end{center}
-  \caption{(\texttt{B} - \texttt{I} \texttt{III} \texttt{II}) Zygalski sheet}
-  \label{fig:zygalski_sheet}
+	\begin{center}
+		\scalebox{0.8}{
+			\begin{tabular}{c|cccccccccccccccccccccccccc}
+				           & \texttt{A} & \texttt{B} & \texttt{C} & \texttt{D} &
+				\texttt{E} & \texttt{F} & \texttt{G} & \texttt{H} &
+				\texttt{I} & \texttt{J} & \texttt{K} & \texttt{L} &
+				\texttt{M} & \texttt{N} & \texttt{O} & \texttt{P} &
+				\texttt{Q} & \texttt{R} & \texttt{S} & \texttt{T} &
+				\texttt{U} & \texttt{V} & \texttt{W} & \texttt{X} &
+				\texttt{Y} & \texttt{Z}
+				\\ \hline
+				\texttt{Z} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.}                             \\
+				\texttt{Y} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0}                             \\
+				\texttt{X} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.}                             \\
+				\texttt{W} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.}                             \\
+				\texttt{V} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{U} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{T} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{S} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{R} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.}                             \\
+				\texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{P} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.}                             \\
+				\texttt{O} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{N} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{M} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0}                             \\
+				\texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0}                             \\
+				\texttt{K} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{J} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.}                             \\
+				\texttt{I} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{H} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+				\texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{F} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+				\texttt{E} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{D} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{C} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{B} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+				\texttt{A} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+			\end{tabular}}
+	\end{center}
+	\caption{(\texttt{B} - \texttt{I} \texttt{III} \texttt{II}) Zygalski sheet}
+	\label{fig:zygalski_sheet}
 \end{figure}
 %\footnotetext{In many Zygalski sheet diagrams a \texttt{0} is used
 % to represent a hole (that is, a singleton cycle) and a \texttt{.}
@@ -1461,11 +1463,11 @@ whether or not a $1-4$ female can be produced. Our ultimate goal is
 to recover the ring settings for day's transmissions.
 \\\\Suppose we receive the following indicators
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \texttt{BWY} & {\uline{\texttt{F}}}\texttt{VJ
-    }{\uline{\texttt{F}}}\texttt{UE}              \\
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{BWY} & {\uline{\texttt{F}}}\texttt{VJ
+		}{\uline{\texttt{F}}}\texttt{UE}              \\
+	\end{array}
 \]
 We can hypothesize that the rotor order is \texttt{I III II}, so we
 can get out the sheet (\texttt{B} - \texttt{I III II}) depicted in
@@ -1484,211 +1486,211 @@ setting \texttt{BWY} each with a different ring setting. In
 particular, column $c$ and row $r$ will give us whether or not a
 window setting of \texttt{BWY} can produce a $1-4$ female with ring settings
 \[
-  (\texttt{A}, \texttt{A} - (c -\texttt{W}), \texttt{A} - (r -\texttt{Y}))
+	(\texttt{A}, \texttt{A} - (c -\texttt{W}), \texttt{A} - (r -\texttt{Y}))
 \]
 Thus such a sheet can investigate, for a given indicator, all $676$
 possible ring settings with its leftmost letter being \texttt{A}. In
 our case, we can relabel figure~\ref{fig:zygalski_sheet} as follows
 \begin{figure}[H]
-  \begin{center}
-    \scalebox{0.7}{
-      \begin{tabular}{c|cccccccccccccccccccccccccc}
-        & \texttt{W} & \texttt{V} & \texttt{U} & \texttt{T} &
-        \texttt{S} & \texttt{R} & \texttt{Q} & \texttt{P} &
-        \texttt{O} & \texttt{N} & \texttt{M} & \texttt{L} &
-        \texttt{K} & \texttt{J} & \texttt{I} & \texttt{H} &
-        \texttt{G} & \texttt{F} & \texttt{E} & \texttt{D} &
-        \texttt{C} & \texttt{B} & \texttt{A} & \texttt{Z} &
-        \texttt{Y} & \texttt{X}
-        \\ \hline
-        \texttt{Z} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.}                             \\
-        \texttt{A} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0}                             \\
-        \texttt{B} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.}                             \\
-        \texttt{C} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.}                             \\
-        \texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{E} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{F} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{G} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{H} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.}                             \\
-        \texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{J} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.}                             \\
-        \texttt{K} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{L} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{M} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0}                             \\
-        \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0}                             \\
-        \texttt{O} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{P} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.}                             \\
-        \texttt{Q} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{R} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-        \texttt{S} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{T} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-        \texttt{U} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{V} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{W} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{X} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-        \texttt{Y} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0}                             \\
-    \end{tabular}}
-  \end{center}
-  \caption{Relabeled (\texttt{B} - \texttt{I} \texttt{III}
-    \texttt{II}) representing window setting \texttt{BWY} with various
-  ring settings starting with \texttt{A}}
-  \label{fig:zygalski_sheet_ring}
+	\begin{center}
+		\scalebox{0.7}{
+			\begin{tabular}{c|cccccccccccccccccccccccccc}
+				           & \texttt{W} & \texttt{V} & \texttt{U} & \texttt{T} &
+				\texttt{S} & \texttt{R} & \texttt{Q} & \texttt{P} &
+				\texttt{O} & \texttt{N} & \texttt{M} & \texttt{L} &
+				\texttt{K} & \texttt{J} & \texttt{I} & \texttt{H} &
+				\texttt{G} & \texttt{F} & \texttt{E} & \texttt{D} &
+				\texttt{C} & \texttt{B} & \texttt{A} & \texttt{Z} &
+				\texttt{Y} & \texttt{X}
+				\\ \hline
+				\texttt{Z} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.}                             \\
+				\texttt{A} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0}                             \\
+				\texttt{B} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.}                             \\
+				\texttt{C} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.}                             \\
+				\texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{E} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{F} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{G} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{H} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.}                             \\
+				\texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{J} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.}                             \\
+				\texttt{K} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{L} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{M} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0}                             \\
+				\texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0}                             \\
+				\texttt{O} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{P} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.}                             \\
+				\texttt{Q} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{R} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+				\texttt{S} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{T} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+				\texttt{U} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{V} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{W} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{X} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+				\texttt{Y} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0}                             \\
+			\end{tabular}}
+	\end{center}
+	\caption{Relabeled (\texttt{B} - \texttt{I} \texttt{III}
+		\texttt{II}) representing window setting \texttt{BWY} with various
+		ring settings starting with \texttt{A}}
+	\label{fig:zygalski_sheet_ring}
 \end{figure}
 \noindent As we will see, it is useful to note that location at which
 the ring setting ending in \texttt{AA} occurs. We will call this the
@@ -1705,8 +1707,8 @@ settings leftmost letter being \texttt{Z}. Thus the cell in sheet
 $s$, column $c$, and row $r$, we learn whether or not the window
 setting \texttt{BWY} with ring setting
 \[
-  (\texttt{A} - (s - \texttt{B}), \texttt{A} - (c -\texttt{W}),
-  \texttt{A} - (r -\texttt{Y}))
+	(\texttt{A} - (s - \texttt{B}), \texttt{A} - (c -\texttt{W}),
+	\texttt{A} - (r -\texttt{Y}))
 \]
 can produce a $1-4$ female.
 
@@ -1715,11 +1717,11 @@ sufficient number of messages with $1-4$ females to be able to make
 use of the sheets, our work would be much easier if we could include
 $2-5$ and $3-6$ females. Consider, for example, the indicators
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{c | c}
-    \texttt{PTC} & \texttt{P}{\uline{\texttt{G}}}\texttt{A
-    T}{\uline{\texttt{G}}}\texttt{Q}
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{c | c}
+		\texttt{PTC} & \texttt{P}{\uline{\texttt{G}}}\texttt{A
+			T}{\uline{\texttt{G}}}\texttt{Q}
+	\end{array}
 \]
 Of course, this is exactly the same as a $1-4$ female with window
 settings \texttt{PTD}. In this sense, it suffices to only produce
@@ -1730,7 +1732,7 @@ finding consistent and accurate information regarding Zygalski
 sheets. Many claims, often conflicting, were made by reliable
 sources. All the while, the closest description of how to actually
 use these sheets was given by Gordon Welchman in his book \emph{The
-Hut Six Story}. While Welchman does describe the underlying theory
+	Hut Six Story}. While Welchman does describe the underlying theory
 behind the sheets, he does not explain explicitly how we test
 different configurations of the leftmost ring setting, nor how we
 deal with turnover. Further, I found no settings or means by which to
@@ -1753,43 +1755,43 @@ example messages using the method described so, at a minimum, this is
 at least one way of using such sheets.
 \\\\Consider the following set of indicators
 \[
-  \setlength{\arraycolsep}{15pt}
-  \begin{array}{|c | c|}
-    \hline
-    \texttt{BWY} & \texttt{}{\uline{\texttt{F}}}\texttt{NV
-    }{\uline{\texttt{F}}}\texttt{CF}                       \\
-    \hline
-    \texttt{AFQ} & \texttt{}{\uline{\texttt{L}}}\texttt{OG
-    }{\uline{\texttt{L}}}\texttt{JU}                       \\
-    \hline
-    \texttt{LZX} & \texttt{}{\uline{\texttt{I}}}\texttt{AP
-    }{\uline{\texttt{I}}}\texttt{YR}                       \\
-    \hline
-    \texttt{MHX} & \texttt{}{\uline{\texttt{D}}}\texttt{LE
-    }{\uline{\texttt{D}}}\texttt{VE}                       \\
-    \hline
-    \texttt{RHT} & \texttt{}{\uline{\texttt{W}}}\texttt{QH
-    }{\uline{\texttt{W}}}\texttt{AA}                       \\
-    \hline
-    \texttt{NSY} & \texttt{}{\uline{\texttt{V}}}\texttt{CK
-    }{\uline{\texttt{V}}}\texttt{JR}                       \\
-    \hline
-    \texttt{QBW} & \texttt{}{\uline{\texttt{O}}}\texttt{PA
-    }{\uline{\texttt{O}}}\texttt{VP}                       \\
-    \hline
-    \texttt{SBW} & \texttt{}{\uline{\texttt{H}}}\texttt{RE
-    }{\uline{\texttt{H}}}\texttt{IK}                       \\
-    \hline
-    \texttt{VFS} & \texttt{}{\uline{\texttt{S}}}\texttt{DL
-    }{\uline{\texttt{S}}}\texttt{AO}                       \\
-    \hline
-    \texttt{WFW} & \texttt{}{\uline{\texttt{V}}}\texttt{EJ
-    }{\uline{\texttt{V}}}\texttt{DE}                       \\
-    \hline
-    \texttt{YKW} & \texttt{}{\uline{\texttt{I}}}\texttt{GW
-    }{\uline{\texttt{I}}}\texttt{ZZ}                       \\
-    \hline
-  \end{array}
+	\setlength{\arraycolsep}{15pt}
+	\begin{array}{|c | c|}
+		\hline
+		\texttt{BWY} & \texttt{}{\uline{\texttt{F}}}\texttt{NV
+		}{\uline{\texttt{F}}}\texttt{CF}                       \\
+		\hline
+		\texttt{AFQ} & \texttt{}{\uline{\texttt{L}}}\texttt{OG
+		}{\uline{\texttt{L}}}\texttt{JU}                       \\
+		\hline
+		\texttt{LZX} & \texttt{}{\uline{\texttt{I}}}\texttt{AP
+		}{\uline{\texttt{I}}}\texttt{YR}                       \\
+		\hline
+		\texttt{MHX} & \texttt{}{\uline{\texttt{D}}}\texttt{LE
+		}{\uline{\texttt{D}}}\texttt{VE}                       \\
+		\hline
+		\texttt{RHT} & \texttt{}{\uline{\texttt{W}}}\texttt{QH
+		}{\uline{\texttt{W}}}\texttt{AA}                       \\
+		\hline
+		\texttt{NSY} & \texttt{}{\uline{\texttt{V}}}\texttt{CK
+		}{\uline{\texttt{V}}}\texttt{JR}                       \\
+		\hline
+		\texttt{QBW} & \texttt{}{\uline{\texttt{O}}}\texttt{PA
+		}{\uline{\texttt{O}}}\texttt{VP}                       \\
+		\hline
+		\texttt{SBW} & \texttt{}{\uline{\texttt{H}}}\texttt{RE
+		}{\uline{\texttt{H}}}\texttt{IK}                       \\
+		\hline
+		\texttt{VFS} & \texttt{}{\uline{\texttt{S}}}\texttt{DL
+		}{\uline{\texttt{S}}}\texttt{AO}                       \\
+		\hline
+		\texttt{WFW} & \texttt{}{\uline{\texttt{V}}}\texttt{EJ
+		}{\uline{\texttt{V}}}\texttt{DE}                       \\
+		\hline
+		\texttt{YKW} & \texttt{}{\uline{\texttt{I}}}\texttt{GW
+		}{\uline{\texttt{I}}}\texttt{ZZ}                       \\
+		\hline
+	\end{array}
 \]
 % Recall that for each indicator, we can think of the right two
 % letters as creating an ``origin'' ring setting where the last two
@@ -1818,51 +1820,51 @@ figure~\ref{fig:shifted_sheet}. Thus, to account for this, Zygalski
 sheets were actually 51 by 51 with cells repeating modulo 26 and
 labels on each axis from \texttt{A}-\texttt{Z} and then \texttt{A}-\texttt{Y}.
 \begin{figure}[H]
-  \centering
-  \scalebox{1.5} {
-    \begin{tikzpicture}
-      % Table dimensions
-      % Frame outer and inner sizes
-      \pgfmathsetmacro{\frameOuter}{3}
-      \pgfmathsetmacro{\frameInner}{2.2}
-      \pgfmathsetmacro{\frameShift}{(\frameOuter - \frameInner)/2}
+	\centering
+	\scalebox{1.5} {
+		\begin{tikzpicture}
+			% Table dimensions
+			% Frame outer and inner sizes
+			\pgfmathsetmacro{\frameOuter}{3}
+			\pgfmathsetmacro{\frameInner}{2.2}
+			\pgfmathsetmacro{\frameShift}{(\frameOuter - \frameInner)/2}
 
-      % Position of the frame on the table (lower right corner, but centered)
-      \pgfmathsetmacro{\fx}{2.5}
-      \pgfmathsetmacro{\fy}{2.5}
+			% Position of the frame on the table (lower right corner, but centered)
+			\pgfmathsetmacro{\fx}{2.5}
+			\pgfmathsetmacro{\fy}{2.5}
 
-      % Draw the picture frame outer square
-      \fill[black!50!gray!40] (\fx, \fy) rectangle ({\fx +
-      \frameOuter}, {\fy + \frameOuter});
-      \fill[white] ({\fx + \frameShift}, {\fy + \frameShift})
-      rectangle ({\fx + \frameOuter - \frameShift}, {\fy +
-      \frameOuter - \frameShift});
-      \draw[thick] (3, 3) rectangle (3+2.1, 3+2.08); % table edge
-      \fill[red!30] (3, 3) rectangle (3+2.1, 3+2.08); % table edge
+			% Draw the picture frame outer square
+			\fill[black!50!gray!40] (\fx, \fy) rectangle ({\fx +
+					\frameOuter}, {\fy + \frameOuter});
+			\fill[white] ({\fx + \frameShift}, {\fy + \frameShift})
+			rectangle ({\fx + \frameOuter - \frameShift}, {\fy +
+					\frameOuter - \frameShift});
+			\draw[thick] (3, 3) rectangle (3+2.1, 3+2.08); % table edge
+			\fill[red!30] (3, 3) rectangle (3+2.1, 3+2.08); % table edge
 
-      % Optional outlines
+			% Optional outlines
 
-      \draw[] (3+2,3+2.1-0.1) circle (1.2pt);
+			\draw[] (3+2,3+2.1-0.1) circle (1.2pt);
 
-      \draw[thick] (\fx, \fy) rectangle ({\fx + \frameOuter}, {\fy +
-      \frameOuter}); % frame outer
-      \draw[thick] ({\fx + \frameShift}, {\fy + \frameShift})
-      rectangle ({\fx + \frameOuter - \frameShift}, {\fy +
-      \frameOuter - \frameShift}); % frame inner
-      \node[font=\small, black] at ({\fx + \frameOuter/2}, {\fy +
-      0.2}) {\texttt{window}};
-      \node[font=\tiny, black] at ({\fx + \frameOuter/2}, {\fy + 0.2
-      + 0.5}) {\texttt{(B - I III II)}};
-      \node[font=\tiny, black] at (3+2-0.4,3+2.1-0.2) {\texttt{origin}};
-      \node[font=\tiny, ,scale=0.75, black] at (3+2-0.2-0.82,3+2.2)
-      {\texttt{ZYXWVUTSRQPONMLKJIHGFEDCBA}};
-      \node[font=\tiny, rotate=90,scale=0.75, black] at
-      (3+2-1.36-0.82,3+2.2-1.2) {\texttt{ZYXWVUTSRQPONMLKJIHGFEDCBA}};
-    \end{tikzpicture}
-  }
-  \caption{Sheet \texttt{(B - I III II)} shifted so that its origin
-  is in location (\texttt{A}, \texttt{A}) in the window}
-  \label{fig:shifted_sheet}
+			\draw[thick] (\fx, \fy) rectangle ({\fx + \frameOuter}, {\fy +
+					\frameOuter}); % frame outer
+			\draw[thick] ({\fx + \frameShift}, {\fy + \frameShift})
+			rectangle ({\fx + \frameOuter - \frameShift}, {\fy +
+					\frameOuter - \frameShift}); % frame inner
+			\node[font=\small, black] at ({\fx + \frameOuter/2}, {\fy +
+				0.2}) {\texttt{window}};
+			\node[font=\tiny, black] at ({\fx + \frameOuter/2}, {\fy + 0.2
+				+ 0.5}) {\texttt{(B - I III II)}};
+			\node[font=\tiny, black] at (3+2-0.4,3+2.1-0.2) {\texttt{origin}};
+			\node[font=\tiny, ,scale=0.75, black] at (3+2-0.2-0.82,3+2.2)
+			{\texttt{ZYXWVUTSRQPONMLKJIHGFEDCBA}};
+			\node[font=\tiny, rotate=90,scale=0.75, black] at
+			(3+2-1.36-0.82,3+2.2-1.2) {\texttt{ZYXWVUTSRQPONMLKJIHGFEDCBA}};
+		\end{tikzpicture}
+	}
+	\caption{Sheet \texttt{(B - I III II)} shifted so that its origin
+		is in location (\texttt{A}, \texttt{A}) in the window}
+	\label{fig:shifted_sheet}
 \end{figure}
 \noindent We now consider our next indicator \texttt{AFQ} which
 corresponds to sheet \texttt{(A - I III II)}. To align its origin we
@@ -1871,408 +1873,408 @@ holes in both \texttt{(B - I III II)} and \texttt{(A - I III II)}
 will only line up at specific locations leading to a window with
 holes with light shining through as follow
 \begin{figure}[H]
-  \begin{center}
-    \scalebox{0.5} {
-      \begin{tabular}{c|cccccccccccccccccccccccccc}
-        & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
-        \texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
-        \texttt{R} & \texttt{Q} & \texttt{P} & \texttt{O} &
-        \texttt{N} & \texttt{M} & \texttt{L} & \texttt{K} &
-        \texttt{J} & \texttt{I} & \texttt{H} & \texttt{G} &
-        \texttt{F} & \texttt{E} & \texttt{D} & \texttt{C} &
-        \texttt{B} & \texttt{A}
-        \\ \hline
-        \texttt{A} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{B} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{C} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.}                             \\
-        \texttt{E} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{0}                             \\
-        \texttt{F} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{H} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{J} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{K} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{M} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{O} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{R} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.}                             \\
-        \texttt{S} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{T} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{U} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{V} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{W} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.}                             \\
-        \texttt{X} & \texttt{.} & \texttt{0} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
-        \texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0}                             \\
-        \texttt{Y} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{Z} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
-        \texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-      \end{tabular}
-    }
-  \end{center}
-  \caption{Window after lining up sheets for the first two indicators
-  \texttt{BWY} and \texttt{AFQ}}
+	\begin{center}
+		\scalebox{0.5} {
+			\begin{tabular}{c|cccccccccccccccccccccccccc}
+				           & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
+				\texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
+				\texttt{R} & \texttt{Q} & \texttt{P} & \texttt{O} &
+				\texttt{N} & \texttt{M} & \texttt{L} & \texttt{K} &
+				\texttt{J} & \texttt{I} & \texttt{H} & \texttt{G} &
+				\texttt{F} & \texttt{E} & \texttt{D} & \texttt{C} &
+				\texttt{B} & \texttt{A}
+				\\ \hline
+				\texttt{A} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{B} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{C} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.}                             \\
+				\texttt{E} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{0}                             \\
+				\texttt{F} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{H} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{J} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{K} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{M} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{O} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{R} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.}                             \\
+				\texttt{S} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{T} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{U} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{V} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{W} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.}                             \\
+				\texttt{X} & \texttt{.} & \texttt{0} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{0} &
+				\texttt{0} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0}                             \\
+				\texttt{Y} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{0} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{Z} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{0} & \texttt{.} &
+				\texttt{0} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+			\end{tabular}
+		}
+	\end{center}
+	\caption{Window after lining up sheets for the first two indicators
+		\texttt{BWY} and \texttt{AFQ}}
 \end{figure}
 \noindent Continuing in this fashion, placing each the origin of each
 sheet corresponding to an indicator in the top right of our window,
 we are left with the following window
 
 \begin{figure}[H]
-  \begin{center}
-    \scalebox{0.5}{
-      \begin{tabular}{c|cccccccccccccccccccccccccc}
-        & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
-        \texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
-        \texttt{R} & \texttt{Q} & \texttt{P} & \texttt{O} &
-        \texttt{N} & \texttt{M} & \texttt{L} & \texttt{K} &
-        \texttt{J} & \texttt{I} & \texttt{H} & \texttt{G} &
-        \texttt{F} & \texttt{E} & \texttt{D} & \texttt{C} &
-        \texttt{B} & \texttt{A}
-        \\ \hline
-        \texttt{A} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{B} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{C} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{E} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{F} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{H} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{J} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{K} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{M} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{O} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{R} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{S} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{T} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{U} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{V} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{W} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{Y} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{Z} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-      \end{tabular}
-    }
-  \end{center}
-  \caption{Window setting after overlaying sheets corresponding to
-  all indicators}
+	\begin{center}
+		\scalebox{0.5}{
+			\begin{tabular}{c|cccccccccccccccccccccccccc}
+				           & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
+				\texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
+				\texttt{R} & \texttt{Q} & \texttt{P} & \texttt{O} &
+				\texttt{N} & \texttt{M} & \texttt{L} & \texttt{K} &
+				\texttt{J} & \texttt{I} & \texttt{H} & \texttt{G} &
+				\texttt{F} & \texttt{E} & \texttt{D} & \texttt{C} &
+				\texttt{B} & \texttt{A}
+				\\ \hline
+				\texttt{A} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{B} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{C} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{E} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{F} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{H} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{J} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{K} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{M} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{O} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{R} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{S} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{T} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{U} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{V} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{W} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{Y} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{Z} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+			\end{tabular}
+		}
+	\end{center}
+	\caption{Window setting after overlaying sheets corresponding to
+		all indicators}
 \end{figure}
 \noindent That is, all holes are blocked and thus there is no
 position for which the rotors \texttt{I III II} and ring settings
@@ -2280,7 +2282,7 @@ beginning with \texttt{A} can generate the observed females.
 \\\\This only tested all ring settings beginning with \texttt{A}. To
 test the ring settings beginning with \texttt{B} we can move each
 sheet letter back by $1$. That is, instead of sheet \texttt{(B - I
-III II)} use sheet \texttt{(A - I III II)}, and peform the exact same
+	III II)} use sheet \texttt{(A - I III II)}, and peform the exact same
 procedure. Iterating in this fashion through each possible letter in
 the leftmost ring setting, we will find some sheets which do have
 light peering through holes in all the sheets. Many of these
@@ -2289,202 +2291,202 @@ we have moved the letter on each sheet back $3$ times, which
 corresponds to the leftmost ring settting being \texttt{D}, we will
 see the following window
 \begin{figure}[H]
-  \begin{center}
-    \scalebox{0.5} {
-      \begin{tabular}{c|cccccccccccccccccccccccccc}
-        & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
-        \texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
-        \texttt{R} & \texttt{Q} & \texttt{P} & \texttt{O} &
-        \texttt{N} & \texttt{M} & \texttt{L} & \texttt{K} &
-        \texttt{J} & \texttt{I} & \texttt{H} & \texttt{G} &
-        \texttt{F} & \texttt{E} & \texttt{D} & \texttt{C} &
-        \texttt{B} & \texttt{A}
-        \\ \hline
-        \texttt{A} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{B} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{C} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{E} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{F} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{H} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{J} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{K} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{M} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{O} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{R} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{S} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{T} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{U} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{V} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{W} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{Y} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-        \texttt{Z} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
-        \texttt{.} & \texttt{.} & \texttt{.}                             \\
-      \end{tabular}
-    }
-  \end{center}
+	\begin{center}
+		\scalebox{0.5} {
+			\begin{tabular}{c|cccccccccccccccccccccccccc}
+				           & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
+				\texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
+				\texttt{R} & \texttt{Q} & \texttt{P} & \texttt{O} &
+				\texttt{N} & \texttt{M} & \texttt{L} & \texttt{K} &
+				\texttt{J} & \texttt{I} & \texttt{H} & \texttt{G} &
+				\texttt{F} & \texttt{E} & \texttt{D} & \texttt{C} &
+				\texttt{B} & \texttt{A}
+				\\ \hline
+				\texttt{A} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{B} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{C} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{D} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{E} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{F} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{G} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{H} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{I} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{J} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{K} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{L} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{M} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{N} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{O} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{Q} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{R} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{S} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{T} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{U} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{V} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{W} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{0} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{Y} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+				\texttt{Z} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
+				\texttt{.} & \texttt{.} & \texttt{.}                             \\
+			\end{tabular}
+		}
+	\end{center}
 \end{figure}
 \noindent This corresponds to the ring setting \texttt{DFX} which
 was, in fact, the rotor position used to encipher these indicators.
@@ -2536,7 +2538,7 @@ independently from a uniform distribution over all $2^{13}$ cycles.
 \\\\We will fix $\sigma_1$ as containing $13$ disjoint transpositions
 labelled $\tau_i$, that is
 \[
-  \sigma_1 = \tau_1\dots\tau_{13}
+	\sigma_1 = \tau_1\dots\tau_{13}
 \]
 $\sigma_1\sigma_4$ will contain a singleton cycle if and only if
 $\sigma_1$ and $\sigma_4$ contain at least one transposition in
@@ -2546,13 +2548,13 @@ contains at least one transposition from the $\tau_i$s.
 $E_i$. Then the probability that at least one $\tau_i$ is common
 between $\sigma_1$ and $\sigma_4$ is
 \[
-  \mathbb{P}\biggl(\bigcup_{i=1}^{13}E_i\biggr)
+	\mathbb{P}\biggl(\bigcup_{i=1}^{13}E_i\biggr)
 \]
 By inclusion-exclusion this gives us
 \[
-  \sum_{1 \le i \le 13}\mathbb{P}(E_i) - \sum_{1\le i < j \le
-  13}\mathbb{P}(E_i\cap E_j) + \dots + \sum_{1\le i_1 < \dots <
-  i_{13} \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_{13}})
+	\sum_{1 \le i \le 13}\mathbb{P}(E_i) - \sum_{1\le i < j \le
+		13}\mathbb{P}(E_i\cap E_j) + \dots + \sum_{1\le i_1 < \dots <
+		i_{13} \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_{13}})
 \]
 We will begin by considering $\mathbb{P}(E_i)$, that is, the
 probability that $\sigma_4$ contains the transposition $\tau_i$. Then
@@ -2562,54 +2564,54 @@ is the same as the number of $2^{12}$ cycles. We can then divide by
 the total number of $\sigma_4$s which is just the number of $2^{13}$
 cycles. This gives us
 \[
-  \mathbb{P}(E_i) = \frac{\text{\# of }2^{12}\text{ cycles}}{\text{\#
-  of }2^{13}\text{ cycles}}
+	\mathbb{P}(E_i) = \frac{\text{\# of }2^{12}\text{ cycles}}{\text{\#
+		of }2^{13}\text{ cycles}}
 \]
 In order to compute the number of such choices we need the following lemma
 \begin{lemma}
-  \label{lem:num_cycle_type}
-  The number of permutations in $S_n$ with cycle type
-  $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ is
-  \[
-    \frac{n!}{\lambda_1^{m_1}\dots\lambda_k^{m_k}m_1!\dots m_k!}
-  \]
+	\label{lem:num_cycle_type}
+	The number of permutations in $S_n$ with cycle type
+	$\lambda_1^{m_1}\dots\lambda_k^{m_k}$ is
+	\[
+		\frac{n!}{\lambda_1^{m_1}\dots\lambda_k^{m_k}m_1!\dots m_k!}
+	\]
 \end{lemma}
 \begin{proof}
-  Given any list of $n$ numbers (of which there are $n!$)
-  \[
-    c_1\dots c_n
-  \]
-  We can produce a $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ cycle type
-  permutation by simply placing parentheses on our list. First we
-  place, $m_1$ sets of parentheses capturing $\lambda_1$ elements
-  each, and then we continue on in this fashion until placing $m_k$
-  sets of parentheses around $\lambda_k$ elements each. Doing this
-  construction will return a set of all permutations with
-  $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ cycle type, but we have
-  overcounted. First, any cycle $\lambda_i$ can be shifted by up to
-  $\lambda_i$ places and still represent the same cycle (e.g.,
-  $(1\ 2\ 3)$, $(2\ 3\ 1)$, and $(3\ 1\ 2)$ are the same cycle).
-  Given that these cycles are disjoint this represents
-  $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ total shifts that we were
-  initially counting as distinct but actually represent the same
-  permutation. Second, the order in which the $m_i$ cycles of the
-  same length appear does not matter. For each $i$, we have
-  overcounted by a factor of $m_i!$ due to permuting these
-  identical-length cycles. Considering both types of overcounting, we
-  must divide our original set of $n!$ elements by our overcounts giving
-  \[
-    \frac{n!}{\lambda_1^{m_1}\dots\lambda_k^{m_k}m_1!\dots m_k!}
-  \]
-  total permutations as desired.
+	Given any list of $n$ numbers (of which there are $n!$)
+	\[
+		c_1\dots c_n
+	\]
+	We can produce a $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ cycle type
+	permutation by simply placing parentheses on our list. First we
+	place, $m_1$ sets of parentheses capturing $\lambda_1$ elements
+	each, and then we continue on in this fashion until placing $m_k$
+	sets of parentheses around $\lambda_k$ elements each. Doing this
+	construction will return a set of all permutations with
+	$\lambda_1^{m_1}\dots\lambda_k^{m_k}$ cycle type, but we have
+	overcounted. First, any cycle $\lambda_i$ can be shifted by up to
+	$\lambda_i$ places and still represent the same cycle (e.g.,
+	$(1\ 2\ 3)$, $(2\ 3\ 1)$, and $(3\ 1\ 2)$ are the same cycle).
+	Given that these cycles are disjoint this represents
+	$\lambda_1^{m_1}\dots\lambda_k^{m_k}$ total shifts that we were
+	initially counting as distinct but actually represent the same
+	permutation. Second, the order in which the $m_i$ cycles of the
+	same length appear does not matter. For each $i$, we have
+	overcounted by a factor of $m_i!$ due to permuting these
+	identical-length cycles. Considering both types of overcounting, we
+	must divide our original set of $n!$ elements by our overcounts giving
+	\[
+		\frac{n!}{\lambda_1^{m_1}\dots\lambda_k^{m_k}m_1!\dots m_k!}
+	\]
+	total permutations as desired.
 \end{proof}
 \noindent Using this lemma, can now compute
 \begin{align*}
-  \mathbb{P}(E_i) & = \frac{\frac{24!}{2^{12}12!}}{\frac{26!}{2^{13}13!}} \\
-  & =  \frac{2\cdot(13)!\cdot(24)!}{(12)!\cdot(26!)}
+	\mathbb{P}(E_i) & = \frac{\frac{24!}{2^{12}12!}}{\frac{26!}{2^{13}13!}} \\
+	                & =  \frac{2\cdot(13)!\cdot(24)!}{(12)!\cdot(26!)}
 \end{align*}
 We can write this as
 \[
-  \frac{2^1\cdot(13)!\cdot(26-2(1))!}{(13-1)!\cdot(26!)}
+	\frac{2^1\cdot(13)!\cdot(26-2(1))!}{(13-1)!\cdot(26!)}
 \]
 which will be useful later when trying to determine a generatic formula.
 \\\\We now consider $\mathbb{P}(E_i\cap E_j)$, that is, the
@@ -2618,52 +2620,52 @@ $\tau_j$. Similarly, we can imagine fixing $\tau_i$ and $\tau_j$ and
 then we have free choice over the remaining 11 transpositions.
 Following a similar argument as above we derive
 \begin{align*}
-  \mathbb{P}(E_i\cap E_j) & =
-  \frac{\frac{22!}{2^{11}11!}}{\frac{26!}{2^{13}13!}}
-  \\
-  & =  \frac{2^2\cdot(13)!\cdot(22)!}{(11)!\cdot(26!)}  \\
-  & = \frac{2^2\cdot(13)!\cdot(26-2(2))!}{(13-2)!(26!)}
+	\mathbb{P}(E_i\cap E_j) & =
+	\frac{\frac{22!}{2^{11}11!}}{\frac{26!}{2^{13}13!}}
+	\\
+	                        & =  \frac{2^2\cdot(13)!\cdot(22)!}{(11)!\cdot(26!)}  \\
+	                        & = \frac{2^2\cdot(13)!\cdot(26-2(2))!}{(13-2)!(26!)}
 \end{align*}
 \noindent In general, we arrive at the formula for an arbitrary
 number of fixed transpositions $(\tau_{i_1}, \dots, \tau_{i_k})$ with
 $k \le 13$ as
 \begin{align*}
-  \mathbb{P}(E_{i_1}\cap\dots\cap E_{i_k}) = \frac{2^k\cdot
-  (13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}
+	\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_k}) = \frac{2^k\cdot
+		(13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}
 \end{align*}
 Then computing our original probability we have
 \begin{align*}
-  & \sum_{1 \le i \le 13}\mathbb{P}(E_i) - \sum_{1\le i < j \le
-  13}\mathbb{P}(E_i\cap E_j) + \dots + \sum_{1\le i_1 < \dots <i_{13}
-  \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_{13}})                \\
-  & = \sum_{i=k}^{13}(-1)^{k+1}\biggl(\sum_{1\le i_1 < \dots < i_k
-  \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_k})\biggr)
-  \\
-  & = \sum_{i=k}^{13}(-1)^{k+1}\biggl(\sum_{1\le i_1 < \dots < i_k
-  \le 13}\frac{2^k\cdot (13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}\biggr)
-  \\
-  & = \sum_{i=k}^{13}(-1)^{k+1}{13\choose k}\frac{2^k\cdot
-  (13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}
-  \\
-  & \approx 0.405
+	 & \sum_{1 \le i \le 13}\mathbb{P}(E_i) - \sum_{1\le i < j \le
+		13}\mathbb{P}(E_i\cap E_j) + \dots + \sum_{1\le i_1 < \dots <i_{13}
+	\le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_{13}})                \\
+	 & = \sum_{i=k}^{13}(-1)^{k+1}\biggl(\sum_{1\le i_1 < \dots < i_k
+			\le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_k})\biggr)
+	\\
+	 & = \sum_{i=k}^{13}(-1)^{k+1}\biggl(\sum_{1\le i_1 < \dots < i_k
+			\le 13}\frac{2^k\cdot (13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}\biggr)
+	\\
+	 & = \sum_{i=k}^{13}(-1)^{k+1}{13\choose k}\frac{2^k\cdot
+		(13)!\cdot(26-2k)!}{(13-k)!\cdot(26!)}
+	\\
+	 & \approx 0.405
 \end{align*}
 \noindent Thus any given setting has a roughly $40.5\%$ chance of
 being able to have a female. Then the likelihood that $n$ Enigma
 machines with randomized settings all produce a female is
 \[
-  (0.405)^n
+	(0.405)^n
 \]
 Then this is also the probability that at a given location, there is
 a hole present in all $n$ sheets. Given that there are $26^2$ holes
 being examined, the expected number of holes peering through all $n$ sheets is
 \[
-  (0.405)^n\cdot(26^2)
+	(0.405)^n\cdot(26^2)
 \]
 Ideally, we would like to reduce the possible settings down to just a
 single hole being examined, and thus we would need to find the number
 of sheets $n$ such that
 \[
-  (0.405)^n\cdot(26^2) = 1
+	(0.405)^n\cdot(26^2) = 1
 \]
 Solving this gives us that we need roughly $12-13$ sheets to produce
 a single surviving hole in our overlapped sheets. This means we need

@@ -259,6 +259,7 @@ operator error, we could recover the entire daily key.
 particular network of operators known as the "Red network". However,
 as we will later see, access to a set of plaintext from messages will
 become a vital component of our plaintext attack.
+
 \section{Plaintext Attack}
 
 Suppose we knew the plaintext which had been enciphered into a
@@ -1880,6 +1881,10 @@ the window settings to that corresponding to $\sigma_1$, and input
 produce the steckering of the next letter in the loop until we have
 deduced the steckerings corresponding to each letter in our loop.
 
+
+
+% https://archive.org/details/battleofwitscomp00budi PAGE $
+
 \subsubsection{Invalid Stops}
 If at this stage we find that a deduced plugboard setting contradicts
 an earlier plugboard setting we discovered, this means that the point
@@ -1905,6 +1910,8 @@ not match our expected plaintext we can deduce what plugboard
 settings need to be added to switch out incorrect letters with their
 correct plaintext letters. In this way we can recover the entirety of
 the plugboard settings.
+
+
 \subsection{Recovering the Ring Settings}\label{bombe_ring_setting}
 By this point we know that for our hypothesized rotor ordering, a
 window setting of \texttt{ZZZ}, a ring setting given by the indicator
@@ -1950,6 +1957,9 @@ stops, thus allowing us to deduce the correct rotor order. In doing
 this, we have now managed to recover all of the relevant settings of
 the daily key.
 
+\subsubsection{Rotor Order Reuse}
+German Enigma protocol stipulated that no rotor setting could appear in two months' setting sheets. This meant that if Bletchley were able to regularly deduce Enigma settings they could rule out many rotor orders which no longer needed to be tested the next month.
+
 \subsection{Turnover}
 Recall that when we initially set up our Bombe, we set each scrambler
 to correspond to a location in our plaintext -- the first location
@@ -1990,12 +2000,16 @@ the cryptographer was able to intercept
 a set of communications before and after encryption this supposition
 seems unrealistic. However, cryptanalysts at Bletchley park
 employed two clever tricks that allowed for such pairings to be
-deduced with reasonable effectiveness. First, analysts were able to
-cross-reference known information to theorize likely phrases in a
+deduced with reasonable effectiveness.
+\subsubsection{Determining Plaintext}
+First, analysts were able to cross-reference known information to theorize likely phrases in a
 message. For instance, if the weather on a particular day was windy
 with a chance of rain, we would expect that the weather report (which
 intellegence knew arrived from specific channels at specific times)
 would likely contain phrases like ``weather'', ``wind'', or ``rain''.
+\\\\Some sources of plaintext could be manufactured in a process known as {\bf{gardening}}. Bletchley Park could request that the British Air Force ``seed'' a designated location with mines. It would then follow that many messages would make specific mention of that location or port which contained the mines.
+\\\\Another source of plaintext lied in the message protocol. If a message was a continuation of another message, the message would begin with \texttt{FORT} (German for ``continued'') followed by the time at which the first messsage was sent. Numbers were ordered by the top row of the keyboard, that is, \texttt{Q} was $1$, \texttt{W} was $2$, and so on.  Thus if a message was sent at $23:30$, and a subsequent message was a continuation, it would begin with \texttt{FORTYWEEPYWEEPY}, where \texttt{Y} is used as a delimiting character.
+\subsubsection{Determining Cribs}
 The second trick used by analysts was the use of permutation theory to
 eliminate locations in the ciphertext where the plaintext could not
 feasibly have been enciphered.
@@ -2264,6 +2278,12 @@ loop, such as the connection in \ref{fig:menu} between \texttt{X} and
 \texttt{H}, could now produce feedback within our loops through the
 diagonal board connections. This made such connections valuable
 additions to a menu.
+
+\subsection{Consecutive Stecker Knock Out}
+In the Air Force Enigma protocol, the plugboard setting was always such that no letter was connected to its neighboring letter in the alphabet (e.g. \texttt{A} cannot be connected to \texttt{B}). Some Bombes had a setting called {\bf{Consecutive Stecker Knock Out (CSKO)}} that allowed for the elimination of some stops which implied consecutive steckerings. This was accomplished by wiring wire \texttt{Ab} to \texttt{Bc} to \texttt{Dc} and so on, with an optional jack that could complete the circuit on the back of the Bombe.
+\\\\In general the CSKO circuit not directly eliminate consecutive steckerings. However, consider the case of a stop (which we will later see is quite common) in which every wire save for one is live. This implies that $\overline\pi$ has a cycle structure of $1^125^1$ and that this remaining singleton cycle is the only possible plugboard setting. If this dead wire representing the singleton does not imply any consecutive steckerings then the CSKO circuit will not come into play and the stop would be considered legitimate. If, however, a consecutive steckering like \texttt{Ef} is on the dead wire, we can see how the CSKO circuit will eliminate this stop.
+\\\\We know that \texttt{Fe} is the dead wire on cable \texttt{F}, since \texttt{Ef} and \texttt{Fe} are connected via the diagonal board. Then any other wire on cable \texttt{F} must be live. In particular, cable \texttt{Fg} must be live. We know that the CSKO circuit connects \texttt{eF} to \texttt{Fg} so it follows that \texttt{eF} will now become live through the CSKO circuit. This will make live the only remaining wire and so all wires become live. Thus, cases in which the machine would singularly imply consecutive steckering hypotheses, these stops would be eliminated. This reduces the number of stops needing to be checked for Air Force traffic.
+
 \subsection{The Machine Gun}
 Even with the Bombe and the diagonal board we still have more
 deductions that can be made to rule out certain settings. Consider
@@ -2379,7 +2399,7 @@ series of uniselectors to quickly switch through the diagonal board
 contacts to search for a pair of deduced steckerings that had a
 common letter (thus producing a logical contradiction). The machine
 got its name from the sudden loud burst of sound produced when the
-uniselectors ran through the diagonal board.
+uniselectors ran through the diagonal board. The class of Bombes produced with the machine gun were dubbed {\bf{Jumbo Bombes}}.
 \\\\Even with such a device many stops still needed to be checked by
 the wrens since the machine gun only detected logical inconsistencies
 in regards to plugboard setting overlap and thus still produced false stops.
@@ -2414,7 +2434,7 @@ turnover notches, increasing the rate of middle wheel and left wheel
 turnover. In theory, these new rotors increased the total rotor
 ordering possibilities to $336$, but the naval operating procedure
 specified that one of the three rotors in a key sheet \emph{must} be
-a naval rotor reducing our rotor ordering space to only $90$.
+a naval rotor reducing our rotor ordering space to only $276$.
 \\\\The theory underlying the Bombe still allows for the naval Enigma
 to be broken, but the additional rotors meant that the workload
 required to break such machines was vastly increased. Further, the
@@ -2424,7 +2444,7 @@ instead we knew the rotor ordering, we could quickly determine cribs
 that ignored turnover and the amount of time we needed to use the
 Bombe would be vastly decreased. The method by which cryptographers
 were able to reduce the possible rotor orderings to a set of only a
-few possibilities became known as {\bf{Banburismus}} and took
+few possibilities became known as {\bf{Banburismus}}\footnote{The naming was due to cards used during the process being produced in Banbury, a small market town near Bletchley Park.}. This method took
 inspiration from clock method described in
 section~\ref{clock_method}. To understand Banburismus we must first
 understand the procedure by which naval Enigmas sent messages.

@@ -5,18 +5,27 @@
 % FOR SUPPLIED INTELLEGENCE SEE
 % https://archive.org/details/enigmahowgermanm0000koza/page/16/mode/2up
 % - Page 16 %
-Rejewski was saddled with arguably the most complex discoveries in
+Polish cryptographer and mathematician Marian Rejewski was saddled with arguably the most complex discoveries in
 Enigma code breaking. Not only did he need to determine a means to
-recover daily keys from limited intellegence supplied by ?? but he
+recover daily keys from limited intellegence supplied by a German spy but he
 additionally needed to recover the wirings of the rotors themselves.
+
+\section{Intellegence}
+
+Hans-Thilo Schmidt (codenamed Asché) was a German spy who worked at their cryptographic headquarters and provided integral documents to the French regarding the Engima machine. On November 8, 1931, Schmidt made an exchange with French spy Rodolphe Lemoine (codenamed Rex). For 10,000 German marks,  Asché allowed Rex to photograph two documents
+\begin{itemize}
+	\item Gebrauchsanweisung für die Chiriermaschine
+	      Enigma -- Instructions for using the Enigma machine.
+	\item Schlüsselanleitung für die Chiriermaschine Enigma -- A manual which details the actual encryption procedure for writing messages. This procedure is the same as that described in section~\ref{protocol}.
+\end{itemize}
+These documents did not contain any explicit wirings of rotors but they did illustrate how various machine settings were employed in practice. The Poles had an agreement with the French regarding military cooperation and thus these documents made their way to the Polish Cipher Bureau.
+\\\\The head of the Polish Cipher Bureau, Karol Gwido Langer, continued to receive information from the French via their informant Asché. In fact, through Asché, Langer had recieved key sheets which totaled 38 months worth of daily keys. With these keys, there was no necessity for using cryptographic techniques to break the encryption, as operators could simply use the keys to decrypt traffic. However, Langer knew that war was looming and there would come a time where such information would become unavailable. He made the bold decision to keep these key sheets from cryptographers at the Bureau, knowing that without them, cryptographers would be forced to work out a means of deriving the daily keys, not through intellegence, but through cryptanalysis.
 \section{Characteristics}
-Rejewksi quickly determined the protocol by which messages were
-enciphered -- in fact, he stated the this protocol was ``obvious.''
-We will see that purely with knowledge of this procudure and some
-military intellegence, Rejewski was able to determine the rotor
+We will see that purely with knowledge of this procedure and some
+military intelligence, Rejewski was able to determine the rotor
 wirings necessary to make further cryptanalysis possible.
 \\\\Consider the first six letters transmitted according to our
-encryption producedure. Operator Alice has some three letter private
+encryption procedure outlined in \ref{protocol}. Operator Alice has some three letter private
 key (say \texttt{XYZ}) which she encodes twice with the machine
 settings specified by her key sheet. This will give us six encrypted
 letters
@@ -106,7 +115,7 @@ This lemma has several consequences.
 	      and similarly for $\sigma_6$.
 \end{itemize}
 Thus with absolutely no knowledge of the rotor wirings or the daily
-key, we can already tractibly compute a searchable space of
+key, we can already tractably compute a searchable space of
 $\sigma_i$'s. To determine which $\sigma_i$ is the correct one, we
 make use of the most prevalent bug in cryptography -- operator error.
 
@@ -118,7 +127,7 @@ same trigrams for each message. Some examples might inclide
 \begin{itemize}
 	\item Initials or first letters of the operator's spouse. For
 	      example, \texttt{CIL} perhaps deriving from the name ``Cecelia''
-	      being shortened to ``cillie''. Allegadely for this reason, poor
+	      being shortened to ``cillie''. Allegedly for this reason, poor
 	      selections of trigrams from operators became known as {\bf{cillies}}.
 	\item The same letter encoded three times such as \texttt{JJJ}. These were ultimately prohibited in 1933
 	\item Letters forming trigrams on the Enigma keyboard such as \texttt{ASD} and \texttt{PYX}. These were also later prohibited.
@@ -130,7 +139,7 @@ same trigrams for each message. Some examples might inclide
 \end{itemize}
 By keeping track of various radio stations which used cillies.
 Rejewski had a reasonable guess as to what the message key used for a
-particular ciphertext were. Suppose we recieved three hexagrams
+particular ciphertext were. Suppose we received three hexagrams
 originating from a radio station which often used \texttt{JJJ} as
 their message key:
 \begin{center}
@@ -139,12 +148,12 @@ their message key:
 	\texttt{SYX SCW}.
 \end{center}
 
-We can then compare these message keys against our possibilites for
+We can then compare these message keys against our possibilities for
 $\sigma_i$s to determine if $\texttt{JJJ}$ could have in fact been
 used to encipher these hexagrams. For example, the first hexagram
 could not have been used since \texttt{J} and \texttt{G} lie in the
 same cycle of $\sigma_3\sigma_6$ which would contradict lemma
-\ref{cillies}. Contiuing in this fashion we may hypothesize that the
+\ref{cillies}. Continuing in this fashion we may hypothesize that the
 third hexagram was likely an enciphering of the repeated letter $\texttt{J}$.
 \\\\To confirm this hypothesis we can use the supposition to further
 reduce the possible $\sigma_i$s. In fact, in our case, such a
@@ -164,7 +173,7 @@ wirings, plugboard settings, or daily keys.
 
 Equipped with a means to determine each $\sigma_i$, Rejewski set
 himself to finding the internal wirings of the rotors. The full
-recovery of rotor wirings and turovers is out of scope of this paper;
+recovery of rotor wirings and turnovers is out of scope of this paper;
 However, we will provide a brief description to illustrate that with
 minimal intellegence information, entire rotor wirings were able to be deduced.
 \\\\We begin by expanding $\sigma_i$ to
@@ -233,7 +242,7 @@ theorem %\ref{IDK}% that if $\rho_i\rho_{i+1}$ has a reasonbaly large
 % rigthmost rotor.
 \\\\In a similar fashion we can recover the remaining rotor wirings
 though often with the help of other mathematical tricks, not to
-mention military intellegence and luck. From this point forward, we
+mention military intelligence and luck. From this point forward, we
 will assume that the cryptanalyst now has access to the wirings of
 all the rotors as well as the reflector.
 
@@ -298,7 +307,7 @@ absolute position of the rightmost rotor. Additionally, using this
 method, we can see where the $Q$s fail to line up to determine which
 letters are steckered and which are unsteckered, along with some of
 the steckerings themselves. Such a method was called the {\bf{grill
-			method}} and required tedious work and had many possibilites for mistakes.
+			method}} and required tedious work and had many possibilities for mistakes.
 \\\\To determine the absolute positions of the remaining two rotors
 we can simply enumerate all $26^2 = 676$ positions of the left two
 rotors (for both possible orderings of the rotors) until $Q$ is
@@ -313,7 +322,7 @@ the German word ``to'' along with \texttt{X} denoting a space. We
 could therefore set the ring setting to its default location and then
 brute force all $26^3$ possible rotor positions until the first
 letters in the deciphered message were \texttt{ANX}. Once we knew the
-absolute position at which this occured, along with the message key,
+absolute position at which this occurred, along with the message key,
 we can immediately determine what the ring settings must have been to
 produce this message -- since the ring setting and rotor position
 have inverse effects on the rotor permutation.
@@ -397,11 +406,11 @@ further than the top message,
 at this point we would expect the texts to both be encoded by
 $\texttt{XYF}$ and the number of coincidences (indicated by
 \texttt{*}) should spike as we see in the above diagram. Given that
-this occured, this means no turnover occured between $\texttt{A}$ and
+this occured, this means no turnover occurred between $\texttt{A}$ and
 $\texttt{F}$. This, for example, eliminates rotor \texttt{II} as a
 candidate since its turnonver occurs when \texttt{E} is displayed in
 the window. We can gain further information by performing the above
-procecdure but now with the message encoded by $\texttt{XYF}$ on the
+procedure but now with the message encoded by $\texttt{XYF}$ on the
 top and the message encoded by $\texttt{XYA}$ on the bottom. In this
 way we can determine which rotor was being used. The clock method was
 a precursor to a method we will discuss later known as Banburismus.
@@ -424,7 +433,7 @@ internal rotor wirings, he could build a machine that could
 immediately produce the cycle structure of characteristics for a given setting.
 \\\\Let us first understand the manual implementation of such a
 deduction. Assuming an identity plugboard $S$ we can use our internal
-rotor wirings to know the exact permutaition $\sigma_1$ and
+rotor wirings to know the exact permutation $\sigma_1$ and
 $\sigma_4$ for any initial rotor position. In specific, suppose we have
 
 \begin{center}
@@ -543,7 +552,7 @@ circuit\footnote{Throughout this paper, diagrams will represent a
 \end{center}
 
 In this circuit $N_z$ represents the rightmost rotor at some position
-$z$ and $Q_{y,x}$ represents our fictious rotor (consisting of $M$,
+$z$ and $Q_{y,x}$ represents our fictitious rotor (consisting of $M$,
 $L$, and $R$) at a fixed position $y$ and $x$ -- we will denote this
 position $(x,y,z)$. Note that right hand
 rotor in the permutation depicted on the right is 3 steps further
@@ -730,8 +739,8 @@ positions to a tractable number with which we can recover the daily key.
 We will first produce a mechanical means of detecting when three
 Enigma machines produce females at given locations -- such a machine
 became known as the {\bf{Bomba Kryptologiczna}} (Bomba for short).
-Let us begin by constructing a device that can detecta a single
-female, taht is, it can determine for a given input letter when two
+Let us begin by constructing a device that can detect a a single
+female, that is, it can determine for a given input letter when two
 sets of rotors three steps apart produce a female.
 \\\\In this paper, diagrams for the Cyclometer and the Bombe (later
 discussed) are abstracted so as to remove reference to specific
@@ -896,7 +905,7 @@ these operations. Consider the following circuit.
 \end{center}
 On the left we have our two sets of rotors represented by
 permutations $N_z^{-1}Q_{y,x}N_z$ and $N_{z+3}^{-1}Q_{y,x}N_{z+3}$
-(three steps apart). Note that these permutaions ignore the plugboard
+(three steps apart). Note that these permutations ignore the plugboard
 setting $S$, a caveat we will discuss later. Further, we will
 implicitly set the rotors' ring settings to \texttt{AAA} by just
 placing each letter abve its corresponding contact on the rotor.
@@ -914,14 +923,14 @@ happens, current is freely able to flow from $T^{-}$ to $T^{+}$.
 as the input letter. Following $N_z^{-1}Q_{y,x}N_z$ we can see that
 the rotor will now output \texttt{C}. Similarly, rotor
 $N_{z+3}^{-1}Q_{y,x}N_{z+3}$ will output \texttt{C}. Each of these
-will then travel to transistor gates of the line labelled \texttt{C},
+will then travel to transistor gates of the line labeled \texttt{C},
 thus opening both transistors in this line and allowing current to
 flow from $T^{-}$ to $T^{+}$.
 Thus, if we connect our battery in parallel to the line from $T^{-}$
 to $T^{+}$ and some current-triggered detector in series with the
 line from $T^{-}$ to $T^{+}$, the detector will only trigger when the
 input letter (in our case \texttt{A}) produces a female (in our case
-\texttt{C}) for the specifed rotor position. We can abstract this
+\texttt{C}) for the specified rotor position. We can abstract this
 entire circuit by noting that the wires exiting the enclosing box of
 the diagram are all that are needed to detect the presence of a
 female for the given rotor position and input. The box itself has
@@ -987,7 +996,7 @@ following claims to its namesake
 	      floor when a solution was found producing a loud noise.
 	      % https://web.archive.org/web/20110807181348/http://www.codesandciphers.org.uk/documents/bmbrpt/bmbpg010.HTM
 	      % %
-	\item Colonel Lisicki of the Polish Cipher Bureau explained that
+	\item Colonel Lisicki of the Bureau explained that
 	      the name came from a popular ice-cream dessert of the same name
 	      which was consumed while the machine was first conceptualized.
 	      % Enigma : how the German machine cipher was broken, and how it
@@ -1002,13 +1011,13 @@ We must first account for some caveats in our construction of the machine.
 \subsubsection{Turnover}
 In our construction we made the simplifying assumption that the rotor
 3 steps apart from $N_{z}^{-1}Q_{y,x}N_{z}$ is
-$N_{z+3}^{-1}Q_{y,x}N_{z+3}$. Of course, if rotor tunover occurs
+$N_{z+3}^{-1}Q_{y,x}N_{z+3}$. Of course, if rotor turnover occurs
 between these two points, the middle rotor will have stepped making
 this assumption no longer true. However, earlier discovery of rotor
 wirings and ring notch locations meant that cryptanalysts knew for a
 given rotor order, which window settings will produce turnovers in
 the first six key presses. Therefore, we definitively know whether or
-not a turnover occured for a given message so in reality we can
+not a turnover occurred for a given message so in reality we can
 update the middle rotor as necessary to ensure the two rotors
 maintain a relative distance of 3 steps. This amounts to changing $y$
 to $y+1$ for some rotor orders and messages though for the sake of
@@ -1033,7 +1042,7 @@ means we necessarily have
 	\sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
 \]
 This is precisely the criteria we are using to check if $\sigma_i$
-has a $1-4$ female, we mechanicaly run \texttt{W} through these
+has a $1-4$ female, we mechanically run \texttt{W} through these
 machines at 3 steps apart, and see if they are equal.
 \\\\If \texttt{W} is fixed by the plugboard permutation $S$ then we have
 \begin{align*}
@@ -1148,9 +1157,9 @@ or
 
 \noindent However, we have now deduced the entire permutation
 $\sigma_i$, save for $S$. We can therefore derive which plugboard
-settting produces $\sigma_1(\texttt{P}) = \texttt{L}$ or the
+setting produces $\sigma_1(\texttt{P}) = \texttt{L}$ or the
 alternate $\sigma_4(\texttt{I}) = \texttt{A}$. This gives two
-pluboard possibilities. As we attempt to decrypt more message keys,
+plugboard possibilities. As we attempt to decrypt more message keys,
 we can find plugboard settings which agree and thus work out the
 entirety of the plugboard. With this, the cryptanalyst has recovered
 the entire daily key.
@@ -1731,7 +1740,7 @@ In researching this paper, no component was more troublesome than
 finding consistent and accurate information regarding Zygalski
 sheets. Many claims, often conflicting, were made by reliable
 sources. All the while, the closest description of how to actually
-use these sheets was given by Gordon Welchman in his book \emph{The
+use these sheets was given by Bletchley Park cryptanalyst, Gordon Welchman, in his book \emph{The
 	Hut Six Story}. While Welchman does describe the underlying theory
 behind the sheets, he does not explain explicitly how we test
 different configurations of the leftmost ring setting, nor how we
@@ -2282,13 +2291,13 @@ beginning with \texttt{A} can generate the observed females.
 \\\\This only tested all ring settings beginning with \texttt{A}. To
 test the ring settings beginning with \texttt{B} we can move each
 sheet letter back by $1$. That is, instead of sheet \texttt{(B - I
-	III II)} use sheet \texttt{(A - I III II)}, and peform the exact same
+	III II)} use sheet \texttt{(A - I III II)}, and perform the exact same
 procedure. Iterating in this fashion through each possible letter in
 the leftmost ring setting, we will find some sheets which do have
 light peering through holes in all the sheets. Many of these
 settings, after testing, will be ruled out. However, eventually when
 we have moved the letter on each sheet back $3$ times, which
-corresponds to the leftmost ring settting being \texttt{D}, we will
+corresponds to the leftmost ring setting being \texttt{D}, we will
 see the following window
 \begin{figure}[H]
 	\begin{center}
@@ -2613,7 +2622,7 @@ We can write this as
 \[
 	\frac{2^1\cdot(13)!\cdot(26-2(1))!}{(13-1)!\cdot(26!)}
 \]
-which will be useful later when trying to determine a generatic formula.
+which will be useful later when trying to determine a generic formula.
 \\\\We now consider $\mathbb{P}(E_i\cap E_j)$, that is, the
 probability that $\sigma_4$ contains both transpositions $\tau_i$ and
 $\tau_j$. Similarly, we can imagine fixing $\tau_i$ and $\tau_j$ and

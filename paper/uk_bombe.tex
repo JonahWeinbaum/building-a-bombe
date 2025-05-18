@@ -2277,7 +2277,8 @@ out all possible plugboard settings.
 loop, such as the connection in \ref{fig:menu} between \texttt{X} and
 \texttt{H}, could now produce feedback within our loops through the
 diagonal board connections. This made such connections valuable
-additions to a menu.
+additions to a menu. This addition was so valuable in making the Bombe a functional means of decrypting Enigma traffic that the Bombe is oftne called the Turing-Welchman Bombe, as it was their combined contributions and insight that allowed the machine to so effectively produce daily keys.
+\\\\While the name often includes only Turing and Welchman, the man who turned the mathematical theory of the Bombe into actual machinery was chief engineer of the British Tabulating Machine Company, Harold ``Doc'' Keen.
 
 \subsection{Consecutive Stecker Knock Out}
 In the Air Force Enigma protocol, the plugboard setting was always such that no letter was connected to its neighboring letter in the alphabet (e.g. \texttt{A} cannot be connected to \texttt{B}). Some Bombes had a setting called {\bf{Consecutive Stecker Knock Out (CSKO)}} that allowed for the elimination of some stops which implied consecutive steckerings. This was accomplished by wiring wire \texttt{Ab} to \texttt{Bc} to \texttt{Dc} and so on, with an optional jack that could complete the circuit on the back of the Bombe.
@@ -2430,7 +2431,7 @@ addition of three rotors (rotors \texttt{VI}, \texttt{VII}, and
 \texttt{VIII}). These rotors were exclusively used by the German Navy
 and they functioned differently than the afformentioned rotors
 \texttt{I}-\texttt{V}. In particular, these new rotors had $2$
-turnover notches, increasing the rate of middle wheel and left wheel
+turnover notches, diametrically opposed, doubling the rate of rotor turnover.
 turnover. In theory, these new rotors increased the total rotor
 ordering possibilities to $336$, but the naval operating procedure
 specified that one of the three rotors in a key sheet \emph{must} be
@@ -2442,7 +2443,7 @@ additional turnover meant that cribs from naval transmissions no
 longer eliminated turnover by splitting the crib into two pieces. If
 instead we knew the rotor ordering, we could quickly determine cribs
 that ignored turnover and the amount of time we needed to use the
-Bombe would be vastly decreased. The method by which cryptographers
+Bombe would be vastly decreased. Turing invented a method by which cryptographers
 were able to reduce the possible rotor orderings to a set of only a
 few possibilities became known as {\bf{Banburismus}}\footnote{The naming was due to cards used during the process being produced in Banbury, a small market town near Bletchley Park.}. This method took
 inspiration from clock method described in
@@ -2829,8 +2830,19 @@ to an arbitrary heuristic is hard to say. In order to determine the
 true hubdub value for a message containing bigrams and trigrams we
 would need to examine the entire corpus of Enigma message gathered
 for the purpose of Banburismus to determine the relative frequency
-of bigrams and trigrams\footnote{According to Hugh Alexander}.
-Given the destruction of the vast majority of these intercepts it
+of bigrams and trigrams. Bletchley Park cryptanalyst, Hugh Alexander, provides some $n$-gram frequencies as follows
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		{\bf{$n$-gram}}  & {\bf{Probability}}         \\
+		\hline
+		\text{Monogram}  & $\frac{1}{17}$             \\
+		\text{Tetragram} & $100\cdot\frac{1}{26^4}$   \\
+		\text{Hexagram}  & $15000\cdot\frac{1}{26^6}$ \\
+		\hline
+	\end{tabular}
+\end{center}
+Sadly, this information does not include bigram or trigram frequencies, and given the destruction of the vast majority of these intercepts it
 is unlikely that such a quantity will be amassed so as to be able
 to prove the accuracy of this bonus system.
 % HUGH ALEXANDER - http://www.ellsbury.com/gne/gne-096.htm
@@ -3810,6 +3822,8 @@ Recall from section~\ref{bombe_ring_setting} that the settings given by a stop o
 % \end{enumerate}
 \noindent Given that we have a known rotor ordering, steckering, and ring/window setting whose relative distance is correct but may need to be adjusted to get the true ring setting, we can compiled a list of all $26^3$ encipherments of \texttt{EINS} which preserve the relative distance between our ring and window setting. Originally this process had to be done by hand with catalogues known as {\bf{corsets}} but a machine called the {\bf{test-plate}} or {\bf{baby}} was created which autmatically enciphered \texttt{EINS} at all such positions into an {\bf{\texttt{EINS} catalogue}}.
 \\\\The catalogue could be used to determine locations within our message corpus, along with settings, that would produce \texttt{EINS}. If we then continue deciphering our message from the start of the \texttt{EINS} location,using these settings, we either find likely plaintext or gibberish. This gives a candidate for the rightmost ring setting. Then as in section~\ref{bombe_ring_setting} we continue attempting to decipher plaintext until we encounter gibberish and adjust the middle and subsequently left ring setting until we have deduced the entire ring setting. With this final component we are now able to completely decipher naval Enigma messages.
+\\\\It is clear from the amount of messages, sheets, and scores that need to be compared and tabulated that Banburismus was a great deal of work. Alexander estimates that an average day involved 400 messages with an average length of 150 characters. In total around 6000 comparisons needed to be made all of which needed to be scored and counted. Particular credit should be given to whom Alexander noted was ``one of the best Banburists'', Joan Clarke. Not only was she an exceptional banburist, she was one of only a handful of female cryptologists working at Bletchley Park.
+\\\\The work done by Banburists provided crucial information on Naval operations including U-Boat attacks which were crippling supply lines and starving Britain.
 % THE BABY THE RACK
 % http://www.ellsbury.com/profsbk/profsbk-140.htm% 
 % FORTYWEEPYYWEEPY http://www.ellsbury.com/hut8/hut8-013.htm%

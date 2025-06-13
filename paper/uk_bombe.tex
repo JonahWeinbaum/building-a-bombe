@@ -492,9 +492,9 @@ position until we have no contradictory results from our hypothesis.
 
 \section{The Bombe}
 
-In the section, we outline the construction of a rudementary Bombe.
+In the section, we outline the construction of a rudimentary Bombe.
 Our goal is to construct a machine using the above insight to quickly
-elimate a rotor position based on contradictory hypotheses. We must
+eliminate a rotor position based on contradictory hypotheses. We must
 shift from the above mathematical construction to an
 electromechanical one. %We imagine the Enigma machine as black-box
 % that takes in cables encoding, via current, each of the 4 letters, and outputs
@@ -589,7 +589,7 @@ permutations. We assume the message began with window setting
 further assume a ring setting of \texttt{ZZZ}. Thus the first machine
 will be set to a window setting \texttt{ZZZ}, the second set to
 \texttt{ZZA}, and the third set to \texttt{ZZB}. Note that this is
-assuming no turnover occured during our enciphering of the plaintext
+assuming no turnover occurred during our enciphering of the plaintext
 -- a caveat we will later address. We can connect these Enigma
 machines as follows
 \begin{center}
@@ -2277,7 +2277,7 @@ out all possible plugboard settings.
 loop, such as the connection in \ref{fig:menu} between \texttt{X} and
 \texttt{H}, could now produce feedback within our loops through the
 diagonal board connections. This made such connections valuable
-additions to a menu. This addition was so valuable in making the Bombe a functional means of decrypting Enigma traffic that the Bombe is oftne called the Turing-Welchman Bombe, as it was their combined contributions and insight that allowed the machine to so effectively produce daily keys.
+additions to a menu. This addition was so valuable in making the Bombe a functional means of decrypting Enigma traffic that the Bombe is often called the Turing-Welchman Bombe, as it was their combined contributions and insight that allowed the machine to so effectively produce daily keys.
 \\\\While the name often includes only Turing and Welchman, the man who turned the mathematical theory of the Bombe into actual machinery was chief engineer of the British Tabulating Machine Company, Harold ``Doc'' Keen.
 
 \subsection{Consecutive Stecker Knock Out}
@@ -2377,7 +2377,7 @@ our first stop we examined from figure~\ref{fig:correct_stecker}.
 		\end{tikzpicture}
 	\end{minipage}
 \end{center}
-This stop may seem to imply we found no logical inconsitencies in our
+This stop may seem to imply we found no logical inconsistencies in our
 deductions stemming from the hypothesis that $S(\texttt{A}) =
 	\texttt{D}$. However, when a wren goes to check the settings found,
 they will discover that this setting produces a contradictory
@@ -2395,7 +2395,7 @@ analysis of the underlying cables. Instead, a device called the
 	{\bf{machine gun}} was developed which examined the state of the
 diagonal board at a given stop to determine if logical contradictions
 were present among the deduced plugboard settings. When a stop
-occured, the machine gun would be brought in. The device then used a
+occurred, the machine gun would be brought in. The device then used a
 series of uniselectors to quickly switch through the diagonal board
 contacts to search for a pair of deduced steckerings that had a
 common letter (thus producing a logical contradiction). The machine
@@ -2492,6 +2492,7 @@ the bigram tables, we can work backwards to figure out the
 pre-message key for any naval message. This puts us in a very
 similar position to the one Rejewski was in when he was able to
 deduce message keys but knew nothing else about the machine settings.
+%TODO
 \\\\TALK ABOUT GETTING THE BIGRAM TABLES
 \\\\With the bigram tables in hand, we can assume that for any
 naval message we are able to deduce its pre-message key. With this
@@ -2526,7 +2527,7 @@ we need not consider a distance of $0$ as this would imply the
 pre-message keys are the same.
 \\\\Recall our discussion from section~\ref{ioc} regarding the
 index of coincidence. We know that when two texts represent the
-same polyalphabet cipher the observed distribution of coincidences
+same poly-alphabetic cipher the observed distribution of coincidences
 (Bletchley Park called these {\bf{repeats}}) should be much higher
 than two texts representing random text. Consider aligning our two
 texts with an offset of $+11$ letters, that is, the hypothesis that
@@ -2620,7 +2621,7 @@ offsets in terms of Bayesian statistics. Recall {\bf{Bayes theorem}}
 	\]
 \end{theorem}
 \noindent This is given in terms of probability. We will see that
-the math becomes siginificantly easier to do in one's head if we
+the math becomes significantly easier to do in one's head if we
 think of these probabilities instead in terms of {\bf{odds}}. That is
 \begin{definition}
 	For an event $A$ with probability $\mathbb{P}(A)$ we say that the
@@ -2681,17 +2682,17 @@ This leads us to the following definition
 	A {\bf{ban}} is a logarithmic unit of information gained from a
 	Bayes factor $\mathbb{F}(A,B)$ such that $1$ ban is equivalent to
 	a Bayes factor which illustrates that the odds of event $A$
-	occuring are increased ten-fold when $B$ is observed. That is
+	occurring are increased ten-fold when $B$ is observed. That is
 	\begin{align*}
 		            & 10^1 = \mathbb{F}(A,B)                    \\
 		\Rightarrow & \log_{10}(\mathbb{F}(A,B)) = 1\text{ ban}
 	\end{align*}
-	\noindent Subsquently, a {\bf{deciban}} is $\frac{1}{10}$ of a
+	\noindent Subsequently, a {\bf{deciban}} is $\frac{1}{10}$ of a
 	ban, representing an event's odds being increased by a factor of
-	$10^\frac{1}{10}$, given $B$ occured. The unit we will be using
+	$10^\frac{1}{10}$, given $B$ occurred. The unit we will be using
 	is half of a deciban, known as a {\bf{hubdub (hdB)}},
 	representing an event's odds being increased by a factor of
-	$10^\frac{1}{20}$, given $B$ occured. That is
+	$10^\frac{1}{20}$, given $B$ occurred. That is
 	\[
 		20\log_{10}(\mathbb{F}(A,B)) = 1\text{ hdB}
 	\]
@@ -2705,17 +2706,17 @@ following relationship between our odds
 Then a series of independent events $B_1, \dots, B_k$ increase the
 odds of $A$ by  $\sum_{i=1}^k{20\log_{10}\mathbb{F}(A,B_i)}$ hdB.
 Note that if this value is positive this implies that the event $A$
-is more likely to have occured after observing each $B_i$. If this
+is more likely to have occurred after observing each $B_i$. If this
 value is negative, then the event $A$ is less likely to have
-occured after observing each $B_i$. If it is $0$ we have gained no
+occurred after observing each $B_i$. If it is $0$ we have gained no
 information.
 
 \subsection{Scoring Charts}
-Bletchely Park cryptanalysts precompiled a large chart of how many
+Bletchley Park cryptanalysts precompiled a large chart of how many
 hubdubs a particular observation of repeats was worth. Consider
 that we observe that at an offset of $-13$ our messages with
 pre-message keys \texttt{VFG} and \texttt{VFX} have a $6/52$ repeat
-structure. That is, there are $6$ monogram repeats occuring in $52$
+structure. That is, there are $6$ monogram repeats occurring in $52$
 characters of observed text. We will call this observed event $B$.
 We will call the event that the our overlap is in-depth as $A$.
 \\\\To calculate how many hubdubs of information we gain we can compute.
@@ -2896,7 +2897,7 @@ letters, we get
 % https://arxiv.org/abs/1505.04714 Turings paper on ioc %
 \noindent We will now make another assumption. We may not know
 $\beta$ but we do expect it to be reasonably small. In an NSA paper
-regarding the index of coincidence, they esimate the probability of
+regarding the index of coincidence, they estimate the probability of
 bigrams in German to be about $0.0097$. Given that Turing's
 estimate of monogram probability of $\frac{1}{17}$ is lower than
 the NSA's estimate for German monograms of $0.076$, we may expect
@@ -2990,7 +2991,7 @@ probability of having a non-naval rotor as your rightmost rotor (i.e. $1-S$) is
 Thus $S\approx0.543$. With this we can now compute the probability
 that a given offset represents message keys that only differ in
 their rightmost letter. In particular, we will generate a
-	{\bf{distance chart}} which assocates for each offset, the hubdub
+	{\bf{distance chart}} which associates for each offset, the hubdub
 value associated to this probability $\tau_N$. We compute a chart
 with offsets from $0$ to $25$ and beneath we will show its
 associated hubdub value associated to the likelihood of turnover.
@@ -3014,7 +3015,7 @@ associated hubdub value associated to the likelihood of turnover.
 \end{figure}
 \subsection{Distance Loss}
 We now need to consider how the probability of rotor turnover
-occuring effects our original estimates. The probability of
+occurring effects our original estimates. The probability of
 observing a repeated monogram is now no longer just the frequency
 of monograms in German, but instead a weighted probability
 depending on the offset being examined. In particular we define for
@@ -3079,15 +3080,15 @@ reference to tetragram sheets save for a couple values used for
 examples by Hugh Alexander, thus we will use these same examples
 later for reference.
 \\\\What we do know is that in order to calculate the log-odds of
-tetragrams, messages were seperated by the {\bf{crib room}} into
-$20$ categories labelled \texttt{I}-\texttt{XX}. Each category
+tetragrams, messages were separated by the {\bf{crib room}} into
+$20$ categories labeled \texttt{I}-\texttt{XX}. Each category
 represented a message that was likely to contain a particular
 distribution of numerals (since many German numbers are $4$
 letters). The exact nature of these categories were not discussed
 in any historical documentation found while researching for this paper.
 \\\\Within each category there are $13$ subdivisions corresponding
-to where a tetragram occured. The first $10$ subdivisions
-represented a tetragram occuring in the first position, second
+to where a tetragram occurred. The first $10$ subdivisions
+represented a tetragram occurring in the first position, second
 position, and so on. The $11$th subdivision corresponded to a
 tetragram occuring between the $11$th and $30$th position. The
 $12$th subdivision corresponded to tetragrams occuring between the
@@ -3264,10 +3265,10 @@ messages whose pre-message key differs by only their last letter.
 We are finally ready to begin the process of {\bf{decibanning}}
 based on end-wheel comparisons. Many of Hugh Alexander's scores do
 not align consistently with reproduced sheets and there are many
-points at which he likely swithces between references to decibans
+points at which he likely switches between references to decibans
 and hubdubs. For this reason we will be using numbers given by
 Steven Hosgood in \emph{All You Ever Wanted to Know About
-	Banburismus but were Afraid to Ask} as these more consistenly align
+	Banburismus but were Afraid to Ask} as these more consistently align
 with the above description. The reader is recommended to examine
 this resource for more detailed discussion about the scoring
 discrepancies between his analysis and those of Hugh Alexander.
@@ -3428,7 +3429,7 @@ letters in common. In theory, there is no reason the same process
 cannot be applied to pre-message keys with their first letter in
 common, although this requires significantly more offsets being
 considered and significantly reduced odds.
-\\\\We might think we need to handle all offsets from $-650$ to $+650$ but in practice, naval Enigma operating procedure restircted message lengths to $250$ characters. Thus, we can only examine offsets of $-250$ to $+250$. This is still an incredible number of offsets to check by hand. To handle this, a section at Bletchley Park known as the {\bf{Freebornery}} used tabulating machines to find repeats of length $4$ or greater, since shorter $n$-grams were not worth the considerable odds against such a large array of candidates. Messages with $4$ or more repeats were compiled into a {\bf{tetra catalogue}} as follows
+\\\\We might think we need to handle all offsets from $-650$ to $+650$ but in practice, naval Enigma operating procedure restricted message lengths to $250$ characters. Thus, we can only examine offsets of $-250$ to $+250$. This is still an incredible number of offsets to check by hand. To handle this, a section at Bletchley Park known as the {\bf{Freebornery}} used tabulating machines to find repeats of length $4$ or greater, since shorter $n$-grams were not worth the considerable odds against such a large array of candidates. Messages with $4$ or more repeats were compiled into a {\bf{tetra catalogue}} as follows
 
 \begin{table}[h!]
 	\centering
@@ -3446,15 +3447,15 @@ considered and significantly reduced odds.
 	\end{tabular}
 	\caption{Example tetragram catalogue}
 \end{table}
-\noindent Here we only underline repeats which are longer than $4$ letters as these have the best chance at being legitimate. We think of each rightmost rotor position as having an alphabet of ``26'' letters before it turns over to a new alphabet of 26 letters. The left number in the position column denotes which alphabet we in and the right number indicates which letter we are in in that alphabet when the $n$-gram occured. In this sense our first tetragram entry with a position of $4.8$ means that the tetragram occured in the $8$th letter of the $4$th alphabet, thus this occured at the $26\cdot3 + 8$ or $86$th letter of the message. It is worth noting that in this notation, for pre-message keys which differ by only their rightmost letter (as in the last section) an offset of $+n$ can be written as $+0.n$. In the end this will allow us to have one sheet with consistent notation representing all our analyzed messages.
+\noindent Here we only underline repeats which are longer than $4$ letters as these have the best chance at being legitimate. We think of each rightmost rotor position as having an alphabet of ``26'' letters before it turns over to a new alphabet of 26 letters. The left number in the position column denotes which alphabet we in and the right number indicates which letter we are in that alphabet when the $n$-gram occurred. In this sense our first tetragram entry with a position of $4.8$ means that the tetragram occurred in the $8$th letter of the $4$th alphabet, thus this occurred at the $26\cdot3 + 8$ or $86$th letter of the message. It is worth noting that in this notation, for pre-message keys which differ by only their rightmost letter (as in the last section) an offset of $+n$ can be written as $+0.n$. In the end this will allow us to have one sheet with consistent notation representing all our analyzed messages.
 
 \subsubsection{Left Rotor Distance Charts}
-To score these messages the first thing we must do is generate a new distance chart for all possible rotor turnovers between all $-250$ to $+250$ offsets. As before we would like to get a probability $\tau_n$ that our offset represents a legitimate comparison between message keys with their leftmost letter in common. This is the same as asking the probability that turnover of the leftmost rotor dd \emph{not} occur. Now we need to consider more scenarios than in our one rotor analysis. Recall that there are $8\cdot7\cdot6$ total arrangements of rotors but $5\cdot4\cdot3$ of these are not allowed since they do not include any naval rotors. Then there are $276$ total rotor combinations we are eaxmining. The two rightmost rotors can be in one of the following cases
+To score these messages the first thing we must do is generate a new distance chart for all possible rotor turnovers between all $-250$ to $+250$ offsets. As before we would like to get a probability $\tau_n$ that our offset represents a legitimate comparison between message keys with their leftmost letter in common. This is the same as asking the probability that turnover of the leftmost rotor dd \emph{not} occur. Now we need to consider more scenarios than in our one rotor analysis. Recall that there are $8\cdot7\cdot6$ total arrangements of rotors but $5\cdot4\cdot3$ of these are not allowed since they do not include any naval rotors. Then there are $276$ total rotor combinations we are examining. The two rightmost rotors can be in one of the following cases
 \begin{itemize}
 	\item Two non-naval rotors -- For each of the $3$ naval rotors as the lefthand rotor we have $5\cdot4$ possible non-naval rotor combinations for the right two rotors, giving $60$ such combinations.
-	\item Two naval rotors --  We have $3\cdot2$ possible naval rotor combinations for the right two rotors, leaving $6$ remaining rotor possibilites for the leftmost rotor, thus giving $36$ such combinations.
-	\item Middle naval rotor and rightmost non-naval rotor --  We have $3\cdot5$ possible naval rotor combinations for the right two rotors, leaving $6$ remaining rotor possibilites for the leftmost rotor, thus giving $90$ such combinations.
-	\item Middle non-naval rotor and rightmostnaval rotor --  As above this has $90$ combinations.
+	\item Two naval rotors --  We have $3\cdot2$ possible naval rotor combinations for the right two rotors, leaving $6$ remaining rotor possibilities for the leftmost rotor, thus giving $36$ such combinations.
+	\item Middle naval rotor and rightmost non-naval rotor --  We have $3\cdot5$ possible naval rotor combinations for the right two rotors, leaving $6$ remaining rotor possibilities for the leftmost rotor, thus giving $90$ such combinations.
+	\item Middle non-naval rotor and rightmost naval rotor --  As above this has $90$ combinations.
 \end{itemize}
 
 For each of this cases we have varying likelihood of rotor turnover. Recall that when dealing with the leftmost rotors period of turnover we must consider double stepping as described in section~\ref{double_step}. Thus we have
@@ -3463,7 +3464,7 @@ For each of this cases we have varying likelihood of rotor turnover. Recall that
 	\item Two non-naval rotors -- Leftmost rotor turns with a $26\cdot25 = 650$ period.
 	\item Two naval rotors --  Leftmost rotor turns with a $13\cdot12 = 156$ period.
 	\item Middle naval rotor and rightmost non-naval rotor --  Leftmost rotor turns with a $26\cdot12 = 312$ period.
-	\item Middle non-naval rotor and rightmostnaval rotor --  Leftmost rotor turns with a $13\cdot25 = 325$ period.
+	\item Middle non-naval rotor and rightmost naval rotor --  Leftmost rotor turns with a $13\cdot25 = 325$ period.
 \end{itemize}
 
 Using the same arguments to compute $\tau_n$ as in section~\ref{distance_chart} we get
@@ -3511,8 +3512,8 @@ This lets us compute $\tau_n$ from up to an offset of $\pm650$ but as mentioned 
 	\end{center}
 	\caption{Distance chart for left rotor turnover}
 \end{figure}
-\noindent With this chart we now know what the loss for our scoring sheet needs to be for a particular message pair. From here we can use our exact same scoring method to compute the log-odds of score for entries in the tetragram catalogue. To the the true odds of our candidate offset we must consider the Bayesian prior representing the initial odds that any given offset is correct. We have that there are $1300$ possible offsets, all of which are equally likey, giving us an extra factor of $-62$ hdB to get the true odds of our candidate.
-\subsubsection{Score Conversion} A candidate offset on the tetragram catalogue does not just store information about the middle wheel but also additional information about the end wheel which we can use to further increase accuracy of our end wheel comparison. In order to do this, we need to determine our score with respect to the Bayesian prior for representing the initial odds of an offset in $\pm25$ being correct. Given that we have used the same scoring system regardless of analyzing middle-wheel and end-wheel comparisons, we have that the Bayesian factors we have computed would be the same whether we were analyzing middle-wheel or end-wheel comparions. Thus, we need only account for the difference in the prior odds between middle-wheel and end-wheel comparisons. We have $-62$ hdB prior log-odds for middle-wheel comparison and $-34$ hdB log-odds for end-wheel comparison. Thus to convert our score to that of an end wheel comparsion we must incur a loss of $-34-62 = -28$ hdB. If $p$ is the probability that our messages are in-depth, then we have that the odds with a loss of $-28$ hdB incurred is
+\noindent With this chart we now know what the loss for our scoring sheet needs to be for a particular message pair. From here we can use our exact same scoring method to compute the log-odds of score for entries in the tetragram catalogue. To the the true odds of our candidate offset we must consider the Bayesian prior representing the initial odds that any given offset is correct. We have that there are $1300$ possible offsets, all of which are equally likely, giving us an extra factor of $-62$ hdB to get the true odds of our candidate.
+\subsubsection{Score Conversion} A candidate offset on the tetragram catalogue does not just store information about the middle wheel but also additional information about the end wheel which we can use to further increase accuracy of our end wheel comparison. In order to do this, we need to determine our score with respect to the Bayesian prior for representing the initial odds of an offset in $\pm25$ being correct. Given that we have used the same scoring system regardless of analyzing middle-wheel and end-wheel comparisons, we have that the Bayesian factors we have computed would be the same whether we were analyzing middle-wheel or end-wheel comparisons. Thus, we need only account for the difference in the prior odds between middle-wheel and end-wheel comparisons. We have $-62$ hdB prior log-odds for middle-wheel comparison and $-34$ hdB log-odds for end-wheel comparison. Thus to convert our score to that of an end wheel comparison we must incur a loss of $-34-62 = -28$ hdB. If $p$ is the probability that our messages are in-depth, then we have that the odds with a loss of $-28$ hdB incurred is
 \begin{align*}
 	 & \frac{p\cdot10^{\frac{-28}{20}} + (1-p)(1-10^{\frac{-28}{20}})}{(1-p)} \\
 	 & = 10^{\frac{-28}{20}}\frac{p}{1-p}-10^{\frac{-28}{20}} + 1
@@ -3815,12 +3816,12 @@ Recall from section~\ref{bombe_ring_setting} that the settings given by a stop o
 \begin{enumerate}
 	\item Naval messages regularly dealt with numbers, all of which needed to be typed out in full. This statistical observation is what made the use of the tetra catalogue so valuable.
 	\item An odd quirk known as {\bf{Benford's law}} tells us that $1$ appears more commonly than any other leading digit in numerical data.
-	\item \texttt{EINS} shows up naturally in many German words either as a subcomponent of a word or when spanning across two words.
+	\item \texttt{EINS} shows up naturally in many German words either as a sub-component of a word or when spanning across two words.
 	      % https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html %
 \end{enumerate}
 
 % \end{enumerate}
-\noindent Given that we have a known rotor ordering, steckering, and ring/window setting whose relative distance is correct but may need to be adjusted to get the true ring setting, we can compiled a list of all $26^3$ encipherments of \texttt{EINS} which preserve the relative distance between our ring and window setting. Originally this process had to be done by hand with catalogues known as {\bf{corsets}} but a machine called the {\bf{test-plate}} or {\bf{baby}} was created which autmatically enciphered \texttt{EINS} at all such positions into an {\bf{\texttt{EINS} catalogue}}.
+\noindent Given that we have a known rotor ordering, steckering, and ring/window setting whose relative distance is correct but may need to be adjusted to get the true ring setting, we can compiled a list of all $26^3$ encipherments of \texttt{EINS} which preserve the relative distance between our ring and window setting. Originally this process had to be done by hand with catalogues known as {\bf{corsets}} but a machine called the {\bf{test-plate}} or {\bf{baby}} was created which automatically enciphered \texttt{EINS} at all such positions into an {\bf{\texttt{EINS} catalogue}}.
 \\\\The catalogue could be used to determine locations within our message corpus, along with settings, that would produce \texttt{EINS}. If we then continue deciphering our message from the start of the \texttt{EINS} location,using these settings, we either find likely plaintext or gibberish. This gives a candidate for the rightmost ring setting. Then as in section~\ref{bombe_ring_setting} we continue attempting to decipher plaintext until we encounter gibberish and adjust the middle and subsequently left ring setting until we have deduced the entire ring setting. With this final component we are now able to completely decipher naval Enigma messages.
 \\\\It is clear from the amount of messages, sheets, and scores that need to be compared and tabulated that Banburismus was a great deal of work. Alexander estimates that an average day involved 400 messages with an average length of 150 characters. In total around 6000 comparisons needed to be made all of which needed to be scored and counted. Particular credit should be given to whom Alexander noted was ``one of the best Banburists'', Joan Clarke. Not only was she an exceptional banburist, she was one of only a handful of female cryptologists working at Bletchley Park.
 \\\\The work done by Banburists provided crucial information on Naval operations including U-Boat attacks which were crippling supply lines and starving Britain.

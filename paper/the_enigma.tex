@@ -97,7 +97,7 @@ the numeral indicator.
 cryptographic devices as they are just substitution ciphers which are
 vulnerable to frequency analysis and, if found by the enemy, would
 serve no purpose whatsoever. Therefore, these rotors were designed to
-rotate which served to change the subtitution at each stage of encryption.
+rotate which served to change the substitution at each stage of encryption.
 \\\\Because these rotors rotate it is best to differentiate between
 contact letters and contact positions. When we give the permutation
 corresponding to a rotor as in figure \ref{fig:rotor_v_wiring} we are
@@ -200,7 +200,7 @@ of shifting an input letter forward by 1 (mod 26) and the output
 letter back by 1 (mod 26).
 \\\\To encode the effect of rotation as a permutation consider
 \begin{definition}
-	The \emph{Ceasar permutation} (denoted $P$) is the permutation
+	The \emph{Caesar permutation} (denoted $P$) is the permutation
 	taking a letter to the next letter in alphabetical order (mod 26).
 	Its two-line permutation notation is
 	\[
@@ -228,14 +228,14 @@ If we denote the permutation corresponding to rotor \texttt{V} in
 default position as $\eta$. Then after $r$ rotations, to get
 our new permutation we must first shift each input letter forward by
 $r$ and each output letter backwards by $r$. This can be encoded via
-the Ceasar permutation as follows
+the Caesar permutation as follows
 \[
 	{P^{-r}}\eta{P^{r}}.
 \]
 \noindent It should be noted that current will only flow through the
 machine \emph{after} the rotation has taken place. Thus encrypting a
 letter with the window indicating \texttt{AAA} is really going to
-send current through the rotors with the window indicaiton
+send current through the rotors with the window indication
 \texttt{AAB} since the rightmost rotor will turn before the encryption happens.
 \subsubsection{Outer Ring}
 
@@ -262,7 +262,7 @@ permutation corresponding to rotor \texttt{V} in default position as
 $\eta$. Then shifting the ring by $r$ letters, we get a new
 permutation by first shifting each input letter backwards by $r$ and
 each output letter forwards by $r$. This can be encoded via the
-Ceasar permutation as follows
+Caesar permutation as follows
 \[
 	{P^{r}}\eta{P^{-r}}.
 \]
@@ -316,11 +316,11 @@ window setting.
 After the current travels through all three rotors, it ends up at the
 reflector which we will denote $R$. The reflector is specially
 designed so that its permutation consists only of disjoint
-transpostions, that is it has a $2^{13}$ cycle type. This means that
+transpositions, that is it has a $2^{13}$ cycle type. This means that
 reflector simply swaps letters in a set of $13$ pairs.
 \\\\Rather than having an entry and an exit side each with their own
 contacts, the reflector has one side of contacts. Current enters at a
-particular contact and is routed through the permutaiton back out
+particular contact and is routed through the permutation back out
 this same side at a different contact. The reason for this is that
 the reflector's job is to send current through the exact inverse of
 the process we have described up to this point. That is, after
@@ -344,7 +344,7 @@ total, we have found
 	 & =\frac{26!}{2^{10}\cdot6!}
 \end{align*}
 possible wire arrangements. Of course, the order in which we select
-the 10 wires does not matter so we have overcounted and must
+the 10 wires does not matter so we have over-counted and must
 therefore divide this value by $10!$ wire orderings. Therefore, we have
 \[
 	\frac{26!}{2^{10}\cdot 10! \cdot 6!}
@@ -359,7 +359,7 @@ giving us ${5\choose3}\cdot{3!}$ possibilities.
 
 \subsubsection{\emph{Ring Setting (}Ringstellung\emph{)}}
 Recall that the only rotors for which the ring setting actually adds
-to the keyspace is the 2 rigthmost rotors since this setting changes
+to the keyspace is the 2 rightmost rotors since this setting changes
 where turnover occurs and only the 2 leftmost rotors are affected by
 turnover. Since each ring can be setting corresponds a letter from
 the 26 letter alphabet, this gives us $26^2$ possibilities.
@@ -371,13 +371,13 @@ giving us $26^3$ possibilities.
 \subsubsection{\emph{Reflector Selection}}
 While there are multiple reflectors each of which saw varying levels
 of usage during World War II, most machines generally stuck to a
-fixed relfector known as \texttt{UKW-B}. Therefore, this does not
+fixed reflector known as \texttt{UKW-B}. Therefore, this does not
 factor into our keyspace but is worth noting if other reflectors are
 being considered.
 
 \subsubsection{Total Key Size}
 Putting together all these components of an Enigma's key settings we
-derivce the following expression for the total number of keys
+derive the following expression for the total number of keys
 \[
 	\frac{26!}{2^{10}\cdot 10! \cdot 6!}\cdot{5\choose 3}\cdot3!\cdot
 	26^2\cdot 26^3 \approx 1.07 \cdot 10^{23} \approx 2^{77}
@@ -386,7 +386,7 @@ resulting in a roughly $77$-bit key space.
 \\\\With such a large key space, it seemed to the Germans that Enigma
 was unbreakable. This was an era before computers could churn through
 massive keyspaces in a matter of hours. Any attempt to break Enigma
-was going to require an attack more intellegent than brute-forcing.
+was going to require an attack more intelligent than brute-forcing.
 \\\\In chapter 2, we will see how Polish cryptanalysts made use of a
 flaw in the Enigma protocol, along with some clever mathematics, to
 construct one of the earliest attempts at breaking the cipher. To
@@ -484,7 +484,7 @@ Alice now sends the following message to Bob
 \end{center}
 \noindent Bob recieves this message. He gets his key sheet and sets
 up his machine as the key sheet describes for that day. He now types
-in the first six letters of the messsage to get back Alice's message
+in the first six letters of the message to get back Alice's message
 key, which will look like
 \begin{center}
 	\texttt{LSG LSG}
@@ -500,7 +500,7 @@ recover the plaintext
 	\texttt{HELLO WORLD}
 \end{center}
 \noindent It should be noted the procedure described here is a
-facimile of the actual procedure meant to only convey the components
+facsimile of the actual procedure meant to only convey the components
 that are cryptographically significant. In practice, additional
 information was sent alongside the message such as time of
 transmission and radio station of origin. Further the message itself
@@ -544,7 +544,7 @@ Enigma machine can be represented as a permutation
 Additionally recall that if we ignore turnover the ring setting and
 window setting effectively represent one singular setting.
 Then, by proper adjustment of permutations ($L$, $M$, and $N$) we can
-consider any Enigma setting as beggining in such a state as described
+consider any Enigma setting as beginning in such a state as described
 by $\sigma$. Further, each subsequent keypress will bring us to a new
 state with a new permutation given by
 \[
@@ -554,20 +554,20 @@ where $i$ describes the number of times we have depressed the
 keyboard. Of course, turnover does exist and does matter; however, if
 we are examining only the first few letters (say $l$) of a message
 being encrypted, we have a $\frac{25}{26}$ chance of no turnover
-occuring at each step and so we have a $(\frac{25}{26})^l$ chance of
-no turnover occuring during our initial stages on encryption. For
+occurring at each step and so we have a $(\frac{25}{26})^l$ chance of
+no turnover occurring during our initial stages on encryption. For
 small $l$ this is a reasonably high probability. We will see that the
 first Enigma codebreakers made use of this
 fact to simplify their model of the machine to the above permutation $\sigma_i$.
 
 \subsection{Cycle Type}
-Consider the structure of the permuation $\sigma_i$. We have
+Consider the structure of the permutation $\sigma_i$. We have
 \begin{align*}
 	\sigma_i & = S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S \\
 	         & = (LMP^{-i}NP^{i}S)^{-1}R(LMP^{-i}NP^{i}S).
 \end{align*}
-That is, $\sigma_i$ is simply the reflector permuation $R$
-precomposed and postcomposed with a permutation and its inverse
+That is, $\sigma_i$ is simply the reflector permutation $R$
+pre-composed and post-composed with a permutation and its inverse
 respectively. This leads us to the following definition,
 
 \begin{definition}
@@ -786,3 +786,5 @@ any given fixed position
 %   \caption{Mock Enigma Key Sheet for April 1943.}
 %   \label{fig:enigma_key_sheet}
 % \end{figure}
+
+% LocalWords:  plugboard

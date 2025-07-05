@@ -543,57 +543,165 @@ While cryptanalysts at the time may not have been able to simulate as many itera
 Consider a Bombe running a menu with two closures. These closures are made up of two sets of scamblers we denote $\overline\pi_1, \dots, \overline\pi_r$ and $\overline\delta_1,\dots,\overline\delta_s$ -- forming two loops with permutations $\overline\pi$ and $\overline\delta$. The Bombe will stop whenever these permutations fail to connect all wires in the Bombe. We have previously shown that this occurs whenever $\langle \overline\pi, \overline\delta \rangle$ does not form a transitive subgroup of $S_{26}$.
 \\\\To get the expected number of stops we need only know the probability that $\langle \overline\pi, \overline\delta \rangle$ form a transitive subgroup. If $\overline\pi$ and $\overline\delta$ were uniformly distributed in $S_{26}$ this question would be easily answered via Dixon's theorem; However, we just showed that these permutations are not evenly distributed and their distributions are dependent on the lengths $s$ and $r$. In the last section, we gathered the distribution for each length $\ell$, so we know the probability that a particular cycle type $1^{m_1}\dots26^{m_{26}}$ occurs for a loop of length $\ell$.
 \\\\Therefore, we will approach this problem by finding the probability that two permutations pulled uniformly from two fixed cycle types form a transitive subgroup of $S_{26}$.
-\\\\We will first simplify our notation to make such a problem easier to state formally. Rather than denoting a cycle type as $1^{m_1}\dots26^{m_{n}}$, we will instead write $(m_i)$, where $i$ ranges from $1$ to $n$, to mean that this permutation has an $m_i$ many $i$ cycles. We will then denote $t_{(\alpha_i), (\beta_i)}$ as the probability that a random permutation with cycle type $(\alpha_i)$, and a random permutation with cycle type $(\beta_i)$, form a transitive subgroup.
-\\\\Assuming we have a means to compute these $t_{(\alpha_i), (\beta_i)}$, we can then introduce our single loop distribution from the last section to compute
+\\\\We will first simplify our notation to make such a problem easier to state formally. Rather than denoting a cycle type as $1^{m_1}\dots26^{m_{n}}$, we will instead shorten this to the sequence of multiplicities $m=(m_i)$, where $i$ ranges from $1$ to $n$, to mean that this permutation has an $m_i$ many $i$ cycles. We will then denote $t_{\alpha, \beta} =t_{(\alpha_i), (\beta_i)}$ as the probability that a random permutation with cycle type $\alpha =(\alpha_i)$, and a random permutation with cycle type $\beta = (\beta_i)$, form a transitive subgroup. This collapses our notations of cycle type into a single variable that will make notation signficantly more condensed. 
+\\\\Assuming we have a means to compute these $t_{\alpha, \beta}$, we can then introduce our single loop distribution from the last section to compute
 \[
-	\mathbb{P}(\overline\pi\text{ has cycle type }(\alpha_i))\cdot\mathbb{P}(\overline\delta\text{ has cycle type }(\alpha_i))\cdot t_{(\alpha_i), (\beta_i)}
+	\mathbb{P}(\overline\pi\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta\text{ has cycle type }\beta)\cdot t_{\alpha, \beta}
 \]
-This is the probability that $\overline\pi$ has a fixed cycle type $(\alpha_i)$ and $\overline\delta$ has a fixed cycle type $(\beta_i)$, and that these two permutations form a transitive subgroup. To get the probability that any two $\overline\pi$ and $\overline\delta$ form a transitive subgroup, we can simply range over all possible cycle types to get
+This is the probability that $\overline\pi$ has a fixed cycle type $\alpha$ and $\overline\delta$ has a fixed cycle type $\beta$, and that these two permutations form a transitive subgroup. To get the probability that any two $\overline\pi$ and $\overline\delta$ form a transitive subgroup, we can simply range over all possible cycle types to get
 \begin{align*}
 	 & \mathbb{P}(\langle \overline\pi,\overline\delta \rangle\text{ forms a transitive subgroup})
-	\\= &\sum_{(\alpha_i), (\beta_i)}\mathbb{P}(\overline\pi\text{ has cycle type }(\alpha_i))\cdot\mathbb{P}(\overline\delta\text{ has cycle type }(\alpha_i))\cdot t_{(\alpha_i), (\beta_i)}
+	\\= &\sum_{\alpha, \beta}\mathbb{P}(\overline\pi\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta\text{ has cycle type }\beta)\cdot t_{\alpha, \beta}
 \end{align*}
-and the inverse of this probability will be the probability of a stop.
-\\\\Then we need only to compute these $t_{(\alpha_i), (\beta_i)}$ to solve the two loop case. In order to do this, we must modify Dixon's theorem to be expressed in terms of cycle types rather than the size of the ambient space. We will first illustrate this by example
-\subsubsection{Computing $t_{(\alpha_i), (\beta_i)}$}
-Suppose we have two permutations $\sigma$ and $tau$ taken from a random distribution of permutations with cycle type $1^23^1$ (with correspond $\alpha_i$s)  and $2^13^1$ (with corresponding $\beta_i$s) respectively in $S_5$. We want to find the probability that $\langle \sigma, \tau \rangle$ is a transitive subgroup of $S_5$.
-\\\\$\langle \sigma, \tau \rangle$ will form some set of orbits which partitions $\mathbb{N}_5$ and the possible structure of these orbits is exactly the possible partitions of the number $5$. In particular our orbits can be structured as follows
-	\begin{align*}
-		 & (5)             \\
-		 & (4, 1)          \\
-		 & (3, 2)          \\
-		 & (3, 1, 1)       \\
-		 & (2, 2, 1)       \\
-		 & (2, 1, 1, 1)    \\
-		 & (1, 1, 1, 1, 1)
-	\end{align*}
-	Our goal is to find the probability that our orbits has the structure $(5)$. We will do this by fully enumerating all the ways in which $\langle \sigma, \tau \rangle$ can produce the other possible orbit structures.
+and the inverse of this probability will be the probability of a stop. 
+\\\\Then we need only to compute these $t_{\alpha, \beta}$ to solve the two loop case. In order to do this, we must modify Dixon's theorem to be expressed in terms of cycle types rather than the size of the ambient space.
+\subsubsection{Computing $t_{\alpha, \beta}$}
+In order to solve this problem, just as in Dixon's theorem, we will enumerate partitions of $\mathbb{N}_n$. \\\\Let
+\[
+\mathcal{P}_n \coloneqq \left\{ \{ \omega_1, \dots, \omega_k \} \,\middle|\, k \in \mathbb{N},\ \omega_i \neq \emptyset,\ \omega_i \cap \omega_j = \emptyset\ \text{for } i \neq j,\ \bigcup_{i=1}^k \omega_i = \mathbb{N}_n \right\}
+\]be the set of partitions of \( \mathbb{N}_n \). 
+\\\\For a particular cycle type $m = (m_i)_{i\in\mathbb{N}_n}$, the total number of permutations in $S_n$ with such a cycle type is 
+\[
+    \frac{n!}{\prod_{i=1}^ni^{m_i}(m_i!)}.
+\]
+\\\\Just as with cycle types, we can say that each partition $\omega = \{\omega_1,\dots, \omega_k\}\in\mathcal{P}$ has a ``partition type'' given in terms of the multiplicity of sets of particular cardinalities. In particular, we will denote that a partition $\omega$ contains $(m_j^{\omega})_{j\in\mathbb{N}}$ sets with cardinality $j$. Then the total number of such partitions is 
+\[
+    \frac{n!}{\prod_{i=1}^n(i!)^{(m_i^{\omega})}(m_i^{\omega}!)}.
+\]
+\\\\To condense both these factors, for a sequence $x = (x_i)_{i\in\mathbb{N}_n}$, we introduce
+\[
+Y(x) \coloneqq \prod_{i=1}^n (i!)^{x_i} \cdot x_i!, \qquad
+Z(x) \coloneqq \prod_{i=1}^n i^{x_i} \cdot x_i!.
+\]
+Then with this notation, total number of permutations with cycle type $c = (c_i)\in\mathbb{N}_n$ is 
+\[
+    \frac{n!}{Z(c)}
+\]
+and the total number of partitions with partition type $p = (p_i)\in\mathbb{N}_n$ is 
+\[
+    \frac{n!}{Y(p)}
+\]
+We will first illustrate the computation of $t_{\alpha,\beta}$ by example. Suppose we have two permutations $\sigma$ and $\tau$ taken from a random distribution of permutations with cycle type $1^23^1$ (with correspond $\alpha_i$s)  and $2^13^1$ (with corresponding $\beta_i$s) respectively in $S_5$. We want to find the probability that $\langle \sigma, \tau \rangle$ is a transitive subgroup of $S_5$.
+\\\\$\langle \sigma, \tau \rangle$ will form some set of orbits which partitions $\mathbb{N}_5$, and the possible structure of these orbits is exactly the possible partitions of the number $5$ which we denoted $\mathcal{P}$. 
+\\\\Our goal is to find the probability that the orbit we generate is exactly $\mathbb{N}_5$. We will do this by fully enumerating all partitions which $\langle \sigma, \tau \rangle$ can form in its orbit structure.
 	\\\\In total, the are
 	\[
-		\frac{(5!)^2}{\prod_{i=1}^{5}i^{\alpha_i}i^{\beta_i}\alpha_i!\beta_i!}
+		\frac{(5!)^2}{Z(\alpha)Z(\beta)}
 	\]
 	possible $\sigma$ and $\tau$ combinations taken from their respective cycle types. This total must be equal to sum, over each partition of $5$, of the number of ways that  $\langle \sigma, \tau \rangle$ can produce an orbit structure mirroring that partition.
-	\\\\Consider the case in which $\langle \sigma, \tau \rangle$ has an orbit structure of $(5)$. This is simply the proportion of all pairs $\sigma$ and $\tau$ which form a transitive subgroup. This is exactly
+	\\\\This count includes all such pairs, regardless of the orbit structure. The transitive case contributes exactly
 	\[
-		\frac{(5!)^2}{\prod_{i=1}^{5}i^{\alpha_i}i^{\beta_i}\alpha_i!\beta_i!}\cdot t_{(\alpha_i, \beta_i)}
+		\frac{(5!)^2}{Z(\alpha)Z(\beta)}\cdot t_{\alpha, \beta}
 	\]
-	Now consider the case in which $\langle \sigma, \tau \rangle$ has an orbit structure of $(3, 2)$. Suppose we wanted to enumerate $\langle \sigma, tau \rangle$ that produce a fixed set of orbits, say $\{A,B\}$ where $|A| = 3$ and $|B| = 2$. In order for this to occur, every cycle of $\sigma$ and $\tau$ must be fully contained in either $A$ or $B$ since otherwise, such a cycle would necessarily mean that one set is reachable from the other, thus bridging the two sets into one orbit.
-	\\\\Thus, we must have that the cycle lengths of $\sigma$ and $\tau$ must be partitionable into two groups -- one group of cycles whose total length is $3$, and the other whose total length is $2$. In our case this can be achieved by spliting $\sigma$ into a $3$ cycle and $2$ cycle, and splitting $\tau$ into a $3$ cycle and $2$ $1$ cycles. The first group of cycles in $S_3$ can be denoted by cycle types $(\alpha_{i_A})$ and $(\beta_{i_A})$. The number of pairs of partitions grouped in this way is
+    Our ultimate goal will be to isolate this factor $t_{\alpha, \beta}$ to get our desired probability. 
+	\\\\Now consider the case in which $\langle \sigma, \tau \rangle$ produce a fixed set of orbits, say $\{A,B\}\in\mathcal{P}$ where $|A| = 3$ and $|B| = 2$. In order for this to occur, every cycle of $\sigma$ and $\tau$ must be fully contained in either $A$ or $B$ since otherwise, such a cycle would necessarily mean that one set is reachable from the other, thus bridging the two sets into one orbit.
+	\\\\Thus, we must have that the cycle lengths of $\sigma$ and $\tau$ must be partitionable into two groups -- one group of cycles whose total length is $3$, and the other whose total length is $2$. In our case this can be achieved by spliting $\sigma$ into a $3$ cycle and $2$ cycle, and splitting $\tau$ into a $3$ cycle and two $1$ cycles. The first group of cycles in $S_3$ can be denoted by cycle types $\alpha^{(A)} = (\alpha^{(A)}_{i})$ and $\beta^{A} = (\beta^{(A)}_{i})$. The number of pairs of partitions grouped in this way is
 	\[
-		\frac{3!}{\prod_{i=1}^3i^{(\alpha_{i_A})}i^{(\beta_{i_A})}\alpha_{i_A}!\beta_{i_A}!}
+		\frac{(|A|!)^2}{Z(\alpha^{(A)})Z(\beta^{(A)})}
 	\]
-	The second group of cycles in $S_2$ can be denoted by cycle types $(\alpha_{i_B})$ and $(\beta_{i_B})$.
-
-	The number of pairs of partitions grouped in this way is
+	The second group of cycles in $S_2$ can be denoted by cycle types $\alpha^{(B)} = (\alpha^{(B)}_i)$ and $\beta^{(B)} = (\beta_{i}^{(B)})$. The number of pairs of partitions grouped in this way is
 	\[
-		\frac{2!}{\prod_{i=1}^3i^{(\alpha_{i_B})}i^{(\beta_{i_B})}\alpha_{i_B}!\beta_{i_B}!}
+		\frac{(|B|!)^2}{Z(\alpha^{(B)})Z(\beta^{(B)})}
 	\]
-	We can then examine restrictions of $\sigma$ and $\tau$ to each subset $A$ and $B$ and compute the probability that the restricted permutations generate a transitive subgroup on the $3$ element set (that is $t_{(\alpha_{i_A}), (\beta_{i_A})}$) and the probability that the restricted permutation generates a tranistive subgroup on the $2$ element set (that is $t_{(\alpha_{i_B}), (\beta_{i_B})}$). Then the probability that these two groups have orbits $A$ and $B$ is
+	We can then examine restrictions of $\sigma$ and $\tau$ to each subset $A$ and $B$ and compute the probability that the restricted permutations generate a transitive subgroup on the $3$ element set (that is $t_{\alpha^{(A)},\beta^{(A)}}$) and the probability that the restricted permutation generates a tranistive subgroup on the $2$ element set (that is $t_{\alpha^{(B)},\beta^{(B)}}$). Then the probability that these two groups have orbits $A$ and $B$ is
 \[
-	\frac{3!}{\prod_{i=1}^3i^{(\alpha_{i_A})}i^{(\beta_{i_A})}\alpha_{i_A}!\beta_{i_A}!}\cdot\frac{2!}{\prod_{i=1}^3i^{(\alpha_{i_B})}i^{(\beta_{i_B})}\alpha_{i_B}!\beta_{i_B}!}\cdot t_{(\alpha_{i_A}), (\beta_{i_A})}\cdot t_{(\alpha_{i_B}), (\beta_{i_B})}
+	\frac{(|A|!)^2}{Z(\alpha^{(A)})Z(\beta^{(A)})}\cdot\frac{(|B|!)^2}{Z(\alpha^{(B)})Z(\beta^{(B)})}\cdot t_{\alpha^{(A)},\beta^{(A)}}\cdot t_{\alpha^{(B)},\beta^{(B)}}
 \]
-% We have
-% 	\[
+If we wanted the total number of ways that $\sigma$ and $\tau$ generate an orbit structure of $(3,2)$, we must perform this computation over each possible partitions into sets $|A|=3$ and $|B|=2$, of which there are 
+\[
+\frac{5!}{(|A|!)(|B|!)}
+\]
+total partitions. Since our count of $\sigma$ and $\tau$ which generate a fixed orbit structure is independent of the specific subsets within the orbit, we can simply multiply by the above factor to get the total $\sigma$ and $\tau$ pairs generating orbits of the form $\{A,B\}\in\mathcal{P}_5$ with $|A| = 3$ and $|B| = 2$ as
+\[
+	\frac{5!}{(|A|!)(|B|!)}\cdot\frac{(|A|!)^2}{Z(\alpha^{(A)})Z(\beta^{(A)})}\cdot\frac{(|B|!)^2}{Z(\alpha^{(B)})Z(\beta^{(B)})}\cdot t_{\alpha^{(A)},\beta^{(A)}}\cdot t_{\alpha^{(B)},\beta^{(B)}}
+\]
+% Finally, consider the case in which $\langle \sigma, \tau \rangle$ has orbits of the form $\{A,B\}\in\mathcal{P}$ with $|A| = 4$ and $|B| = 1$. Recall that for this to occur, $\sigma$ and $\tau$ must be partitionable into groups of cycles whose total length is $4$ and the other whose total length is $1$. For $\tau$ this can be achieved by splitting the cycles into a $3$ cycle and $1$ cycle (totaling length $4$), and a remaining $1$ cycle (totaling length $1$) -- this is impossible to achieve for $\sigma$ since it cannot be partitioned in such a way.
+\\\\We note that, for a fixed cycle type \( x = (x_i)_{i \in \mathbb{N}_n} \), and a set partition \( \omega = \{\omega_1, \dots, \omega_k\} \in \mathcal{P}_5 \) of $\mathbb{N}_n$, the set
+\[
+\mathcal{S}_{x,\omega} \coloneqq \left\{ \left(x^{(\omega_j)}_i\right)_{i \in \mathbb{N}_n,\, j = 1,\dots,k} \,\middle|\, 
+\begin{array}{l}
+\text{For each } j, \sum_{i=1}^n i x^{(\omega_j)}_i = |\omega_j|, \\
+\text{and for each } i, \sum_{j=1}^k x^{(\omega_j)}_i = x_i
+\end{array}
+\right\}.
+\] is the set of groupings of the cycle type $x$ into $k$ buckets, such that the sum of the $i$th group is exactly $|\omega_i|$. Further, we require that for each $i\in\mathbb{N}$, $\sum_{j=1}^k x^{(\omega_j)}_i = x_i$ since we want to ensure that the total number of $i$ cycles does not change between our original cycle type and this new grouping of cycles.
+\\\\In the case where $\omega = \{A,B\}$ with $|A| = 3$ and $|B| = 2$, $\alpha = (0,1,1,0,0)$ (i.e. $\sigma$ has cycle type $2^13^1$) and $\beta=(2,0,1,0,0)$ (i.e. $\tau$ has cycle type $1^23^1$, we have that 
+\[
+S_{\alpha,\omega} = \{(0,1,0,0,0), (0,0,1,0,0)\}
+\]
+and 
+\[
+S_{\beta,\omega} = \{(2,0,0,0,0), (0, 0, 1,0,0)\}.
+\]
+\\\\Note that if either $S_{\alpha,\omega}$ or $S_{\beta,\omega}$ were empty, then there is no way of partition both $\sigma$ and $\tau$'s cycle types such that they can form orbits which are compatible with our partition $\omega$. For our particular $\sigma$ and $\tau$, this is exactly the case when $\omega = \{A,B\}\in\mathcal{P}_5$ with $|A| = 4$ and $|B| = 1$. For this to occur, $\sigma$ and $\tau$ must be partitionable into groups of cycles whose total length is $4$ and the other whose total length is $1$. For $\tau$ this can be achieved by splitting the cycles into a $3$ cycle and $1$ cycle (totaling length $4$), and a remaining $1$ cycle (totaling length $1$) -- this is impossible to achieve for $\sigma$ since it cannot be partitioned in such a way. This is to say, for $\alpha = (0,1,1,0,0)$
+\[
+    S_{\alpha,\omega} = \emptyset.
+\]
+If we enumerate over each partition in $\mathcal{P}_5$, summing over the ways in which $\sigma$ and $\tau$ can generate a set of orbits matching that partition, we will get the total number of pairs of $\sigma$ and $\tau$. We found that for a particular partition $\omega$, we have 
+\[
+\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}\]
+Total ways in which $\sigma$ and $\tau$ can produce this partition in its orbits. Then there are 
+\[
+\frac{5!}{Y(m^{(\omega)})}
+\]
+such partitions of $\mathbb{N}_5$. Computing 
+\[
+\frac{5!}{Y(m^{(\omega)})}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}
+\]
+we find that there are $40$ pairs of permutations in $S_5$ with cycle types $2^13^1$ and $1^23^1$ respectively that generate orbits with a set containing $3$ elements and a set containing $2$ elements
+Finally, summing over partitions $\mathcal{P}_5$, we have that 
+\[
+    \frac{(5!)^2}{Z(\alpha)Z(\beta)} = \sum_{\omega\in\mathcal{P}_5}\frac{5!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+\]
+\\\\In general, for $n\in\mathbb{N}$, and two permutations $\sigma$ and $\tau$ with cycle types $\alpha$ and $\beta$ respectively
+\[
+    \frac{(n!)^2}{Z(\alpha)Z(\beta)} = \sum_{\omega\in\mathcal{P}_n}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+\]
+To solve for $t_{\alpha,\beta}$, we must isolate the partition in which $\omega=\mathbb{N}_n$
+\begin{align*}
+    \frac{(n!)^2}{Z(\alpha)Z(\beta)} = &\frac{(n!)^2}{Z(\alpha)Z(\beta)}\cdot t_{\alpha, \beta}\\
+    &+ \sum_{\omega\in\mathcal{P}_n \setminus \{\mathbb{N}_n\}}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+\end{align*}
+Solving for $t_{\alpha,\beta}$ we have
+\begin{theorem}
+For $\sigma,\tau\in S_n$ with cycle types, $\alpha$ and $\beta$ respectively, we have 
+\begin{align*}
+    t_{\alpha, \beta}\ = 1 - \frac{Z(\alpha)Z(\beta)}{(n!)}\sum_{\omega\in\mathcal{P}_n \setminus\{\mathbb{N}_n\}}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+\end{align*}
+\end{theorem}
+\noindent This can be solved recursively since each factor $t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}$ is being computed for some $\omega \ne \mathbb{N}_n$. Thus $|\omega_i| < n$ and we can compute the subproblem for the case of permutations with cycle types $\alpha^{(\omega_i)}$ and $\beta^{(\omega_i)}$. Eventually, we will achieve the base case where $t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}} = 1$ since in the case of $n =1$ transitivity is guaranteed. 
+\\\\In practice, we performed bottom-up recursion to get all possible values $t_{\alpha,\beta}$, for all pairs of cycle types $\alpha$ and $\beta$ in $S_1, \dots, S_{26}$ respectively.
+% \subsubsction{Notation}
+% \text{}Let \( \mathbb{N}_n \coloneqq \{1, 2, \dots, n\} \), and let
+% \[
+% \mathcal{P} \coloneqq \left\{ \{ \omega_1, \dots, \omega_k \} \,\middle|\, k \in \mathbb{N},\ \omega_i \neq \emptyset,\ \omega_i \cap \omega_j = \emptyset\ \text{for } i \neq j,\ \bigcup_{i=1}^k \omega_i = \mathbb{N}_n \right\}
+% \]be the set of partitions of \( \mathbb{N}_n \).
+% \\\\For a cycle type \( x = (x_i)_{i \in \mathbb{N}_n} \), define
+% \[
+% Y(x) \coloneqq \prod_{i=1}^n (i!)^{x_i} \cdot x_i!, \qquad
+% Z(x) \coloneqq \prod_{i=1}^n i^{x_i} \cdot x_i!.
+% \]
+
+% \\\\For a fixed cycle type \( x = (x_i)_{i \in \mathbb{N}_n} \), and a set partition \( \omega = \{\omega_1, \dots, \omega_k\} \in \mathcal{P} \) of $\mathbb{N}_n$, define
+% \[
+% \mathcal{S}_{x,\omega} \coloneqq \left\{ \left(x^{(\omega_j)}_i\right)_{i \in \mathbb{N}_n,\, j = 1,\dots,k} \,\middle|\, 
+% \begin{array}{l}
+% \text{For each } j, \sum_{i=1}^n i x^{(\omega_j)}_i = |\omega_j|, \\
+% \text{and for each } i, \sum_{j=1}^k x^{(\omega_j)}_i = x_i
+% \end{array}
+% \right\}.
+% \]
+% Then we have 
+% \[
+%     \frac{(n!)^2}{Z(\alpha)Z(\beta)} = \sum_{\omega\in\mathcal{P}}\frac{n!}{Y(\omega)}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+% {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}\]
+% We have% 	\[
 % 		\sigma = (a_1a_2a_3)(a_4a_5)\\
 % 		\tau = (b_1b_2b_3)(b_4)(b_5)
 % 	\]

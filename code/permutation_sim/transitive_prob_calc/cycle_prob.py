@@ -1,4 +1,4 @@
-from itertools import combinations_with_replacement
+from itertools import combinations_with_replacement, combinations
 from collections import defaultdict, Counter
 from tqdm import TqdmExperimentalWarning
 from tqdm.rich import tqdm
@@ -6,6 +6,7 @@ from rich.console import Console
 from rich.progress import Progress, BarColumn, TextColumn
 from rich.table import Table
 from colorama import Fore, Style, init
+from pyenigma import *
 import networkx as nx
 import numpy as np
 import io
@@ -17,9 +18,18 @@ import warnings
 import logging
 import pickle
 import argparse
+import string
 
-EPS: float = 1e-5
+EPS: float = 1e-3
 PATIENCE: int = 30
+
+ROTORS = [
+    rotor.ROTOR_I,
+    rotor.ROTOR_II,
+    rotor.ROTOR_III,
+    rotor.ROTOR_IV,
+    rotor.ROTOR_V,
+]
 
 init(autoreset=True)
 
@@ -84,6 +94,59 @@ def generate_disjoint_transpositions(n: int) -> list[tuple[int, int]]:
     return transpositions
 
 
+def generate_engima_transpositions(
+    n: int, offset: int, reflector: rotor.Reflector, rotors: list[rotor.Rotor], key: str
+) -> list[tuple[int, int]]:
+    transpositions: list[tuple[int, int]] = []
+
+    for i in range(int(n)):
+        i_as_chr = chr(0x41 + i)
+
+        # Initialize new Enigma
+        e = enigma.Enigma(reflector, rotors[0], rotors[1], rotors[2], key, plugs="")
+        e.encipher("a" * offset)
+
+        sig_i_as_char = e.encipher(i_as_chr)
+        sig_i = ord(sig_i_as_char) - 0x41
+
+        transpositions.append((i, sig_i))
+        transpositions.append((sig_i, i))
+    transpositions.sort(key=lambda x: x[0])
+    return list(set(transpositions))
+
+
+def create_enigma_graph(n: int, l: int) -> nx.Graph:
+    G: nx.Graph = nx.Graph()
+
+    # Create l columns of n nodes
+    for col in range(l):
+        for node in range(n):
+            G.add_node((col, node))
+
+    # Choose l random offsets
+    offsets = random.sample(range(17), k=l)
+    rotor_choice = random.sample(ROTORS, k=3)
+    key_choice = "".join(random.choices(string.ascii_uppercase, k=3))
+
+    # Connect nodes within each column to the next via random transpositions
+    for col in range(l - 1):
+        transpositions: list[tuple[int, int]] = generate_engima_transpositions(
+            n,
+            offsets[col],
+            rotor.ROTOR_Reflector_B,
+            rotor_choice,
+            key_choice,
+        )
+
+        for i, j in transpositions:
+            G.add_edge((col, i), (col + 1, j))
+
+    for node in range(n):
+        G.add_edge((0, node), (l - 1, node), color="invis")  # Invisible edges
+
+    return G
+
+
 def create_graph_with_transpositions(n: int, l: int) -> nx.Graph:
     G: nx.Graph = nx.Graph()
 
@@ -121,7 +184,7 @@ def total_variation_distance(d1, d2) -> float:
     return sum(abs(d1.get(k, 0) - d2.get(k, 0)) for k in keys) / 2
 
 
-def collect_cycle_types(n: int, l: int, num_sims: int):
+def collect_cycle_types(n: int, l: int, num_sims: int, enigma: bool = False):
     # Collect cycle types and their counts
     cycles_seen = {}
     prev_d = {}
@@ -140,9 +203,11 @@ def collect_cycle_types(n: int, l: int, num_sims: int):
     ) as progress:
         task = progress.add_task(f"Collecting cycles l={l}", total=None, tvd=0.00)
         for i in range(1, num_sims + 1):
-            G = create_graph_with_transpositions(n, l + 1)
+            if enigma:
+                G = create_enigma_graph(n, l+1)
+            else:
+                G = create_graph_with_transpositions(n, l + 1)
             cycle_type = get_cycle_type(G)
-
             try:
                 cycles_seen[cycle_type] += 1
             except KeyError:
@@ -190,6 +255,22 @@ def main(n: int, num_sims: int) -> None:
             log_success(f"Saved cycle collection cache for l={i}")
 
 
+# Computes distribution from real Enigma machines rather than randomized permutations
+# This gives much better results in the case when l = 2
+def enigma_distribution(n: int, num_sims: int) -> None:
+    for i in range(2, 17):
+        # Check if file was previously cached
+        if os.path.isfile(f"enigmaCycles{i}.dat"):
+            log_info(f"Cycles for l={i} were previously cached, skipping...")
+        else:
+            log_info(f"Collecting cycles for l={i}")
+            got_cycles = collect_cycle_types(n, i, num_sims, enigma=True)
+            collected_cycles = open(f"enigmaCycles{i}.dat", "wb")
+            pickle.dump(got_cycles, collected_cycles)
+            collected_cycles.close()
+            log_success(f"Saved cycle collection cache for l={i}")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -211,4 +292,4 @@ if __name__ == "__main__":
     n = args.N
     num_sims = int(args.SIMS)
 
-    main(n, num_sims)
+    main(n, num_sums)

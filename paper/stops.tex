@@ -491,7 +491,8 @@ we would say this stop is a $13^2$ stop. This is effectively analogous to the cy
 	The opposite of this probability is the probability that we generate exactly the orbit structure we specified, thus giving us the desired result.
 \end{proof}
 \noindent It should be noted that the actual statement of this proof is a formula for $t_n$ which is then shown to asymptotically approach $1$ as $n$ increases. In the context of the theorem above, $t_n$ can be solved by computing the probability that $\langle \sigma, \tau\rangle$ have an orbit structure of $26^1$, that is, the subgroup formed is transitive. For such an orbit structure, each $t_i$ given in our equation necessarily has $i < n$ so we can recursively solve for $t_n$. With the ability to solve for any $t_k$ for $k\in\mathbb{N}$ we can then go and compute the probability of any particular orbit structure via the above theorem.
-\\\\We can now compute for the case of two loops, what the probability of a particular stop type is. Computing the above for a $26^1$ orbit structure tells us that roughly $95.9\%$ of all rotor configurations in a two loop structure will electrify all wires, producing no stop whatsoever. The remaining $4.1\%$ of rotor configurations account for all possible stops. Of these stops we can compute that roughly $92.3\%$ of these stops have a stop type of $1^125^1$. This is a \emph{massive} proportion of the possible stops. Nearly all stops have this singular stop type, and herein lies the justification for Turing's method.
+\subsection{Turing's Model's Accuracy}\label{justify_turing}
+We can now compute for the case of two loops, what the probability of a particular stop type is. Computing the above for a $26^1$ orbit structure tells us that roughly $95.9\%$ of all rotor configurations in a two loop structure will electrify all wires, producing no stop whatsoever. The remaining $4.1\%$ of rotor configurations account for all possible stops. Of these stops we can compute that roughly $92.3\%$ of these stops have a stop type of $1^125^1$. This is a \emph{massive} proportion of the possible stops. Nearly all stops have this singular stop type, and herein lies the justification for Turing's method.
 \\\\For the sake of argument, suppose \emph{all} stops were of the type $1^125^1$. In this case, we note two observations
 \begin{enumerate}[(I)]
 	\item All stops have a normal stops
@@ -539,7 +540,8 @@ While we might be able to run a lengthy Monte Carlo simulation of the Bombe over
 	\item[(2)]Would cryptanalysts at the time be able to simulate such a distribution?
 \end{enumerate}
 While cryptanalysts at the time may not have been able to simulate as many iterations as we can with modern computers, we do know that such technology existed as would make this task reasonably achievable at the time. Recall from section \ref{cyclometer}, that the Polish Cipher Beaurea produced a device called the cyclometer, whose sole purpose was to quickly determine the cycle type produced by composing two Enigma permutations. With simple changes this could easily be extended to determine cycle types of arbitrary length loops of Enigma machines. With some random sampling and tedious cataloguing, it is certainly feasible that cryptanalysts of the time could have computed a distribution close to the one discussed in this section.
-\\\\With both these points addressed, we can examine the results of simulating a single loop of length $\ell$. After collecting the cycle distribution for each length $\ell$ over a large Monte Carlo simulation, we can take the sum of observed frequency which are not $26^1$ cycles as our probability of a stop occuring. Multiplying this by $26^3$ we get our expected number of stops. We then compare this with a small simulation run via Bouchaudy's simulation as our ground truth. 
+\subsubsection{One Loop Results}
+With both these points addressed, we can examine the results of simulating a single loop of length $\ell$. After collecting the cycle distribution for each length $\ell$ over a large Monte Carlo simulation, we can take the sum of observed frequency which are not $26^1$ cycles as our probability of a stop occuring. Multiplying this by $26^3$ we get our expected number of stops. We then compare this with a small simulation run via Bouchaudy's simulation as our ground truth. 
 \begin{table}[H]
 \centering
 
@@ -602,7 +604,7 @@ In order to solve this problem, just as in Dixon's theorem, we will enumerate pa
 \[
     \frac{n!}{\prod_{i=1}^n(i!)^{(m_i^{\omega})}(m_i^{\omega}!)}.
 \]
-\\\\To condense both these factors, for a sequence $x = (x_i)_{i\in\mathbb{N}_n}$, we introduce
+To condense both these factors, for a sequence $x = (x_i)_{i\in\mathbb{N}_n}$, we introduce
 \[
 Y(x) \coloneqq \prod_{i=1}^n (i!)^{x_i} \cdot x_i!, \qquad
 Z(x) \coloneqq \prod_{i=1}^n i^{x_i} \cdot x_i!.
@@ -666,7 +668,7 @@ and
 \[
 S_{\beta,\omega} = \{(2,0,0,0,0), (0, 0, 1,0,0)\}.
 \]
-\\\\Note that if either $S_{\alpha,\omega}$ or $S_{\beta,\omega}$ were empty, then there is no way of partition both $\sigma$ and $\tau$'s cycle types such that they can form orbits which are compatible with our partition $\omega$. For our particular $\sigma$ and $\tau$, this is exactly the case when $\omega = \{A,B\}\in\mathcal{P}_5$ with $|A| = 4$ and $|B| = 1$. For this to occur, $\sigma$ and $\tau$ must be partitionable into groups of cycles whose total length is $4$ and the other whose total length is $1$. For $\tau$ this can be achieved by splitting the cycles into a $3$ cycle and $1$ cycle (totaling length $4$), and a remaining $1$ cycle (totaling length $1$) -- this is impossible to achieve for $\sigma$ since it cannot be partitioned in such a way. This is to say, for $\alpha = (0,1,1,0,0)$
+\\\\Note that if either $S_{\alpha,\omega}$ or $S_{\beta,\omega}$ were empty, then there is no way of partition both $\sigma$ and $\tau$'s cycle types such that they can form orbits which are compatible with our partition $\omega$. For our particular $\sigma$ and $\tau$, this is the case when $\omega = \{A,B\}\in\mathcal{P}_5$ with $|A| = 4$ and $|B| = 1$. For this to occur, $\sigma$ and $\tau$ must be partitionable into groups of cycles whose total length is $4$ and the other whose total length is $1$. For $\tau$ this can be achieved by splitting the cycles into a $3$ cycle and $1$ cycle (totaling length $4$), and a remaining $1$ cycle (totaling length $1$) -- this is impossible to achieve for $\sigma$ since it cannot be partitioned in such a way. This is to say, for $\alpha = (0,1,1,0,0)$
 \[
     S_{\alpha,\omega} = \emptyset.
 \]
@@ -704,7 +706,7 @@ Solving for $t_{\alpha,\beta}$ we have
 \begin{theorem}
 For $\sigma,\tau\in S_n$ with cycle types, $\alpha$ and $\beta$ respectively, we have 
 \begin{align*}
-    t_{\alpha, \beta}\ = 1 - \frac{Z(\alpha)Z(\beta)}{(n!)}\sum_{\omega\in\mathcal{P}_n \setminus\{\mathbb{N}_n\}}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+    t_{\alpha, \beta}\ = 1 - \frac{Z(\alpha)Z(\beta)}{(n!)^2}\sum_{\omega\in\mathcal{P}_n \setminus\{\mathbb{N}_n\}}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
 {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
 \end{align*}
 \end{theorem}
@@ -712,7 +714,7 @@ For $\sigma,\tau\in S_n$ with cycle types, $\alpha$ and $\beta$ respectively, we
 \\\\In practice, we performed bottom-up recursion to get all possible values $t_{\alpha,\beta}$, for all pairs of cycle types $\alpha$ and $\beta$ in $S_1, \dots, S_{26}$ respectively. To the best of my knowledge, a general formula computing the probability that two permutations with fixed cycle types $\alpha$ and $\beta$ generate a transitive subgroup of $S_n$ has not appeared in the literature. This contribution serves to extend Dixon's theorem to allow for cases in which $\sigma,\tau\in S_n$ are drawn from non-uniform distributions determined by their cycle types.
 \subsubsection{Two Loop Results}
 With these $t_{\alpha, \beta}$ in hand, we can now compute the probability that two Enigma permutations $\overline\pi$ and $\overline\delta$ do \emph{not} form a transitive subgroup -- thus producing a stop. What follows is a table representing the length of each closure in two loop menu and the resulting number of expected stops. 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{adjustbox}{max width=\textwidth,max height=2\textheight}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -744,7 +746,7 @@ With these $t_{\alpha, \beta}$ in hand, we can now compute the probability that 
 \end{tabular}
 
 \end{adjustbox}
-\caption{Computed values indexed by $(m,n)$ for $m,n \in \{2,\dots,12\}$, with values within the margin of error of the corresponding cells in the second table in \textbf{bold}.}
+\caption{Expected number of stops for two closures each ranging from length $\{2,\dots,12\}$. Values within the $95\%$ margin of error of table \protect\ref{fig:simulated_two_loop} are noted in \textbf{bold}.}
 \end{table}
 
 
@@ -780,8 +782,66 @@ With these $t_{\alpha, \beta}$ in hand, we can now compute the probability that 
 \hline
 \end{tabular}
 \end{adjustbox}
-\caption{Computed values indexed by $(m,n)$ for $m,n \in \{2,\dots,12\}$}
+\caption{Simulated number of stops for two closures each ranging from length $\{2,\dots,12\}$}
+\label{fig:simulated_two_loop}
 \end{table}
+
+\subsection{Three or More Loops}
+Our version of Dixon's theorem can be easily extended to work on an arbitrary number of permutatiosn with arbitrary cycle types. The problem with calculating the corresponding values of $t_{\alpha_1,\dots,\alpha_k}$ is that of computational complexity. 
+\\\\While the implented algorithm used many optimizations including caching lookups and precomputing partitions, it is still sufficiently slow that the three loop case would likely require further optimization and more parallelization. Given the scale of combinatoric enumeration done to solve this problem, we used \texttt{python} to implement the algorithm. Certainly a language with less overhead like \texttt{C} or \texttt{Rust} could outpace our program. This examination of further closures presents an interesting research topic as it would illustrate whether or not the variance from the one loop estimates results in a degradation of the model for higher order loops.  
+\section{H-M Factor}
+% https://wdc.contentdm.oclc.org/digital/collection/leo/id/167 %
+This entire discussion of the expected number of stops has ignored the impact of the diagonal board. Once implemented, the diagonal board drastically reduced the number of stops for a run of the Bombe. To describe this effect, Turing introduced an additional term called the {\bf{H-M Factor}}, named after Cyril Holland-Martin the Technical Director of the British Tabulating Company which manufactured the Bombe.
+\\\\The H-M Factor measures the proportion of normal stops over all steckering hypotheses that are maintained after introducing the diagonal connections. Given that the number of diagonal wires being used is dictated by the number of letters being considered in a menu, Turing gave seperate H-M Factors for menus containing various numbers of letters. We will denote the H-M Factor for a menu with $k$ letters as $\mathcal{H}_k$. 
+\\\\Supposing we had a menu with $c$ closures containing $k$ total letters. Turing's model tells us that before the introduction of the diagonal board we expect $26^{4-c}$ normal stops over all steckering hypotheses. Given that $\mathcal{H}_k$ of these normal stops are maintain after introducing the diagonal board, Turing's model esimates that we expect 
+\[
+    26^{4-c}\cdot\mathcal{H}_k
+\]
+total normal stops over all steckering hypotheses when including the diagonal board. 
+\\\\For the same reasons discussed in section \ref{justify_turing}, this serves as a fair approximation of the actual number of stops since with more loops the proportion of stops with type $1^125^1$ increases. However, this also means that the calculation of $\mathcal{H}_k$ suffers from the inherent issues with Turing's model without the diagonal board -- undercounting due to abnormal stops, and overcounting stops with multiple steckering hypotheses producing normal stops. As an example, Turing calculates that $\mathcal{H}_2 = 0.92$. While this may serve as an accurate estimate of the number of normal stops over all steckering hypotheses, it has scarce relation to the actual number of stops. For instance, a menu with one closure and only two letters can never produce a stop -- even with the introduction of the diagonal board. 
+\subsubsection{Cycle-Type Based H-M Factor}
+As with our cycle-type model introduced in the last section, a proper calculation of $\mathcal{H}_k$ should not only take into account the single variable $k$, it should also take into account an additional variable representing the orbit structure $m = (m_i)$ of a stop. Further, such an H-M fator would not give the proportion of normal stops over all steckering hypotheses that are maintained after the introduction of the diagonal board, it would give the proportion of \emph{all} stops which are maintained. We will denote such a hypothetical H-M factor as $\mathcal{H}_{k,m}$  
+\\\\Consider the case of two closures. We showed in the last section that we can compute the probability of a stop for two loops with cycle structures $\alpha$ and $\beta$ as.
+\begin{align*}
+    t_{\alpha, \beta}\ = 1 - \sum_{\omega\in\mathcal{P}_n \setminus\{\mathbb{N}_n\}}\frac{Z(\alpha)Z(\beta)}{(n!)^2}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+\end{align*}
+We can modify our version of Dixon's theorem to give us the likelihood that two permutations $\sigma,\tau\in S_n$ with cycle type $\alpha$ and $\beta$ are such that $\langle\sigma,\tau\rangle$ have the structure of a particular orbit $\omega\in\mathcal{P}_n$. We denote this probability $t_{\alpha,\beta}^{(m^{(\omega)})}$ and this is given as 
+\begin{align*}
+    t^{m^{(\omega)}}_{\alpha, \beta}\ =\frac{Z(\alpha)Z(\beta)}{(n!)^2}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+{\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+\end{align*}
+and we note that 
+\[
+t_{\alpha,\beta} = 1 - \sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}t_{\alpha,\beta}^{(m^{(\omega)})}
+\]
+Recall that the probability of a stop for loops of length $a$ and $b$ is 
+\begin{align*}
+&1-\sum_{\alpha, \beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta)\cdot t_{\alpha, \beta}\\
+= \text{ }&1-\sum_{\alpha, \beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta)\cdot (1 - \sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}t_{\alpha,\beta}^{(m^{(\omega)})})\\
+= \text{ }&1-\sum_{\alpha, \beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta) 
+\\\text{ }&+ \sum_{\alpha,\beta}\sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}\\
+=\text{ }&\sum_{\alpha,\beta}\sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}\\
+=\text{ }&\sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\sum_{\alpha,\beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}
+\end{align*}
+This does not include our hypothetical H-M factor yet. Our factor $\mathcal{H_{k,m}}$ gives the proportion of stops of type $m$ that are maintained after the diagonal board is introduced. Then the total number of expected stops with two closures with lengths $a$ and $b$ representing a menu of $k$ distinct letters ($k$ is not necessarily $a+b$ because the closures may share letters), including the diagonal board is 
+\[
+\sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\mathcal{H}_{k,m^{(\omega)}}\sum_{\alpha,\beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}
+\]
+\subsubsection{Future Work} While this provides a framework for understanding such a hypothetical factor $\mathcal{H}_{k,nm}$ -- we leave its explicit computation to future work. 
+\\\\In theory, $\mathcal{H}_{k,m}$ could be estimated via simulation; however, this would require that we are able to efficiently generate menus producing arbitrary orbit structures, many of which are extremely rare. This would likely resuly in high variance and poor convergence. 
+\\\\We suspect it is possible to perform an exact enumeration to compute $\mathcal{H}_{k,m}$, likely via similar methods used to compute $t^{(m)}_{\alpha,\beta}$, though we do not yet posses such a procedure. Developing a means to compute this factor would allow us to model the effective number of stops with high accuracy across nearly all Bombe configurations — with or without the diagonal board.
+% \[
+% \mathcal{D}_{a,b, m} \coloneq \biggl(\sum_{\alpha, \beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle type }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{ has cycle type }\beta)\cdot t_{\alpha, \beta}^{(m)}\biggr)
+% \]
+% We note that 
+% \[
+% \mathcal{C}_{a,b} = 1 - \sum_{\omega\in\mathcal{P_n}}{\mathcal{D}_{a,b,m^{(\omegay)}}}
+% \]
+% With $\mathcal{H}_{k,m}$  and $t_{\alpha,\beta}^{(m)}$ we could compute the expected the number of stops with two closures with lengths $a$ and $b$ representing a menu of $k$ distinct letters ($k$ is not necessarily $a+b$ because the closures may share letters), including the use of the diagonal board, as 
+% \[
+% \mathcal{H}_{k,m}
+% \]
 % \subsubsction{Notation}
 % \text{}Let \( \mathbb{N}_n \coloneqq \{1, 2, \dots, n\} \), and let
 % \[

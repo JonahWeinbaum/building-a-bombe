@@ -288,45 +288,58 @@ def main() -> None:
 
 
 def test() -> None:
-    console = Console()
+    t_i = [get_simple_transitive_prob(i) for i in range(26)]
+    total = 0
+    for ip in IPS[26]:
+        if sorted(ip) != sorted((26,)):
+           pm = partition_to_multiplicity(ip)
+           prod = 1
+           for i, m_i in pm:
+               prod *= (math.factorial(i)*t_i[i-1])**m_i/math.factorial(m_i)
+           total += prod
+    total /= math.factorial(26)
+    print(1- total)
 
-    results = []
+    
+    # console = Console()
 
-    for i in track(range(1, N + 1), description="Running tests..."):
-        simple_prob: int = get_simple_transitive_prob(i)
+    # results = []
 
-        calculated_prob: float = 0.0
-        for j1 in range(len(IPS[i])):
-            for j2 in range(j1, len(IPS[i])):
-                if j1 != j2:
-                    calculated_prob += 2 * (
-                        cycle_type_prob(IPS[i][j1], i)
-                        * cycle_type_prob(IPS[i][j2], i)
-                        * get_transitive_prob(IPS[i][j1], IPS[i][j2], i)
-                    )
-                else:
-                    calculated_prob += (
-                        cycle_type_prob(IPS[i][j1], i)
-                        * cycle_type_prob(IPS[i][j2], i)
-                        * get_transitive_prob(IPS[i][j1], IPS[i][j2], i)
-                    )
-        passed = abs(calculated_prob - simple_prob) < EPS
-        results.append((i, simple_prob, calculated_prob, passed))
+    # for i in track(range(1, N + 1), description="Running tests..."):
+    #     simple_prob: int = get_simple_transitive_prob(i)
 
-    table = Table(title="Test Results")
-    table.add_column("N", justify="right", style="cyan", no_wrap=True)
-    table.add_column("Simple Prob", justify="right", style="magenta")
-    table.add_column("Calculated Prob", justify="right", style="yellow")
-    table.add_column("Status", justify="center", style="green")
+    #     calculated_prob: float = 0.0
+    #     for j1 in range(len(IPS[i])):
+    #         for j2 in range(j1, len(IPS[i])):
+    #             if j1 != j2:
+    #                 calculated_prob += 2 * (
+    #                     cycle_type_prob(IPS[i][j1], i)
+    #                     * cycle_type_prob(IPS[i][j2], i)
+    #                     * get_transitive_prob(IPS[i][j1], IPS[i][j2], i)
+    #                 )
+    #             else:
+    #                 calculated_prob += (
+    #                     cycle_type_prob(IPS[i][j1], i)
+    #                     * cycle_type_prob(IPS[i][j2], i)
+    #                     * get_transitive_prob(IPS[i][j1], IPS[i][j2], i)
+    #                 )
+    #     passed = abs(calculated_prob - simple_prob) < EPS
+    #     results.append((i, simple_prob, calculated_prob, passed))
 
-    for i, simple_prob, calculated_prob, passed in results:
-        status = (
-            "[bold green]PASS[/bold green]" if passed else "[bold red]FAIL[/bold red]"
-        )
-        table.add_row(str(i), f"{simple_prob:.6f}", f"{calculated_prob:.6f}", status)
+    # table = Table(title="Test Results")
+    # table.add_column("N", justify="right", style="cyan", no_wrap=True)
+    # table.add_column("Simple Prob", justify="right", style="magenta")
+    # table.add_column("Calculated Prob", justify="right", style="yellow")
+    # table.add_column("Status", justify="center", style="green")
 
-    num_failures = sum(1 for _, _, _, passed in results if not passed)
-    console.print(table)
+    # for i, simple_prob, calculated_prob, passed in results:
+    #     status = (
+    #         "[bold green]PASS[/bold green]" if passed else "[bold red]FAIL[/bold red]"
+    #     )
+    #     table.add_row(str(i), f"{simple_prob:.6f}", f"{calculated_prob:.6f}", status)
+
+    # num_failures = sum(1 for _, _, _, passed in results if not passed)
+    # console.print(table)
 
 
 if __name__ == "__main__":

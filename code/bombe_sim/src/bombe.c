@@ -13,7 +13,7 @@ int main() {
 
     t_row row = {0};
 
-    int shifts[12] = {11, 5, 6, 14, 13, 7, 16, 2, 10, 9, 12, 15};
+    int shifts[12] = {0, 5, 6, 14, 13, 7, 16, 2, 10, 9, 12, 15};
 
     for (int i = 0; i < 12; i++) {
         row.states[i].walzenlage[2] = 3;

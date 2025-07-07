@@ -1,6 +1,10 @@
 \documentclass{dcthesis}
 
-\usepackage{subcaption} 
+\usepackage[export]{adjustbox} % in preambl
+\usepackage[normalem]{ulem}
+\usepackage{circuitikz}
+\usepackage{longtable}
+\usepackage{subcaption}
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{amssymb,amsthm,amsmath,amstext}
@@ -24,7 +28,7 @@
 \usepackage{tikz-cd}
 \usepackage{dirtytalk}
 \usetikzlibrary{calc}
-\usetikzlibrary{positioning, shapes.geometric}
+\usetikzlibrary{positioning, shapes, shapes.geometric, fit}
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
@@ -115,7 +119,9 @@
 \theoremstyle{remark}
 \newtheorem{remark}[prop]{Remark}
 \newtheorem{example}[prop]{Example}
-\newtheorem*{claim}{Claim}
+\newcommand\dunderline[3][-1pt]{{%
+    \sbox0{#3}%
+\ooalign{\copy0\cr\rule[\dimexpr#1-#2\relax]{\wd0}{#2}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Indicies
@@ -132,8 +138,8 @@
 % Title Page Information
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Your personal info goes here!
-\title{Building a Bombe}
-\subtitle{The Mathematics and Circuitry that Bested German Encryption}
+\title{Action This Day}
+\subtitle{The Mathematics and Machinations that Bested the German Enigma}
 \author{Jonah Weinbaum}
 
 \begin{document}
@@ -165,21 +171,40 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Main Portion of Thesis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\mainmatter
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  YOUR THESIS HERE!  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
 
+\chapter*{Aims of Thesis}
+\addcontentsline{toc}{section}{Aims of Thesis}
+It should be made clear that I am not a historian. As such, this thesis does not aim to be a perfect retelling of historical narrative; rather, this thesis aims to convey a chronological progression of cryptographic attacks on Enigma, culminating in the creation of the Turing-Welchman Bombe, which is the central focus of this paper. The paper is structured to gradually build the reader's understanding of the various flaws in the Enigma machine, illustrating how and why the Bombe came to take the form that it did.  Historical details are included to advance the mathematical narrative and are, to the best of my ability, confirmed to be historically accurate.
+\\\\The first three chapters of this thesis serve as an expository resource aimed at mathematically inclined readers seeking depth and rigor regarding cryptographic attacks on Enigma. The final chapter presents a novel contribution. It critically examines the mathematical model by which the Bombe's efficacy was described by Turing and presents an alternative model that better aligns with the ground-truth operation of the Bombe.
+
+\chapter*{Requisite Background}
+\addcontentsline{toc}{section}{Requisite Background}
+The subject matter of this paper concerns both the mathematical and mechanical means by which the Enigma encryption scheme was broken over time.
+\\\\With respect to mathematical background, the reader is expected to have an introductory knowledge of abstract algebra, in particular a solid grasp of permutation theory. Further, many topics will delve into probabilistic and combinatoric analysis of language frequency, keyspaces, and the effectiveness of various methods. For this reason the reader is expected to have a comfortable understanding of introductory combinatorics and Bayesian statistics.
+\\\\With respect to mechanical background, the reader requires very limited knowledge of components such as transistors and relays. Circuit diagrams will be used sparingly or will be abstracted such as to reduce the need of an electrical engineering background.
+
+
+\chapter*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+While the allied armies fought tooth and nail, in trenches and tanks, for the fate of the world, another army was amassed in the small radio factory of Bletchley Park. Mathematicians, engineers, linguists, and chess players, armed with paper and pencil, wire and punch-cards, took up their own battle.
+\\\\Hitler's best kept secrets lay hidden behind a math problem. What follows is the story of some of history's greatest minds and their work to break that problem. It is story of secrecy and spies. Of ingenious perspectives, laborious work, and machines built to think faster than any human ever had.
+\\\\At the center of this story is the Enigma machine, a feat of cryptography so vast in its possible arrangements that it was thought unbreakable. Breaking it required more than mathematical trickery; it required coordination, luck, and a cryptographic intelligence team the likes of which the world had never seen. Winston Churchill saw this math problem for what it was: the key to saving millions of lives. Understanding the project's urgency, he issued a memo demanding that the utmost attention and resources be given to the Bletchley team. Churchill tagged this memo with a red stamp reserved for matters of the highest priority. It read:
+\begin{center}
+	\textbf{Action This Day}
+\end{center}
+\mainmatter
 \include{the_enigma}
-
-% \include{permutations}
-
 \include{polish_bomba}
-
 \include{uk_bombe}
-\include{simulations}
 \include{stops}
+
 %\appendix
 %\include{appendixA}
 

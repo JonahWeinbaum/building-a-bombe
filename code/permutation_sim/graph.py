@@ -240,7 +240,7 @@ def is_stop(G):
     for component in components:
         s = 0
         for node in component:
-            if node[0] == 0:
+            if node[1] == 0:
                 s += 1
         type.append(s)
     if 25 in type:

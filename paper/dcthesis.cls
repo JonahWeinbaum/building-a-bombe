@@ -26,54 +26,54 @@
 %% $Id: dcthesis.dtx,v 1.4 2007-08-12 08:06:53 dorais Exp $
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{dcthesis}
-    [2007/06/22 v1.0 dcLaTeX Thesis Class]
+[2007/06/22 v1.0 dcLaTeX Thesis Class]
 \newif\if@mainmatter \@mainmattertrue
 \newif\if@copyright \@copyrightfalse
 \newif\if@noheadings \@noheadingsfalse
 
 %Make copyright option
 \DeclareOption{copyright}{
-  \@copyrighttrue
-  \newcommand{\copyrightname}{\@author}
-  \newcommand{\copyrightyear}{\the\year}
+	\@copyrighttrue
+	\newcommand{\copyrightname}{\@author}
+	\newcommand{\copyrightyear}{\the\year}
 }
 \newif\if@final \@finaltrue
 \DeclareOption{final}{
-  \@finaltrue
-  \PassOptionsToClass{final}{book}
+	\@finaltrue
+	\PassOptionsToClass{final}{book}
 }
 
 \DeclareOption{noheadings}{
-  \@noheadingstrue
+	\@noheadingstrue
 }
 
 %Set properties of various options
 \DeclareOption{draft}{
-  \@finalfalse
-  \PassOptionsToClass{draft}{book}
+	\@finalfalse
+	\PassOptionsToClass{draft}{book}
 }
 
 \DeclareOption{singlespacing}{
-  \AtBeginDocument{%
-    \if@final%
-      \ClassWarningNoLine{dcthesis}%
-          {Option singlespacing ignored in final mode}%
-      \doublespacing%
-    \else%
-      \singlespacing%
-    \fi%
-  }
+	\AtBeginDocument{%
+		\if@final%
+			\ClassWarningNoLine{dcthesis}%
+			{Option singlespacing ignored in final mode}%
+			\doublespacing%
+		\else%
+			\singlespacing%
+		\fi%
+	}
 }
 \DeclareOption{onehalfspacing}{
-  \AtBeginDocument{%
-    \if@final%
-      \ClassWarningNoLine{dcthesis}%
-          {Option onehalfspacing ignored in final mode}%
-      \doublespacing%
-    \else%
-      \onehalfspacing%
-    \fi%
-  }
+	\AtBeginDocument{%
+		\if@final%
+			\ClassWarningNoLine{dcthesis}%
+			{Option onehalfspacing ignored in final mode}%
+			\doublespacing%
+		\else%
+			\onehalfspacing%
+		\fi%
+	}
 }
 \DeclareOption{doublespacing}{\AtBeginDocument{\doublespacing}}
 \DeclareOption{twoside}{\OptionNotUsed}
@@ -94,33 +94,34 @@
 %Utilities stuff for maketitle
 \def\@school{Dartmouth College}
 \def\@location{Hanover, New Hampshire}
-\newcommand*{\committee}[5][]{%
-  \ifx#1\@empty\else\def\@dean{#1}\fi%
-  \def\@advisor{#2}%
-  \def\@examinera{#3}%
-  \def\@examinerb{#4}%
-  \def\@examinerc{#5}%
+\newcommand*{\committee}[6][]{%
+	\ifx#1\@empty\else\def\@dean{#1}\fi%
+	\def\@advisor{#2}%
+	\def\@examinera{#3}%
+	\def\@examinerb{#4}%
+	\def\@examinerc{#5}%
+	\def\@examinerd{#6}%
 }
 \newcommand*{\subtitle}[1]{\def\@subtitle{#1}}
 \newcommand*{\degree}[1]{\def\@degree{#1}}
 \newcommand*{\field}[1]{\def\@field{#1}}
-\newcommand*{\school}[2]{\def\@school{#1}\def\@location{#2}}
+\newcommand*{\school}[3]{\def\@school{#1}\def\@university{#2}\def\@location{#3}}
 \renewenvironment{titlepage}{\newpage}{\newpage}
 \newcommand{\@signatureline}[1]{%
-  \begin{minipage}{2.66667in}%
-    \begin{singlespace}
-      \vspace{.3in}
-      \underline{\hspace{2.6667in}} \par #1 %
-    \end{singlespace}
-   \end{minipage}%
+	\begin{minipage}{2.66667in}%
+		\begin{singlespace}
+			\vspace{.3in}
+			\underline{\hspace{2.6667in}} \par #1 %
+		\end{singlespace}
+	\end{minipage}%
 }
 \newcommand{\@longsignatureline}[1]{%Required for the Dean's title to fit.
-  \begin{minipage}{5.5in}%
-    \begin{singlespace}
-      \vspace{.3in}
-      \underline{\hspace{2.6667in}} \par #1 %
-    \end{singlespace}
-   \end{minipage}%
+	\begin{minipage}{5.5in}%
+		\begin{singlespace}
+			\vspace{.3in}
+			\underline{\hspace{2.6667in}} \par #1 %
+		\end{singlespace}
+	\end{minipage}%
 }
 
 %Command to make the title page
@@ -128,49 +129,69 @@
 %account the unnumbered copyrights page and the use of the committee
 %command from above
 \renewcommand{\maketitle}{
-  \setcounter{page}{0}
-  \begin{titlepage}
-    \thispagestyle{empty}
-    \begin{doublespace}
-      \begin{center}
-        {\bfseries \MakeUppercase{\@title} \par}
-        \begin{large}\@subtitle\end{large} \par
-        \@author \par
-        \vfill
-        % \begin{tabular}[t]{cc}
-        %   & Examining Committee: \\
-        %   \phantom{\underline{\hspace{3in}}} & \@signatureline{\@advisor, Chair} \\
-        %   & \@signatureline{\@examinera} \\
-        %   & \@signatureline{\@examinerb} \\
-        %   & \@signatureline{\@examinerc} \\
-        %   \multicolumn{2}{l}{\@longsignatureline{\@dean \par Dean of the Guarini School of Graduate and Advanced Studies}} \\
-        % \end{tabular}
+	\setcounter{page}{0}
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\begin{doublespace}
+			\begin{center}
+				{\bfseries \MakeUppercase{\@title} \par}
+				\begin{small}\@subtitle\end{small} \par
+				\bigbreak
+				\begin{singlespace}
+					A Thesis \\
+					Submitted to the Faculty \\
+					in partial fulfillment of the requirements for the \\
+					degree of
+					\bigbreak
+					\@degree
+					\bigbreak
+					in
+					\bigbreak
+					\@field
+					\bigbreak
+					by \@author
+					\bigbreak
+					\@school \\
+					\@university \\
+					\@location
+					\vfill
+
+					\begin{tabular}[t]{cc}
+						                                   & Examining Committee:                                                                    \\
+						\phantom{\underline{\hspace{3in}}} & \@signatureline{\@advisor, Chair}                                                       \\
+						                                   & \@signatureline{\@examinera}                                                            \\
+						                                   & \@signatureline{\@examinerb}                                                            \\
+						                                   & \@signatureline{\@examinerc}                                                            \\
+						                                   & \@signatureline{\@examinerd}                                                            \\
+						\multicolumn{2}{l}{\@longsignatureline{F. Jon Kull, Ph.D. \par Dean of the Guarini School of Graduate and Advanced Studies}} \\
+					\end{tabular}
+				\end{singlespace}
 			\end{center}
-    \end{doublespace}
-    \thispagestyle{empty}
-    \if@copyright
-      \begin{singlespace}
-        \begin{center}
-          Copyright by \par
-          \copyrightname \par
-          \copyrightyear
-        \end{center}
-      \end{singlespace}
-    \fi
-    \null\vfil
-  \end{titlepage}
+		\end{doublespace}
+		\thispagestyle{empty}
+		\if@copyright
+			\begin{singlespace}
+				\begin{center}
+					Copyright by \par
+					\copyrightname \par
+					\copyrightyear
+				\end{center}
+			\end{singlespace}
+		\fi
+		\null\vfil
+	\end{titlepage}
 
-% Code for creating empty pages, since we have skipped a page this 
-% has been modified to only start the preliminary sections on even
-% numbered pages
+	% Code for creating empty pages, since we have skipped a page this 
+	% has been modified to only start the preliminary sections on even
+	% numbered pages
 
-\makeatletter
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page%
-    \hbox{}
-    \thispagestyle{empty}
-    \newpage
-    \if@twocolumn\hbox{}\newpage\fi\fi\fi}
-\makeatother \clearpage{\pagestyle{empty}\cleardoublepage}
+	\makeatletter
+	\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page%
+				\hbox{}
+				\thispagestyle{empty}
+				\newpage
+				\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+	\makeatother \clearpage{\pagestyle{empty}\cleardoublepage}
 
 }
 
@@ -181,83 +202,83 @@
 %Frontend command
 %Set the page numbering and header scheme for the frontend. 
 \renewcommand\frontmatter{%
-  \@mainmatterfalse%
-  %Headers and Footers
-  \renewcommand\headrulewidth{0pt} 
-  \fancyhf{}
-  \if@twoside
-  \fancyfoot[RE,LO]{\thepage}\else
-   \fancyfoot[C]{\thepage}\fi
-  \pagenumbering{roman}
+	\@mainmatterfalse%
+	%Headers and Footers
+	\renewcommand\headrulewidth{0pt}
+	\fancyhf{}
+	\if@twoside
+		\fancyfoot[RE,LO]{\thepage}\else
+		\fancyfoot[C]{\thepage}\fi
+	\pagenumbering{roman}
 }
 
 %Main section command.  Change headers and footers, reset the page
 %counter and switch the \cleardoublepage back to odds
 \renewcommand\mainmatter{%
-  \cleardoublepage
-  \@mainmattertrue%
-  %Headers and Footers
+	\cleardoublepage
+	\@mainmattertrue%
+	%Headers and Footers
 	\titleformat{\chapter}[display]
-		{\normalfont\Large\filcenter}
-		{\titlerule[1pt]%
-			\vspace{10pt}%
-			%\titlerule
-			%\vspace{1pc}%
-			\sffamily\LARGE \chaptertitlename\ \thechapter} %\MakeUppercase{\chaptertitlename} \thechapter}
-		{1pc}
-		{\titlerule[1pt]
-			\vspace{1pc}%
-			\Huge
-			\bfseries}
-			
+	{\normalfont\Large\filcenter}
+	{\titlerule[1pt]%
+		\vspace{10pt}%
+		%\titlerule
+		%\vspace{1pc}%
+		\sffamily\LARGE \chaptertitlename\ \thechapter} %\MakeUppercase{\chaptertitlename} \thechapter}
+	{1pc}
+	{\titlerule[1pt]
+		\vspace{1pc}%
+		\Huge
+		\bfseries}
+
 	\titleformat{\section}[frame]
-		{\normalfont}
-		{\filright
+	{\normalfont}
+	{\filright
 		\sffamily
 		\large
 		\enspace Section \thesection\enspace}
-		{8pt}
-		{\filcenter\Large\bfseries}		
-			
+	{8pt}
+	{\filcenter\Large\bfseries}
+
 	\titleformat{\subsection}
-		{\bfseries}
-		{\thesubsection.}
-		{.5em}
-		{}
-		[\titlerule]
+	{\bfseries}
+	{\thesubsection.}
+	{.5em}
+	{}
+	[\titlerule]
 
 	\titleformat{\subsubsection}[runin]
-		{\bfseries\itshape}
-		{}
-		{0pt}
-		{}
-		[.]
+	{\bfseries\itshape}
+	{}
+	{0pt}
+	{}
+	[.]
 
-  \if@noheadings\else
-  \renewcommand\headrulewidth{.1pt}
-  \fancyhead[L]{\sffamily\sc \rightmark}
-  \fancyhead[R]{\sffamily\sc \leftmark}\fi
-  \if@twoside
-  \fancyfoot[LE,RO]{\thepage}
-  \fancyfoot[LO,RE]{}\else
-  \fancyfoot[C]{\thepage}\fi
-  \pagenumbering{arabic}%
-  %Code for creating empty pages
-  \makeatletter
-  \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
-  \hbox{}
-  \thispagestyle{empty}
-  \newpage
-  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
-  \makeatother \clearpage{\pagestyle{empty}\cleardoublepage}
+	\if@noheadings\else
+		\renewcommand\headrulewidth{.1pt}
+		\fancyhead[L]{\sffamily\sc \rightmark}
+		\fancyhead[R]{\sffamily\sc \leftmark}\fi
+	\if@twoside
+		\fancyfoot[LE,RO]{\thepage}
+		\fancyfoot[LO,RE]{}\else
+		\fancyfoot[C]{\thepage}\fi
+	\pagenumbering{arabic}%
+	%Code for creating empty pages
+	\makeatletter
+	\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
+				\hbox{}
+				\thispagestyle{empty}
+				\newpage
+				\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+	\makeatother \clearpage{\pagestyle{empty}\cleardoublepage}
 }
 
 %Backend command
 \renewcommand\backmatter{%
-  \cleardoublepage%
-  \@mainmatterfalse%  
+	\cleardoublepage%
+	\@mainmatterfalse%  
 	\fancyhead[L]{}
-  \fancyhead[R]{\sffamily\sc \leftmark}
+	\fancyhead[R]{\sffamily\sc \leftmark}
 }
 
 %\@marginsize is for the lefthand margin

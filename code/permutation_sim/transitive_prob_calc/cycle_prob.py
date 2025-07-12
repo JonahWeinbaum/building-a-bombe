@@ -94,7 +94,7 @@ def generate_disjoint_transpositions(n: int) -> list[tuple[int, int]]:
     return transpositions
 
 
-def generate_engima_transpositions(
+def generate_enigma_transpositions(
     n: int, offset: int, reflector: rotor.Reflector, rotors: list[rotor.Rotor], key: str
 ) -> list[tuple[int, int]]:
     transpositions: list[tuple[int, int]] = []
@@ -130,7 +130,7 @@ def create_enigma_graph(n: int, l: int) -> nx.Graph:
 
     # Connect nodes within each column to the next via random transpositions
     for col in range(l - 1):
-        transpositions: list[tuple[int, int]] = generate_engima_transpositions(
+        transpositions: list[tuple[int, int]] = generate_enigma_transpositions(
             n,
             offsets[col],
             rotor.ROTOR_Reflector_B,
@@ -292,4 +292,4 @@ if __name__ == "__main__":
     n = args.N
     num_sims = int(args.SIMS)
 
-    main(n, num_sums)
+    main(n, num_sims)

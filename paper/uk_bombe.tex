@@ -21,7 +21,7 @@ key only once.
 encoded message key to function, without such relationships all the
 previously mentioned tools became useless. World War II had begun and
 the need for intelligence material was greater than ever. Thus,
-British intelligence brought a group of crypt-analysts,
+British intelligence brought a group of cryptanalysts,
 mathematicians, historians, linguists, and more, to Bletchley Park to
 engage in a large-scale attempt to break the Enigma machine with this
 new protocol.
@@ -246,13 +246,13 @@ slightly lazy, they may turn the wheels a couple turns forward or
 back. Regardless, this meant that many operators began enciphering
 their messages with a window setting that was nearly identical to the
 ring setting. Thus, by looking at several operators first messages of
-the day, we would see several cluster around a particular setting
+the day, we would see a cluster around a particular setting
 that is likely to be the ring setting. Such an insight became known
 as the {\bf{Herevil tip}}.
 \\\\With the Herevil tip, we could determine a likely ring setting.
 Then by either brute force or use of the clock method, we could
 determine the rotor order. Then finally, as we did to recover the
-plugboard from the Bomba in section~\ref{bomba_plugboard}, we could
+plugboard from the Bomba in Section~\ref{bomba_plugboard}, we could
 even recover the plugboard settings. Thus, purely by virtue of
 operator error, we could recover the entire daily key.
 
@@ -262,14 +262,15 @@ shortcut to deduce some wheel orders, ring settings, and plugboard
 configurations. The presumption was that the German operators in
 charge of creating the key sheets needed to produce a large amount of
 random or psuedo-random numbers to create each daily key. As the
-number of unique keys increased this task became cumbersome so, to
+number of unique keys increased, this task became cumbersome so, to
 reduce time, the operators creating the key sheets may reuse one or
 more columns of the key sheet from previously generated sheets. By
 keeping track of previously deduced daily keys, Parker found that, in
-fact, some colummns from the daily sheets had been reused from
-previous months. As parts of keys were broken, the relevant setting
-(e.g. wheel order, rotor order, plugboar configuration) were compared
-against Parker's records of prior keys to detemine if that same
+fact, some columns from the daily sheets had been reused from
+previous months. 
+\\\\As parts of keys were broken, the relevant setting
+(e.g. wheel order, rotor order, plugboard configuration) were compared
+against Parker's records of prior keys to determine if that same
 setting appears in a prior sheet. If it was, Parker guessed that the
 entire column may actually be the same as the earlier month's and
 this would completely determine one component of the daily key for an
@@ -279,10 +280,9 @@ key sheet could be determined in advance. This procedure became known
 as {\bf{Parkerismus}}. Welchman explained that at one point they had
 determined the entire month's worth of keys that Rommel would use in
 Africa just by use of Parkerismus.
-\\\\Ultimatley the Herevil tip and Parkerismus only helped them to
-decipher messages in particular circumstances. Herevil's trick only
-was used within a
-particular network of operators known as the "Red network". Similarly
+\\\\Ultimately, the Herevil tip and Parkerismus only helped them to
+decipher messages in particular circumstances. Herevil's trick was only used within a
+particular network of operators known as the "Red network". Similarly,
 Parker's trick only functioned when certain columns in the key sheet
 had been reused. However,
 as we will later see, access to a set of plaintext from messages will
@@ -339,7 +339,7 @@ Consider the following mapping,
   \end{tikzpicture}
 \end{center}
 where the top row indicates our enciphered message, the bottom row
-indicates the plain-text,
+indicates the plaintext,
 and the indices on the arrows indicate how many steps forward our
 Enigma machine has moved while enciphering this message.
 \\\\From this pairing we have that
@@ -372,9 +372,9 @@ at \texttt{A}. We visualize this loop as follows
     \node (D) at (210:1.5) {$\texttt{D}$};
     \node (X) at (330:1.5) {$\texttt{X}$};
 
-    \draw[<->, bend right=45] (A) to node[midway, draw=none, above] {1} (D);
-    \draw[<->, bend right=45] (D) to node[midway, draw=none, above] {7} (X);
-    \draw[<->, bend right=45] (X) to node[midway, draw=none, above] {11} (A);
+    \draw[<->, bend right=45] (A) to node[midway, draw=none, above] {$\sigma_1$} (D);
+    \draw[<->, bend right=45] (D) to node[midway, draw=none, above] {$\sigma_7$} (X);
+    \draw[<->, bend right=45] (X) to node[midway, draw=none, above] {$\sigma_{11    }$} (A);
   \end{tikzpicture}
 \end{center}
 Recall that, ignoring turnover, each $\sigma_i$ is of the form
@@ -389,17 +389,17 @@ We will denote $\sigma_i$ separated from its plugboard as
 \noindent that is $\sigma_i = S^{-1}\overline{\sigma_i}S$
 (conversely, $\overline\sigma_i = S^{-1}\sigma_iS$)\footnote{It
   should be noted that $S$ = $S^{-1}$ since the plugboard is always an
-involution}.
+involution.}.
 Then our loop is expressed by the fact that
 $\sigma_{11}\sigma_7\sigma_1$ has a fixed point at $\texttt{A}$.
-We also note that the intermediate plugboard settings cancel out, that is
+We also note that the intermediate plugboard settings cancel out, that is,
 \begin{center}
   \begin{align*}
     \sigma_{1}\sigma_7\sigma_{11} & =
     S^{-1}\overline{\sigma_{1}}SS^{-1}\overline{\sigma_7}SS^{-1}\overline{\sigma_{11}}S
     \\&= S^{-1}
     \overline{\sigma_{1}}\overline{\sigma_7}\overline{\sigma_{11}}
-    S
+    S.
   \end{align*}
 \end{center}
 We will condense this notation by defining
@@ -440,8 +440,8 @@ more than one value at a time, so if
 $|\langle\overline{\pi}\rangle\cdot\alpha| > 1$ our initial
 hypotheses that $S(\texttt{A}) = \alpha$ must have been incorrect. Further,
 the above argument also illustrates that $\texttt{A}$ cannot be steckered to
-any element in the orbit of $\alpha$ since
-we would similarly find that the orbit of \emph{that} element was not a
+\emph{any} element in the orbit of $\alpha$ since
+we would similarly find that the orbit of that element was not a
 singleton. Then we now have
 \begin{center}
   $|\langle\overline{\pi}\rangle\cdot\alpha| > 1 \Rightarrow
@@ -449,15 +449,15 @@ singleton. Then we now have
   }\langle\overline{\pi}\rangle\cdot\alpha$
 \end{center}
 thus eliminating several elements that $\texttt{A}$ could be steckered to.
-\\\\By representing $\overline\pi$ in its cycle notation we can
+\\\\By representing $\overline\pi$ in its cycle notation, we can
 quickly see whether certain hypotheses are possible. For example,
 suppose we found that
 \begin{center}
   $\overline\pi =
-  (\texttt{ABCDEF})(\texttt{GHIJK})(\texttt{L})(\texttt{MNOPQRSTUVWXYZ})$
+  (\texttt{ABCDEF})(\texttt{GHIJK})(\texttt{L})(\texttt{MNOPQRSTUVWXYZ})$.
 \end{center}
 If we suppose that $\texttt{A}$ is steckered to any element in the cycle
-$(ABCDEF)$ we find that this
+$(\texttt{ABCDEF})$ we find that this
 element has an orbit of length $6$ in $\langle\overline\pi\rangle$
 and thus $\texttt{A}$ cannot be steckered
 to any element in this cycle. Then it is clear that $\texttt{A}$ can only be
@@ -465,11 +465,11 @@ steckered to $\texttt{L}$ in this case.
 
 \subsection{Scanning Methods}
 Turing describes various methods of mechanizing the above analysis of
-cycle-type to determine when we can eliminate rotor positions.
+cycle type to determine when we can eliminate rotor positions.
 \begin{enumerate}
   \item If we examine a particular hypothesis, say $\texttt{A}$ is steckered
-    to $\texttt{A}$, we can rule out this steckering if we find that
-    $\texttt{A}$ is
+    to $\texttt{K}$, we can rule out this steckering if we find that
+    $\texttt{K}$ is
     not in a $1$-cycle, that is if $\overline\pi(\texttt{K}) \ne
     \texttt{K}$. If we
     mechanize this process we can eliminate rotor positions which do
@@ -479,11 +479,11 @@ cycle-type to determine when we can eliminate rotor positions.
     positions which do have valid steckerings, just not the
     particular steckering that we hypothesized.
   \item If we perform single line scanning in sequence, that is, for
-    each steckering hypothesis, we can rule out rotor positions which
+    each steckering hypothesis we check if that hypothesis produces a fixed point in $\overline\pi$, we can rule out rotor positions which
     have all steckering hypotheses invalid. Turing called this method
     \textbf{serial scanning}.
   \item Serial scanning requires a separate examination of each
-    steckering. Turing proposed a machine which could concurrently
+    steckering hypothesis. Turing proposed a machine which could concurrently
     examine all steckering possibilities and eliminate rotor positions
     which had no valid steckerings. Turing called this method
     \textbf{simultaneous scanning}.
@@ -493,8 +493,8 @@ cycle-type to determine when we can eliminate rotor positions.
     If we mechanism this process we can eliminate \emph{some} rotor
     positions which do not have valid steckerings. We will call this
     method \textbf{spider scanning}. Note, however, that this method
-    would not, for example, detect that $\overline\pi$ with cycle
-    type $2^{13}$ contains no
+    would not, for example, detect that an $\overline\pi$ with cycle
+    type ${13}^2$ contains no
     valid steckerings. As Turing explained,
     \say{The ideal machine that Welchman was aiming at was to reject
       any position in which a certain fixed-for-the-time Stecker
@@ -508,14 +508,15 @@ cycle-type to determine when we can eliminate rotor positions.
 \end{enumerate}
 Iterations of each scanning methods were proposed or designed, but in
 the end we find that the spider scanning method was used in the
-implementation of the Bombe. At a high level, we encode the structure
-of the plaintext-ciphertext pairings, we input a hypothesis that a particular
-letter (e.g $\texttt{A}$) is steckered to another (e.g. $\alpha$), and we
+implementation of the Bombe. 
+\\\\At a high level, we encode the structure
+of a plaintext-ciphertext pairing, and we input a hypothesis that a particular
+letter (e.g. $\texttt{A}$) is steckered to another (e.g. $\alpha$). We then
 electrically produce the elements that must also be steckered to our test letter
 (e.g. $\langle\overline{\pi}\rangle\cdot\alpha$) if our hypothesis
 were to be true. If we find that this production generates a set of
-all letters and thus disqualifies this rotor position from producing
-the plaintext we observed, then we can continue on to the next rotor
+all letters, and thus disqualifies this rotor position from producing
+the plaintext we observed, we can then continue on to the next rotor
 position until we have no contradictory results from our hypothesis.
 
 \section{The Bombe}
@@ -561,7 +562,7 @@ small box/.style={draw, minimum width=1cm, minimum height=1cm}}
 
   \end{tikzpicture}
 \end{center}
-A couple quick notes about this abstraction. First as these lines are
+A couple quick notes about this abstraction. First, as these lines are
 simply wires, current can flow in either direction, left-to-right, or
 right-to-left.
 Second, we can apply current to multiple wires concurrently, for
@@ -574,7 +575,7 @@ from the actual plaintext-ciphertext letters.
 \\\\As described in our motivating example, we may want to connect
 Engima permutations in series to capture an underlying relationship
 between a plaintext-ciphertext pairing.
-Suppose we had plaintext-ciphertext pairing
+Suppose we had the plaintext-ciphertext pairing,
 \begin{center}
   \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
     circle, minimum height=0.1cm, minimum width=0.1cm}]
@@ -594,10 +595,10 @@ Suppose we had plaintext-ciphertext pairing
     \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
     \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
 
-  \end{tikzpicture}
+  \end{tikzpicture}.
 \end{center}
 
-\noindent Then we find that there exists a loop in the pairing as follows
+\noindent Then we find that there exists a loop in the pairing as follows,
 
 \begin{center}
   \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
@@ -609,16 +610,10 @@ Suppose we had plaintext-ciphertext pairing
     \draw[<->, bend right=45] (A) to node[midway, draw=none, above] {1} (B);
     \draw[<->, bend right=45] (B) to node[midway, draw=none, above] {2} (C);
     \draw[<->, bend right=45] (C) to node[midway, draw=none, above] {3} (A);
-  \end{tikzpicture}
+  \end{tikzpicture}.
 \end{center}
 We can then think of this loop as a series of three Enigma
-permutations. We assume the message began with window setting
-\texttt{ZZZ}. We will hypothesize some rotor ordering and we will
-further assume a ring setting of \texttt{ZZZ}. Thus the first machine
-will be set to a window setting \texttt{ZZZ}, the second set to
-\texttt{ZZA}, and the third set to \texttt{ZZB}. Note that this is
-assuming no turnover occurred during our enciphering of the plaintext
--- a caveat we will later address. We can connect these Enigma
+permutations. We can connect these Enigma
 machines as follows
 \begin{center}
   \begin{tikzpicture}[thick, scale=0.6, every node/.style={scale=0.7}]
@@ -702,16 +697,16 @@ machines as follows
     \node[draw,circle] at (3, -9) {\texttt{B}};
     \node[draw,circle] at (10.5, -1) {\texttt{C}};
 
-  \end{tikzpicture}
+  \end{tikzpicture}.
 \end{center}
 As before, let us make a hypothesis regarding steckering. Suppose
 $S(\texttt{A}) = \texttt{D}$. We know that $\texttt{A}$ must map to
 $\texttt{A}$ via
 $S^{-1}\overline\pi_3\overline\pi_2\overline\pi_1 S$. In our
-diagram, however we do not see a plugboard so how can we represent
+diagram, however, we do not see a plugboard so how can we represent
 the plugboard's involvement? In order
 to achieve this \emph{we} will function as the plugboard by applying
-voltage to the $\texttt{d}$ line on the $\texttt{A}$ cable thus
+voltage to the $\texttt{d}$ line on the $\texttt{A}$ cable, thus
 implicitly performing the
 plugboard mapping in which $S(\texttt{A}) = \texttt{D}$.
 Then this will go through the electrical mapping $\overline\pi_1$
@@ -1083,9 +1078,7 @@ sent through $\texttt{Ad}$.
 we find that after sending
 current through $\texttt{Ad}$ we arrive after mapping through
 $\overline\pi$ back at $\texttt{Ad}$. Since we got an output of
-$\texttt{D}$ before the plugboard mapping, and we know that at the
-end this will ultimately map back through the plugboard to
-$\texttt{A}$ in order preserve our fixed point at $\texttt{A}$, we
+$\texttt{Ad}$, we know that the plugboard needs to map \texttt{D} to \texttt{A} in order preserve our fixed point. Thus, we
 get the statement that $S(\texttt{D}) = \texttt{A}$ which is
 perfectly consistent with our original hypothesis.
 \\\\On the other hand, if we change
@@ -1270,19 +1263,17 @@ following situation
 \noindent In this example, following our steckering hypothesis
 $S(\texttt{A}) = \texttt{D}$,
 results in \texttt{Aa} becoming live after mapping through $\overline\pi$ and
-thus we must have $S(\texttt{A}) = \texttt{A}$ as well in order for
-this to ultimately
-map back to \texttt{A} and preserve our fixed point at \texttt{A}.
+thus we must have $S(\texttt{A}) = \texttt{A}$ as well, in order to preserve our fixed point at \texttt{A}.
 This creates an inconsistency between our hypothesis and deduction
-meaning that we can eliminate the steckering possibilities both
-steckering possibilities so that $S(\texttt{A}) \notin \{\texttt{A},
+meaning that we can eliminate the both
+steckering possibilities $S(\texttt{A}) \notin \{\texttt{A},
 \texttt{D}\}$
 \\\\Effectively, this process is a mechanization of
 finding the cycle containing a particular letter. In the above
-figure~\ref{fig:incorrect_stecker} sending current from \texttt{Ad}
+figure~\ref{fig:incorrect_stecker}, sending current from \texttt{Ad}
 until we arrive back at \texttt{Ad} is
 akin to repeatedly applying $\overline\pi$ to \texttt{D}
-until we return to \texttt{D}. This can be visualized in our diagram as
+until we return to \texttt{D}. This can be visualized in our diagram as,
 
 \begin{center}
   \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
@@ -1368,20 +1359,20 @@ until we return to \texttt{D}. This can be visualized in our diagram as
     \node[draw,circle] at (3, -9) {\texttt{B}};
     \node[draw,circle] at (10.5, -1) {\texttt{C}};
 
-  \end{tikzpicture}
+  \end{tikzpicture}.
 \end{center}
-Where we find that in $\overline\pi$ we have the cycle $(\texttt{AD})$
+Here we find that in $\overline\pi$ we have the cycle $(\texttt{AD})$
 since \texttt{Ad} and \texttt{Aa} are the only two live
-wires in the \texttt{A} cable after allowing currently to reach a
-steady-state. If we had instead applied current to \texttt{Ab} we would find
-that \texttt{Ab} and \texttt{Ac} become live and give us the full
+wires in the \texttt{A} cable, after allowing currently to reach a
+steady-state. If we had instead applied current to \texttt{Ab}, we would find
+that \texttt{Ab} and \texttt{Ac} become live, thus giving us the full
 permutation $\overline\pi = (\texttt{AD})(\texttt{BC})$. The beauty
 of this design
 is that it is able to deduce the elements in a cycle of
 $\overline\pi$ nearly instantaneously since it only requires the
 circuit to reach
 a steady-state.
-\\\\Equipped with this tool spider-scanning becomes quite trivial.
+\\\\Equipped with this tool, spider-scanning becomes quite trivial.
 The goal of spider-scanning is to eliminate a rotor position by
 checking if the permutation has a $26$-cycle. In our diagram, with four lines,
 this would be analogous to testing a steckering hypothesis (any
@@ -1436,7 +1427,7 @@ because all of these permutations are conjugates of one another, for
 example we have
 \begin{center}
   $\overline\pi_2\overline\pi_1\overline\pi_3 =
-  \overline\pi_3^{-1}(\overline\pi_3\overline\pi_2\overline\pi_1)\overline\pi_3$
+  \overline\pi_3^{-1}(\overline\pi_3\overline\pi_2\overline\pi_1)\overline\pi_3$.
 \end{center}
 Since permutations in the same conjugacy class must have the same
 cycle type, it follows that no matter where in the loop we place our
@@ -1448,7 +1439,7 @@ In our example we provided only a single loop encoded in the
 plaintext-ciphertext pairing. In practice, multiple loops could exist
 within such a pairing and we can electrically connect all loops
 together within a row on the Bombe to produce a single circuit. For
-instance we might have a plaintext-ciphertext pairing as follows
+instance, we might have a plaintext-ciphertext pairing as follows,
 \begin{center}
   \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
     circle, minimum height=0.1cm, minimum width=0.1cm}]
@@ -1477,9 +1468,9 @@ instance we might have a plaintext-ciphertext pairing as follows
     \draw[->] (a5) -- (x5) node[midway, left, draw=none, fill=none] {5};
     \draw[->] (a6) -- (x6) node[midway, left, draw=none, fill=none] {6};
 
-  \end{tikzpicture}
+  \end{tikzpicture}.
 \end{center}
-Thus encoding the following loops
+Thus encoding the following loops,
 \begin{center}
   \scalebox{0.8}{
     \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
@@ -1695,31 +1686,30 @@ With our diagram format this could look as follows
     }
   \end{center}
   \caption{Multiple loops in the Bombe}
-  \label{fig:multiloops}
+  \label{fig:multiloops}.
 \end{figure}
-\noindent This increased electrical connections resulting in fewer
-stops. We will return in the next chapter to the effect that multiple
-loops has on the number of stops.
+\noindent This increased electrical connections results in fewer
+stops. In the next chapter, we will return to the effect that multiple
+loops have on the number of stops.
 
 \subsection{Indicator Drums and Ring Setting}
 The Bombe is set up with up to $12$ scramblers
 \begin{center}
-  $R_{x_1, y_1, z_1},\dots, R_{x_k, y_k, z_k}$
+  $R_{x_1, y_1, z_1},\dots, R_{x_{k}, y_{k}, z_{k}}$
 \end{center}
 intended to encode the various positions of our Enigma machine while
-enciphering our plaintext-ciphertext pairing. We assume that the
-initial setting while encoding the message was \texttt{ZZZ}. It will
-run through all $26^3$ positions of the Enigma machine until it finds
-a stop. Suppose that at a stop the drums have positions
+enciphering our plaintext-ciphertext pairing. Each scrambler will have an implicit ring setting of \texttt{ZZZ}. We will assume that the window setting encoding the message began at \texttt{ZZZ}. The Bombe then
+runs through all $26^3$ positions of the Enigma machine until it finds
+a stop. 
+\\\\Suppose that at a stop, the drums have positions
 \begin{center}
-  $R_{a_1, b_1, c_1},\dots, R_{a_k, b_k, c_k}$.
+  $R_{a_1, b_1, c_1},\dots, R_{a_{k}, b_k, c_{k}}$.
 \end{center}
-Given that our supposed ring setting was \texttt{ZZZ} (we will denote
+Recall that our ring setting is \texttt{ZZZ} (which we denote
   (\texttt{26},
-\texttt{26}, \texttt{26})), we now know that a candidate with a ring
+\texttt{26}, \texttt{26})). Then we know that a candidate with a ring
 setting of (\texttt{26},
-\texttt{26}, \texttt{26}) and window setting of $(a_1, b_1, c_1)$
-which should produce our expected plaintext at the location of the
+\texttt{26}, \texttt{26}) and window setting of $(a_1, b_1, c_1)$ should produce our expected plaintext at the location of the
 first letter included in our loop. Of course, we want the plaintext
 from the beginning of our plaintext-ciphertext pairing, so this
 should actually occur at a window setting of
@@ -1729,48 +1719,49 @@ should actually occur at a window setting of
   mod }26, \texttt{Z} + (c_1-z_1)\text{ mod }26)
 \end{align}
 with a ring setting of (\texttt{26},
-\texttt{26}, \texttt{26}). Recall, that our assumed window setting at
+\texttt{26}, \texttt{26}). Recall that our assumed window setting at
 the beginning of our plaintext-ciphertext pairing is \texttt{ZZZ}. We
 want to move our window setting \ref{eq:bombe_stop} to correspond
-with this but, in order to maintain permutation which produced the
-stop, we must move the ring setting backwards by the same amount we
-must move from \ref{eq:bombe_stop} to \texttt{ZZZ}. This displacement
+with this, but in order to maintain the permutation which produced this
+stop, we must move the ring setting backwards by the same amount we must move to get from \ref{eq:bombe_stop} to \texttt{ZZZ}. This displacement
 is given by
 \begin{align*}
   ((a_1-x_1)\text{ mod }26, (b_1-y_1)\text{ mod }26, (c_1-z_1)\text{ mod }26)
 \end{align*}
 since the \texttt{Z}s cancel out. Then we must move our assumed ring
 setting of (\texttt{26},
-\texttt{26}, \texttt{26}) backwards by this same amount giving a ring setting of
-\begin{align*}
+\texttt{26}, \texttt{26}) backwards by this same amount, thus giving a ring setting of
+\begin{align}
+    \label{eq:ring_setting}
   (\texttt{26} - (a_1-x_1)\text{ mod }26, \texttt{26} -
   (b_1-y_1)\text{ mod }26, \texttt{26} - (c_1-z_1)\text{ mod }26).
-\end{align*}
-Notice that $(a_1-x_1, b_1-y_1, c_1-z_1)$ is just the number of steps
+\end{align}
+Thus with ring setting~\ref{eq:ring_setting}, and window setting \texttt{ZZZ}, we get the same permutation that caused the original stop, now properly adjusted so that it aligns with our assumed starting window setting.
+\\\\Notice that $(a_1-x_1, b_1-y_1, c_1-z_1)$ is just the number of steps
 our machine has made since it started. So, to get the ring position
-corresponding to the start of our plaintext-ciphertext pairing we
+corresponding to the start of our plaintext-ciphertext pairing, we
 just subtract the number of steps each rotor has made from our
-assumed ring position (\texttt{26},\texttt{26}, \texttt{26}). Rather
+assumed ring position (\texttt{26}, \texttt{26}, \texttt{26}). Rather
 than doing all this math, the Bombe was equipped with an additional
 set of {\bf{indicator drums}} which began with labels \texttt{ZZZ}
 and for each step the machine moved \emph{forward}, it moved the
-indicator drum \emph{backward}. This means that when the machine
+indicator drum \emph{backward}. This meant that when the machine
 stopped, the indicator drums would immediately tell us the ring
-setting which corresponded to our plaintext-ciphertext pairing. Then,
+setting which corresponded to the start of our plaintext-ciphertext pairing. Then,
 with this ring setting, setting our machine to the window setting
-\texttt{ZZZ} would produce our expected plaintext-ciphertext
+\texttt{ZZZ} would hopefully produce our expected plaintext-ciphertext
 pairing\footnote{The actual rotors used in the Bombe scramblers were
   incorrect and did not match the true Enigma rotors by varying degrees
   of rotation depending on the rotor in question. This meant operators
   did not set their window settings to \texttt{ZZZ} but rather some
   small offset depending on which rotors were included. This meant if
   we used rotors (\texttt{II}, \texttt{V}, \texttt{III}) our window
-setting would be \texttt{YWY}}.
+setting would be \texttt{YWY}.}.
 
 \subsection{Recovering the Plugboard}
 Given a stop, we now know that for our hypothesized rotor order, a
 window setting of \texttt{ZZZ}, and ring setting given by the
-indicator drums we should be able to produce our plaintext-ciphertext
+indicator drums, we should be able to produce our plaintext-ciphertext
 pair. However, we have yet to deduce the plugboard setting. The
 genius of the Bombe is that much of the deduction required to workout
 the plugboard setting has been done for us. Consider a possible stop
@@ -1861,7 +1852,7 @@ of the Bombe
   \end{tikzpicture}
 \end{center}
 Our hypothesized plugboard setting was that \texttt{A} was steckered
-to \texttt{C} and we found no logical contradictions thus producing a
+to \texttt{C} and we found no logical contradictions, thus producing a
 stop. This means that at a minimum we recover that $S(\texttt{A}) =
 \texttt{C}$. However, we may as well have hypothesis that \texttt{B}
 was steckered to \texttt{D} and thus we would have applied current to
@@ -1892,7 +1883,7 @@ $\overline\sigma_i$. Suppose the operator (known as a
   Women's Royal Navy Service. Such members became the primary operators
 of Bombes at Bletchley Park.} knew from the Bombe stop that our
 hypothesis letter \texttt{A} was steckered to \texttt{C} (i.e.
-$S(\texttt{A} = \texttt{C}$)). Further, from our loop the wren might know that
+$S(\texttt{A}) = \texttt{C}$). Further, from our loop, the wren knows that
 \[
   \sigma_1(\texttt{A}) = \texttt{B}
 \]
@@ -1900,12 +1891,12 @@ We then have that
 \begin{align*}
   S(\texttt{B}) & = S(\sigma_1(\texttt{A}))                \\
   & = SS^{-1}\overline\sigma_1 S(\texttt{A}) \\
-  & = \overline\sigma_1(\texttt{D})
+  & = \overline\sigma_1(\texttt{C})
 \end{align*}
 Then to determine what letter is steckered to \texttt{B}, the wren
 only needs to set their ring settings to that given by the indicator,
 the window settings to that corresponding to $\sigma_1$, and input
-\texttt{D}. Now using this newly deduced steckering the wren can
+\texttt{C}. Now using this newly deduced steckering, the wren can
 produce the steckering of the next letter in the loop until we have
 deduced the steckerings corresponding to each letter in our loop.
 
@@ -1918,29 +1909,29 @@ at which the Bombe stopped is incorrect! Recall that the Bombe stops
 when there are no logical contradictions gleamed from its setup and
 the information in the loop -- this does not mean no logical
 contradictions exist. Further, even if no logical contradictions
-existed that does not mean this is the only such setting which would
+existed that does not mean that this is the only such setting which could
 be logically consistent with our plaintext (though this is certainly
 less likely). The use of the Bombe is thus a trial-and-error
 procedure. We run the machine until we find a candidate stop, then we
 check for possible further logical contradictions, and if such
-contradictions are found we continue from where we left off. Many
+contradictions are found, we continue from where we left off. Many
 additions we discuss later in this chapter are designed with the sole
-purpose of reducing the number of stops we need to check down to a
+purpose of reducing the number of stops we need to check, down to a
 tractable number.
 \\\\If we find our stop has valid plugboard settings, we can recover
-any remaining settings is quite easily. We can attempt to decrypt our
+any remaining settings quite easily. We can attempt to decrypt our
 ciphertext with our window setting of \texttt{ZZZ}, our ring setting
 given by the indicator drums, and our plguboard settings we
 discovered from the stop. If we find that there are letters which do
 not match our expected plaintext we can deduce what plugboard
 settings need to be added to switch out incorrect letters with their
-correct plaintext letters. In this way we can recover the entirety of
+correct plaintext letters. In this way, we can recover the entirety of
 the plugboard settings.
 
 \subsection{Recovering the Ring Settings}\label{bombe_ring_setting}
 By this point we know that for our hypothesized rotor ordering, a
 window setting of \texttt{ZZZ}, a ring setting given by the indicator
-drums, and a plugboard setting deduced from the state of the stop as
+drums, and a plugboard setting deduced from the state of the stop, as
 well as additional logical induction, we can produce the desired
 ciphertext-plaintext pairing. However, this does not mean the ring
 setting that we have is the true ring setting. We assumed that
@@ -1963,7 +1954,7 @@ investigating if we get gibberish. Eventually, we will have arrived
 at the true ring setting and our deciphering will begin producing
 additional plaintext.
 \\\\To recover the ring setting of the other two rotors we employ the
-same procedure though it requires a great deal of ciphertext as
+same procedure though it requires a great deal of ciphertext, as
 turnover becomes less and less frequent as we consider the middle and
 leftmost rotor respectively.
 
@@ -1972,12 +1963,12 @@ In its full form the Bombe was constructed with $3$ rows each
 equipped with 12 scramblers. For a single plaintext-ciphertext
 pairing we could test multiple rotor orders simultaneously. If our
 plaintext-ciphertext pairing is shorter than $12$ characters we could
-test $3$ rotor orders concurrently. If it is longer then we may need
-to split it into two separate pairings spread across multiple rows
+test $3$ rotor orders concurrently. If it is longer, then we may need
+to split it into two separate pairings spread across multiple rows,
 meaning that we may only test $1$ or $2$ rotor orders. Further, over
 the course of the war many Bombes were produced. This meant that it
 was feasible to test all $60$ rotor orderings against our
-plaintext-ciphertext pairing to see which orderings generated valid
+plaintext-ciphertext pairing concurrently to see which orderings generated valid
 stops, thus allowing us to deduce the correct rotor order. In doing
 this, we have now managed to recover all of the relevant settings of
 the daily key.
@@ -1985,7 +1976,7 @@ the daily key.
 \subsubsection{Rotor Order Reuse}
 German Enigma protocol stipulated that no rotor setting could appear
 in two months' setting sheets. This meant that if Bletchley were able
-to regularly deduce Enigma settings they could rule out many rotor
+to regularly deduce Enigma settings, they could rule out many rotor
 orders which no longer needed to be tested the next month.
 
 \subsection{Turnover}
@@ -2012,8 +2003,8 @@ message is longer than $26$ characters there could be $2$ or more
 turnovers during encipherment meaning that splitting the text in this
 way would no longer guarantee valid stops but, as we will see in our
 analysis in the next chapter, a plaintext-ciphertext pairing of
-length $26$ is more than sufficient to produce a small number of
-stops so this does not present an issue.
+length $26$ is more than sufficient to produce a tractable number of
+stops, so this does not present an issue.
 \subsection{Cribs and Menus}
 
 % \begin{chapquote}{Gordon Welchman, \textit{The Hut Six Story Page 120}}
@@ -2060,21 +2051,22 @@ itself. On D-Day the weather report had the following ciphertext
 \begin{center}
   \texttt{QFZWRWIVTYRESXBFOGKUHQBAISEZ}
 \end{center}
-Given that this was a report the weather in the Bay of Biscay, we
+Given that this was a report regarding the weather in the Bay of Biscay, we
 suspect it to contain the following plaintext
 \begin{center}
-  \texttt{WETTERVORHERSAGEBISKAYA}
+  \texttt{WETTERVORHERSAGEBISKAYA},
 \end{center}
-If we overlay our ciphertext on top of our plaintext as follows
+that is, ``weather forecast Biscay."
+\\\\If we overlay our ciphertext on top of our plaintext as follows,
 \begin{align*}
   & \texttt{QFZWRWIVTYRE}{\uline{\texttt{S}}}\texttt{XBFOGKUHQBAISEZ} \\
   & \texttt{WETTERVORHER}{\uline{\texttt{S}}}\texttt{AGEBISKAYA.....}
 \end{align*}
 we notice that at the 13th position, the letter \texttt{S} appears in
 both the plaintext and the ciphertext. We know that such an
-encipherment is impossible and therefore the suspected plaintext
+encipherment is impossible, and therefore, the suspected plaintext
 cannot begin at this location. If we slide the plaintext along our
-ciphertext we get the following
+ciphertext we get the following,
 \begin{align*}
   & \texttt{QFZWRWIVTYRESXBFOGKUHQBAISEZ}
   \\
@@ -2097,7 +2089,7 @@ position impossible. Only at an offset of $4$ do we observe no
 coincidences. Such a potentially valid location for enciphering is
 known as a {\bf{crib}}. We may find many such cribs for a given
 transmission and suspected plaintext, but if our suspected plaintext
-is long the likelihood of this occurring goes down significantly so
+is long, the likelihood of this occurring goes down significantly, so
 we expect to find only a few cribs.
 \\\\Now equipped with our crib
 \begin{figure}[H]
@@ -2173,7 +2165,7 @@ if they are not included in any loop? From our earlier machine
 description its clear that such connection will never electrify
 additional wires. That is, they will only permute the incoming
 electrified wires but never increasing the quantity of electrified
-wires since there is no feedback. Thus they add no additional value
+wires since there is no feedback. Thus, they add no additional value
 save for perhaps slightly more plugboard information. However, an
 addition to the machine made by Gordon Welchman made use of such
 connections and produced more electrified wires even within the loops
@@ -2336,7 +2328,7 @@ Bombes had a setting called {\bf{Consecutive Stecker Knock Out
 consecutive steckerings. This was accomplished by wiring wire
 \texttt{Ab} to \texttt{Bc} to \texttt{Dc} and so on, with an optional
 jack that could complete the circuit on the back of the Bombe.
-\\\\In general the CSKO circuit not directly eliminate consecutive
+\\\\In general, the CSKO circuit not directly eliminate consecutive
 steckerings. However, consider the case of a stop (which we will
 later see is quite common) in which every wire save for one is live.
 This implies that $\overline\pi$ has a cycle structure of $1^125^1$
@@ -2352,15 +2344,15 @@ board. Then any other wire on cable \texttt{F} must be live. In
 particular, cable \texttt{Fg} must be live. We know that the CSKO
 circuit connects \texttt{eF} to \texttt{Fg} so it follows that
 \texttt{eF} will now become live through the CSKO circuit. This will
-make live the only remaining wire and so all wires become live. Thus,
+make live the only remaining wire, and so all wires become live. Thus,
 cases in which the machine would singularly imply consecutive
-steckering hypotheses, these stops would be eliminated. This reduces
-the number of stops needing to be checked for Air Force traffic.
+steckering hypotheses would be eliminated. This reduces
+the number of stops to be checked for Air Force traffic.
 
 \subsection{The Machine Gun}
-Even with the Bombe and the diagonal board we still have more
+Even with these additions, we still have more
 deductions that can be made to rule out certain settings. Consider
-our first stop we examined from figure~\ref{fig:correct_stecker}.
+our first stop we examined from figure~\ref{fig:correct_stecker},
 \begin{center}
   \begin{minipage}{0.45\textwidth}
     \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
@@ -2483,7 +2475,7 @@ in regards to plugboard setting overlap and thus still produced false stops.
 % http://www.ellsbury.com/gne/gne-102.htm%
 % https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html
 % %
-Early in this chapter we discussed the changes made to the Enigma
+Early in this chapter, we discussed the changes made to the Enigma
 protocol that necessitated the use of the Bombe. The changes
 discussed applied only to the Army and Air Force. The Navy, on the
 other hand, had a completely different set of changes that required
@@ -2494,22 +2486,21 @@ The German Navy used completely different Enigma models including
 \texttt{M1}, \texttt{M2}, \texttt{M3}, and ultimately \texttt{M4},
 the last of which actually allowed for the use of four rotors. The
 first three models are compatible with the Enigma model \texttt{I}
-that we have been discussing so we will not be examining the
+that we have been discussing, so we will not be examining the
 differences between these machines in this paper. Further, the
 \texttt{M4}'s additional rotor presented additional cryptographic
 challenges to cryptanalysts but the underlying theory described above
 is the same.
 %https://cryptomuseum.com/crypto/enigma/m3/index.htm%
 \\\\The most important difference of the Naval Enigma was the
-addition of three rotors (rotors \texttt{VI}, \texttt{VII}, and
-\texttt{VIII}). These rotors were exclusively used by the German Navy
+addition of three rotors -- rotors \texttt{VI}, \texttt{VII}, and
+\texttt{VIII}. These rotors were exclusively used by the German Navy
 and they functioned differently than the afformentioned rotors
 \texttt{I}-\texttt{V}. In particular, these new rotors had $2$
-turnover notches, diametrically opposed, doubling the rate of rotor turnover.
-turnover. In theory, these new rotors increased the total rotor
+turnover notches, diametrically opposed, doubling the rate of rotor turnover. In theory, these new rotors increased the total rotor
 ordering possibilities to $336$, but the naval operating procedure
 specified that one of the three rotors in a key sheet \emph{must} be
-a naval rotor reducing our rotor ordering space to only $276$.
+a naval rotor, thus reducing our rotor ordering space to only $276$.
 \\\\The theory underlying the Bombe still allows for the naval Enigma
 to be broken, but the additional rotors meant that the workload
 required to break such machines was vastly increased. Further, the
@@ -2520,11 +2511,11 @@ that ignored turnover and the amount of time we needed to use the
 Bombe would be vastly decreased. Turing invented a method by which
 cryptographers
 were able to reduce the possible rotor orderings to a set of only a
-few possibilities became known as {\bf{Banburismus}}\footnote{The
+few possibilities which became known as {\bf{Banburismus}}\footnote{The
   naming was due to cards used during the process being produced in
 Banbury, a small market town near Bletchley Park.}. This method took
-inspiration from clock method described in
-section~\ref{clock_method}. To understand Banburismus we must first
+inspiration from the clock method described in
+Section~\ref{clock_method}. To understand Banburismus, we must first
 understand the procedure by which naval Enigmas sent messages.
 \subsection{The Naval Enigma Protocol}
 Unlike Army and Air Force key sheets, which by this point had stopped
@@ -2536,7 +2527,7 @@ bigrams to other bigrams known as a {\bf{bigram table}}. We will not
 discuss the exact details of choosing trigrams since they are not of
 cryptogrpahic importance, but suffice it to say that the operator
 chose two trigrams from the K-Book (e.g. \texttt{CAC} and
-\texttt{ABB}) and arranged them in two rows as follows
+\texttt{ABB}) and arranged them in two rows as follows,
 \begin{align*}
   & \texttt{.CAC} \\
   & \texttt{ABB.}
@@ -2559,8 +2550,7 @@ And these new bigrams were then arranged into tetragrams which in our
 example produces \texttt{CCAA BCAA}. These two teragrams were then
 sent in plaintext at the start of our message. To actually encipher
 their message, the operator set their machine to the window setting
-specified by the key sheet and enciphered their second chosen trigram
-(i.e. \texttt{ABB} to get their message key. We will call the message
+specified by the key sheet and enciphered their second chosen trigram, \texttt{ABB}, to get their message key. We will call the message
   key prior to being enciphered the {\bf{pre-message key}} (in our
   case \texttt{ABB}). They then set their window setting to the
   message key and began enciphering their message.
@@ -2570,10 +2560,20 @@ specified by the key sheet and enciphered their second chosen trigram
   similar position to the one Rejewski was in when he was able to
   deduce message keys but knew nothing else about the machine settings.
   %TODO
-  \\\\TALK ABOUT GETTING THE BIGRAM TABLES
-  \\\\With the bigram tables in hand, we can assume that for any
+  \\\\The recovery of bigram tables was an incredible feat of the British Royal Navy. The Royal Navy boarded and recovered documents from a number enemy ships over the course of several years. The recovery of such documents became known as {\bf{pinches}}. Some well known pinches are: 
+  % See chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://cryptocellar.org/turing/0-19-825080-0.pdf
+  % and https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html
+  \begin{itemize}
+      \item The Narvik Pinch -- This first pinch, on April 26, 1940, occurred when the \emph{HMS Griffin} boarded the German \emph{Polares} headed for the port of Narvik. Aboard, they found entire cribs, descriptions of the naval messaging protocol, and keylists. 
+      \item The Krebs Pinch -- On March 4, 1941, the \emph{HMS Somali} boarded the German \emph{Krebs}. Aboard, they found a keylist for the entire month of February. 
+      \item The München Pinch -- On May 7, 1941, the \emph{HMS Somali} boarded the German weather ship \emph{München}. Aboard, they found a keylist for the entire month of June.
+      %https://archive.org/details/britishintellige0000hins/page/336/mode/2up?q=Lauenburg
+      \item The Lauenburg Pinch -- On June 28, 1941, the \emph{HMS Somali} boarded the German weather ship \emph{Lauenburg}. Aboard, they found a keylist for the entire month of July.
+       \item The \emph{U-110} Pinch -- On May 9, 1941, the Royal Navy struck the German U-boat \emph{U-110}. The crew abandoned the sinking ship, allowing members of the \emph{HMS Bulldog} to board. Aboard, they recovered and Enigma machine and the bigram tables themselves (though they had already been reconstructed by Bletchley Park at this point). 
+  \end{itemize}
+  \noindent These pinches provided Bletchley Park cryptanalysts with the information necessary to reverse engineer the bigram tables used by the German navy. With the bigram tables in hand, we can assume that for any
   naval message we are able to deduce its pre-message key. With this
-  assumption we will now employ statistical analysis to determine
+  assumption, we will now employ statistical analysis to determine
   which rotors were more likely used in the daily key for a particular day.
 
   \subsection{Repeats}

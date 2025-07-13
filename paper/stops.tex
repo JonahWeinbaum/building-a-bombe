@@ -991,7 +991,7 @@ enumerate partitions of $\mathbb{N}_n$. \\\\Let
     \emptyset\ \text{for } i \neq j,\ \bigcup_{i=1}^k \omega_i =
   \mathbb{N}_n \right\}
 \]be the set of partitions of \( \mathbb{N}_n \).
-\\\\For a particular cycle type $m = (m_i)_{i\in\mathbb{N}_n}$, the
+\\\\We showed in Corollary~\ref{cycle_count} that, for a particular cycle type $m = (m_i)_{i\in\mathbb{N}_n}$, the
 total number of permutations in $S_n$ with such a cycle type is
 \[
   \frac{n!}{\prod_{i=1}^ni^{m_i}(m_i!)}.
@@ -1001,11 +1001,12 @@ Just as with cycle types, we can say that each partition $\omega =
 given in terms of the multiplicity of sets of particular
 cardinalities. In particular, we will denote that a partition
 $\omega$ contains $m^{(\omega)} = (m_j^{(\omega)})_{j\in\mathbb{N}}$
-sets with cardinality $j$. Then the total number of such partitions is
+sets with cardinality $j$. The total number of such partitions is
 \[
   \frac{n!}{\prod_{i=1}^n(i!)^{(m_i^{(\omega)})}(m_i^{(\omega)}!)}.
 \]
-To condense both of these factors, for a sequence $x =
+We can arrive at this formula in a similar fashion to Corollary~\ref{cycle_count}, but we must account for the fact that the order of each $i$ cycle does not matter since we are treating them as sets, which gives us a factor of $i!$ in our formula as opposed to $i$. 
+\\\\To condense both of these factors, for a sequence $x =
 (x_i)_{i\in\mathbb{N}_n}$, we introduce
 \[
   Y(x) \coloneqq \prod_{i=1}^n (i!)^{x_i} \cdot x_i!, \qquad

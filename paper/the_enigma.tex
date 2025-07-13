@@ -270,7 +270,7 @@ send current through the rotors with the window indication
 The rotors were additionally equipped with an outer ring with
 letters \texttt{A} to \texttt{Z} moving clockwise relative to the
 entry-side of the rotor. Alternately some rings had numerical values
-ranging from \texttt{01} to \texttt{26}. The outer ring was not fixed to the underlying rotor and could be moved. Most importantly, this outer ring is what contained the turnover notch. Thus by moving the outer ring we change where turnover occurs.
+ranging from \texttt{01} to \texttt{26}. The outer ring was not fixed to the underlying rotor and could be moved. Most importantly, this outer ring is what contained the turnover notch. Thus by moving the outer ring we change where turnover occurs relative to the internal wiring of the rotor.
 \\\\To consider the effect of this ring,
 consider if an operator were instructed to place the ring such that
 the outer ring's \texttt{02} label was placed over contact \texttt{A}. Once
@@ -735,7 +735,7 @@ $m_i$) we can shift each element up to $i$ times to get the
 same permutation. This gives $i^{m_i}$ possible shifts of all $i$ cycles.
 \end{proof}
 \noindent This further gives us that, 
-\begin{corr}
+\begin{corr}\label{cycle_count}
     There are 
     \[
     \frac{n!}{\prod_{i=1}^n{i^{m_i}m_i!}}

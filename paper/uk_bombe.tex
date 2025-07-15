@@ -2556,11 +2556,13 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   message key and began enciphering their message.
   \\\\The long short of this procedure is that if we have a copy of
   the bigram tables, we can work backwards to figure out the
-  pre-message key for any naval message. This puts us in a very
-  similar position to the one Rejewski was in when he was able to
-  deduce message keys but knew nothing else about the machine settings.
+  pre-message key for any naval message. 
+  %This puts us in a very
+  % similar position to the one Rejewski was in when he was able to
+  % deduce message keys but knew nothing else about the machine settings.
   %TODO
-  \\\\The recovery of bigram tables was an incredible feat of the British Royal Navy. The Royal Navy boarded and recovered documents from a number enemy ships over the course of several years. The recovery of such documents became known as {\bf{pinches}}. Some well known pinches are: 
+  \subsection{Pinches}
+  The recovery of bigram tables was an incredible feat of the British Royal Navy. The Royal Navy boarded and recovered documents from a number enemy ships over the course of several years. The recovery of such documents became known as {\bf{pinches}}. Some well known pinches are: 
   % See chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://cryptocellar.org/turing/0-19-825080-0.pdf
   % and https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html
   \begin{itemize}
@@ -2569,15 +2571,15 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
       \item The München Pinch -- On May 7, 1941, the \emph{HMS Somali} boarded the German weather ship \emph{München}. Aboard, they found a keylist for the entire month of June.
       %https://archive.org/details/britishintellige0000hins/page/336/mode/2up?q=Lauenburg
       \item The Lauenburg Pinch -- On June 28, 1941, the \emph{HMS Somali} boarded the German weather ship \emph{Lauenburg}. Aboard, they found a keylist for the entire month of July.
-       \item The \emph{U-110} Pinch -- On May 9, 1941, the Royal Navy struck the German U-boat \emph{U-110}. The crew abandoned the sinking ship, allowing members of the \emph{HMS Bulldog} to board. Aboard, they recovered and Enigma machine and the bigram tables themselves (though they had already been reconstructed by Bletchley Park at this point). 
+       \item The \emph{U-110} Pinch -- On May 9, 1941, the Royal Navy struck the German U-boat \emph{U-110}. The crew abandoned the sinking ship, allowing members of the \emph{HMS Bulldog} to board. Aboard, they recovered an Enigma machine and the bigram tables themselves (though they had already been reconstructed by Bletchley Park at this point). 
   \end{itemize}
   \noindent These pinches provided Bletchley Park cryptanalysts with the information necessary to reverse engineer the bigram tables used by the German navy. With the bigram tables in hand, we can assume that for any
   naval message we are able to deduce its pre-message key. With this
   assumption, we will now employ statistical analysis to determine
-  which rotors were more likely used in the daily key for a particular day.
+  which rotors were most likely used in the daily key for a particular day.
 
   \subsection{Repeats}
-  Suppose we find the following two naval Enigma messages
+  Suppose we find the following two naval Enigma messages,
   \[
     \setlength{\arraycolsep}{15pt}
     \begin{array}{c | c}
@@ -2602,9 +2604,9 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   Note that we know such a distance ranges between $-25$ and $25$ and
   we need not consider a distance of $0$ as this would imply the
   pre-message keys are the same.
-  \\\\Recall our discussion from section~\ref{ioc} regarding the
+  \\\\Recall our discussion from Section~\ref{ioc} regarding the
   index of coincidence. We know that when two texts represent the
-  same poly-alphabetic cipher the observed distribution of coincidences
+  same poly-alphabetic cipher, the observed distribution of coincidences
   (Bletchley Park called these {\bf{repeats}}) should be much higher
   than two texts representing random text. Consider aligning our two
   texts with an offset of $+11$ letters, that is, the hypothesis that
@@ -2641,13 +2643,13 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   discuss, we must factor this into our analysis. Thus we denote the
   repeat structure at this offset as $9^{\texttt{xx}}/56$, where each
   $\texttt{x}$ denotes a bigram.\\\\For any other $n$-gram repeat, we
-  will use the $n$ in the exponent. For example, when considering $3$
+  will use $n$ in the exponent. For example, when considering $3$
   repeats in $57$ letters, where we note that there is a trigram
   repeated we would denote this repeat structure as $3^{3}/57$. This
   is actually the case when examining our messages at an offset of $-8$.
   \\\\Examining offsets from $-9$ to $+9$\footnote{In practice all
     offsets from $-25$ to $+25$ would be computed but the table has
-  been shorted for brevity} we get the following chart of repeat structures
+  been shorted for brevity.} we get the following chart of repeat structures
   \begin{center}\scalebox{0.8}{
       \begin{minipage}{\linewidth}
         \begin{table}[H]
@@ -2686,27 +2688,27 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   course an offset of $-9$ has the most repeats, but perhaps the
   trigram at an offset of $-8$ makes this case more likely. In order
   to answer this question we will need a means to score these repeat
-  structures. To do this, we must take a brief moment to dicuss
+  structures. To do this, we must take a brief moment to discuss
   Bayesian statistics.
   \subsection{Bayesian Statistics}
   Turing thought of the relationships between texts at various
-  offsets in terms of Bayesian statistics. Recall {\bf{Bayes theorem}}
+  offsets in terms of Bayesian statistics. Recall {\bf{Bayes theorem}},
   \begin{theorem}
     Given events $A$ and $B$, where $\mathbb{P}(B) \ne 0$ we have that
     \[
-      \mathbb{P}(A|B) = \frac{\mathbb{P}(B|A)\mathbb{P}(A)}{\mathbb{P}(B)}
+      \mathbb{P}(A|B) = \frac{\mathbb{P}(B|A)\mathbb{P}(A)}{\mathbb{P}(B)}.
     \]
   \end{theorem}
   \noindent This is given in terms of probability. We will see that
   the math becomes significantly easier to do in one's head if we
-  think of these probabilities instead in terms of {\bf{odds}}. That is
+  think of these probabilities instead in terms of {\bf{odds}}. That is,
   \begin{definition}
     For an event $A$ with probability $\mathbb{P}(A)$ we say that the
-    odds of $A$ occuring are
+    odds of $A$ occurring are
     \[
       \mathbb{O}(A) = \frac{\mathbb{P}(A)}{\mathbb{P}(\overline{A})}
     \]
-    where $\overline{A}$ denotes the probability of $A$ not occuring,
+    where $\overline{A}$ denotes the probability of $A$ not occurring,
     that is, $\mathbb{P}(\overline{A}) = 1-\mathbb{P}(A)$.
   \end{definition}
   \noindent Then we have
@@ -2721,15 +2723,15 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
     \frac{\mathbb{P}(A)}{\mathbb{P}(\overline{A})}\cdot\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}
     \\
     & =
-    \mathbb{O}(A)\cdot\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}
+    \mathbb{O}(A)\cdot\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}.
     \\
   \end{align*}
   \noindent We will denote
   $\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}$ as
-  $\mathbb{F}(A,B)$, this is called the {\bf{Bayes factor}}. The
+  $\mathbb{F}(A,B)$. This is called the {\bf{Bayes factor}}. The
   Bayes factor can be thought of as a measurement of how much the
   odds of an event increase when we add in a particular hypothesis.
-  For a subsequent and independent event $C$ we have
+  For a subsequent and independent event $C$ we have,
   \begin{align*}
     \mathbb{O}(A|B\wedge C) & =
     \mathbb{O}(A)\cdot\frac{\mathbb{P}(B\wedge C|
@@ -2738,27 +2740,27 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
     & = \mathbb{O}(A)\cdot\frac{\mathbb{P}(B| A)}{\mathbb{P}(B|
     \overline{A})}\cdot\frac{\mathbb{P}(C|A)}{\mathbb{P}(C|\overline{A})}
     \\
-    & = \mathbb{O}(A)\cdot \mathbb{F}(A,B) \cdot \mathbb{F}(A,C)
+    & = \mathbb{O}(A)\cdot \mathbb{F}(A,B) \cdot \mathbb{F}(A,C).
   \end{align*}
-  \noindent Inductively we have that for a series of independent
-  events $B_1, \dots, B_k$ we get
+  \noindent Inductively, we have that for a series of independent
+  events $B_1, \dots, B_k$ we get,
   \[
     \mathbb{O}(A|\wedge_{i=1}^k B_i) =
-    \mathbb{O}(A)\cdot\prod_{i=1}^k{\mathbb{F}(A,B_i)}
+    \mathbb{O}(A)\cdot\prod_{i=1}^k{\mathbb{F}(A,B_i)}.
   \]
   If we are considering many events $B_i$, then we have to do a lot
   of multiplications by hand which are prone to error. For this
   reason, we consider the {\bf{log-odds}} of these events occuring,
-  turning these products into summations. In particular, for log-base $b$
+  turning these products into summations. In particular, for log-base $b$ we have,
   \[
     \log_b\mathbb{O}(A|\wedge_{i=1}^k B_i) =
-    \log_b\mathbb{O}(A)+\sum_{i=1}^k{\log_b\mathbb{F}(A,B_i)}
+    \log_b\mathbb{O}(A)+\sum_{i=1}^k{\log_b\mathbb{F}(A,B_i)}.
   \]
   This leads us to the following definition
   \begin{definition}
     A {\bf{ban}} is a logarithmic unit of information gained from a
-    Bayes factor $\mathbb{F}(A,B)$ such that $1$ ban is equivalent to
-    a Bayes factor which illustrates that the odds of event $A$
+    Bayes factor $\mathbb{F}(A,B)$, such that $1$ ban is equivalent to
+    a Bayes factor which asserts that the odds of event $A$
     occurring are increased ten-fold when $B$ is observed. That is
     \begin{align*}
       & 10^1 = \mathbb{F}(A,B)                    \\
@@ -2782,20 +2784,19 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   \]
   Then a series of independent events $B_1, \dots, B_k$ increase the
   odds of $A$ by  $\sum_{i=1}^k{20\log_{10}\mathbb{F}(A,B_i)}$ hdB.
-  Note that if this value is positive this implies that the event $A$
+  Note that if this value is positive, this implies that the event $A$
   is more likely to have occurred after observing each $B_i$. If this
   value is negative, then the event $A$ is less likely to have
-  occurred after observing each $B_i$. If it is $0$ we have gained no
+  occurred after observing each $B_i$. If it is $0$, we have gained no
   information.
 
   \subsection{Scoring Charts}
-  Bletchley Park cryptanalysts precompiled a large chart of how many
-  hubdubs a particular observation of repeats was worth. Consider
-  that we observe that at an offset of $-13$ our messages with
+  Bletchley Park cryptanalysts pre-compiled a large chart of how many
+  hubdubs a particular observation of repeats was worth. Consider that at an offset of $-13$ our messages with
   pre-message keys \texttt{VFG} and \texttt{VFX} have a $6/52$ repeat
   structure. That is, there are $6$ monogram repeats occurring in $52$
   characters of observed text. We will call this observed event $B$.
-  We will call the event that the our overlap is in-depth as $A$.
+  We will call the event that the our overlap is in-depth -- that is, our rotors are aligned between both messages -- as $A$.
   \\\\To calculate how many hubdubs of information we gain we can compute.
   \[
     20\log_{10}\mathbb{F}(A,B) =
@@ -2808,25 +2809,25 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   \[
     \mathbb{P}(B|\overline{A}) = (\frac{1}{26})^6(1-\frac{1}{26})^{(52-6)}
   \]
-  \\\\The numerator $\mathbb{P}(B|\overline{A})$ represents the
+  \\\\The numerator $\mathbb{P}(B|{A})$ represents the
   probability that we observed $6$ repeated monograms in $52$
   characters of text, given that our messages are in-depth, that is,
-  they both represent streams of German text. Based on observation of
+  they both represent streams of enciphered German text. Based on observation of
   the corpus of naval Enigma messages, analysts determined that a
   monogram repeat occurs with a probability of $\frac{1}{17}$. Then
   our numerator is given by
   \[
-    \mathbb{P}(B|A) = (\frac{1}{17})^6(1-\frac{1}{17})^{(52-6)}
+    \mathbb{P}(B|A) = (\frac{1}{17})^6(1-\frac{1}{17})^{(52-6)}.
   \]
   It then follows that the observation $B$, that is, that our texts
-  are shifted at a distance of $-13$ is worth $13.59$ (which
+  are shifted at a distance of $-13$, is worth $13.59$ (which
   Bletchley Park rounded to $13$) hubdubs of information. That is,
-  this new observation increases our odds of the messages being
-  in-depth by a factor of $10^\frac{13}{20}$ -- giving a rougly $5$
+  this new observation increases the odds of the messages being
+  in-depth by a factor of $10^\frac{13}{20}$ -- giving roughly $5$
   to $1$ odds in favor of the text being in-depth. A scoring chart
   could be computed for all repeat structures of interest. Repeating
   this same calculation for various possible text lengths and number
-  of repeats we may compute a table representing all hubdub values.
+  of repeated monograms, we may compute a table representing all hubdub values.
   \begin{figure}[H]
     \begin{center}
       \scalebox{0.7}{
@@ -2887,8 +2888,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   sheets}} (sometimes called {\bf{deciban sheets}} from when
   calculations were done in decibans). The columns represent the
   length of text being observed and the rows indicate the number of
-  repeats. We now know how to score repeat structures which only
-  contain aligned monograms, but we have yet to account for bigrams or trigrams.
+  repeated monograms. We now know how to score repeat structures which contain aligned monograms, but we have yet to account for bigrams or trigrams.
 
   \subsection{Bonus Scoring System} Bletchley Park cryptanalysts used
   a bonus system intended to account for the difference in frequency
@@ -2900,7 +2900,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   $6^\texttt{xx}/55$ we would examine row $6$ column $55$. However,
   to account for the additional two bigrams, we must moved down two
   rows (one for each bigram) to row $8$ -- giving a value of $20$
-  hdB. Similarly, for a repeat structure of $5^3/40$ we would examine
+  hdB. Similarly, for a repeat structure of $4^3/40$ we would examine
   row $4$ column $40$. Then, to account for the trigram we would move
   down four rows to row $8$ -- giving a value of $23$ hdB.
   \\\\The extent to which this bonus system was accurate as opposed
@@ -2909,7 +2909,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   would need to examine the entire corpus of Enigma message gathered
   for the purpose of Banburismus to determine the relative frequency
   of bigrams and trigrams. Bletchley Park cryptanalyst, Hugh
-  Alexander, provides some $n$-gram frequencies as follows
+  Alexander, provides some $n$-gram frequencies as follows,
   \begin{center}
     \begin{tabular}{|c|c|}
       \hline
@@ -2938,7 +2938,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   can approximate that a message with $m$ monograms including $b$
   bigrams over $n$ letters has a Bayes factor of
   \[
-    \frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\cdot\frac{(\frac{1}{17})^{(m-2b)}(1-\frac{1}{17})^{(n-m)}}{(\frac{1}{26})^{(m-2b)}(1-\frac{1}{26})^{(n-m)}}
+    \frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\cdot\frac{(\frac{1}{17})^{(m-2b)}(1-\frac{1}{17})^{(n-m)}}{(\frac{1}{26})^{(m-2b)}(1-\frac{1}{26})^{(n-m)}}.
   \]
   This makes several assumptions and overestimations. First, this
   assumes that having bigrams and monograms are independent events.
@@ -2964,7 +2964,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
     \\\\
     \Rightarrow &
     \frac{(\beta)^b(1-\beta)^{(n-1)-b}}{(\frac{1}{26^2})^b(1-\frac{1}{26^2})^{(n-1)-b}}\approx
-    (\frac{26^2\cdot25}{17^2\cdot16})^b
+    (\frac{26^2\cdot25}{17^2\cdot16})^b.
   \end{align*}
   % NSA BIGRAMS -
   % chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/friedman-documents/correspondence/FOLDER_152/41746979078617.pdf
@@ -2978,16 +2978,17 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   \noindent We will now make another assumption. We may not know
   $\beta$ but we do expect it to be reasonably small. In an NSA paper
   regarding the index of coincidence, they estimate the probability of
-  bigrams in German to be about $0.0097$. Given that Turing's
-  estimate of monogram probability of $\frac{1}{17}$ is lower than
-  the NSA's estimate for German monograms of $0.076$, we may expect
-  that $\beta$ is reasonably close to, if not lower, than $0.0097$.
+  bigrams in German to be about $0.0097$. We may expect that $\beta$ is reasonably close to, or at least in a similar magnitude to, this value.
+  %Given that Turing's
+  %estimate of monogram probability of $\frac{1}{17}$ is lower than
+  %the NSA's estimate for German monograms of $0.076$, we may expect
+  %that $\beta$ is reasonably close to, if not lower, than $0.0097$.
   Given its small magnitude, the ultimate application of
   $20\log_{10}$ to each side will render the term
   \[
     \frac{(1-\beta)^{(n-1)-b}}{(1-\frac{1}{26^2})^{(n-1)-b}}
   \]
-  meaningless. Thus as a simplifying assumption this can be ignored.
+  insignificant in comparison to $\frac{(\beta)^b}{(\frac{1}{26^2})^b}$. Thus, as a simplifying assumption this can be ignored.
   This leaves us with only a dependence on $b$, allowing us to
   approximately guess $\beta$. We have
   \[
@@ -3003,10 +3004,9 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   coincidence of monograms -- that is
 
   \[
-    \beta\cdot26^2 \approx (\frac{1}{17}\cdot26)^3
+    \beta\cdot26^2 \approx (\frac{1}{17}\cdot26)^3,
   \]
-  whereas we might expect it to be the square, hence the addition of
-  an extra row for each bigram. Alternately, to put it in terms of
+  hence the addition of an extra row for each bigram. Alternately, to put it in terms of
   logarithmic odds we have
   \[
     20\log_{10}(\beta\cdot26^2) \approx 3\cdot20\log_{10}(\frac{1}{17}\cdot26)
@@ -3018,7 +3018,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   provides arguably more justification.}. Thus we can say with reasonable
   confidence that the bonus system rule is grounded in legitimate
   data of bigram frequency. The same type of calculation can be done
-  for trigrams but the goal of this section was to give justification
+  for trigrams, but the goal of this section was to give justification
   to the reader that the bonus system is more than just a heuristic.
 
   \subsection{Distance Charts}\label{distance_chart}
@@ -3116,7 +3116,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   of $20\log_{10}{\tau_n}$ hdB. Then, for each loss corresponding to
   a particular offset, we must recompute our scoring sheets -- though
   now instead of using $\frac{1}{17}$ as our probability we will use
-  $\ell_n$. Here is the scoring table for a loss of $-3$ hdB
+  $\ell_n$. Here is the scoring table for a loss of $-3$ hdB,
   \begin{figure}[H]
     \begin{center}
       \scalebox{0.7}{
@@ -3275,7 +3275,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   score chart to score
   the remaining $7^\texttt{x}/56$ repeat structure, adding these two
   scores together to get our total score for this repeat structure.
-  With this we can now score any repeat structure, save for one
+  With this, we can now score any repeat structure, save for one
   exception we will now discuss.
 
   \subsection{Dummyismus}
@@ -3283,31 +3283,35 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   fully score our repeat structures. Based on observation,
   cryptanalysts at Bletchley Park noted that some percentage of
   messages turned into ``dummy'' messages some way through. That is,
-  short sections of German text follow by gibberish. Dealing with
+  short sections of German text were often followed by gibberish. Dealing with
   such messages became known as {\bf{dummyismus}}.
   \\\\Cryptanalysts in the crib room  based on length, frequency,
   cateogry, etc., would place a {\bf{blue line}} at some point in
-  each message beyond which they estimated there was a $25\%$ chance
-  or higher of the message being a dummy, they denoted this
+  each message, beyond which they estimated there was a $25\%$ chance
+  or higher of the message being a dummy. They noted this
   percentage on the sheet corresponding to each message.
   \\\\How they determined where to place the blue line and what
   percentage likelihood beyond this point the message was a dummy is
-  not discuss by Hugh Alexander and likely depended on a number of
+  not discussed by Hugh Alexander and likely depended on a number of
   additional factors which were known to the crib room but may remain
   a mystery to us.
   \\\\In practice, if we are scoring a repeat structure of $0/30$
   before the blue line and $11^{3\texttt{x}}/171$ after it, we would
-  first score $0/30$ as we have done before, but then score
-  $11^{3\texttt{X}}/171$ on the sheet corresponding to its offset
-  loss plus the loss of both messages estimated by the dummyismus protocol.
+  first score $0/30$ as we have done before. We then must separately score the
+  $11^{3\texttt{X}}/171$ repeat structure on the sheet corresponding to its distance
+  loss plus its dummyismus loss.
   \\\\To see this, suppose our two messages have $d_1$ and $d_2$
-  probability respectively of being a dummy after the blue line. Then there is a
+  probability, respectively, of being a dummy after the blue line. Then there is a
   \[
     (1-d_1)\cdot(1-d_2)
   \]
-  chance of our messages both being genuine beyond the blue line. We
-  can compute a lookup table in hdB for all percentages they
-  encountered as follows
+  chance of our messages both being genuine beyond the blue line. Thus we incur a loss of 
+  \[
+    20\text{log}_{10}((1-d_1)\cdot(1-d_2))
+  \]
+  hubdubs. 
+  \\\\We can compute a lookup table in hdB for all percentages they
+  encountered as follows,
   \begin{figure}[H]
     \begin{center}
       \scalebox{0.7}{
@@ -3349,7 +3353,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
     \end{center}
     \caption{Dummyismus scoring sheet}
   \end{figure}
-  \noindent We now have all the details necessary to score to
+  \noindent By adding the loss incurred from the dummyismus chart, to the loss incurred by the distance chart, we get the total loss corresponding to a particular repeat structure. To score this repeat structure we use the scoring sheet associated to that loss. We now have all the details necessary to score to
   messages whose pre-message key differs by only their last letter.
 
   \subsection{End-Wheel Comparison}
@@ -3357,16 +3361,16 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   based on end-wheel comparisons. Many of Hugh Alexander's scores do
   not align consistently with reproduced sheets and there are many
   points at which he likely switches between references to decibans
-  and hubdubs. For this reason we will be using numbers given by
+  and hubdubs. For this reason, we will be using numbers given by
   Steven Hosgood in \emph{All You Ever Wanted to Know About
-  Banburismus but were Afraid to Ask} as these more consistently align
+  Banburismus but Were Afraid to Ask} as these more consistently align
   with the above description. The reader is recommended to examine
   this resource for more detailed discussion about the scoring
   discrepancies between his analysis and those of Hugh Alexander.
   Regardless, the underlying theory is the same and the above
   discussion should give the reader and understanding of how such
   sheets looked and were used. We will give several examples to
-  illustrate the various odd scenarios of decibanning.
+  illustrate the various scenarios of decibanning.
   \subsubsection{\texttt{TYQ = TYB + 5}}
   \text{}\\Suppose we are examining the hypothesis that pre-message
   keys \texttt{TYQ} and \texttt{TYB} represent an offset of $+5$. At
@@ -3406,7 +3410,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   column to get a more accurate score for each offset.
 
   \subsubsection{\texttt{ASL = ASJ + 5}}
-  \text{}\\\\Suppose we are examining the hypothesis that pre-message
+  \text{}\\Suppose we are examining the hypothesis that pre-message
   keys \texttt{ASL} and \texttt{ASJ} represent an offset of $+5$. At
   this offset, we observe a repeat structure of $0/30$ before the
   blue line, and $11^\texttt{3x}/171$ after the blue line. For the
@@ -3519,7 +3523,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   \noindent After all this work we can now determine that the most
   likely candidate is that
   \[
-    \texttt{W} = \texttt{V} - 2
+    \sigma_3(\texttt{W}) = \sigma_3(\texttt{V}) - 2
   \]
   with a total score of $27$ hdB. We can now add in the Bayesian
   prior representing the initial odds that any given offset is
@@ -3528,13 +3532,13 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   an extra factor of $-34$ hdB to get the true odds of our candidate
   as $-7$ hdB or roughly $2$ to $1$ odds against our candidate. These
   sheets will ultimately be used to disambiguate our deduced rotor
-  possibilities. Later when we show deciban sheets, we will show
+  possibilities. Later, when we show deciban sheets, we will show
   scores already being adjusted by the prior odds to make our work easier.
 
   \subsection{Middle-Wheel Comparison}
   So far we have only examined pre-message keys with their first two
   letters in common. In theory, there is no reason the same process
-  cannot be applied to pre-message keys with their first letter in
+  cannot be applied to pre-message keys with onlt their first letter in
   common, although this requires significantly more offsets being
   considered and significantly reduced odds.
   \\\\We might think we need to handle all offsets from $-650$ to
@@ -3583,9 +3587,9 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   \end{table}
   \noindent Here we only underline repeats which are longer than $4$
   letters as these have the best chance at being legitimate. We think
-  of each rightmost rotor position as having an alphabet of ``26''
+  of each rightmost rotor position as having an alphabet of 26
   letters before it turns over to a new alphabet of 26 letters. The
-  left number in the position column denotes which alphabet we in and
+  left number in the position column denotes which alphabet we are in and
   the right number indicates which letter we are in that alphabet
   when the $n$-gram occurred. In this sense our first tetragram entry
   with a position of $4.8$ means that the tetragram occurred in the
@@ -3603,9 +3607,9 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   probability $\tau_n$ that our offset represents a legitimate
   comparison between message keys with their leftmost letter in
   common. This is the same as asking the probability that turnover of
-  the leftmost rotor dd \emph{not} occur. Now we need to consider
+  the leftmost rotor dd \emph{not} occur. Now we must consider
   more scenarios than in our one rotor analysis. Recall that there
-  are $8\cdot7\cdot6$ total arrangements of rotors but
+  are $8\cdot7\cdot6$ total arrangements of rotors, but
   $5\cdot4\cdot3$ of these are not allowed since they do not include
   any naval rotors. Then there are $276$ total rotor combinations we
   are examining. The two rightmost rotors can be in one of the following cases
@@ -3719,7 +3723,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   \noindent With this chart we now know what the loss for our scoring
   sheet needs to be for a particular message pair. From here we can
   use our exact same scoring method to compute the log-odds of score
-  for entries in the tetragram catalogue. To the the true odds of our
+  for entries in the tetragram catalogue. To get the true odds of our
   candidate offset we must consider the Bayesian prior representing
   the initial odds that any given offset is correct. We have that
   there are $1300$ possible offsets, all of which are equally likely,
@@ -3731,8 +3735,8 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   comparison. In order to do this, we need to determine our score
   with respect to the Bayesian prior for representing the initial
   odds of an offset in $\pm25$ being correct. Given that we have used
-  the same scoring system regardless of analyzing middle-wheel and
-  end-wheel comparisons, we have that the Bayesian factors we have
+  the same scoring system regardless of analyzing middle-wheel or
+  end-wheel comparisons, we have that the Bayesian factors we
   computed would be the same whether we were analyzing middle-wheel
   or end-wheel comparisons. Thus, we need only account for the
   difference in the prior odds between middle-wheel and end-wheel
@@ -3752,11 +3756,11 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   middle-wheel to an end-wheel comparison, we compute
   \[
     20\log_{10}(10^\frac{s}{20}\cdot10^{\frac{-28}{20}}
-    -10^{\frac{-28}{20}} + 1)
+    -10^{\frac{-28}{20}} + 1).
   \]
 
   \noindent We can compute a conversion chart from middle-wheel
-  scores to end-wheel scores as follows
+  scores to end-wheel scores as follows.
   \begin{figure}[H]
     \begin{center}
       \scalebox{0.6}{
@@ -3779,13 +3783,13 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   \subsection{Scritchmus}
   We have developed a lot of theory to score repeat structures and
   various letter offsets so it is best to recap what we get at the
-  end of this analysis. We have
+  end of this analysis. We have,
   \begin{itemize}
     \item A list of repeat structures and their scores which we will
       call a {\bf{catalouge}}. This is just a scored tetra catalogue
       combined with a scored end-wheel catalogue. An example is as
       follows\footnote{For sufficiently high odds we just write
-      ``certain'' as it may as well be}
+      ``certain'' as it may as well be.}
       \begin{figure}[H]
 
         \begin{center}
@@ -3820,7 +3824,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
     \item A list of deciban sheets for a variety of letters
       combinations compiled from summed likelihoods of letter offsets
       gleamed from both end-wheel and middle-wheel comparisons. One
-      such deciban sheet is as follows
+      such deciban sheet is as follows,
       \begin{figure}[H]
         \begin{center}
           \scalebox{0.6}{
@@ -3860,7 +3864,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
     & \texttt{............R....X........}
   \end{align*}
   In this way, adding in repeats (2)-(5) we get from our initial
-  hypothesis $\sigma_3(\texttt{R}) = \texttt{M}$
+  hypothesis $\sigma_3(\texttt{R}) = \texttt{M}$,
   \begin{align*}
     & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
     & \texttt{P......N...UR.K..X........}
@@ -3868,10 +3872,10 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   Recall that $\sigma_3$ must be an involution so if
   $\sigma_3(\texttt{R}) = \texttt{M}$ we must also have
   $\sigma_3(\texttt{M}) = \texttt{R}$, but of course this contradicts
-  our derivation that $\sigma_3(\texttt{M}) = \texttt{X}$. Then our
+  our derivation that $\sigma_3(\texttt{X}) = \texttt{R}$. Then our
   initial hypothesis $\sigma_3(\texttt{R}) = \texttt{M}$ is likely
   wrong. We must therefore continue through all hypotheses for the
-  value of $\sigma_3(\texttt{R})$. We can eliminate possibilities as follows
+  value of $\sigma_3(\texttt{R})$. We can eliminate possibilities as follows,
   % \begin{align*}
   %    & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} &
   %                                          \\
@@ -3976,7 +3980,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
         \texttt{.} & \texttt{K} & \texttt{.} & \texttt{.} &
         \texttt{X} & \texttt{.} & \texttt{.} & \texttt{.} &
         \texttt{.} & \texttt{.} & \;\;Contradicts reciprocal
-        \texttt{R} and \texttt{M} \\
+        \texttt{R} and \texttt{P} \\
         \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
         \texttt{P} & \texttt{.} & \texttt{.} & \texttt{.} &
         \texttt{.} & \texttt{.} & \texttt{.} & \texttt{N} &
@@ -4032,7 +4036,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
         \texttt{.} & \texttt{N} & \texttt{.} & \texttt{.} &
         \texttt{.} & \texttt{U} & \texttt{R} & \texttt{.} &
         \texttt{K} & \texttt{.} & \;\;Contradicts reciprocal
-        \texttt{R} and \texttt{M} \\
+        \texttt{K} and \texttt{Y} \\
         \texttt{.} & \texttt{.} & \texttt{X} & \texttt{.} &
         \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
         \texttt{.} & \texttt{.} & \texttt{.} & \texttt{P} &
@@ -4040,7 +4044,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
         \texttt{.} & \texttt{.} & \texttt{N} & \texttt{.} &
         \texttt{.} & \texttt{.} & \texttt{U} & \texttt{R} &
         \texttt{.} & \texttt{K} & \;\;Contradicts reciprocal
-        \texttt{X} and \texttt{A} \\
+        \texttt{X} and \texttt{C} \\
         \texttt{K} & \texttt{.} & \texttt{.} & \texttt{X} &
         \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
         \texttt{.} & \texttt{.} & \texttt{.} & \texttt{.} &
@@ -4218,9 +4222,9 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   picking up (7) is such that it outweighs the denial of (8) anyways.
   \\\\We now need to determine which of (a) or (d) is correct. To do
   this we can turn to our deciban sheets~\ref{fig:deciban_sheet}. For
-  example, we note that alphabet (a) is such that $\texttt{T} =
-  \texttt{H} + 2$ which is evidence $3$ hdB in favor of this
-  alphabet. Alexander's example found that after adding up all the
+  example, we note that alphabet (a) is such that $\sigma_3(\texttt{T}) =
+  \sigma_3(\texttt{H}) + 2$ which is evidence $3$ hdB in favor of this
+  alphabet. Alexander's example found, that after adding up all the
   offsets in alphabet (a) against deciban sheets, we find that the
   alphabet has a total score of $54$ hdB, almost certainly indicating
   that alphabet (a) is our correct choice for $\sigma_3$.
@@ -4247,7 +4251,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   indication that no turnover occurred during these repeat
   structures. Therefore we may assume that no turnover occurred
   between the encipherment of \texttt{C} and \texttt{L}, and no
-  turnover occurred between \texttt{N} and \texttt{K}. Thus we can
+  turnover occurred between \texttt{N} and \texttt{K}. Thus, we can
   assume no turnover occurred between \texttt{C} and \texttt{K}.
   Given that this is a stretch of $18$ letters, we can immediately
   eliminate the possibility that the rightmost rotor is a naval rotor
@@ -4262,11 +4266,11 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   Determining the middle rotor is much the same as the above
   procedure. Our goal is to get a likely alphabet for $\sigma_2$ and
   determine where turnover of the leftmost wheel occurred so as to
-  eliminate possible middle rotors. The only difference is that we
-  now strongly suspect that turnover of the rightmost rotor occurred
-  between \texttt{K} and \texttt{C}. Thus a hypothesis like (2) which
+  eliminate possible middle rotors. The only difference is that, based on our above analysis, we
+  now strongly suspect that turnover of the rightmost rotor occurrs
+  between \texttt{K} and \texttt{C}. Thus, a hypothesis like (2) which
   asserts that, in the middle wheel alphabet $\texttt{T} = \texttt{X}
-  + 2$, must be adjusted to state that $\texttt{T} = \texttt{X} + 3$
+  + 2$, must be adjusted to state that $\texttt{T} = \texttt{X} + 3$,
   since we know turnover of the rightmost rotor occurred in passing
   from \texttt{P} to \texttt{U}. Adjusting our offsets as necessary
   we can perform the exact same analysis as above to determine a
@@ -4275,19 +4279,19 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   of the naval Enigma to only a handful of possibilities, thus making
   searching for naval settings on the Bombe tractable. However, in
   order to actually make use of the Bombe we still need a crib to
-  determine invalid settings.
+  determine valid settings.
 
   \subsection{Running the Bombe}
   By this point we have determined a handful of possible rotor
   orderings, and we have, with luck, determine the entirety of
-  permutations $\sigma_2$ and $\sigma_3$. Note though, that the
+  permutations $\sigma_2$ and $\sigma_3$. Note though that the
   permutations $\sigma_2$ and $\sigma_3$ are themselves
   plaintext-ciphertext pairings! For example, if we determine
   $\sigma_2$ and $\sigma_3$ to be
   \begin{align*}
     & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
     \sigma_2\;\; & \texttt{KJNRPQUOLBAISCHEFDMYGZXWTV} \\
-    \sigma_3\;\; & \texttt{OVJWLSKMUCGEHTAXRQFNIBDPZY} \\
+    \sigma_3\;\; & \texttt{OVJWLSKMUCGEHTAXRQFNIBDPZY}. \\
   \end{align*}
   Then we get a series of $2$ letter plaintext-ciphertext pairings, such as
 
@@ -4385,7 +4389,7 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   positions of rotors necessary to produce our menu -- that is, the
   settings which convert pre-message keys into message keys.
   \subsubsection{The \texttt{EINS} Catalogue}
-  Recall from section~\ref{bombe_ring_setting} that the settings
+  Recall from Section~\ref{bombe_ring_setting}, that the settings
   given by a stop of the Bombe do not necessarily correspond to the
   true ring settings. In order to determine the true ring settings we
   would normally use our plaintext-ciphertext pairing to determine at
@@ -4394,19 +4398,19 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   plaintext-ciphertext pairings, after which the message is
   enciphered with the message key and is thus meaningless. Therefore
   we can no longer deduce at what point during our message turnover
-  occurs and thus can no longer use this method to determine the true
+  occurs, and thus can no longer use this method to determine the true
   ring setting.
   \\\\In analyzing naval Enigma traffic, cryptanalysts found that
   nearly all messages (around $90\%$) contained the word
   \texttt{EINS} (German for ``one'') at some point in the message.
-  This makes sense for a number of reasons
+  This makes sense for a number of reasons:
   \begin{enumerate}
-    \item Naval messages regularly dealt with numbers, all of which
+    \item[(1)] Naval messages regularly dealt with numbers, all of which
       needed to be typed out in full. This statistical observation is
       what made the use of the tetra catalogue so valuable.
-    \item An odd quirk known as {\bf{Benford's law}} tells us that
+    \item[(2)] An odd quirk known as {\bf{Benford's law}} tells us that
       $1$ appears more commonly than any other leading digit in numerical data.
-    \item \texttt{EINS} shows up naturally in many German words
+    \item[(3)] \texttt{EINS} shows up naturally in many German words
       either as a sub-component of a word or when spanning across two words.
       % https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html
       % %
@@ -4414,24 +4418,20 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
 
   % \end{enumerate}
   \noindent Given that we have a known rotor ordering, steckering,
-  and ring/window setting whose relative distance is correct but may
-  need to be adjusted to get the true ring setting, we can compiled a
+  and ring/window setting whose relative distance is correct, but may
+  need to be adjusted to get the true ring setting, we can compile a
   list of all $26^3$ encipherments of \texttt{EINS} which preserve
   the relative distance between our ring and window setting.
   Originally this process had to be done by hand with catalogues
   known as {\bf{corsets}} but a machine called the {\bf{test-plate}}
   or {\bf{baby}} was created which automatically enciphered
   \texttt{EINS} at all such positions into an {\bf{\texttt{EINS} catalogue}}.
-  \\\\The catalogue could be used to determine locations within our
+  \\\\The catalogue could then be used to determine locations within our
   message corpus, along with settings, that would produce
   \texttt{EINS}. If we then continue deciphering our message from the
-  start of the \texttt{EINS} location,using these settings, we either
-  find likely plaintext or gibberish. This gives a candidate for the
-  rightmost ring setting. Then as in section~\ref{bombe_ring_setting}
-  we continue attempting to decipher plaintext until we encounter
-  gibberish and adjust the middle and subsequently left ring setting
+  start of the \texttt{EINS} location, as in Section~\ref{bombe_ring_setting}, we can decipher plaintext until we encounter gibberish and adjust the middle, and subsequently left, ring setting
   until we have deduced the entire ring setting. With this final
-  component we are now able to completely decipher naval Enigma messages.
+  component, we are now able to completely decipher naval Enigma messages.
   \\\\It is clear from the amount of messages, sheets, and scores
   that need to be compared and tabulated that Banburismus was a great
   deal of work. Alexander estimates that an average day involved 400
@@ -4439,10 +4439,10 @@ specified by the key sheet and enciphered their second chosen trigram, \texttt{A
   6000 comparisons needed to be made all of which needed to be scored
   and counted. Particular credit should be given to whom Alexander
   noted was ``one of the best Banburists'', Joan Clarke. Not only was
-  she an exceptional banburist, she was one of only a handful of
+  she an exceptional Banburist, she was also one of only a handful of
   female cryptologists working at Bletchley Park.
   \\\\The work done by Banburists provided crucial information on
-  Naval operations including U-Boat attacks which were crippling
+  Naval operations, including U-Boat attacks which were crippling
   supply lines and starving Britain.
   % THE BABY THE RACK
   % http://www.ellsbury.com/profsbk/profsbk-140.htm%

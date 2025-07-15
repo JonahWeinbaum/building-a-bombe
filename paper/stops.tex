@@ -1,4 +1,4 @@
-\chapter{Stops}
+\chapter{Stops}\label{stops}
 The Turing-Welchman Bombe was remarkably adept at computing daily
 keys in a tractable manner. In optimal conditions,
 with a well-crafted and fortunate menu, the Bombe could run in as
@@ -1396,6 +1396,7 @@ estimates that we expect
 \]
 total normal stops over all steckering hypotheses when including the
 diagonal board.
+\\\\The H-M factor has been discussed in academic literature regarding the Bombe, with researchers like John Wright and Donald W. Davies attempting to improve the accuracy of the H-M factor through either recursive formulae or explicit enumeration, respectively. Much of this research stems from the fact that Turing provides no formal justification for his computation of the H-M factor, stating simply that, ``the method of constructing the [H-M factor] table is very tedious and uninteresting.'' This understatement sparked a number of attempts to recreate, or improve upon, this ``uninteresting'' computation.
 \\\\For the same reasons discussed in Section~\ref{justify_turing},
 this serves as a fair approximation of the actual number of stops
 since with more loops the proportion of stops with type $1^125^1$
@@ -1502,9 +1503,68 @@ procedure. Developing a means to compute this factor would allow us
 to model the effective number of stops with high accuracy across
 nearly all Bombe configurations — with or without the diagonal board.
 
-\section{Computational Methods}
-Many of the results in this thesis were obtained through simulations and computational analysis. To support reproducibility and encourage further exploration, this thesis is accompanied by a companion repository containing all relevant code. This repository is intended not only to allow readers to experiment with the methods described herein, but also to serve as a foundation for any future research building on this work. 
-\\\\In this section, we will outline some of the more relevant files and their roles in producing the results presented throughout the thesis.
+\subsection{Computational Methods}
+Many of the results in this thesis were obtained through simulations and computational analysis. To support reproducibility and encourage further exploration, this thesis is accompanied by a companion repository containing all relevant code. 
+This repository can be found at \url{https://https://github.com/JonahWeinbaum/building-a-bombe}. This repository includes the scripts used for: 
+\begin{itemize}
+    \item Simulating the Bombe
+    \item Simulating the Enigma
+    \item Creating and using Zygalski Sheets
+    \item Computing scoring, distance, dummyismus, and repeat sheets for Banburismus
+    \item Capturing cycle distributions in the Bombe
+    \item Computing probabilities $t_{\alpha,\beta}$
+    \item Computing the expected number of stops in the Bombe for various menu arrangements
+\end{itemize}
+This repository is intended not only to allow readers to experiment with the methods described herein, but also to serve as a foundation for any future research building on this work. 
+\\\\Ultimately, our work provides several promising directions for exploration—from improving the estimation of stops in the Bombe by computing a new H-M factor, to deeper investigations of transitivity in randomly composed permutations. In analyzing and extending Turing’s approach with modern tools, we not only gain greater insight into the Bombe itself, but also into the mathematical structures that underlie its success.
+% \section{Computational Methods}
+% Many of the results in this thesis were obtained through simulations and computational analysis. To support reproducibility and encourage further exploration, this thesis is accompanied by a companion repository containing all relevant code. This repository is intended not only to allow readers to experiment with the methods described herein, but also to serve as a foundation for any future research building on this work. 
+% \\\\In this section, we will outline some of the more relevant files and their roles in producing the results presented throughout the thesis.
+% \subsection{Repository Structure}
+
+% We begin by providing an outline of the key directories in the repository and their purpose:
+% \begin{itemize}
+%   \item \texttt{code/}
+%   \begin{itemize}
+%     \item \texttt{banburismus/} -- Code used for Section~\ref{banburismus}.
+%     \item \texttt{bombe\_sim/} -- A simulation of both the Bombe and the Enigma.
+%     \item \texttt{stop\_sim/} -- Code used for simulating the Bombe in Chapter~\ref{stops}.
+%     \item \texttt{zygalksi\_sim/} -- Code used for Section~\ref{zygalski}.
+%     \item \texttt{permutation\_sim/} -- A variety of simulations and computations used when researching methods to compute $t_{\alpha,\beta}$
+%     \item \texttt{permutation\_sim/transitive\_prob\_calc} -- The code used to compute $t_{\alpha,\beta}$ values. 
+%   \end{itemize}
+
+%   \item \texttt{paper/}
+%   \begin{itemize}
+%     \item Contains all LaTeX source files and assets required to compile this thesis. 
+%   \end{itemize}
+% \end{itemize}
+
+% \subsection{Banburismus}
+% In \texttt{code/banburismus/} we find the several files. 
+% \begin{itemize}
+%     \item \texttt{ban.py}
+% \end{itemize}
+% This was used to compute the scoring sheets for an accompanying loss value and produce the relevant LaTeX tables. 
+% \begin{itemize}
+%     \item \texttt{conversion.py}
+% \end{itemize}
+% This was used to compute the conversions from middle wheel comparisons to end wheel comparisons and produce the relevant LaTeX tables. 
+% \begin{itemize}
+%     \item \texttt{distance.py}
+% \end{itemize}
+% This was used to compute loss incurred from offset distance and produce the relevant LaTeX tables. 
+% \begin{itemize}
+%     \item \texttt{dummy.py}
+% \end{itemize}
+% This was used to compute loss incurred from the dummyismus protocol and produce the relevant LaTeX tables.
+% \begin{itemize}
+%     \item \texttt{repeats.py}
+% \end{itemize}
+% This was used to quickly determine repeat structures in two pieces of text. 
+% \subsection{Bombe and Enigma Simulation}
+% In \texttt{code/bombe\_sim/} we find code used to simulate both the Bombe and the Enigma machines. Running \texttt{make} produces a directory \texttt{out} containing two files \texttt{bombe} and \texttt{engima} which are executables corresponding to their relevant simulation. 
+% \\\\Here, the Bombe simulation is particularly useful for readers seeking to understand internals of the Bombe. The simulation produces a display of the scramblers, indicator drum, test register, and the state of all the wires in the diagonal board at each rotor position. 
 % \[
 % \mathcal{D}_{a,b, m} \coloneq \biggl(\sum_{\alpha,
 % \beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle

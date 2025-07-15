@@ -4,7 +4,13 @@
 %   The Enigma, though simple in principle and primitive in many ways,
 %   presented the cryptanalyst with a dazzling number of possibilities.
 % \end{chapquote}
-
+% IMAGES FROM :
+% - https://www.latimes.com/entertainment/arts/culture/la-et-cm-imitation-game-enigma-machine-david-bohnett-20150122-story.html
+% - https://en.m.wikipedia.org/wiki/File:Enigma-plugboard.jpg
+% - https://en.wikipedia.org/wiki/Enigma_rotor_details#/media/File:Enigma-rotor-pin-contacts.jpg
+% -https://en.wikipedia.org/wiki/Enigma_rotor_details#/media/File:Enigma-rotor-flat-contacts.jpg
+% -https://en.wikipedia.org/wiki/Enigma_machine#/media/File:Enigma_insides.agr.jpg
+% -https://en.wikipedia.org/wiki/File:Enigma_rotor_exploded_view.png
 The Enigma machine was used extensively by the Germans to encipher
 communications prior to and throughout World War II. German
 stratagems like the \emph{blitzkrieg} required quick radio
@@ -18,8 +24,14 @@ counter, defend, and retaliate appropriately.
 % participated in a war of arms and power, a select group of academics
 % at Bletchley Park engaged in a battle of minds to crack a puzzle
 % whose solution could save millions of lives.
-
+%https://www.cryptomuseum.com/crypto/enigma/i/index.htm
 \section{The Machine}
+\begin{figure}[H]
+  \begin{center}\includegraphics[scale=0.3]{paper/images/enigma.jpg}
+  \end{center}
+  \label{ref:enigma}
+  \caption{Enigma model \texttt{I}}
+\end{figure}
 Throughout this paper, the model \texttt{I} Enigma is chosen to
 represent our canonical machine as these were the most common version
 used during World War II with over 20000 being produced. Further, it
@@ -37,14 +49,13 @@ requires several mechanical components in a complex arrangement.
 
 \subsection{The Plugboard}
 
-% \begin{figure}[htbp]
-%   \begin{center}\includegraphics[scale=0.9]{images/plugboard.jpg}
-%   \end{center}
-%   \label{ref:plugboard}
-%   \caption{Enigma \texttt{I} Plugboard}
-% \end{figure}
-
-Upon a key press, the electrical current corresponding to this letter
+\begin{figure}[htbp]
+  \begin{center}\includegraphics[scale=1.2]{paper/images/plugboard.jpg}
+  \end{center}
+  \label{ref:plugboard}
+  \caption{Enigma plugboard}
+\end{figure}
+\noindent Upon a key press, the electrical current corresponding to this letter
 is sent to a mechanism known as the {\bf{plugboard}}. From an operator's
 perspective, the plugboard was a series of ports, one for each
 letter, along with 10 cables which could connect these ports. When
@@ -66,6 +77,26 @@ permutation could be
 In general, we will denote the permutation corresponding to a plugboard as $S$.
 
 \subsection{The Rotors}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{paper/images/disassembled.png}
+        \subcaption{Disassembled rotor}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{paper/images/entry.jpg}
+        \subcaption{Enigma rotor \texttt{V} entry side}
+        \vspace{4mm} % adjust spacing as needed
+        \includegraphics[width=0.8\linewidth]{paper/images/exit.jpg}
+        \subcaption{Enigma rotor \texttt{V} exit side}
+    \end{minipage}
+    \caption{Enigma rotor}
+    \label{fig:rotors}
+\end{figure}
 % \begin{figure}[htpb]
 %   \centering
 %   \begin{subfigure}{0.3\textwidth}
@@ -89,12 +120,12 @@ branch we examine. At a minimum, all three branches of the military
 had access to five rotors labeled by their roman numeral equivalents (i.e. $\texttt{I},\dots,\texttt{V}$).
 Each rotor encoded a unique permutation from 26 input contacts to 26
 output contacts by simply connecting between each input/output pair
-in the permutation with a wire. The contacts represent the letters
+in the permutation with a wire as in figure~\ref{fig:rotors} (a)-(4,5,6). The contacts represent the letters
 in alphabetical order moving in a clockwise manner relative to the
 entry side of the rotor. The input contacts of the rotor were often marked
 with a white dot indicating which contact corresponded to \texttt{A},
 but in general is found by looking at the contact immediately above
-the numeral indicator.
+the numeral indicator as in figure~\ref{fig:rotors} (b).
 \\\\On their own, these rotors would prove to be very poor
 cryptographic devices, as they are just substitution ciphers, which are
 vulnerable to frequency analysis and, if found by the enemy, would
@@ -118,12 +149,12 @@ be the same. For example, contact \texttt{A} can be in position
 it is one pin away from being at the top of the rotor.
 
 \subsubsection{Turnover}
-Each rotor had on its entry-side a notch next to each contact. A pawl
+Each rotor had on its entry-side a notch next to each contact as in figure~\ref{fig:rotors} (b). A pawl
 attempted to engage
 the notch and move the rotor forward by one contact each key press.
 On the exit-side, each
 rotor was equipped with a smooth ring with only a single notch
-breaking it. This is known as the {\bf{turnover notch}}. Assuming the
+breaking it as in figure~\ref{fig:rotors} (c). This is known as the {\bf{turnover notch}}. Assuming the
 rotor functions in isolation the pawl will engage the entry notches
 during each key press thus moving the rotor forward by one until,
 after 26 presses, the rotor returns to its original position.
@@ -252,7 +283,7 @@ letter back by 1 (mod 26).
     \right).
   \]
 \end{definition}
-If we denote the permutation corresponding to rotor \texttt{V} in
+\noindent If we denote the permutation corresponding to rotor \texttt{V} in
 default position as $\eta$. Then after $r$ rotations, to get
 our new permutation we must first shift each input letter forward by
 $r$ and each output letter backwards by $r$. This can be encoded via
@@ -269,8 +300,8 @@ send current through the rotors with the window indication
 
 The rotors were additionally equipped with an outer ring with
 letters \texttt{A} to \texttt{Z} moving clockwise relative to the
-entry-side of the rotor. Alternately some rings had numerical values
-ranging from \texttt{01} to \texttt{26}. The outer ring was not fixed to the underlying rotor and could be moved. Most importantly, this outer ring is what contained the turnover notch. Thus by moving the outer ring we change where turnover occurs relative to the internal wiring of the rotor.
+entry-side of the rotor as in figure~\ref{fig:rotors} (a)-(3). Alternately some rings had numerical values
+ranging from \texttt{01} to \texttt{26}. The outer ring was not fixed to the underlying rotor and could be moved. Most importantly, this outer ring is what contained the turnover notch -- that is figure~\ref{fig:rotors} (a)-(3) was connected to (a)-(1). Thus, by moving the outer ring, we change where turnover occurs relative to the internal wiring of the rotor.
 \\\\To consider the effect of this ring,
 consider if an operator were instructed to place the ring such that
 the outer ring's \texttt{02} label was placed over contact \texttt{A}. Once
@@ -341,7 +372,13 @@ window setting.
 % \end{itemize}
 
 \subsection{The Reflector}
-After the current travels through all three rotors, it ends up at the
+\begin{figure}[H]
+  \begin{center}\includegraphics[scale=0.3]{paper/images/internals.jpg}
+  \end{center}
+  \label{ref:internals}
+  \caption{Enigma internals illustrating reflector placement}
+\end{figure}
+\noindent After the current travels through all three rotors, it ends up at the
 reflector which we will denote $R$. The reflector is specially
 designed so that its permutation consists only of disjoint
 transpositions, that is it has a $2^{13}$ cycle type. This means that
@@ -478,7 +515,7 @@ A key sheet at this time may have looked along these lines.
         \hline
     \end{tabular}}
   \end{center}
-  \caption{Mock Enigma Key Sheet pre-1938}
+  \caption{Mock Enigma key sheet pre-1938}
   \label{fig:keysheet_early}
 \end{figure}
 

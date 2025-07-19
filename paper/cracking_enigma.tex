@@ -185,7 +185,7 @@ College}{Hanover, New Hampshire}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
-This thesis presents a comprehensive and chronological overview of cryptographic techniques designed to break Engima, beginning in $1932$ and culminating in the creation of the Turing-Welchman Bombe. We discuss the mathematical theory and electromechanical implements used to decode one of history's greatest ciphers. 
+This thesis presents a comprehensive and chronological overview of cryptographic techniques designed to break Enigma, beginning in $1932$ and culminating in the creation of the Turing-Welchman Bombe. We discuss the mathematical theory and electromechanical implements used to decode one of history's greatest ciphers. 
 \\\\Reexamining the Bombe through the lens of modern group theory, we critique Alan Turing's estimation of the number of ``stops'' that the Bombe produces for various plaintext-ciphertext pairing structures. To address its limitations, we introduce a new framework for estimating the number of stops by extending John Dixon's theorem concerning the probability that uniformly distributed elements of $S_n$ generate a transitive subgroup. Our formulation generalizes this result to compute the probability of transitivity when permutations are sampled from arbitrary distributions over conjugacy classes.
 \\\\All results are supported by extensive simulation, and a full suite of implementations of various cryptographic techniques are made available via an open source repository to provide researchers with new tools to study the methods discussed herein. 
 
@@ -193,10 +193,8 @@ This thesis presents a comprehensive and chronological overview of cryptographic
 \addcontentsline{toc}{section}{Aims of Thesis}
 It should be made clear that I am not a historian. As such, this
 thesis does not aim to be a perfect retelling of historical
-narrative; Rather, this thesis aims to convey a chronological
-progression of cryptographic attacks on Enigma, culminating in the
-creation of the Turing-Welchman Bombe, which is the central focus of
-this paper. The paper is structured to gradually build the reader's
+narrative; Rather, this thesis aims to convey a
+progression of cryptographic attacks on Enigma. The paper is structured to gradually build the reader's
 understanding of the various flaws in the Enigma machine,
 illustrating how and why the Bombe came to take the form that it did.
 Historical details are included to advance the mathematical narrative
@@ -217,12 +215,12 @@ mechanical means by which the Enigma encryption scheme was broken over time.
 to have an introductory knowledge of abstract algebra, in particular
 a solid grasp of permutation theory. Further, many topics will delve
 into probabilistic and combinatoric analysis of language frequency,
-keyspaces, and the effectiveness of various methods. For this reason
+key spaces, and the effectiveness of various methods. For this reason
 the reader is expected to have a comfortable understanding of
 introductory combinatorics and Bayesian statistics.
-\\\\With respect to mechanical background, the reader requires very
+\\\\With respect to mechanical background, the reader requires
 limited knowledge of components such as transistors and relays.
-Circuit diagrams will be used sparingly or will be abstracted such as
+Circuit diagrams will be used sparingly, or will be abstracted, so as
 to reduce the need of an electrical engineering background.
 
 \chapter*{Introduction}
@@ -246,7 +244,7 @@ this math problem for what it was: the key to saving millions of
 lives. Understanding the project's urgency, he issued a memo
 demanding that the utmost attention and resources be given to the
 Bletchley team. Churchill tagged this memo with a red stamp reserved
-for matters of the highest priority. It read:
+for matters of the highest priority~\cite{action_this_day}. It read:
 \begin{center}
   \textbf{Action This Day}
 \end{center}
@@ -262,15 +260,15 @@ for matters of the highest priority. It read:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Backend of thesis (references and the like)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \backmatter
+\backmatter
 
 %Add your bibliography filename and uncomment these lines
-% \bibliographystyle{amsplain}
-% \addcontentsline{toc}{chapter}{References}
-% \bibliography{citations}
-% \markboth{{\sffamily\sc Bibliography}}{}
+\bibliographystyle{amsplain}
+\addcontentsline{toc}{chapter}{References}
+\bibliography{citations}
+\markboth{{\sffamily\sc Bibliography}}{}
 
 %Uncomment if you want an index
-%\printindex
+% \printindex
 
 \end{document}

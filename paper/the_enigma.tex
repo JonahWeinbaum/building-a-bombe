@@ -15,9 +15,9 @@ The Enigma machine was used extensively by the Germans to encipher
 communications prior to and throughout World War II. German
 stratagems like the \emph{blitzkrieg} required quick radio
 %% See the Code Book Singh page 196 %%
-communication, so to ensure that the allied powers did not intercept
-signals, they encoded all radio signals using the Enigma machine.
-Breaking the Enigma would allow the allied powers to freely intercept
+communication, so to ensure that the allied powers were not able to read
+messages, they encoded all radio signals using the Enigma machine.
+Breaking the Enigma would allow the allied powers to freely intercept and decrypt
 all naval, air force, and military command -- offering them time to
 counter, defend, and retaliate appropriately. 
 % Thus, while millions
@@ -30,14 +30,14 @@ counter, defend, and retaliate appropriately.
   \begin{center}\includegraphics[scale=0.3]{paper/images/enigma.jpg}
   \end{center}
   \label{ref:enigma}
-  \caption{Enigma model \texttt{I}}
+  \caption{Enigma model \texttt{I}~\cite{img_enigma}}
 \end{figure}
 Throughout this paper, the model \texttt{I} Enigma is chosen to
 represent our canonical machine as these were the most common version
 used during World War II with over 20000 being produced. Further, it
 was used by both the \emph{Heer} (Army), \emph{Luftwaffe} (Air
 Force), and the \emph{Kriegsmarine} (Navy), making this a prime target
-for attack by cryptanalysts. Many models existed, each with varying
+for attack by cryptanalysts~\cite{enigma_I}. Many models existed, each with varying
 layouts, key spaces, and use-cases; however, the central ideas that
 are discussed in this paper can generally be adapted to work on other models.
 \\\\At its most basic function, the Enigma (once set up) is a
@@ -53,7 +53,7 @@ requires several mechanical components in a complex arrangement.
   \begin{center}\includegraphics[scale=1.2]{paper/images/plugboard.jpg}
   \end{center}
   \label{ref:plugboard}
-  \caption{Enigma plugboard}
+  \caption{Enigma plugboard~\cite(img_enigma_plugboard)}
 \end{figure}
 \noindent Upon a key press, the electrical current corresponding to this letter
 is sent to a mechanism known as the {\bf{plugboard}}. From an operator's
@@ -116,7 +116,7 @@ In general, we will denote the permutation corresponding to a plugboard as $S$.
 
 The Enigma model \texttt{I} used three rotors, selected from a larger
 set of rotors, the number of which changed depending on the military
-branch we examine. At a minimum, all three branches of the military
+branch we examine. At a minimum, all three branches of the military eventually
 had access to five rotors labeled by their roman numeral equivalents (i.e. $\texttt{I},\dots,\texttt{V}$).
 Each rotor encoded a unique permutation from 26 input contacts to 26
 output contacts by simply connecting between each input/output pair
@@ -149,7 +149,7 @@ be the same. For example, contact \texttt{A} can be in position
 it is one pin away from being at the top of the rotor.
 
 \subsubsection{Turnover}
-Each rotor had on its entry-side a notch next to each contact as in figure~\ref{fig:rotors} (b). A pawl
+Each rotor had on its entry-side, a notch next to each contact as in figure~\ref{fig:rotors} (b). A pawl
 attempted to engage
 the notch and move the rotor forward by one contact each key press.
 On the exit-side, each
@@ -301,7 +301,7 @@ send current through the rotors with the window indication
 The rotors were additionally equipped with an outer ring with
 letters \texttt{A} to \texttt{Z} moving clockwise relative to the
 entry-side of the rotor as in figure~\ref{fig:rotors} (a)-(3). Alternately some rings had numerical values
-ranging from \texttt{01} to \texttt{26}. The outer ring was not fixed to the underlying rotor and could be moved. Most importantly, this outer ring is what contained the turnover notch -- that is figure~\ref{fig:rotors} (a)-(3) was connected to (a)-(1). Thus, by moving the outer ring, we change where turnover occurs relative to the internal wiring of the rotor.
+ranging from \texttt{01} to \texttt{26}. The outer ring was not fixed to the underlying rotor and could be moved. Most importantly, this outer ring is what contained the turnover notch -- that is, the component in figure~\ref{fig:rotors} (a)-(3) was connected to the component (a)-(1). Thus, by moving the outer ring, we change where turnover occurs relative to the internal wiring of the rotor.
 \\\\To consider the effect of this ring,
 consider if an operator were instructed to place the ring such that
 the outer ring's \texttt{02} label was placed over contact \texttt{A}. Once

@@ -1,4 +1,6 @@
 \documentclass[hyphens,aspectratio=169]{beamer}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -31,6 +33,65 @@ July 28, 2025
 \section{Action This Day}
 
 \begin{frame}[fragile]{D-Day}
+\begin{center}
+    \begin{figure}
+        \includegraphics[scale=0.11]{paper/images/dday.jpg}
+    \end{figure}
+    \small
+    \caption{\emph{Into the Jaws of Death} -- Robert F. Sargent -- June 6, 1944 (D-Day)}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{D-Day}
+\begin{center}
+    \begin{figure}
+        \includegraphics[scale=0.3]{paper/images/dummy_tank.jpg}
+    \end{figure}
+    \small
+    \caption{Inflatable M4 Sherman Tank -- Operation Bodyguard}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{D-Day}
+Allied forces needed to time the invasion around 
+\begin{itemize}
+    \item Time of day
+    \pause
+    \item Weather
+    \pause
+    \item Tides
+    \pause
+    \item Phase of the moon
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{D-Day}
+The invasion was scheduled for June 5th, 
+\pause
+then postponed to June 6th
+\pause 
+\\\\Further postponement would move the plan a month.
+\end{frame}
+
+\begin{frame}[fragile]{D-Day}
+\begin{center}
+    \begin{figure}
+        \includegraphics[scale=0.21]{paper/images/general_eisenhower.jpg}
+    \end{figure}
+    \small
+    \caption{General Eisenhower's advance command post near Southwick House}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{D-Day}
+\begin{center}
+    \begin{figure}
+        \includegraphics[scale=0.105]{paper/images/bletchley_decrypt.jpg}
+    \end{figure}
+    \small
+    \caption{Example Bletchley Park decrypt}
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Letter to Winston Churchill}
@@ -46,7 +107,263 @@ July 28, 2025
 
 \section{The Enigma}
 
-\begin{frame}[fragile]{Slide}
+\begin{frame}[fragile]{Overview}
+  \begin{center}
+    \scalebox{1}{
+      \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+        \draw[fill=lightgray] (0+5-14, 0+2+5) rectangle (2+5-14,4+2+5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5+5) {\texttt{Keyboard}};
+
+        \draw[fill=lightgray] (0+5-14, 0+2-5) rectangle (2+5-14,4+2-5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
+
+        \draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
+        \node at (0+5+1-8, 0+2-0.5) {$S$};
+
+        \draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
+        \node at (0+5+1, 0+2-0.5) {$M$};
+
+        \draw[fill=lightgray] (0+5+4, 0+2) rectangle (2+5+4,4+2) node[midway] {};
+        \node at (0+5+1+4, 0+2-0.5) {$L$};
+
+        \draw[fill=lightgray] (0+5+8, 0+2) rectangle (2+5+8,4+2) node[midway] {};
+        \node at (0+5+1+8, 0+2-0.5) {$R$};
+
+        \draw[fill=lightgray] (0+5-4, 0+2) rectangle (2+5-4,4+2) node[midway] {};
+        \node at (0+5+1-4, 0+2-0.5) {$N$};
+
+        \draw[->,dotted] (0+5-14+2, 0+2+5+2) -- (0+5-10, 0+2+5+2) 
+        -- (0+5-10, 0+2+5-2) -- (0+5-8, 0+2+5-2);
+
+        \draw[->,dotted] (0+5-6, 0+2+5-2) -- (0+5-4, 0+2+5-2);
+        \draw[->,dotted] (0+5-2, 0+2+5-2) -- (0+5, 0+2+5-2);
+        \draw[->,dotted] (0+5+2, 0+2+5-2) -- (0+5+4, 0+2+5-2);
+        \draw[->,dotted] (0+5+6, 0+2+5-2) -- (0+5+8, 0+2+5-2);
+
+        \draw[->,dotted] (0+5+8, 0+2+5-4) -- (0+5+6, 0+2+5-4);
+        \draw[->,dotted] (0+5+4, 0+2+5-4) -- (0+5+2, 0+2+5-4);
+        \draw[->,dotted] (0+5, 0+2+5-4) -- (0+5-2, 0+2+5-4);
+        \draw[->,dotted] (0+5-4, 0+2+5-4) -- (0+5-6, 0+2+5-4);
+
+        \draw[->,dotted]  (0+5-8, 0+2+5-4) -- (0+5-10, 0+2+5-4)
+        -- (0+5-10, 0+2+5-8) -- (0+5-14+2, 0+2+5-8) ;
+
+
+      \end{tikzpicture}
+    }
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Overview}
+  \begin{center}
+    \scalebox{1}{
+      \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+        \draw[fill=lightgray] (0+5-14, 0+2+5) rectangle (2+5-14,4+2+5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5+5) {\texttt{Keyboard}};
+
+        \draw[fill=lightgray] (0+5-14, 0+2-5) rectangle (2+5-14,4+2-5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
+
+        \draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
+        \node at (0+5+1-8, 0+2-0.5) {$S$};
+
+        \draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
+        \node at (0+5+1, 0+2-0.5) {$M$};
+
+        \draw[fill=lightgray] (0+5+4, 0+2) rectangle (2+5+4,4+2) node[midway] {};
+        \node at (0+5+1+4, 0+2-0.5) {$L$};
+
+        \draw[fill=lightgray] (0+5+8, 0+2) rectangle (2+5+8,4+2) node[midway] {};
+        \node at (0+5+1+8, 0+2-0.5) {$R$};
+
+        \draw[fill=lightgray] (0+5-4, 0+2) rectangle (2+5-4,4+2) node[midway] {};
+        \node at (0+5+1-4, 0+2-0.5) {$N$};
+
+        \draw[->, red ,dotted] (0+5-14+2, 0+2+5+2) -- (0+5-10, 0+2+5+2) 
+        -- (0+5-10, 0+2+5-2) -- (0+5-8, 0+2+5-2);
+
+        \draw[->,dotted] (0+5-6, 0+2+5-2) -- (0+5-4, 0+2+5-2);
+        \draw[->,dotted] (0+5-2, 0+2+5-2) -- (0+5, 0+2+5-2);
+        \draw[->,dotted] (0+5+2, 0+2+5-2) -- (0+5+4, 0+2+5-2);
+        \draw[->,dotted] (0+5+6, 0+2+5-2) -- (0+5+8, 0+2+5-2);
+
+        \draw[->,dotted] (0+5+8, 0+2+5-4) -- (0+5+6, 0+2+5-4);
+        \draw[->,dotted] (0+5+4, 0+2+5-4) -- (0+5+2, 0+2+5-4);
+        \draw[->,dotted] (0+5, 0+2+5-4) -- (0+5-2, 0+2+5-4);
+        \draw[->,dotted] (0+5-4, 0+2+5-4) -- (0+5-6, 0+2+5-4);
+
+        \draw[->,dotted]  (0+5-8, 0+2+5-4) -- (0+5-10, 0+2+5-4)
+        -- (0+5-10, 0+2+5-8) -- (0+5-14+2, 0+2+5-8) ;
+
+
+      \end{tikzpicture}
+    }
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{The Plugboard}
+\begin{center}
+    \includegraphics[]{paper/images/plugboard.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Overview}
+  \begin{center}
+    \scalebox{1}{
+      \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+        \draw[fill=lightgray] (0+5-14, 0+2+5) rectangle (2+5-14,4+2+5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5+5) {\texttt{Keyboard}};
+
+        \draw[fill=lightgray] (0+5-14, 0+2-5) rectangle (2+5-14,4+2-5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
+
+        \draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
+        \node at (0+5+1-8, 0+2-0.5) {$S$};
+
+        \draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
+        \node at (0+5+1, 0+2-0.5) {$M$};
+
+        \draw[fill=lightgray] (0+5+4, 0+2) rectangle (2+5+4,4+2) node[midway] {};
+        \node at (0+5+1+4, 0+2-0.5) {$L$};
+
+        \draw[fill=lightgray] (0+5+8, 0+2) rectangle (2+5+8,4+2) node[midway] {};
+        \node at (0+5+1+8, 0+2-0.5) {$R$};
+
+        \draw[fill=lightgray] (0+5-4, 0+2) rectangle (2+5-4,4+2) node[midway] {};
+        \node at (0+5+1-4, 0+2-0.5) {$N$};
+
+        \draw[->, red,dotted] (0+5-14+2, 0+2+5+2) -- (0+5-10, 0+2+5+2) 
+        -- (0+5-10, 0+2+5-2) -- (0+5-8, 0+2+5-2);
+
+        \draw[->, red,dotted] (0+5-6, 0+2+5-2) -- (0+5-4, 0+2+5-2);
+        \draw[->,dotted] (0+5-2, 0+2+5-2) -- (0+5, 0+2+5-2);
+        \draw[->,dotted] (0+5+2, 0+2+5-2) -- (0+5+4, 0+2+5-2);
+        \draw[->,dotted] (0+5+6, 0+2+5-2) -- (0+5+8, 0+2+5-2);
+
+        \draw[->,dotted] (0+5+8, 0+2+5-4) -- (0+5+6, 0+2+5-4);
+        \draw[->,dotted] (0+5+4, 0+2+5-4) -- (0+5+2, 0+2+5-4);
+        \draw[->,dotted] (0+5, 0+2+5-4) -- (0+5-2, 0+2+5-4);
+        \draw[->,dotted] (0+5-4, 0+2+5-4) -- (0+5-6, 0+2+5-4);
+
+        \draw[->,dotted]  (0+5-8, 0+2+5-4) -- (0+5-10, 0+2+5-4)
+        -- (0+5-10, 0+2+5-8) -- (0+5-14+2, 0+2+5-8) ;
+
+
+      \end{tikzpicture}
+    }
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{The Rotors}
+\begin{center}
+\scalebox{0.58}{
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{paper/images/disassembled.png}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{paper/images/entry.jpg}
+        \vspace{4mm} % adjust spacing as needed
+        \includegraphics[width=0.8\linewidth]{paper/images/exit.jpg}
+    \end{minipage}
+    }
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Overview}
+  \begin{center}
+    \scalebox{1}{
+      \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+        \draw[fill=lightgray] (0+5-14, 0+2+5) rectangle (2+5-14,4+2+5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5+5) {\texttt{Keyboard}};
+
+        \draw[fill=lightgray] (0+5-14, 0+2-5) rectangle (2+5-14,4+2-5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
+
+        \draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
+        \node at (0+5+1-8, 0+2-0.5) {$S$};
+
+        \draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
+        \node at (0+5+1, 0+2-0.5) {$M$};
+
+        \draw[fill=lightgray] (0+5+4, 0+2) rectangle (2+5+4,4+2) node[midway] {};
+        \node at (0+5+1+4, 0+2-0.5) {$L$};
+
+        \draw[fill=lightgray] (0+5+8, 0+2) rectangle (2+5+8,4+2) node[midway] {};
+        \node at (0+5+1+8, 0+2-0.5) {$R$};
+
+        \draw[fill=lightgray] (0+5-4, 0+2) rectangle (2+5-4,4+2) node[midway] {};
+        \node at (0+5+1-4, 0+2-0.5) {$N$};
+
+        \draw[->, red,dotted] (0+5-14+2, 0+2+5+2) -- (0+5-10, 0+2+5+2) 
+        -- (0+5-10, 0+2+5-2) -- (0+5-8, 0+2+5-2);
+
+        \draw[->, red,dotted] (0+5-6, 0+2+5-2) -- (0+5-4, 0+2+5-2);
+        \draw[->, red,dotted] (0+5-2, 0+2+5-2) -- (0+5, 0+2+5-2);
+        \draw[->, red,dotted] (0+5+2, 0+2+5-2) -- (0+5+4, 0+2+5-2);
+        \draw[->, red,dotted] (0+5+6, 0+2+5-2) -- (0+5+8, 0+2+5-2);
+
+        \draw[->,dotted] (0+5+8, 0+2+5-4) -- (0+5+6, 0+2+5-4);
+        \draw[->,dotted] (0+5+4, 0+2+5-4) -- (0+5+2, 0+2+5-4);
+        \draw[->,dotted] (0+5, 0+2+5-4) -- (0+5-2, 0+2+5-4);
+        \draw[->,dotted] (0+5-4, 0+2+5-4) -- (0+5-6, 0+2+5-4);
+
+        \draw[->,dotted]  (0+5-8, 0+2+5-4) -- (0+5-10, 0+2+5-4)
+        -- (0+5-10, 0+2+5-8) -- (0+5-14+2, 0+2+5-8) ;
+
+
+      \end{tikzpicture}
+    }
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Overview}
+  \begin{center}
+    \scalebox{1}{
+      \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+        \draw[fill=lightgray] (0+5-14, 0+2+5) rectangle (2+5-14,4+2+5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5+5) {\texttt{Keyboard}};
+
+        \draw[fill=lightgray] (0+5-14, 0+2-5) rectangle (2+5-14,4+2-5) node[midway] {};
+        \node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
+
+        \draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
+        \node at (0+5+1-8, 0+2-0.5) {$S$};
+
+        \draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
+        \node at (0+5+1, 0+2-0.5) {$M$};
+
+        \draw[fill=lightgray] (0+5+4, 0+2) rectangle (2+5+4,4+2) node[midway] {};
+        \node at (0+5+1+4, 0+2-0.5) {$L$};
+
+        \draw[fill=lightgray] (0+5+8, 0+2) rectangle (2+5+8,4+2) node[midway] {};
+        \node at (0+5+1+8, 0+2-0.5) {$R$};
+
+        \draw[fill=lightgray] (0+5-4, 0+2) rectangle (2+5-4,4+2) node[midway] {};
+        \node at (0+5+1-4, 0+2-0.5) {$N$};
+
+        \draw[->, red,dotted] (0+5-14+2, 0+2+5+2) -- (0+5-10, 0+2+5+2) 
+        -- (0+5-10, 0+2+5-2) -- (0+5-8, 0+2+5-2);
+
+        \draw[->, red,dotted] (0+5-6, 0+2+5-2) -- (0+5-4, 0+2+5-2);
+        \draw[->, red,dotted] (0+5-2, 0+2+5-2) -- (0+5, 0+2+5-2);
+        \draw[->, red,dotted] (0+5+2, 0+2+5-2) -- (0+5+4, 0+2+5-2);
+        \draw[->, red,dotted] (0+5+6, 0+2+5-2) -- (0+5+8, 0+2+5-2);
+
+        \draw[->, red,dotted] (0+5+8, 0+2+5-4) -- (0+5+6, 0+2+5-4);
+        \draw[->, red,dotted] (0+5+4, 0+2+5-4) -- (0+5+2, 0+2+5-4);
+        \draw[->, red,dotted] (0+5, 0+2+5-4) -- (0+5-2, 0+2+5-4);
+        \draw[->, red,dotted] (0+5-4, 0+2+5-4) -- (0+5-6, 0+2+5-4);
+
+        \draw[->, red,dotted]  (0+5-8, 0+2+5-4) -- (0+5-10, 0+2+5-4)
+        -- (0+5-10, 0+2+5-8) -- (0+5-14+2, 0+2+5-8) ;
+
+
+      \end{tikzpicture}
+    }
+  \end{center}
 \end{frame}
 
 \subsection{Key Space}

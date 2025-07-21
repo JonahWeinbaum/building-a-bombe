@@ -613,8 +613,7 @@ Suppose we had the plaintext-ciphertext pairing,
   \end{tikzpicture}.
 \end{center}
 We can then think of this loop as a series of three Enigma
-permutations. We can connect these Enigma
-machines as follows
+permutations. At each step of enciphering the message, we have a new arrangement of the Enigma machine represented by the permutation $\pi_i$. Without the plugboard's involvement, these are denoted $\overline{\pi_i}$. For our plaintext-ciphertext pairing, we can imagine that the $\overline{\pi_i}$s for our loop of three Enigma machines may look as follows,
 \begin{center}
   \begin{tikzpicture}[thick, scale=0.6, every node/.style={scale=0.7}]
     % Draw the box
@@ -703,9 +702,9 @@ As before, let us make a hypothesis regarding steckering. Suppose
 $S(\texttt{A}) = \texttt{D}$. We know that $\texttt{A}$ must map to
 $\texttt{A}$ via
 $S^{-1}\overline\pi_3\overline\pi_2\overline\pi_1 S$. In our
-diagram, however, we do not see a plugboard so how can we represent
+diagram, however, we have not accounted for the plugboard, so how can we represent
 the plugboard's involvement? In order
-to achieve this \emph{we} will function as the plugboard by applying
+to achieve this, \emph{we} will function as the plugboard by applying
 voltage to the $\texttt{d}$ line on the $\texttt{A}$ cable, thus
 implicitly performing the
 plugboard mapping in which $S(\texttt{A}) = \texttt{D}$.
@@ -2292,7 +2291,7 @@ board}}. In our diagram this can be viewed as follows
 \end{figure}
 \noindent This significantly increases the number of connections,
 adding $\frac{k(k-1)}{2}$ new wires where $k$ is the number of
-scramblers in the loop. Adding more connections increases electrical
+distinct letters in the menu. Adding more connections increases electrical
 connectivity thus reducing the number of stops. In fact, prior to the
 use of the diagonal board, often $3$ loops needed to be present in
 the crib to have a tractable number of stops. With the addition of

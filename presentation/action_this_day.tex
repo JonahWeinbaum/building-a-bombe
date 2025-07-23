@@ -12,6 +12,8 @@
 \usepackage{framed}
 \usepackage{minted}
 \usepackage{relsize}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \graphicspath{{../}}
 \usetheme{Berlin}
 \usecolortheme[RGB={0,95,47}]{structure}
@@ -2038,7 +2040,81 @@ July 28, 2025
 		\emph{What is the probability that two permutations $\sigma$ and $\tau$, each pulled uniformly from a fixed conjugacy class, generate a transitive subgroup of $S_n$?}
 	\end{center}
 \end{frame}
+\begin{frame}[fragile]{Extended Dixon's Theorem}
+	\scalebox{0.9}{
+		\begin{minipage}{\linewidth}
+			\scriptsize
+			\setlength{\baselineskip}{0.9\baselineskip}
+			\begin{algorithmic}[1]
+				\Function{ExtendedDixons}{$p_1$, $p_2$, $n$}
+				\Comment{$p_1$ and $p_2$: partition of $n$, representing permutation cycle types}
 
+
+				\Comment{$n$: size of the symmetric group}
+				\If{$|p_1| = 1$ \textbf{or} $|p_2| = 1$}
+				\State \Return $1.0$
+				\EndIf
+				\State $S \gets$ (number of permutation pairs with cycle types $p_1$ and $p_2$)
+				\State $R \gets S$
+				\For{integer partition $\nu = (\nu_1, \nu_2, \dots, \nu_k)$ of $n$}
+				\If{$|\nu| = 1$} \State \textbf{continue} \EndIf
+				\State $C_1, C_2 \gets$ (partitions of $p_1$, $p_2$ whose sums are $\nu_i$s)
+				\State $T \gets 0$
+				\For{$(c_1, c_2)$ in $C_1 \times C_2$}
+				\State $P \gets 1$
+				\For{$i = 1$ to $|\nu|$}
+				\State $P \gets P \times$ (number of permutation pairs with cycle types $c_1[i]$ and $c_2[i]$)
+				\State $P \gets P \times$ \Call{ExtendedDixons}{$c_1[i]$, $c_2[i]$, $\nu_i$}
+				\EndFor
+				\State $T \gets T + P$
+				\EndFor
+				\State $R \gets R - T \times$ (number of set partitions of $\mathbb{N}_n$ of type $\nu$)
+				\EndFor
+				\State \Return $R / S$
+				\EndFunction
+			\end{algorithmic}
+		\end{minipage}}
+\end{frame}
+% \begin{frame}[fragile]{Algo}
+% 	\begin{minipage}{\linewidth}
+% 		\scriptsize
+% 		\setlength{\baselineskip}{0.9\baselineskip}
+% 		\begin{algorithmic}[1]
+% 			\Function{TransitiveProbability}{$p_1$, $p_2$, $n$}
+% 			\State \Comment{$p_1, p_2$ are integer partitions of $n$, represented as tuples of integers}
+% 			\State \Comment{$n$ is a positive integer}
+% 			\If{$|p_1| = 1$ \textbf{or} $|p_2| = 1$}
+% 			\State \Return $1.0$
+% 			\EndIf
+% 			\State Compute $S \gets$ product of cycle type counts for $p_1$ and $p_2$ given $n$
+% 			\State Initialize $R \gets S$
+% 			\For{each partition $\pi$ of $n$}
+% 			\If{$|\pi| = 1$}
+% 			\State \textbf{continue}
+% 			\EndIf
+% 			\State Compute $C_1 \gets$ set of ways to partition $p_1$ into sub-partitions matching $\pi$
+% 			\State Compute $C_2 \gets$ set of ways to partition $p_2$ into sub-partitions matching $\pi$
+% 			\If{$|C_1| = 0$ \textbf{or} $|C_2| = 0$}
+% 			\State \textbf{continue}
+% 			\EndIf
+% 			\State Initialize $T \gets 0$
+% 			\For{each pair $(c_1, c_2)$ in $C_1 \times C_2$}
+% 			\State Initialize $P \gets 1$
+% 			\For{each $i$ from 1 to $|\pi|$}
+% 			\State Let $s_1 \gets$ $i$-th sub-partition in $c_1$
+% 			\State Let $s_2 \gets$ $i$-th sub-partition in $c_2$
+% 			\State Let $v \gets$ $\pi[i]$
+% 			\State $P \gets P \times$ (product of cycle type counts for $s_1$ and $s_2$ given $v$) $\times$ transitive probability of $s_1$, $s_2$, $v$
+% 			\EndFor
+% 			\State $T \gets T + P$
+% 			\EndFor
+% 			\State $R \gets R - T \times$ number of permutations of $n$ with partition $\pi$
+% 			\EndFor
+% 			\State \Return $R / S$
+% 			\EndFunction
+% 		\end{algorithmic}
+% 	\end{minipage}
+% \end{frame}
 
 \begin{frame}[fragile]{Two Loops}
 	\renewcommand{\arraystretch}{1.5}

@@ -103,10 +103,10 @@ int main() {
         usleep(10000);
         row_advance(&row, 1);
 
-        char ch;
-        do {
-            ch = getchar();
-        } while (ch != 'n'); 
+        /* char ch; */
+        /* do { */
+        /*     ch = getchar(); */
+        /* } while (ch != 'n');  */
 
         bool cs[26];
         cable_state(plug_matrix, cs, 'G');

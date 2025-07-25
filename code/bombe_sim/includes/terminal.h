@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+#define CLEAR_SCREEN  "\x1b[H" 
 #define COLOR_RESET   "\x1b[0m"
 #define COLOR_RED     "\x1b[31m"
 #define COLOR_GREEN   "\x1b[32m"
@@ -60,7 +61,7 @@ int kbhit() {
 
 void clearScreen()
 { 
-    system("clear");
+  printf("%s", CLEAR_SCREEN);
 }
 
 #endif //TERMINAL_H

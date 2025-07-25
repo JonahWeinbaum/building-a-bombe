@@ -1,4 +1,4 @@
-\chapter{Stops}
+\chapter{Stops}\label{stops}
 The Turing-Welchman Bombe was remarkably adept at computing daily
 keys in a tractable manner. In optimal conditions,
 with a well-crafted and fortunate menu, the Bombe could run in as
@@ -10,8 +10,9 @@ explore the relationship
 between menus and the number of stops the Bombe is expected to
 encounter. Equipped with this information, a cryptanalyst would be
 able to select the menu
-that yields the fewest stops. Each stop consumed precious
-time as operators needed to verify whether they corresponded to a
+that yields the fewest stops.
+\\\\Each stop consumed precious
+time, as operators needed to verify whether they corresponded to a
 valid key. Therefore, menu selection becomes an integral factor
 in reducing the time between intercepting transmissions and
 recovering the key for that day. Even a reduction of minutes could
@@ -21,11 +22,11 @@ their expected number of stops is a matter of strategic urgency.
 
 \section{Turing's Model}
 We begin by describing the model for the expected number of stops
-given by Turing himself in the Prof's Book. Turing approaches this
+given by Turing himself in \emph{The Prof's Book}. Turing approaches this
 problem not by computing the expected number of stops itself, but
 instead by computing the expected number of {\bf{normal stops}} over
 all steckering hypothesis. These normal stops are described by Turing
-as ``positions at which by altering the point at which the current
+as, ``positions at which by altering the point at which the current
 enters the diagonal board, one can make 25 relays close.'' In the
 case of a single loop in our menu, this is equivalent to the
 statement that the resulting loop in the Bombe has a singleton cycle.
@@ -33,14 +34,14 @@ If we apply current to this singleton cycle all the remaining relays
 will close. For now we will ignore the impact of the diagonal board.
 \\\\Turing considered a menu in which no loops occured which he
 called a {\bf{web}}. In this case every position of the Bombe and
-every initial steckering hypothesis would create a normal stop as
+every initial steckering hypothesis would create a normal stop, as
 there is no feedback necessary to electrify any additional wires on a
 given cable. Turing considers not only the $26^3$ possible rotor
 positions of the Bombe, but also the $26$ initial steckering
 hypotheses we could input. In our case, all steckering hypotheses and
 all rotor configurations produce a normal stop so we get $26^4$ total
 normal stops over all steckering hypotheses. In our simplified model
-with only $4$ characters this may look as follows
+with only $4$ characters this may look as follows,
 \begin{center}
   \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
 
@@ -88,11 +89,11 @@ with only $4$ characters this may look as follows
   \end{tikzpicture}
 \end{center}
 \noindent Turing then considered the effect of adding an edge to our
-menu which would have the effect of forming a loop, he called such an
+menu which would form a loop, he called such an
 edge a {\bf{chain-closing constatation}}. He wanted to deduce the
 likelihood that adding such an edge turns our normal stops into
 anything other than a normal stop. We will denote this chain-closing
-edge as $s$. Our diagram would then be
+edge as $s$. Our diagram would then be,
 \begin{center}
   \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
 
@@ -144,8 +145,9 @@ edge as $s$. Our diagram would then be
 
   \end{tikzpicture}
 \end{center}
-\noindent Suppose for a particular steckering hypothesis $S(x) = y$,
-the electrification of our hypothesis wire produces a normal stop.
+\noindent Suppose that before adding the edge $s$, a particular
+steckering hypothesis $S(x) = y$,
+produces a normal stop.
 What is the probability that by adding the permutation $s$ we are now
 no longer in the situation of a normal stop?
 \\\\Given that by supposition electrifying wire $xy$ through
@@ -155,7 +157,7 @@ non-electrified wires to arrive at anything other than a normal stop.
 Thus there is $\frac{3}{4}$ chance that $s\circ\overline\pi$ is no
 longer a normal stop. Conversely, there is a $\frac{1}{4}$ chance
 that $s$ fails to remove our normal stop.
-\\\\In the case of a $26$ character alphabet the same logic follows
+\\\\In the case of a $26$ character alphabet, the same logic follows,
 and we have a $\frac{1}{26}$ chance that a chain-closing
 constatations fails to remove a normal stop. Given that we originally
 expected $26^4$ normal stops over all steckering hypotheses without
@@ -163,24 +165,28 @@ any closures, we would now expect that adding a chain-closing
 constatation to our menu would have $\frac{1}{26}$ as many normal
 stops. Thus adding one closure to our menu now brings the expected
 number of normal stops over all steckering hypotheses down to $26^{4-1} = 26^3$.
-\\\\Turing extends this argument to explain that for a menu with $c$
+\\\\Turing extends this argument to explain that, for a menu with $c$
 loops (which he called {\bf{closures}}) we would expect $26^{4-c}$
 normal stops over all steckering hypotheses.
 \subsection{Dixon's Theorem}
 A natural question arises - why should the number of normal stops
-over all steckering hypotheses approximate the number of stops?
-First, we are only considering a subset of possible stops so we might
-expect our approximation to be poor. Second, we are considering these
-stops over all steckering hypotheses so we might expect our
+over all steckering hypotheses approximate the number of actual stops
+the Bombe encounters?
+First, we are only considering a subset of possible stops so, from
+this perspective, we might
+expect our approximation to be under-representing the true number of
+stops. Second, we are considering these
+stops over \emph{all} steckering hypotheses so, from this
+prespective, we might expect our
 approximation to be around $26$ times greater than the actual answer.
-Yet, testing Turing's formula against the actual Bombe, in many cases
+Yet, testing Turing's formula against the actual Bombe, in many cases,
 we find that his approximation of $26^{4-c}$ falls roughly in line
 with the actual number of stops. To answer this question we must show
-the following
-\begin{enumerate}[(I)]
-  \item The number of normal stops approximates the number of stops
+the following:
+\begin{enumerate}[(1)]
+  \item The number of normal stops approximates the number of stops.
   \item The consideration of all $26$ steckering hypotheses for each
-    rotor position averages out in such a way that we get only $1$
+    rotor position averages out in such a way that we only account for $1$
     steckering hypothesis per each rotor position thus removing any
     double counting of a particular rotor position.
 \end{enumerate}
@@ -193,7 +199,7 @@ permutation representing our loop is $\overline\pi$, then the number
 of normal stops over all steckering hypotheses is just the number of
 singleton cycles in $\overline\pi$'s cycle decomposition.
 \\\\Once we add in additional closures this becomes slightly more
-complicated. Suppose we have two closures, with each seperate closure
+complicated. Suppose we have two closures, with each separate closure
 being represented by the permutations $\overline\pi$ and
 $\overline\delta$ respectively.
 \begin{figure}[H]
@@ -403,11 +409,11 @@ this complex arrangment of permutations? To answer this we introduce
 \end{definition}
 \noindent This is the set of all group elements obtained by applying
 finite compositions of $\sigma$, $\tau$, and their inverses.
-\\\\Consider how this relates to our two loop Bombe arrangment with
+\\\\Consider how this relates to our two loop Bombe arrangement with
 $\overline\pi$ and $\overline\delta$. The electricity is free to flow
 through any number of iterations forwards and backwards through both
 $\overline\pi$ and $\overline\delta$. Applying a current at some
-input wire will propogate in such a way that it reaches possible
+input wire will propagate in such a way that it reaches possible
 letters which can be reached by some sequence of applications of
 $\overline\pi$, $\overline\delta$, and their inverses. Then on cable
 \texttt{A}, applying a current at some input $x$ can only reach wire
@@ -428,16 +434,16 @@ $x\in\mathbb{N}_{4}$ we have
 \begin{center}
   $\langle\overline\pi, \overline\delta\rangle\cdot
   x\coloneq\{\sigma(x)\text{ }|\text{ }\sigma\in\langle\overline\pi,
-  \overline\delta\rangle\}$
+  \overline\delta\rangle\}$.
 \end{center}
 \noindent We can think of this orbit as all elements in
 $\mathbb{N}_{4}$ which $x$ can reach via some sequence finite
 compositions of $\overline\pi$, $\overline\delta$, and their
 inverses. This is exactly analogous to the set of wires on cable
-\texttt{A} which can be reached from an input on $x$. Then these
+\texttt{A} which can be reached from an input on wire $x$. Then these
 orbits partition $\mathbb{N}_{4}$ and tell us which wires are in a
 connected loop in our Bombe arrangement.
-\\\\In this way the parition given by the set of orbits
+\\\\In this way, the partition given by the set of orbits
 $\mathbb{N}_{4}/\langle\overline\pi, \overline\delta\rangle$
 represents which wires are connected to which wires in our diagram.
 If $\mathbb{N}_{4}/\langle\overline\pi, \overline\delta\rangle =
@@ -546,43 +552,50 @@ In such a case we say that $\langle\overline\pi,
 determined by examining the cycle decomposition of $\overline\pi$
 which in this case is
 \begin{center}
-  (\texttt{ad})(\texttt{bc})
+  (\texttt{ad})(\texttt{bc}).
 \end{center}
-\noindent However, we can get the exact same picture by simply
+\noindent However, we can get the exact same information by simply
 considering the set orbits of $\langle\overline\pi\rangle$ acting on
-$\{\texttt{a},\dots\texttt{z}\}$, which would give us
+$\{\texttt{a},\dots\texttt{d}\}$, which would give us
 \begin{center}
-  $\{\{\texttt{a}, \texttt{d}\},\{\texttt{b}, \texttt{c}\}\}$
+  $\{\{\texttt{a}, \texttt{d}\},\{\texttt{b}, \texttt{c}\}\}$,
 \end{center}
-\noindent which gives us an equal picture of the connections between
+\noindent giving us an equal picture of the connections between
 wires on the \texttt{A} cable. Additionally, shifting to this view
-means that rather than saying the entire loop becomes electrified
-when $\overline\pi$ has a $26^1$ cycle type, we say that this occurs
+means that rather than saying that the entire loop becomes electrified
+when $\overline\pi$ has a $4$ cycle, we say that this occurs
 when $\langle\overline\pi\rangle$ forms a transitive subgroup of $S_4$.
 \\\\This description is more robust in that it can handle any number
 of closures and gives us a picture of which wires are connected to
 which on a particular cable.
 \subsubsection{Distribution of Stops}
-Equipped with this mathematical framework are now ready to address
+Equipped with this mathematical framework, we are now ready to address
 Turing's model. We will classify stops by the cardinality and
-multiplicty of sets in the partition given by the orbits described
+multiplicity of sets in the partition given by the orbits described
 above. For example, if a set of orbits is
 \begin{center}
   $\{\{\texttt{a}, \dots, \texttt{m}\}, \{\texttt{n}, \dots, \texttt{z}\}\}$
 \end{center}
-we would say this stop is a $13^2$ stop. This is effectively
-analogous to the cycle type of a permutation but in order to extend
+we would say this stop has a $13^2$ stop type. In general, if the
+orbits of a subgroup are sets $\omega = \{\omega_1,\dots,\omega_k\}$,
+we say that this represents a $1^{m_1}\dots n^{m_n}$ stop, where
+${m_i}$ is the number of sets in $\omega$ with cardinality $i$ --
+that is $m_i =|\{j\in\mathbb{N}_k\text{ }|\text{ }|\omega_j| = i\}|$.
+\\\\This is effectively
+analogous to the cycle type of a permutation, but in order to extend
 this to multiple loops we must frame it in this description of
-partitions given by orbits of subgroups. We will call these orbit structures.
-\\\\In Turing's model, such a $13^2$ stop as above, would count as
+partitions given by orbits of subgroups. Where context allows, we
+will refer to these interchangeably as  either {\bf{orbit types}},
+{\bf{stop types}}, or {\bf{partition types}}.
+\\\\In Turing's model, such a $13^2$ stop type as above, would count as
 $0$ normal stops over all steckering hypotheses. In the actual
 running of the Bombe this would constitute a single stop. Further, a
-$1^323^1$ stop in Turing's model would be considered as $3$ normal
-stops over all possible steckering hypotheses. In reality this would
+$1^323^1$ stop type in Turing's model would be considered as $3$ normal
+stops over all possible steckering hypotheses. In reality, this would
 only constitute a single real stop in the running of the Bombe. This
 highlights the two qualms that we are trying to reconcile in Turing's
-model, the absence of abnormal stops, and the overcounting of normal stops.
-\\\\We begin by considering the case of $2$ closures, where at each
+model, the absence of abnormal stops, and the over-counting of normal stops.
+\\\\We begin by considering the case of two closures, where at each
 rotor position of the Bombe, we have some permutations $\overline\pi$
 and $\overline\delta$. What is the distribution of stop types? For
 now we will assume that any loop in a particular configuration of the
@@ -590,15 +603,15 @@ Bombe represents a random permutation. We will later refine this, but
 as a heuristic it serves to justify Turing's model. We want to know
 what stop types are most common. That is, given two random
 permutations $\overline\pi$ and $\overline\delta$, what is the
-distribution of orbit structures for the subgroup
+distribution of orbit types generated by the subgroup
 $\langle\overline\pi, \overline\delta\rangle$? This question was
 answered by John Dixon in 1969 in his paper ``The Probability of
 Generating the Symmetric Group''.
 
-\begin{theorem}[Dixon's Theorem]
+\begin{theorem}[Dixon's Theorem]\label{dixons_theorem}
   Given two random permutations $\sigma$ and $\tau$ in $S_n$, the
   probability that $\langle\sigma, \tau\rangle$ have an orbit
-  structure of $1^{m_1}\dots n^{m_n}$ is
+  type of $1^{m_1}\dots n^{m_n}$ is
   \begin{align*}
     1-\frac{1}{n!}\sum_{1^{\ell_1}\dots n^{\ell_n} \ne 1^{m_1}\dots
     n^{m_n}}\prod_{i=1}^n{\frac{(i!t_{i})^{\ell_i}}{\ell_i!}}
@@ -609,18 +622,16 @@ Generating the Symmetric Group''.
 \begin{proof}
   Let $t_i$ be the probability that for two random $x,y\in S_i$, we
   have that $\langle x,y\rangle$ acts transitively on $\mathbb{N}_i$.
-  \\\\Fix a partition $\omega_1\cup\dots\cup\omega_k$ of
-  $\mathbb{N}_n$. We want to know the number of $x,y\in S_n$ such
+  \\\\Fix a partition $\omega=\{\omega_1,\dots,\omega_k\}$ of
+  $\mathbb{N}_n$. We want to know the number of pairs $x,y\in S_n$ such
   that $\langle x,y\rangle$ have orbits which are exactly the sets in
   our partition. For $\langle x, y\rangle$ to contain an orbit
   $\omega_i$, we must have that $\langle x,y\rangle$ acts
-  transitively on $\omega_i$. That is, $\forall$
-  $a,b\in\omega_i$\text{ }$\exists\text{ }\sigma\in\langle
-  x,y\rangle$ such that $\sigma(a) = b$. This also means that the
-  restriction of the action $\langle x,y\rangle$ to $\omega_i$ is a
-  transitive group action.  The total number of restrictions to
-  $\omega_i$ without any constraints on transitivity is
-  $(|\omega_i|!)^2$, so to get the number of restrictions which
+  transitively on $\omega_i$. This also means that the
+  restriction of the action of $\langle x,y\rangle$ to $\omega_i$ is a
+  transitive group action.  The total number of ways to define such a
+  restriction on $\omega_i$, without any constraints on transitivity is
+  $(|\omega_i|!)^2$. So, to get the number of restrictions which
   represent a transitive action we compute
   $(|\omega_i|!)^2t_{|\omega_i|}$. To contain all orbits $\omega_i$,
   we must have that when restricted to each $\omega_i$, $\langle
@@ -628,25 +639,32 @@ Generating the Symmetric Group''.
   \begin{center}
     $\prod_{i=1}^k(|\omega_i|!)^2t_{|\omega_i|}$
   \end{center}
-  permutations $x,y\in S_n$ such that $\langle x,y\rangle$ has an
-  orbit structure equivalent to the partition $\omega_1\cup\dots\cup\omega_k$.
-  \\\\Supposing we have a particular partition with $ell_i$ sets of
-  size $i$ then our above argument can be framed as stating that there are
+  permutations $x,y\in S_n$ such that $\langle x,y\rangle$ generates
+  the orbits $\omega$.
+  \\\\Supposing $\omega$ has partition type $1^{\ell_1}\dots
+  n^{\ell_n}$, then our above argument can be framed as stating that there are
   \begin{center}
     $\prod_{i=1}^n{((i!)^2t_i)^{\ell_i}}$
   \end{center}
-  The number of partitions with $\ell_i$ sets of size $i$ is exactly
+  permutations $x,y\in S_n$ such that $\langle x,y\rangle$ has an
+  orbit type equivalent to the partition type of $\omega$.
+  \\\\To obtain the total number of such $x,y \in S_n$ that generate
+  a subgroup with orbit type $1^{\ell_1}\dots n^{\ell_n}$, we
+  multiply by the number of partitions of $\mathbb{N}_n$ with this
+  type, of which there are
   \begin{center}
-    $\frac{n!}{\prod_{i=1}^n{(i!)^{\ell_i}\ell_i!}}$
+    $\frac{n!}{\prod_{i=1}^n{(i!)^{\ell_i}\ell_i!}}$\footnote{This
+      fact will be addressed later, but it follows from
+    Corollary~\ref{cycle_count} with only minor argumentative changes.}.
   \end{center}
-  We compute the probability that $x,y\in S_n$ do \emph{not} generate
-  an orbit structure with $m_i$ orbits of size $i$, by computing the
+  We then compute the probability that $x,y\in S_n$ do \emph{not} generate
+  orbits with orbit type $1^{m_1}\dots n^{m_n} $, by computing the
   total number of $x,y\in S_n$ which generate any other orbit
-  structure, and dividing by $(n!)^2$ (i.e. the total number of pairs
-  of permutations in $S_n$). This is precisely
+  type, and dividing by $(n!)^2$ (i.e. the total number of pairs
+  of permutations in $S_n$). This is precisely,
   \begin{align*}
-    & \sum_{1^{\ell_1}\dots n^{\ell_n} \ne 1^{m_1}\dots
-    n^{m_n}}{\frac{1}{(n!)^2}\frac{n!}{\prod_{i=1}^n{(i!)^{\ell_i}\ell_i!}}}\prod_{i=1}^n{((i!)^2t_i)^{\ell_i}}
+    & {\frac{1}{(n!)^2}\sum_{1^{\ell_1}\dots n^{\ell_n} \ne 1^{m_1}\dots
+    n^{m_n}}\frac{n!}{\prod_{i=1}^n{(i!)^{\ell_i}\ell_i!}}}\prod_{i=1}^n{((i!)^2t_i)^{\ell_i}}
     \\
     =\text{ } & \frac{1}{n!}\sum_{1^{\ell_1}\dots n^{\ell_n} \ne
       1^{m_1}\dots
@@ -654,55 +672,61 @@ Generating the Symmetric Group''.
     \\
     =\text{ } & \frac{1}{n!}\sum_{1^{\ell_1}\dots n^{\ell_n} \ne
     1^{m_1}\dots n^{m_n}}{\prod_{i=1}^n{\frac{(i!)^{\ell_i}t_i^{\ell_i}}{
-    \ell_i!}}}
+    \ell_i!}}}.
   \end{align*}
-  The opposite of this probability is the probability that we
+  The inverse of this probability is the probability that we
   generate exactly the orbit structure we specified, thus giving us
-  the desired result.
+  the desired result,
+  \begin{align*}
+    \mathbb{P}(\langle\sigma,\tau\rangle\text{ has orbit type
+    }1^{m_1}\dots n^{m_n}) = 1-\frac{1}{n!}\sum_{1^{\ell_1}\dots
+      n^{\ell_n} \ne 1^{m_1}\dots
+    n^{m_n}}\prod_{i=1}^n{\frac{(i!t_{i})^{\ell_i}}{\ell_i!}}.
+  \end{align*}
 \end{proof}
 \noindent It should be noted that the actual statement of this proof
 is a formula for $t_n$ which is then shown to asymptotically approach
-$1$ as $n$ increases. In the context of the theorem above, $t_n$ can
+$1$ as $n$ increases. In the context of the above theorem, $t_n$ can
 be solved by computing the probability that $\langle \sigma,
-\tau\rangle$ have an orbit structure of $26^1$, that is, the subgroup
+\tau\rangle$ have an orbit structure of $n^1$, that is, the subgroup
 formed is transitive. For such an orbit structure, each $t_i$ given
 in our equation necessarily has $i < n$ so we can recursively solve
 for $t_n$. With the ability to solve for any $t_k$ for
 $k\in\mathbb{N}$ we can then go and compute the probability of any
-particular orbit structure via the above theorem.
+particular orbit type via the above theorem.
 \subsection{Turing's Model's Accuracy}\label{justify_turing}
-We can now compute for the case of two loops, what the probability of
+We can now compute, for the case of two loops, what the probability of
 a particular stop type is. Computing the above for a $26^1$ orbit
-structure tells us that roughly $95.9\%$ of all rotor configurations
+type tells us that roughly $95.9\%$ of all rotor configurations
 in a two loop structure will electrify all wires, producing no stop
 whatsoever. The remaining $4.1\%$ of rotor configurations account for
-all possible stops. Of these stops we can compute that roughly
+all possible stops. Of these stops, we can compute that roughly
 $92.3\%$ of these stops have a stop type of $1^125^1$. This is a
 \emph{massive} proportion of the possible stops. Nearly all stops
 have this singular stop type, and herein lies the justification for
 Turing's method.
 \\\\For the sake of argument, suppose \emph{all} stops were of the
-type $1^125^1$. In this case, we note two observations
-\begin{enumerate}[(I)]
-  \item All stops have a normal stops
+type $1^125^1$. In this case, we note two observations:
+\begin{enumerate}[(1)]
+  \item All stops have a normal stops.
   \item The number of steckering hypothesis producing a normal stop
-    for each stop type is $1$
+    for each stop type is $1$.
 \end{enumerate}
 It would then follow that if we could compute the number of normal
 stops over all steckering hypothesis we would get exactly the number
 of total stops. In such a case Turing's calculation of the expected
 number of normal stops over all steckering hypothesis is the same as
 the expected number of stops. As the proportion of stops whose stop
-type is $1^125^1$ increases, Turing's expected number of normal stops
-over all steckering hypothesis will begin to align with the total
-number of actual stops. Given that $92.3\%$ of stops have this stop
+type is $1^125^1$ increases, Turing’s expected count becomes an
+increasingly accurate proxy for the actual number of stops. Given
+that $92.3\%$ of stops have this stop
 type with just two closures, we can expect that Turing's estimate is
 very strong.
-\\\\As the number of closures increases, such an estimate improves.
+\\\\Moreover, as the number of closures increases, such an estimate improves.
 This is because for $\langle \sigma_1, \dots, \sigma_k\rangle\le
 S_{26}$, the expected size of orbits should increase as $k$
 increases. This can be shown heuristically via the orbit-stabilizer
-theorem which tells us that
+theorem which tells us that,
 \begin{theorem}[Orbit-Stabilizer Theorem]
   For a group $G$ acting on a finite set $X$, we have that for $x\in X$
   \begin{align*}
@@ -713,37 +737,43 @@ theorem which tells us that
 \noindent We see that the size of the orbit of $x$ is inversely
 proportional to the size of its stabilizer. As we increase the number
 of random permutations generating our subgroup, the  constraints
-required for an element to fix $x$ become increasingly unlikely to be
-satisfied by independent random generators. Thus we expect the
-average size of $G_x$ to go down and thus the average size of an
-orbit increases. In our context, this means that with more closures,
-Turing's estimate approaches the true number of stops.
+required for an element in $\langle\sigma_i\rangle$ to fix $x$ become
+increasingly unlikely to be
+satisfied by independent random generators. Thus, we expect the
+average size of $G_x$ to go down, and thus the average size of an
+orbit increases.
+\\\\In our context, this implies that stop types tend to have larger
+components as the number of closures increases. Consequently, the
+stop type $1^1 25^1$—corresponding to a single isolated wire—becomes
+even more dominant among all stops. Thus, Turing's estimate should
+also improve as the number of generators, that is, the number of
+closures, increases.
 
 \subsubsection{Simulating Turing's Model}
 We will now show to what extent Turing's model aligns with
 ground-truth simulation. For testing during this thesis I created a
 simulation of both the Bombe and the Enigma machine. However, to
 ensure my implicit biases regarding my understanding of the Bombe's
-functions do not interfere with my analysis, to provide simulated
-figures of the Bombe we will use Jean-François Bouchaudy's simulation
+functions do not interfere with my analysis, simulated figures will
+be generated by Jean-François Bouchaudy's simulation
 of the Bombe. This simulation in its current form misses a number of
 stops that were detected by my simulation since, for poorer menus, it
-fails to propagate the input singal sufficiently to reach a steady
+fails to propagate the input signal sufficiently to reach a steady
 state. If we increase the propagation to $100$ loops per position of
 the Bombe then my simulation falls in line with Bouchaudy's.
 \\\\We can run Bouchaudy's simulation with randomly generated menu
 configurations and rotor choices, allowing us to compute the average
 number of stops along with a margin of error with $95\%$ confidence.
-\\\\ For instance, running a monte carlo simulation of menus with
+\\\\ For instance, running a Monte Carlo simulation of menus with
 three closures, we find that there are $30.26\pm0.57$ stops. Turing's
-estiamte would give us $26^{4-3}$ or $26$ stops which, tough outside
+estimate would give us $26^{4-3}$ or $26$ stops which, though outside
 the margin of error, is still relatively close the the simulated ground-truth.
 \\\\However, as we remove closures, we can expect that the
 distribution of stop types will diverge away from $1^125^1$ stops,
 and Turing's estimate will stray from the actual number of stops.
 This can be seen by running a menu with a single closure which
 produces $17003.50\pm23.83$ stops. Turing's estimate would give us
-$26^{4-1}$ or $17576$ stop which falls far outside the desired margin
+$26^{4-1}$ or $17576$ stops, which falls far outside the desired margin
 of error of simulation.
 \\\\Turing's estimate is a strong heuristic model for the number of
 stops, but we can see that even with a large number of closures, his
@@ -756,7 +786,7 @@ stops and the number of stops with multiple steckering hypotheses
 producing normal stops are too high for the model to align with
 reality. In order to address these problems, we must develop a new
 model which does away with some of Turing's fundamental assumptions.
-\section{The Cycle-Type Model}
+\section{The Cycle Type Model}
 The goal of Turing's model was to compute the expected number of
 normal stops over all steckering hypotheses. In the last section, we
 justified that for stronger menus, this serves as a reasonable
@@ -773,20 +803,20 @@ into our model to most accurately mimic the simulated behavior.
 \subsection{Single Loop} Consider a Bombe running a menu with a
 single closure. This closure is made up of some number of scramblers
 which we denote $\overline\pi_1, \dots, \overline\pi_\ell$. In the
-loop these form one permutation $\overline\pi =
+loop, these form one permutation $\overline\pi =
 \overline\pi_1\dots\overline\pi_\ell$. The Bombe will stop whenever
 $\overline\pi$ fails to connect all wires in the Bombe. We have
 previously shown that this occurs whenever $\overline\pi$ is not a
 $26$, or equivalently, whenever $\langle\overline\pi\rangle$ does not
 form a transitive subgroup of $S_{26}$.
 \\\\We might expect that composing $\ell$ scramblers should produce a
-reasonably a permutation $\overline\pi$ that is relatively random in
-$S_{26}$. If this was the case, we would expect $\overline\pi$ to be
+permutation $\overline\pi$ that is relatively random in
+$S_{26}$. If this were the case, we would expect $\overline\pi$ to be
 a $26$ cycle with probability $\frac{1}{26}$ and thus we would expect
 a stop with probability $\frac{25}{26}$. Thus over $26^3$ possible
 rotor positions, we would expect $26^2\cdot25 = 16900$ stops.
 \\\\Running our simulation with $\ell = 5$ we find that there are
-$16224.77\pm2.80$ stops. This is significantly off from our
+$16224.77\pm2.80$ stops. This is significantly different from our
 prediction. Further, a simulation with $\ell=4$ produces $17576$
 stops with no margin of error, meaning that \emph{every} position on
 \emph{every} menu with this structure produces a stop. Clearly, we
@@ -796,21 +826,21 @@ are not dealing with permutations $\overline\pi$ that are random.
 To make this clear, consider our case where $\ell=4$. We have $4$
 permutations $\overline\pi_1,\dots, \overline\pi_4$ which make up our
 loop $\overline\pi$. Each permutation $\overline\pi_i$ is a
-permutation representing an Enigma machine meaning that it has a
-$2^{13}$ cycle. This means that each permutation in our loop is made
-of $13$ disjoint transpositions. This means that each permutation
-$\overline\pi_i$ has an odd parity. Thus the composition of $4$ such
+permutation representing an Enigma machine, meaning that it has a
+$2^{13}$ cycle type. This means that each permutation in our loop is made
+of $13$ disjoint transpositions. In other words, each permutation
+$\overline\pi_i$ has an odd parity. Thus, the composition of $4$ such
 permutations of odd parity must result in a permutation of even
-parity. Given that any $26$ cycle is necessarily of odd parity. Thus
-$\overline\pi$ can \emph{never} be have cycle type $26^1$ and thus
+parity. Given that any $26$ cycle is necessarily of odd parity,
+$\overline\pi$ can \emph{never} have a cycle type of $26^1$ and thus
 always produces a stop. In mathematical terms, we would say the
 distribution generated by composing $4$ of these Enigma permutations
-is support on $A_{26}$ -- the set of even permutations in $S_{26}$.
+is supported on $A_{26}$ -- the set of even permutations in $S_{26}$.
 In fact, this is true for any loop where $\ell$ is even.
 \\\\Similarly, for any odd $\ell$, $\overline\pi$ cannot produce any
 even parity cycle types, including our $1^125^1$ stop type that was
 so common in the two cycle case. In this case, the distribution is
-support on odd permutations $S_{26}-A_{26}$.
+supported on odd permutations $S_{26}-A_{26}$.
 \\\\The important takeaway is that we cannot just consider the number
 of closures in a menu -- we must also consider the length of each
 loop within the closures of a menu. The length of a closure
@@ -825,7 +855,7 @@ resulting distribution in $S_{26}$ is so complex and vast in its
 possible enumeration that our best chance at getting a reasonable
 grasp of this distribution is to simulate it.
 \\\\The use of a simulation to get the expected number of stops for a
-single loop of length $\ell$ begs the following questions
+single loop of length $\ell$ begs the following questions:
 \begin{enumerate}
   \item[(1)] If we can simulate the number of expected stops for one
     closure, why not just solve the entire problem of computing the
@@ -833,10 +863,10 @@ single loop of length $\ell$ begs the following questions
 \end{enumerate}
 While we might be able to run a lengthy Monte Carlo simulation of the
 Bombe over many different menu arrangements and shapes, the nature of
-the Bombe is so complicated that in practice there is no convergence
+the Bombe is so complicated that, in practice, there is no convergence
 to a steady state. Focusing on a single loop allows us to reach a
 distribution with a steady state fairly quickly. We can then rely on
-this distribution to compute more complicated menu arrangments which
+this distribution to compute more complicated menu arrangements which
 we will discuss in the following section.
 \\\\In practice, this distribution was reached by running a Monte
 Carlo simulation. In each iteration, we initialize $\ell$ Enigma
@@ -851,7 +881,7 @@ comparisons, we deem that the distribution has reached a steady state.
 \\\\Implicit in this simulation is the assumption that permutations
 produced by the Bombe are uniformly distributed within each cycle
 type. This is a reasonable assumption since all permutations for a
-given cycle type are the same up to relabelling. Therefore, we expect
+given cycle type are the same up to relabeling. Therefore, we expect
 no structural differences within the distribution for a fixed type.
 \\\\Initially, we initialized $\ell$ permutations chosen randomly
 from the set of permutations with cycle type $2^{13}$ to perform our
@@ -870,22 +900,22 @@ relationship between the permutations in a loop.
 While cryptanalysts at the time may not have been able to simulate as
 many iterations as we can with modern computers, we do know that such
 technology existed as would make this task reasonably achievable at
-the time. Recall from section \ref{cyclometer}, that the Polish
-Cipher Beaurea produced a device called the cyclometer, whose sole
+the time. Recall from Section~\ref{cyclometer}, that the Polish
+Cipher Beaurea produced a device called the Cyclometer, whose sole
 purpose was to quickly determine the cycle type produced by composing
-two Enigma permutations. With simple changes this could easily be
+two Enigma permutations. With simple changes, this could easily be
 extended to determine cycle types of arbitrary length loops of Enigma
-machines. With some random sampling and tedious cataloguing, it is
+machines. With some random sampling and tedious cataloging, it is
 certainly feasible that cryptanalysts of the time could have computed
 a distribution close to the one discussed in this section.
 \subsubsection{One Loop Results}
 With both these points addressed, we can examine the results of
 simulating a single loop of length $\ell$. After collecting the cycle
-distribution for each length $\ell$ over a large Monte Carlo
+type distribution for each length $\ell$ over a large Monte Carlo
 simulation, we can take the sum of observed frequency which are not
-$26^1$ cycles as our probability of a stop occuring. Multiplying this
+$26^1$ cycles to get the probability of a stop occurring. Multiplying this
 by $26^3$ we get our expected number of stops. We then compare this
-with a small simulation run via Bouchaudy's simulation as our ground truth.
+with a small simulation run via Bouchaudy's simulation as our ground-truth.
 \begin{table}[H]
   \centering
 
@@ -920,8 +950,8 @@ with a small simulation run via Bouchaudy's simulation as our ground truth.
   $l=2$ to $l=12$}
 \end{table}
 \noindent It is no surprise that these two values line up with each
-others since they are both just simulated implementations of the
-Bombe, but we will see that with just this small simulation, we are
+other, since they are both just simulated implementations of the
+Bombe; However, we will see that with just this small simulation, we are
 able to accurately estimate the stops for the case of two loops,
 without the need for any further simulation.
 \subsection{Two Loops}
@@ -939,9 +969,9 @@ probability that $\langle \overline\pi, \overline\delta \rangle$ form
 such a transitive subgroup. If $\overline\pi$ and $\overline\delta$
 were uniformly distributed in $S_{26}$ this question would be easily
 answered via Dixon's theorem; However, we just showed that these
-permutations are not evenly distributed and their distributions are
+permutations are not evenly distributed and that their distributions are
 dependent on the loop lengths $a$ and $b$. In the last section, we
-gathered the distribution for each length $\ell$, so we know the
+gathered the distribution of cycle types for each length $\ell$, so we know the
 probability that a particular cycle type $1^{m_1}\dots26^{m_{26}}$
 occurs for a loop of length $\ell$.
 \\\\Therefore, we will approach this problem by finding the
@@ -949,63 +979,88 @@ probability that two permutations pulled uniformly from two fixed
 cycle types form a transitive subgroup of $S_{26}$.
 \\\\We will first simplify our notation to make such a problem easier
 to state formally. Rather than denoting a cycle type as $1^{m_1}\dots
-n^{m_{n}}$, we will instead shorten this to the sequence of
-multiplicities $m=(m_i)$, where $i$ ranges from $1$ to $n$, to mean
+n^{m_{n}}$, we will instead shorten this to the vector of
+multiplicities $m=(m_i)_{i\in\mathbb{N}_n}$, to mean
 that this permutation has $m_i$ many $i$ cycles. We will then denote
 $t_{\alpha, \beta} =t_{(\alpha_i), (\beta_i)}$ as the probability
 that a random permutation with cycle type $\alpha =(\alpha_i)$, and a
 random permutation with cycle type $\beta = (\beta_i)$, form a
 transitive subgroup of $S_n$. This collapses our notations of cycle
-type into a single variable that will make notation signficantly more condensed.
+type into a single variable that will make notation significantly
+more condensed.
 \\\\Assuming we have a means to compute these $t_{\alpha, \beta}$, we
 can then introduce our single loop distribution from the last section to compute
 \[
   \mathbb{P}(\overline\pi\text{ has cycle type
   }\alpha)\cdot\mathbb{P}(\overline\delta\text{ has cycle type
-  }\beta)\cdot t_{\alpha, \beta}
+  }\beta)\cdot t_{\alpha, \beta}.
 \]
 This is the probability that $\overline\pi$ has a fixed cycle type
 $\alpha$ and $\overline\delta$ has a fixed cycle type $\beta$, and
-that these two permutations form a transitive subgroup. To get the
+that these two permutations form a transitive subgroup of $S_n$. To get the
 probability that any two $\overline\pi$ and $\overline\delta$ form a
-transitive subgroup, we can simply range over all possible cycle types to get
+transitive subgroup, we can simply range over all possible cycle
+types in $S_n$ to get
 \begin{align*}
   & \mathbb{P}(\langle \overline\pi,\overline\delta \rangle\text{
   forms a transitive subgroup})
   \\= &\sum_{\alpha, \beta}\mathbb{P}(\overline\pi\text{ has cycle
   type }\alpha)\cdot\mathbb{P}(\overline\delta\text{ has cycle type
-  }\beta)\cdot t_{\alpha, \beta}
+  }\beta)\cdot t_{\alpha, \beta},
 \end{align*}
 and the inverse of this probability will be the probability of a stop.
 \\\\Then we need only to compute these $t_{\alpha, \beta}$ to solve
 the two loop case. In order to do this, we must modify Dixon's
 theorem to be expressed in terms of cycle types rather than the size
-of the ambient space.
+of the ambient space $S_n$.
 \subsubsection{Computing $t_{\alpha, \beta}$}
-In order to solve this problem, just as in Dixon's theorem, we will
-enumerate partitions of $\mathbb{N}_n$. \\\\Let
+In order to solve this problem, just as in Dixon's Theorem, we will
+enumerate the various partition types of partitions of $\mathbb{N}_n$. \\\\Let
 \[
-  \mathcal{P}_n \coloneqq \left\{ \{ \omega_1, \dots, \omega_k \}
-    \,\middle|\, k \in \mathbb{N}, \omega_i \subseteq \mathbb{N}_n,
-    \omega_i \ne \emptyset, \omega_i \cap \omega_j =
-    \emptyset\ \text{for } i \neq j,\ \bigcup_{i=1}^k \omega_i =
-  \mathbb{N}_n \right\}
-\]be the set of partitions of \( \mathbb{N}_n \).
-\\\\For a particular cycle type $m = (m_i)_{i\in\mathbb{N}_n}$, the
+  \mathcal{I}_n \coloneqq \left\{ (\upsilon_1, \dots, \upsilon_k)\in\mathbb{N}^k
+    \,\middle|\, 1 \le k \le n,\text{ }1\le\upsilon_i,\text{ }
+    \upsilon_1\le\upsilon_2\le\dots\le\upsilon_k,
+  \sum_{j=1}^k{\upsilon_j} = n \right\}
+\]
+be the set of integer partitions of $n$. To align with our earlier
+multiplicity-based description of orbit, partition, and cycle types,
+we define a multiplicity function:
+\begin{align*}
+  m^{(\cdot)}:\mathcal{I}_n &\to \mathbb{N}^n
+  \\ \upsilon=(\upsilon_j)_{j\in\mathbb{N}_k} &\mapsto m^{(\upsilon)}
+  = (m_i^{\upsilon})_{i\in\mathbb{N}_n}
+\end{align*}
+where each $m_i^{(\upsilon)}\coloneq |\{j\in\mathbb{N}_k\text{
+}|\text{ }\upsilon_j = i\}|$.
+\\\\We note that $\{m^{(\upsilon)}\text{ }|\text{
+}\upsilon\in\mathcal{I}_n\}$ is exactly the set of partition types of
+partitions of $\mathbb{N}_n$ since the set partitions of
+$\mathbb{N}_n$ are surjective on to the integer partitions of $n$.
+% \\\\For the argument that follows, we will need to move between
+% set-theoretic partitions and integer partitions. Note that there is
+% a natural bijection between $\mathcal{P}_n$ and $\mathcal{I}_n$ given by
+% \begin{align*}
+%     \psi: \mathcal{P}_n &\to \mathcal{I}_n\\
+%     \{\omega_1,\dots,\omega_k\} &\mapsto \{|\omega_1|, \dots, |\omega_k|\}.
+% \end{align*}
+% We will also need to move between
+\\\\We showed in Corollary~\ref{cycle_count} that, for a particular
+cycle type $m = (m_i)_{i\in\mathbb{N}_n}$, the
 total number of permutations in $S_n$ with such a cycle type is
 \[
   \frac{n!}{\prod_{i=1}^ni^{m_i}(m_i!)}.
 \]
-Just as with cycle types, we can say that each partition $\omega =
-\{\omega_1,\dots, \omega_k\}\in\mathcal{P}$ has a ``partition type''
-given in terms of the multiplicity of sets of particular
-cardinalities. In particular, we will denote that a partition
-$\omega$ contains $m^{(\omega)} = (m_j^{(\omega)})_{j\in\mathbb{N}}$
-sets with cardinality $j$. Then the total number of such partitions is
+Similarly, for a particular partition type $m^{(\upsilon)} =
+(m_j^{(\upsilon)})_{j\in\mathbb{N}_n}$, the total number of
+partitions with partition type $m^{(\upsilon)}$ is
 \[
-  \frac{n!}{\prod_{i=1}^n(i!)^{(m_i^{(\omega)})}(m_i^{(\omega)}!)}.
+  \frac{n!}{\prod_{i=1}^n(i!)^{(m_i^{(\upsilon)})}(m_i^{(\upsilon)}!)}.
 \]
-To condense both of these factors, for a sequence $x =
+We can arrive at this formula in a similar fashion to
+Corollary~\ref{cycle_count}, but we must account for the fact that
+the order of each $i$ cycle does not matter since we are treating
+them as sets, which gives us a factor of $i!$ in our formula as opposed to $i$.
+\\\\To condense both of these factors, for a vector $x =
 (x_i)_{i\in\mathbb{N}_n}$, we introduce
 \[
   Y(x) \coloneqq \prod_{i=1}^n (i!)^{x_i} \cdot x_i!, \qquad
@@ -1029,73 +1084,76 @@ $\beta_i$s) respectively in $S_5$. We want to find the probability
 that $\langle \sigma, \tau \rangle$ is a transitive subgroup of $S_5$.
 \\\\$\langle \sigma, \tau \rangle$ will form some set of orbits which
 partitions $\mathbb{N}_5$. Our goal is to find the probability that
-the orbit we generate is exactly $\{\mathbb{N}_5\}$. We will do this
-by enumerating all partitions which $\langle \sigma, \tau \rangle$
+the orbit we generate is exactly $\{\mathbb{N}_n\}$ . We will do this
+by enumerating all partition types which $\langle \sigma, \tau \rangle$
 can form in its orbit structure.
 \\\\In total, the are
 \[
   \frac{(5!)^2}{Z(\alpha)Z(\beta)}
 \]
 possible $\sigma$ and $\tau$ combinations taken from their respective
-cycle types. This total must be equal to the sum, over each partition
+cycle types. This total must be equal to the sum, over each partition type
 of $\mathbb{N}_5$, of the number of ways that  $\langle \sigma, \tau
-\rangle$ can produce an orbit structure mirroring that partition.
+\rangle$ can produce an orbit structure mirroring that partition type.
 \\\\The transitive case contributes exactly
 \[
   \frac{(5!)^2}{Z(\alpha)Z(\beta)}\cdot t_{\alpha, \beta}
 \]
-Our ultimate goal will be to isolate this factor $t_{\alpha, \beta}$
+pairs $\sigma, \tau\in S_5$. Our ultimate goal will be to isolate
+this factor $t_{\alpha, \beta}$
 to get our desired probability.
 \\\\Now consider the case in which $\langle \sigma, \tau \rangle$
-produce a fixed set of orbits, say $\{A,B\}\in\mathcal{P}$ where $|A|
-= 3$ and $|B| = 2$. In order for this to occur, every cycle of
+produce a set of orbits, say $\{A,B\}$ where $|A|
+= 3$ and $|B| = 2$ -- that is, an orbit of type $2^13^1$. In order
+for this to occur, every cycle of
 $\sigma$ and $\tau$ must be fully contained in either $A$ or $B$
-since otherwise, such a cycle would necessarily mean that one set is
+since a cycle containing elements from both would necessarily mean
+that one set is
 reachable from the other, thus bridging the two sets into one orbit.
 \\\\Thus, we must have that the cycle lengths of $\sigma$ and $\tau$
-must be partitionable into two groups -- one group of cycles whose
+be partitionable into two groups -- one group of cycles whose
 total length is $3$, and the other whose total length is $2$. In our
-case this can be achieved by splitting $\sigma$ into a $3$ cycle and
+case, this can be achieved by splitting $\sigma$ into a $3$ cycle and
 $2$ cycle, and splitting $\tau$ into a $3$ cycle and two $1$ cycles.
 The first group of cycles in $S_3$ can be denoted by cycle types
-$\alpha^{(A)} = (\alpha^{(A)}_{i})$ and $\beta^{(A)} =
-(\beta^{(A)}_{i})$. The number of pairs of partitions grouped in this way is
+$\alpha^{(3)} = (\alpha^{(3)}_{i})$ and $\beta^{(3)} =
+(\beta^{(3)}_{i})$. The number of pairs of cycles grouped in this way is
 \[
-  \frac{(|A|!)^2}{Z(\alpha^{(A)})Z(\beta^{(A)})}
+  \frac{(3!)^2}{Z(\alpha^{(3)})Z(\beta^{(3)})}.
 \]
 The second group of cycles in $S_2$ can be denoted by cycle types
-$\alpha^{(B)} = (\alpha^{(B)}_i)$ and $\beta^{(B)} =
-(\beta_{i}^{(B)})$. The number of pairs of partitions grouped in this way is
+$\alpha^{(2)} = (\alpha^{(2)}_i)$ and $\beta^{(2)} =
+(\beta_{i}^{(2)})$. The number of pairs of partitions grouped in this way is
 \[
-  \frac{(|B|!)^2}{Z(\alpha^{(B)})Z(\beta^{(B)})}
+  \frac{(2!)^2}{Z(\alpha^{(2)})Z(\beta^{(2)})}.
 \]
 We can then examine restrictions of $\sigma$ and $\tau$ to each
 subset $A$ and $B$ and compute the probability that the restricted
 permutations generate a transitive subgroup on the $3$ element set
-(that is $t_{\alpha^{(A)},\beta^{(A)}}$) and the probability that the
+(that is $t_{\alpha^{(3)},\beta^{(3)}}$) and the probability that the
 restricted permutation generates a transitive subgroup on the $2$
-element set (that is $t_{\alpha^{(B)},\beta^{(B)}}$). Then the total
+element set (that is $t_{\alpha^{(2)},\beta^{(2)}}$). Then the total
 number of pairs $\sigma$ and $\tau$ with cycle types $\alpha$ and
 $\beta$ which form orbits $A$ and $B$ is
 \[
-  \frac{(|A|!)^2}{Z(\alpha^{(A)})Z(\beta^{(A)})}\cdot\frac{(|B|!)^2}{Z(\alpha^{(B)})Z(\beta^{(B)})}\cdot
-  t_{\alpha^{(A)},\beta^{(A)}}\cdot t_{\alpha^{(B)},\beta^{(B)}}
+  \frac{(3!)^2}{Z(\alpha^{(3)})Z(\beta^{(3)})}\cdot\frac{(2!)^2}{Z(\alpha^{(2)})Z(\beta^{(2)})}\cdot
+  t_{\alpha^{(3)},\beta^{(3)}}\cdot t_{\alpha^{(2)},\beta^{(2)}}.
 \]
 If we wanted the total number of ways that $\sigma$ and $\tau$
-generate an orbit structure of $(3,2)$, we must perform this
+generate an orbit type of $2^13^1$, we must perform this
 computation over each possible partitions into sets $|A|=3$ and
 $|B|=2$, of which there are
 \[
-  \frac{5!}{(|A|!)(|B|!)}
+  \frac{5!}{(2!)(3!)}
 \]
-total partitions. Since our count of $\sigma$ and $\tau$ which
-generate a fixed orbit structure is independent of the specific
-subsets within the orbit, we can simply multiply by the above factor
+total partitions. Since our count of $\sigma$ and $\tau$
+generating a fixed orbit with that structure was independent of the specific
+subsets within that orbit, we can simply multiply by the above factor
 to get the total $\sigma$ and $\tau$ pairs generating orbits of the
-form $\{A,B\}\in\mathcal{P}_5$ with $|A| = 3$ and $|B| = 2$ as
+form $\{A,B\}$ with $|A| = 3$ and $|B| = 2$ as
 \[
-  \frac{5!}{(|A|!)(|B|!)}\cdot\frac{(|A|!)^2}{Z(\alpha^{(A)})Z(\beta^{(A)})}\cdot\frac{(|B|!)^2}{Z(\alpha^{(B)})Z(\beta^{(B)})}\cdot
-  t_{\alpha^{(A)},\beta^{(A)}}\cdot t_{\alpha^{(B)},\beta^{(B)}}
+  \frac{5!}{(2!)(3!)}\cdot\frac{(3!)^2}{Z(\alpha^{(3)})Z(\beta^{(3)})}\cdot\frac{(2!)^2}{Z(\alpha^{(2)})Z(\beta^{(2)})}\cdot
+  t_{\alpha^{(3)},\beta^{(3)}}\cdot t_{\alpha^{(2)},\beta^{(2)}}.
 \]
 % Finally, consider the case in which $\langle \sigma, \tau \rangle$
 % has orbits of the form $\{A,B\}\in\mathcal{P}$ with $|A| = 4$ and
@@ -1106,100 +1164,124 @@ form $\{A,B\}\in\mathcal{P}_5$ with $|A| = 3$ and $|B| = 2$ as
 % (totaling length $4$), and a remaining $1$ cycle (totaling length
 % $1$) -- this is impossible to achieve for $\sigma$ since it cannot
 % be partitioned in such a way.
-\\\\We note that, for a fixed cycle type \( x = (x_i)_{i \in
-\mathbb{N}_n} \), and a set partition \( \omega = \{\omega_1, \dots,
-\omega_k\} \in \mathcal{P}_5 \), the set
+We note that, for a fixed cycle type \( x = (x_i)_{i \in
+\mathbb{N}_n} \), and a partition type $\upsilon =
+\{\upsilon_1,\dots, \upsilon_k\}\in\mathcal{I}_n$, the set
 \[
-  \mathcal{S}_{x,\omega} \coloneqq \left\{
-    \left(x^{(\omega_j)}_i\right)_{i \in \mathbb{N}_n,\, j =
+  \mathcal{S}_{x,\upsilon} \coloneqq \left\{
+    \left(x^{(\upsilon_j)}_i\right)_{i \in \mathbb{N}_n,\, j =
     1,\dots,k} \,\middle|\,
     \begin{array}{l}
-      \text{For each } j, \sum_{i=1}^n i x^{(\omega_j)}_i = |\omega_j|, \\
-      \text{and for each } i, \sum_{j=1}^k x^{(\omega_j)}_i = x_i
+      \text{For each } j, \sum_{i=1}^n i x^{(\upsilon_j)}_i = \upsilon_j, \\
+      \text{and for each } i, \sum_{j=1}^k x^{(\upsilon_j)}_i = x_i
     \end{array}
   \right\}.
 \] is the set of groupings of the cycle type $x$ into $k$ buckets,
-such that the sum of the $j$th group is exactly $|\omega_j|$.
+such that the sum of the lengths of cycles in the $j$th bucket is
+exactly $\upsilon_j$.
 Further, we require that for each $i\in\mathbb{N}$, $\sum_{j=1}^k
-x^{(\omega_j)}_i = x_i$ since we want to ensure that the total number
+x^{(\upsilon_j)}_i = x_i$ since we want to ensure that the total number
 of $i$ cycles does not change between our original cycle type and
-this new grouping of cycles.
-\\\\In the case where $\omega = \{A,B\}$ with $|A| = 3$ and $|B| =
-2$, $\alpha = (0,1,1,0,0)$ (i.e. $\sigma$ has cycle type $2^13^1$)
+this new grouping of cycles. This is the set of all groupings of the
+cycle type $x$ into distinct groups of cycles whose lengths
+correspond to the cardinalities of sets within a partition of $\mathbb{N}_n$.
+\\\\In the example we just computed, we have that for $\upsilon =
+(2,3)$ (i.e. our orbit has type $2^13^1$), $\alpha = (0,1,1,0,0)$
+(i.e. $\sigma$ has cycle type $2^13^1$)
 and $\beta=(2,0,1,0,0)$ (i.e. $\tau$ has cycle type $1^23^1$) , we have that
 \[
-  S_{\alpha,\omega} = \{(0,1,0,0,0), (0,0,1,0,0)\}
+  S_{\alpha,\upsilon} = \{((0,1,0,0,0), (0,0,1,0,0))\}
 \]
 and
 \[
-  S_{\beta,\omega} = \{(2,0,0,0,0), (0, 0, 1,0,0)\}.
+  S_{\beta,\upsilon} = \{((2,0,0,0,0), (0, 0, 1,0,0))\}.
 \]
-\\\\Note that if either $S_{\alpha,\omega}$ or $S_{\beta,\omega}$
+Note that if either $S_{\alpha,\upsilon}$ or $S_{\beta,\upsilon}$
 were empty, then there is no way to partition both $\sigma$ and
 $\tau$'s cycle types such that they can form orbits which are
-compatible with our partition $\omega$. For our particular $\sigma$
-and $\tau$, this is the case when $\rho = \{C,D\}\in\mathcal{P}_5$
-with $|C| = 4$ and $|D| = 1$. For this to occur, $\sigma$ and $\tau$
+compatible with our partition type $\upsilon$.
+\\\\For our particular $\sigma$
+and $\tau$, this is the case when we want to determine the number of
+pairs $\sigma$ and $\tau$ generating an orbit of type $\rho =
+(1,4)\in\mathcal{I}_n$. For this to occur, $\sigma$ and $\tau$
 must be partitionable into groups of cycles whose total lengths are
 $4$ and $1$. For $\tau$ this can be achieved by splitting the cycles
 into a $3$ cycle and $1$ cycle (totaling length $4$), and a remaining
-$1$ cycle (totaling length $1$) -- this is impossible to achieve for
-$\sigma$ since it cannot be partitioned in such a way. This is to
+$1$ cycle (totaling length $1$) For $\sigma$ this is impossible to
+achieve since it clearly cannot be subdivided such that it has cycles
+totaling length $1$. This is to
 say, for $\alpha = (0,1,1,0,0)$
 \[
   S_{\alpha,\rho} = \emptyset.
 \]
-If we enumerate over each partition in $\mathcal{P}_5$, summing over
-the ways in which $\sigma$ and $\tau$ can generate a set of orbits
-matching that partition, we will get the total number of pairs of
-$\sigma$ and $\tau$. We found that for a particular partition $\omega$, we have
+We found that for a particular partition type $\upsilon$, we have
 \[
-  \sum_{\alpha^{(\omega)}\in
-  S_{\alpha,\omega}}\sum_{\beta^{(\omega)}\in S_{\beta,\omega}}\prod_{j=1}^k
-  {\frac{(|\omega_j|!)^2}{Z(\alpha^{(\omega_j)})Z(\beta^{(\omega_j)})}}\cdot
-t_{\alpha^{(\omega_j)},\beta^{(\omega_j)}}\]
-total ways in which $\sigma$ and $\tau$ can produce this partition in
-its orbits. Then there are
-\[
-  \frac{5!}{Y(m^{(\omega)})}
-\]
-such partitions of $\mathbb{N}_5$. Computing
-\[
-  \frac{5!}{Y(m^{(\omega)})}\sum_{\alpha^{(\omega_i)}\in
-  S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
-  {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
-  t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}
-\]
-we find that there are $40$ pairs of permutations in $S_5$ with cycle
+  \sum_{\alpha^{(\upsilon)}\in
+  S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon)}\in
+  S_{\beta,\upsilon}}\prod_{j=1}^k
+  {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}\]
+total ways in which $\sigma$ and $\tau$ can produce this partition type in
+its orbits.
+% There are
+% \[
+%   \frac{5!}{Y(m^{(\omega)})}
+% \]
+% such partitions of this partition type. So computing
+% \[
+%   \frac{5!}{Y(m^{(\omega)})}\sum_{\alpha^{(\omega_i)}\in
+%   S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
+%   {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
+%   t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}
+% \]
+% gives us that total number of pairs $\sigma$ and $\tau$ which
+% generate an orbit type of $2^13^1$.
+For $\upsilon = (2,3)\in\mathcal{I}_5$, we find that there are $40$
+pairs of permutations in $S_5$ with cycle
 types $2^13^1$ and $1^23^1$ respectively that generate orbits with a
-set containing $3$ elements and a set containing $2$ elements
-Finally, summing over partitions $\mathcal{P}_5$, we have that
+set containing $3$ elements and a set containing $2$ elements.
+\\\\If we enumerate over all partition types in $\mathcal{I}_5$, summing over
+the ways in which $\sigma$ and $\tau$ can generate a set of orbits
+matching that partition type, we will get the total number of pairs of
+$\sigma$ and $\tau$. We have that,
 \[
   \frac{(5!)^2}{Z(\alpha)Z(\beta)} =
-  \sum_{\omega\in\mathcal{P}_5}\frac{5!}{Y(m^{(\omega)})}\sum_{\alpha^{(\omega_i)}\in
-  S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
-  {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
-  t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+  \sum_{(\upsilon_1,\dots,\upsilon_k)\in\mathcal{I}_5}\frac{5!}{Y(m^{(\upsilon)})}\sum_{\alpha^{(\upsilon_j)}\in
+  S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon_j)}\in
+  S_{\beta,\upsilon}}\prod_{j=1}^k
+  {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+  t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}.
 \]
-\\\\In general, for $n\in\mathbb{N}$, and two permutations $\sigma$
-and $\tau$ with cycle types $\alpha$ and $\beta$ respectively
+% Note that this sum over equivalence classes
+% $[\omega]\in\mathcal{P}_5/\sim$ is equivalent to a sum over integer
+% partitions of $n$, where the multiplicities $m^{(\omega)}$
+% correspond to each partition types. In fact, the code used to
+% compute $t_{\alpha,\beta}$ enumerates over partitions of $n$
+% directly, rather than representatives of partition types. However,
+% we have chosen to present it in this form to remain consistent with
+% our earlier notation and to emphasize the underlying connection to
+% set partitions.
+In general, for $n\in\mathbb{N}$, and two permutations $\sigma$
+and $\tau$ with cycle types $\alpha$ and $\beta$ respectively, we have that,
 \[
   \frac{(n!)^2}{Z(\alpha)Z(\beta)} =
-  \sum_{\omega\in\mathcal{P}_n}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in
-  S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
-  {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
-  t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+  \sum_{(\upsilon_1,\dots,\upsilon_k)\in\mathcal{I}_n}\frac{n!}{Y(m^{(\upsilon)})}\sum_{\alpha^{(\upsilon_j)}\in
+  S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon_j)}\in
+  S_{\beta,\upsilon}}\prod_{j=1}^k
+  {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+  t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}.
 \]
-To solve for $t_{\alpha,\beta}$, we must isolate the partition in
-which $\omega=\{\mathbb{N}_n\}$
+To solve for $t_{\alpha,\beta}$, we must isolate the partition
+$\{\mathbb{N}_n\}$, giving us
 \begin{align*}
   \frac{(n!)^2}{Z(\alpha)Z(\beta)} =
   &\frac{(n!)^2}{Z(\alpha)Z(\beta)}\cdot t_{\alpha, \beta}\\
-  &+ \sum_{\omega\in\mathcal{P}_n \setminus
-  \{\mathbb{N}_n\}}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in
-  S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
-  {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
-  t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+  &+
+  \sum_{(\upsilon_1,\dots,\upsilon_k)\ne(n)}\frac{n!}{Y(m^{(\upsilon)})}\sum_{\alpha^{(\upsilon_j)}\in
+  S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon_j)}\in
+  S_{\beta,\upsilon}}\prod_{j=1}^k
+  {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+  t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}.
 \end{align*}
 Solving for $t_{\alpha,\beta}$ we have
 \begin{theorem}
@@ -1207,25 +1289,32 @@ Solving for $t_{\alpha,\beta}$ we have
   respectively, we have
   \begin{align*}
     t_{\alpha, \beta}\ = 1 -
-    \frac{Z(\alpha)Z(\beta)}{(n!)^2}\sum_{\omega\in\mathcal{P}_n
-    \setminus\{\mathbb{N}_n\}}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in
-    S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
-    {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
-    t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+    \frac{Z(\alpha)Z(\beta)}{(n!)^2}\sum_{(\upsilon_1,\dots,\upsilon_k)\ne(n)}\frac{n!}{Y(m^{(\upsilon)})}\sum_{\alpha^{(\upsilon_j)}\in
+    S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon_j)}\in
+    S_{\beta,\upsilon}}\prod_{j=1}^k
+    {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+    t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}.
   \end{align*}
 \end{theorem}
 \noindent This can be solved recursively since each factor
-$t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}$ is being computed for
-some $\omega \ne \{\mathbb{N}_n\}$. Thus $|\omega_i| < n$ and we can
+$t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}$ is being computed for
+some $\upsilon \ne (n)$. Thus, each $\upsilon_j < n$ and we can
 compute the subproblem for the case of permutations with cycle types
-$\alpha^{(\omega_i)}$ and $\beta^{(\omega_i)}$. Eventually, we will
-achieve the base case where $n = 1$ since in the case, transitivity is trivial.
+$\alpha^{(\upsilon_j)}$ and $\beta^{(\upsilon_j)}$. Eventually, we will
+achieve the base case where $n = 1$, in which case transitivity is trivial.
 \\\\In practice, we performed bottom-up recursion to get all possible
 values $t_{\alpha,\beta}$, for all pairs of cycle types $\alpha$ and
-$\beta$ in $S_1, \dots, S_{26}$ respectively. To the best of my
+$\beta$ in $S_1, \dots, S_{26}$ respectively. As a sanity check, we
+verified that for all cycle types $\alpha$ and $\beta$ in $S_n$, that
+\[
+  t_n = \sum_{\alpha,\beta}\frac{1}{Z(\alpha)Z(\beta)}\cdot t_{\alpha,\beta}
+\]
+where $n\in\{1,\dots,26\}$ and $t_n$ is in reference to the original
+statement of Dixon's Theorem~\ref{dixons_theorem}.
+\\\\To the best of our
 knowledge, a general formula computing the probability that two
 permutations with fixed cycle types $\alpha$ and $\beta$ generate a
-transitive subgroup of $S_n$ has not appeared in the literature. This
+transitive subgroup of $S_n$ has not appeared in academic literature. This
 contribution serves to extend Dixon's theorem to allow for cases in
 which $\sigma,\tau\in S_n$ are drawn from non-uniform distributions
 determined by their cycle types.
@@ -1240,43 +1329,70 @@ each closure in two loop menu and the resulting number of expected stops.
   \begin{adjustbox}{max width=\textwidth,max height=2\textheight}
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
       \hline
-      & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+      & 2               & 3               & 4               & 5
+      & 6               & 7               & 8               & 9
+      & 10              & 11              & 12              \\
       \hline
-      2 & \textbf{781.69} & \textbf{751.03} & \textbf{750.56} &
+      2               & \textbf{781.69} & \textbf{751.03} & \textbf{750.56} &
       \textbf{750.34} & \textbf{750.31} & \textbf{750.33} &
       \textbf{750.22} & \textbf{750.49} & \textbf{750.49} &
-      \textbf{750.61} & \textbf{750.48} \\
+      \textbf{750.61} & \textbf{750.48}
+      \\
       \hline
-      3 & & 707.37 & \textbf{707.50} & \textbf{707.25} &
-      \textbf{707.23} & 707.25 & 707.14 & \textbf{707.40} &
-      \textbf{707.40} & 707.52 & \textbf{707.39} \\
+      3               &                 & 701.96          &
+      \textbf{704.78} & 704.54          & 704.52          &
+      \textbf{704.54} & \textbf{704.43} & \textbf{704.69} & 704.69
+      & \textbf{704.81} & \textbf{704.68} \\
       \hline
-      4 & & & \textbf{707.65} & \textbf{707.41} & \textbf{707.38} &
+      4               &                 &                 &
+      \textbf{707.65} & \textbf{707.41} & \textbf{707.38} &
       \textbf{707.40} & \textbf{707.29} & \textbf{707.56} &
-      \textbf{707.55} & \textbf{707.68} & \textbf{707.55} \\
+      \textbf{707.55} & \textbf{707.68} & \textbf{707.55}
+      \\
       \hline
-      5 & & & & \textbf{707.17} & \textbf{707.14} & \textbf{707.16} &
+      5               &                 &                 &
+      & \textbf{707.17} & \textbf{707.14} & \textbf{707.16} &
       \textbf{707.05} & \textbf{707.32} & \textbf{707.31} &
-      \textbf{707.44} & \textbf{707.31} \\
+      \textbf{707.44} & \textbf{707.31}
+      \\
       \hline
-      6 & & & & & \textbf{707.12} & \textbf{707.14} & \textbf{707.03}
-      & \textbf{707.29} & \textbf{707.29} & \textbf{707.41} & \textbf{707.28} \\
+      6               &                 &                 &
+      &                 & \textbf{707.12} & \textbf{707.14} & \textbf{707.03}
+      & \textbf{707.29} & \textbf{707.29} & \textbf{707.41} &
+      \textbf{707.28}
+      \\
       \hline
-      7 & & & & & & \textbf{707.16} & \textbf{707.05} &
-      \textbf{707.31} & \textbf{707.31} & \textbf{707.43} & \textbf{707.30} \\
+      7               &                 &                 &
+      &                 &                 & \textbf{707.16} & \textbf{707.05} &
+      \textbf{707.31} & \textbf{707.31} & \textbf{707.43} &
+      \textbf{707.30}
+      \\
       \hline
-      8 & & & & & & & \textbf{706.94} & \textbf{707.20} &
-      \textbf{707.20} & \textbf{707.32} & \textbf{707.19} \\
+      8               &                 &                 &
+      &                 &                 &                 &
+      \textbf{706.94} & \textbf{707.20} &
+      \textbf{707.20} & \textbf{707.32} & \textbf{707.19}
+      \\
       \hline
-      9 & & & & & & & & \textbf{707.46} & \textbf{707.46} &
-      \textbf{707.58} & \textbf{707.46} \\
+      9               &                 &                 &
+      &                 &                 &                 &
+      & \textbf{707.46} & \textbf{707.46} &
+      \textbf{707.58} & \textbf{707.46}
+      \\
       \hline
-      10 & & & & & & & & & \textbf{707.46} & \textbf{707.58} &
-      \textbf{707.45} \\
+      10              &                 &                 &
+      &                 &                 &                 &
+      &                 & \textbf{707.46} & \textbf{707.58} &
+      \textbf{707.45}
+      \\
       \hline
-      11 & & & & & & & & & & \textbf{707.70} & \textbf{707.58} \\
+      11              &                 &                 &
+      &                 &                 &                 &
+      &                 &                 & \textbf{707.70} & \textbf{707.58} \\
       \hline
-      12 & & & & & & & & & & & \textbf{707.45} \\
+      12              &                 &                 &
+      &                 &                 &                 &
+      &                 &                 &                 & \textbf{707.45} \\
       \hline
     \end{tabular}
 
@@ -1336,17 +1452,29 @@ each closure in two loop menu and the resulting number of expected stops.
     \end{tabular}
   \end{adjustbox}
   \caption{Simulated number of stops for two closures each ranging
-  from length $\{2,\dots,12\}$}
+  from length $\{2,\dots,12\}$.}
   \label{fig:simulated_two_loop}
 \end{table}
 
 \subsection{Three or More Loops}
-Our version of Dixon's theorem can be easily extended to work on an
-arbitrary number of permutatiosn with arbitrary cycle types. The
+Our version of Dixon's Theorem can be easily extended to work on an
+arbitrary number of permutations with arbitrary cycle types
+$\alpha_1,\dots,\alpha_\ell$ via
+\[
+  t_{\alpha_1, \dots, \alpha_\ell} = 1 - \frac{\prod_{i=1}^\ell
+  Z(\alpha_i)}{(n!)^\ell} \sum_{(\upsilon_1,\dots,\upsilon_k)\ne(n)}
+  \frac{n!}{Y(m^{(\upsilon)})} \sum_{\alpha_1^{(\upsilon_j)} \in
+    \mathcal{S}_{\alpha_1, \upsilon},\dots,\alpha_\ell^{(\upsilon_j)}
+  \in \mathcal{S}_{\alpha_\ell, \upsilon}} \prod_{j=1}^k
+  \frac{(\upsilon_j!)^\ell}{\prod_{i=1}^\ell
+  Z(\alpha_i^{(\upsilon_j)})} \cdot t_{\alpha_1^{(\upsilon_j)},
+  \dots, \alpha_\ell^{(\upsilon_j)}}.
+\]
+The
 problem with calculating the corresponding values of
-$t_{\alpha_1,\dots,\alpha_k}$ is that of computational complexity.
-\\\\While the implented algorithm used many optimizations including
-caching lookups and precomputing partitions, it is still sufficiently
+$t_{\alpha_1,\dots,\alpha_\ell}$ is that of computational complexity.
+\\\\While the implemented algorithm used many optimizations including
+caching lookups and pre-computing partitions, it is still sufficiently
 slow that the three loop case would likely require further
 optimization and more parallelization. Given the scale of
 combinatoric enumeration done to solve this problem, we used
@@ -1362,33 +1490,42 @@ This entire discussion of the expected number of stops has ignored
 the impact of the diagonal board. Once implemented, the diagonal
 board drastically reduced the number of stops for a run of the Bombe.
 To describe this effect, Turing introduced an additional term called
-the {\bf{H-M Factor}}, named after Cyril Holland-Martin the Technical
+the {\bf{H-M factor}}, named after Cyril Holland-Martin the Technical
 Director of the British Tabulating Company which manufactured the Bombe.
-\\\\The H-M Factor measures the proportion of normal stops over all
+\\\\The H-M factor measures the proportion of normal stops over all
 steckering hypotheses that are maintained after introducing the
 diagonal connections. Given that the number of diagonal wires being
 used is dictated by the number of letters being considered in a menu,
-Turing gave seperate H-M Factors for menus containing various numbers
-of letters. We will denote the H-M Factor for a menu with $k$ letters
-as $\mathcal{H}_k$.
-\\\\Supposing we had a menu with $c$ closures containing $k$ total
+Turing gave separate H-M factors for menus containing various numbers
+of letters. We will denote the H-M factor for a menu with $\ell$ letters
+as $\mathcal{H}_\ell$.
+\\\\Supposing we had a menu with $c$ closures containing $\ell$ total
 letters. Turing's model tells us that before the introduction of the
 diagonal board we expect $26^{4-c}$ normal stops over all steckering
-hypotheses. Given that $\mathcal{H}_k$ of these normal stops are
+hypotheses. Given that $\mathcal{H}_\ell$ of these normal stops are
 maintain after introducing the diagonal board, Turing's model
-esimates that we expect
+estimates that we expect
 \[
-  26^{4-c}\cdot\mathcal{H}_k
+  26^{4-c}\cdot\mathcal{H}_\ell
 \]
 total normal stops over all steckering hypotheses when including the
 diagonal board.
-\\\\For the same reasons discussed in section \ref{justify_turing},
+\\\\The H-M factor has been discussed in academic literature
+regarding the Bombe, with researchers like John Wright and Donald W.
+Davies attempting to improve the accuracy of the H-M factor through
+either recursive formulae or explicit enumeration, respectively. Much
+of this research stems from the fact that Turing provides no formal
+justification for his computation of the H-M factor, stating simply
+that, ``the method of constructing the [H-M factor] table is very
+tedious and uninteresting.'' This understatement sparked a number of
+attempts to recreate, or improve upon, this ``uninteresting'' computation.
+\\\\For the same reasons discussed in Section~\ref{justify_turing},
 this serves as a fair approximation of the actual number of stops
 since with more loops the proportion of stops with type $1^125^1$
 increases. However, this also means that the calculation of
-$\mathcal{H}_k$ suffers from the inherent issues with Turing's model
-without the diagonal board -- undercounting due to abnormal stops,
-and overcounting stops with multiple steckering hypotheses producing
+$\mathcal{H}_\ell$ suffers from the inherent issues with Turing's model
+without the diagonal board -- under-counting due to abnormal stops,
+and over-counting stops with multiple steckering hypotheses producing
 normal stops. As an example, Turing calculates that $\mathcal{H}_2 =
 0.92$. While this may serve as an accurate estimate of the number of
 normal stops over all steckering hypotheses, it has scarce relation
@@ -1397,40 +1534,45 @@ and only two letters can never produce a stop -- even with the
 introduction of the diagonal board.
 \subsubsection{Cycle-Type Based H-M Factor}
 As with our cycle-type model introduced in the last section, a proper
-calculation of $\mathcal{H}_k$ should not only take into account the
-single variable $k$, it should also take into account an additional
-variable representing the orbit structure $m = (m_i)$ of a stop.
-Further, such an H-M fator would not give the proportion of normal
+calculation of $\mathcal{H}_\ell$ should not only take into account the
+single variable $\ell$, it should also take into account an additional
+variable representing the partition type $\upsilon\in\mathcal{I}_n$ of a stop.
+Further, such an H-M factor would not give the proportion of normal
 stops over all steckering hypotheses that are maintained after the
 introduction of the diagonal board, it would give the proportion of
 \emph{all} stops which are maintained. We will denote such a
-hypothetical H-M factor as $\mathcal{H}_{k,m}$
+hypothetical H-M factor as $\mathcal{H}_{\ell,\upsilon}$. While
+$\mathcal{H}_\ell$ is Turing's original scalar correction factor for
+menus of length $\ell$, our refinement $\mathcal{H}_{\ell,\upsilon}$
+introduces partition-aware correction accounting for the stop type of a stop.
 \\\\Consider the case of two closures. We showed in the last section
 that we can compute the probability of a stop for two loops with
 cycle structures $\alpha$ and $\beta$ as.
 \begin{align*}
-  t_{\alpha, \beta}\ = 1 - \sum_{\omega\in\mathcal{P}_n
-  \setminus\{\mathbb{N}_n\}}\frac{Z(\alpha)Z(\beta)}{(n!)^2}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in
-  S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
-  {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
-  t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+  t_{\alpha, \beta}\ = 1 -
+  \frac{Z(\alpha)Z(\beta)}{(n!)^2}\sum_{(\upsilon_1,\dots,\upsilon_k)\ne(n)}\frac{n!}{Y(m^{(\upsilon)})}\sum_{\alpha^{(\upsilon_j)}\in
+  S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon_j)}\in
+  S_{\beta,\upsilon}}\prod_{j=1}^k
+  {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+  t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}.
 \end{align*}
-We can modify our version of Dixon's theorem to give us the
+We can modify our version of Dixon's Theorem to give us the
 likelihood that two permutations $\sigma,\tau\in S_n$ with cycle type
-$\alpha$ and $\beta$ are such that $\langle\sigma,\tau\rangle$ have
-the structure of a particular orbit $\omega\in\mathcal{P}_n$. We
-denote this probability $t_{\alpha,\beta}^{(m^{(\omega)})}$ and this is given as
+$\alpha$ and $\beta$ are such that the orbits of
+$\langle\sigma,\tau\rangle$ have a particular partition type
+$\upsilon\in\mathcal{I}_n$. We
+denote this probability $t_{\alpha,\beta}^{(\upsilon)}$ and this is given as
 \begin{align*}
-  t^{m^{(\omega)}}_{\alpha,
-  \beta}\ =\frac{Z(\alpha)Z(\beta)}{(n!)^2}\frac{n!}{Y(m^{(\omega}))}\sum_{\alpha^{(\omega_i)}\in
-  S_{\alpha,\omega}}\sum_{\beta^{(\omega_i)}\in S_{\beta,\omega}}\prod_{i=1}^k
-  {\frac{(|\omega_i|!)^2}{Z(\alpha^{(\omega_i)})Z(\beta^{(\omega_i)})}}\cdot
-  t_{\alpha^{(\omega_i)},\beta^{(\omega_i)}}.
+  t_{\alpha,\beta}^{(\upsilon)}\ =\frac{Z(\alpha)Z(\beta)}{(n!)^2}\frac{n!}{Y(m^{(\upsilon)})}\sum_{\alpha^{(\upsilon_j)}\in
+  S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon_j)}\in
+  S_{\beta,\upsilon}}\prod_{j=1}^k
+  {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+  t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}.
 \end{align*}
-and we note that
+We note that
 \[
   t_{\alpha,\beta} = 1 -
-  \sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}t_{\alpha,\beta}^{(m^{(\omega)})}
+  \sum_{\upsilon\ne(n)}t_{\alpha,\beta}^{(\upsilon)}.
 \]
 Recall that the probability of a stop for loops of length $a$ and $b$ is
 \begin{align*}
@@ -1444,53 +1586,158 @@ Recall that the probability of a stop for loops of length $a$ and $b$ is
       type
   }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{
   has cycle type }\beta)\cdot (1 -
-  \sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}t_{\alpha,\beta}^{(m^{(\omega)})})\\
+  \sum_{\upsilon\ne(n)}t_{\alpha,\beta}^{(\upsilon)})\\
   = \text{ }&1-\sum_{\alpha,
   \beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle
       type
   }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{
   has cycle type }\beta)
   \\\text{ }&+
-  \sum_{\alpha,\beta}\sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
+  \sum_{\alpha,\beta}\sum_{\upsilon\ne(n)}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
       has cycle type
   }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{
-  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}\\
+  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(\upsilon)}\\
   =\text{
-  }&\sum_{\alpha,\beta}\sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
+  }&\sum_{\alpha,\beta}\sum_{\upsilon\ne(n)}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
       has cycle type
   }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{
-  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}\\
+  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(\upsilon)}\\
   =\text{
-  }&\sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\sum_{\alpha,\beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
+  }&\sum_{\upsilon\ne(n)}\sum_{\alpha,\beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
       has cycle type
   }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{
-  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}
+  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(\upsilon)}
 \end{align*}
 This does not include our hypothetical H-M factor yet. Our factor
-$\mathcal{H_{k,m}}$ gives the proportion of stops of type $m$ that
+$\mathcal{H}_{\ell,\upsilon}$, gives the proportion of stops of type
+$\upsilon$ that
 are maintained after the diagonal board is introduced. Then the total
-number of expected stops with two closures with lengths $a$ and $b$
-representing a menu of $k$ distinct letters ($k$ is not necessarily
-$a+b$ because the closures may share letters), including the diagonal board is
+number of expected stops, with two closures with lengths $a$ and $b$
+representing a menu of $\ell$ distinct letters ($\ell$ is not necessarily
+$a+b$ because the closures may share letters), including the diagonal board is,
 \[
-  \sum_{\omega\in\mathcal{P}_n\setminus\{\mathbb{N}_n\}}\mathcal{H}_{k,m^{(\omega)}}\sum_{\alpha,\beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
+  \sum_{\upsilon\ne(n)}\mathcal{H}_{\ell,\upsilon}\sum_{\alpha,\beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{
       has cycle type
   }\alpha)\cdot\mathbb{P}(\overline\delta_1\dots\overline\delta_b\text{
-  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(m^{(\omega)})}
+  has cycle type }\beta)\cdot t_{\alpha,\beta}^{(\upsilon)}.
 \]
 \subsubsection{Future Work} While this provides a framework for
-understanding such a hypothetical factor $\mathcal{H}_{k,nm}$ -- we
+understanding such a hypothetical factor $\mathcal{H}_{\ell,\upsilon}$ -- we
 leave its explicit computation to future work.
-\\\\In theory, $\mathcal{H}_{k,m}$ could be estimated via simulation;
-however, this would require that we are able to efficiently generate
+\\\\In theory, $\mathcal{H}_{\ell,\upsilon}$ could be estimated via simulation;
+However, this would require that we are able to efficiently generate
 menus producing arbitrary orbit structures, many of which are
-extremely rare. This would likely resuly in high variance and poor convergence.
+extremely rare. This would likely result in high variance and poor convergence.
 \\\\We suspect it is possible to perform an exact enumeration to
-compute $\mathcal{H}_{k,m}$, likely via similar methods used to
-compute $t^{(m)}_{\alpha,\beta}$, though we do not yet posses such a
+compute $\mathcal{H}_{\ell,\upsilon}$, likely via similar methods used to
+compute $t_{\alpha,\beta}$, though we do not yet posses such a
 procedure. Developing a means to compute this factor would allow us
 to model the effective number of stops with high accuracy across
 nearly all Bombe configurations — with or without the diagonal board.
+
+\subsection{Computational Methods}
+Many of the results in this thesis were obtained through simulations
+and computational analysis. To support reproducibility and encourage
+further exploration, this thesis is accompanied by a companion
+repository containing all relevant code.
+This repository can be found at
+\url{https://github.com/JonahWeinbaum/building-a-bombe}. This
+repository includes the scripts used for:
+\begin{itemize}
+  \item Simulating the Bombe
+  \item Simulating the Enigma
+  \item Creating and using Zygalski Sheets
+  \item Computing scoring, distance, dummyismus, and repeat sheets
+    for Banburismus
+  \item Capturing cycle distributions in the Bombe
+  \item Computing probabilities $t_{\alpha,\beta}$
+  \item Computing the expected number of stops in the Bombe for
+    various menu arrangements
+\end{itemize}
+This repository is intended not only to allow readers to experiment
+with the methods described herein, but also to serve as a foundation
+for any future research building on this work.
+\\\\Ultimately, our work provides several promising directions for
+exploration—from improving the estimation of stops in the Bombe by
+computing a new H-M factor, to deeper investigations of transitivity
+in randomly composed permutations. In analyzing and extending
+Turing’s approach with modern tools, we not only gain greater insight
+into the Bombe itself, but also into the mathematical structures that
+underlie its success.
+% \section{Computational Methods}
+% Many of the results in this thesis were obtained through
+% simulations and computational analysis. To support reproducibility
+% and encourage further exploration, this thesis is accompanied by a
+% companion repository containing all relevant code. This repository
+% is intended not only to allow readers to experiment with the
+% methods described herein, but also to serve as a foundation for any
+% future research building on this work.
+% \\\\In this section, we will outline some of the more relevant
+% files and their roles in producing the results presented throughout
+% the thesis.
+% \subsection{Repository Structure}
+
+% We begin by providing an outline of the key directories in the
+% repository and their purpose:
+% \begin{itemize}
+%   \item \texttt{code/}
+%   \begin{itemize}
+%     \item \texttt{banburismus/} -- Code used for Section~\ref{banburismus}.
+%     \item \texttt{bombe\_sim/} -- A simulation of both the Bombe
+% and the Enigma.
+%     \item \texttt{stop\_sim/} -- Code used for simulating the Bombe
+% in Chapter~\ref{stops}.
+%     \item \texttt{zygalksi\_sim/} -- Code used for Section~\ref{zygalski}.
+%     \item \texttt{permutation\_sim/} -- A variety of simulations
+% and computations used when researching methods to compute $t_{\alpha,\beta}$
+%     \item \texttt{permutation\_sim/transitive\_prob\_calc} -- The
+% code used to compute $t_{\alpha,\beta}$ values.
+%   \end{itemize}
+
+%   \item \texttt{paper/}
+%   \begin{itemize}
+%     \item Contains all LaTeX source files and assets required to
+% compile this thesis.
+%   \end{itemize}
+% \end{itemize}
+
+% \subsection{Banburismus}
+% In \texttt{code/banburismus/} we find the several files.
+% \begin{itemize}
+%     \item \texttt{ban.py}
+% \end{itemize}
+% This was used to compute the scoring sheets for an accompanying
+% loss value and produce the relevant LaTeX tables.
+% \begin{itemize}
+%     \item \texttt{conversion.py}
+% \end{itemize}
+% This was used to compute the conversions from middle wheel
+% comparisons to end wheel comparisons and produce the relevant LaTeX tables.
+% \begin{itemize}
+%     \item \texttt{distance.py}
+% \end{itemize}
+% This was used to compute loss incurred from offset distance and
+% produce the relevant LaTeX tables.
+% \begin{itemize}
+%     \item \texttt{dummy.py}
+% \end{itemize}
+% This was used to compute loss incurred from the dummyismus protocol
+% and produce the relevant LaTeX tables.
+% \begin{itemize}
+%     \item \texttt{repeats.py}
+% \end{itemize}
+% This was used to quickly determine repeat structures in two pieces of text.
+% \subsection{Bombe and Enigma Simulation}
+% In \texttt{code/bombe\_sim/} we find code used to simulate both the
+% Bombe and the Enigma machines. Running \texttt{make} produces a
+% directory \texttt{out} containing two files \texttt{bombe} and
+% \texttt{engima} which are executables corresponding to their
+% relevant simulation.
+% \\\\Here, the Bombe simulation is particularly useful for readers
+% seeking to understand internals of the Bombe. The simulation
+% produces a display of the scramblers, indicator drum, test
+% register, and the state of all the wires in the diagonal board at
+% each rotor position.
 % \[
 % \mathcal{D}_{a,b, m} \coloneq \biggl(\sum_{\alpha,
 % \beta}\mathbb{P}(\overline\pi_1\dots\overline\pi_a\text{ has cycle

@@ -115,6 +115,23 @@ July 28, 2025
 	\end{center}
 \end{frame}
 
+\begin{frame}[fragile]{Action This Day}
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{minipage}{0.48\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{paper/images/bombe.jpg}
+			\end{minipage}%
+			\hfill
+            
+			\begin{minipage}{0.48\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{paper/images/colossus.jpg}
+			\end{minipage}
+		}
+	\end{center}
+\end{frame}
+
 \begin{frame}[fragile]{Acknowledgments}
 	\begin{itemize}
 		\item Marian Rejewski, Jerzy Różycki, and Henryk Zygalski
@@ -205,7 +222,7 @@ July 28, 2025
 		      \begin{itemize}
 			      \setlength\itemsep{1em}
 			      \item Turing's model
-			      \item A new cycle type model
+			      \item Development of a new cycle type model
 			      \item H-M factor
 		      \end{itemize}
 	\end{itemize}
@@ -256,7 +273,7 @@ July 28, 2025
 				\node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
 
 				\draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
-				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard}};
+				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard} ($S$)};
 
 				\draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
 				\node at (0+5+1, 0+2-0.5) {\texttt{Rotor}};
@@ -303,7 +320,7 @@ July 28, 2025
 				\node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
 
 				\draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
-				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard}};
+				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard} ($S$)};
 
 				\draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
 				\node at (0+5+1, 0+2-0.5) {\texttt{Rotor}};
@@ -356,7 +373,7 @@ July 28, 2025
 				\node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
 
 				\draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
-				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard}};
+				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard} ($S$)};
 
 				\draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
 				\node at (0+5+1, 0+2-0.5) {\texttt{Rotor}};
@@ -460,7 +477,7 @@ July 28, 2025
 				\node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
 
 				\draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
-				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard}};
+				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard} ($S$)};
 
 				\draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
 				\node at (0+5+1, 0+2-0.5) {\texttt{Rotor}};
@@ -521,7 +538,7 @@ July 28, 2025
 				\node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
 
 				\draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
-				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard}};
+				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard} ($S$)};
 
 				\draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
 				\node at (0+5+1, 0+2-0.5) {\texttt{Rotor}};
@@ -575,7 +592,7 @@ July 28, 2025
 				\node at (0+5+1-14, 0+2-0.5-5) {\texttt{Bulbs}};
 
 				\draw[fill=lightgray] (0+5-8, 0+2) rectangle (2+5-8,4+2) node[midway] {};
-				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard}};
+				\node at (0+5+1-8, 0+2-0.5) {\texttt{Plugboard} ($S$)};
 
 				\draw[fill=lightgray] (0+5, 0+2) rectangle (2+5,4+2) node[midway] {};
 				\node at (0+5+1, 0+2-0.5) {\texttt{Rotor}};
@@ -700,7 +717,10 @@ July 28, 2025
 		\item A random message key (\emph{Spruchschlüssel}) is chosen and the window setting (\emph{Grundstellung}) is used to encipher this message key
         		      \pause
 		      \vspace{1em}
-		\item The remainder of the message is enciphered using the message key (\emph{Spruchschlüssel})
+        \item Send the enciphered message key (\emph{Spruchschlüssel})
+        		      \pause
+		      \vspace{1em}
+		\item The remainder of the message is enciphered using the message key (\emph{Spruchschlüssel}) and sent
 	\end{enumerate}
 \end{frame}
 
@@ -763,7 +783,7 @@ We send
 \end{frame}
 
 \begin{frame}{Sending Messages}
-We decipher \texttt{XYZ} as
+We decipher \texttt{FZK} as
     \begin{center}
         \texttt{ABC}
     \end{center}
@@ -806,6 +826,13 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 
 \part{}
 \section{The Turing-Welchman Bombe}
+
+\begin{frame}[fragile]{}
+	\Huge
+	\begin{center}
+		The Turing-Welchman Bombe
+	\end{center}
+\end{frame}
 
 \begin{frame}[fragile]{Plaintext Attack}
 	\begin{center}
@@ -940,11 +967,11 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 \begin{frame}[fragile]{Plaintext Attack}
 	That is,
 	\begin{center}
-		$S(\texttt{A}) = \alpha \Rightarrow S(\texttt{A}) \text{ is steckered to all } \{\overline{\pi}^i(\alpha)\text{ }\vert\text{ }i\in\mathbb{N}\}$.
+		$S(\texttt{A}) = \alpha \Rightarrow \texttt{A} \text{ is steckered to all } \{\overline{\pi}^i(\alpha)\text{ }\vert\text{ }i\in\mathbb{N}\}$.
 	\end{center}
 	Alternately,
 	\begin{center}
-		$S(\texttt{A}) = \alpha \Rightarrow S(\texttt{A})\text{ is steckered to all }\langle\overline{\pi}\rangle\cdot{\alpha}$.
+		$S(\texttt{A}) = \alpha \Rightarrow \texttt{A}\text{ is steckered to all }\langle\overline{\pi}\rangle\cdot{\alpha}$.
 	\end{center}
 \end{frame}
 
@@ -2827,6 +2854,13 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 \part{}
 \section{Stops}
 
+\begin{frame}[fragile]{}
+	\Huge
+	\begin{center}
+		Analyzing the Bombe's Efficacy
+	\end{center}
+\end{frame}
+
 \begin{frame}[fragile]{Normal Stops}
 	For his analysis, Turing defines a \textbf{normal stop} as, ``positions at which by altering the point at which the current
 	enters the diagonal board, one can make 25 relays close.''
@@ -3224,7 +3258,7 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 
 				\draw[fill=lightgray] (2-6,-1.5-14) rectangle (4-6,2.5-14) node[midway] {};
 
-				\node at (3-6, -2) {$\overline\sigma_3$};
+				% \node at (3-6, -2) {$\overline\sigma_3$};
 
 				% Draw the wires entering the box
 				\draw[-] (0-6, 2-14) -- (2-6, 2-14) node[midway, above] {a};
@@ -3270,7 +3304,7 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 
 				\draw[fill=lightgray] (2+6,-1.5-14) rectangle (4+6,2.5-14) node[midway] {};
 
-				\node at (3, -2-14) {$\delta_3$};
+				% \node at (3, -2-14) {$\delta_3$};
 
 				% Draw the wires entering the box
 				\draw[-] (0+6, 2-14) -- (2+6, 2-14) node[midway, above] {};
@@ -3331,7 +3365,7 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 \end{frame}
 
 \begin{frame}{Orbits}
-    For more loops $\overline\pi$ and $\overline\delta$, we can view the orbits of $\langle\overline\pi, \overline\delta\rangle$ to see which wires electrify each other 
+    For more loops $\overline\pi$ and $\overline\delta$, we can view the orbits of $\langle\overline\pi, \overline\delta\rangle$ to see which wires electrify each other.
 \end{frame}
 
 
@@ -3349,7 +3383,7 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 \end{frame}
 
 \begin{frame}{Transitivity}
-	If we have two loops $\overline\pi$ and $\overline\delta$, the orbit of $\langle\overline\pi, \overline\delta\rangle$ will tell us which wires are reachable from one another.
+	If we have two loops $\overline\pi$ and $\overline\delta$, the orbits of $\langle\overline\pi, \overline\delta\rangle$ will tell us which wires are reachable from one another.
 	\pause
 	\\\\If there is only a single orbit $\{\texttt{A}, \texttt{B},\dots, \texttt{Z}\}$, then our arrangement is connected.
 	\pause
@@ -3374,7 +3408,7 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 
 \begin{frame}[fragile]{Dixon's Theorem}
 	\large
-	Dixon's Theorem (1969) gives recursive formulae to compute the probability that uniformly random $\sigma, \tau\in S_n$ form a transitive subgroup of $S_n$.
+	Dixon's Theorem (1969) gives a recursive formula to compute the probability that uniformly random $\sigma, \tau\in S_n$ form a transitive subgroup of $S_n$.
 \end{frame}
 
 \begin{frame}[fragile]{Dixon's Theorem}
@@ -3398,10 +3432,10 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 \begin{frame}{Generalized Dixon's Theorem}
 \begin{align*}
   & \mathbb{P}(\langle \overline\pi,\overline\delta \rangle\text{
-  forms a transitive subgroup})
+  is a transitive subgroup})
   \\= &\sum_{\alpha, \beta}\mathbb{P}(\overline\pi\text{ has cycle
   type }\alpha)\cdot\mathbb{P}(\overline\delta\text{ has cycle type
-  }\beta)\cdot t_{\alpha, \beta},
+  }\beta)\cdot t_{\alpha, \beta}
 \end{align*}
 \end{frame}
 \begin{frame}[fragile]{Generalized Dixon's Theorem}
@@ -3444,6 +3478,16 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 				\EndFunction
 			\end{algorithmic}
 		\end{minipage}}
+\end{frame}
+
+\begin{frame}{Generalized Dixon's Theorem}
+\begin{align*}
+  & \mathbb{P}(\langle \overline\pi,\overline\delta \rangle\text{
+  is a transitive subgroup})
+  \\= &\sum_{\alpha, \beta}\mathbb{P}(\overline\pi\text{ has cycle
+  type }\alpha)\cdot\mathbb{P}(\overline\delta\text{ has cycle type
+  }\beta)\cdot t_{\alpha, \beta}
+\end{align*}
 \end{frame}
 
 % \begin{frame}[fragile]{Algo}
@@ -3618,6 +3662,13 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 
 \part{}
 \section{Conclusion}
+
+\begin{frame}[fragile]{}
+	\Huge
+	\begin{center}
+		Conclusion
+	\end{center}
+\end{frame}
 
 \begin{frame}[fragile]{Future Work}
 \begin{itemize}

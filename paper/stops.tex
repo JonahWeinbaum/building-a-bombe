@@ -876,7 +876,7 @@ given a randomized offset, and the resulting cycle type of their
 composition was collected. As we collect this distribution, we
 compute the total variation distance change between our distributions
 every $1000$ iterations. If the total variation distance change
-between our distributions goes below $0.00001$ for more than $30$
+between our distributions goes below $0.0001$ for more than $30$
 comparisons, we deem that the distribution has reached a steady state.
 \\\\Implicit in this simulation is the assumption that permutations
 produced by the Bombe are uniformly distributed within each cycle
@@ -1327,74 +1327,33 @@ each closure in two loop menu and the resulting number of expected stops.
 \begin{table}[H]
   \centering
   \begin{adjustbox}{max width=\textwidth,max height=2\textheight}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
-      \hline
-      & 2               & 3               & 4               & 5
-      & 6               & 7               & 8               & 9
-      & 10              & 11              & 12              \\
-      \hline
-      2               & \textbf{781.69} & \textbf{751.03} & \textbf{750.56} &
-      \textbf{750.34} & \textbf{750.31} & \textbf{750.33} &
-      \textbf{750.22} & \textbf{750.49} & \textbf{750.49} &
-      \textbf{750.61} & \textbf{750.48}
-      \\
-      \hline
-      3               &                 & 701.96          &
-      \textbf{704.78} & 704.54          & 704.52          &
-      \textbf{704.54} & \textbf{704.43} & \textbf{704.69} & 704.69
-      & \textbf{704.81} & \textbf{704.68} \\
-      \hline
-      4               &                 &                 &
-      \textbf{707.65} & \textbf{707.41} & \textbf{707.38} &
-      \textbf{707.40} & \textbf{707.29} & \textbf{707.56} &
-      \textbf{707.55} & \textbf{707.68} & \textbf{707.55}
-      \\
-      \hline
-      5               &                 &                 &
-      & \textbf{707.17} & \textbf{707.14} & \textbf{707.16} &
-      \textbf{707.05} & \textbf{707.32} & \textbf{707.31} &
-      \textbf{707.44} & \textbf{707.31}
-      \\
-      \hline
-      6               &                 &                 &
-      &                 & \textbf{707.12} & \textbf{707.14} & \textbf{707.03}
-      & \textbf{707.29} & \textbf{707.29} & \textbf{707.41} &
-      \textbf{707.28}
-      \\
-      \hline
-      7               &                 &                 &
-      &                 &                 & \textbf{707.16} & \textbf{707.05} &
-      \textbf{707.31} & \textbf{707.31} & \textbf{707.43} &
-      \textbf{707.30}
-      \\
-      \hline
-      8               &                 &                 &
-      &                 &                 &                 &
-      \textbf{706.94} & \textbf{707.20} &
-      \textbf{707.20} & \textbf{707.32} & \textbf{707.19}
-      \\
-      \hline
-      9               &                 &                 &
-      &                 &                 &                 &
-      & \textbf{707.46} & \textbf{707.46} &
-      \textbf{707.58} & \textbf{707.46}
-      \\
-      \hline
-      10              &                 &                 &
-      &                 &                 &                 &
-      &                 & \textbf{707.46} & \textbf{707.58} &
-      \textbf{707.45}
-      \\
-      \hline
-      11              &                 &                 &
-      &                 &                 &                 &
-      &                 &                 & \textbf{707.70} & \textbf{707.58} \\
-      \hline
-      12              &                 &                 &
-      &                 &                 &                 &
-      &                 &                 &                 & \textbf{707.45} \\
-      \hline
-    \end{tabular}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \hline
+  & 2       & 3       & 4       & 5       & 6       & 7       & 8       & 9       & 10      & 11      & 12      \\
+  \hline
+  2 & \textbf{781.69} & \textbf{749.40} & \textbf{750.42} & \textbf{751.24} & \textbf{750.81} & 750.08 & 750.78 & 750.25 & 750.05 & 750.24 & 750.13 \\
+  \hline
+  3 &               & \textbf{704.13} & 705.75 & 706.53 & 706.12 & 705.39 & 706.07 & 705.55 & 705.35 & 705.56 & 705.40 \\
+  \hline
+  4 &               &               & \textbf{707.42} & 708.20 & 707.79 & 707.05 & 707.74 & 707.21 & 707.02 & 707.22 & 707.07 \\
+  \hline
+  5 &               &               &               & \textbf{708.98} & 708.57 & 707.83 & 708.51 & 707.99 & 707.80 & 708.00 & 707.84 \\
+  \hline
+  6 &               &               &               &               & \textbf{708.16} & 707.42 & 708.11 & 707.59 & 707.39 & 707.59 & 707.44 \\
+  \hline
+  7 &               &               &               &               &               & \textbf{706.68} & 707.37 & 706.85 & 706.65 & 706.85 & 706.70 \\
+  \hline
+  8 &               &               &               &               &               &               & \textbf{708.05} & 707.53 & 707.33 & 707.54 & 707.38 \\
+  \hline
+  9 &               &               &               &               &               &               &               & \textbf{707.01} & 706.81 & 707.02 & 706.86 \\
+  \hline
+  10 &              &               &               &               &               &               &               &               & \textbf{706.62} & 706.82 & 706.67 \\
+  \hline
+  11 &              &               &               &               &               &               &               &               &               & \textbf{707.02} & 706.87 \\
+  \hline
+  12 &              &               &               &               &               &               &               &               &               &               & \textbf{706.72} \\
+  \hline
+\end{tabular}
 
   \end{adjustbox}
   \caption{Expected number of stops for two closures each ranging

@@ -20,7 +20,7 @@ import pickle
 import argparse
 import string
 
-EPS: float = 1e-3
+EPS: float = 1e-4
 PATIENCE: int = 30
 
 ROTORS = [
@@ -241,35 +241,22 @@ def collect_cycle_types(n: int, l: int, num_sims: int, enigma: bool = False):
     return {cycle: count / total_sims for cycle, count in cycles_seen.items()}
 
 
-def main(n: int, num_sims: int) -> None:
+def main(n: int, num_sims: int, enigma: bool) -> None:
     for i in range(2, 17):
+        if enigma:
+            cycle_path = f"enigmaCycles{i}.dat"
+        else:
+            cycle_path = f"collectedCycles{i}.dat"
         # Check if file was previously cached
-        if os.path.isfile(f"collectedCycles{i}.dat"):
+        if os.path.isfile(cycle_path):
             log_info(f"Cycles for l={i} were previously cached, skipping...")
         else:
             log_info(f"Collecting cycles for l={i}")
-            got_cycles = collect_cycle_types(n, i, num_sims)
-            collected_cycles = open(f"collectedCycles{i}.dat", "wb")
+            got_cycles = collect_cycle_types(n, i, num_sims, enigma)
+            collected_cycles = open(cycle_path, "wb")
             pickle.dump(got_cycles, collected_cycles)
             collected_cycles.close()
             log_success(f"Saved cycle collection cache for l={i}")
-
-
-# Computes distribution from real Enigma machines rather than randomized permutations
-# This gives much better results in the case when l = 2
-def enigma_distribution(n: int, num_sims: int) -> None:
-    for i in range(2, 17):
-        # Check if file was previously cached
-        if os.path.isfile(f"enigmaCycles{i}.dat"):
-            log_info(f"Cycles for l={i} were previously cached, skipping...")
-        else:
-            log_info(f"Collecting cycles for l={i}")
-            got_cycles = collect_cycle_types(n, i, num_sims, enigma=True)
-            collected_cycles = open(f"enigmaCycles{i}.dat", "wb")
-            pickle.dump(got_cycles, collected_cycles)
-            collected_cycles.close()
-            log_success(f"Saved cycle collection cache for l={i}")
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -287,9 +274,11 @@ if __name__ == "__main__":
         help="Maximum number of simulations to run in collecting cycle types",
     )
 
+    parser.add_argument('--enigma', action='store_true')
+
     args = parser.parse_args()
 
     n = args.N
     num_sims = int(args.SIMS)
 
-    main(n, num_sims)
+    main(n, num_sims, args.enigma)

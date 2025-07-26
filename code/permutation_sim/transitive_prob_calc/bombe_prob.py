@@ -27,10 +27,13 @@ def log_info(message: str):
     logger.info(Fore.CYAN + message)
 
 
-def load_cycle_distribution(l: int) -> dict[tuple[int, ...], float]:
+def load_cycle_distribution(l: int, enigma: bool) -> dict[tuple[int, ...], float]:
     try:
         log_info("Attempting to load collected cycles cache...")
-        f = open(f"collectedCycles{l}.dat", "rb")
+        if enigma:
+            f = open(f"enigmaCycles{l}.dat", "rb")
+        else:
+            f = open(f"collectedCycles{l}.dat", "rb")
         cycles_d: dict[tuple[int, ...], float] = pickle.load(f)
         f.close()
         return cycles_d
@@ -55,8 +58,12 @@ def load_transitive_probs() -> (
         exit()
 
 
-def main(l: list[int], c: int) -> None:
-    cycle_d1: dict[tuple[int, ...], float] = load_cycle_distribution(l[0])
+def main(l: list[int], c: int, enigma: bool) -> None:
+    transitive_probs: dict[tuple[tuple[int, ...], tuple[int, ...], int], faloat] = (
+        load_transitive_probs()
+    )
+
+    cycle_d1: dict[tuple[int, ...], float] = load_cycle_distribution(l[0], enigma)
 
     if c == 1:
         prob_stop = 0.0
@@ -67,11 +74,8 @@ def main(l: list[int], c: int) -> None:
         log_info(f"Probability of stop with params [l={l}, c={c}] -> {prob_stop:.5f}")
         return
     else:
-        transitive_probs: dict[tuple[tuple[int, ...], tuple[int, ...], int], faloat] = (
-            load_transitive_probs()
-        )
 
-        cycle_d2: dict[tuple[int, ...], float] = load_cycle_distribution(l[1])
+        cycle_d2: dict[tuple[int, ...], float] = load_cycle_distribution(l[1], enigma)
 
         prob_stop = 1.0
 
@@ -94,7 +98,6 @@ def main(l: list[int], c: int) -> None:
         log_info(f"Probability of stop with params [l={l}, c={c}] -> {prob_stop:.5f}")
         return
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -113,6 +116,8 @@ if __name__ == "__main__":
         help="Number of closures in the menu",
     )
 
+    parser.add_argument('--enigma', action='store_true', help="Use real Enigma for cycle distribution")
+
     args = parser.parse_args()
 
     l: list[int] = args.L
@@ -129,4 +134,4 @@ if __name__ == "__main__":
         log_error("Support for more than two closures not implemented!")
         exit()
 
-    main(l, c)
+    main(l, c, args.enigma)

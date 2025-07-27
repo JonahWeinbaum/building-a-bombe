@@ -51,39 +51,39 @@ some three letter private
 key (say \texttt{XYZ}) which she encodes twice with the machine
 settings specified by her key sheet. This will give us six encrypted
 letters
-$\sigma_1(\texttt{X})\sigma_2(\texttt{Y})\sigma_3(\texttt{Z})\sigma_4(\texttt{X})\sigma_5(\texttt{Y})\sigma_6(\texttt{Z})$.
+$\pi_1(\texttt{X})\pi_2(\texttt{Y})\pi_3(\texttt{Z})\pi_4(\texttt{X})\pi_5(\texttt{Y})\pi_6(\texttt{Z})$.
 Suppose these six letters are given as
 \begin{center}
   \texttt{ABC} \texttt{DEF}
 \end{center}
 That is
 \begin{align*}
-  \sigma_1(\texttt{X}) & = \texttt{A} \\
-  \sigma_2(\texttt{Y}) & = \texttt{B} \\
-  \sigma_3(\texttt{Z}) & = \texttt{C} \\
-  \sigma_4(\texttt{X}) & = \texttt{D} \\
-  \sigma_5(\texttt{Y}) & = \texttt{E} \\
-  \sigma_6(\texttt{Z}) & = \texttt{F} \\
+  \pi_1(\texttt{X}) & = \texttt{A} \\
+  \pi_2(\texttt{Y}) & = \texttt{B} \\
+  \pi_3(\texttt{Z}) & = \texttt{C} \\
+  \pi_4(\texttt{X}) & = \texttt{D} \\
+  \pi_5(\texttt{Y}) & = \texttt{E} \\
+  \pi_6(\texttt{Z}) & = \texttt{F} \\
 \end{align*}
-Since each $\sigma_i$ is represented by 13 disjoint transpositions we
+Since each $\pi_i$ is represented by 13 disjoint transpositions we
 can deduce, for example, that
 \[
-  \sigma_1\sigma_4(D) = \sigma_1(X) = A.
+  \pi_1\pi_4(D) = \pi_1(X) = A.
 \]
 With a sufficient set of hexagrams from gathered messages, we could
-then fully deduce the permutation $\sigma_1\sigma_4$. Further, we
-could recover $\sigma_2\sigma_5$ and $\sigma_3\sigma_6$. Rejewski
-referred to these paired permutations $\sigma_i\sigma_{i+3}$, as
+then fully deduce the permutation $\pi_1\pi_4$. Further, we
+could recover $\pi_2\pi_5$ and $\pi_3\pi_6$. Rejewski
+referred to these paired permutations $\pi_i\pi_{i+3}$, as
 {\bf{characteristics}}. In
 practice, such recovered characteristics may look like
 \begin{align*}
-  \sigma_1\sigma_4 & =
+  \pi_1\pi_4 & =
   (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})
   \\
-  \sigma_2\sigma_5 & =
+  \pi_2\pi_5 & =
   (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})
   \\
-  \sigma_3\sigma_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO}).
+  \pi_3\pi_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO}).
 \end{align*}
 Rejewski noted a key structural similarity between all such
 characteristics recovered in this fashion: in each characteristic,
@@ -91,21 +91,21 @@ cycles of the same length appear in pairs.
 \\\\To see why this happens, consider the following lemma,
 \begin{lemma}
   \label{cillies}
-  Suppose $(\alpha\beta)$ appears in $\sigma_i$ for $i\in\{1,2,3\}$.
+  Suppose $(\alpha\beta)$ appears in $\pi_i$ for $i\in\{1,2,3\}$.
   Then $\alpha$ and $\beta$ will appear in disjoint cycles of
-  $\sigma_i\sigma_{i+3}$ of equal length.
+  $\pi_i\pi_{i+3}$ of equal length~\cite[p.~8]{Rejewski1980}.
 \end{lemma}
 \begin{proof}
   %% chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
   % %%
-  We begin by noting that if $(\alpha\beta)$ is in $\sigma_{i+3}$
+  We begin by noting that if $(\alpha\beta)$ is in $\pi_{i+3}$
   then $\pi$ contains fixed points at $\alpha$ and $\beta$ and our
   claim is true. Then without loss of generality we can arrange
-  $\sigma_{i}$ and $\sigma_{i+3}$ (non-exhaustively) in the following way:
+  $\pi_{i}$ and $\pi_{i+3}$ (non-exhaustively) in the following way:
   \[
     \setlength{\arraycolsep}{15pt}
     \begin{array}{cc}
-      \sigma_i      & \sigma_{i+3} \\
+      \pi_i      & \pi_{i+3} \\
       \hline
       (\alpha\beta) & (\beta x_1)  \\
       (x_1 x_2)     & (x_2 x_3)    \\
@@ -113,7 +113,7 @@ cycles of the same length appear in pairs.
       (x_{k-1} x_k) & (x_k \alpha)
     \end{array}
   \]
-  Then the product $\sigma_i\sigma_{i+3}$ will contain the cycles
+  Then the product $\pi_i\pi_{i+3}$ will contain the cycles
   \[
     (\alpha x_1 x_3 \dots x_{k-1} )(x_k
     x_{k-2} \dots x_2 \beta)
@@ -123,11 +123,11 @@ cycles of the same length appear in pairs.
 
 \noindent This lemma has several consequences:
 \begin{itemize}
-  \item[(1)] A characteristic like $\sigma_1\sigma_4$ which has two
-    singletons $\texttt{A}$ and $\texttt{S}$ must have that both $\sigma_1$ and
-    $\sigma_4$ share the transposition $(\texttt{AS})$.
-  \item[(2)] A characteristic like $\sigma_3\sigma_6$ (two disjoint 13
-    cycles) reduces the space of possible $\sigma_3$'s to just 13
+  \item[(1)] A characteristic like $\pi_1\pi_4$ which has two
+    singletons $\texttt{A}$ and $\texttt{S}$ must have that both $\pi_1$ and
+    $\pi_4$ share the transposition $(\texttt{AS})$.
+  \item[(2)] A characteristic like $\pi_3\pi_6$ (two disjoint 13
+    cycles) reduces the space of possible $\pi_3$'s to just 13
     permutations which will take the form
     \begin{center}
       $(\texttt{AD})(\texttt{BO})(\texttt{VM})\dots(\texttt{YU})$ \\
@@ -135,11 +135,11 @@ cycles of the same length appear in pairs.
       $\vdots$                                       \\
       $(\texttt{AO})(\texttt{BM})(\texttt{VS})\dots(\texttt{YD})$
     \end{center}
-    and similarly for $\sigma_6$.
+    and similarly for $\pi_6$.
 \end{itemize}
 Thus with absolutely no knowledge of the rotor wirings or the daily
 key, we can already tractably compute a searchable space of
-$\sigma_i$'s. To determine which $\sigma_i$ is the correct one, we
+$\pi_i$'s. To determine which $\pi_i$ is the correct one, we
 make use of the most prevalent bug in cryptography -- operator error.
 
 \subsection{Cillies}\label{section_cillies}
@@ -176,82 +176,82 @@ their message key:
 
 \noindent We can then compare these message keys against our
 possibilities for each
-$\sigma_i$ to determine if $\texttt{AAA}$ could have, in fact, been
+$\pi_i$ to determine if $\texttt{AAA}$ could have, in fact, been
 used to encipher these hexagrams. For example, in the the first
 hexagram we see that \texttt{G} appears as the third letter. We
 suspect our radio operator is using \texttt{AAA} as their message
-key, so this would mean $\sigma_3$ contains the transposition
-$(\texttt{AG})$. However, in $\sigma_3\sigma_6$, \texttt{A} and
+key, so this would mean $\pi_3$ contains the transposition
+$(\texttt{AG})$. However, in $\pi_3\pi_6$, \texttt{A} and
 \texttt{G} lie in the
 same cycle which would contradict Lemma
 \ref{cillies}. Thus we know that the first hexagram does not encode
 the message key \texttt{AAA}. In order for a hexagram to encode
 \texttt{AAA} we require that each letter does \emph{not} appear in
 the same cycle as \texttt{A} corresponding characteristic
-$\sigma_i\sigma_{i+3}$, but \emph{does} appear in a cycle of equal
+$\pi_i\pi_{i+3}$, but \emph{does} appear in a cycle of equal
 lenght to the cycle containing \texttt{A}. With this set strict of
 requirements, we can deduce that the
 third hexagram was most likely an enciphering of the repeated letter
 $\texttt{J}$ since the first two cannot encode this message key.
 \\\\If our hypothesis is correct and \texttt{SYX SCW} is actually an
 enciphering of \texttt{AAA AAA}, we significantly reduce our space of
-possible $\sigma_i$s. For example, in our case, such a
-hypothesis would completely determine which $\sigma_3$ was used. We
-know $\sigma_3$ contains the transposition $(\texttt{AX})$ and only
-one such possible $\sigma_3$ contains this transposition, specifically,
+possible $\pi_i$s. For example, in our case, such a
+hypothesis would completely determine which $\pi_3$ was used. We
+know $\pi_3$ contains the transposition $(\texttt{AX})$ and only
+one such possible $\pi_3$ contains this transposition, specifically,
 \[
-  \sigma_3 =
+  \pi_3 =
   (\texttt{AX})(\texttt{BL})(\texttt{VH})(\texttt{IE})(\texttt{KR})(\texttt{TZ})(\texttt{JU})(\texttt{GD})(\texttt{FO})(\texttt{FM})(\texttt{CS})(\texttt{QP})(\texttt{NP})(\texttt{YW}).
-\]Similarly we can determine $\sigma_6$.
-For the remaining $\sigma_i$s we are only left
+\]Similarly we can determine $\pi_6$.
+For the remaining $\pi_i$s we are only left
 with a small, searchable set of options.
-\\\\Trying our reduced set of possible $\sigma_i$s on hexagrams from
+\\\\Trying our reduced set of possible $\pi_i$s on hexagrams from
 other radio stations
-suspected of using cillies we can find the most likely $\sigma_i$s.
-For example, if we use our set of possible $\sigma_i$s and find that
-for a particular choice of $\sigma_i$ and a particular hexagram, we
+suspected of using cillies we can find the most likely $\pi_i$s.
+For example, if we use our set of possible $\pi_i$s and find that
+for a particular choice of $\pi_i$ and a particular hexagram, we
 decode \texttt{PPP PPP}, we have strong reason to believe that this
-is the correct choice of $\sigma_i$s.
-In this way, we can recover each $\sigma_i$ and thus recover any
+is the correct choice of $\pi_i$s.
+In this way, we can recover each $\pi_i$ and thus recover any
 transmission's message key -- all without any knowledge of internal
 wirings, plugboard settings, or daily keys.
 \section{Recovering the Rotor Wirings}
 
-Equipped with a means to determine each day's $\sigma_i$s, Rejewski set
-himself to finding the internal wirings of the rotors. The full
+Equipped with a means to determine each day's $\pi_i$s, Rejewski set
+himself to finding the internal wirings of the rotors~\cite[pp.~219--221]{Rejewski1981}. The full
 recovery of rotor wirings and turnovers is out of scope of this paper;
-However, we will provide a brief description to illustrate that with
+however, we will provide a brief description to illustrate that with
 minimal intelligence information, entire rotor wirings were able to be deduced.
 \\\\To perform this deduction we will assume no turnover occurs in
 the first six letters which, as we have discussed, is a reasonably
-likely assumption. We begin by expanding $\sigma_i$ to
+likely assumption. We begin by expanding $\pi_i$ to
 \[
-  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
+  \pi_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S
 \]
 where $x$ accounts for the initial starting position of the rightmost rotor.
 Since turnover does not occur, $M^{-1}L^{-1}RLM$ does not change
-between $\sigma_i$s. Thus, we will
+between $\pi_i$s. Thus, we will
 denote this permutation $Q$, simplifying our earlier expression to
 \[
-  \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
+  \pi_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S
 \]
 Rejewski knew the plugboard settings for two whole months, so he
 began shifting knowns and unknowns to opposite sides. Shifting things
 around gives us
 \begin{align*}
-  & \sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S \\
-  \Rightarrow\text{ } & S\sigma_i S^{-1} =
+  & \pi_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}S \\
+  \Rightarrow\text{ } & S\pi_i S^{-1} =
   P^{-(x+i)}N^{-1}P^{x+i}QP^{-(x+i)}NP^{x+i}
   \\
-  \Rightarrow\text{ } & P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)} =
+  \Rightarrow\text{ } & P^{(x+i)}S\pi_i S^{-1}P^{-(x+i)} =
   N^{-1}P^{x+i}QP^{-(x+i)}N
 \end{align*}
 To further simplify notation we will then define ${\rho_i} \coloneq
-P^{(x+i)}S\sigma_i S^{-1}P^{-(x+i)}$. Then we have now have
+P^{(x+i)}S\pi_i S^{-1}P^{-(x+i)}$. Then we have now have
 \[
   \rho_i = N^{-1}P^{x+i}QP^{-(x+i)}N
 \]
-where $\rho_i$s are known from the deduction of $\sigma_i$ and the
+where $\rho_i$s are known from the deduction of $\pi_i$ and the
 key sheets Rejewski had access to.
 We will now eliminate this equation's dependence on $Q$ by considering
 pairs of $\rho_i$ and $\rho_{i+1}$
@@ -309,26 +309,26 @@ all the rotors as well as the reflector.
 
 We now have deduced all of the rotor permutations $N$, $M$, $L$, $R$,
 as well as each
-$\sigma_i$ for a given day. We will use this information to recover
+$\pi_i$ for a given day. We will use this information to recover
 the daily keys.
 \\\\For the moment, let us assume $S$ is the identity permutation. Then
-rearranging $\sigma_i$ we get
+rearranging $\pi_i$ we get
 \begin{align}
-  Q = P^{-(x+i)}NP^{x+i}\sigma_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
+  Q = P^{-(x+i)}NP^{x+i}\pi_iP^{-(x+i)}N^{-1}P^{x+i} \label{eq:q_eq}
 \end{align}
 Since $Q$ must be the same for each such equation involving
-$\sigma_i$, we will devise a manual means to deduce the correct
+$\pi_i$, we will devise a manual means to deduce the correct
 starting position by find a value of $x$ which produces a consistent
 permutation $Q$ across all $i\in\{1,\dots,6\}$. We can
 precompute $N$, $P^{-1}NP$, $\dots$, $P^{4}NP^{-4}$ and arrange them
 in a large sheet of rows called the {\bf{bottom sheet}}. Then, for
-each $\sigma_i$, we write it out on a separate line with a blank row
+each $\pi_i$, we write it out on a separate line with a blank row
 (a slit) beneath it to allow for alignment with a row of the bottom
 sheet. This forms the \textbf{top sheet}. We will
-illustrate this for $\sigma_1$ and denote the slit beneath with periods.
+illustrate this for $\pi_1$ and denote the slit beneath with periods.
 \begin{align*}
   \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+  \pi_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
   \texttt{|}          & \texttt{..........................} \texttt{|}
 \end{align*}
 By sliding the bottom sheet
@@ -336,44 +336,44 @@ beneath the top sheet we can test various values of $P^{-k}NP^{k}$ to
 see what values of $Q$ they give. For example, for $k = 0$ we have
 \begin{align*}
   \texttt{|}          & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \texttt{|} \\
-  \sigma_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
+  \pi_1\texttt{ |} & \texttt{SRWIVHNFDOLKYGJTXBAPZECQMU} \texttt{|} \\
   P^{-k}NP^{k} \texttt{ |}       &
   \texttt{KJPZYDTIOHXCSGUBRNWFMVEQLA} \texttt{|}
 \end{align*}
 We know that $Q(\texttt{A}) =
-(P^{-k}NP^k)\sigma_i(P^{-k}NP^k)^{-1}(\texttt{A})$. Therefore to compute
+(P^{-k}NP^k)\pi_i(P^{-k}NP^k)^{-1}(\texttt{A})$. Therefore to compute
 $Q(\texttt{A})$ we first begin at $\texttt{A}$ in our bottom row to
 find that $(P^{-k}NP^k)^{-1}(\texttt{A})=\texttt{Z}$. We now map $\texttt{Z}$
-through $\sigma_i$ by finding $\texttt{Z}$ on the top row and seeing
+through $\pi_i$ by finding $\texttt{Z}$ on the top row and seeing
 where it lands in the middle row, thus giving
-$\sigma_i(P^{-k}NP^k)^{-1}(\texttt{A}) = \texttt{U}$. Finally, we see
+$\pi_i(P^{-k}NP^k)^{-1}(\texttt{A}) = \texttt{U}$. Finally, we see
 where $(P^{-k}NP^k)$
 maps $\texttt{U}$ by finding $\texttt{U}$ on the top row and seeing
 where it lands in the bottom row, thus giving $Q(\texttt{A}) =
-(P^{-k}NP^k)\sigma_i(P^{-k}NP^k)^{-1}(\texttt{A}) = \texttt{M}$. Thus
-for $\sigma_1$ and $k=0$ we get that
+(P^{-k}NP^k)\pi_i(P^{-k}NP^k)^{-1}(\texttt{A}) = \texttt{M}$. Thus
+for $\pi_1$ and $k=0$ we get that
 \[
   Q =
   (\texttt{AM})(\texttt{BF})(\texttt{CX})(\texttt{DI})(\texttt{EP})(\texttt{GT})(\texttt{HU})(\texttt{JN})(\texttt{KW})(\texttt{LS})(\texttt{OZ})(\texttt{QR})(\texttt{VY})
 \]
 Continuing in this fashion, we can
 get candidate $Q$s generated
-\[(P^{-1}NP^1)\sigma_2(P^{-2}NP^2)^{-1}, \dots
-  (P^{-5}NP^5)\sigma_6(P^{-5}NP^5)^{-1}
+\[(P^{-1}NP^1)\pi_2(P^{-2}NP^2)^{-1}, \dots
+  (P^{-5}NP^5)\pi_6(P^{-5}NP^5)^{-1}
 \]
 \subsection{Recovering the Rotor Position and Order}
 \noindent Recall that $Q$ must be consistent between
 each equation \ref{eq:q_eq}. To check this, we can simply construct
-our top sheet such that all six permutations $\sigma_i$ are written
+our top sheet such that all six permutations $\pi_i$ are written
 in a vertical stack, each with a slit beneath it. We slide the bottom
 sheet behind them corresponding to a hypothesis starting position
-$x$. Aligning each $\sigma_i$ with a possible $P^{-(x+i)}NP^{x+i}$,
+$x$. Aligning each $\pi_i$ with a possible $P^{-(x+i)}NP^{x+i}$,
 we recover the resulting $Q$ for each row. If the computed $Q$s are
-consistent across all six $\sigma_i$, we have identified the correct
+consistent across all six $\pi_i$, we have identified the correct
 value of $x$ and hence the starting position of the rightmost rotor.
 \\\\If $S$ were truly the identity then we would ultimately find an
 offset of the bottom sheet that generates identical $Q$s for each
-$\sigma_i$. Of course,
+$\pi_i$. Of course,
 $S$ will not be the identity. Thus, instead of looking for perfect
 consistency between each $Q$ we are only looking for relative
 consistency between each $Q$ where perhaps a majority of letters are
@@ -392,9 +392,9 @@ This mapping is likely the true mapping of $Q$ with no plugboard involvement.
 which letters are steckered. We can potentially even recover some of
 the steckerings themselves by seeing where we expect $Q$ to map a
 letter and comparing this to where it actually mapped a letter for a
-particular $\sigma_i$.
+particular $\pi_i$.
 \\\\Such a method was called the {\bf{grill
-method}} and required tedious work and had many possibilities for
+method}}~\cite[pp.~221--222]{Rejewski1980} and required tedious work and had many possibilities for
 mistakes; However, if done correctly, it could recover the absolute
 position of the rightmost rotor, the permutation $Q$, and some
 steckerings of the plugboard.
@@ -463,7 +463,7 @@ can be uncovered. With that, the cryptanalyst is now able to recover
 the full daily key.
 \\\\One key point regarding the grill method is that at the time when
 it was in use only $3$ jacks were used in the plugboard. This means
-that the $Q$s generated by each $\sigma_i$ were relatively similar
+that the $Q$s generated by each $\pi_i$ were relatively similar
 since the permutation $S$ had less impact on average. However, the
 Germans eventually used up to $10$ jacks making the grill method
 infeasible, since we can no longer confidently determine the true
@@ -485,7 +485,7 @@ daily keys kept rotor positions the same for an entire 3 month period
 meaning this analysis did not need to be done too frequently.
 \\\\However, Jerzy Różycki worked out an efficient method to
 determine the rightmost rotor which he called the {\bf{clock
-method}}. The clock method attempted to determine where the turnover
+method}}~\cite[p.~223]{Rejewski1980}. The clock method attempted to determine where the turnover
 notch was for the rightmost rotor. From this we could immediately
 determine which of the three rotors was used.
 
@@ -506,7 +506,7 @@ from the second piece of text is non-uniform. This distribution is
 called the {\bf{index of coincidence}}. In particular, for German, we
 find that the expected number of alignments (called
 {\bf{coincidences}}) between two pieces of text $26$ letters long is
-$2.05$. If these texts
+$2.05$~\cite[p.~5-3]{FriedmanCallimahos1952}\footnote{It should be noted that this data is from 1952 whereas the index of coincidence that was being used for German at this time seems to be roughly $\frac{26}{17}$.}. If these texts
 %https://en.wikipedia.org/wiki/Index_of_coincidence% It then follows
 % that if two pieces of text
 are enciphered with the \emph{same} poly-alphabetic cipher, we expect
@@ -575,8 +575,8 @@ internal rotor wirings, he could build a machine that could
 immediately produce the cycle structure of characteristics for a given setting.
 \\\\Let us first understand the manual implementation of such a
 deduction. Assuming an identity plugboard $S$, we can use our internal
-rotor wirings to know the exact permutation $\sigma_1$ and
-$\sigma_4$ for any initial rotor position. In specific, suppose we have
+rotor wirings to know the exact permutation $\pi_1$ and
+$\pi_4$ for any initial rotor position. In specific, suppose we have
 
 \begin{center}
   \[
@@ -599,7 +599,7 @@ $\sigma_4$ for any initial rotor position. In specific, suppose we have
       \end{array}
     \right)
   \]
-  $\sigma_1$
+  $\pi_1$
 \end{center}
 \begin{center}
   \[
@@ -622,21 +622,21 @@ $\sigma_4$ for any initial rotor position. In specific, suppose we have
       \end{array}
     \right)
   \]
-  $\sigma_4$
+  $\pi_4$
 \end{center}
-Then to find the cycle type of $\sigma_1\sigma_4$ we might do the
+Then to find the cycle type of $\pi_1\pi_4$ we might do the
 following. We begin with \texttt{A}. We first run \texttt{A} through
-$\sigma_4$ to get \texttt{J}. We then run \texttt{J} through
-$\sigma_1$ to get \texttt{M}. Thus we see
-$\sigma_1\sigma_4(\texttt{A}) = \texttt{M}$. Now we could continue
-with \texttt{M} sending it back into $\sigma_4$,. Eventually after
-jumping back and forth between $\sigma_1$ and $\sigma_4$ we we will
+$\pi_4$ to get \texttt{J}. We then run \texttt{J} through
+$\pi_1$ to get \texttt{M}. Thus we see
+$\pi_1\pi_4(\texttt{A}) = \texttt{M}$. Now we could continue
+with \texttt{M} sending it back into $\pi_4$,. Eventually after
+jumping back and forth between $\pi_1$ and $\pi_4$ we we will
 have encountered all letters contained in the same cycle as
 \texttt{A}. We do, however, encounter some other letters as well.
 This method is effectively the same method used in lemma
 \ref{cillies} to find the two disjoint cycles of equal length
 produced in a characteristic. In fact, by switching back and forth
-between $\sigma_1$ and $\sigma_4$ we will find alternating elements
+between $\pi_1$ and $\pi_4$ we will find alternating elements
 of the pair of cycles of equal length which contain \texttt{A}. We
 can mechanize this process via the following
 circuit\footnote{Throughout this paper, diagrams will represent a
@@ -706,18 +706,18 @@ in the pair of cycles of equal length which contain \texttt{A}, that
 is, the number of wires electrified is double the length of the cycle
 containing \texttt{A}. If we connect each wire to a bulb, we can
 count the number of illuminated bulbs and quickly determine the length of
-the cycles in the permutation $\sigma_1\sigma_{4}$ at any given
+the cycles in the permutation $\pi_1\pi_{4}$ at any given
 position of rotors $(x,y,z)$. We can now rotate through all
 $26^3$ positions of the rotors and create a catalogue of all
-characteristics $\sigma_1\sigma_3$ (note that $\sigma_2\sigma_5$ and
-  $\sigma_3\sigma_6$ can be retrieved by just looking at the next two
+characteristics $\pi_1\pi_3$ (note that $\pi_2\pi_5$ and
+  $\pi_3\pi_6$ can be retrieved by just looking at the next two
 catalogue entries). We must also consider all 6 orderings of rotors
 \texttt{I}, \texttt{II}, and \texttt{III}. Thus we can laboriously
 generate a catalogue of all rotor orders and settings consisting of
 $6\cdot 26^3 = 105456$ entries.
 \\\\Now equipped with this catalogue, the cryptanalyst could use the
 traffic from a given day to determine the characteristics
-($\sigma_1\sigma_3$, $\sigma_2\sigma_5$, and $\sigma_3\sigma_6$), look up
+($\pi_1\pi_3$, $\pi_2\pi_5$, and $\pi_3\pi_6$), look up
 the cycle types in the catalogue, and immediately determine the rotor order and
 absolute rotor positions.
 \\\\The plugboard settings could then be
@@ -1186,15 +1186,15 @@ with the keys
   \end{array}
 \]
 For this message, denote the Enigma permutations at positions $1$ and
-$4$ as $\sigma_1$ and $\sigma_4$ respectively. Recall that \texttt{W}
+$4$ as $\pi_1$ and $\pi_4$ respectively. Recall that \texttt{W}
 at positions $1$ and $4$ represent the same enciphered letter. Thus, we have
 \[
-  \sigma_1(\texttt{W}) = \sigma_4(\texttt{W}).
+  \pi_1(\texttt{W}) = \pi_4(\texttt{W}).
 \]
 Consider the impact of the plugboard. Suppose \texttt{W} is fixed by
 the plugboard permutation $S$. We then have,
 \begin{align*}
-  & \sigma_1(\texttt{W}) = \sigma_4(\texttt{W})
+  & \pi_1(\texttt{W}) = \pi_4(\texttt{W})
   \\
   \iff & S^{-1}N_z^{-1}Q_{y,x}N_zS(\texttt{W}) =
   S^{-1}N_{z+3}x^{-1}Q_{y,x}N_{z+3}S(\texttt{W})     \\
@@ -1308,9 +1308,9 @@ or
 \end{center}
 
 \noindent However, we have now deduced the entire permutation
-$\sigma_i$, save for $S$. We can therefore derive which plugboard
-setting produces $\sigma_1(\texttt{P}) = \texttt{L}$ or the
-alternate $\sigma_4(\texttt{I}) = \texttt{A}$. This gives two
+$\pi_i$, save for $S$. We can therefore derive which plugboard
+setting produces $\pi_1(\texttt{P}) = \texttt{L}$ or the
+alternate $\pi_4(\texttt{I}) = \texttt{A}$. This gives two
 plugboard possibilities. As we attempt to decrypt more message keys,
 we can find plugboard settings which mutually agree, and thus work out the
 entirety of the plugboard. With this, the cryptanalyst has recovered
@@ -1356,28 +1356,28 @@ a female for that setting. Consider a message with a $1-4$ female
   \end{array}
 \]
 Denote the Enigma permutation at the positions $1$ and $4$
-respectively as $\sigma_1$ and $\sigma_4$. We know that \texttt{F} in
+respectively as $\pi_1$ and $\pi_4$. We know that \texttt{F} in
 the ciphertext at both position $1$ and $4$ represent the same letter
 (we will denote $\alpha$). Then we have
 \[
-  \sigma_1\sigma_4(\texttt{F}) = \sigma_1(\alpha) = \texttt{F}.
+  \pi_1\pi_4(\texttt{F}) = \pi_1(\alpha) = \texttt{F}.
 \]
-That is $\sigma_1\sigma_4$ contains the singleton cycle
+That is $\pi_1\pi_4$ contains the singleton cycle
 $(\texttt{F})$. The converse is also true, that containing a
-singleton cycle in $\sigma_1\sigma_4$ means that the letter contained
+singleton cycle in $\pi_1\pi_4$ means that the letter contained
 in that singleton will produce a $1-4$ female.
-\\\\We will denote $\sigma_i$ without the use of the plugboard as
-$\overline\sigma_i$, that is
+\\\\We will denote $\pi_i$ without the use of the plugboard as
+$\overline\pi_i$, that is
 \[
-  \sigma_i = S^{-1}\overline\sigma_i S
+  \pi_i = S^{-1}\overline\pi_i S
 \]
 Then we note that
 \begin{align*}
-  \sigma_1\sigma_4 & = S^{-1}\overline\sigma_1 SS^{-1} \overline\sigma_4 S \\
-  & = S^{-1} \overline\sigma_1\overline\sigma_4 S
+  \pi_1\pi_4 & = S^{-1}\overline\pi_1 SS^{-1} \overline\pi_4 S \\
+  & = S^{-1} \overline\pi_1\overline\pi_4 S
 \end{align*}
-Then we have that $\sigma_1\sigma_4$ and
-$\overline\sigma_1\overline\sigma_4$ are conjugate permutations. Then
+Then we have that $\pi_1\pi_4$ and
+$\overline\pi_1\overline\pi_4$ are conjugate permutations. Then
 by Theorem~\ref{conjugate_cycle_type}, these two must have the same
 cycle type. Thus, if either have a singleton cycle, they must both
 have a singleton cycle. All this is to ultimately say, if  a
@@ -1895,7 +1895,7 @@ sheets. Many claims, often conflicting, were made by reliable
 sources. All the while, the closest description of how to actually
 use these sheets was given by Bletchley Park cryptanalyst, Gordon
 Welchman, in his book \emph{The
-Hut Six Story}. While Welchman does describe the underlying theory
+Hut Six Story}~\cite{Welchman1982HutSix}. While Welchman does describe the underlying theory
 behind the sheets, he does not explain explicitly how we test
 different configurations of the leftmost ring setting, nor how we
 deal with turnover. Further, I found no settings or means by which to
@@ -2696,21 +2696,21 @@ We will now compute the expected number of sheets required to carry
 out the above operation. We first need to determine the probability
 that a particular Enigma setting can generate a female. Consider an
 Enigma permutation $\sigma$, our goal is to determine the probability
-that $\sigma_1\sigma_4$ has a singleton cycle. We will make the
-simplifying assumption that $\sigma_1$ and $\sigma_4$ are pulled
+that $\pi_1\pi_4$ has a singleton cycle. We will make the
+simplifying assumption that $\pi_1$ and $\pi_4$ are pulled
 independently from a uniform distribution over all $2^{13}$ cycles.
-\\\\We will fix $\sigma_1$ as containing $13$ disjoint transpositions
+\\\\We will fix $\pi_1$ as containing $13$ disjoint transpositions
 labelled $\tau_i$, that is
 \[
-  \sigma_1 = \tau_1\dots\tau_{13}
+  \pi_1 = \tau_1\dots\tau_{13}
 \]
-$\sigma_1\sigma_4$ will contain a singleton cycle if and only if
-$\sigma_1$ and $\sigma_4$ contain at least one transposition in
-common. Then it suffices to determine the probability that $\sigma_4$
+$\pi_1\pi_4$ will contain a singleton cycle if and only if
+$\pi_1$ and $\pi_4$ contain at least one transposition in
+common. Then it suffices to determine the probability that $\pi_4$
 contains at least one transposition from the $\tau_i$s.
-\\\\We denote the event that $\tau_i$ is contained in $\sigma_4$ as
+\\\\We denote the event that $\tau_i$ is contained in $\pi_4$ as
 $E_i$. Then the probability that at least one $\tau_i$ is common
-between $\sigma_1$ and $\sigma_4$ is
+between $\pi_1$ and $\pi_4$ is
 \[
   \mathbb{P}\biggl(\bigcup_{i=1}^{13}E_i\biggr)
 \]
@@ -2721,11 +2721,11 @@ By inclusion-exclusion this gives us
   i_{13} \le 13}\mathbb{P}(E_{i_1}\cap\dots\cap E_{i_{13}})
 \]
 We will begin by considering $\mathbb{P}(E_i)$, that is, the
-probability that $\sigma_4$ contains the transposition $\tau_i$. Then
+probability that $\pi_4$ contains the transposition $\tau_i$. Then
 to calculate this probability, we can imagine fixing $\tau_i$ and
 then we have free choice over the remaining $12$ transpositions. This
 is the same as the number of $2^{12}$ cycles. We can then divide by
-the total number of $\sigma_4$s which is just the number of $2^{13}$
+the total number of $\pi_4$s which is just the number of $2^{13}$
 cycles. This gives us
 \[
   \mathbb{P}(E_i) = \frac{\text{\# of }2^{12}\text{ cycles}}{\text{\#
@@ -2779,7 +2779,7 @@ We can write this as
 \]
 which will be useful later when trying to determine a generic formula.
 \\\\We now consider $\mathbb{P}(E_i\cap E_j)$, that is, the
-probability that $\sigma_4$ contains both transpositions $\tau_i$ and
+probability that $\pi_4$ contains both transpositions $\tau_i$ and
 $\tau_j$. Similarly, we can imagine fixing $\tau_i$ and $\tau_j$ and
 then we have free choice over the remaining 11 transpositions.
 Following a similar argument as above we derive
@@ -2849,7 +2849,7 @@ to find $12-13$ messages with indicators containing females.
 % GRUNDSTELLUNG AND SEEING IF THERES TURNOVER FOR A PARTICULAR ROTOR ORDER  %%
 % \\\\In reality, $S$ will not be the identity, but we only require
 % that $S$ fixes \texttt{A} in order to remove its relevance from the
-% relationship between $\sigma_{i}$ and $\sigma_{i+3}$. At the time
+% relationship between $\pi_{i}$ and $\pi_{i+3}$. At the time
 % the Bomba was constructed, anywhere from $5$ to $8$ plugboard jacks
 % were in use, meaning we have, on average, a $50\%$ chance that $S$
 % fixes \texttt{A}.

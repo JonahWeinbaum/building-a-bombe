@@ -4,6 +4,7 @@
 \usepackage[export]{adjustbox} % in preambl
 \usepackage[normalem]{ulem}
 \usepackage{circuitikz}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
 \usepackage{longtable}
 \usepackage{subcaption}
 \usepackage{graphicx}
@@ -38,6 +39,8 @@
   pdftitle={Overleaf Example},
   pdfpagemode=FullScreen,
 }
+
+\addbibresource{paper/citations.bib}
 
 \makeatletter
 \renewcommand{\@chapapp}{}% Not necessary...
@@ -279,10 +282,11 @@ for matters of the highest priority~\cite{action_this_day}. It read:
 \backmatter
 
 %Add your bibliography filename and uncomment these lines
-\bibliographystyle{amsplain}
 \addcontentsline{toc}{chapter}{References}
-\bibliography{citations}
+\printbibliography
+
 \markboth{{\sffamily\sc Bibliography}}{}
+
 
 %Uncomment if you want an index
 % \printindex

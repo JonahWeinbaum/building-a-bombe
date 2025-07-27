@@ -33,14 +33,14 @@ counter, defend, and retaliate appropriately.
   \begin{center}\includegraphics[scale=0.3]{paper/images/enigma.jpg}
   \end{center}
   \label{ref:enigma}
-  \caption{Enigma model \texttt{I}~\cite{img_enigma}}
+  \caption{Enigma model \texttt{I}}
 \end{figure}
 Throughout this paper, the model \texttt{I} Enigma is chosen to
-represent our canonical machine as these were the most common version
+represent our canonical machine as this was the most common version
 used during World War II with over 20000 being produced. Further, it
-was used by both the \emph{Heer} (Army), \emph{Luftwaffe} (Air
-Force), and the \emph{Kriegsmarine} (Navy), making this a prime target
-for attack by cryptanalysts~\cite{enigma_I}. Many models existed,
+was used by the \emph{Heer} (Army), \emph{Luftwaffe} (Air
+Force), and \emph{Kriegsmarine} (Navy), making this a prime target
+for attack by cryptanalysts. Many models existed,
 each with varying
 layouts, key spaces, and use-cases; however, the central ideas that
 are discussed in this paper can generally be adapted to work on other models.
@@ -57,7 +57,7 @@ requires several mechanical components in a complex arrangement.
   \begin{center}\includegraphics[scale=1.2]{paper/images/plugboard.jpg}
   \end{center}
   \label{ref:plugboard}
-  \caption{Enigma plugboard~\cite(img_enigma_plugboard)}
+  \caption{Enigma plugboard}
 \end{figure}
 \noindent Upon a key press, the electrical current corresponding to this letter
 is sent to a mechanism known as the {\bf{plugboard}}. From an operator's
@@ -128,13 +128,13 @@ branch we examine. At a minimum, all three branches of the military eventually
 had access to five rotors labeled by their roman numeral equivalents
 (i.e. $\texttt{I},\dots,\texttt{V}$).
 Each rotor encoded a unique permutation from 26 input contacts to 26
-output contacts by simply connecting between each input/output pair
+output contacts by simply connecting each input/output pair
 in the permutation with a wire as in figure~\ref{fig:rotors}
 (a)-(4,5,6). The contacts represent the letters
 in alphabetical order moving in a clockwise manner relative to the
 entry side of the rotor. The input contacts of the rotor were often marked
 with a white dot indicating which contact corresponded to \texttt{A},
-but in general is found by looking at the contact immediately above
+but in general the \texttt{A} contact found by looking at the contact immediately above
 the numeral indicator as in figure~\ref{fig:rotors} (b).
 \\\\On their own, these rotors would prove to be very poor
 cryptographic devices, as they are just substitution ciphers, which are
@@ -147,7 +147,7 @@ corresponding to a rotor as in figure \ref{fig:rotor_v_wiring} we are
 referring to the \texttt{A} contact as the specific contact denoted
 by the marker dot and the \texttt{B} contact as its next contact
 turning clockwise. When referred to in this context, we will use the
-word ``contact''. On the other hand, when we say that an electrical
+word ``contact.'' On the other hand, when we say that an electrical
 current corresponding to \texttt{A} enters a rotor, we mean
 that the current enters the contact at the topmost \emph{position} of
 the rotor, even if the rotor has rotated now so that that contact
@@ -335,7 +335,7 @@ to be in the window, then contact \texttt{Z} is now in position
 entering at position \texttt{A} will go into contact \texttt{Z}, be
 routed through the permutation and exit
 at contact \texttt{K} which now is at position \texttt{L} due to the
-ring setting. This is to say that the moving the ring
+ring setting. This is to say that moving the ring
 setting has the effect of shifting an input letter back by 1 (mod 26)
 and the output letter forward by 1 (mod 26).
 As in the prior discussion on rotor rotation, if we denote the
@@ -361,7 +361,7 @@ However, consider that changing the ring
 setting also changes where the turnover occurs relative to the
 internal wiring of a rotor. This means that for rotors $M$ and $L$
 which are affected by turnover, the ring setting does add to
-the key space since it has effects which are independent from the
+the key space since it has effects which are independent of the
 window setting.
 
 %% NOTE HAPPENES AFTER PAWL %%
@@ -556,7 +556,7 @@ rotates the rotors so that they display \texttt{VAR} (or in numerals
 \texttt{22} \texttt{01} \texttt{18}) in the window of
 each rotor. Finally, Alice connects \texttt{B} and \texttt{F} in the
 plugboard and similarly for the remaining plugboard settings. Alice
-now choose a random message key, this is a three letter trigram
+now chooses a random message key, this is a three letter trigram
 called the \emph{Spruchschlüssel}. Alice chooses her message key as
 \texttt{LSG} and is now ready to encrypt her message.
 \\\\First, Alice will encrypt her message key \texttt{LSG} twice,
@@ -582,7 +582,7 @@ key, which will look like
 \end{center}
 We can now see why we doubly encoded the message key. If Bob did not
 see the same trigram repeated twice he would know that either he or
-Alice set up their machines incorrectly, or that Alice incorrectly typed in
+Alice set up their machine incorrectly, or that Alice incorrectly typed in
 her message key. Bob could then tell Alice to correct the message.
 Now equipped with Alice's message key, Bob sets his machine window to
 \texttt{LSG} and begins typing in the remainder of the message to
@@ -629,17 +629,17 @@ rotor ($M$), leftmost rotor ($L$), and the reflector ($R$), only to
 return through each of these components. Then at default position the
 Enigma machine can be represented as a permutation
 \[
-  \sigma_0 \coloneq S^{-1}N^{-1}M^{-1}L^{-1}RLMNS
+  \pi_0 \coloneq S^{-1}N^{-1}M^{-1}L^{-1}RLMNS
 \]
 
 \noindent Additionally recall that if we ignore turnover the ring setting and
 window setting effectively represent one singular setting.
 Then, by proper adjustment of permutations ($L$, $M$, and $N$) we can
 consider any Enigma setting as beginning in such a state as described
-by $\sigma_0$. Further, each subsequent key-press will bring us to a new
+by $\pi_0$. Further, each subsequent key-press will bring us to a new
 state with a new permutation given by
 \[
-  \sigma_i \coloneq S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S
+  \pi_i \coloneq S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S
 \]
 where $i$ describes the number of times we have depressed the
 keyboard. Of course, turnover does exist and does matter; however, if
@@ -649,15 +649,15 @@ occurring at each step and so we have a $(\frac{25}{26})^l$ chance of
 no turnover occurring during our initial stages on encryption. For
 small $l$ this is a reasonably high probability. We will see that the
 first Enigma codebreakers made use of this
-fact to simplify their model of the machine to the above permutation $\sigma_i$.
+fact to simplify their model of the machine to the above permutation $\pi_i$.
 
 \subsection{Cycle Type}
-Consider the structure of the permutation $\sigma_i$. We have
+Consider the structure of the permutation $\pi_i$. We have
 \begin{align*}
-  \sigma_i & = S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S \\
+  \pi_i & = S^{-1}P^{i}N^{-1}P^{-i}M^{-1}L^{-1}RLMP^{-i}NP^{i}S \\
   & = (LMP^{-i}NP^{i}S)^{-1}R(LMP^{-i}NP^{i}S).
 \end{align*}
-That is, $\sigma_i$ is simply the reflector permutation $R$
+That is, $\pi_i$ is simply the reflector permutation $R$
 pre-composed and post-composed with a permutation and its inverse
 respectively. This leads us to the following definition,
 
@@ -666,7 +666,7 @@ respectively. This leads us to the following definition,
   {\bf{conjugate}} if $\exists\text{ }g\in{G}$ s.t. $a=gbg^{-1}$.
 \end{definition}
 \text{}\\In this way, we can shorten our above observation to say that
-$\forall\text{ }i\in\mathbb{N}$ we have that $\sigma_i$ and $R$ are
+$\forall\text{ }i\in\mathbb{N}$ we have that $\pi_i$ and $R$ are
 conjugate permutations. This point is true regardless of turnover
 since the permutations being pre-composed and post-composed with $R$
 are always inverse permutations. Now consider the following lemma,\\
@@ -826,15 +826,15 @@ Let $\alpha$ be any fixed permutation with cycle type $1^{m_1} \dots
 n^{m_n}$. Every permutation with this cycle type is a conjugate of
 $\alpha$. So, the number of such permutations is equal to the number
 of distinct conjugates of $\alpha$.
-\\\\Every permutation $\pi \in S_n$ gives a conjugate $\pi \alpha
-\pi^{-1}$. However, different $\pi$ can produce the same permutation
-after conjugation. For two permutations $\pi$ and $\rho$ to produce
+\\\\Every permutation $\sigma \in S_n$ gives a conjugate $\sigma \alpha
+\sigma^{-1}$. However, different $\sigma$ can produce the same permutation
+after conjugation. For two permutations $\sigma$ and $\rho$ to produce
 the same permutation after conjugating $\alpha$ we must have
 \begin{align*}
-&\pi\alpha\pi^{-1} = \rho\alpha\rho^{-1}\\
-\Rightarrow\text{ }&\alpha = \pi^{-1}\rho\alpha\rho^{-1}\pi
+&\sigma\alpha\sigma^{-1} = \rho\alpha\rho^{-1}\\
+\Rightarrow\text{ }&\alpha = \sigma^{-1}\rho\alpha\rho^{-1}\sigma
 \end{align*}
-In other words, $\rho^{-1}\pi$ must conjugate $\alpha$ to $\alpha$
+In other words, $\rho^{-1}\sigma$ must conjugate $\alpha$ to $\alpha$
 \\\\From the previous corollary, we know there are
 \[
 \prod_{i=1}^{n} i^{m_i} m_i!
@@ -848,7 +848,7 @@ the number of permutations with the same cycle type — is
 \end{proof}
 \noindent Returning to the Enigma, recall that at any fixed position
 of the Enigma machine, the
-permutation describing this position $\sigma_i$ is just a conjugate
+permutation describing this position $\pi_i$ is just a conjugate
 of the reflector permutation $R$. As the reflector permutation $R$
 has a cycle type
 of $2^{13}$ it must then be the case by Theorem
@@ -856,14 +856,14 @@ of $2^{13}$ it must then be the case by Theorem
 machine is simply a $2^{13}$ cycle. This gives two key properties at
 any given fixed position:
 \begin{itemize}
-\item[(1)] The Enigma is an involution, meaning that $\sigma_i(\sigma_i(x))
+\item[(1)] The Enigma is an involution, meaning that $\pi_i(\pi_i(x))
 = x$. This is actually a desired and arguably necessary property for
 the Enigma to work since we need to ensure that, when two
-machines are at the same position, a cipher letter $\sigma_i(x)$ will
+machines are at the same position, a cipher letter $\pi_i(x)$ will
 decrypt to its plaintext counterpart $x$.
-\item[(2)] The Enigma has no fixed points. Since $\sigma_i$ is composed of
+\item[(2)] The Enigma has no fixed points. Since $\pi_i$ is composed of
 13 disjoint transpositions, we can never have a letter $x$ for which
-$\sigma_i(x) = x$. Therefore, we will never see a letter encrypted to
+$\pi_i(x) = x$. Therefore, we will never see a letter encrypted to
 itself. This means that for \emph{any} setting, repeatedly pressing a
 letter (e.g. $\texttt{A}$) on an Enigma machine
 will \emph{never} produce the same letter

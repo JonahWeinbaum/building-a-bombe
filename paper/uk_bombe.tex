@@ -160,72 +160,72 @@ known plaintext attack.
 % \end{align*}
 % Then it follows that our loop can be represented by
 % \begin{align*}
-%     \sigma &= E_{11}\circ E_7 \circ E_{1}
+%     \pi &= E_{11}\circ E_7 \circ E_{1}
 % \end{align*}
 % and we see that all the intermediate plugboard settings cancel out.
 % Lets isolate the plugboard settings by letting
-% $\overline{\sigma}$ represent $\sigma$ without the use of the
+% $\overline{\pi}$ represent $\pi$ without the use of the
 % plugboard for input and output, then
 % \[
-%     \sigma = P^{-1}\overline{\sigma}P
+%     \pi = P^{-1}\overline{\pi}P
 % \]
 % We have that
 % \begin{align*}
-%     \sigma(A) &= A
-%     \\\iff (P^{-1}\overline{\sigma}P)(A) &= A
-%     \\\iff \overline{\sigma}(P(A)) &= P(A)
+%     \pi(A) &= A
+%     \\\iff (P^{-1}\overline{\pi}P)(A) &= A
+%     \\\iff \overline{\pi}(P(A)) &= P(A)
 % \end{align*}
 
 % Suppose that our initial rotor position was correct, then certainly
-% our $\overline{\sigma}$ is correct. We can make a hypothesis
+% our $\overline{\pi}$ is correct. We can make a hypothesis
 % that $A$ is steckered to $K$ in the plugboard. Suppose we find that
-% $\overline{\sigma}(K) \ne K$, then $\sigma(A)\ne A$ and our loop is
+% $\overline{\pi}(K) \ne K$, then $\pi(A)\ne A$ and our loop is
 % broken, breaking our assumptions, thus $A$ must not be steckered to $K$.
 % But this will actually elimiate more hypotheses than just $A$ being
-% steckered to $K$. We know that $\overline{\sigma}(K)$ is some
+% steckered to $K$. We know that $\overline{\pi}(K)$ is some
 % letter which is not $K$. So we continue with a new hypothesis that
 % $A$ is steckered to
-% $\overline{\sigma}(K)$ and if we find
-% $\overline{\sigma}(\overline{\sigma}(K)) \ne \overline{\sigma}(K)$,
+% $\overline{\pi}(K)$ and if we find
+% $\overline{\pi}(\overline{\pi}(K)) \ne \overline{\pi}(K)$,
 % then we have further eliminated this possibility.
 % Each new hypothesis suggests that $A$ is steckered to
-% $\overline{\sigma}^{i}(K)$ which will be shown to be false if
-% $\overline{\sigma}^{i+1}(K) \ne \overline{\sigma}^{i}(K)$. What if
+% $\overline{\pi}^{i}(K)$ which will be shown to be false if
+% $\overline{\pi}^{i+1}(K) \ne \overline{\pi}^{i}(K)$. What if
 % we find that
-% $\overline{\sigma}^{i+1}(K) = \overline{\sigma}^i(K)$ at some
+% $\overline{\pi}^{i+1}(K) = \overline{\pi}^i(K)$ at some
 % point? This cannot happen since
 % \begin{center}
 %         \begin{align*}
-%             &\overline{\sigma}^{i+1}(K) = \overline{\sigma}^i(K)
+%             &\overline{\pi}^{i+1}(K) = \overline{\pi}^i(K)
 %             \\\Rightarrow \text{
-% }&\overline{\sigma}^{-i}\circ\overline{\sigma}^{i+1}(K) =
-% \overline\sigma^{-i}\circ\overline{\sigma}^i(K)
-%             \\\Rightarrow \text{ }&\overline{\sigma}(K) = K
+% }&\overline{\pi}^{-i}\circ\overline{\pi}^{i+1}(K) =
+% \overline\pi^{-i}\circ\overline{\pi}^i(K)
+%             \\\Rightarrow \text{ }&\overline{\pi}(K) = K
 %         \end{align*}
 % \end{center}
 % which by supposition is false. Then we can continue in our
-% hypotheses until we eventually reach a cycle where $\overline\sigma^i(K) = K$.
+% hypotheses until we eventually reach a cycle where $\overline\pi^i(K) = K$.
 % Then we gather a set of impossible steckerings, that is
 % \begin{align*}
-%     P(A) \notin \{\text{ }\overline{\sigma}^i(K)\text{ }\vert\text{
+%     P(A) \notin \{\text{ }\overline{\pi}^i(K)\text{ }\vert\text{
 % }i\in\mathbb{N}\}
 % \end{align*}
 % \\\\The notation we are using can be simplified significantly. The
-% set $\{\text{ }\overline{\sigma}^i(K)\text{ }\vert\text{
+% set $\{\text{ }\overline{\pi}^i(K)\text{ }\vert\text{
 % }i\in\mathbb{N}\}$ is equivalent to the orbit of $K$ via the group
 % action of the
-% cyclic subgroup $\langle\overline{\sigma}\rangle$ which can be
-% denoted $\langle\overline{\sigma}\rangle\cdot K$.
+% cyclic subgroup $\langle\overline{\pi}\rangle$ which can be
+% denoted $\langle\overline{\pi}\rangle\cdot K$.
 % \\\\We then have several cases
 % \begin{enumerate}
-%     \item If $|\langle\overline{\sigma}\rangle\cdot K| = 26$, then
+%     \item If $|\langle\overline{\pi}\rangle\cdot K| = 26$, then
 % $A$ cannot be steckered to anything which is clearly
 %     impossible, thus our rotor position must be incorrect.
-%     \item If $|\langle\overline{\sigma}\rangle\cdot K| = 25$, then
+%     \item If $|\langle\overline{\pi}\rangle\cdot K| = 25$, then
 % $A$ can only be steckered to the remaining letter \\$\{A,\dots,Z\} -
-%     \langle \overline{\sigma} \rangle\cdot K$
-%     \item If $|\langle\overline{\sigma}\rangle\cdot K| = 1$, in
-% this case we must have intially had $\overline{\sigma}(K) = K$ so we have not
+%     \langle \overline{\pi} \rangle\cdot K$
+%     \item If $|\langle\overline{\pi}\rangle\cdot K| = 1$, in
+% this case we must have intially had $\overline{\pi}(K) = K$ so we have not
 %     eliminated any possibilities.
 % \end{enumerate}
 
@@ -248,8 +248,8 @@ their messages with a window setting that was nearly identical to the
 ring setting. Thus, by looking at several operators first messages of
 the day, we would see a cluster around a particular setting
 that is likely to be the ring setting. Such an insight became known
-as the {\bf{Herevil tip}}.
-\\\\With the Herevil tip, we could determine a likely ring setting.
+as the {\bf{Herivel tip}}.
+\\\\With the Herivel tip, we could determine a likely ring setting.
 Then by either brute force or use of the clock method, we could
 determine the rotor order. Then finally, as we did to recover the
 plugboard from the Bomba in Section~\ref{bomba_plugboard}, we could
@@ -269,7 +269,7 @@ keeping track of previously deduced daily keys, Parker found that, in
 fact, some columns from the daily sheets had been reused from
 previous months.
 \\\\As parts of keys were broken, the relevant setting
-(e.g. wheel order, rotor order, plugboard configuration) were compared
+(e.g.\ wheel order, rotor order, plugboard configuration) were compared
 against Parker's records of prior keys to determine if that same
 setting appears in a prior sheet. If it was, Parker guessed that the
 entire column may actually be the same as the earlier month's and
@@ -280,8 +280,8 @@ key sheet could be determined in advance. This procedure became known
 as {\bf{Parkerismus}}. Welchman explained that at one point they had
 determined the entire month's worth of keys that Rommel would use in
 Africa just by use of Parkerismus.
-\\\\Ultimately, the Herevil tip and Parkerismus only helped them to
-decipher messages in particular circumstances. Herevil's trick was
+\\\\Ultimately, the Herivel tip and Parkerismus only helped them to
+decipher messages in particular circumstances. Herivel's trick was
 only used within a
 particular network of operators known as the "Red network". Similarly,
 Parker's trick only functioned when certain columns in the key sheet
@@ -345,9 +345,9 @@ and the indices on the arrows indicate how many steps forward our
 Enigma machine has moved while enciphering this message.
 \\\\From this pairing we have that
 \begin{center}
-  $\sigma_1(\texttt{A}) = {\texttt{D}}$\\
-  $\sigma_7(\texttt{D}) = {\texttt{X}}$\\
-  $\sigma_{11}(\texttt{X}) = {\texttt{A}}$\\
+  $\pi_1(\texttt{A}) = {\texttt{D}}$\\
+  $\pi_7(\texttt{D}) = {\texttt{X}}$\\
+  $\pi_{11}(\texttt{X}) = {\texttt{A}}$\\
 \end{center}
 % Our goal is to determine which Enigma settings were used to encipher
 % the message.  In order to achieve this,
@@ -364,7 +364,7 @@ Enigma machine has moved while enciphering this message.
 % and 11, from our initial position, then inputting $\texttt{A}$ on the first
 % machine would result in an ouput of $\texttt{A}$ on the
 % third machine.
-Thus, $\sigma_1$, $\sigma_7$, and $\sigma_{11}$ form a loop starting
+Thus, $\pi_1$, $\pi_7$, and $\pi_{11}$ form a loop starting
 at \texttt{A}. We visualize this loop as follows
 \begin{center}
   \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
@@ -374,46 +374,46 @@ at \texttt{A}. We visualize this loop as follows
     \node (X) at (330:1.5) {$\texttt{X}$};
 
     \draw[<->, bend right=45] (A) to node[midway, draw=none, above]
-    {$\sigma_1$} (D);
+    {$\pi_1$} (D);
     \draw[<->, bend right=45] (D) to node[midway, draw=none, above]
-    {$\sigma_7$} (X);
+    {$\pi_7$} (X);
     \draw[<->, bend right=45] (X) to node[midway, draw=none, above]
-    {$\sigma_{11    }$} (A);
+    {$\pi_{11    }$} (A);
   \end{tikzpicture}
 \end{center}
-Recall that, ignoring turnover, each $\sigma_i$ is of the form
+Recall that, ignoring turnover, each $\pi_i$ is of the form
 \begin{center}
-  $\sigma_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S$
+  $\pi_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S$
 \end{center}
-We will denote $\sigma_i$ separated from its plugboard as
+We will denote $\pi_i$ separated from its plugboard as
 \begin{center}
-  $\overline{\sigma_i} =
+  $\overline{\pi_i} =
   P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}$
 \end{center}
-\noindent that is $\sigma_i = S^{-1}\overline{\sigma_i}S$
-(conversely, $\overline\sigma_i = S^{-1}\sigma_iS$)\footnote{It
+\noindent that is $\pi_i = S^{-1}\overline{\pi_i}S$
+(conversely, $\overline\pi_i = S^{-1}\pi_iS$)\footnote{It
   should be noted that $S$ = $S^{-1}$ since the plugboard is always an
 involution.}.
 Then our loop is expressed by the fact that
-$\sigma_{11}\sigma_7\sigma_1$ has a fixed point at $\texttt{A}$.
+$\pi_{11}\pi_7\pi_1$ has a fixed point at $\texttt{A}$.
 We also note that the intermediate plugboard settings cancel out, that is,
 \begin{center}
   \begin{align*}
-    \sigma_{1}\sigma_7\sigma_{11} & =
-    S^{-1}\overline{\sigma_{1}}SS^{-1}\overline{\sigma_7}SS^{-1}\overline{\sigma_{11}}S
+    \pi_{1}\pi_7\pi_{11} & =
+    S^{-1}\overline{\pi_{1}}SS^{-1}\overline{\pi_7}SS^{-1}\overline{\pi_{11}}S
     \\&= S^{-1}
-    \overline{\sigma_{1}}\overline{\sigma_7}\overline{\sigma_{11}}
+    \overline{\pi_{1}}\overline{\pi_7}\overline{\pi_{11}}
     S.
   \end{align*}
 \end{center}
 We will condense this notation by defining
 \begin{center}
-  $\pi \coloneq \sigma_{1}\sigma_7\sigma_{11}$
+  $\pi \coloneq \pi_{1}\pi_7\pi_{11}$
 \end{center}
 and
 \begin{center}
   $\overline{\pi} \coloneq
-  \overline{\sigma_{1}}\overline{\sigma_7}\overline{\sigma_{11}}$
+  \overline{\pi_{1}}\overline{\pi_7}\overline{\pi_{11}}$
 \end{center}
 And thus we have shown $\pi = S^{-1}\overline{\pi}S$ (conversely,
 $\overline\pi = S^{-1}\pi S$).
@@ -516,9 +516,9 @@ the end we find that the spider scanning method was used in the
 implementation of the Bombe.
 \\\\At a high level, we encode the structure
 of a plaintext-ciphertext pairing, and we input a hypothesis that a particular
-letter (e.g. $\texttt{A}$) is steckered to another (e.g. $\alpha$). We then
+letter (e.g.\ $\texttt{A}$) is steckered to another (e.g.\ $\alpha$). We then
 electrically produce the elements that must also be steckered to our test letter
-(e.g. $\langle\overline{\pi}\rangle\cdot\alpha$) if our hypothesis
+(e.g.\ $\langle\overline{\pi}\rangle\cdot\alpha$) if our hypothesis
 were to be true. If we find that this production generates a set of
 all letters, and thus disqualifies this rotor position from producing
 the plaintext we observed, we can then continue on to the next rotor
@@ -600,10 +600,10 @@ Suppose we had the plaintext-ciphertext pairing,
     \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
     \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
 
-  \end{tikzpicture}.
+  \end{tikzpicture}
 \end{center}
 
-\noindent Then we find that there exists a loop in the pairing as follows,
+\noindent Then we find that there exists a loop in the pairing as follows:
 
 \begin{center}
   \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
@@ -615,7 +615,7 @@ Suppose we had the plaintext-ciphertext pairing,
     \draw[<->, bend right=45] (A) to node[midway, draw=none, above] {1} (B);
     \draw[<->, bend right=45] (B) to node[midway, draw=none, above] {2} (C);
     \draw[<->, bend right=45] (C) to node[midway, draw=none, above] {3} (A);
-  \end{tikzpicture}.
+  \end{tikzpicture}
 \end{center}
 We can then think of this loop as a series of three Enigma
 permutations. At each step of enciphering the message, we have a new
@@ -623,7 +623,7 @@ arrangement of the Enigma machine represented by the permutation
 $\pi_i$. Without the plugboard's involvement, these are denoted
 $\overline{\pi_i}$. For our plaintext-ciphertext pairing, we can
 imagine that the $\overline{\pi_i}$s for our loop of three Enigma
-machines may look as follows,
+machines may look as follows:
 \begin{center}
   \begin{tikzpicture}[thick, scale=0.6, every node/.style={scale=0.7}]
     % Draw the box
@@ -1279,13 +1279,13 @@ preserve our fixed point at \texttt{A}.
 This creates an inconsistency between our hypothesis and deduction
 meaning that we can eliminate the both
 steckering possibilities $S(\texttt{A}) \notin \{\texttt{A},
-\texttt{D}\}$
+\texttt{D}\}$.
 \\\\Effectively, this process is a mechanization of
 finding the cycle containing a particular letter. In the above
 figure~\ref{fig:incorrect_stecker}, sending current from \texttt{Ad}
 until we arrive back at \texttt{Ad} is
 akin to repeatedly applying $\overline\pi$ to \texttt{D}
-until we return to \texttt{D}. This can be visualized in our diagram as,
+until we return to \texttt{D}. This can be visualized in our diagram as
 
 \begin{center}
   \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
@@ -1371,7 +1371,7 @@ until we return to \texttt{D}. This can be visualized in our diagram as,
     \node[draw,circle] at (3, -9) {\texttt{B}};
     \node[draw,circle] at (10.5, -1) {\texttt{C}};
 
-  \end{tikzpicture}.
+  \end{tikzpicture}
 \end{center}
 Here we find that in $\overline\pi$ we have the cycle $(\texttt{AD})$
 since \texttt{Ad} and \texttt{Aa} are the only two live
@@ -1418,8 +1418,7 @@ between \texttt{Ab} and some constant power supply line. Then, when
 current stops
 flowing through \texttt{Ab}, the relay will trigger. We can then wire the
 stopping mechanism to the contact terminal of the relay such that the
-stopping mechanism will only trigger when line \texttt{Ab} is not live (i.e.
-the relay is closed).
+stopping mechanism will only trigger when line \texttt{Ab} is not live (i.e.\ the relay is closed).
 \\\\We can further extend this to detect when any line on the \texttt{A}
 cable is not live by having each line \texttt{Aa}, \texttt{Ab},
 \texttt{Ac}, \texttt{Ad} wired in
@@ -1482,7 +1481,7 @@ instance, we might have a plaintext-ciphertext pairing as follows,
 
   \end{tikzpicture}.
 \end{center}
-Thus encoding the following loops,
+Thus encoding the following loops:
 \begin{center}
   \scalebox{0.8}{
     \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
@@ -1503,7 +1502,7 @@ Thus encoding the following loops,
     \end{tikzpicture}
   }
 \end{center}
-With our diagram format this could look as follows
+With our diagram format this could look as follows:
 \begin{figure}[H]
   \begin{center}
     \scalebox{0.8}{
@@ -1700,7 +1699,7 @@ With our diagram format this could look as follows
   \caption{Multiple loops in the Bombe}
   \label{fig:multiloops}.
 \end{figure}
-\noindent This increased electrical connections results in fewer
+\noindent This increased electrical connection results in fewer
 stops. In the next chapter, we will return to the effect that multiple
 loops have on the number of stops.
 
@@ -1899,24 +1898,23 @@ one such derivation.
 \\\\The checking machine was effectively an Enigma machine with no
 plugboard attachment and no rotor advancement mechanism --
 effectively, the checking machine represents a fixed
-$\overline\sigma_i$. Suppose the operator (known as a
+$\overline\pi_i$. Suppose the operator (known as a
 {\bf{wren}})\footnote{Wren comes from the abbreviation WRN of the
   Women's Royal Navy Service. Such members became the primary operators
 of Bombes at Bletchley Park.} knew from the Bombe stop that our
-hypothesis letter \texttt{A} was steckered to \texttt{C} (i.e.
-$S(\texttt{A}) = \texttt{C}$). Further, from our loop, the wren knows that
+hypothesis letter \texttt{A} was steckered to \texttt{C} (i.e.\ $S(\texttt{A}) = \texttt{C}$). Further, from our loop, the wren knows that
 \[
-  \sigma_1(\texttt{A}) = \texttt{B}
+  \pi_1(\texttt{A}) = \texttt{B}
 \]
 We then have that
 \begin{align*}
-  S(\texttt{B}) & = S(\sigma_1(\texttt{A}))                \\
-  & = SS^{-1}\overline\sigma_1 S(\texttt{A}) \\
-  & = \overline\sigma_1(\texttt{C})
+  S(\texttt{B}) & = S(\pi_1(\texttt{A}))                \\
+  & = SS^{-1}\overline\pi_1 S(\texttt{A}) \\
+  & = \overline\pi_1(\texttt{C})
 \end{align*}
 Then to determine what letter is steckered to \texttt{B}, the wren
 only needs to set their ring settings to that given by the indicator,
-the window settings to that corresponding to $\sigma_1$, and input
+the window settings to that corresponding to $\pi_1$, and input
 \texttt{C}. Now using this newly deduced steckering, the wren can
 produce the steckering of the next letter in the loop until we have
 deduced the steckerings corresponding to each letter in our loop.
@@ -1927,7 +1925,7 @@ deduced the steckerings corresponding to each letter in our loop.
 If at this stage we find that a deduced plugboard setting contradicts
 an earlier plugboard setting we discovered, this means that the point
 at which the Bombe stopped is incorrect! Recall that the Bombe stops
-when there are no logical contradictions gleamed from its setup and
+when there are no logical contradictions gleaned from its setup and
 the information in the loop -- this does not mean no logical
 contradictions exist. Further, even if no logical contradictions
 existed that does not mean that this is the only such setting which could
@@ -2047,7 +2045,7 @@ theorize likely phrases in a
 message. For instance, if the weather on a particular day was windy
 with a chance of rain, we would expect that the weather report (which
 intellegence knew arrived from specific channels at specific times)
-would likely contain phrases like ``weather'', ``wind'', or ``rain''.
+would likely contain phrases like ``weather,'' ``wind,'' or ``rain.''
 \\\\Some sources of plaintext could be manufactured in a process
 known as {\bf{gardening}}. Bletchley Park could request that the
 British Air Force ``seed'' a designated location with mines. It would
@@ -2208,7 +2206,7 @@ this will be entirely consistent with our current deductions and thus
 there will be no new logical contradictions introduced by this
 additional current. That is, for any wire \texttt{Xy} we can connect
 it directly to \texttt{Yx} through what was called a {\bf{diagonal
-board}}. In our diagram this can be viewed as follows
+board}}. In our diagram, this can be viewed as follows:
 \begin{figure}[H]
   \begin{center}
     \begin{tikzpicture}[thick, scale=0.7, every node/.style={scale=0.7}]
@@ -2343,7 +2341,7 @@ was chief engineer of the British Tabulating Machine Company, Harold
 \subsection{Consecutive Stecker Knock Out}
 In the Air Force Enigma protocol, the plugboard setting was always
 such that no letter was connected to its neighboring letter in the
-alphabet (e.g. \texttt{A} cannot be connected to \texttt{B}). Some
+alphabet (e.g.\ \texttt{A} cannot be connected to \texttt{B}). Some
 Bombes had a setting called {\bf{Consecutive Stecker Knock Out
 (CSKO)}} that allowed for the elimination of some stops which implied
 consecutive steckerings. This was accomplished by wiring wire
@@ -2548,13 +2546,13 @@ key, the Navy maintained this parameter of their daily key.
 bigrams to other bigrams known as a {\bf{bigram table}}. We will not
 discuss the exact details of choosing trigrams since they are not of
 cryptogrpahic importance, but suffice it to say that the operator
-chose two trigrams from the K-Book (e.g. \texttt{CAC} and
+chose two trigrams from the K-Book (e.g.\ \texttt{CAC} and
 \texttt{ABB}) and arranged them in two rows as follows,
 \begin{align*}
   & \texttt{.CAC} \\
   & \texttt{ABB.}
 \end{align*}
-The operator then chose two random letters (e.g. \texttt{B} and
+The operator then chose two random letters (e.g.\ \texttt{B} and
 \texttt{B}) and filled in the remaining slots
 \begin{align*}
   & \texttt{BCAC} \\
@@ -2569,7 +2567,7 @@ a new bigram. That is
   & \texttt{CB} \mapsto \texttt{AA}
 \end{align*}
 And these new bigrams were then arranged into tetragrams which in our
-example produces \texttt{CCAA BCAA}. These two teragrams were then
+example produces \texttt{CCAA BCAA}. These two tetragrams were then
 sent in plaintext at the start of our message. To actually encipher
 their message, the operator set their machine to the window setting
 specified by the key sheet and enciphered their second chosen
@@ -2623,7 +2621,7 @@ assumption, we will now employ statistical analysis to determine
 which rotors were most likely used in the daily key for a particular day.
 
 \subsection{Repeats}
-Suppose we find the following two naval Enigma messages,
+Suppose we find the following two naval Enigma messages:
 \[
   \setlength{\arraycolsep}{15pt}
   \begin{array}{c | c}
@@ -2635,16 +2633,16 @@ Suppose we find the following two naval Enigma messages,
 \]
 We know that after enciphering our pre-message key we will get our
 actual message key. Both \texttt{VFG} and \texttt{VFX} will be
-enciphered with the same settings (say $\sigma_i$) so we know that
+enciphered with the same settings (say $\pi_i$) so we know that
 they will be converted to
 \begin{align*}
-  \texttt{VFG} & \mapsto \sigma_1(V)\sigma_2(F)\sigma_3(G) \\
-  \texttt{VFX} & \mapsto \sigma_1(V)\sigma_2(F)\sigma_3(X) \\
+  \texttt{VFG} & \mapsto \pi_1(V)\pi_2(F)\pi_3(G) \\
+  \texttt{VFX} & \mapsto \pi_1(V)\pi_2(F)\pi_3(X) \\
 \end{align*}
 Given that both message keys begin with the letters
-$\sigma_1(V)\sigma_2(F)$, we know that they only differ by some
+$\pi_1(V)\pi_2(F)$, we know that they only differ by some
 unknown amount in their rightmost letter. Our first goal will be to
-determine the distance between $\sigma_3(G)$ and $\sigma_3(X)$.
+determine the distance between $\pi_3(G)$ and $\pi_3(X)$.
 Note that we know such a distance ranges between $-25$ and $25$ and
 we need not consider a distance of $0$ as this would imply the
 pre-message keys are the same.
@@ -2654,7 +2652,7 @@ same poly-alphabetic cipher, the observed distribution of coincidences
 (Bletchley Park called these {\bf{repeats}}) should be much higher
 than two texts representing random text. Consider aligning our two
 texts with an offset of $+11$ letters, that is, the hypothesis that
-$\sigma_3(\texttt{G}) = \sigma_3(\texttt{X}) + 11$
+$\pi_3(\texttt{G}) = \pi_3(\texttt{X}) + 11$
 \begin{center}
   \scalebox{0.8}{
     \begin{minipage}{\linewidth}
@@ -3080,17 +3078,17 @@ differs between our text; However, if the middle rotor turns over
 between the enciphering of our two pre-message keys, this
 assumption no longer holds. We must then ask the question, what is
 the likelihood that our two messages have message keys differing by
-only their last letter? If we assume that $\sigma_3(\texttt{G}) =
-\sigma_3(\texttt{X}) + n$ (thus corresponding to an offset of
+only their last letter? If we assume that $\pi_3(\texttt{G}) =
+\pi_3(\texttt{X}) + n$ (thus corresponding to an offset of
 $+n$), then this is the same as asking what is the probability that
-a turnover did \emph{not} occur between $\sigma_3(\texttt{G})$ and
-$\sigma_3(\texttt{X})$, that is, that a turnover did \emph{not}
+a turnover did \emph{not} occur between $\pi_3(\texttt{G})$ and
+$\pi_3(\texttt{X})$, that is, that a turnover did \emph{not}
 occur over $n$ letters distance of encipherment?
-\\\\Let $S$ represent the probability we are using an non-naval
+\\\\Let $S$ represent the probability we are using a non-naval
 Enigma rotor as our rightmost rotor (rotors \texttt{I}-\texttt{V}).
 If we are in this case, then we have a $\frac{1}{26}$ chance of
 turnover at any given letter, so the likelihood of turnover over a
-distance of $n$ letters is thus $\frac{n}{26}$. Thus the likelihood
+distance of $n$ letters is $\frac{n}{26}$. Thus the likelihood
 of \emph{not} turning over is $\frac{26-n}{26}$.
 \\\\If we are in the case with $1-S$ probability that we are using
 a naval rotor (rotors \texttt{VI}-\texttt{VIII}), then we have a
@@ -3109,14 +3107,14 @@ denote $\tau_n$, is
     & \text{for } 13 \le n < 26
   \end{cases}
 \]
-Given that, by protocol, at least one rotor must be a naval rotor
+Given that, by protocol, at least one rotor must be a naval rotor,
 we will now calculate $S$.
 \\\\We have $8\cdot7\cdot6$ possible arrangements of rotors for all
 possible naval rotors, but $5\cdot4\cdot3$ of these will contain no
 naval rotors. Additionally, only $7\cdot6\cdot3$ of these will have
 a naval rotor as their rightmost rotor, meaning that the
 probability of having a non-naval rotor as your rightmost rotor
-(i.e. $1-S$) is
+(i.e.\ $1-S$) is
 \[
   1-S = \frac{7\cdot6\cdot3}{8\cdot7\cdot6 - 5\cdot4\cdot3}
 \]
@@ -3462,7 +3460,7 @@ indicate which two letters are being compared, in our case
 \end{figure}
 
 \noindent If we had other pre-message keys which added observations
-regarding these distances (e.g. \texttt{POQ} and \texttt{POB}),
+regarding these distances (e.g.\ \texttt{POQ} and \texttt{POB}),
 then we would add another row below this and we could add up each
 column to get a more accurate score for each offset.
 
@@ -3580,7 +3578,7 @@ and \texttt{W} derived from pre-message keys
 \noindent After all this work we can now determine that the most
 likely candidate is that
 \[
-  \sigma_3(\texttt{W}) = \sigma_3(\texttt{V}) - 2
+  \pi_3(\texttt{W}) = \pi_3(\texttt{V}) - 2
 \]
 with a total score of $27$ hdB. We can now add in the Bayesian
 prior representing the initial odds that any given offset is
@@ -3843,7 +3841,7 @@ various letter offsets so it is best to recap what we get at the
 end of this analysis. We have,
 \begin{itemize}
   \item A list of repeat structures and their scores which we will
-    call a {\bf{catalouge}}. This is just a scored tetra catalogue
+    call a {\bf{catalogue}}. This is just a scored tetra catalogue
     combined with a scored end-wheel catalogue. An example is as
     follows\footnote{For sufficiently high odds we just write
     ``certain'' as it may as well be.}
@@ -3907,32 +3905,32 @@ end of this analysis. We have,
 The process of combining these two pieces of information to recover
 the middle and end rotors became known as {\bf{scritchmus}}.
 
-\subsubsection{Determining $\sigma_3$}
+\subsubsection{Determining $\pi_3$}
 We are now going to determine the mapping of the third letter in
-the pre-message key $\sigma_3$. We begin by making a chain of
+the pre-message key $\pi_3$. We begin by making a chain of
 letters whose distances are deduced from the likely candidates from
 our catalogue~\ref{fig:catalogue}. Repeat (1) indicates that
-$\sigma_3(\texttt{X}) = \sigma_3(\texttt{R}) + 5$. Let us make an
-initial assumption that $\sigma_3(\texttt{R}) = \texttt{M}$ then we
-deduce that $\sigma_3(\texttt{X}) = \texttt{M} + 5 = \texttt{R}$.
+$\pi_3(\texttt{X}) = \pi_3(\texttt{R}) + 5$. Let us make an
+initial assumption that $\pi_3(\texttt{R}) = \texttt{M}$ then we
+deduce that $\pi_3(\texttt{X}) = \texttt{M} + 5 = \texttt{R}$.
 We can place these in an alphabet as follows
 \begin{align*}
   & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
   & \texttt{............R....X........}
 \end{align*}
 In this way, adding in repeats (2)-(5) we get from our initial
-hypothesis $\sigma_3(\texttt{R}) = \texttt{M}$,
+hypothesis $\pi_3(\texttt{R}) = \texttt{M}$,
 \begin{align*}
   & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
   & \texttt{P......N...UR.K..X........}
 \end{align*}
-Recall that $\sigma_3$ must be an involution so if
-$\sigma_3(\texttt{R}) = \texttt{M}$ we must also have
-$\sigma_3(\texttt{M}) = \texttt{R}$, but of course this contradicts
-our derivation that $\sigma_3(\texttt{X}) = \texttt{R}$. Then our
-initial hypothesis $\sigma_3(\texttt{R}) = \texttt{M}$ is likely
+Recall that $\pi_3$ must be an involution so if
+$\pi_3(\texttt{R}) = \texttt{M}$ we must also have
+$\pi_3(\texttt{M}) = \texttt{R}$, but of course this contradicts
+our derivation that $\pi_3(\texttt{X}) = \texttt{R}$. Then our
+initial hypothesis $\pi_3(\texttt{R}) = \texttt{M}$ is likely
 wrong. We must therefore continue through all hypotheses for the
-value of $\sigma_3(\texttt{R})$. We can eliminate possibilities as follows,
+value of $\pi_3(\texttt{R})$. We can eliminate possibilities as follows,
 % \begin{align*}
 %    & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} &
 %                                          \\
@@ -4218,7 +4216,7 @@ value of $\sigma_3(\texttt{R})$. We can eliminate possibilities as follows,
   \end{tabular}}
 \end{center}
 \noindent In the end we arrive at only $4$ possible alphabets. By
-filling in values given by the reciprocal nature of $\sigma_3$ we
+filling in values given by the reciprocal nature of $\pi_3$ we
 arrive at these four alphabets.
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.1}
@@ -4279,15 +4277,15 @@ alphabet since (8) has roughly even odds of being correct and
 picking up (7) is such that it outweighs the denial of (8) anyways.
 \\\\We now need to determine which of (a) or (d) is correct. To do
 this we can turn to our deciban sheets~\ref{fig:deciban_sheet}. For
-example, we note that alphabet (a) is such that $\sigma_3(\texttt{T}) =
-\sigma_3(\texttt{H}) + 2$ which is evidence $3$ hdB in favor of this
+example, we note that alphabet (a) is such that $\pi_3(\texttt{T}) =
+\pi_3(\texttt{H}) + 2$ which is evidence $3$ hdB in favor of this
 alphabet. Alexander's example found, that after adding up all the
 offsets in alphabet (a) against deciban sheets, we find that the
 alphabet has a total score of $54$ hdB, almost certainly indicating
-that alphabet (a) is our correct choice for $\sigma_3$.
+that alphabet (a) is our correct choice for $\pi_3$.
 \\\\We can now further fill in the alphabet from hypotheses that
 got picked up. We begin by including hypothesis (9) and using
-$\sigma_3$'s reciprocal property to get the alphabet
+$\pi_3$'s reciprocal property to get the alphabet
 \begin{align*}
   & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
   & \texttt{.......P..VQ.ONHLTURSK.YX.}
@@ -4303,7 +4301,7 @@ entire alphabet in this way.
 
 \subsubsection{Recovering the End Rotor}
 We will now examine what possible end rotors could be used that
-corroborate our alphabet for $\sigma_3$. Consider that for our
+corroborate our alphabet for $\pi_3$. Consider that for our
 end-wheel comparisons like hypothesis (5) and (6), we have strong
 indication that no turnover occurred during these repeat
 structures. Therefore we may assume that no turnover occurred
@@ -4321,7 +4319,7 @@ possibilities from $8$ to $2$.
 
 \subsubsection{Recovering the Middle Rotor}
 Determining the middle rotor is much the same as the above
-procedure. Our goal is to get a likely alphabet for $\sigma_2$ and
+procedure. Our goal is to get a likely alphabet for $\pi_2$ and
 determine where turnover of the leftmost wheel occurred so as to
 eliminate possible middle rotors. The only difference is that, based
 on our above analysis, we
@@ -4342,14 +4340,14 @@ determine valid settings.
 \subsection{Running the Bombe}
 By this point we have determined a handful of possible rotor
 orderings, and we have, with luck, determine the entirety of
-permutations $\sigma_2$ and $\sigma_3$. Note though that the
-permutations $\sigma_2$ and $\sigma_3$ are themselves
+permutations $\pi_2$ and $\pi_3$. Note though that the
+permutations $\pi_2$ and $\pi_3$ are themselves
 plaintext-ciphertext pairings! For example, if we determine
-$\sigma_2$ and $\sigma_3$ to be
+$\pi_2$ and $\pi_3$ to be
 \begin{align*}
   & \texttt{ABCDEFGHIJKLMNOPQRSTUVWXYZ} \\
-  \sigma_2\;\; & \texttt{KJNRPQUOLBAISCHEFDMYGZXWTV} \\
-  \sigma_3\;\; & \texttt{OVJWLSKMUCGEHTAXRQFNIBDPZY}. \\
+  \pi_2\;\; & \texttt{KJNRPQUOLBAISCHEFDMYGZXWTV} \\
+  \pi_3\;\; & \texttt{OVJWLSKMUCGEHTAXRQFNIBDPZY}. \\
 \end{align*}
 Then we get a series of $2$ letter plaintext-ciphertext pairings, such as
 

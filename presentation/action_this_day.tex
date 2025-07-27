@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{textcomp}
+ \usepackage[normalem]{ulem}
 \usepackage{moresize}
 \usepackage{framed}
 \usepackage{minted}
@@ -23,6 +24,12 @@
     \usebeamercolor[fg]{footline}%
     \hspace{1em}%
     \insertframenumber/\inserttotalframenumber
+}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
 }
 \makeatletter
 \AtBeginEnvironment{minted}{\dontdofcolorbox}
@@ -858,7 +865,7 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
                  \node[draw=none] at ([xshift=-1.5cm]x1.west) {\texttt{Plaintext  }};
 
 		\end{tikzpicture}
-	\end{center}
+	\end{center}\blfootnote{For many examples we will switch to a $4$ letter alphabet.}
 \end{frame}
 
 \begin{frame}[fragile]{Plaintext Attack}
@@ -2764,7 +2771,6 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
                 \draw[->] (a10) -- (x10) node[midway, left, draw=none, fill=none] {10};
                 \draw[->] (a11) -- (x11) node[midway, left, draw=none, fill=none] {11};
                 \draw[->] (a12) -- (x12) node[midway, left, draw=none, fill=none] {12};
-                \draw[->] (a13) -- (x13) node[midway, left, draw=none, fill=none] {13};
                 \draw[->] (a14) -- (x14) node[midway, left, draw=none, fill=none] {14};
                 \draw[->] (a15) -- (x15) node[midway, left, draw=none, fill=none] {15};
                 \draw[->] (a16) -- (x16) node[midway, left, draw=none, fill=none] {16};
@@ -2774,7 +2780,7 @@ We change our window setting to \texttt{ABC} and decipher our message \texttt{BQ
 
 		\end{tikzpicture}
         }
-        \footnote{Thanks to Martin Gillow for the example.}
+        \blfootnote{Thanks to Martin Gillow for the example.}
 	\end{center}
 \end{frame}
 
@@ -3685,5 +3691,306 @@ All code used for the project is available at \url{https://github.com/JonahWeinb
 \end{itemize}
 \end{frame}
 
+\part{}
+\section{Pocket Slides}
+
+
+
+
+
+\begin{frame}[fragile]{...why?}
+\begin{itemize}
+    \item Modern, hardware-based encryption exist
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{...why?}
+\begin{center}
+    \includegraphics[scale=0.3]{paper/images/taclane.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{...why?}
+\begin{itemize}
+    \item  Modern, hardware-based encryption exist
+    \vspace{1em}
+        \item Lessons from history
+        \begin{itemize}
+            \item Breaking down encryption schemes into smaller components
+            \item Operator error and key distribution security 
+            \item International cooperation in cryptography
+        \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{...why?}
+\begin{center}
+    \includegraphics[scale=0.3]{paper/images/aes.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{...why?}
+\begin{itemize}
+    \item  Modern, hardware-based encryption exist
+    \vspace{1em}
+        \item Lessons from history
+        \begin{itemize}
+            \item Breaking down encryption schemes into smaller components
+            \item Operator error and key distribution security 
+            \item International cooperation in cryptography
+        \end{itemize}
+    \vspace{1em}
+        \item New discoveries by examining ``outdated'' subjects
+    \vspace{1em}
+    \pause
+    \item How did modern computing come to exist?
+        \vspace{1em}
+    \pause
+    \item Specialty built analog computers
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{How does Turing's model work?}
+Using Dixon's Theorem, we calculate for two loops (not accurate but fine for a heuristic argument)
+\begin{itemize}
+    \item $95.9\%$ -- $26^1$
+    \item  $4.1\%$ -- non-$26^1$ (i.e.\ stops)
+    \begin{itemize}
+        \item $92.3\%$ -- $1^125^1$
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{How does Turing's model work?}
+If all stops were $1^125^1$ stops then
+\begin{enumerate}
+  \item All stops have a steckering hypothesis producing a normal stop.
+  \item The number of steckering hypothesis producing a normal stop
+    for each stop type is $1$.
+\end{enumerate}
+so Turing's estimate becomes the true number of stops.
+\end{frame}
+
+\begin{frame}[fragile]{How does Turing's model work?}
+As a heuristic consider the Orbit-Stabilizer Theorem 
+\begin{theorem}[Orbit-Stabilizer Theorem]
+  For a group $G$ acting on a finite set $X$, we have that for $x\in X$
+  \begin{align*}
+    |G\cdot x| = \frac{|G|}{|G_x|}
+  \end{align*}
+  where $G\cdot x$ is the orbit of $x$ and $G_x$ is the stabilizer of $x$.
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}[fragile]{Generalized Dixon's Theorem Sanity Check}
+\begin{theorem}
+  For $\sigma,\tau\in S_n$ with cycle types, $\alpha$ and $\beta$
+  respectively, we have
+  \begin{align*}
+    &t_{\alpha, \beta}\ = 
+    \\&1 -
+    \frac{Z(\alpha)Z(\beta)}{(n!)^2}\sum_{(\upsilon_1,\dots,\upsilon_k)\ne(n)}\frac{n!}{Y(m^{(\upsilon)})}\sum_{\alpha^{(\upsilon_j)}\in
+    S_{\alpha,\upsilon}}\sum_{\beta^{(\upsilon_j)}\in
+    S_{\beta,\upsilon}}\prod_{j=1}^k
+    {\frac{(\upsilon_j!)^2}{Z(\alpha^{(\upsilon_j)})Z(\beta^{(\upsilon_j)})}}\cdot
+    t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}.
+  \end{align*}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[fragile]{Generalized Dixon's Theorem Sanity Check}
+\begin{center}
+\[
+  t_n = \sum_{\alpha,\beta}\frac{1}{Z(\alpha)Z(\beta)}\cdot t_{\alpha,\beta}
+\]
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Finding Plaintext-Ciphertext Pairings}
+\begin{center}
+\begin{align*}
+  & \texttt{QFZWRWIVTYRESXBFOGKUHQBAISEZ}
+  \\
+  & \texttt{WETTERVORHER}{\uline{\texttt{S}}}\texttt{AGEBISKAYA.....}
+  \\
+  &
+  \texttt{.WETTER}{\uline{\texttt{V}}}\texttt{ORH}{\uline{\texttt{E}}}\texttt{RSAGEBISKAY}{\uline{\texttt{A}}}\texttt{....}
+  \\
+  & \texttt{..WETTE}{\uline{\texttt{R}}}\texttt{VORHERSAGEBISKAYA...}
+  \\
+  &
+  \texttt{...}{\uline{\texttt{W}}}\texttt{ETTERVORHERSA}{\uline{\texttt{G}}}\texttt{EBISK}{\uline{\texttt{A}}}\texttt{YA...}
+  \\
+  & \texttt{....WETTERVORHERSAGEBISKAYA..}
+  \\
+\end{align*}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Finding Plaintext-Ciphertext Pairings}
+\begin{center}
+\begin{figure}[H]
+  \begin{center}
+    \scalebox{0.5}{
+      \begin{tikzpicture}[>=stealth, every node/.style={}]
+        % Manual node positions
+        \node (E) at (0,0) {\texttt{E}};
+        \node (O) at (3,1.5) {\texttt{0}};
+        \node (B) at (0,3) {\texttt{B}};
+        \node (U) at (-3,3) {\texttt{U}};
+        \node (S) at (6,3) {\texttt{S}};
+        \node (Y) at (9,3) {\texttt{Y}};
+        \node (G) at (-6,3) {\texttt{G}};
+        \node (H) at (0,6) {\texttt{H}};
+        \node (X) at (-3,6) {\texttt{X}};
+        \node (W) at (3,0) {\texttt{W}};
+        \node (R) at (6,0) {\texttt{R}};
+        \node (F) at (9,0) {\texttt{F}};
+        \node (A) at (-3,0) {\texttt{A}};
+        \node (I) at (-3,-3) {\texttt{I}};
+        \node (Q) at (-6,-3) {\texttt{Q}};
+        \node (T) at (0,-3) {\texttt{T}};
+        \node (K) at (-6,0) {\texttt{K}};
+        \node (V) at (6,-3) {\texttt{V}};
+
+        % Connections
+        \draw[-] (E) -- (W) node[midway, above, sloped] {\texttt{ZZB}};
+        \draw[-] (W) -- (R) node[midway, above, sloped] {\texttt{ZZA}};
+        \draw[-] (R) -- (F) node[midway, above, sloped] {\texttt{ZZL}};
+        \draw[-] (R) -- (Y) node[midway, above, sloped] {\texttt{ZZF}};
+        \draw[-] (E) -- (O) node[midway, above, sloped] {\texttt{ZZH}};
+        \draw[-] (O) -- (S) node[midway, above, sloped] {\texttt{ZZM}};
+        \draw[-] (S) -- (Y) node[midway, above, sloped] {\texttt{ZZV}};
+        \draw[-] (R) -- (S) node[midway, above, sloped] {\texttt{ZZI}};
+        \draw[-] (B) -- (S) node[midway, above, sloped] {\texttt{ZZS}};
+        \draw[-] (E) -- (B) node[midway, above, sloped] {\texttt{ZZK}};
+        \draw[-] (B) -- (H) node[midway, above, sloped] {\texttt{ZZQ}};
+        \draw[-] (X) -- (H) node[midway, above, sloped] {\texttt{ZZJ}};
+        \draw[-] (U) -- (E) node[midway, above, sloped] {\texttt{ZZP}};
+        \draw[-] (G) -- (A) node[midway, above, sloped] {\texttt{ZZN}};
+        \draw[-] (A) -- (E) node[midway, above, sloped] {\texttt{ZZW}};
+        \draw[-] (K) -- (G) node[midway, above, sloped] {\texttt{ZZO}};
+        \draw[-] (K) -- (A) node[midway, above, sloped] {\texttt{ZZT}};
+        \draw[-] (T) -- (E) node[midway, above, sloped] {\texttt{ZZE}};
+        \draw[-] (I) -- (A) node[midway, above, sloped] {\texttt{ZZU}};
+        \draw[-] (Q) -- (I) node[midway, above, sloped] {\texttt{ZZR}};
+        \draw[-] (I) -- (T) node[midway, above, sloped] {\texttt{ZZC}};
+        \draw[-] (T) -- (V) node[midway, above, sloped] {\texttt{ZZD}};
+        \draw[-] (V) -- (R) node[midway, above, sloped] {\texttt{ZZG}};
+
+    \end{tikzpicture}}
+  \end{center}
+  \caption{Example menu}
+  \label{fig:menu}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Diagonal Board}
+\begin{figure}[H]
+  \begin{center}
+    \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
+      % Draw the box
+      \draw[fill=lightgray] (2,-1.5) rectangle (4,2.5) node[midway] {};
+
+      \node at (3, -2) {$\overline\pi_3$};
+
+      % Draw the wires entering the box
+      \draw[-] (0, 2) -- (2, 2) node[midway, above] {\texttt{a}};
+      \draw[-] (0, 1) -- (2, 1) node[midway, above] {\texttt{b}};
+      \draw[-] (0, 0) -- (2, 0) node[midway, above] {\texttt{c}};
+      \draw[-] (0,-1) -- (2,-1) node[midway, above] {\texttt{d}};
+
+      % Draw the wires exiting the box with crossed mappings
+      \draw[-] (4, 2) -- (6,2) node[midway, above] {\texttt{a}};
+      \draw[-] (4, 1) -- (6, 1) node[midway, above] {\texttt{b}};
+      \draw[-] (4, 0) -- (6, 0) node[midway, above] {\texttt{c}};
+      \draw[-] (4,-1) -- (6, -1) node[midway, above] {\texttt{d}};
+
+      % Draw the lines inside the box to represent the mapping
+      \draw[-] (2, 2) -- (4, -1);
+      \draw[-] (2, 1) -- (4, 0);
+      \draw[-] (2, 0) -- (4, 1);
+      \draw[-] (2,-1) -- (4, 2);
+
+      \draw[-] (0-3, 2-7) to[out=180, in=180] (0, 2) node[midway, above] {};
+      \draw[-] (0-3, 1-7) to[out=180, in=180] (0, 1) node[midway, above] {};
+      \draw[-] (0-3, 0-7) to[out=180, in=180] (0, 0) node[midway, above] {};
+      \draw[-] (0-3, -1-7) to[out=180, in=180] (0, -1)
+      node[midway, above] {};
+
+      \draw[-] (6+3, 2-7) to[out=360, in=360] (6, 2) node[midway, above] {};
+      \draw[-] (6+3, 1-7) to[out=360, in=360] (6, 1) node[midway, above] {};
+      \draw[-] (6+3, 0-7) to[out=360, in=360] (6, 0) node[midway, above] {};
+      \draw[-] (6+3, -1-7) to[out=360, in=360] (6, -1) node[midway, above] {};
+
+      \draw[fill=lightgray] (2-3,-1.5-7) rectangle (4-3,2.5-7) node[midway] {};
+
+      \node at (3-3, -2-7) {$\overline\pi_1$};
+
+      % Draw the wires entering the box
+      \draw[-] (0-3, 2-7) -- (2-3, 2-7) node[midway, above] {\texttt{a}};
+      \draw[-] (0-3, 1-7) -- (2-3, 1-7) node[midway, above] {\texttt{b}};
+      \draw[-] (0-3, 0-7) -- (2-3, 0-7) node[midway, above] {\texttt{c}};
+      \draw[-] (0-3,-1-7) -- (2-3,-1-7) node[midway, above] {\texttt{d}};
+
+      % Draw the wires exiting the box
+      \draw[-] (4-3, 2-7) -- (6-3,2-7) node[right, above] {\texttt{a}};
+      \draw[-] (4-3, 1-7) -- (6-3, 1-7) node[right, above] {\texttt{b}};
+      \draw[-] (4-3, 0-7) -- (6-3, 0-7) node[right, above] {\texttt{c}};
+      \draw[-] (4-3,-1-7) -- (6-3, -1-7) node[right, above] {\texttt{d}};
+
+      % Draw the lines inside the box to represent the mapping
+      \draw[-] (2-3, 2-7) -- (4-3, 0-7);
+      \draw[-] (2-3, 1-7) -- (4-3, -1-7);
+      \draw[-] (2-3, 0-7) -- (4-3, 2-7);
+      \draw[-] (2-3,-1-7) -- (4-3, 1-7);
+
+      \draw[fill=lightgray] (2+3,-1.5-7) rectangle (4+3,2.5-7) node[midway] {};
+
+      \node at (3+3, -2-7) {$\overline\pi_2$};
+
+      % Draw the wires entering the box
+      \draw[-] (0+3, 2-7) -- (2+3, 2-7) node[midway, above] {};
+      \draw[-] (0+3, 1-7) -- (2+3, 1-7) node[midway, above] {};
+      \draw[-] (0+3, 0-7) -- (2+3, 0-7) node[midway, above] {};
+      \draw[-] (0+3,-1-7) -- (2+3,-1-7) node[midway, above] {};
+
+      % Draw the wires exiting the box
+      \draw[-] (4+3, 2-7) -- (6+3,2-7) node[midway, above] {\texttt{a}};
+      \draw[-] (4+3, 1-7) -- (6+3, 1-7) node[midway, above] {\texttt{b}};
+      \draw[-] (4+3, 0-7) -- (6+3, 0-7) node[midway, above] {\texttt{c}};
+      \draw[-] (4+3,-1-7) -- (6+3, -1-7) node[midway, above] {\texttt{d}};
+
+      \draw[-] (2+3, 2-7) -- (4+3, -1-7);
+      \draw[-] (2+3, 1-7) -- (4+3, 0-7);
+      \draw[-] (2+3, 0-7) -- (4+3, 1-7);
+      \draw[-] (2+3,-1-7) -- (4+3, 2-7);
+
+      \node[draw,circle] at (-4.5, -1) {\texttt{A}};
+      \node[draw,circle] at (3, -9) {\texttt{B}};
+      \node[draw,circle] at (10.5, -1) {\texttt{C}};
+
+      % Diagonal wires
+      \draw[-, blue, very thick] (3,2-7) to[bend left=20] (-3+0.1, 2-3);
+      \draw[fill=white] (-3+0.1, 2-3) circle (0.1);
+      \draw[fill=white] (3, 2-7) circle (0.1);
+
+      \draw[-, orange,  very thick] (9-0.1,2-2) to[bend left=20] (-3+0.1, 2-4);
+      \draw[fill=white] (9-0.1, 2-2) circle (0.1);
+      \draw[fill=white] (-3+0.1, 2-4) circle (0.1);
+
+      \draw[-, purple, very thick] (3,0-7) to[bend right=20] (9-0.1, 2-3);
+      \draw[fill=white] (3, 0-7) circle (0.1);
+      \draw[fill=white] (9-0.1, 2-3) circle (0.1);
+
+    \end{tikzpicture}
+  \end{center}
+  \caption{Diagonal wires}
+  \label{fig:diagonal}
+\end{figure}
+\end{frame}
 
 \end{document}

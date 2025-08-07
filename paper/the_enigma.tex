@@ -135,7 +135,7 @@ in alphabetical order moving in a clockwise manner relative to the
 entry side of the rotor. The input contacts of the rotor were often marked
 with a white dot indicating which contact corresponded to \texttt{A},
 but in general the \texttt{A} contact found by looking at the contact immediately above
-the numeral indicator as in figure~\ref{fig:rotors} (b).
+the numeral indicator as in figure~\ref{fig:rotors} (b)~\cite{cryptomuseumEnigmaWiring}.
 \\\\On their own, these rotors would prove to be very poor
 cryptographic devices, as they are just substitution ciphers, which are
 vulnerable to frequency analysis and, if found by the enemy, would
@@ -212,7 +212,7 @@ make 26 full rotations before rotor L will move by one contact.
         \end{array}
       \right)
     \]
-    \caption{Rotor \texttt{V} permutation}
+    \caption{Rotor \texttt{V} permutation~\cite{cryptomuseumEnigmaWiring}}
     \label{fig:rotor_v_wiring}
   \end{figure}
 \end{center}
@@ -490,18 +490,18 @@ mathematical formalism for the machine.
 % chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.math.ias.edu/files/wam/rejewski.pdf
 % $$
 Suppose Alice and Bob are two radio operators (prior to September 15,
-1938) who want to communicate securely. Each are supplied an Enigma
+1938) who want to communicate securely~\cite[p.~546]{Rejewski1981}. Each are supplied an Enigma
 machine along with a key sheet indicating the keys for a given day.
 The key sheet contains the following information:
 \begin{itemize}
   \item the choice and order of rotors, known as the
     \emph{Walzenlage} -- at this point only three
     rotors \texttt{I}, \texttt{II}, and \texttt{III} were in
-    production,
+    production~\cite[p.~214]{Rejewski1980},
   \item the ring setting, known as the \emph{Ringstellung},
     %% See rejwinski for this %%
   \item the plugboard settings, known as the
-    \emph{Steckerverbindungen} -- at this point only 3 jacks were used
+    \emph{Steckerverbindungen} -- at this point only 6 jacks were used~\cite[p.~242]{KozaczukEnigma1984},
 
   \item the window setting, known as the \emph{Grundstellung}.
 \end{itemize}
@@ -522,17 +522,17 @@ A key sheet at this time may have looked along these lines.
         \texttt{31.}                                 & \texttt{I II
         III}                                         & \texttt{10 14
         02}                                          & \texttt{BF SD
-        AY}                                          & \texttt{VAR}
+        AY QN LP JE}                                          & \texttt{VAR}
         \\
         \texttt{30.}                                 & \texttt{I II
         III}                                         & \texttt{04 25
         01}                                          & \texttt{UE PL
-        AY}                                          & \texttt{PAQ}
+        AY IN QR SZ}                                          & \texttt{PAQ}
         \\
         \texttt{29.}                                 & \texttt{I II
         III}                                         & \texttt{13 11
         06}                                          & \texttt{WJ VD
-        PO}                                          & \texttt{ZJB}
+        PO TY BL NK}                                          & \texttt{ZJB}
         \\
         $\vdots$                                     & $\vdots$
         & $\vdots$      & $\vdots$ & $\vdots$ \\
@@ -548,7 +548,7 @@ the 31st of the month using the key sheet in figure
 \ref{fig:keysheet_early}. She opens the machine and places the rotors in
 the machine from left to right as \texttt{I}, \texttt{II},
 \texttt{III}\footnote{Prior to January 1, 1936, the sequence of
-rotors was only changed once a quarter}. She then aligns the
+rotors was only changed once a quarter~\cite[p.~223]{Rejewski1980}.}. She then aligns the
 \texttt{10} indicator on the
 leftmost drum to be inline with the \texttt{A} contact, and similarly
 for the remaining ring settings. Alice now closes the machine and
@@ -562,16 +562,16 @@ called the \emph{Spruchschlüssel}. Alice chooses her message key as
 \\\\First, Alice will encrypt her message key \texttt{LSG} twice,
 producing the hexagram
 \begin{center}
-  \texttt{KUW ACQ}
+  \texttt{MRF NZJ}
 \end{center}
 \noindent Alice now sets her window setting to her message key
 \texttt{LSG} and begins enciphering her message \texttt{HELLO WORLD} to produce
 \begin{center}
-  \texttt{WQMYV HWGAB}
+  \texttt{JYOKZ OIBGO}
 \end{center}
 Alice now sends the following message to Bob
 \begin{center}
-  \texttt{KUW ACQ WQMYV HWGAB}
+  \texttt{MRF NZJ JYOKZ OIBGO}
 \end{center}
 \noindent Bob recieves this message. He gets his key sheet and sets
 up his machine as the key sheet describes for that day. He now types

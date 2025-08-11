@@ -3120,7 +3120,7 @@ a naval rotor as their rightmost rotor, meaning that the
 probability of having a non-naval rotor as your rightmost rotor
 (i.e.\ $1-S$) is
 \[
-  1-S = \frac{7\cdot6\cdot3}{8\cdot7\cdot6 - 5\cdot4\cdot3}
+  1-S = \frac{7\cdot6\cdot3}{8\cdot7\cdot6 - 5\cdot4\cdot3}.
 \]
 Thus $S\approx0.543$. With this we can now compute the probability
 that a given offset represents message keys that only differ in
@@ -4362,11 +4362,11 @@ Then we get a series of $2$ letter plaintext-ciphertext pairings, such as
     % Centering the diagram
     \node (a1) [] {\texttt{?}};
     \node (a2) [right=0.1cm of a1] {\texttt{A}};
-    \node (a3) [right=0.1cm of a2] {\texttt{B}};
+    \node (a3) [right=0.1cm of a2] {\texttt{K}};
     % Nodes for ciphertext
     \node (x1) [below=1cm of a1] {\texttt{?}};
     \node (x2) [below=1cm of a2] {\texttt{K}};
-    \node (x3) [below=1cm of a3] {\texttt{O}};
+    \node (x3) [below=1cm of a3] {\texttt{G}};
 
     % Arrows for mapping
     \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
@@ -4375,7 +4375,7 @@ Then we get a series of $2$ letter plaintext-ciphertext pairings, such as
 
   \end{tikzpicture}
 \end{center}
-Using these plaintext-ciphertext mappings we can construct a menu as follows
+Using these plaintext-ciphertext mappings we can construct a menu as follows:
 \begin{figure}[H]
   \begin{center}
     \scalebox{0.8}{
@@ -4491,7 +4491,7 @@ message corpus, along with settings, that would produce
 \texttt{EINS}. If we then continue deciphering our message from the
 start of the \texttt{EINS} location, as in
 Section~\ref{bombe_ring_setting}, we can decipher plaintext until we
-encounter gibberish and adjust the middle, and subsequently left, ring setting
+encounter gibberish and adjust the right, and subsequently middle, ring setting
 until we have deduced the entire ring setting. With this final
 component, we are now able to completely decipher naval Enigma messages.
 \\\\It is clear from the amount of messages, sheets, and scores

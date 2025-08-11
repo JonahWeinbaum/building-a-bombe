@@ -2972,7 +2972,7 @@ Alexander, provides some $n$-gram frequencies~\cite[p.~96]{Alexander1945} as fol
 \end{center}
 Sadly, this information does not include bigram or trigram
 frequencies, and given the destruction of the vast majority of
-these intercepts it
+these intercepts~\cite[p.~29]{deutsch2006ultra}~\cite[p.~193]{sullivan-weierud} it
 is unlikely that such a quantity will be amassed so as to be able
 to prove the accuracy of this bonus system.
 % HUGH ALEXANDER - http://www.ellsbury.com/gne/gne-096.htm
@@ -3231,7 +3231,7 @@ $12$th subdivision corresponded to tetragrams occuring between the
 $30$th position until the $30$th to last position. The $13$th
 subdivision corresponded to tetragrams occuring in the last $30$
 letters of the message. For each category and subdivision, a hubdub
-value was given.
+value was given~\cite[p.~107]{Alexander1945}.
 \\\\Filling in the values given by Hugh Alexander we provide a
 score sheet for tetragrams with missing values
 \begin{figure}[H]
@@ -3314,7 +3314,7 @@ score sheet for tetragrams with missing values
         \hline
     \end{tabular}}
   \end{center}
-  \caption{Scoring sheet for tetragrams with the only known values filled in}
+  \caption{Scoring sheet for tetragrams with the only known values filled in~\cite[p.~106]{Alexander1945}}
 \end{figure}
 \noindent In practice, to score a pair of messages with repeat structure
 $11^{4\texttt{x}}/60$, we would first consult our tetragram scoring
@@ -3337,12 +3337,12 @@ fully score our repeat structures. Based on observation,
 cryptanalysts at Bletchley Park noted that some percentage of
 messages turned into ``dummy'' messages some way through. That is,
 short sections of German text were often followed by gibberish. Dealing with
-such messages became known as {\bf{dummyismus}}.
+such messages became known as {\bf{dummyismus}}~\cite[Section 4.4]{Hosgood2007}.
 \\\\Cryptanalysts in the crib room  based on length, frequency,
 cateogry, etc., would place a {\bf{blue line}} at some point in
 each message, beyond which they estimated there was a $25\%$ chance
 or higher of the message being a dummy. They noted this
-percentage on the sheet corresponding to each message.
+percentage on the sheet corresponding to each message~\cite[p.~104]{Alexander1945}.
 \\\\How they determined where to place the blue line and what
 percentage likelihood beyond this point the message was a dummy is
 not discussed by Hugh Alexander and likely depended on a number of
@@ -3416,7 +3416,7 @@ have all the details necessary to score to
 messages whose pre-message key differs by only their last letter.
 
 \subsection{End-Wheel Comparison}
-We are finally ready to begin the process of {\bf{decibanning}}
+We are finally ready to begin the process of {\bf{decibanning}}~\cite[p.~105]{Alexander1945}
 based on end-wheel comparisons. Many of Hugh Alexander's scores do
 not align consistently with reproduced sheets and there are many
 points at which he likely switches between references to decibans
@@ -3577,7 +3577,7 @@ and \texttt{W} derived from pre-message keys
   \end{center}
 
   \caption{End-wheel deciban sheet for \texttt{V} and \texttt{W} with
-  summation on the bottom }
+  summation on the bottom~\cite[Section 5.6]{Hosgood2007}}
 \end{figure}
 \noindent After all this work we can now determine that the most
 likely candidate is that
@@ -3608,7 +3608,7 @@ offsets to check by hand. To handle this, a section at Bletchley
 Park known as the {\bf{Freebornery}} used tabulating machines to
 find repeats of length $4$ or greater, since shorter $n$-grams were
 not worth the considerable odds against such a large array of
-candidates. Messages with $4$ or more repeats were compiled into a
+candidates~\cite[pp.~102--103]{Alexander1945}. Messages with $4$ or more repeats were compiled into a
 {\bf{tetra catalogue}} as follows
 
 \begin{table}[h!]
@@ -3642,7 +3642,7 @@ candidates. Messages with $4$ or more repeats were compiled into a
     \\
     \hline
   \end{tabular}
-  \caption{Example tetragram catalogue}
+  \caption{Example tetragram catalogue~\cite[p.~98]{Alexander1945}}
 \end{table}
 \noindent Here we only underline repeats which are longer than $4$
 letters as these have the best chance at being legitimate. We think
@@ -3705,7 +3705,7 @@ section~\ref{double_step}. Thus we have
 \end{itemize}
 
 Using the same arguments to compute $\tau_n$ as in
-section~\ref{distance_chart} we get
+Section~\ref{distance_chart} we get
 \[
   \tau_n =
   \begin{cases}
@@ -3835,7 +3835,7 @@ scores to end-wheel scores as follows.
         \hline
     \end{tabular}}
   \end{center}
-  \caption{Conversion chart for scores from $15$ hdB to $39$ hdB}
+  \caption{Chart to convert middle-wheel scores to end-wheel scores}
 \end{figure}
 \noindent Now we can include pre-message keys with only their left
 letter in common in our deciban sheets for end-wheel analysis.
@@ -3877,12 +3877,12 @@ end of this analysis. We have,
             & 50 : 1 on  \\
         \end{tabular}}
       \end{center}
-      \caption{Catalogue of repeat structures}
+      \caption{Catalogue of repeat structures~\cite[p.~99]{Alexander1945}}
       \label{fig:catalogue}
     \end{figure}
   \item A list of deciban sheets for a variety of letters
     combinations compiled from summed likelihoods of letter offsets
-    gleamed from both end-wheel and middle-wheel comparisons. One
+    gleaned from both end-wheel and middle-wheel comparisons. One
     such deciban sheet is as follows,
     \begin{figure}[H]
       \begin{center}
@@ -3902,12 +3902,12 @@ end of this analysis. We have,
         \end{tabular}}
       \end{center}
 
-      \caption{End-wheel deciban sheet for \texttt{H} and \texttt{T}}
+      \caption{End-wheel deciban sheet for \texttt{H} and \texttt{T}~\cite[p.~101]{Alexander1945}}
       \label{fig:deciban_sheet}
     \end{figure}
 \end{itemize}
 The process of combining these two pieces of information to recover
-the middle and end rotors became known as {\bf{scritchmus}}.
+the middle and end rotors became known as {\bf{scritchmus}}~\cite[Section~7.0]{Hosgood2007}.
 
 \subsubsection{Determining $\pi_3$}
 We are now going to determine the mapping of the third letter in
@@ -4221,7 +4221,7 @@ value of $\pi_3(\texttt{R})$. We can eliminate possibilities as follows,
 \end{center}
 \noindent In the end we arrive at only $4$ possible alphabets. By
 filling in values given by the reciprocal nature of $\pi_3$ we
-arrive at these four alphabets.
+arrive at these four alphabets~\cite[p.~100]{Alexander1945}:
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.1}
 
@@ -4285,7 +4285,7 @@ example, we note that alphabet (a) is such that $\pi_3(\texttt{T}) =
 \pi_3(\texttt{H}) + 2$ which is evidence $3$ hdB in favor of this
 alphabet. Alexander's example found, that after adding up all the
 offsets in alphabet (a) against deciban sheets, we find that the
-alphabet has a total score of $54$ hdB, almost certainly indicating
+alphabet has a total score of $54$ hdB~\cite[p.~101]{Alexander1945}, almost certainly indicating
 that alphabet (a) is our correct choice for $\pi_3$.
 \\\\We can now further fill in the alphabet from hypotheses that
 got picked up. We begin by including hypothesis (9) and using

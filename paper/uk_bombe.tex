@@ -10,7 +10,7 @@ construction of one of the largest such electromechanical devices to
 date, known as the {\bf{Bombe}}.
 
 \subsection{Changes to the Enigma Protocol}
-Recall that during the use of the Polish Bomba, operators were
+Recall that during the use of the Polish Bomba, Enigma operators were
 instructed to send their window setting (\emph{Grundstellung}) in
 plaintext, and then use this to doubly encode their message key
 (\emph{Spruchschlüssel}). Starting in 1940, a small but impactful
@@ -244,7 +244,7 @@ particularly lazy, this was \emph{all} they did, or if they were only
 slightly lazy, they may turn the wheels a couple turns forward or
 back. Regardless, this meant that many operators began enciphering
 their messages with a window setting that was nearly identical to the
-ring setting. Thus, by looking at several operators first messages of
+ring setting. Thus, by looking at several operators' first messages of
 the day, we would see a cluster around a particular setting
 that is likely to be the ring setting. Such an insight became known
 as the {\bf{Herivel tip}}~\cite[p.~143]{BudianskyBattleOfWits2000}.
@@ -291,37 +291,37 @@ become a vital component of our plaintext attack.
 \section{Plaintext Attack}
 
 Suppose we knew the plaintext which had been enciphered into a
-particular Enigma transmission.
-Consider the following mapping,
+particular Enigma transmission. Consider the following mapping,
 \begin{center}
   \begin{tikzpicture}[node distance=1cm, every node/.style={draw,
     circle, minimum height=0.1cm, minimum width=0.1cm}]
 
     % Centering the diagram
-    \node (a1) [] {\texttt{D}};
-    \node (a2) [right=0.1cm of a1] {\texttt{Y}};
-    \node (a3) [right=0.1cm of a2] {\texttt{Y}};
-    \node (a4) [right=0.1cm of a3] {\texttt{Y}};
-    \node (a5) [right=0.1cm of a4] {\texttt{Y}};
-    \node (a6) [right=0.1cm of a5] {\texttt{Y}};
-    \node (a7) [right=0.1cm of a6] {\texttt{X }};
-    \node (a8) [right=0.1cm of a7] {\texttt{Y}};
-    \node (a9) [right=0.1cm of a8] {\texttt{Y}};
-    \node (a10) [right=0.1cm of a9] {\texttt{Y}};
-    \node (a11) [right=0.1cm of a10] {\texttt{X}};
-
+    \node (a1) [] {\texttt{A}};
+    \node (a2) [right=0.1cm of a1] {\texttt{B}};
+    \node (a3) [right=0.1cm of a2] {\texttt{R}};
+    \node (a4) [right=0.1cm of a3] {\texttt{A}};
+    \node (a5) [right=0.1cm of a4] {\texttt{C}};
+    \node (a6) [right=0.1cm of a5] {\texttt{A}};
+    \node (a7) [right=0.1cm of a6] {\texttt{D}};
+    \node (a8) [right=0.1cm of a7] {\texttt{A}};
+    \node (a9) [right=0.1cm of a8] {\texttt{B}};
+    \node (a10) [right=0.1cm of a9] {\texttt{R}};
+    \node (a11) [right=0.1cm of a10] {\texttt{A}};
+    \node[draw=none,anchor=east] (ptlabel) at ([xshift=-0.3cm]a1.west) {Plaintext};
     % Nodes for ciphertext
-    \node (x1) [below=1cm of a1] {\texttt{A}};
-    \node (x2) [below=1cm of a2] {\texttt{B}};
-    \node (x3) [below=1cm of a3] {\texttt{R}};
-    \node (x4) [below=1cm of a4] {\texttt{A}};
-    \node (x5) [below=1cm of a5] {\texttt{C}};
-    \node (x6) [below=1cm of a6] {\texttt{A}};
-    \node (x7) [below=1cm of a7] {\texttt{D}};
-    \node (x8) [below=1cm of a8] {\texttt{A}};
-    \node (x9) [below=1cm of a9] {\texttt{B}};
-    \node (x10) [below=1cm of a10] {\texttt{R}};
-    \node (x11) [below=1cm of a11] {\texttt{A}};
+    \node (x1) [below=1cm of a1] {\texttt{D}};
+    \node (x2) [below=1cm of a2] {\texttt{Y}};
+    \node (x3) [below=1cm of a3] {\texttt{Y}};
+    \node (x4) [below=1cm of a4] {\texttt{Y}};
+    \node (x5) [below=1cm of a5] {\texttt{Y}};
+    \node (x6) [below=1cm of a6] {\texttt{Y}};
+    \node (x7) [below=1cm of a7] {\texttt{X}};
+    \node (x8) [below=1cm of a8] {\texttt{Y}};
+    \node (x9) [below=1cm of a9] {\texttt{Y}};
+    \node (x10) [below=1cm of a10] {\texttt{Y}};
+    \node (x11) [below=1cm of a11] {\texttt{X}};
+    \node[draw=none,anchor=east] (ptlabel) at ([xshift=-0.3cm]x1.west) {Ciphertext};
 
     % Arrows for mapping
     \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
@@ -338,10 +338,9 @@ Consider the following mapping,
 
   \end{tikzpicture}
 \end{center}
-where the top row indicates our enciphered message, the bottom row
-indicates the plaintext,
-and the indices on the arrows indicate how many steps forward our
-Enigma machine has moved while enciphering this message.
+where the top row indicates our plaintex message, the bottom row
+indicates the ciphertext,
+and the indices on the arrows indicate which step we are at while enciphering this message.
 \\\\From this pairing we have that
 \begin{center}
   $\pi_1(\texttt{A}) = {\texttt{D}}$\\
@@ -380,7 +379,8 @@ at \texttt{A}. We visualize this loop as follows
     {$\pi_{11    }$} (A);
   \end{tikzpicture}
 \end{center}
-Recall that, ignoring turnover, each $\pi_i$ is of the form
+with doubly linked arrows, since each $\pi_i$ is an involution.
+\\\\Recall that, ignoring turnover, each $\pi_i$ is of the form
 \begin{center}
   $\pi_i = S^{-1}P^{-(x+i)}N^{-1}P^{x+i}M^{-1}L^{-1}RLMP^{-(x+i)}NP^{x+i}S$
 \end{center}
@@ -494,7 +494,7 @@ cycle type to determine when we can eliminate rotor positions.
   \item If we find $\overline\pi$ has a $26$-cycle, then we must
     have that there are no $1$-cycles and thus no valid steckerings.
     It then follows that the rotor position is incorrect.
-    If we mechanism this process we can eliminate \emph{some} rotor
+    By constructing an electromechanical device which tests for this condition, we can quickly eliminate \emph{some} rotor
     positions which do not have valid steckerings. We will call this
     method \textbf{spider scanning}. Note, however, that this method
     would not, for example, detect that an $\overline\pi$ with cycle
@@ -588,6 +588,7 @@ Suppose we had the plaintext-ciphertext pairing,
     \node (a1) [] {\texttt{B}};
     \node (a2) [right=0.1cm of a1] {\texttt{C}};
     \node (a3) [right=0.1cm of a2] {\texttt{A}};
+    \node[draw=none,anchor=east] (ptlabel) at ([xshift=-0.3cm]a1.west) {Plaintext};
 
     % Nodes for ciphertext
     \node (x1) [below=1cm of a1] {\texttt{A}};
@@ -598,6 +599,7 @@ Suppose we had the plaintext-ciphertext pairing,
     \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
     \draw[->] (a2) -- (x2) node[midway, left, draw=none, fill=none] {2};
     \draw[->] (a3) -- (x3) node[midway, left, draw=none, fill=none] {3};
+    \node[draw=none,anchor=east] (ptlabel) at ([xshift=-0.3cm]x1.west) {Ciphertext};
 
   \end{tikzpicture}
 \end{center}
@@ -1409,7 +1411,7 @@ meaning current could be applied in either direction to achieve our
 Enigma permutation.
 
 \subsection{Stopping Mechanism}
-The Bombe would stop when it detected
+The Bombe would stop when it detected that
 any line (say \texttt{Ab}) is no longer live. To do this, we can
 place a differential
 relay such that it only engages when a current difference is present
@@ -1425,7 +1427,7 @@ parallel, each to a separate relay, all comparing against the same
 constant supply voltage. If we wire our stopping mechanism to engage
 if any relay closes
 then our stopping mechanism will engage if any wire ceases to be live.
-\\\\This begs the question of where to place this detecting circuit.
+\\\\This raises the question of where to place this detecting circuit.
 If we are in the situation described above, a loop of Enigma
 permutations, then this choice does not matter. This is because if a
 $26$-cycle is present in
@@ -1461,6 +1463,7 @@ instance, we might have a plaintext-ciphertext pairing as follows,
     \node (a4) [right=0.1cm of a3] {\texttt{A}};
     \node (a5) [right=0.1cm of a4] {\texttt{C}};
     \node (a6) [right=0.1cm of a5] {\texttt{C}};
+    \node[draw=none,anchor=east] (ptlabel) at ([xshift=-0.3cm]a1.west) {Plaintext};
 
     % Nodes for ciphertext
     \node (x1) [below=1cm of a1] {\texttt{A}};
@@ -1469,6 +1472,7 @@ instance, we might have a plaintext-ciphertext pairing as follows,
     \node (x4) [below=1cm of a4] {\texttt{B}};
     \node (x5) [below=1cm of a5] {\texttt{B}};
     \node (x6) [below=1cm of a6] {\texttt{A}};
+    \node[draw=none,anchor=east] (ptlabel) at ([xshift=-0.3cm]x1.west) {Ciphertext};
 
     % Arrows for mapping
     \draw[->] (a1) -- (x1) node[midway, left, draw=none, fill=none] {1};
@@ -1703,7 +1707,7 @@ stops. In the next chapter, we will return to the effect that multiple
 loops have on the number of stops.
 
 \subsection{Indicator Drums and Ring Setting}
-The Bombe is set up with up to $12$ scramblers
+The Bombe is set up with $k\le12$ scramblers
 \begin{center}
   $R_{x_1, y_1, z_1},\dots, R_{x_{k}, y_{k}, z_{k}}$
 \end{center}
@@ -1980,7 +1984,7 @@ In its full form the Bombe was constructed with $3$ rows each
 equipped with 12 scramblers. For a single plaintext-ciphertext
 pairing we could test multiple rotor orders simultaneously. If our
 plaintext-ciphertext pairing is shorter than $12$ characters we could
-test $3$ rotor orders concurrently. If it is longer, then we may need
+test $3$ rotor orders concurrently, one on each row. If it is longer, then we may need
 to split it into two separate pairings spread across multiple rows,
 meaning that we may only test $1$ or $2$ rotor orders. Further, over
 the course of the war many Bombes were produced. This meant that it
@@ -2055,10 +2059,10 @@ known as {\bf{gardening}}~\cite[p.~187]{sebag-montefiore2000enigma}~\cite[p.~144
 British Air Force ``seed'' a designated location with mines. It would
 then follow that many messages would make specific mention of that
 location or port which contained the mines.
-\\\\Another source of plaintext lied in the message protocol. If a
+\\\\Another source of plaintext lay in the message protocol. If a
 message was a continuation of another message, the message would
 begin with \texttt{FORT} (German for ``continued'') followed by the
-time at which the first messsage was sent. Numbers were ordered by
+time at which the first message was sent, repeated twice. Numbers were ordered by
 the top row of the keyboard, that is, \texttt{Q} was $1$, \texttt{W}
 was $2$, and so on.  Thus if a message was sent at $23:30$, and a
 subsequent message was a continuation, it would begin with
@@ -2123,11 +2127,11 @@ we expect to find only a few cribs.
   \caption{Example crib}
   \label{fig:crib}
 \end{figure}
-\noindent We can generate a diagramatic representation of our
+\noindent We can generate a diagrammatic representation of our
 plaintext-ciphertext pairing called a {\bf{menu}} which will be used
 to wire up our Bombe. We assume the enciphering starts with window
-setting \texttt{ZZZ} so we will denote which window setting takes
-each letter to the next~\cite[p.~306]{Welchman1982HutSix}.
+setting \texttt{ZZZ} so we will denote which window setting maps
+each letter to its plaintext counterpart~\cite[p.~306]{Welchman1982HutSix}.
 \begin{figure}[H]
   \begin{center}
     \scalebox{0.8}{
@@ -2977,7 +2981,7 @@ is unlikely that such a quantity will be amassed so as to be able
 to prove the accuracy of this bonus system.
 % HUGH ALEXANDER - http://www.ellsbury.com/gne/gne-096.htm
 % CRYPTOGRAPHIC HISTORY OF WORK ON THE GERMAN NAVAL ENIGMA %
-\\\\However, by working backwards from the bonus system we can attempt
+\\\\There is no formal justification for the bonus system given in any historical accounts we examined. However, by working backwards from the bonus system we will attempt
 to reverse engineer the bigram frequency~\cite{cryptoSEBanburismus}. If this frequency lies
 within a reasonable estimate of bigram frequencies observed in
 German at-large, we can assume that this bonus system was likely
@@ -3335,8 +3339,8 @@ exception we will now discuss.
 There is one more caveat we need to address before we are ready to
 fully score our repeat structures. Based on observation,
 cryptanalysts at Bletchley Park noted that some percentage of
-messages turned into ``dummy'' messages some way through. That is,
-short sections of German text were often followed by gibberish. Dealing with
+messages were followed by ``dummy'' messages some way through. That is,
+short sections of German text were often followed by gibberish indended to confuse cryptanalysts. Dealing with
 such messages became known as {\bf{dummyismus}}~\cite[Section 4.4]{Hosgood2007}.
 \\\\Cryptanalysts in the crib room  based on length, frequency,
 cateogry, etc., would place a {\bf{blue line}} at some point in

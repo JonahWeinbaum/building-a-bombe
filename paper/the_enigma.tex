@@ -127,15 +127,15 @@ set of rotors, the number of which changed depending on the military
 branch we examine. At a minimum, all three branches of the military eventually
 had access to five rotors labeled by their roman numeral equivalents
 (i.e. $\texttt{I},\dots,\texttt{V}$).
-Each rotor encoded a unique permutation from 26 input contacts to 26
-output contacts by simply connecting each input/output pair
+Each rotor encoded a unique permutation from 26 brass input contacts to 26
+brass output contacts by simply connecting each input/output pair
 in the permutation with a wire as in Figure~\ref{fig:rotors}
 (a)-(4,5,6). The contacts represent the letters
 in alphabetical order moving in a clockwise manner relative to the
 entry side of the rotor. The input contacts of the rotor were often marked
 with a white dot indicating which contact corresponded to \texttt{A},
-but in general the \texttt{A} contact found by looking at the contact immediately above
-the numeral indicator as in Figure~\ref{fig:rotors} (b)~\cite{cryptomuseumEnigmaWiring}.
+but in general the \texttt{A} contact is found by looking at the contact immediately above
+the numeral indicator~\cite{cryptomuseumEnigmaWiring}. In Figure~\ref{fig:rotors} (b), this is the topmost contact, located directly above the text \texttt{V}. 
 \\\\On their own, these rotors would prove to be very poor
 cryptographic devices, as they are just substitution ciphers, which are
 vulnerable to frequency analysis and, if found by the enemy, would
@@ -671,7 +671,7 @@ conjugate permutations. This point is true regardless of turnover
 since the permutations being pre-composed and post-composed with $R$
 are always inverse permutations. Now consider the following lemma,\\
 \begin{lemma}
-  Suppose $\rho=(a_0\dots a_{k-1})\in S_n$ is a $k$-cycle. Then
+  Suppose $\rho=(a_0\dots a_{k-1})\in S_n$\footnote{The symmetric group on $n$ elements.} is a $k$-cycle. Then
   $\forall\text{ }\tau\in S_n$ we have
   $\tau\rho\tau^{-1}$ is a $k$-cycle.
   \label{conjugate_cycle}

@@ -5,7 +5,7 @@
 % FOR SUPPLIED INTELLEGENCE SEE
 % https://archive.org/details/enigmahowgermanm0000koza/page/16/mode/2up
 % - Page 16 %
-Polish cryptographer and mathematician Marian Rejewski had arguably the most difficult task in the process of breaking the Enigma. Not only did he need to determine a means to
+In the early 1930s, Polish cryptographer and mathematician Marian Rejewski had arguably the most difficult task in the process of breaking the Enigma. Not only did he need to determine a means to
 recover daily keys from limited intelligence supplied by a German spy but he
 additionally needed to recover the wirings of the rotors themselves
 and reproduce the Enigma machine being used by the Germans.
@@ -41,7 +41,7 @@ such information would become unavailable. He made the bold decision
 to keep these key sheets from cryptographers at the Bureau, knowing
 that without them, cryptographers would be forced to work out a means
 of deriving the daily keys, not through intelligence, but through cryptanalysis~\cite[p.~157]{SinghCodeBook1999}.
-\section{Characteristics}
+\section{Characteristics}\label{characteristics}
 We will see that purely with knowledge of this procedure and some
 military intelligence, Rejewski was able to determine the rotor
 wirings necessary to make further cryptanalysis possible.
@@ -76,15 +76,15 @@ could recover $\pi_2\pi_5$ and $\pi_3\pi_6$. Rejewski
 referred to these paired permutations $\pi_i\pi_{i+3}$, as
 {\bf{characteristics}}~\cite[p.~217]{Rejewski1981}. In
 practice, such recovered characteristics may look like
-\begin{align*}
+\begin{align}
   \pi_1\pi_4 & =
-  (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})
+  (\texttt{DVPFKXGZYO})(\texttt{EIJMUNQLHT})(\texttt{BC})(\texttt{RW})(\texttt{A})(\texttt{S})\label{char_1}
   \\
   \pi_2\pi_5 & =
-  (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})
+  (\texttt{BLFQUEOUM})(\texttt{HJPSWIZRN})(\texttt{AXT})(\texttt{CGY})(\texttt{D})(\texttt{K})\label{char_2}
   \\
-  \pi_3\pi_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO}).
-\end{align*}
+  \pi_3\pi_6 & = (\texttt{ABVIKTJGFCQNY})(\texttt{DUZREHLXWPSMO})\label{char_3}.
+\end{align}
 Rejewski noted a key structural similarity between all such
 characteristics recovered in this fashion: in each characteristic,
 cycles of the same length appear in pairs.
@@ -123,10 +123,10 @@ cycles of the same length appear in pairs.
 
 \noindent This lemma has several consequences:
 \begin{itemize}
-  \item[(1)] A characteristic like $\pi_1\pi_4$ which has two
+  \item[(1)] A characteristic like $\pi_1\pi_4$, seen in \ref{char_1}, which has two
     singletons $\texttt{A}$ and $\texttt{S}$ must have that both $\pi_1$ and
     $\pi_4$ share the transposition $(\texttt{AS})$.
-  \item[(2)] A characteristic like $\pi_3\pi_6$ (two disjoint 13
+  \item[(2)] A characteristic like $\pi_3\pi_6$, seen in \ref{char_2}, (two disjoint 13
     cycles) reduces the space of possible $\pi_3$'s to just 13
     permutations which will take the form
     \begin{center}
@@ -566,7 +566,7 @@ German operators were instructed to use more plugboard jacks and
 increased the rate at which daily keys changed. Rejewski wanted to
 produce a mechanical means of performing a similar deduction. He
 returned to the characteristics associated with a particular day's
-key. He noticed that the cycle structure of a characteristic did not
+key as in Section~\ref{characteristics}. He noticed that the cycle structure of a characteristic did not
 regularly repeat (if at all). Then we perhaps could create a
 ``fingerprint'' of a key by noting the cycle structure of all three
 characteristics associated to the key. Now that Rejewski had the
@@ -716,7 +716,7 @@ generate a catalogue of all rotor orders and settings consisting of
 $6\cdot 26^3 = 105456$ entries.
 \\\\Now equipped with this catalogue, the cryptanalyst could use the
 traffic from a given day to determine the characteristics
-($\pi_1\pi_3$, $\pi_2\pi_5$, and $\pi_3\pi_6$), look up
+($\pi_1\pi_3$, $\pi_2\pi_5$, and $\pi_3\pi_6$) as in Section~\ref{characteristics}, look up
 the cycle types in the catalogue, and immediately determine the rotor order and
 absolute rotor positions.
 \\\\The plugboard settings could then be
@@ -852,14 +852,14 @@ window setting in plaintext and proceeded to encode their message key
 \text{}\\On first view, this method seems to be more insecure than the
 previous method since we openly broadcast our window setting.
 However, because the window setting now changes between each message
-sequence, we will never find enough messages with the same window
+sequence, the cryptanalyst will never find enough messages with the same window
 setting to produce a set of characteristics needed for the
 cyclometer. Even with the window setting the cryptanalyst still knows
 nothing of the ring setting, plugboard setting, rotor position, or rotor order.
 
 \subsection{Females}
 Rejewski noticed that, given enough cipher material, we could find
-three messages with the following form.
+three messages with the following form seen below:
 \[
   \setlength{\arraycolsep}{15pt}
   \begin{array}{c | c}
@@ -1349,7 +1349,7 @@ It should be noted that a set of $3$ females is not unique enough to
 pare down to a single setting. The Bomba could produce many stops,
 each of which produce females in all $3$ pairs of rotors. These stops
 then need to be checked to see if the produce valid settings. This
-meant that using the Bomby could take nearly two hours~\cite[p.~242]{KozaczukEnigma1984}.
+meant that finding keys with the Bomby could take nearly two hours~\cite[p.~242]{KozaczukEnigma1984}.
 
 \section{Zygalski Sheets}\label{zygalski}
 
@@ -1421,7 +1421,8 @@ setting could possibly generate a female.
 
 \subsection{Constructing Sheets}
 The catalogue was constructed as a series of sheets which are now
-called {\bf{Zygalski sheets}}. To construct a sheet, we can set our
+called {\bf{Zygalski sheets}}. Sheets produced in this thesis were constructed by code in our project's open-source repository~\cite{Weinbaum2023_building-a-bombe}. To our knowledge this is the first open-source code available for creating and using Zygalski sheets. 
+\\\\To construct a sheet, we can set our
 Enigma to ring settings \texttt{AAA} and we can set our plugboard to
 the identity. We then choose a particular rotor ordering (e.g.
 \texttt{I} \texttt{III} \texttt{II}) and set our leftmost rotor's
@@ -1631,7 +1632,7 @@ cell covered. We can denote such a sheet (\texttt{B} - \texttt{I}
         \texttt{.} & \texttt{0} & \texttt{0}                             \\
     \end{tabular}}
   \end{center}
-  \caption{(\texttt{B} - \texttt{I} \texttt{III} \texttt{II}) Zygalski sheet}
+  \caption{(\texttt{B} - \texttt{I} \texttt{III} \texttt{II}) Zygalski sheet: \texttt{O} represents a hole and \texttt{.} represents its absence}
   \label{fig:zygalski_sheet}
 \end{figure}
 %\footnotetext{In many Zygalski sheet diagrams a \texttt{0} is used
@@ -1684,7 +1685,7 @@ possible ring settings with its leftmost letter being \texttt{A}. In
 our case, we can relabel Figure~\ref{fig:zygalski_sheet} as follows
 \begin{figure}[H]
   \begin{center}
-    \scalebox{0.7}{
+    \scalebox{0.8}{
       \begin{tabular}{c|cccccccccccccccccccccccccc}
         & \texttt{W} & \texttt{V} & \texttt{U} & \texttt{T} &
         \texttt{S} & \texttt{R} & \texttt{Q} & \texttt{P} &
@@ -2068,7 +2069,7 @@ will only line up at specific locations leading to a window with
 holes with light shining through as follows,
 \begin{figure}[H]
   \begin{center}
-    \scalebox{0.5} {
+    \scalebox{0.8} {
       \begin{tabular}{c|cccccccccccccccccccccccccc}
         & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
         \texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
@@ -2272,7 +2273,7 @@ we are left with the following cells displayed,
 
 \begin{figure}[H]
   \begin{center}
-    \scalebox{0.5}{
+    \scalebox{0.8}{
       \begin{tabular}{c|cccccccccccccccccccccccccc}
         & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
         \texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
@@ -2486,7 +2487,7 @@ corresponds to the leftmost ring setting being \texttt{D}, we will
 see the following window,
 \begin{figure}[H]
   \begin{center}
-    \scalebox{0.5} {
+    \scalebox{0.8} {
       \begin{tabular}{c|cccccccccccccccccccccccccc}
         & \texttt{Z} & \texttt{Y} & \texttt{X} & \texttt{W} &
         \texttt{V} & \texttt{U} & \texttt{T} & \texttt{S} &
@@ -2799,8 +2800,8 @@ cycles. This gives us
 % \end{proof}
 \noindent Using Lemma \ref{cycle_count}, we can compute
 \begin{align*}
-  \mathbb{P}(E_i) & = \frac{\frac{24!}{2^{12}12!}}{\frac{26!}{2^{13}13!}} \\
-  & =  \frac{2\cdot(13)!\cdot(24)!}{(12)!\cdot(26!)}
+  \mathbb{P}(E_i) & = \dfrac{\dfrac{24!}{2^{12}12!}}{\dfrac{26!}{2^{13}13!}} \\
+  & =  \frac{2\cdot(13)!\cdot(24)!}{(12)!\cdot(26!)}.
 \end{align*}
 We can write this as
 \[
@@ -2814,7 +2815,7 @@ then we have free choice over the remaining 11 transpositions.
 Following a similar argument as above we derive
 \begin{align*}
   \mathbb{P}(E_i\cap E_j) & =
-  \frac{\frac{22!}{2^{11}11!}}{\frac{26!}{2^{13}13!}}
+  \dfrac{\dfrac{22!}{2^{11}11!}}{\dfrac{26!}{2^{13}13!}}
   \\
   & =  \frac{2^2\cdot(13)!\cdot(22)!}{(11)!\cdot(26!)}  \\
   & = \frac{2^2\cdot(13)!\cdot(26-2(2))!}{(13-2)!(26!)}

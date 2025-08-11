@@ -163,7 +163,7 @@ same trigrams for each message. Some examples might include:
     %% Battle of wits the complete story of codebreaking in World War
     % II PAGE 143 %%
 \end{itemize}
-By keeping track of various radio stations which used cillies.
+By keeping track of various radio stations which used cillies,
 Rejewski had a reasonable guess as to what the message key used for a
 particular ciphertext was. Suppose we received three hexagrams
 originating from a radio station which often used \texttt{AAA} as
@@ -219,7 +219,7 @@ wirings, plugboard settings, or daily keys.
 
 Equipped with a means to determine each day's $\pi_i$s, Rejewski set
 himself to finding the internal wirings of the rotors~\cite[pp.~219--221]{Rejewski1981}. The full
-recovery of rotor wirings and turnovers is out of scope of this paper;
+recovery of rotor wirings and turnovers is out of scope of this thesis;
 however, we will provide a brief description to illustrate that with
 minimal intelligence information, entire rotor wirings were able to be deduced.
 \\\\To perform this deduction we will assume no turnover occurs in
@@ -450,7 +450,7 @@ Thus to get the value of the true ring setting, we compute
 \\\\This technique of fixing a ring setting and then computing the
 true ring setting needed to maintain a desired permutation while
 matching a desired window setting is used repeatedly throughout this
-paper. We have chosen to provide a full explanation each time it
+thesis. We have chosen to provide a full explanation each time it
 becomes relevant, as understanding this technique is critical to
 understanding the Bombe which is our ultimate goal.
 \subsection{Recovering the Plugboard}
@@ -638,7 +638,7 @@ produced in a characteristic. In fact, by switching back and forth
 between $\pi_1$ and $\pi_4$ we will find alternating elements
 of the pair of cycles of equal length which contain \texttt{A}. We
 can mechanize this process via the following
-circuit\footnote{Throughout this paper, diagrams will represent a
+circuit\footnote{Throughout this thesis, diagrams will represent a
   simplified Enigma machine consisting of only four letters
 (\texttt{A},\texttt{B}, \texttt{C}, and \texttt{D}):}
 \begin{center}
@@ -732,7 +732,7 @@ settings to roughly $15$ minutes~\cite[p.~225]{Rejewski1981}. Note that the mach
 cycles in permutations
 instantaneous by connecting each cycle in its own disjoint electrical
 circuit. This first attempt at mechanizing the process of decryption
-is a very early predecessor to the primary topic of this paper, the
+is a very early predecessor to the primary topic of this thesis, the
 Bombe. This method of enumerating cycles, as we will see, is the core
 of the Bombe's primary function.
 \section{The Bomba}
@@ -892,7 +892,7 @@ became known as the {\bf{Bomba Kryptologiczna}} (Bomba for short).
 Let us begin by constructing a device that can detect a a single
 female, that is, it can determine for a given input letter when two
 sets of rotors three steps apart produce a female.
-\\\\In this paper, diagrams for the Cyclometer and the Bombe (later
+\\\\In this thesis, diagrams for the Cyclometer and the Bombe (later
 discussed) are abstracted so as to remove reference to specific
 circuitry elements since the reader is not expected to have a deep
 understanding of electrical engineering. However, compared to the
@@ -928,9 +928,9 @@ these operations. Consider the following circuit:
 
       % Wiring exiting
       \draw (1,2-1) to (1.75,2-1);
-      \draw[line width=1.25pt] (1.75, 2-1) to ++(60:0.5);
+      \draw[line width=1.25pt] (1.75, 2-1) to ++(31.5:0.58);
       \fill (1.75, 2-1) circle (2pt); % dot
-      \fill (1.75,2-1) ++(60:0.5) circle (2pt); % dot
+      \fill (1.75,2-1) ++(31.5:0.58) circle (2pt); % dot
       \draw (2.25,2-1) circle (2pt); % dot
       \draw (2.3,2-1) to (3,2-1);
       \draw (1,1-1) to (1.75,1-1);
@@ -969,9 +969,9 @@ these operations. Consider the following circuit:
 
       % Wiring exiting
       \draw (1,2-7) to (1.75,2-7);
-      \draw[line width=1.25pt] (1.75, 2-7) to ++(60:0.5);
+      \draw[line width=1.25pt] (1.75, 2-7) to ++(31.5:0.58);
       \fill (1.75, 2-7) circle (2pt); % dot
-      \fill (1.75,2-7) ++(60:0.5) circle (2pt); % dot
+      \fill (1.75,2-7) ++(31.5:0.58) circle (2pt); % dot
       \draw (2.25,2-7) circle (2pt); % dot
       \draw (2.3,2-7) to (3,2-7);
       \draw (1,1-7) to (1.75,1-7);
@@ -1034,8 +1034,14 @@ these operations. Consider the following circuit:
 
       % Circuit Completion
       \draw (3.5,3) to (8,3);
+      \draw[fill=black] (3.5,3) circle (2pt); % dot
+      \draw[fill=black] (3.5+1.5,3) circle (2pt); % dot
+      \draw[fill=black] (3.5+3,3) circle (2pt); % dot
       \draw (8, -10) to (3.5, -10);
       \draw[purple] (-3.3, 3.3) rectangle (10.3, -10.3);
+      \draw[fill=black](3.5,-10) circle (2pt); % dot
+      \draw[fill=black] (3.5+1.5,-10) circle (2pt); % dot
+      \draw[fill=black] (3.5+3,-10) circle (2pt); % dot
 
       % Labels
       \node at (3.5, 4+0.3) {$T^{+}$};
@@ -1046,10 +1052,26 @@ these operations. Consider the following circuit:
       \node at (8.2, 2-5.5) {\texttt{D}};
 
       % Power line
-      \node at (2, 4+0.3) {$V^{+}$};
-      \node at (2, -11-0.3) {$V^{-}$};
-      \draw[dashed] (2, 4) -- (2, -11);
+      \node at (2.6, 4+0.3) {$V^{+}$};
+      % \node at (2, -11-0.3) {$V^{-}$};
+      \draw[dashed] (2+0.75, 4) -- (2+0.75, -11);
+      \draw[dashed] (2.35, 4-2.7) -- (2.75, 4-2.7);
+      \draw (2.25, 4-2.7) circle (2pt); % dot
+      \draw[dashed] (2.35, 4-2.7-1) -- (2.75, 4-2.7-1);
+      \draw (2.25, 4-2.7-1) circle (2pt); % dot
+    \draw[dashed] (2.35, 4-2.7-2) -- (2.75, 4-2.7-2);
+      \draw (2.25, 4-2.7-2) circle (2pt); % dot
+    \draw[dashed] (2.35, 4-2.7-3) -- (2.75, 4-2.7-3);
+      \draw (2.25, 4-2.7-3) circle (2pt); % dot
 
+          \draw[dashed] (2.35, 4-2.7-6) -- (2.75, 4-2.7-6);
+      \draw (2.25, 4-2.7-6) circle (2pt); % dot
+          \draw[dashed] (2.35, 4-2.7-7) -- (2.75, 4-2.7-7);
+      \draw (2.25, 4-2.7-7) circle (2pt); % dot
+                \draw[dashed] (2.35, 4-2.7-8) -- (2.75, 4-2.7-8);
+      \draw (2.25, 4-2.7-8) circle (2pt); % dot
+                \draw[dashed] (2.35, 4-2.7-9) -- (2.75, 4-2.7-9);
+      \draw (2.25, 4-2.7-9) circle (2pt); % dot
     \end{circuitikz}
   }
 \end{center}
@@ -1059,26 +1081,26 @@ permutations $N_z^{-1}Q_{y,x}N_z$ and $N_{z+3}^{-1}Q_{y,x}N_{z+3}$
 setting $S$, a caveat we will discuss later. Further, we will
 implicitly set the rotors' ring settings to \texttt{AAA} by just
 placing each letter above its corresponding contact on the rotor.
-\\\\The dotted line from $V^{-}$ to $V^{+}$  represents our battery
+\\\\The dotted line represents our battery
 line. When current enters through the battery line, it is only able
 to enter at contacts which have their switches flipped, this is how
 the operator can select the input letter. When the input letter then
 travels through the rotors, it will exit at some other location. If
 both $N_z^{-1}Q_{y,x}N_z$ and $N_{z+3}^{-1}Q_{y,x}N_{z+3}$ produce
 the same exit letter for the given input letter, then both exit
-letters wil reach transistor gates along the same line (depicted with
+letters will reach transistor gates along the same line (depicted with
 letters \texttt{A}, \texttt{B}, \texttt{C}, \texttt{D}). When this
-happens, current is freely able to flow from $T^{-}$ to $T^{+}$.
+happens, current is freely able to flow from $T^{+}$ to $T^{-}$.
 \\\\To see this, note that in our diagram we have \texttt{A} selected
 as the input letter. Following $N_z^{-1}Q_{y,x}N_z$ we can see that
 the rotor will now output \texttt{C}. Similarly, rotor
 $N_{z+3}^{-1}Q_{y,x}N_{z+3}$ will output \texttt{C}. Each of these
 will then travel to transistor gates of the line labeled \texttt{C},
 thus opening both transistors in this line and allowing current to
-flow from $T^{-}$ to $T^{+}$.
-Thus, if we connect our battery in parallel to the line from $T^{-}$
-to $T^{+}$ and some current-triggered detector in series with the
-line from $T^{-}$ to $T^{+}$, the detector will only trigger when the
+flow from $T^{+}$ to $T^{-}$.
+Thus, if we connect our battery in parallel to the line from $T^{+}$
+to $T^{-}$ and some current-triggered detector in series with the
+line from $T^{+}$ to $T^{-}$, the detector will only trigger when the
 input letter (in our case \texttt{A}) produces a female (in our case
 \texttt{C}) for the specified rotor position. We can abstract this
 entire circuit by noting that the wires exiting the enclosing box of
@@ -1164,11 +1186,18 @@ In our construction we made the simplifying assumption that the rotor
 3 steps apart from $N_{z}^{-1}Q_{y,x}N_{z}$ is
 $N_{z+3}^{-1}Q_{y,x}N_{z+3}$. Of course, if rotor turnover occurs
 between these two points, the middle rotor will have stepped making
-this assumption no longer true. However, earlier discovery of rotor
-wirings and ring notch locations meant that cryptanalysts knew for a
+this assumption no longer true. 
+\\\\We found no explicit account of how turnover was handle in practice. 
+It is possible that it was simply ignored since the likelihood of turnover in a $3$ letter sequence of characters is $\frac{3}{26}$, meaning that there is a 
+\[
+(1-\frac{3}{26})^3 \approx 0.69
+\]
+chance that no turnover occurred in all three messages being examined. With a sufficient number of messages, simple trial and error will eventually yield legitimate results. 
+\\\\It is also possible that they explicitly handled turnover in their analysis. Earlier discovery of rotor
+wirings and ring notch locations meant that cryptanalysts knew, for a
 given rotor order, which window settings will produce turnovers in
-the first six key presses. Therefore, we definitively know whether or
-not a turnover occurred for a given message, so in reality we can
+the $3$ steps spanning the female being examined. Therefore, we definitively know whether or
+not a turnover occurred for a given message, so we can
 update the middle rotor as necessary to ensure the two rotors
 maintain a relative distance of 3 steps. This amounts to changing $y$
 to $y+1$ for some rotor orders and messages -- though for the sake of
@@ -1632,7 +1661,7 @@ to recover the ring settings for a day's transmissions.
 \]
 We hypothesize that the rotor order is \texttt{I III II}, so we
 can get out the sheet (\texttt{B} - \texttt{I III II}) depicted in
-figure~\ref{fig:zygalski_sheet} and examine row \texttt{Y} column
+Figure~\ref{fig:zygalski_sheet} and examine row \texttt{Y} column
 \texttt{W} to see if window setting \texttt{BWY} with ring
 setting \texttt{AAA} can produce a $1-4$ female. At this cell, we will
 see it has no hole, indicating that such a setting cannot produce a female.
@@ -1652,7 +1681,7 @@ window setting of \texttt{BWY} can produce a $1-4$ female with ring settings
 \]
 Thus, such a sheet can investigate, for a given message key, all $676$
 possible ring settings with its leftmost letter being \texttt{A}. In
-our case, we can relabel figure~\ref{fig:zygalski_sheet} as follows
+our case, we can relabel Figure~\ref{fig:zygalski_sheet} as follows
 \begin{figure}[H]
   \begin{center}
     \scalebox{0.7}{
@@ -1889,7 +1918,7 @@ Of course, this is exactly the same as a $1-4$ female with window
 settings \texttt{PTD}. In this sense, it suffices to only produce
 sheets for $1-4$ females.
 \subsection{Using Zygalski Sheets}
-In researching this paper, no component was more troublesome than
+In researching this thesis, no component was more troublesome than
 finding consistent and accurate information regarding Zygalski
 sheets. Many claims, often conflicting, were made by reliable
 sources. All the while, the closest description of how to actually
@@ -1903,7 +1932,7 @@ reproduce the example sheets provided in the book, leading me to
 believe that they may be intended to give the reader an idea of what
 such a sheet would look like rather than representing an actual
 sheet. I suspect this is the case because I myself have done this for
-many examples provided in this paper. Creating examples from
+many examples provided in this thesis. Creating examples from
 authentic Enigma messages can require hundreds of messages to create
 a single example. The fact that some of these examples were
 fictitiously created does not change the underlying theory described.
@@ -1965,7 +1994,7 @@ at least one way of using such sheets.
 \\We begin with a large illuminated table. We now set up a frame with
 $26$ by $26$ letters indicating ring settings in the right two rotors
 from \texttt{A}-\texttt{Z}. This will serve as the window through
-which we will observe the sheets and ultimately, from this window,,
+which we will observe the sheets and ultimately, from this window,
 we will read the ring settings.
 \\\\We will first test the assumption of
 the rotor order \texttt{I III II} and the leftmost ring setting \texttt{A}.
@@ -1980,7 +2009,7 @@ setting \texttt{BWY}.
 \\\\Note that if our Zygalski sheets were only 26 by 26, such a
 translation of the sheet would mean that there would be empty space
 in the window where no sheet was present as in
-figure~\ref{fig:shifted_sheet}. Thus, to account for this, Zygalski
+Figure~\ref{fig:shifted_sheet}. Thus, to account for this, Zygalski
 sheets were actually 51 by 51, with cells repeating modulo 26 and
 labels on each axis from \texttt{A}-\texttt{Z} and then \texttt{A}-\texttt{Y}.
 \begin{figure}[H]
@@ -2689,7 +2718,7 @@ accidentally rule out a possibly valid setting. How cryptographers
 actually dealt with this when using the physical sheets is unknown to
 me as no source referenced such an issue, save for Tony Sale in his
 digitized implementation of the sheets, where he solved the problem
-as I did. This is a question that warrants further historical research.
+as I did~\cite{codesandciphersPolishBombe}. This is a question that warrants further historical research.
 
 \subsubsection{Expected Number of Sheets}
 We will now compute the expected number of sheets required to carry

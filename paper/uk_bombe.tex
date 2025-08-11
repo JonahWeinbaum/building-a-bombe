@@ -233,9 +233,8 @@ known plaintext attack.
 % %
 \subsection{Herivel Tip}
 While Turing was developing his plaintext attack that ultimately
-culminated in the creation of the Bombe, there was a period of time
-that some have called a "blackout" in which little to no Enigma
-messages could be deciphered. During this time, Bletchley Park
+culminated in the creation of the Bombe, there was a short period of time in which little to no Enigma
+messages could be deciphered~\cite[p.~102]{Welchman1982HutSix}. During this time, Bletchley Park
 cryptanalyst John Herivel had a simple idea. When operators set their
 ring settings as described by the key sheet they would place their
 wheels in the machine in the order described, and they would then
@@ -277,13 +276,13 @@ this would completely determine one component of the daily key for an
 entire month. As other components were deduced more columns could be
 determined in their entirety until, eventually, the entire month's
 key sheet could be determined in advance. This procedure became known
-as {\bf{Parkerismus}}. Welchman explained that at one point they had
+as {\bf{Parkerismus}}~\cite[pp.~130--131]{Welchman1982HutSix}. Welchman explained that at one point they had
 determined the entire month's worth of keys that Rommel would use in
-Africa just by use of Parkerismus.
+Africa just by use of Parkerismus~\cite[p.~131]{Welchman1982HutSix}.
 \\\\Ultimately, the Herivel tip and Parkerismus only helped them to
 decipher messages in particular circumstances. Herivel's trick was
 only used within a
-particular network of operators known as the "Red network". Similarly,
+particular network of operators known as the "Red network"~\cite[p.~101]{Welchman1982HutSix}. Similarly,
 Parker's trick only functioned when certain columns in the key sheet
 had been reused. However,
 as we will later see, access to a set of plaintext from messages will
@@ -478,7 +477,7 @@ cycle type to determine when we can eliminate rotor positions.
     \texttt{K}$. If we
     mechanize this process we can eliminate rotor positions which do
     not satisfy this singular hypothesis. Turing called this method
-    \textbf{single line scanning}. Note, however, that this method
+    \textbf{single line scanning}~\cite[p.~104]{Turing1940ProfBook}. Note, however, that this method
     may eliminate rotor
     positions which do have valid steckerings, just not the
     particular steckering that we hypothesized.
@@ -486,12 +485,12 @@ cycle type to determine when we can eliminate rotor positions.
     each steckering hypothesis we check if that hypothesis produces a
     fixed point in $\overline\pi$, we can rule out rotor positions which
     have all steckering hypotheses invalid. Turing called this method
-    \textbf{serial scanning}.
+    \textbf{serial scanning}~\cite[p.~104]{Turing1940ProfBook}.
   \item Serial scanning requires a separate examination of each
     steckering hypothesis. Turing proposed a machine which could concurrently
     examine all steckering possibilities and eliminate rotor positions
     which had no valid steckerings. Turing called this method
-    \textbf{simultaneous scanning}.
+    \textbf{simultaneous scanning}~\cite[p.~104]{Turing1940ProfBook}.
   \item If we find $\overline\pi$ has a $26$-cycle, then we must
     have that there are no $1$-cycles and thus no valid steckerings.
     It then follows that the rotor position is incorrect.
@@ -507,7 +506,7 @@ cycle type to determine when we can eliminate rotor positions.
       more than this in one way and
       less in another. It is not restricted to dealing with one Stecker
       hypothesis at a time, and it does not find all direct
-    contradictions.} Effectively, spider-scanning is like a form of
+    contradictions}~\cite[p.~112]{Turing1940ProfBook}. Effectively, spider-scanning is like a form of
     simultaneous scanning which is restricted
     to examining only one cycle at a time.
 \end{enumerate}
@@ -1282,7 +1281,7 @@ steckering possibilities $S(\texttt{A}) \notin \{\texttt{A},
 \texttt{D}\}$.
 \\\\Effectively, this process is a mechanization of
 finding the cycle containing a particular letter. In the above
-figure~\ref{fig:incorrect_stecker}, sending current from \texttt{Ad}
+Figure~\ref{fig:incorrect_stecker}, sending current from \texttt{Ad}
 until we arrive back at \texttt{Ad} is
 akin to repeatedly applying $\overline\pi$ to \texttt{D}
 until we return to \texttt{D}. This can be visualized in our diagram as
@@ -1404,7 +1403,7 @@ Thus far we have described the Bombe as connecting Enigma machines.
 In reality, the Bombe used a set of rotors known as {\bf{drums}}
 mimicking the effect of each Enigma rotor. Thus three drums together
 produced the effect of an entire Enigma permutation. Such a set of
-drums was called a {\bf{Letchworth scrambler}} which effectively
+drums was called a {\bf{Letchworth Enigma}} (or {\bf{scrambler}})~\cite[p.~102]{Turing1940ProfBook}~\cite[p.~39]{Welchman1982HutSix} which effectively
 mimicked the function of the Enigma machine but was double-ended
 meaning current could be applied in either direction to achieve our
 Enigma permutation.
@@ -1901,7 +1900,7 @@ effectively, the checking machine represents a fixed
 $\overline\pi_i$. Suppose the operator (known as a
 {\bf{wren}})\footnote{Wren comes from the abbreviation WRN of the
   Women's Royal Navy Service. Such members became the primary operators
-of Bombes at Bletchley Park.} knew from the Bombe stop that our
+of Bombes at Bletchley Park~\cite[pp.~58,97]{smith2015hidden}.} knew from the Bombe stop that our
 hypothesis letter \texttt{A} was steckered to \texttt{C} (i.e.\ $S(\texttt{A}) = \texttt{C}$). Further, from our loop, the wren knows that
 \[
   \pi_1(\texttt{A}) = \texttt{B}
@@ -1940,7 +1939,7 @@ tractable number.
 \\\\If we find our stop has valid plugboard settings, we can recover
 any remaining settings quite easily. We can attempt to decrypt our
 ciphertext with our window setting of \texttt{ZZZ}, our ring setting
-given by the indicator drums, and our plguboard settings we
+given by the indicator drums, and our plugboard settings we
 discovered from the stop. If we find that there are letters which do
 not match our expected plaintext we can deduce what plugboard
 settings need to be added to switch out incorrect letters with their
@@ -1951,8 +1950,7 @@ the plugboard settings.
 By this point we know that for our hypothesized rotor ordering, a
 window setting of \texttt{ZZZ}, a ring setting given by the indicator
 drums, and a plugboard setting deduced from the state of the stop, as
-well as additional logical induction, we can produce the desired
-ciphertext-plaintext pairing. However, this does not mean the ring
+well as additional logical induction, we can produce the desired plaintext-ciphertext pairing. However, this does not mean the ring
 setting that we have is the true ring setting. We assumed that
 turnover did not occur during our crib so in this case we can adjust
 our window setting and ring setting arbitrarily (so long as we keep
@@ -1993,10 +1991,16 @@ this, we have now managed to recover all of the relevant settings of
 the daily key.
 
 \subsubsection{Rotor Order Reuse}
-German Enigma protocol stipulated that no rotor setting could appear
-in two months' setting sheets. This meant that if Bletchley were able
+German Enigma protocol stipulated the following:
+\begin{itemize}
+    \item No rotor setting could appear
+in two months' setting sheets~\cite{bouch2015enigma}
+    \item The same wheel could not be used in the same location two days in a row~\cite{bouch2015enigma}.
+    \item In the same column, no wheel could be followed by a consecutive wheel (with \texttt{V} and \texttt{I} not regarded as consecutive)~\cite{bouch2015enigma}.
+\end{itemize}
+This meant that if Bletchley were able
 to regularly deduce Enigma settings, they could rule out many rotor
-orders which no longer needed to be tested the next month.
+orders which no longer needed to be tested in the next day or month.
 
 \subsection{Turnover}
 Recall that when we initially set up our Bombe, we set each scrambler
@@ -2047,7 +2051,7 @@ with a chance of rain, we would expect that the weather report (which
 intellegence knew arrived from specific channels at specific times)
 would likely contain phrases like ``weather,'' ``wind,'' or ``rain.''
 \\\\Some sources of plaintext could be manufactured in a process
-known as {\bf{gardening}}. Bletchley Park could request that the
+known as {\bf{gardening}}~\cite[p.~187]{sebag-montefiore2000enigma}~\cite[p.~144]{kahn1991seizing}. Bletchley Park could request that the
 British Air Force ``seed'' a designated location with mines. It would
 then follow that many messages would make specific mention of that
 location or port which contained the mines.
@@ -2058,7 +2062,7 @@ time at which the first messsage was sent. Numbers were ordered by
 the top row of the keyboard, that is, \texttt{Q} was $1$, \texttt{W}
 was $2$, and so on.  Thus if a message was sent at $23:30$, and a
 subsequent message was a continuation, it would begin with
-\texttt{FORTYWEEPYWEEPY}, where \texttt{Y} is used as a delimiting character.
+\texttt{FORTYWEEPYWEEPY}, where \texttt{Y} is used as a delimiting character~\cite[pp.~278--279]{action_this_day}.
 \subsubsection{Determining Cribs}
 The second trick used by analysts was the use of permutation theory to
 eliminate locations in the ciphertext where the plaintext could not
@@ -2075,7 +2079,7 @@ suspect it to contain the following plaintext
 \begin{center}
   \texttt{WETTERVORHERSAGEBISKAYA},
 \end{center}
-that is, ``weather forecast Biscay."
+that is, ``weather forecast Biscay''~\cite{ellsburyTuringBombe}.
 \\\\If we overlay our ciphertext on top of our plaintext as follows,
 \begin{align*}
   & \texttt{QFZWRWIVTYRE}{\uline{\texttt{S}}}\texttt{XBFOGKUHQBAISEZ} \\
@@ -2094,7 +2098,7 @@ ciphertext we get the following,
   &
   \texttt{.WETTER}{\uline{\texttt{V}}}\texttt{ORH}{\uline{\texttt{E}}}\texttt{RSAGEBISKAY}{\uline{\texttt{A}}}\texttt{....}
   \\
-  & \texttt{..WETTE}{\uline{\texttt{R}}}\texttt{VORHERSAGEBISKAYA...}
+  & \texttt{..WETTER}\texttt{VO}{\uline{\texttt{R}}}\texttt{HERSAGEBISKAYA...}
   \\
   &
   \texttt{...}{\uline{\texttt{W}}}\texttt{ETTERVORHERSA}{\uline{\texttt{G}}}\texttt{EBISK}{\uline{\texttt{A}}}\texttt{YA...}
@@ -2123,7 +2127,7 @@ we expect to find only a few cribs.
 plaintext-ciphertext pairing called a {\bf{menu}} which will be used
 to wire up our Bombe. We assume the enciphering starts with window
 setting \texttt{ZZZ} so we will denote which window setting takes
-each letter to the next.
+each letter to the next~\cite[p.~306]{Welchman1982HutSix}.
 \begin{figure}[H]
   \begin{center}
     \scalebox{0.8}{
@@ -2206,7 +2210,7 @@ this will be entirely consistent with our current deductions and thus
 there will be no new logical contradictions introduced by this
 additional current. That is, for any wire \texttt{Xy} we can connect
 it directly to \texttt{Yx} through what was called a {\bf{diagonal
-board}}. In our diagram, this can be viewed as follows:
+board}}~\cite[pp.301--305]{Welchman1982HutSix}. In our diagram, this can be viewed as follows:
 \begin{figure}[H]
   \begin{center}
     \begin{tikzpicture}[thick, scale=0.7, every node/.style={scale=0.7}]
@@ -2316,8 +2320,8 @@ connectivity thus reducing the number of stops. In fact, prior to the
 use of the diagonal board, often $3$ loops needed to be present in
 the crib to have a tractable number of stops. With the addition of
 the diagonal board this could be significantly reduced and made the
-use of the Bombe practical.
-\\\\For instance, in our example from figure~\ref{fig:diagonal},
+use of the Bombe practical~\cite{Davies2010}.
+\\\\For instance, in our example from Figure~\ref{fig:diagonal},
 without the diagonal such a state would produce a stop with
 hypothesis $S(\texttt{A}) = \texttt{D}$. However, adding the diagonal
 wires would cause all wires to have current flowing through them --
@@ -2336,7 +2340,7 @@ produce daily keys.
 \\\\While the name often includes only Turing and Welchman, the man
 who turned the mathematical theory of the Bombe into actual machinery
 was chief engineer of the British Tabulating Machine Company, Harold
-``Doc'' Keen.
+``Doc'' Keen~\cite[p.~81]{Welchman1982HutSix}.
 
 \subsection{Consecutive Stecker Knock Out}
 In the Air Force Enigma protocol, the plugboard setting was always
@@ -2346,7 +2350,7 @@ Bombes had a setting called {\bf{Consecutive Stecker Knock Out
 (CSKO)}} that allowed for the elimination of some stops which implied
 consecutive steckerings. This was accomplished by wiring wire
 \texttt{Ab} to \texttt{Bc} to \texttt{Dc} and so on, with an optional
-jack that could complete the circuit on the back of the Bombe.
+jack that could complete the circuit on the back of the Bombe~\cite[p.~240]{BudianskyBattleOfWits2000}.
 \\\\In general, the CSKO circuit not directly eliminate consecutive
 steckerings. However, consider the case of a stop (which we will
 later see is quite common) in which every wire save for one is live.
@@ -2371,7 +2375,7 @@ the number of stops to be checked for Air Force traffic.
 \subsection{The Machine Gun}
 Even with these additions, we still have more
 deductions that can be made to rule out certain settings. Consider
-our first stop we examined from figure~\ref{fig:correct_stecker},
+our first stop we examined from Figure~\ref{fig:correct_stecker},
 \begin{center}
   \begin{minipage}{0.45\textwidth}
     \begin{tikzpicture}[thick, scale=0.4, every node/.style={scale=0.7}]
@@ -2484,7 +2488,7 @@ contacts to search for a pair of deduced steckerings that had a
 common letter (thus producing a logical contradiction). The machine
 got its name from the sudden loud burst of sound produced when the
 uniselectors ran through the diagonal board. The class of Bombes
-produced with the machine gun were dubbed {\bf{Jumbo Bombes}}.
+produced with the machine gun were dubbed {\bf{Jumbo Bombes}}~\cite[p.~240]{BudianskyBattleOfWits2000}.
 \\\\Even with such a device many stops still needed to be checked by
 the wrens since the machine gun only detected logical inconsistencies
 in regards to plugboard setting overlap and thus still produced false stops.
@@ -2503,10 +2507,10 @@ additional insight to allow us to make use of our Bombe on such naval messages.
 \subsection{The Naval Enigma}
 The German Navy used completely different Enigma models including
 \texttt{M1}, \texttt{M2}, \texttt{M3}, and ultimately \texttt{M4},
-the last of which actually allowed for the use of four rotors. The
+the last of which actually allowed for the use of four rotors~\cite{cryptomuseumM4}. The
 first three models are compatible with the Enigma model \texttt{I}
 that we have been discussing, so we will not be examining the
-differences between these machines in this paper. Further, the
+differences between these machines in this thesis. Further, the
 \texttt{M4}'s additional rotor presented additional cryptographic
 challenges to cryptanalysts but the underlying theory described above
 is the same.
@@ -2514,13 +2518,13 @@ is the same.
 \\\\The most important difference of the Naval Enigma was the
 addition of three rotors -- rotors \texttt{VI}, \texttt{VII}, and
 \texttt{VIII}. These rotors were exclusively used by the German Navy
-and they functioned differently than the afformentioned rotors
+and they functioned differently than the aforementioned rotors
 \texttt{I}-\texttt{V}. In particular, these new rotors had $2$
 turnover notches, diametrically opposed, doubling the rate of rotor
 turnover. In theory, these new rotors increased the total rotor
 ordering possibilities to $336$, but the naval operating procedure
 specified that one of the three rotors in a key sheet \emph{must} be
-a naval rotor, thus reducing our rotor ordering space to only $276$.
+a naval rotor, thus reducing our rotor ordering space to only $276$~\cite{cryptomuseumM4}.
 \\\\The theory underlying the Bombe still allows for the naval Enigma
 to be broken, but the additional rotors meant that the workload
 required to break such machines was vastly increased. Further, the
@@ -2531,9 +2535,9 @@ that ignored turnover and the amount of time we needed to use the
 Bombe would be vastly decreased. Turing invented a method by which
 cryptographers
 were able to reduce the possible rotor orderings to a set of only a
-few possibilities which became known as {\bf{Banburismus}}\footnote{The
+few possibilities which became known as {\bf{Banburismus}}~\cite[p.~76]{sebag-montefiore2000enigma}\footnote{The
   naming was due to cards used during the process being produced in
-Banbury, a small market town near Bletchley Park.}. This method took
+Banbury, a small market town near Bletchley Park~\cite[p.~76]{sebag-montefiore2000enigma}.}. This method took
 inspiration from the clock method described in
 Section~\ref{clock_method}. To understand Banburismus, we must first
 understand the procedure by which naval Enigmas sent messages.
@@ -2543,9 +2547,9 @@ including the window setting (\emph{Grundstellung}) in their daily
 key, the Navy maintained this parameter of their daily key.
 \\\\The naval operators were provided a large book of trigrams via a
 {\bf{{K-Book}}} (\emph{K-Buch}) as well as a large mapping from
-bigrams to other bigrams known as a {\bf{bigram table}}. We will not
+bigrams to other bigrams known as a {\bf{bigram table}}~\cite[pp.~332,334]{rijmenants2010enigma}. We will not
 discuss the exact details of choosing trigrams since they are not of
-cryptogrpahic importance, but suffice it to say that the operator
+cryptographic importance, but suffice it to say that the operator
 chose two trigrams from the K-Book (e.g.\ \texttt{CAC} and
 \texttt{ABB}) and arranged them in two rows as follows,
 \begin{align*}
@@ -2571,7 +2575,7 @@ example produces \texttt{CCAA BCAA}. These two tetragrams were then
 sent in plaintext at the start of our message. To actually encipher
 their message, the operator set their machine to the window setting
 specified by the key sheet and enciphered their second chosen
-trigram, \texttt{ABB}, to get their message key. We will call the message
+trigram, \texttt{ABB}, to get their message key~\cite[pp.~332--336]{rijmenants2010enigma}. We will call the message
 key prior to being enciphered the {\bf{pre-message key}} (in our
 case \texttt{ABB}). They then set their window setting to the
 message key and began enciphering their message.
@@ -2595,23 +2599,23 @@ such documents became known as {\bf{pinches}}. Some well known pinches are:
   \item The Narvik Pinch -- This first pinch, on April 26, 1940,
     occurred when the \emph{HMS Griffin} boarded the German
     \emph{Polares} headed for the port of Narvik. Aboard, they found
-    entire cribs, descriptions of the naval messaging protocol, and keylists.
+    entire cribs, descriptions of the naval messaging protocol, and keylists~\cite[p.~259]{action_this_day}.
   \item The Krebs Pinch -- On March 4, 1941, the \emph{HMS Somali}
     boarded the German \emph{Krebs}. Aboard, they found a keylist for
-    the entire month of February.
+    the entire month of February~\cite[p.~260]{action_this_day}.
   \item The München Pinch -- On May 7, 1941, the \emph{HMS Somali}
     boarded the German weather ship \emph{München}. Aboard, they
-    found a keylist for the entire month of June.
+    found a keylist for the entire month of June~\cite[p.~260]{action_this_day}.
     %https://archive.org/details/britishintellige0000hins/page/336/mode/2up?q=Lauenburg
   \item The Lauenburg Pinch -- On June 28, 1941, the \emph{HMS
     Somali} boarded the German weather ship \emph{Lauenburg}. Aboard,
-    they found a keylist for the entire month of July.
+    they found a keylist for the entire month of July~\cite[260]{action_this_day}.
   \item The \emph{U-110} Pinch -- On May 9, 1941, the Royal Navy
     struck the German U-boat \emph{U-110}. The crew abandoned the
     sinking ship, allowing members of the \emph{HMS Bulldog} to
     board. Aboard, they recovered an Enigma machine and the bigram
     tables themselves (though they had already been reconstructed by
-    Bletchley Park at this point).
+    Bletchley Park at this point)~\cite[p.~261]{action_this_day}.
 \end{itemize}
 \noindent These pinches provided Bletchley Park cryptanalysts with
 the information necessary to reverse engineer the bigram tables used
@@ -2649,7 +2653,7 @@ pre-message keys are the same.
 \\\\Recall our discussion from Section~\ref{ioc} regarding the
 index of coincidence. We know that when two texts represent the
 same poly-alphabetic cipher, the observed distribution of coincidences
-(Bletchley Park called these {\bf{repeats}}) should be much higher
+(Bletchley Park called these {\bf{repeats}}~\cite[p.~95]{Alexander1945}) should be much higher
 than two texts representing random text. Consider aligning our two
 texts with an offset of $+11$ letters, that is, the hypothesis that
 $\pi_3(\texttt{G}) = \pi_3(\texttt{X}) + 11$
@@ -2721,7 +2725,7 @@ been shorted for brevity.} we get the following chart of repeat structures
           \texttt{VFG} = \texttt{VFX}+9 & 2/56                      \\
           \hline
         \end{tabular}
-        \caption{Repeat structure at various offsets}
+        \caption{Repeat structure at various offsets~\cite[Section 2.3]{Hosgood2007}}
       \end{table}
     \end{minipage}
   }
@@ -2734,7 +2738,7 @@ structures. To do this, we must take a brief moment to discuss
 Bayesian statistics.
 \subsection{Bayesian Statistics}
 Turing thought of the relationships between texts at various
-offsets in terms of Bayesian statistics. Recall {\bf{Bayes' theorem}},
+offsets in terms of Bayesian statistics. Recall {\bf{Bayes' theorem}}~\cite[p.~175]{kendall1948advanced,},
 \begin{theorem}
   Given events $A$ and $B$, where $\mathbb{P}(B) \ne 0$ we have that
   \[
@@ -2770,7 +2774,7 @@ think of these probabilities instead in terms of {\bf{odds}}. That is,
 \end{align*}
 \noindent We will denote
 $\frac{\mathbb{P}(B|A)}{\mathbb{P}(B|\overline{A})}$ as
-$\mathbb{F}(A,B)$. This is called the {\bf{Bayes factor}}. The
+$\mathbb{F}(A,B)$. This is called the {\bf{Bayes factor}}~\cite[Section 3.1]{Hosgood2007}. The
 Bayes factor can be thought of as a measurement of how much the
 odds of an event increase when we add in a particular hypothesis.
 For a subsequent and independent event $C$ we have,
@@ -2811,7 +2815,7 @@ This leads us to the following definition
   \noindent Subsequently, a {\bf{deciban}} is $\frac{1}{10}$ of a
   ban, representing an event's odds being increased by a factor of
   $10^\frac{1}{10}$, given $B$ occurred. The unit we will be using
-  is half of a deciban, known as a {\bf{hubdub (hdB)}},
+  is half of a deciban, known as a {\bf{hubdub (hdB)}}~\cite[Section 4.1]{Hosgood2007},
   representing an event's odds being increased by a factor of
   $10^\frac{1}{20}$, given $B$ occurred. That is
   \[
@@ -2940,7 +2944,7 @@ a bonus system intended to account for the difference in frequency
 between monograms, bigrams, and trigrams in German text. The rule
 was -- to find the value of a repeat structure find its row and
 column location, then add one row for each bigram and four rows for
-each trigram. \\\\We will illustrate this rule by example. To find
+each trigram~\cite[p.~105]{Alexander1945}. \\\\We will illustrate this rule by example. To find
 the approximate hubdub value for an observed repeat structure of
 $6^\texttt{xx}/55$ we would examine row $6$ column $55$. However,
 to account for the additional two bigrams, we must moved down two
@@ -2973,8 +2977,8 @@ is unlikely that such a quantity will be amassed so as to be able
 to prove the accuracy of this bonus system.
 % HUGH ALEXANDER - http://www.ellsbury.com/gne/gne-096.htm
 % CRYPTOGRAPHIC HISTORY OF WORK ON THE GERMAN NAVAL ENIGMA %
-\\\\However, we can work backwards from the bonus system to attempt
-to reverse engineer the bigram frequency. If this frequency lies
+\\\\However, by working backwards from the bonus system we can attempt
+to reverse engineer the bigram frequency~\cite{cryptoSEBanburismus}. If this frequency lies
 within a reasonable estimate of bigram frequencies observed in
 German at-large, we can assume that this bonus system was likely
 based on careful analysis of actual bigram data in relation to the
@@ -3074,7 +3078,7 @@ to the reader that the bonus system is more than just a heuristic.
 Another factor we must account for is rotor turnover. We began with
 pre-message keys \texttt{VFG} and \texttt{VFX}, so all of this work
 has been assuming that only the last letter of the message key
-differs between our text; However, if the middle rotor turns over
+differs between our text; however, if the middle rotor turns over
 between the enciphering of our two pre-message keys, this
 assumption no longer holds. We must then ask the question, what is
 the likelihood that our two messages have message keys differing by
@@ -3108,7 +3112,7 @@ denote $\tau_n$, is
   \end{cases}
 \]
 Given that, by protocol, at least one rotor must be a naval rotor,
-we will now calculate $S$.
+we will now calculate $S$~\cite[Section 5.1]{Hosgood2007}.
 \\\\We have $8\cdot7\cdot6$ possible arrangements of rotors for all
 possible naval rotors, but $5\cdot4\cdot3$ of these will contain no
 naval rotors. Additionally, only $7\cdot6\cdot3$ of these will have
@@ -3217,7 +3221,7 @@ $20$ categories labeled \texttt{I}-\texttt{XX}. Each category
 represented a message that was likely to contain a particular
 distribution of numerals (since many German numbers are $4$
 letters). The exact nature of these categories were not discussed
-in any historical documentation found while researching for this paper.
+in any historical documentation found while researching for this thesis.
 \\\\Within each category there are $13$ subdivisions corresponding
 to where a tetragram occurred. The first $10$ subdivisions
 represented a tetragram occurring in the first position, second
@@ -3431,9 +3435,9 @@ illustrate the various scenarios of decibanning.
 keys \texttt{TYQ} and \texttt{TYB} represent an offset of $+5$. At
 this offset, we observe a repeat structure of $7^\texttt{xx}/32$,
 with no section after the blue line. Consulting our distance chart
-from figure~\ref{fig:distance_chart}, a $+5$ offset gives us a loss
+from Figure~\ref{fig:distance_chart}, a $+5$ offset gives us a loss
 of $-3$ hdB. We then get our score sheet calculated for a loss of
-$-3$ hdB from figure~\ref{fig:loss_sheet} and consult row $7$
+$-3$ hdB from Figure~\ref{fig:loss_sheet} and consult row $7$
 column $32$. Then, according to our bonus system, we move down one
 row for each bigram to row $9$ -- giving us a score of $21$ hdB. We
 now enter this score in a  {\bf{deciban sheet}}. The sheet will
@@ -3470,9 +3474,9 @@ keys \texttt{ASL} and \texttt{ASJ} represent an offset of $+5$. At
 this offset, we observe a repeat structure of $0/30$ before the
 blue line, and $11^\texttt{3x}/171$ after the blue line. For the
 repeats before the blue line, consulting our distance chart from
-figure~\ref{fig:distance_chart}, a $+5$ offset gives us a loss of
+Figure~\ref{fig:distance_chart}, a $+5$ offset gives us a loss of
 $-3$ hdB. We then get our score sheet calculated for a loss of $-3$
-hdB from figure~\ref{fig:loss_sheet} and consult row $0$ column
+hdB from Figure~\ref{fig:loss_sheet} and consult row $0$ column
 $30$ to get a score of $-4$ hdB. For the section after the blue
 line, the crib room estimates a $-4$ hdB loss due to the
 possibility that either is a dummy message. In this case, we must
@@ -4463,11 +4467,11 @@ This makes sense for a number of reasons:
 \begin{enumerate}
   \item[(1)] Naval messages regularly dealt with numbers, all of which
     needed to be typed out in full. This statistical observation is
-    what made the use of the tetra catalogue so valuable.
+    what made the use of the tetra catalogue so valuable~\cite[Section 9.3]{Hosgood2007}.
   \item[(2)] An odd quirk known as {\bf{Benford's law}} tells us that
-    $1$ appears more commonly than any other leading digit in numerical data.
+    $1$ appears more commonly than any other leading digit in numerical data~\cite[p.~556]{benford1938law}.
   \item[(3)] \texttt{EINS} shows up naturally in many German words
-    either as a sub-component of a word or when spanning across two words.
+    either as a sub-component of a word or when spanning across two words~\cite[Section 9.3]{Hosgood2007}.
     % https://web.archive.org/web/20160309155544/http://stoneship.org.uk/~steve/banburismus.html
     % %
 \end{enumerate}
@@ -4481,7 +4485,7 @@ the relative distance between our ring and window setting.
 Originally this process had to be done by hand with catalogues
 known as {\bf{corsets}} but a machine called the {\bf{test-plate}}
 or {\bf{baby}} was created which automatically enciphered
-\texttt{EINS} at all such positions into an {\bf{\texttt{EINS} catalogue}}.
+\texttt{EINS} at all such positions into an {\bf{\texttt{EINS} catalogue}}~\cite[pp.~140--142]{Turing1940ProfBook}.
 \\\\The catalogue could then be used to determine locations within our
 message corpus, along with settings, that would produce
 \texttt{EINS}. If we then continue deciphering our message from the
@@ -4495,8 +4499,8 @@ that need to be compared and tabulated that Banburismus was a great
 deal of work. Alexander estimates that an average day involved 400
 messages with an average length of 150 characters. In total around
 6000 comparisons needed to be made all of which needed to be scored
-and counted. Particular credit should be given to whom Alexander
-noted was ``one of the best Banburists'', Joan Clarke. Not only was
+and counted~\cite[p.~109]{Alexander1945}. Particular credit should be given to whom Alexander
+noted was ``one of the best Banburists'', Joan Clarke~\cite[p.~73]{Alexander1945}. Not only was
 she an exceptional Banburist, she was also one of only a handful of
 female cryptologists working at Bletchley Park.
 \\\\The work done by Banburists provided crucial information on

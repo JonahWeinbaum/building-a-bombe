@@ -35,7 +35,7 @@ counter, defend, and retaliate appropriately.
   \label{ref:enigma}
   \caption{Enigma model \texttt{I}}
 \end{figure}
-Throughout this paper, the model \texttt{I} Enigma is chosen to
+Throughout this thesis, the model \texttt{I} Enigma is chosen to
 represent our canonical machine as this was the most common version
 used during World War II with over 20000 being produced~\cite{cryptomuseumEnigmaI}. Further, it
 was used by the \emph{Heer} (Army), \emph{Luftwaffe} (Air
@@ -43,7 +43,7 @@ Force), and \emph{Kriegsmarine} (Navy), making this a prime target
 for attack by cryptanalysts. Many models existed,
 each with varying
 layouts, key spaces, and use-cases; however, the central ideas that
-are discussed in this paper can generally be adapted to work on other models.
+are discussed in this thesis can generally be adapted to work on other models.
 \\\\At its most basic function, the Enigma (once set up) is a
 keyboard whose letters, when depressed, illuminate bulbs of a
 corresponding keyboard layout. The operator presses keys of the
@@ -73,7 +73,7 @@ through the plugboard, we will say that the letters are
 {\bf{steckered}} to one another. Assuming all 10
 cables are used, this means that the plugboard can be represented as a
 permutation on 26 letters with $2^{10}1^6$ cycle type\footnote{We
-  will denote cycle types in this paper in the format
+  will denote cycle types in this thesis in the format
   $\lambda_1^{m_1}\dots\lambda_k^{m_k}$ where $\lambda_i$ is the length
   of a cycle and $m_i$ is the multiplicity of this cycle length. We
   will often write the full notation $1^{m_1}\dots n^{m_n}$ in which
@@ -129,13 +129,13 @@ had access to five rotors labeled by their roman numeral equivalents
 (i.e. $\texttt{I},\dots,\texttt{V}$).
 Each rotor encoded a unique permutation from 26 input contacts to 26
 output contacts by simply connecting each input/output pair
-in the permutation with a wire as in figure~\ref{fig:rotors}
+in the permutation with a wire as in Figure~\ref{fig:rotors}
 (a)-(4,5,6). The contacts represent the letters
 in alphabetical order moving in a clockwise manner relative to the
 entry side of the rotor. The input contacts of the rotor were often marked
 with a white dot indicating which contact corresponded to \texttt{A},
 but in general the \texttt{A} contact found by looking at the contact immediately above
-the numeral indicator as in figure~\ref{fig:rotors} (b)~\cite{cryptomuseumEnigmaWiring}.
+the numeral indicator as in Figure~\ref{fig:rotors} (b)~\cite{cryptomuseumEnigmaWiring}.
 \\\\On their own, these rotors would prove to be very poor
 cryptographic devices, as they are just substitution ciphers, which are
 vulnerable to frequency analysis and, if found by the enemy, would
@@ -160,12 +160,12 @@ it is one pin away from being at the top of the rotor.
 
 \subsubsection{Turnover}
 Each rotor had on its entry-side, a notch next to each contact as in
-figure~\ref{fig:rotors} (b). A pawl
+Figure~\ref{fig:rotors} (b). A pawl
 attempted to engage
 the notch and move the rotor forward by one contact each key press.
 On the exit-side, each
 rotor was equipped with a smooth ring with only a single notch
-breaking it as in figure~\ref{fig:rotors} (c). This is known as the
+breaking it as in Figure~\ref{fig:rotors} (c). This is known as the
 {\bf{turnover notch}}. Assuming the
 rotor functions in isolation the pawl will engage the entry notches
 during each key press thus moving the rotor forward by one until,
@@ -316,12 +316,12 @@ send current through the rotors with the window indication
 
 The rotors were additionally equipped with an outer ring with
 letters \texttt{A} to \texttt{Z} moving clockwise relative to the
-entry-side of the rotor as in figure~\ref{fig:rotors} (a)-(3).
+entry-side of the rotor as in Figure~\ref{fig:rotors} (a)-(3).
 Alternately some rings had numerical values
 ranging from \texttt{01} to \texttt{26}. The outer ring was not fixed
 to the underlying rotor and could be moved. Most importantly, this
 outer ring is what contained the turnover notch -- that is, the
-component in figure~\ref{fig:rotors} (a)-(3) was connected to the
+component in Figure~\ref{fig:rotors} (a)-(3) was connected to the
 component (a)-(1). Thus, by moving the outer ring, we change where
 turnover occurs relative to the internal wiring of the rotor.
 \\\\To consider the effect of this ring,
@@ -597,7 +597,7 @@ information was sent alongside the message such as time of
 transmission and radio station of origin. Further the message itself
 was to be encoded with particular rules, for example, spaces would be
 denoted with \texttt{X}. As we discuss changes to Enigma protocol
-throughout this paper we will leave such details out.
+throughout this thesis we will leave such details out.
 %% https://www.ilord.com/enigma-manuals %%
 %% REAL DECRYPT FOR EXAMPLE OH WAIT THESE MIGHT JUST BE TUNNY
 % DECRYPTS
@@ -704,14 +704,14 @@ are always inverse permutations. Now consider the following lemma,\\
 \end{proof}
 
 \noindent This lemma leads us to the following theorem that will be of deep
-relevance for the remainder of the paper.
+relevance for the remainder of the thesis.
 
 \begin{theorem}
   \label{conjugate_cycle_type}
   $\forall\text{ }\alpha, \beta \in S_n$ we have
   \begin{center}
     $\alpha$ and $\beta$ are conjugates $\iff$ $\alpha$ and $\beta$
-    have the same cycle type~\cite{ProofWikiConjugateCycleType}.
+    have the same cycle type~\cite[p.~126]{dummit2004abstract}.
   \end{center}
 \end{theorem}
 \begin{proof}

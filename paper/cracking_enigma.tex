@@ -214,8 +214,8 @@ I would first like to express my sincerest gratitude to the thesis committee mem
 \\\\In the thesis and narrative that follows, there are many figures, old and new, who pushed the bounds of cryptanalysis, mathematics, and statistics forward. It is their discovery and contributions that are at the heart of this thesis and I can only attribute the beauty and artistry of these insights to the minds which conceived them. It is also the combined efforts of modern preservationists and historians who allowed this story to be told. Most notably I would like thank Tony Sale whose work in preserving historical documentation and rebuilding Colossus has done a great deal in keeping modern researchers engaged with this topic. I would also like to thank Steven Hosgood for his research into the relatively niche topic of Banburismus; without his prior work this section of the thesis would not have been possible. Both Tony Sale and Steven Hosgood have passed away, along with many preservationists who have kept this story alive. In that spirit, I write this thesis in an attempt to continue their legacy, honoring their work by contributing to the understanding and appreciation of this pivotal chapter in history.
 \\\\Finally, I would like to dedicate this thesis to Sam Gawel who, though no longer with me, continues to guide me through even the most trying of times. His memory remains a well of faith when I face doubt and his spirit remains a compass when I lose my way. 
 
-\chapter*{Academic Contributions}
-\addcontentsline{toc}{section}{Academic Contributions}
+\chapter*{Thesis Structure}
+\addcontentsline{toc}{section}{Thesis Structure}
 It should be made clear that I am not a historian. As such, this
 thesis does not aim to be a perfect retelling of historical
 narrative; rather, this thesis aims to convey a
@@ -225,16 +225,19 @@ understanding of the various flaws in the Enigma machine,
 illustrating how and why the Bombe came to take the form that it did.
 Historical details are included to advance the mathematical narrative
 and are, to the best of my ability, confirmed to be historically accurate.
-\\\\The first three chapters of this thesis serve as an expository
-resource aimed at mathematically inclined readers seeking depth and
-rigor regarding cryptographic attacks on Enigma. The final chapter
-presents a novel contribution. It critically examines the
+\\\\The first chapter serves as an introduction to the Enigma machine itself. We describe its construction, use, and cryptographic strength. We further provide mathematical description of the machine using permutation theory. 
+\\\\The second chapter discusses the first cryptographic attacks on Enigma which were employed by Polish cryptanalysts. We first discuss the reconstruction of the German Enigma via mathematical deduction about the internal wirings of the machine. We further discuss both manual and electromechanical methods for deducing daily keys. 
+\\\\The third chapter focuses on British cryptanalysis of the Enigma during the war. While we describe a variety of methods used by Bletchley Park to deduce daily keys, we primarily focus on the creation and construction of the Turing-Welchman Bombe. We rigorously describe the mathematical reasoning implicit in the machine. We further describe extensions added to the original design of the Bombe. Finally, we describe the process by which naval Enigma messages were deciphered using the Bombe, known as Banburismus. We describe and justify this complex system of linguistic frequency analysis. 
+\\\\These three chapters function as an expository
+resource aimed at mathematically inclined readers seeking depth and rigor regarding cryptographic attacks on Enigma. 
+\\\\The fourth chapter examines the
 mathematical model by which the Bombe's efficacy was described by
-Turing and presents an alternative model that better aligns with the
-ground-truth operation of the Bombe.
+Turing. We first justify Turing's model using John Dixon's theorem regarding the probability that two uniformly distributed permutations in $S_n$ form a transitive subgroup~\cite{Dixon1969}. We also present several critiques of Turing's model and illustrate its inability to make predictions which align with the ground-truth operation of the Bombe. To remedy these issues, we present an alternative model which closely predicts the true behavior of the Bombe. To do this, we created a generalized version of Dixon's Theorem~\ref{general_dixon} which allows for the calculation of the probability that two permutations, pulled from a non-uniform distribution of cycle types in $S_n$, form a transitive subgroup. 
+\\\\The final chapter discusses directions for future research on the subjects and methods described herein. We also describe the open-source repository which is used throughout this thesis to generate tables, calculate relevant values, and simulate both manual and electromechanical methods of attacking Enigma.
 
-\chapter*{Thesis Overview}
-\addcontentsline{toc}{section}{Thesis Overview}
+\chapter*{Academic Contributions}
+\addcontentsline{toc}{section}{Academic Contributions}
+
 
 \chapter*{Requisite Background}
 \addcontentsline{toc}{section}{Requisite Background}

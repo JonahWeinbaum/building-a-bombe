@@ -260,7 +260,7 @@ Similar to the Herivel tip, Bletchely Park analyst Reg Parker found a
 shortcut to deduce some wheel orders, ring settings, and plugboard
 configurations. The presumption was that the German operators in
 charge of creating the key sheets needed to produce a large amount of
-random or psuedo-random numbers to create each daily key. As the
+random or pseudo-random numbers to create each daily key. As the
 number of unique keys increased, this task became cumbersome so, to
 reduce time, the operators creating the key sheets may reuse one or
 more columns of the key sheet from previously generated sheets. By
@@ -338,7 +338,7 @@ particular Enigma transmission. Consider the following mapping,
 
   \end{tikzpicture}
 \end{center}
-where the top row indicates our plaintex message, the bottom row
+where the top row indicates our plaintext message, the bottom row
 indicates the ciphertext,
 and the indices on the arrows indicate which step we are at while enciphering this message.
 \\\\From this pairing we have that
@@ -2012,13 +2012,13 @@ to correspond to a location in our plaintext -- the first location
 being $\texttt{ZZZ}$, the second being \texttt{ZZA}, and so on. As
 mentioned previously, the assumption that only the righthand rotor
 advanced in our window setting while enciphering the plaintext is
-only true if no turnover occurs. If turnover occured during the
+only true if no turnover occurs. If turnover occurred during the
 message encipherment, our machine will not produce correct stops.
 \\\\To account for this we will split up our message into multiple
 parts. Consider a plaintext-ciphertext pairing that is $26$
 characters long. We are guaranteed to have a turnover of the middle
 rotor during the encipherment of this message. However, we know that
-the turnover must have occured in either the first half or the second
+the turnover must have occurred in either the first half or the second
 half of the message. Thus, one half of the message assuredly had no
 turnover during its encipherment. This means that if we split our
 message into two $13$ character plaintext-ciphertext pairings, at
@@ -2052,7 +2052,7 @@ First, analysts were able to cross-reference known information to
 theorize likely phrases in a
 message. For instance, if the weather on a particular day was windy
 with a chance of rain, we would expect that the weather report (which
-intellegence knew arrived from specific channels at specific times)
+intelligence knew arrived from specific channels at specific times)
 would likely contain phrases like ``weather,'' ``wind,'' or ``rain.''
 \\\\Some sources of plaintext could be manufactured in a process
 known as {\bf{gardening}}~\cite[p.~187]{sebag-montefiore2000enigma}~\cite[p.~144]{kahn1991seizing}. Bletchley Park could request that the
@@ -2477,7 +2477,7 @@ this stop. Is there a means by which we could have detected this
 without having to manually work it out on a checking machine?
 \\\\Recall that before we introduced the checking machine, we noted
 that the plugboard settings we would deduce from the checking machine
-were implictly encoded in the internal state of the wires of the
+were implicitly encoded in the internal state of the wires of the
 machine. In particular since wire $\texttt{Ca}$ was active, we could
 have immediately deduced that $S(\texttt{A})= \texttt{C}$ without
 having to employ a checking machine. However, these wires states are
@@ -2800,7 +2800,7 @@ events $B_1, \dots, B_k$ we get,
 \]
 If we are considering many events $B_i$, then we have to do a lot
 of multiplications by hand which are prone to error. For this
-reason, we consider the {\bf{log-odds}} of these events occuring,
+reason, we consider the {\bf{log-odds}} of these events occurring,
 turning these products into summations. In particular, for log-base $b$ we have,
 \[
   \log_b\mathbb{O}(A|\wedge_{i=1}^k B_i) =
@@ -3230,10 +3230,10 @@ in any historical documentation found while researching for this thesis.
 to where a tetragram occurred. The first $10$ subdivisions
 represented a tetragram occurring in the first position, second
 position, and so on. The $11$th subdivision corresponded to a
-tetragram occuring between the $11$th and $30$th position. The
-$12$th subdivision corresponded to tetragrams occuring between the
+tetragram occurring between the $11$th and $30$th position. The
+$12$th subdivision corresponded to tetragrams occurring between the
 $30$th position until the $30$th to last position. The $13$th
-subdivision corresponded to tetragrams occuring in the last $30$
+subdivision corresponded to tetragrams occurring in the last $30$
 letters of the message. For each category and subdivision, a hubdub
 value was given~\cite[p.~107]{Alexander1945}.
 \\\\Filling in the values given by Hugh Alexander we provide a
@@ -3340,10 +3340,10 @@ There is one more caveat we need to address before we are ready to
 fully score our repeat structures. Based on observation,
 cryptanalysts at Bletchley Park noted that some percentage of
 messages were followed by ``dummy'' messages some way through. That is,
-short sections of German text were often followed by gibberish indended to confuse cryptanalysts. Dealing with
+short sections of German text were often followed by gibberish intended to confuse cryptanalysts. Dealing with
 such messages became known as {\bf{dummyismus}}~\cite[Section 4.4]{Hosgood2007}.
 \\\\Cryptanalysts in the crib room  based on length, frequency,
-cateogry, etc., would place a {\bf{blue line}} at some point in
+category, etc., would place a {\bf{blue line}} at some point in
 each message, beyond which they estimated there was a $25\%$ chance
 or higher of the message being a dummy. They noted this
 percentage on the sheet corresponding to each message~\cite[p.~104]{Alexander1945}.
@@ -3601,7 +3601,7 @@ scores already being adjusted by the prior odds to make our work easier.
 \subsection{Middle-Wheel Comparison}
 So far we have only examined pre-message keys with their first two
 letters in common. In theory, there is no reason the same process
-cannot be applied to pre-message keys with onlt their first letter in
+cannot be applied to pre-message keys with only their first letter in
 common, although this requires significantly more offsets being
 considered and significantly reduced odds.
 \\\\We might think we need to handle all offsets from $-650$ to
@@ -4331,7 +4331,7 @@ procedure. Our goal is to get a likely alphabet for $\pi_2$ and
 determine where turnover of the leftmost wheel occurred so as to
 eliminate possible middle rotors. The only difference is that, based
 on our above analysis, we
-now strongly suspect that turnover of the rightmost rotor occurrs
+now strongly suspect that turnover of the rightmost rotor occurs
 between \texttt{K} and \texttt{C}. Thus, a hypothesis like (2) which
 asserts that, in the middle wheel alphabet $\texttt{T} = \texttt{X}
 + 2$, must be adjusted to state that $\texttt{T} = \texttt{X} + 3$,
@@ -4506,7 +4506,7 @@ messages with an average length of 150 characters. In total around
 and counted~\cite[p.~109]{Alexander1945}. Particular credit should be given to whom Alexander
 noted was ``one of the best Banburists'', Joan Clarke~\cite[p.~73]{Alexander1945}. Not only was
 she an exceptional Banburist, she was also one of only a handful of
-female cryptologists working at Bletchley Park.
+female cryptanalysts working at Bletchley Park.
 \\\\The work done by Banburists provided crucial information on
 naval operations, including U-Boat attacks which were crippling
 supply lines and starving Britain.

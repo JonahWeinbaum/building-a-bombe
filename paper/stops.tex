@@ -32,7 +32,7 @@ case of a single loop in our menu, this is equivalent to the
 statement that the resulting loop in the Bombe has a singleton cycle.
 If we apply current to this singleton cycle all the remaining relays
 will close. For now we will ignore the impact of the diagonal board.
-\\\\Turing considered a menu in which no loops occured which he
+\\\\Turing considered a menu in which no loops occurred which he
 called a {\bf{web}}. In this case every position of the Bombe and
 every initial steckering hypothesis would create a normal stop, as
 there is no feedback necessary to electrify any additional wires on a
@@ -177,7 +177,7 @@ this perspective, we might
 expect our approximation to be under-representing the true number of
 stops. Second, we are considering these
 stops over \emph{all} steckering hypotheses so, from this
-prespective, we might expect our
+perspective, we might expect our
 approximation to be around $26$ times greater than the actual answer.
 Yet, testing Turing's formula against the actual Bombe, in many cases,
 we find that his approximation of $26^{4-c}$ falls roughly in line
@@ -193,7 +193,7 @@ the following:
 \subsubsection{Transitive Subgroups}
 \noindent To show these two points, we require additional
 mathematical tools. We first need to translate our mechanical
-understanding of the Bombe's electrifcation of wires into a
+understanding of the Bombe's electrification of wires into a
 mathematical one. For a single loop this is quite trivial. If the
 permutation representing our loop is $\overline\pi$, then the number
 of normal stops over all steckering hypotheses is just the number of
@@ -899,7 +899,7 @@ While cryptanalysts at the time may not have been able to simulate as
 many iterations as we can with modern computers, we do know that such
 technology existed as would make this task reasonably achievable at
 the time. Recall from Section~\ref{cyclometer}, that the Polish
-Cipher Beaurea produced a device called the Cyclometer, whose sole
+Cipher Bureau produced a device called the Cyclometer, whose sole
 purpose was to quickly determine the cycle type produced by composing
 two Enigma permutations. With simple changes, this could easily be
 extended to determine cycle types of arbitrary length loops of Enigma
@@ -1296,7 +1296,7 @@ Solving for $t_{\alpha,\beta}$ we have
 \noindent This can be solved recursively since each factor
 $t_{\alpha^{(\upsilon_j)},\beta^{(\upsilon_j)}}$ is being computed for
 some $\upsilon \ne (n)$. Thus, each $\upsilon_j < n$ and we can
-compute the subproblem for the case of permutations with cycle types
+compute the sub-problem for the case of permutations with cycle types
 $\alpha^{(\upsilon_j)}$ and $\beta^{(\upsilon_j)}$. Eventually, we will
 achieve the base case where $n = 1$, in which case transitivity is trivial.
 \\\\In practice, we performed bottom-up recursion to get all possible

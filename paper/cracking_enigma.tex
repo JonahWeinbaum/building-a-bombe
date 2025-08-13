@@ -237,7 +237,11 @@ Turing. We first justify Turing's model using John Dixon's theorem regarding the
 
 \chapter*{Academic Contributions}
 \addcontentsline{toc}{section}{Academic Contributions}
-
+This thesis presents a collection of novel contributions to the study of both cryptographic history and mathematics. 
+\\\\We present linear, rigorous, and extensive descriptions of cryptographic attacks on Enigma. To our knowledge no such prior compilation of mathematical materials exists on the subject of Enigma of comparable scope. 
+\\\\We provide a unique mathematical description of the Bombe, using group-theoretic language to formalize its electromechanical elements. This allows us to more precisely illustrate the mathematical contradictions the Bombe uses to eliminate certain rotor positions. This further allows us to abstract problems associated with analyzing the Bombe to explicit problems in the field of group theory.
+\\\\We devise and prove a generalization of Dixon's Theorem. The original theorem statement regards the probability that two uniformly distributed permutations in $S_n$ form a transitive subgroup~\cite{Dixon1969}. We extend this theorem to allow for the calculation of the probability that two permutations, pulled from a non-uniform distribution of cycle types in $S_n$, form a transitive subgroup~\ref{general_dixon}. 
+\\\\We further provide researchers with a repository of open-source tools used in the creation of the thesis~\cite{Weinbaum2023_building-a-bombe}. Of particular note, we have created a simulation of the Bombe which provides a detailed internal view of the wirings of the machine. Further, we have provided code which allows for the construction and use of Zygalski sheets. We additionally wrote several programs which allow for the computation of scoring, distance, dummyismus, and repeat sheets used for the Banburismus procedure. Most significantly, we implemented the generalized Dixon's Theorem as an algorithm in \texttt{python}, allowing for researchers to compute the probability of two permutations forming a transitive subgroup pulled from an arbitrary distribution over cycle types. Finally, we provide a script which allows researchers to quickly estimate the number of stops we expect the Bombe to encounter for a particular menu arrangement.
 
 \chapter*{Requisite Background}
 \addcontentsline{toc}{section}{Requisite Background}
